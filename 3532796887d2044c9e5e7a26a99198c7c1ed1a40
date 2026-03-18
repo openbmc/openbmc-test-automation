@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de81e6cd_850a03b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2026-03-18T23:54:50Z",
+      "side": 1,
+      "message": "Thanks for getting multi-chassis support in George!",
+      "revId": "3532796887d2044c9e5e7a26a99198c7c1ed1a40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9159a66a_854f153c",
+        "filename": "lib/multi_chassis_power.resource",
+        "patchSetId": 10
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2026-03-18T23:54:50Z",
+      "side": 1,
+      "message": "A comment on how the aggregation logic would be good for reference. I assume all present chassis must be on to report an aggregated state of on?",
+      "revId": "3532796887d2044c9e5e7a26a99198c7c1ed1a40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cb519aa_f9455414",
+        "filename": "lib/multi_chassis_power.resource",
+        "patchSetId": 10
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2026-03-18T23:54:50Z",
+      "side": 1,
+      "message": "I\u0027m missing something here. What\u0027s the use case of passing in a CHASSIS_ID?",
+      "range": {
+        "startLine": 26,
+        "startChar": 15,
+        "endLine": 26,
+        "endChar": 26
+      },
+      "revId": "3532796887d2044c9e5e7a26a99198c7c1ed1a40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cfa78c8_fc15cf7e",
+        "filename": "lib/multi_chassis_power.resource",
+        "patchSetId": 10
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2026-03-18T23:54:50Z",
+      "side": 1,
+      "message": "It would seem to me that we would always just want to get single chassis state if chassis count is 1? Why does if CHASSIS_ID is defined matter?",
+      "revId": "3532796887d2044c9e5e7a26a99198c7c1ed1a40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b5207b7_c9adf533",
+        "filename": "lib/multi_chassis_power.resource",
+        "patchSetId": 10
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2026-03-18T23:54:50Z",
+      "side": 1,
+      "message": "I\u0027m a bit confused on this log. The previous line is saying power is \u003d\u003d \u0027On\u0027 so why the (not On) log here?",
+      "range": {
+        "startLine": 177,
+        "startChar": 92,
+        "endLine": 177,
+        "endChar": 100
+      },
+      "revId": "3532796887d2044c9e5e7a26a99198c7c1ed1a40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
