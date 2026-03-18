@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "031e5459_eebeffaf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-03-18T16:53:14Z",
+      "side": 1,
+      "message": "Example\n\n*** Keywords ***\nRefresh GUI\n    [Documentation]  Standard GUI refresh using application button\n    Click Element  ${xpath_refresh_button}\n\nHard Reset GUI\n    [Documentation]  Full page reload for recovery scenarios\n    Reload Page\n\n*** Test Cases ***\nTest Flow Example\n    Perform Action\n    Refresh GUI  # Use soft refresh\n    Validate Result\n\n*** Suite Teardown ***\n    Hard Reset GUI  # Use reload for cleanup\n\n\n\n\nSo best to call the  Reload Pag at test case or suite level and leve this soft reset as it is. Please do the changes",
+      "revId": "8ec27412a0eeaca04849e37bf232ee373f01a325",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
