@@ -1,5 +1,4 @@
 *** Settings ***
-
 Documentation     Test file corruption on hard power cycle.
 
 Resource          ../lib/pdu/pdu.robot
@@ -11,7 +10,7 @@ Suite Setup       Open Connection And Log In
 Suite Teardown    Close All Connections
 Test Teardown     FFDC On Test Case Fail
 
-Test Tags  AC_Cycles
+Test Tags         AC_Cycles
 
 *** Test Cases ***
 

@@ -210,7 +210,7 @@ Wait For OS
 Copy PNOR To BMC
     [Documentation]  Copy the PNOR image to the BMC.
     Import Library      SCPLibrary      AS       scp
-    Open Connection for SCP
+    Open Connection For SCP
     Log    Copying ${PNOR_IMAGE_PATH} to /tmp
     scp.Put File    ${PNOR_IMAGE_PATH}   /tmp
 
@@ -722,7 +722,7 @@ Install Debug Tarball On BMC
 
     # Upload the file to BMC.
     Import Library  SCPLibrary  AS  scp
-    Open Connection for SCP
+    Open Connection For SCP
     scp.Put File  ${tarball_file_path}  /tmp/debug-tarball.tar.xz
 
     # Create tarball directory and install.

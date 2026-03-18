@@ -26,7 +26,6 @@ ${boot_fail_threshold}  ${0}
 ${stack_mode}           skip
 ${update_status}        True
 
-
 *** Test Cases ***
 
 Host BIOS Update
@@ -92,4 +91,3 @@ Validate Parameters
 
     OperatingSystem.File Should Exist  ${PNOR_IMAGE_PATH}
     ...   msg=${PNOR_IMAGE_PATH} File not found
-

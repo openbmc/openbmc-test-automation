@@ -1,10 +1,10 @@
 *** Settings ***
 Documentation    Code update utility
 
+Library                  OperatingSystem
 Resource                 ../../lib/rest_client.robot
 Resource                 ../../lib/connection_client.robot
 Resource                 ../../lib/utils.robot
-Library                  OperatingSystem
 
 *** Variables ***
 
@@ -60,14 +60,14 @@ Prepare For Update
     Sleep  10s
 
 
-SCP Tar Image File to BMC
+SCP Tar Image File To BMC
     [Documentation]  Copy BMC tar image to BMC.
     [Arguments]  ${image_file_path}
 
     # Description of argument(s):
     # image_file_path  Downloaded BMC tar file image path.
 
-    Open Connection for SCP
+    Open Connection For SCP
     Open Connection And Log In
     Loop SCP Retry  ${image_file_path}
 
@@ -125,7 +125,7 @@ System Readiness Test
     [Documentation]  Verify ping and REST authenticatec for the target
     ...              system.
 
-    ${l_status}=  Run Keyword and Return Status
+    ${l_status}=  Run Keyword And Return Status
     ...  Verify Ping And REST Authentication
     IF  '${l_status}' == '${False}'
         Fail  msg=System not in ideal state to use [ERROR]
@@ -144,7 +144,7 @@ Validate BMC Version
     Should Be Equal As Strings  ${version}  ${output[1:-1]}
 
 
-Trigger Warm Reset via Reboot
+Trigger Warm Reset Via Reboot
     [Documentation]    Execute reboot command on the remote BMC and
     ...                returns immediately. This keyword "Start Command"
     ...                returns nothing and does not wait for the command

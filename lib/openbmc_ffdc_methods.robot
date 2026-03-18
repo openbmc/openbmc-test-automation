@@ -537,7 +537,7 @@ SCP Coredump Files
 
     @{core_list}=  Split String  ${core_files}
     # Copy the core files
-    Run Key U  Open Connection for SCP
+    Run Key U  Open Connection For SCP
 
     FOR  ${index}  IN  @{core_list}
       ${ffdc_file_path}=  Catenate  ${LOG_PREFIX}${index.lstrip("/tmp/")}

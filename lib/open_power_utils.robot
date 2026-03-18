@@ -272,7 +272,7 @@ Inject OPAL TI
     ${cmd_buf}=  Catenate  git clone --branch ${stable_branch} ${repo_github_url} ${repo_dir_path}/${value}
     Shell Cmd  ${cmd_buf}
 
-    Open Connection for SCP
+    Open Connection For SCP
     scp.Put File  ${repo_dir_path}/${value}/test_binaries/deadbeef  /tmp
     Pdbg  -a putmem 0x300000f8 < /tmp/deadbeef
 
