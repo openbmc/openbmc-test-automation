@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d145ca8_7bd8f2a6",
+        "filename": "data/ipmi_raw_cmd_table.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 649,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-03-18T12:14:56Z",
+      "side": 1,
+      "message": "Need to update the error message -\u003e \"Request sensor\" to \"Requested sensor\"",
+      "range": {
+        "startLine": 649,
+        "startChar": 37,
+        "endLine": 649,
+        "endChar": 38
+      },
+      "revId": "c83517cc7121df993ac758bde110fbf0547d47be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
