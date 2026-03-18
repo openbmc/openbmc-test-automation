@@ -1,13 +1,14 @@
 *** Settings ***
+Documentation    XCAT resource file containing utility keywords.
+
+Library     OperatingSystem
+Library     String
+Library     SSHLibrary
 
 Resource    ../xcat/resource.robot
 Resource    ../../lib/resource.robot
 
-Library     SSHLibrary
-Library     OperatingSystem
-Library     String
-
-*** Keywords  ***
+*** Keywords ***
 
 Open Connection And Login To XCAT
     [Documentation]  Open connection and login to xCAT server.
