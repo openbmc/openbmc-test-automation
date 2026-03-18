@@ -175,6 +175,28 @@ Run External IPMI Standard Command
     ${ipmi_cmd}=  Create IPMI Ext Command String  ${command_string}  &{options}
     Qprint Issuing  ${ipmi_cmd}
     ${rc}  ${output}=  Run And Return RC and Output  ${ipmi_cmd}
+
+    ${lines}=  Split String  ${output}  \n
+    ${filtered}=  Create List
+    ${ignore_list}=  Create List
+    ...  IANA PEN registry open failed
+
+    FOR  ${line}  IN  @{lines}
+        ${skip}=  Set Variable  ${False}
+        ${line}=  Strip String  ${line}
+        FOR  ${pattern}  IN  @{ignore_list}
+            IF  "${pattern}" in "${line}"
+                ${skip}=  Set Variable  ${True}
+            END
+        END
+        IF  not ${skip}
+            Append To List  ${filtered}  ${line}
+        END
+    END
+
+    ${output}=  Catenate  SEPARATOR=\n  @{filtered}
+    ${output}=  Strip String  ${output}
+
     IF  ${fail_on_err} == ${0}  RETURN  ${output}
     Should Be Equal  ${rc}  ${expected_rc}  msg=${output}
     RETURN  ${output}
