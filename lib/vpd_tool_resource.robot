@@ -5,7 +5,6 @@ Library         vpd_utils.py
 Variables       ../data/vpd_variables.py
 Resource        boot_utils.robot
 
-
 *** Variables ***
 
 ${DR_WRITE_VALUE}              XYZ Component
@@ -13,7 +12,6 @@ ${PN_WRITE_VALUE}              XYZ1234
 ${SN_WRITE_VALUE}              ABCD12345678
 @{fields}                      PN  SN  LocationCode
 @{vpd_fields}                  PN  SN
-
 
 *** Keywords ***
 
@@ -39,28 +37,28 @@ Verify VPD Component Read Operation
     FOR  ${vpd_field}  IN  @{fields}
         ${match_key_exists}=  Run Keyword And Return Status
         ...  Dictionary Should Contain Key  ${vpdtool_res}  ${vpd_field}
-          IF  '${match_key_exists}' == 'True'
-              #  drive components busctl field response in ascii due to that checking only locationcode.
-              IF  'drive' in '${component}'
-                  ${vpd_field}=  Set Variable  LocationCode
-              END
-              # Skip check if VPD field is empty.
-              IF  '${vpd_records['${component}']['${vpd_field}']}' == ''  CONTINUE
-
-              # Get VPD field values via busctl.
-              ${busctl_field}=  Set Variable If
-              ...  '${vpd_field}' == 'LocationCode'  com.ibm.ipzvpd.Location LocationCode
-              ...  '${vpd_field}' == 'PN'  xyz.openbmc_project.Inventory.Decorator.Asset PartNumber
-              ...  '${vpd_field}' == 'SN'  xyz.openbmc_project.Inventory.Decorator.Asset SerialNumber
-              ${cmd}=  Catenate  ${CMD_GET_PROPERTY_INVENTORY}
-              ...  /xyz/openbmc_project/inventory${component} ${busctl_field}
-              ${cmd_output}=  BMC Execute Command  ${cmd}
-              # Check whether the vpdtool response and busctl response matching.
-              Valid Value  vpd_records['${component}']['${vpd_field}']
-              ...  ['${cmd_output[0].split('"')[1].strip('"')}']
-          ELSE
-             CONTINUE
+        IF  '${match_key_exists}' == 'True'
+          #  drive components busctl field response in ascii due to that checking only locationcode.
+          IF  'drive' in '${component}'
+              ${vpd_field}=  Set Variable  LocationCode
           END
+          # Skip check if VPD field is empty.
+          IF  '${vpd_records['${component}']['${vpd_field}']}' == ''  CONTINUE
+
+          # Get VPD field values via busctl.
+          ${busctl_field}=  Set Variable If
+          ...  '${vpd_field}' == 'LocationCode'  com.ibm.ipzvpd.Location LocationCode
+          ...  '${vpd_field}' == 'PN'  xyz.openbmc_project.Inventory.Decorator.Asset PartNumber
+          ...  '${vpd_field}' == 'SN'  xyz.openbmc_project.Inventory.Decorator.Asset SerialNumber
+          ${cmd}=  Catenate  ${CMD_GET_PROPERTY_INVENTORY}
+          ...  /xyz/openbmc_project/inventory${component} ${busctl_field}
+          ${cmd_output}=  BMC Execute Command  ${cmd}
+          # Check whether the vpdtool response and busctl response matching.
+          Valid Value  vpd_records['${component}']['${vpd_field}']
+          ...  ['${cmd_output[0].split('"')[1].strip('"')}']
+        ELSE
+          CONTINUE
+        END
     END
 
 
@@ -76,22 +74,22 @@ Verify VPD Field Read Operation
          ${match_key_exists}=  Run Keyword And Return Status
          ...  Dictionary Should Contain Key  ${vpdtool_res}  ${field}
          IF  '${match_key_exists}' == 'True'
-             ${vpd_records}=  Vpdtool  -r -O ${component} -R VINI -K ${field}
-             # Skip check if field value is empty.
-             IF  '${vpd_records['${component}']['${field}']}' == ''  CONTINUE
+           ${vpd_records}=  Vpdtool  -r -O ${component} -R VINI -K ${field}
+           # Skip check if field value is empty.
+           IF  '${vpd_records['${component}']['${field}']}' == ''  CONTINUE
 
-             ${busctl_field}=  Set Variable If
-             ...  '${field}' == 'PN'  xyz.openbmc_project.Inventory.Decorator.Asset PartNumber
-             ...  '${field}' == 'SN'  xyz.openbmc_project.Inventory.Decorator.Asset SerialNumber
-             ${cmd}=  Catenate  ${CMD_GET_PROPERTY_INVENTORY}
-             ...  /xyz/openbmc_project/inventory${component} ${busctl_field}
-             ${cmd_output}=  BMC Execute Command  ${cmd}
+           ${busctl_field}=  Set Variable If
+           ...  '${field}' == 'PN'  xyz.openbmc_project.Inventory.Decorator.Asset PartNumber
+           ...  '${field}' == 'SN'  xyz.openbmc_project.Inventory.Decorator.Asset SerialNumber
+           ${cmd}=  Catenate  ${CMD_GET_PROPERTY_INVENTORY}
+           ...  /xyz/openbmc_project/inventory${component} ${busctl_field}
+           ${cmd_output}=  BMC Execute Command  ${cmd}
 
-             # Check vpdtool response and busctl response for the component field.
-             Valid Value  vpd_records['${component}']['${field}']
-             ...  ['${cmd_output[0].split('"')[1].strip('"')}']
+           # Check vpdtool response and busctl response for the component field.
+           Valid Value  vpd_records['${component}']['${field}']
+           ...  ['${cmd_output[0].split('"')[1].strip('"')}']
          ELSE
-            CONTINUE
+           CONTINUE
          END
     END
 
