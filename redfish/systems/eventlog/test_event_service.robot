@@ -22,6 +22,7 @@ ${REMOTE_SERVER_IP}             10.7.7.7
 @{ResourceTypes_list}           Task
 ${Maximum_subscription_count}   20
 @{Service_state}                ${False}  ${True}
+@{Invalid_service_state}        FALSE  TRUE  1  0  on  off
 
 ** Test Cases **
 
@@ -112,6 +113,19 @@ Verify Event Service Enable And Disable Methods
         ${after_policy}=  Get From Dictionary  ${resp}  ServiceEnabled
         Should Be Equal  ${after_policy}  ${state}
     END
+
+Verify Invalid Data For Enable And Disable Event Service Methods
+    [Documentation]  Verify invalid data for enable and disable event service methods.
+    [Tags]  Verify_Invalid_Data_For_Enable_And_Disable_Event_Service_Methods
+    [Setup]  Fetch Default Event Service State
+    [Teardown]  Set Default Event Service State
+
+    FOR  ${state}  IN  @{Invalid_service_state}
+        # Patch operation to change the service enabled state.
+        ${payload}=  Create Dictionary  ServiceEnabled=${state}
+        Redfish.Patch  /redfish/v1/EventService  body=${payload}  valid_status_codes=[${HTTP_BAD_REQUEST}]
+    END
+
 
 *** Keywords ***
 
