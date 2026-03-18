@@ -35,6 +35,7 @@ Library   run_keyword.py
 Test Tags  Run_Keyword_Pgm
 
 *** Variables ***
+
 # Initialize program parameters variables.
 # Create parm_list containing all of our program parameters.  parm_list is
 # used by "rqprint_pgm_header".
@@ -48,13 +49,14 @@ ${test_mode}                0
 ${quiet}                    0
 ${debug}                    0
 
-
 *** Test Cases ***
+
 Run Keyword Pgm
     [Documentation]  Run the keyword program.
     Main
 
 *** Keywords ***
+
 Main
     [Documentation]  Do main program processing.
     [Teardown]  Program Teardown

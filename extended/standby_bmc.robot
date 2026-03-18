@@ -27,6 +27,7 @@ Test Timeout      10 minutes
 Test Tags         Standby_BMC
 
 *** Variables ***
+
 ${HOST_SETTING}      /org/openbmc/settings/host0
 
 ${ERROR_REGEX}  xyz.openbmc_project.Software.BMC.Updater.service: Failed with result 'core-dump'
@@ -52,7 +53,7 @@ Get To Stable State
     ...  Wait For Host To Ping  ${OPENBMC_HOST}  2 mins
 
     # Check if the ping works using 1400 MTU.
-    #IF  ${ping_status} == ${True}  MTU Ping Test
+    # IF  ${ping_status} == ${True}  MTU Ping Test
 
     IF  ${ping_status} == ${False}  Fail  ${OPENBMC_HOST} ping test failed.
 
@@ -106,7 +107,7 @@ Redfish Clean Up
 BMC Online Test
     [Documentation]   BMC ping, SSH, REST connection Test
 
-    ${l_status}=   Run Keyword and Return Status
+    ${l_status}=   Run Keyword And Return Status
     ...   Verify Ping And REST Authentication
     IF  '${l_status}' == '${False}'
         Fail  msg=System not in ideal state to continue [ERROR]
@@ -120,13 +121,13 @@ Update Policy Setting
     # Description of argument(s):
     # policy      Restore policy.
 
-    ${valueDict}=     create dictionary  data=${policy}
+    ${valueDict}=  Create Dictionary  data=${policy}
     Write Attribute    ${HOST_SETTING}    power_policy   data=${valueDict}
     ${currentPolicy}=  Read Attribute     ${HOST_SETTING}   power_policy
     Should Be Equal    ${currentPolicy}   ${policy}
 
 
-Trigger Warm Reset via Reboot
+Trigger Warm Reset Via Reboot
     [Documentation]    Execute reboot command on the remote BMC and
     ...                returns immediately. This keyword "Start Command"
     ...                returns nothing and does not wait for the command

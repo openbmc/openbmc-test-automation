@@ -1,5 +1,4 @@
 *** Settings ***
-
 Documentation    Module to stress-test REST upload stability.
 ...              Upload a test file to the BMC.  The
 ...              test file is approximately the size of
@@ -9,7 +8,6 @@ Documentation    Module to stress-test REST upload stability.
 # OPENBMC_HOST        The BMC host name or IP address.
 # LOOPS               The number of times to loop the test.
 #                     Default value for LOOPS is 1.
-
 
 Library            OperatingSystem
 Resource           ../lib/utils.robot

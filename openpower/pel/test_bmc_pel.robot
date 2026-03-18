@@ -542,7 +542,7 @@ Verify Error Logging Rotation Policy With All Types Of Errors
 Verify Error Logging Rotation Policy With HOST Error Logs
     [Documentation]  Verify error logging rotation policy for non bmc error logs.
     [Tags]  Verify_Error_Logging_Rotation_Policy_With_HOST_Error_Logs
-    [Setup]  Run Keywords  Open Connection for SCP  AND  scp.Put File  ${UNRECOVERABLE_FILE_PATH}
+    [Setup]  Run Keywords  Open Connection For SCP  AND  scp.Put File  ${UNRECOVERABLE_FILE_PATH}
     ...  /tmp/FILE_HOST_UNRECOVERABLE  AND  scp.Put File  ${INFORMATIONAL_FILE_PATH}
     ...  /tmp/FILE_HOST_INFORMATIONAL
     [Template]  Error Logging Rotation Policy
@@ -560,7 +560,7 @@ Verify Error Logging Rotation Policy With HOST Error Logs
 Verify Error Logging Rotation Policy With Unrecoverable HOST And BMC Error Logs
     [Documentation]  Verify error logging rotation policy with unrecoverable HOST and BMC error logs.
     [Tags]  Verify_Error_Logging_Rotation_Policy_With_Unrecoverable_HOST_And_BMC_Error_Logs
-    [Setup]  Run Keywords  Open Connection for SCP  AND  scp.Put File  ${UNRECOVERABLE_FILE_PATH}
+    [Setup]  Run Keywords  Open Connection For SCP  AND  scp.Put File  ${UNRECOVERABLE_FILE_PATH}
     ...  /tmp/FILE_NBMC_UNRECOVERABLE  AND  Redfish.Login
     [Template]  Error Logging Rotation Policy
 

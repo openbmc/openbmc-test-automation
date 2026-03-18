@@ -2,11 +2,11 @@
 Documentation  This file is resourced by obmc_boot_test.py to set initial
 ...            variable values, etc.
 
+Library    Collections
 Resource   ../lib/openbmc_ffdc.robot
 
 Library    ../lib/state.py
 Library    ../lib/obmc_boot_test.py
-Library    Collections
 
 *** Variables ***
 

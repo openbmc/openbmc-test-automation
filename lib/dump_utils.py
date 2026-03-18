@@ -123,7 +123,7 @@ def scp_dumps(targ_dir_path, targ_file_prefix="", dump_dict=None, quiet=None):
     if dump_dict is None:
         dump_list = get_dump_dict(quiet=quiet)
 
-    status, ret_values = grk.run_key("Open Connection for SCP", quiet=quiet)
+    status, ret_values = grk.run_key("Open Connection For SCP", quiet=quiet)
 
     dump_file_list = []
     for file_path in dump_list:
