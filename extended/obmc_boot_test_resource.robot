@@ -8,8 +8,6 @@ Library    ../lib/state.py
 Library    ../lib/obmc_boot_test.py
 Library    Collections
 
-Test Tags  Obmc_Boot_Test
-
 *** Variables ***
 
 # Initialize program parameters variables.
