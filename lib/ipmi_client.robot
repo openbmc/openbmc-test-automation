@@ -177,6 +177,25 @@ Run External IPMI Standard Command
     ${rc}  ${output}=  Run And Return RC and Output  ${ipmi_cmd}
     IF  ${fail_on_err} == ${0}  RETURN  ${output}
     Should Be Equal  ${rc}  ${expected_rc}  msg=${output}
+
+    ${lines}=  Split String  ${output}  \n
+    ${filtered}=  Create List
+    ${ignore_list}=  Create List
+    ...  IANA PEN registry open failed
+
+    FOR  ${line}  IN  @{lines}
+    ${skip}=  Set Variable  ${False}
+    FOR  ${pattern}  IN  @{ignore_list}
+        Run Keyword If  "${pattern}" in "${line}"
+        ...  Set Variable  ${skip}  ${True}
+    END
+    Run Keyword If  not ${skip}
+    ...  Append To List  ${filtered}  ${line}
+    END
+
+    ${output}=  Catenate  SEPARATOR=\n  @{filtered}
+    ${output}=  Evaluate "${output}".lstrip()
+
     RETURN  ${output}
 
 
