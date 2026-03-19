@@ -3,6 +3,7 @@ Documentation       Test telemetry functionality of OpenBMC.
 
 Resource            ../../lib/bmc_redfish_resource.robot
 Resource            ../../lib/openbmc_ffdc.robot
+Resource            ../../lib/bmc_redfish_utils.robot
 
 Suite Setup         Suite Setup Execution
 Suite Teardown      Redfish.Logout
@@ -70,14 +71,14 @@ Verify Telemetry Service Unsupported Methods
     [Documentation]  Verify Telemetry Service with Unsupported methods.
     [Tags]  Verify_Telemetry_Service_Unsupported_Methods
 
-    Verify Supported And Unsupported Methods    uri=/redfish/v1/TelemetryService
+    Verify Supported And Unsupported Methods  uri=${REDFISH_TELEMETRY_URI}
 
 
 Verify Telemetry Service MetricReports Unsupported Methods
     [Documentation]  Verify Telemetry Service MetricReports with Unsupported methods.
     [Tags]  Verify_Telemetry_Service_MetricReports_Unsupported_Methods
 
-    Verify Supported And Unsupported Methods    uri=/redfish/v1/TelemetryService/MetricReports
+    Verify Supported And Unsupported Methods  uri=${metric_report_base_uri}
 
 
 Verify Telemetry Service Defaults
@@ -114,32 +115,6 @@ Verify Metric Reports Defaults
 
 
 *** Keywords ***
-
-Verify Supported And Unsupported Methods
-    [Documentation]  Verify Supported And Unsupported Methods for given URI.
-    [Arguments]   ${uri}
-    # Description of argument(s):
-    # uri                 The URI to be tested.
-
-    # GET operation on Telemetry Service
-    Redfish.Get    ${uri}
-    ...    valid_status_codes=[${HTTP_OK}]
-
-    # Put operation on Telemetry Service
-    Redfish.Put  ${uri}
-    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
-
-    # Post operation on Telemetry Service
-    Redfish.Post  ${uri}
-    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
-
-    # Delete operation on Telemetry Service
-    Redfish.Delete  ${uri}
-    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
-
-    # Patch operation on Telemetry Service
-    Redfish.Patch  ${uri}
-    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
 
 Suite Setup Execution
     [Documentation]  Do test case setup tasks.

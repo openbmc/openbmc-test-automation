@@ -244,6 +244,8 @@ REDFISH_SYSTEM_DUMP = (
     + REDFISH_SYSTEM_ID
     + "/LogServices/Dump/Entries"
 )
+REDFISH_CERTIFICATE_SERVICE_URI = REDFISH_BASE_URI + "CertificateService/"
+REDFISH_TELEMETRY_URI = REDFISH_BASE_URI + "TelemetryService/"
 
 # Boot options and URI variables.
 POWER_ON = "On"
