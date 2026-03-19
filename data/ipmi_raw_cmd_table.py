@@ -602,6 +602,12 @@ IPMI_RAW_CMD = {
             "0x06 0x38",
         ]
     },
+    "Get Channel Info": {
+        "get": [
+            # raw command
+            "0x06 0x42",
+        ]
+    },
     "Cipher Suite": {
         "get": [
             # raw command, supported algorithm
