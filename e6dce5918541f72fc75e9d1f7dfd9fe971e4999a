@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce47e12b_615150a2",
+        "filename": "lib/ipmi_client.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-03-19T13:50:34Z",
+      "side": 1,
+      "message": "please rename the keyword as \n\n```\nRun External IPMI Raw Command Return Output\n```\n\nChange RC -\u003e Output as it is sending both rc and output",
+      "revId": "e6dce5918541f72fc75e9d1f7dfd9fe971e4999a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
