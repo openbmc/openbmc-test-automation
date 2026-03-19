@@ -251,8 +251,45 @@ Verify Certificates Location Via Redfish
     Should Be Equal  ${match}  ${True}
     ...  msg=Verify the location of certificates via Redfish fail.
 
+Verify Certificate Service Unsupported Methods
+    [Documentation]  Verify certificate service with unsupported methods.
+    [Tags]  Verify_Certificate_Service_Unsupported_Methods
+
+    Verify Supported And Unsupported Methods  uri=/redfish/v1/CertificateService
+
+Verify Certificate Locations Unsupported Methods
+    [Documentation]  Verify certificate locations with unsupported methods.
+    [Tags]  Verify_Certificate_Locations_Unsupported_Methods
+
+    Verify Supported And Unsupported Methods  uri=/redfish/v1/CertificateService/CertificateLocations
 
 *** Keywords ***
+
+Verify Supported And Unsupported Methods
+    [Documentation]  Verify supported and unsupported methods.
+    [Arguments]   ${uri}
+    # Description of argument(s):
+    # uri           The URI to be tested.
+
+    # GET operation on certificate service.
+    Redfish.Get  ${uri}
+    ...    valid_status_codes=[${HTTP_OK}]
+
+    # Put operation on certificate service.
+    Redfish.Put  ${uri}
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Post operation on certificate service.
+    Redfish.Post  ${uri}
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Delete operation on certificate service.
+    Redfish.Delete  ${uri}
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Patch operation on certificate service.
+    Redfish.Patch  ${uri}
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
 
 Get Current BMC Date
     [Documentation]  Get current BMC date.
