@@ -479,3 +479,30 @@ Get BMC Active Session Count
 
     Log To Console  Redfish active session count: ${session_count}
     RETURN  ${session_count}
+
+
+Verify Supported And Unsupported Methods
+    [Documentation]  Verify supported and unsupported methods.
+    [Arguments]   ${uri}
+    # Description of argument(s):
+    # uri           The URI to be tested.
+
+    # GET operation on supported method.
+    Redfish.Get  ${uri}
+    ...    valid_status_codes=[${HTTP_OK}]
+
+    # Put operation on unsupported method.
+    Redfish.Put  ${uri}
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Post operation on unsupported method.
+    Redfish.Post  ${uri}
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Delete operation on unsupported method.
+    Redfish.Delete  ${uri}
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Patch operation on unsupported method.
+    Redfish.Patch  ${uri}
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
