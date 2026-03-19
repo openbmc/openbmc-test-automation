@@ -251,6 +251,38 @@ Verify Certificates Location Via Redfish
     Should Be Equal  ${match}  ${True}
     ...  msg=Verify the location of certificates via Redfish fail.
 
+Verify Certificate Service Defaults
+    [Documentation]  Verify Certificate Service Defaults.
+    [Tags]  Verify_Certificate_Service_Defaults
+
+    # Get certificate service default properties.
+    ${certificateservice}=  Redfish.Get Properties  /redfish/v1/CertificateService
+    ...    valid_status_codes=[${HTTP_OK}]
+
+    # Validate certificate service properties.
+    Valid Value  certificateservice['@odata.id']  ['/redfish/v1/CertificateService']
+    Valid Value  certificateservice['Name']  ['Certificate Service']
+    Valid Value  certificateservice['Id']  ['CertificateService']
+    Dictionary Should Contain Key  ${certificateservice}  CertificateLocations
+    Valid Value  certificateservice['CertificateLocations']['@odata.id']
+    ...    ['/redfish/v1/CertificateService/CertificateLocations']
+
+Verify Certificate Locations Defaults
+    [Documentation]  Verify Certificate Locations Defaults.
+    [Tags]  Verify_Certificate_Locations_Defaults
+
+    # Get certificate locations default properties.
+    ${certificatelocations}=  Redfish.Get Properties  /redfish/v1/CertificateService/CertificateLocations
+    ...    valid_status_codes=[${HTTP_OK}]
+
+    # Validate certificate locations properties.
+    Valid Value  certificatelocations['@odata.id']  ['/redfish/v1/CertificateService/CertificateLocations']
+    Valid Value  certificatelocations['Name']  ['Certificate Locations']
+    Valid Value  certificatelocations['Id']  ['CertificateLocations']
+    Dictionary Should Contain Key  ${certificatelocations}  Links
+    Dictionary Should Contain Key  ${certificatelocations['Links']}  Certificates
+    Dictionary Should Contain Key  ${certificatelocations['Links']}  Certificates@odata.count
+
 
 *** Keywords ***
 
