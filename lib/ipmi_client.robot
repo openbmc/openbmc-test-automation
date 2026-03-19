@@ -198,6 +198,26 @@ Run External IPMI Standard Command
 
     RETURN  ${output}
 
+Run External IPMI Raw Command Return Output
+    [Documentation]  Run external IPMI raw command and return output.
+    [Arguments]  ${command}  &{options}
+
+    # Description of argument(s):
+    # command                       The IPMI command string to be executed
+    #                               (e.g. "power status").  Note that if
+    #                               ${IPMI_USER_OPTIONS} has a value (e.g.
+    #                               "-vvv"), it will be pre-pended to this
+    #                               command string.
+    # options                       Additional ipmitool command options (e.g.
+    #                               -C=3, -I=lanplus, etc.).
+
+    ${command_string}=  Process IPMI User Options  ${command}
+    ${ipmi_cmd}=  Create IPMI Ext Command String  ${command_string}  &{options}
+    Qprint Issuing  ${ipmi_cmd}
+
+    ${rc}  ${output}=  Run And Return RC and Output  ${ipmi_cmd}
+
+    RETURN  ${rc}  ${output}
 
 Run External IPMI Raw Command
     [Documentation]  Run the external IPMI raw command.
