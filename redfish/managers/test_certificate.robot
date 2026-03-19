@@ -5,6 +5,7 @@ Resource         ../../lib/resource.robot
 Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/openbmc_ffdc.robot
 Resource         ../../lib/certificate_utils.robot
+Resource         ../../lib/bmc_redfish_utils.robot
 Library          String
 
 
@@ -251,6 +252,17 @@ Verify Certificates Location Via Redfish
     Should Be Equal  ${match}  ${True}
     ...  msg=Verify the location of certificates via Redfish fail.
 
+Verify Certificate Service Unsupported Methods
+    [Documentation]  Verify certificate service with unsupported methods.
+    [Tags]  Verify_Certificate_Service_Unsupported_Methods
+
+    Verify Supported And Unsupported Methods  uri=/redfish/v1/CertificateService
+
+Verify Certificate Locations Unsupported Methods
+    [Documentation]  Verify certificate locations with unsupported methods.
+    [Tags]  Verify_Certificate_Locations_Unsupported_Methods
+
+    Verify Supported And Unsupported Methods  uri=/redfish/v1/CertificateService/CertificateLocations
 
 *** Keywords ***
 
