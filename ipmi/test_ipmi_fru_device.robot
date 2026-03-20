@@ -291,6 +291,8 @@ Compare IPMI FRU With DBUS
     #    DBUS FRU field :
     #            .BOARD_PART_NUMBER      property  s     "111.22222.0000"        emits-change
     FOR  ${key}  ${ipmi_fru_value}  IN  &{ipmi_fru}
+        ${key_exists}=  Run Keyword And Return Status  Dictionary Should Contain Key  ${dbus_dict}  ${key}
+        IF  '${key_exists}' == 'False'  CONTINUE
         ${dbus_resp}=  Execute DBUS Introspect Command  ${dbus_dict}[${key}]
         ${ipmi_fru_subkeys}=  Get Dictionary Keys  ${ipmi_fru_value}
         FOR  ${subkeys}  IN  @{ipmi_fru_subkeys}
