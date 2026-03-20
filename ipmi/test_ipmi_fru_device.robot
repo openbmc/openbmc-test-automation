@@ -195,12 +195,13 @@ Get IPMI FRU Devices Data
         ...  Board Serial  Product Serial
 
         ${serial_no}=  Get Lines Containing String  ${frudata}  ${serial_str}
+        ${num}=  Evaluate  int(${num}) + 1
+        Continue For Loop If  '${serial_no}' == '${EMPTY}'
 
         # Get each device and split field as key and value and append to a dictionary.
         ${serial_nos}=  Set Variable  ${serial_no.strip()}
         ${data}=  Split String  ${serial_nos}  :
         ${serial_number}=  Get From List  ${data}  1
-        ${num}=  Evaluate  int(${num}) + 1
         FOR  ${entry}  IN  @{dev}
             ${entry}=  Split String  ${entry}  ${SPACE}:${SPACE}
             ${entry1}=  Set Variable  ${entry[0].strip()}
