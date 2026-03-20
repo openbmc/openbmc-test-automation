@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "266220fe_710cf5b3",
+        "filename": "redfish/managers/test_certificate.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-03-20T04:59:30Z",
+      "side": 1,
+      "message": "please give one more line space",
+      "revId": "c0200a9ad3ddd60950817cdab373979b52a106e6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
