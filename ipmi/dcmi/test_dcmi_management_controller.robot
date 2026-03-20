@@ -31,7 +31,7 @@ Validate IPMI Response Length
     #                      "04", "05", "06", "07", "08", "09"]
     # rsp_length = 10
     # string_length = 0a
-    ${rsp_length}=  Get Length  ${ipmi_cmd_rsp_list[2:]}
+    ${rsp_length}=  Get Length  ${ipmi_cmd_rsp_list[2:-1]}
     ${string_length}=  Get Response Length In Hex  ${rsp_length}
 
     # ipmi_cmd_rsp_list[1] = 0a
@@ -51,7 +51,7 @@ Test Hostname Is Same With Management Controller Identifier String
     @{ipmi_cmd_rsp_list}=  Split String  ${rsp}
     ${bmc_console_hostname_bytes_list}=  Get Hostname From BMC Console
 
-    Lists Should Be Equal  ${ipmi_cmd_rsp_list[2:]}  ${bmc_console_hostname_bytes_list}
+    Lists Should Be Equal  ${ipmi_cmd_rsp_list[2:-1]}  ${bmc_console_hostname_bytes_list}
     ...  msg=response get from dcmi get mcid cmd and hostname from "cat /etc/os-release" cmd is not same.
 
 Test Get Management Controller Identifier String
@@ -85,7 +85,7 @@ Test Get Management Controller Identifier String
     # the above condition is equal.
     # suppose if string_length and ipmi_cmd_rsp_list[1] not matches then
     # it will fails.
-    ${rsp_length}=  Get Length  ${ipmi_cmd_rsp_list[2:]}
+    ${rsp_length}=  Get Length  ${ipmi_cmd_rsp_list[2:-1]}
     ${string_length}=  Get Response Length In Hex  ${rsp_length}
     Run Keyword And Continue On Failure
     ...  Should Be Equal As Strings  ${ipmi_cmd_rsp_list[1]}  ${string_length}
@@ -96,13 +96,13 @@ Test Get Management Controller Identifier String
     ${set_dcmi_mcid_cmd}=
     ...  convert_prefix_hex_list_to_non_prefix_hex_list  ${string_hex_list}
     Run Keyword And Continue On Failure
-    ...  Lists Should Be Equal  ${ipmi_cmd_rsp_list[2:]}  ${set_dcmi_mcid_cmd}
+    ...  Lists Should Be Equal  ${ipmi_cmd_rsp_list[2:-1]}  ${set_dcmi_mcid_cmd}
     ...  msg=Bytes given in dcmi set mcid command and string bytes got from dcmi get mcid command are not same
 
     # Verify Hostname of cat /etc/hostname and get dcmi management controller identifier string command.
     ${bytes_list}=  Get Hostname From BMC Console
     Run Keyword And Continue On Failure
-    ...  Lists Should Be Equal  ${ipmi_cmd_rsp_list[2:]}  ${bytes_list}
+    ...  Lists Should Be Equal  ${ipmi_cmd_rsp_list[2:-1]}  ${bytes_list}
     ...  msg=Bytes got from dcmi get mcid command and hostname from "cat /etc/os-release" command is not same.
 
 *** Keywords ***
