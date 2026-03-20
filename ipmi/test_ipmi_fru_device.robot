@@ -195,12 +195,13 @@ Get IPMI FRU Devices Data
         ...  Board Serial  Product Serial
 
         ${serial_no}=  Get Lines Containing String  ${frudata}  ${serial_str}
+        ${num}=  Evaluate  int(${num}) + 1
+        Continue For Loop If  '${serial_no}' == '${EMPTY}'
 
         # Get each device and split field as key and value and append to a dictionary.
         ${serial_nos}=  Set Variable  ${serial_no.strip()}
         ${data}=  Split String  ${serial_nos}  :
         ${serial_number}=  Get From List  ${data}  1
-        ${num}=  Evaluate  int(${num}) + 1
         FOR  ${entry}  IN  @{dev}
             ${entry}=  Split String  ${entry}  ${SPACE}:${SPACE}
             ${entry1}=  Set Variable  ${entry[0].strip()}
@@ -298,6 +299,7 @@ Compare IPMI FRU With DBUS
             IF  '${key_status}' == 'False'  CONTINUE
             ${property_name}=  Get From Dictionary  ${ipmi_dbus_name_mapping}  ${subkeys}
             ${dbus_data}=  Get Lines Containing String  ${dbus_resp}  ${property_name}
+            Continue For Loop If  '${dbus_data}' == '${EMPTY}'
             ${dbus_value}=  Set Variable  ${dbus_data.split('"')[1].strip()}
             ${ipmi_response}=  Get From Dictionary  ${ipmi_fru_value}  ${subkeys}
             ${status}=  Run Keyword And Return Status  Should Contain  ${property_name}  DATE
