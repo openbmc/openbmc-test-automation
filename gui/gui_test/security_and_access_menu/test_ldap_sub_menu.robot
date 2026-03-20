@@ -16,7 +16,7 @@ ${xpath_ldap_heading}                   //h1[text()="LDAP"]
 ${xpath_enable_ldap_checkbox}           //*[@data-test-id='ldap-checkbox-ldapAuthenticationEnabled']
 ${xpath_secure_ldap_checkbox}           //*[@data-test-id='ldap-checkbox-secureLdapEnabled']
 ${xpath_service_radio_button}           //*[@data-test-id="ldap-radio-activeDirectoryEnabled"]
-${xpath_add_role_group_button}          //button[contains(text(),'Add role group')]
+${xpath_add_role_group_button}          //*[text()=" Add role group"]
 ${xpath_ldap_url}                       //*[@data-test-id='ldap-input-serverUri']
 ${xpath_ldap_bind_dn}                   //*[@data-test-id='ldap-input-bindDn']
 ${xpath_ldap_password}                  //*[@id='bind-password']
@@ -25,8 +25,8 @@ ${xpath_ldap_save_settings}             //*[@data-test-id='ldap-button-saveSetti
 ${xpath_select_refresh_button}          //*[text()[contains(.,"Refresh")]]
 ${xpath_add_group_name}                 //*[@id="role-group-name"]
 ${xpath_add_group_Privilege}            //*[@id="privilege"]
-${xpath_add_privilege_button}           //button[text()=" Add "]
-${xpath_delete_group_button}            //*[@title="Delete"]
+${xpath_add_privilege_button}           //button[text()="Add"]
+${xpath_delete_group_button}            //*[@title="Delete role group"]
 ${xpath_delete_button}                  //button[text()="Delete"]
 
 
@@ -147,8 +147,9 @@ Verify LDAP User With Admin Privilege
     [Teardown]  Run Keywords  Redfish.Login  AND  Delete LDAP Role Group  ${GROUP_NAME}
 
     Update LDAP Configuration With LDAP User Role And Group  ${GROUP_NAME}  ${GROUP_PRIVILEGE}
+    Sleep  15s
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
-    Redfish OBMC Reboot (off)
+#    Redfish OBMC Reboot (off)
     Redfish.Logout
 
 
@@ -235,6 +236,7 @@ Create LDAP Configuration
     # Wait for GUI to reflect LDAP disabled status.
     Run Keywords  Refresh GUI  AND  Sleep  10s
 
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=60
     Click Element At Coordinates  ${xpath_enable_ldap_checkbox}  0  0
     ${radio_buttons}=  Get WebElements  ${xpath_service_radio_button}
 
