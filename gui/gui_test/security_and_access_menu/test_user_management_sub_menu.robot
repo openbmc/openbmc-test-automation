@@ -309,7 +309,7 @@ Verify Creating User Without Privileges Via GUI
     Page Should Contain  Field required
 
 Verify Creating User With Invalid Password Length Via GUI
-    [Documentation]  Verify creating user with Invalid password length
+    [Documentation]  Verify creating user with invalid password length
     ...    via GUI.
     [Tags]  Verify_Creating_User_With_Invalid_Password_Length_Via_GUI
     [Teardown]  Click Element  ${xpath_cancel_button}
