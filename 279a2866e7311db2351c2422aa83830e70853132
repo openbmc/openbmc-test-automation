@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a9990e0_49722199",
+        "filename": "gui/gui_test/security_and_access_menu/test_user_management_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-03-23T09:27:44Z",
+      "side": 1,
+      "message": "Invalid -\u003e invalid",
+      "range": {
+        "startLine": 337,
+        "startChar": 30,
+        "endLine": 337,
+        "endChar": 37
+      },
+      "revId": "279a2866e7311db2351c2422aa83830e70853132",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15c2758f_33d3d0a3",
+        "filename": "gui/gui_test/security_and_access_menu/test_user_management_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-03-23T09:27:44Z",
+      "side": 1,
+      "message": "can make use of the same username created at 317",
+      "range": {
+        "startLine": 341,
+        "startChar": 4,
+        "endLine": 342,
+        "endChar": 32
+      },
+      "revId": "279a2866e7311db2351c2422aa83830e70853132",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40baaafb_0c87acb5",
+        "filename": "gui/gui_test/security_and_access_menu/test_user_management_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-03-23T09:27:44Z",
+      "side": 1,
+      "message": "Invalid -\u003e invalid",
+      "range": {
+        "startLine": 361,
+        "startChar": 30,
+        "endLine": 361,
+        "endChar": 37
+      },
+      "revId": "279a2866e7311db2351c2422aa83830e70853132",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
