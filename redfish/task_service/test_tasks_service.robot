@@ -203,6 +203,26 @@ Verify Task Service Unsupported Methods
     Redfish.Delete  /redfish/v1/TaskService
     ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
 
+Verify Retrieving Deleted Tasks Instance
+    [Documentation]  Verify retrieving the deleted tasks Instance
+    ...    returns an error.
+    [Tags]  Verify_Retrieving_Deleted_Tasks_Instance
+
+    # Trigger a Redfish event that generates task Instance.
+    ${task_id}  ${resp}=  Generate Task Instance
+
+    # Get the generated task Instance.
+    ${resp}=  Redfish.Get  /redfish/v1/TaskService/Tasks/${task_id}
+    ...  valid_status_codes=[${HTTP_OK}]
+
+    # Delete the created task Instance.
+    Redfish.Delete  /redfish/v1/TaskService/Tasks/${task_id}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+    # Retrieving the deleted task Instance should return an error.
+    Redfish.Get  /redfish/v1/TaskService/Tasks/${task_id}
+    ...  valid_status_codes=[${HTTP_NOT_FOUND}]
+
 
 *** Keywords ***
 
