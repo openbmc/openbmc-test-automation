@@ -308,6 +308,56 @@ Verify Creating User Without Privileges Via GUI
     # Expect get the field required messages.
     Page Should Contain  Field required
 
+Verify Creating User With Invalid Password Length Via GUI
+    [Documentation]  Verify creating user with invalid password length
+    ...    via GUI.
+    [Tags]  Verify_Creating_User_With_Invalid_Password_Length_Via_GUI
+    [Teardown]  Click Element  ${xpath_cancel_button}
+
+    # Get random username.
+    ${username}=  Generate Random String  8  [LETTERS]
+
+    # Click the add user button.
+    Click Element  ${xpath_add_user}
+    Wait Until Page Contains Element  ${xpath_add_user_heading}
+
+    # Set user name.
+    Input Text  ${xpath_username_input_button}  ${user_name}
+
+    # Set user privilege.
+    Select From List by Value  ${xpath_privilege_list_button}  Administrator
+
+    # Set user password.
+    Input Text  ${xpath_password_input_button}  testuser1223456789123456789
+    Input Text  ${xpath_password_confirm_button}  testuser1223456789123456789
+
+    # Submit changes.
+    Click Element  ${xpath_submit_button}
+
+    # Expect get the password invalid length messages.
+    Page Should Contain  Password must be between 8 \u2013 20 characters
+    Click Element  ${xpath_cancel_button}
+
+    # Click the add user button.
+    Click Element  ${xpath_add_user}
+    Wait Until Page Contains Element  ${xpath_add_user_heading}
+
+    # Set user name.
+    Input Text  ${xpath_username_input_button}  ${user_name}
+
+    # Set user privilege.
+    Select From List by Value  ${xpath_privilege_list_button}  Administrator
+
+    # Set user password.
+    Input Text  ${xpath_password_input_button}  testusr
+    Input Text  ${xpath_password_confirm_button}  testusr
+
+    # Submit changes.
+    Click Element  ${xpath_submit_button}
+
+    # Expect get the password invalid length messages.
+    Page Should Contain  Password must be between 8 \u2013 20 characters
+
 
 *** Keywords ***
 
