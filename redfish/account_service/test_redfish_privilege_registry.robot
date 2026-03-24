@@ -184,6 +184,20 @@ Verify ReadOnly User Privileges Via Redfish
     Redfish.Delete  ${REDFISH_ACCOUNTS_URI}${patched_user}
     ...  valid_status_codes=[${HTTP_FORBIDDEN}]
 
+Verify Registries Defaults
+    [Documentation]  Verify registries default property values.
+    [Tags]  Verify_Registries_Defaults
+
+    Redfish.Login
+    ${registries}=  Redfish.Get Properties  /redfish/v1/Registries
+    Rprint Vars  registries
+    ${registries_count}=  Get Length  ${registries['Members']}
+
+    Valid Value  registries['@odata.id']  ['/redfish/v1/Registries/', '/redfish/v1/Registries']
+    Valid Value  registries['Description']  ['Collection of MessageRegistryFiles']
+    Valid Value  registries['Name']  ['MessageRegistryFile Collection']
+    Valid Value  registries['Members@odata.count']  [${registries_count}]
+
 
 *** Keywords ***
 
