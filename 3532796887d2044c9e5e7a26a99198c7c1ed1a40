@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8cbc6c8a_eaaa1790",
+        "filename": "lib/multi_chassis_power.resource",
+        "patchSetId": 10
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-03-24T16:07:13Z",
+      "side": 1,
+      "message": "Yes correct.. for multi chassis all the chassis* state should be ON to be consider it as on.",
+      "parentUuid": "9159a66a_854f153c",
+      "revId": "3532796887d2044c9e5e7a26a99198c7c1ed1a40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4cb519aa_f9455414",
         "filename": "lib/multi_chassis_power.resource",
         "patchSetId": 10
@@ -48,6 +66,30 @@
       "writtenOn": "2026-03-18T23:54:50Z",
       "side": 1,
       "message": "I\u0027m missing something here. What\u0027s the use case of passing in a CHASSIS_ID?",
+      "range": {
+        "startLine": 26,
+        "startChar": 15,
+        "endLine": 26,
+        "endChar": 26
+      },
+      "revId": "3532796887d2044c9e5e7a26a99198c7c1ed1a40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "724e7afd_e55f96f9",
+        "filename": "lib/multi_chassis_power.resource",
+        "patchSetId": 10
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-03-24T16:07:13Z",
+      "side": 1,
+      "message": "This is to cater to old default CHASSIS_ID\"chassis  user can key in \n\n-v CHASSIS_ID:chassis0  or any specific name they have implemented.  \n\nThough this is redundant now but to have code support existing where there are manytest cases which are relying on this CHASIS_ID variable..  So its a WIP and will be eventually removed when all the other test cases are synced to latest which will be done in different commit bit latter .",
+      "parentUuid": "4cb519aa_f9455414",
       "range": {
         "startLine": 26,
         "startChar": 15,
@@ -77,6 +119,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a2f475ea_da3c2ec8",
+        "filename": "lib/multi_chassis_power.resource",
+        "patchSetId": 10
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-03-24T16:07:13Z",
+      "side": 1,
+      "message": "Same as previous comments.. the single Chasiis keyword is redundant and will be removed in next commit ahead. This is just to preserve and branch into it untill test cases are fixed..",
+      "parentUuid": "4cfa78c8_fc15cf7e",
+      "revId": "3532796887d2044c9e5e7a26a99198c7c1ed1a40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8b5207b7_c9adf533",
         "filename": "lib/multi_chassis_power.resource",
         "patchSetId": 10
@@ -88,6 +148,30 @@
       "writtenOn": "2026-03-18T23:54:50Z",
       "side": 1,
       "message": "I\u0027m a bit confused on this log. The previous line is saying power is \u003d\u003d \u0027On\u0027 so why the (not On) log here?",
+      "range": {
+        "startLine": 177,
+        "startChar": 92,
+        "endLine": 177,
+        "endChar": 100
+      },
+      "revId": "3532796887d2044c9e5e7a26a99198c7c1ed1a40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed9a2b83_bea7b0c1",
+        "filename": "lib/multi_chassis_power.resource",
+        "patchSetId": 10
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-03-24T16:07:13Z",
+      "side": 1,
+      "message": "Good catch.. fixed the entry to this print to state which /redfish/vi/Chasis/chassisx was not on when run on list of chassis list.\n\nFixed \n IF  \u0027${power_state}\u0027 !\u003d \u0027On\u0027",
+      "parentUuid": "8b5207b7_c9adf533",
       "range": {
         "startLine": 177,
         "startChar": 92,
