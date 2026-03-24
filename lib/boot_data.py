@@ -80,8 +80,8 @@ def create_boot_table(file_path=None, os_host=""):
     cmd_buf = "egrep -v '^[ ]*$|^[ ]*#' " + file_path + " > " + temp_file_path
     gc.cmd_fnc_u(cmd_buf, quiet=1)
 
-    boot_file = open(temp_file_path)
-    boot_table = json.load(boot_file, object_hook=DotDict)
+    with open(temp_file_path) as boot_file:
+        boot_table = json.load(boot_file, object_hook=DotDict)
 
     # If the user is running without an OS_HOST, we remove os starting and ending state requirements from
     # the boot entries.
