@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "187931ca_8e516b1d",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1001808
+      },
+      "writtenOn": "2026-03-24T02:58:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5630cef9_4830e4da",
+      "range": {
+        "startLine": 199,
+        "startChar": 1,
+        "endLine": 199,
+        "endChar": 27
+      },
+      "revId": "bb42300da0ff5bde6d74e5a5ef88273761de22ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2beb42fb_d8a447c6",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-03-23T10:14:29Z",
       "side": 1,
       "message": "Continue For Loop If is deprecated since Robot Framework version 5.*, use IF and CONTINUE instead",
+      "range": {
+        "startLine": 302,
+        "startChar": 0,
+        "endLine": 302,
+        "endChar": 12
+      },
+      "revId": "bb42300da0ff5bde6d74e5a5ef88273761de22ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53d4c5e1_c5dd9cf1",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1001808
+      },
+      "writtenOn": "2026-03-24T02:58:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2beb42fb_d8a447c6",
       "range": {
         "startLine": 302,
         "startChar": 0,
