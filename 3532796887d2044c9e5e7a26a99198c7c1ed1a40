@@ -53,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e3c6c13_5569b6d4",
+        "filename": "lib/multi_chassis_power.resource",
+        "patchSetId": 10
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-03-24T16:21:38Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8cbc6c8a_eaaa1790",
+      "revId": "3532796887d2044c9e5e7a26a99198c7c1ed1a40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4cb519aa_f9455414",
@@ -100,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "500e1576_0e55746c",
+        "filename": "lib/multi_chassis_power.resource",
+        "patchSetId": 10
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-03-24T16:21:38Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "724e7afd_e55f96f9",
+      "range": {
+        "startLine": 26,
+        "startChar": 15,
+        "endLine": 26,
+        "endChar": 26
+      },
+      "revId": "3532796887d2044c9e5e7a26a99198c7c1ed1a40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4cfa78c8_fc15cf7e",
@@ -131,6 +173,24 @@
       "side": 1,
       "message": "Same as previous comments.. the single Chasiis keyword is redundant and will be removed in next commit ahead. This is just to preserve and branch into it untill test cases are fixed..",
       "parentUuid": "4cfa78c8_fc15cf7e",
+      "revId": "3532796887d2044c9e5e7a26a99198c7c1ed1a40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5233894e_f7b9086e",
+        "filename": "lib/multi_chassis_power.resource",
+        "patchSetId": 10
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-03-24T16:21:38Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a2f475ea_da3c2ec8",
       "revId": "3532796887d2044c9e5e7a26a99198c7c1ed1a40",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
