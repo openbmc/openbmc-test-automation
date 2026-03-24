@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "24ae7bde_cdaed64c",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp_eth0.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-03-24T10:23:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c69be18b_ae11245b",
+      "revId": "11377de2cb69bafc42f51dceca353da6b5c54276",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8b9e1a86_362feea1",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-03-24T09:05:20Z",
       "side": 1,
       "message": "Same as above",
+      "revId": "11377de2cb69bafc42f51dceca353da6b5c54276",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cb920e7_aae95cb5",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp_eth0.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-03-24T10:23:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b9e1a86_362feea1",
       "revId": "11377de2cb69bafc42f51dceca353da6b5c54276",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -52,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c40c933e_cdcecbc6",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp_eth0.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-03-24T10:23:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "799dcb8f_4f0b7f1e",
+      "revId": "11377de2cb69bafc42f51dceca353da6b5c54276",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b5bbee2f_71dffe0a",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-03-24T09:05:20Z",
       "side": 1,
       "message": "Keep this Suite setup keyword as the 1st keyword for better visibility",
+      "revId": "11377de2cb69bafc42f51dceca353da6b5c54276",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36c88d77_97e80ed0",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp_eth0.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-03-24T10:23:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5bbee2f_71dffe0a",
       "revId": "11377de2cb69bafc42f51dceca353da6b5c54276",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
