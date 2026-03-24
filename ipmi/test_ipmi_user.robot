@@ -460,8 +460,8 @@ Verify Default Selection Of 16 Character Password For IPMI User
     [Template]  Set User Password And Verify
 
     # password_length  password_option  expected_status
-    17                 16               ${True}
-    20                 16               ${True}
+    17                 16               ${False}
+    20                 16               ${False}
 
 
 Verify Minimum Password Length For IPMI User
