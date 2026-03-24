@@ -398,13 +398,14 @@ def get_aux_version(version_id):
 
     # Commit version.
     count = re.findall("-(\\d{1,4})-", version_id)
+    commit = count[0] if count else "0000"
 
     # Release version.
     release = re.findall("-r(\\d{1,4})", version_id)
     if release:
-        aux_version = count[0] + "{0:0>4}".format(release[0])
+        aux_version = commit + "{0:0>4}".format(release[0])
     else:
-        aux_version = count[0] + "0000"
+        aux_version = commit + "0000"
 
     return aux_version
 
