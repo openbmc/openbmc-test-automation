@@ -1,5 +1,4 @@
 *** Settings ***
-
 Documentation  Operational check of fans with OS booted.
 
 # Test Parameters:
@@ -20,7 +19,6 @@ Test Teardown   Test Teardown Execution
 Test Tags       Fan_Operations
 
 *** Test Cases ***
-
 
 Check Number Of Fans With Power On
     [Documentation]  Verify system has the minimum number of fans.

@@ -1,11 +1,9 @@
 *** Settings ***
 Documentation     Energy scale power capping tests.
 
-
 # Acronyms
 #  PL     Power Limit
 #  OCC    On Chip Controller
-
 
 Resource          ../../lib/energy_scale_utils.robot
 Resource          ../../lib/rest_client.robot
@@ -26,10 +24,7 @@ ${max_power}            3050
 ${near_max_power_50}    3000
 ${near_max_power_100}   2950
 
-
-
 *** Test Cases ***
-
 
 Escale System On And PL Enabled
     [Documentation]  Change active power limit with system power on and
@@ -131,7 +126,7 @@ Escale Check Settings System Off Then On
     ${power_setting}=  Set Variable  ${near_max_power_50}
 
     Set DCMI Power Limit And Verify  ${power_setting}
-    Deactivate DCMI Power and Verify
+    Deactivate DCMI Power And Verify
 
     Smart Power Off
 

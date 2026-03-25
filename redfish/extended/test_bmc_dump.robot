@@ -37,7 +37,7 @@ Verify Dump After Host Watchdog Error Injection
     @{dump_entry_list}=  Read Properties  ${DUMP_ENTRY_URI}
 
     # Verifying that there is only one dump
-    ${length}=  Get length  ${dump_entry_list}
+    ${length}=  Get Length  ${dump_entry_list}
     Should Be Equal As Integers  ${length}  ${1}
 
     # Get dump id

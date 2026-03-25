@@ -1,5 +1,4 @@
 *** Settings ***
-
 Documentation  Websocket functionality test.
 
 # Test Parameters:
@@ -10,13 +9,13 @@ Documentation  Websocket functionality test.
 # OS_USERNAME        The username for the OS login.
 # OS_PASSWORD        The password for OS_USERNAME.
 
+Library              OperatingSystem
 Resource             ../../lib/esel_utils.robot
 Resource             ../../lib/bmc_redfish_resource.robot
 Resource             ../../lib/logging_utils.robot
 Resource             ../../lib/dump_utils.robot
 Resource             ../../lib/os_utilities.robot
 Library              ../../lib/gen_cmd.py
-Library              OperatingSystem
 
 
 Suite Setup          Suite Setup Execution
@@ -34,9 +33,7 @@ ${dump_received}        Dump notification received over websocket interface
 ${min_number_chars}     22
 ${monitor_cmd}          ${monitor_pgm} ${OPENBMC_HOST} --openbmc_username ${OPENBMC_USERNAME}
 
-
 *** Test Cases ***
-
 
 Test BMC Websocket ESEL Interface
     [Documentation]  Verify eSELs are reported over the websocket interface.
@@ -179,4 +176,4 @@ Suite Teardown Execution
     [Documentation]  Do the post-suite teardown.
 
     Delete All Error Logs
-    Run Keyword and Return Status  Redfish.Logout
+    Run Keyword And Return Status  Redfish.Logout

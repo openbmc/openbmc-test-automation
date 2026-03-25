@@ -15,6 +15,7 @@ Test Teardown    FFDC On Test Case Fail
 Test Tags        Server_Restart_Policy
 
 *** Variables ***
+
 ${LOG_SERVICE}  xyz.openbmc_project.Logging.service
 
 *** Test Cases ***
