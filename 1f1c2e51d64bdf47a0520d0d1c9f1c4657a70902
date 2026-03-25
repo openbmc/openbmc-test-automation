@@ -16,6 +16,23 @@
       "message": "updated as per the comment.",
       "revId": "1f1c2e51d64bdf47a0520d0d1c9f1c4657a70902",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "922be072_5e75369a",
+        "filename": "redfish/managers/test_certificate.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1002230
+      },
+      "writtenOn": "2026-03-25T13:32:40Z",
+      "side": 1,
+      "message": "What\u0027s the purpose of this test? Redfish Service Validator tests these. I don\u0027t think it makes sure the the Name and Id are exactly Certificate Service and CertificateService (so you might want to keep the test if you really need to test exact values), but it tests the format of the properties matches expectations and CertificateLocations is present.\n\nSame for the test below. Can you please run Redfish Service Validator (https://github.com/DMTF/Redfish-Service-Validator) against your target, check report and see if it does what you want to do here?\n\nNote, openbmc-test-automation has a test that uses Redfish Service Validator - https://github.com/openbmc/openbmc-test-automation/blob/35b3260513eba12416138ec1df870184c9e1e60a/redfish/dmtf_tools/Redfish_Service_Validator.robot#L25",
+      "revId": "1f1c2e51d64bdf47a0520d0d1c9f1c4657a70902",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
