@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation  Test BMC file mirroring sync from primary flash chip to
-...  alternate flash chip side.
+...            alternate flash chip side.
 
 Resource       ../../lib/openbmc_ffdc.robot
 Resource       ../../lib/bmc_network_utils.robot
@@ -66,4 +66,3 @@ Test Teardown Execution
 
     Redfish.Login
     Configure Hostname  ${hostname}
-

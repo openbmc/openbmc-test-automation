@@ -17,8 +17,7 @@ Library         ../../lib/state_map.py
 Test Teardown   Test Teardown Execution
 Suite Teardown  Suite Teardown Execution
 
-Test Tags      Power_Restore
-
+Test Tags       Power_Restore
 
 *** Test Cases ***
 
@@ -37,7 +36,6 @@ Test Restore Policy ALWAYS_POWER_OFF With Host Off
 
     # Policy                Initial Host State     Expected Host State
     AlwaysOff               Off                    Off
-
 
 
 Test Restore Policy ALWAYS_POWER_OFF With Host Running
@@ -66,7 +64,6 @@ Test Restore Policy ALWAYS_POWER_ON With Host Off
     AlwaysOn                Off                    Running
 
 
-
 Test Restore Policy ALWAYS_POWER_ON With Host Running
     [Documentation]  Verify the BMC restore policy is ALWAYS_POWER_ON while the Host is running.
     [Tags]  Test_Restore_Policy_ALWAYS_POWER_ON_With_Host_Running
@@ -74,7 +71,6 @@ Test Restore Policy ALWAYS_POWER_ON With Host Running
 
     # Policy                Initial Host State     Expected Host State
     AlwaysOn                Running                Running
-
 
 
 Test Restore Policy Restore Last State With Host Running
@@ -92,7 +88,6 @@ Test Restore Policy Restore Last State With Host Running
 
     # Policy                Initial Host State     Expected Host State
     LastState               Running                Running
-
 
 
 Test Restore Policy Restore Last State With Host Off

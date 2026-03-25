@@ -85,4 +85,3 @@ Redfish Update Firmware
     Run Key  ${post_code_update_actions['${image_info["image_type"]}']['OnReset']}
     Redfish.Login
     Redfish Verify Host Version  ${IMAGE_FILE_PATH}
-

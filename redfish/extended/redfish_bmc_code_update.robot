@@ -29,7 +29,7 @@ Test Teardown            FFDC On Test Case Fail
 # Force the test to timedout to prevent test hanging.
 Test Timeout             45 minutes
 
-Test Tags               Bmc_Code_Update
+Test Tags                Bmc_Code_Update
 
 *** Variables ***
 
@@ -305,4 +305,3 @@ Redfish Update Firmware
     Run Key  ${post_code_update_actions['${image_info["image_type"]}']['OnReset']}
     Redfish.Login
     Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
-
