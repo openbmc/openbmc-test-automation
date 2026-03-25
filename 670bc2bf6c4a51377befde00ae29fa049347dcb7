@@ -16,6 +16,23 @@
       "message": "Sridevi / Nanda please ake a look . Thanks",
       "revId": "670bc2bf6c4a51377befde00ae29fa049347dcb7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "443c34f5_1986a678",
+        "filename": "lib/ipmi_client.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-03-25T17:14:06Z",
+      "side": 1,
+      "message": "Need to correct spacing\n\nI tried executing this test on our environment it is failing - ipmi/test_ipmi_chassis.robot -\u003e IPMI Chassis Status Off\n\n```\nIPMI Chassis Status Off :: This test case verifies system power of... | FAIL |\nEvaluating expression \u0027\"System Power         : off\\nPower Overload       : false\\nPower Interlock      : inactive\\nMain Power Fault     : false\\nPower Control Fault  : false\\nPower Restore Policy : always-off\\nLast Power Event     : \\nChassis Intrusion    : inactive\\nFront-Panel Lockout  : inactive\\nDrive Fault          : false\\nCooling/Fan Fault    : false\\nSleep Button Disable : not allowed\\nDiag Button Disable  : not allowed\\nReset Button Disable : not allowed\\nPower Button Disable : allowed\\nSleep Button Disabled: false\\nDiag Button Disabled : false\\nReset Button Disabled: false\\nPower Button Disabled: false\".lstrip()\u0027 failed: SyntaxError: unterminated string literal (detected at line 1) (\u003cstring\u003e, line 1)\n```\n\n\nPlease check on this",
+      "revId": "670bc2bf6c4a51377befde00ae29fa049347dcb7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
