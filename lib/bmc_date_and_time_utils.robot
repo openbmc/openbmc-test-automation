@@ -21,7 +21,38 @@ Redfish Get DateTime
     [Documentation]  Returns BMC Datetime value from Redfish.
 
     ${date_time}=  Redfish.Get Attribute  ${REDFISH_BASE_URI}Managers/${MANAGER_ID}  DateTime
+
     RETURN  ${date_time}
+
+
+Redfish Get TimeZoneName
+    [Documentation]  Return BMC TimeZoneName value from Redfish.
+
+    ${tz_name}=  Redfish.Get Attribute  ${REDFISH_BASE_URI}Managers/${MANAGER_ID}  TimeZoneName
+
+    RETURN  ${tz_name}
+
+
+Redfish Set TimeZoneName
+    [Documentation]  Set TimeZoneName using Redfish.
+    [Arguments]  ${timezone}  ${valid_status_codes}=[${HTTP_NO_CONTENT}]
+
+    # Description of argument(s):
+    # timezone              IANA timezone name to set (e.g. "Asia/Tokyo").
+    # valid_status_codes    Expected HTTP status codes.
+
+    Redfish.Patch  ${REDFISH_BASE_URI}Managers/${MANAGER_ID}
+    ...  body={'TimeZoneName': '${timezone}'}
+    ...  valid_status_codes=${valid_status_codes}
+
+
+Redfish Get DateTimeLocalOffset
+    [Documentation]  Return BMC DateTimeLocalOffset from Redfish.
+
+    ${offset}=  Redfish.Get Attribute
+    ...  ${REDFISH_BASE_URI}Managers/${MANAGER_ID}  DateTimeLocalOffset
+
+    RETURN  ${offset}
 
 
 Redfish Set DateTime
