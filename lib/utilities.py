@@ -265,13 +265,16 @@ def get_mtr_row(host=""):
     # The max length of host in output is 28 chars.
     host_part = host[:28]
 
-    row = [
+    matching_rows = [
         value
         for key, value in report.items()
         if key in host or host_part in key
-    ][0]
+    ]
 
-    return row
+    if not matching_rows:
+        return None
+
+    return matching_rows[0]
 
 
 def list_to_set(fru_list=""):
