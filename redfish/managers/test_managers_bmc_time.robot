@@ -1,8 +1,9 @@
 *** Settings ***
-Documentation        Test BMC manager time functionality.
+Documentation        Test BMC manager time and timezone functionality.
 
 Resource             ../../lib/openbmc_ffdc.robot
 Resource             ../../lib/bmc_date_and_time_utils.robot
+Library              ../../lib/bmc_ssh_utils.py
 
 Test Setup           Printn
 Test Teardown        Test Teardown Execution
@@ -103,6 +104,94 @@ Verify Immediate Consumption Of BMC Date
     off
 
 
+Verify BMC Timezone Properties Are Exposed
+    [Documentation]  Verify TimeZoneName, DateTimeLocalOffset and DateTime offset are exposed.
+    [Tags]  Verify_BMC_Timezone_Properties_Are_Exposed
+
+    ${tz}=  Redfish Get TimeZoneName
+    Should Not Be Empty  ${tz}
+    ${offset}=  Redfish Get DateTimeLocalOffset
+    Should Not Be Empty  ${offset}
+    ${dt}=  Redfish Get DateTime
+    Should Match Regexp  ${dt}  .*[+-]\\d{2}:\\d{2}$
+
+
+Verify Set Timezone
+    [Documentation]  Set different timezones and verify properties.
+    [Tags]  Verify_Set_Timezone
+    [Template]  Set Timezone And Verify Offset
+
+    # timezone        expected_offset
+    Asia/Tokyo        +09:00
+    Australia/Darwin  +09:30
+    Etc/UTC           +00:00
+
+
+Verify Set Timezone To Negative Offset
+    [Documentation]  Set timezone to Etc/GMT-8 and verify positive offset.
+    [Tags]  Verify_Set_Timezone_To_Negative_Offset
+    [Template]  Set Timezone And Verify Offset
+
+    # timezone     expected_offset
+    Etc/GMT-8      +08:00
+
+
+Verify Set Invalid Timezone Is Rejected
+    [Documentation]  Verify that setting an invalid timezone is rejected.
+    [Tags]  Verify_Set_Invalid_Timezone_Is_Rejected
+
+    ${original_tz}=  Redfish Get TimeZoneName
+    Redfish Set TimeZoneName  Invalid/Timezone
+    ...  valid_status_codes=[${HTTP_INTERNAL_SERVER_ERROR}]
+    ${current_tz}=  Redfish Get TimeZoneName
+    Should Be Equal As Strings  ${current_tz}  ${original_tz}
+
+
+Verify DateTime Offset Does Not Change Timezone
+    [Documentation]  Verify setting DateTime with UTC offset does not change timezone.
+    [Tags]  Verify_DateTime_Offset_Does_Not_Change_Timezone
+
+    # Set timezone to Asia/Tokyo (+09:00).
+    Redfish Set TimeZoneName  Asia/Tokyo
+
+    # Get current UTC time and PATCH DateTime with +00:00 offset.
+    ${utc_time}=  Get Current Date  time_zone=UTC
+    ${utc_formatted}=  Convert Date  ${utc_time}
+    ...  result_format=%Y-%m-%dT%H:%M:%S+00:00
+    Redfish.Patch  ${REDFISH_BASE_URI}Managers/${MANAGER_ID}
+    ...  body={'DateTime': '${utc_formatted}'}
+    ...  valid_status_codes=[${HTTP_NO_CONTENT}]
+
+    # Verify timezone and offset are unchanged.
+    ${tz}=  Redfish Get TimeZoneName
+    Should Be Equal As Strings  ${tz}  Asia/Tokyo
+    ${offset}=  Redfish Get DateTimeLocalOffset
+    Should Be Equal As Strings  ${offset}  +09:00
+    ${dt}=  Redfish Get DateTime
+    Should End With  ${dt}  +09:00
+
+    # Verify time was correctly converted (local = UTC + 9 hours).
+    ${local_from_redfish}=  Convert Date  ${dt}  result_format=epoch  date_format=%Y-%m-%dT%H:%M:%S%z
+    ${utc_epoch}=  Convert Date  ${utc_time}  result_format=epoch
+    ${time_diff}=  Evaluate  abs(${local_from_redfish} - ${utc_epoch})
+    Should Be True  ${time_diff} < ${max_time_diff_in_seconds}
+
+
+Verify CLI Timezone Matches Redfish
+    [Documentation]  Verify BMC CLI timezone matches Redfish after setting timezone.
+    [Tags]  Verify_CLI_Timezone_Matches_Redfish
+
+    Redfish Set TimeZoneName  Asia/Tokyo
+
+    # Verify /etc/localtime symlink points to Asia/Tokyo.
+    ${localtime_link}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  readlink -f /etc/localtime
+    Should Contain  ${localtime_link}  Asia/Tokyo
+
+    # Verify date command reports +0900 offset (busybox date uses %z without colon).
+    ${cli_offset}  ${stderr}  ${rc}=  BMC Execute Command  date +%z
+    Should Be Equal As Strings  ${cli_offset}  +0900
+
 
 *** Keywords ***
 
@@ -110,6 +199,23 @@ Test Teardown Execution
     [Documentation]  Do the post test teardown.
 
     FFDC On Test Case Fail
+
+
+Set Timezone And Verify Offset
+    [Documentation]  Set timezone and verify Redfish properties.
+    [Arguments]  ${timezone}  ${expected_offset}
+
+    # Description of argument(s):
+    # timezone         IANA timezone name to set (e.g. "Asia/Tokyo").
+    # expected_offset  Expected UTC offset string (e.g. "+09:00").
+
+    Redfish Set TimeZoneName  ${timezone}
+    ${tz}=  Redfish Get TimeZoneName
+    Should Be Equal As Strings  ${tz}  ${timezone}
+    ${offset}=  Redfish Get DateTimeLocalOffset
+    Should Be Equal As Strings  ${offset}  ${expected_offset}
+    ${dt}=  Redfish Get DateTime
+    Should End With  ${dt}  ${expected_offset}
 
 
 Suite Setup Execution
@@ -120,13 +226,20 @@ Suite Setup Execution
     Get NTP Initial Status
     ${old_date_time}=  CLI Get BMC DateTime
     ${year_status}=  Run Keyword And Return Status  Should Not Contain  ${old_date_time}  ${year_without_ntp}
-    IF  ${year_status} == False  Enable NTP And Add NTP Address
-    Set Time To Manual Mode
+    IF  ${year_status} == False
+        Run Keyword And Ignore Error  Enable NTP And Add NTP Address
+    END
+    Run Keyword And Ignore Error  Set Time To Manual Mode
+    # Save original timezone for restoration in teardown.
+    ${original_timezone}=  Redfish Get TimeZoneName
+    Set Suite Variable  ${original_timezone}
 
 
 Suite Teardown Execution
     [Documentation]  Do the suite level teardown.
 
-    Set Time To Manual Mode
-    Restore NTP Status
+    # Restore original timezone.
+    Run Keyword And Ignore Error  Redfish Set TimeZoneName  ${original_timezone}
+    Run Keyword And Ignore Error  Set Time To Manual Mode
+    Run Keyword And Ignore Error  Restore NTP Status
     Redfish.Logout
