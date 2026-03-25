@@ -392,7 +392,7 @@ class redfish_request(object):
         lookup_list = ["Actions", "#" + attribute, "target"]
         for lookup_item in lookup_list:
             response = redfish_request.dict_parse(lookup_item, response)
-            if response is not None and type(response) is dict():
+            if response is not None and isinstance(response, dict):
                 continue
         else:
             return response
