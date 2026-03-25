@@ -16,6 +16,52 @@
       "message": "Feroz/ Nanda please check again. Thanks",
       "revId": "a647ddeaac4267d8f7847f844a7d39384454d40b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "663d0e0a_9158020f",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-03-25T17:01:12Z",
+      "side": 1,
+      "message": "Please replace subnet with netmask to maintain uniformity and add this test case in #332 with all the other netmask verification test cases.\nYou can consider naming\n\nConfigure Empty Netmask",
+      "range": {
+        "startLine": 668,
+        "startChar": 0,
+        "endLine": 669,
+        "endChar": 61
+      },
+      "revId": "a647ddeaac4267d8f7847f844a7d39384454d40b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2e2ae3f_ceb808ac",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 682,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-03-25T17:01:12Z",
+      "side": 1,
+      "message": "use the existing keyword Add IP Address\n\n[Template]  Add IP Address\n\n    # ip               subnet_mask   gateway          valid_status_codes\n    ${test_ipv4_addr}  ${EMPTY}      ${test_gateway}  ${HTTP_BAD_REQUEST}",
+      "range": {
+        "startLine": 673,
+        "startChar": 4,
+        "endLine": 682,
+        "endChar": 66
+      },
+      "revId": "a647ddeaac4267d8f7847f844a7d39384454d40b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
