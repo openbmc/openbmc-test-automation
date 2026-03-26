@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "977c412d_351bd16f",
+        "filename": "gui/gui_test/security_and_access_menu/test_sessions_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002804
+      },
+      "writtenOn": "2026-03-26T09:43:59Z",
+      "side": 1,
+      "message": "Add the Suite Setup Launch Browser And Login GUI.\nIt opens the browser and performs GUI login, without this test fails",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 29
+      },
+      "revId": "6658d32fe5f71664190345fab6984d9e66315a76",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
