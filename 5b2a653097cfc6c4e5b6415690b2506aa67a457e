@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fd017c8_6478574d",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-03-26T12:06:22Z",
+      "side": 1,
+      "message": "Please change this value ${test_ipv6_addr} \non configuring same value for IP addr and the static default gateway the system might go down.",
+      "range": {
+        "startLine": 391,
+        "startChar": 57,
+        "endLine": 391,
+        "endChar": 74
+      },
+      "revId": "5b2a653097cfc6c4e5b6415690b2506aa67a457e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
