@@ -16,6 +16,29 @@
       "message": "Nanda can you check on this please as well. Thanks",
       "revId": "8b960aafd922691afd88e89f8734a092edc7e1da",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9c82825_8f9cdc7d",
+        "filename": "ipmi/test_ipmi_cipher.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-03-26T18:55:16Z",
+      "side": 1,
+      "message": "The current output is showing as ${channel_num} \u003d \"length \u003d 2\". This needs to be fixed when assigning a value to ${channel_num}.",
+      "range": {
+        "startLine": 209,
+        "startChar": 34,
+        "endLine": 209,
+        "endChar": 38
+      },
+      "revId": "8b960aafd922691afd88e89f8734a092edc7e1da",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
