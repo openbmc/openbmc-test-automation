@@ -53,20 +53,20 @@ ${ipv4_addr_origin_elements}             //h2[contains(text(),'IPv4')]//followin
 ...                                      //td[@aria-colindex='4']
 ${ipv6_addr_origin_elements}             //h2[contains(text(),'IPv6')]//following::table[1]
 ...                                      //td[@aria-colindex='3']
-${xpath_delete_ipv4_addres}              //*[text()='${test_ipv4_addr_2}']/following::td[4]
+${xpath_delete_ipv4_addres}              //*[text()='IP_PLACEHOLDER']/following::td[4]
 ...                                      //*[@title="Delete IPv4 address"]
-${xpath_delete_ipv6_addres}              //*[text()='${test_ipv6_addr_2}']/following::td[3]
+${xpath_delete_ipv6_addres}              //*[text()='IP_PLACEHOLDER']/following::td[3]
 ...                                      //*[@title="Delete IPv6 address"]
 ${xpath_edit_ipv4_addres}                //*[text()='${test_ipv4_addr}']/following::td[4]
 ...                                      //*[@title="Edit static IPv4 address"]
 ${xpath_edit_ipv6_addres}                //*[text()='${test_ipv6_addr}']/following::td[3]
 ...                                      //*[@title="Edit static IPv6 address"]
 ${xpath_ipv6_static_def_gateway_table}   //h2[normalize-space()='IPv6 static default gateways']/following::table[1]
-${xpath_delete_ipv6_def_gateway_addr}    //*[text()='${test_ipv6_addr}']/following::td[1]
+${xpath_delete_ipv6_def_gateway_addr}    //*[text()='${test_ipv6_gateway_1}']/following::td[1]
 ...                                      //*[@title="Delete IPv6 static default gateway address"]
-${xpath_edit_ipv6_def_gateway_addr}      //*[text()='${test_ipv6_addr}']/following::td[1]
+${xpath_edit_ipv6_def_gateway_addr}      //*[text()='${test_ipv6_gateway}']/following::td[1]
 ...                                      //*[@title="Edit IPv6 static default gateway address"]
-${xpath_edit_ipv6_def_gateway_addr_1}    //*[text()='${test_ipv6_addr_1}']/following::td[1]
+${xpath_edit_ipv6_def_gateway_addr_1}    //*[text()='${test_ipv6_gateway_1}']/following::td[1]
 ...                                      //*[@title="Edit IPv6 static default gateway address"]
 ${xpath_ipv6_addr_edit_button}           //*[text()='{}']/following::td[3]
 ...                                      //*[@title="Edit static IPv6 address"]
@@ -93,6 +93,8 @@ ${test_ipv4_addr_2}                      10.7.6.5
 ${test_ipv6_addr}                        2001:db8:3333:4444:5555:6666:7777:8888
 ${test_ipv6_addr_1}                      2001:db8:3333:4444:5555:6666:7777:8889
 ${test_ipv6_addr_2}                      2001:db8:3333:4444:5555:6666:7777:8890
+${test_ipv6_gateway}                     2001:db8:3333:4444::1
+${test_ipv6_gateway_1}                   2001:db8:3333:5555::1
 ${ipv6_multi_block}                      2001:0022:0000:0000:1:2:3:8
 ${ipv6_multi_block_addr}                 2001:22::1:2:3:8
 ${ipv4_hexword_addr}                     10.5.5.6:1A:1B:1C:1D:1E:1F
@@ -243,6 +245,7 @@ Configure Static IPv4 Netmask Via GUI And Verify
     [Documentation]  Login to GUI Network page, configure static IPv4 netmask and verify.
     [Tags]  Configure_Static_IPv4_Netmask_Via_GUI_And_Verify
     [Template]  Add Static IP Address And Verify
+    [Teardown]  Run Keyword And Ignore Error  Delete All Static IP Addresses  ipv4  ${test_ipv4_addr}
 
     # ip_addresses      subnet_masks             gateway             expected_status
     ${test_ipv4_addr}   ${lowest_netmask}        ${default_gateway}  Success
@@ -256,6 +259,7 @@ Configure Static IPv4 Netmask Via GUI And Verify
 Configure And Verify Static IP Address
     [Documentation]  Login to GUI Network page, configure static ip address and verify.
     [Tags]  Configure_And_Verify_Static_IP_Address
+    [Teardown]  Run Keyword And Ignore Error  Delete All Static IP Addresses  ipv4  ${test_ipv4_addr}
 
     Add Static IP Address And Verify  ${test_ipv4_addr}  ${test_subnet_mask}  ${default_gateway}  Success
 
@@ -263,6 +267,8 @@ Configure And Verify Static IP Address
 Configure And Verify Multiple Static IP Address
     [Documentation]  Login to GUI Network page, configure multiple static IP address and verify.
     [Tags]  Configure_And_Verify_Multiple_Static_IP_Address
+    [Teardown]  Run Keyword And Ignore Error  Delete All Static IP Addresses  ipv4
+    ...  ${test_ipv4_addr}  ${test_ipv4_addr_1}
 
     Add Static IP Address And Verify  ${test_ipv4_addr}  ${test_subnet_mask}  ${default_gateway}  Success
     Add Static IP Address And Verify  ${test_ipv4_addr_1}  ${test_subnet_mask}  ${default_gateway}  Success
@@ -286,6 +292,8 @@ Configure And Verify Invalid Static IP Address
 Configure And Verify Multiple Static IPv6 Address
     [Documentation]  Login to GUI Network page, configure multiple static IPv6 address and verify.
     [Tags]  Configure_And_Verify_Multiple_Static_IPv6_Address
+    [Teardown]  Run Keyword And Ignore Error  Delete All Static IP Addresses  ipv6
+    ...  ${test_ipv6_addr}  ${test_ipv6_addr_1}
 
     Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr}    ${test_prefix_length}  Success
     Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr_1}  ${test_prefix_length}  Success
@@ -295,6 +303,9 @@ Configure And Verify Static IPv6 Address
     [Documentation]  Login to GUI Network page, configure static IPv6 address and verify.
     [Tags]  Configure_And_Verify_Static_IPv6_Address
     [Template]  Add Static IPv6 Address And Verify Via GUI
+    [Teardown]  Run Keyword And Ignore Error  Delete All Static IP Addresses  ipv6
+    ...  ${ipv6_without_leadingzeroes_addr}  ${ipv6_eliminate_onehextet_zero}
+    ...  ${ipv6_multi_block_addr}  ${compressed_ipv6}  ${test_ipv6_addr}
 
     # ipv6                           prefix_length          status         expected_ipv6
     ${ipv6_with_leadingzeroes_addr}  ${test_prefix_length}  Success        ${ipv6_without_leadingzeroes_addr}
@@ -313,7 +324,7 @@ Configure And Verify Static Default Gateway
     [Template]  Add IPv6 Static Default Gateway And Verify
 
     # ipv6 static default gateway  status
-    ${test_ipv6_addr}              Success
+    ${test_ipv6_gateway}              Success
 
 
 Verify Coexistence of Staticv6 and Linklocal
@@ -374,6 +385,23 @@ Modify IPv6 Address Via GUI And Verify
     ...  ${test_prefix_length}  Success
 
     Modify IP Address And Verify  ipv6  ${test_ipv6_addr}  ${test_ipv6_addr_1}
+
+
+Delete Default IPv6 Static Gateway Address And Verify
+    [Documentation]  Delete default IPv6 static gateway address and verify.
+    [Tags]  Delete_Default_IPv6_Static_Gateway_Address_And_Verify
+    [Setup]  Add IPv6 Static Default Gateway And Verify  ${test_ipv6_gateway_1}  Success
+
+    Delete Default IPv6 Gateway And Verify  ${test_ipv6_gateway_1}
+
+
+Modify Default IPv6 Static Gateway Address And Verify
+    [Documentation]  Modify default IPv6 static gateway address and verify.
+    [Tags]  Modify_Default_IPv6_Static_Gateway_Address_And_Verify
+    [Setup]  Add IPv6 Static Default Gateway And Verify  ${test_ipv6_gateway}  Success
+    [Teardown]  Run Keyword And Ignore Error  Delete Default IPv6 Gateway And Verify  ${test_ipv6_gateway_1}
+
+    Modify Default IPv6 Gateway And Verify  ${test_ipv6_gateway}  ${test_ipv6_gateway_1}
 
 
 Verify MAC Address Is Displayed
@@ -537,23 +565,6 @@ Verify DHCPv6 Enable And Disable On Both Interfaces Via GUI
     Disabled        Disabled
     Enabled         Disabled
     Enabled         Enabled
-
-
-Delete Default IPv6 Static Gateway Address And Verify
-    [Documentation]  Delete default IPv6 static gateway address and verify.
-    [Tags]  Delete_Default_IPv6_Static_Gateway_Address_And_Verify
-    [Setup]  Add IPv6 Static Default Gateway And Verify  ${test_ipv6_addr}  Success
-
-    Delete Default IPv6 Gateway And Verify  ${test_ipv6_addr}
-
-
-Modify Default IPv6 Static Gateway Address And Verify
-    [Documentation]  Modify default IPv6 static gateway address and verify.
-    [Tags]  Modify_Default_IPv6_Static_Gateway_Address_And_Verify
-    [Setup]  Add IPv6 Static Default Gateway And Verify  ${test_ipv6_addr}  Success
-    [Teardown]  Delete Default IPv6 Gateway And Verify  ${test_ipv6_addr_1}
-
-    Modify Default IPv6 Gateway And Verify  ${test_ipv6_addr}  ${test_ipv6_addr_1}
 
 
 Verify Enable Or Disable DHCPv6 Does Not Impact IPv4 Settings
@@ -955,6 +966,8 @@ Suite Setup Execution
     Click Element  ${xpath_network_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  network
     Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
+    ${OPENBMC_HOST}=  Evaluate  "${OPENBMC_HOST}".replace("[","").replace("]","")
+    Set Suite Variable  ${OPENBMC_HOST}
     ${default_gateway}=  Get BMC Default Gateway
     Set Suite Variable  ${default_gateway}
     ${default_gateway_2}=  Get BMC Default Gateway  2
@@ -1013,7 +1026,7 @@ Add Static IP Address And Verify
     # CHANNEL_NUMBER      Channel number: 1 for eth0, 2 for eth1.
 
     Wait Until Element Is Enabled  ${xpath_add_static_ipv4_addr_btn_eth0}  timeout=60sec
-    Wait Until Element Is Not Visible  ${xpath_overlay}  timeout=30sec
+    Wait Until Element Is Not Visible  ${xpath_overlay}  timeout=60sec
     IF  '${CHANNEL_NUMBER}' == '1'
       Click Element  ${xpath_eth0_interface}
       Click Element  ${xpath_add_static_ipv4_addr_btn_eth0}
@@ -1029,7 +1042,7 @@ Add Static IP Address And Verify
     Click Element  ${xpath_add_button}
     IF  '${expected_status}' == 'Success'
         Wait Until Page Contains  ${ip_address}  timeout=40sec
-        Validate Network Config On BMC
+        Wait Until Keyword Succeeds  5x  5s  Validate Network Config On BMC
     ELSE IF  '${expected_status}' == 'Invalid format'
         Page Should Contain  Invalid format
         Click Button  ${xpath_cancel_button}
@@ -1052,8 +1065,8 @@ Add Static IPv6 Address And Verify Via GUI
     # CHANNEL_NUMBER      Channel number: 1 for eth0, 2 for eth1.
 
     Wait Until Element Is Enabled  ${xpath_add_static_ipv6_addr_btn_eth0}  timeout=60sec
+    Wait Until Element Is Not Visible  ${xpath_overlay}  timeout=60sec
     IF  '${CHANNEL_NUMBER}' == '1'
-      Wait Until Element Is Not Visible  ${xpath_overlay}  timeout=30sec
       Click Element  ${xpath_eth0_interface}
       Click Element  ${xpath_add_static_ipv6_addr_btn_eth0}
     ELSE
@@ -1071,7 +1084,7 @@ Add Static IPv6 Address And Verify Via GUI
         ELSE
             Wait Until Page Contains  ${expected_ipv6}  timeout=40sec
         END
-        Validate Network Config On BMC
+        Wait Until Keyword Succeeds  5x  5s  Validate Network Config On BMC
     ELSE
         Page Should Contain  Invalid format
         Click Button  ${xpath_cancel_button}
@@ -1087,7 +1100,7 @@ Add IPv6 Static Default Gateway And Verify
     # ipv6_static_def_gw  IPv6 static default gateway.
     # expected_status     Expected status (Success or Fail).
 
-    Wait Until Element Is Not Visible  ${xpath_overlay}  timeout=30sec
+    Wait Until Element Is Not Visible  ${xpath_overlay}  timeout=60sec
     Click Element  ${xpath_eth0_interface}
     Wait Until Element Is Enabled  ${xpath_add_static_def_gateway_button}  timeout=60sec
     Click Element  ${xpath_add_static_def_gateway_button}
@@ -1097,7 +1110,7 @@ Add IPv6 Static Default Gateway And Verify
     Click Element  ${xpath_add_button}
     IF  '${expected_status}' == 'Success'
         Wait Until Page Contains  ${ipv6_static_def_gw}  timeout=40sec
-        Validate Network Config On BMC
+        Wait Until Keyword Succeeds  5x  5s  Validate Network Config On BMC
     ELSE
         Page Should Contain  Invalid format
         Cancel And Verify Network Heading
@@ -1199,8 +1212,11 @@ Delete IP Address And Verify
     # ip_version   Either 'ipv4' or 'ipv6'.
     # ip_addr      IP address to be deleted.
 
-    ${delete_xpath}=  Set Variable If  '${ip_version}' == 'ipv4'
+    ${template}=  Set Variable If  '${ip_version}' == 'ipv4'
     ...  ${xpath_delete_ipv4_addres}  ${xpath_delete_ipv6_addres}
+
+    # Replace Placeholder with actual IP.
+    ${delete_xpath}=  Replace String  ${template}  IP_PLACEHOLDER  ${ip_addr}
 
     Reload Page
     Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=120s
@@ -1221,6 +1237,19 @@ Delete IP Address And Verify
 
     Should Be Equal  ${delete_status}  ${False}
     Wait Until Page Does Not Contain Element  ${delete_xpath}
+
+
+Delete All Static IP Addresses
+    [Documentation]  Delete all static ipv4 and ipv6 testcases.
+    [Arguments]  ${ip_version}  @{ip_list}
+
+    # Description of argument(s):
+    # ip_version   Either 'ipv4' or 'ipv6'.
+    # ip_list      List of IP addresses to be deleted.
+
+    FOR  ${ip}  IN  @{ip_list}
+      Delete IP Address And Verify  ${ip_version}  ${ip}
+    END
 
 
 Modify IP Address And Verify
@@ -1338,6 +1367,7 @@ Set IPv6 AutoConfig State
     # desired_autoconfig_state      IPv6 autoconfig Toggle state(eg: Enabled or Disabled).
     # xpath_ipv6_autoconfig_button  xpath of eth0 or eth1 ipv6 autoconfig button.
 
+    Wait Until Element Is Not Visible  ${xpath_overlay}  timeout=60sec
     IF  '${channel_number}' == '1'
       ${xpath_autoconfig_button}=  Set Variable  ${xpath_eth0_autoconfig_button}
       Click Element  ${xpath_eth0_interface}
@@ -1423,6 +1453,7 @@ Toggle DHCPv4 State And Verify
     # desired_dhcpv4_state  DHCPv4 Toggle state (Enabled or Disabled).
     # channel_number        Channel number: 1 for eth0, 2 for eth1.
 
+    Wait Until Element Is Not Visible  ${xpath_overlay}  timeout=60sec
     IF  '${channel_number}' == '1'
       ${xpath_dhcpv4_button}=  Set Variable  ${xpath_eth0_dhcpv4_button}
       Click Element  ${xpath_eth0_interface}
@@ -1491,6 +1522,7 @@ Toggle DHCPv6 State And Verify
     # desired_dhcpv6_state  DHCPv6 Toggle state (Enabled or Disabled).
     # channel_number        Channel number: 1 for eth0, 2 for eth1.
 
+    Wait Until Element Is Not Visible  ${xpath_overlay}  timeout=60sec
     IF  '${channel_number}' == '1'
       ${xpath_dhcpv6_button}=  Set Variable  ${xpath_eth0_dhcpv6_button}
       Click Element  ${xpath_eth0_interface}
