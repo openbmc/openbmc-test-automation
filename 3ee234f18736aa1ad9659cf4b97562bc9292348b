@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42b93ee2_54180e52",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-03-27T12:10:19Z",
+      "side": 1,
+      "message": "The changes looks good now.\n\nI verified the changes by running ipmi/test_ipmi_cipher.robot, ipmi/test_ipmi_chassis.robot\n\n```\n\nTest Ipmi Cipher :: Module to test IPMI chipher functionality.        | PASS |\n5 tests, 5 passed, 0 failed\n```\n```\n\nTest Ipmi Chassis :: Module to test IPMI chassis functionality.       | PASS |\n1 test, 1 passed, 0 failed\n```",
+      "revId": "3ee234f18736aa1ad9659cf4b97562bc9292348b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
