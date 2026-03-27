@@ -575,13 +575,11 @@ Identify SEL Time
     ...  ${modifying_date_status} == True  ${time.split("+")[-1]}
     ...  ${modifying_date_status} == False  ${time.split("-")[-1]}
 
-    ${datetime}=  Set Variable If  ${modifying_date_status} == True
-    ...    Add Time To Date
-    ...    ${current_date}  ${date_time}  result_format=%m/%d/%Y %H:%M:%S  date_format=%m/%d/%Y %H:%M:%S
-    ...  ELSE IF  ${modifying_date_status} == False
-    ...    Subtract Time From Date
-    ...    ${current_date}  ${date_time}  result_format=%m/%d/%Y %H:%M:%S  date_format=%m/%d/%Y %H:%M:%S
-
+    IF  ${modifying_date_status} == True
+        ${datetime}=  Add Time To Date  ${current_date}  ${date_time}  result_format=%m/%d/%Y %H:%M:%S  date_format=%m/%d/%Y %H:%M:%S
+    ELSE IF  ${modifying_date_status} == False
+        ${datetime}=  Subtract Time From Date  ${current_date}  ${date_time}  result_format=%m/%d/%Y %H:%M:%S  date_format=%m/%d/%Y %H:%M:%S
+    END
     # Set SEL Time.
     ${quoted_date}=  Fetch Date  ${datetime}
 
