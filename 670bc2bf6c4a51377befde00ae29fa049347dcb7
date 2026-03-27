@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "516917f8_6e9afc72",
+        "filename": "lib/ipmi_client.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1002803
+      },
+      "writtenOn": "2026-03-27T12:39:41Z",
+      "side": 1,
+      "message": "please check the indentation from line 186 to 194.",
+      "range": {
+        "startLine": 185,
+        "startChar": 0,
+        "endLine": 194,
+        "endChar": 7
+      },
+      "revId": "670bc2bf6c4a51377befde00ae29fa049347dcb7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "443c34f5_1986a678",
         "filename": "lib/ipmi_client.robot",
         "patchSetId": 3
