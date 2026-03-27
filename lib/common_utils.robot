@@ -882,10 +882,11 @@ Check For Regex In Journald
     # filter_string    String to be stripped out.
 
 
-    ${cmd}=  Set Variable If   '${filter_string}' == '${EMPTY}'
-    ...    Catenate  journalctl --no-pager ${boot} | egrep '${regex}'
-    ...  ELSE
-    ...    Catenate  journalctl --no-pager ${boot} | egrep '${regex}' |  sed '/${filter_string}/d'
+    IF  '${filter_string}' == '${EMPTY}'
+        ${cmd}=  Catenate  journalctl --no-pager ${boot} | egrep '${regex}'
+    ELSE
+        ${cmd}=  Catenate  journalctl --no-pager ${boot} | egrep '${regex}' |  sed '/${filter_string}/d'
+    END
 
     ${journal_log}  ${stderr}  ${rc}=  BMC Execute Command   ${cmd}  ignore_err=1
 

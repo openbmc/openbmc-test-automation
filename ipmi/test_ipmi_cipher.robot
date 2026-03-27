@@ -236,9 +236,9 @@ Verify Cipher Suite Command For Invalid Request Data
    # Description of argument(s):
    # byte_length   extra or less.
 
-   ${req_cmd}=  Set Variable If  '${byte_length}' == 'less'
-   ...  Catenate  ${IPMI_RAW_CMD['Cipher Suite']['get'][0]} ${CHANNEL_NUMBER} 00
-   ...  ELSE
-   ...  Catenate  ${IPMI_RAW_CMD['Cipher Suite']['get'][0]} ${CHANNEL_NUMBER} 00 00 01
-
+   IF  '${byte_length}' == 'less'
+       ${req_cmd}=  Catenate  ${IPMI_RAW_CMD['Cipher Suite']['get'][0]} ${CHANNEL_NUMBER} 00
+   ELSE
+       ${req_cmd}=  Catenate  ${IPMI_RAW_CMD['Cipher Suite']['get'][0]} ${CHANNEL_NUMBER} 00 00 01
+   END
    Verify Invalid IPMI Command  ${req_cmd}  0xc7
