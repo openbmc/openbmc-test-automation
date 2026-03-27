@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b00201c8_847b4b71",
+        "filename": "redfish/task_service/test_tasks_service.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-03-27T10:26:20Z",
+      "side": 1,
+      "message": "Instance -\u003e instance\n\nplease make changes at line 211, 214, 218, 222 as well",
+      "range": {
+        "startLine": 207,
+        "startChar": 57,
+        "endLine": 207,
+        "endChar": 65
+      },
+      "revId": "64d07928d6771c7ecdb94fc81da070d77a1a2c7e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df9e2eae_0fa40bd3",
+        "filename": "redfish/task_service/test_tasks_service.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-03-27T10:26:20Z",
+      "side": 1,
+      "message": "${resp} is unused. please remove or make use of it.",
+      "range": {
+        "startLine": 215,
+        "startChar": 6,
+        "endLine": 215,
+        "endChar": 10
+      },
+      "revId": "64d07928d6771c7ecdb94fc81da070d77a1a2c7e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
