@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b787424_a15bbf5d",
+        "filename": "lib/oem/ieisystem/snmp/redfish_snmp_utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-03-27T09:24:47Z",
+      "side": 1,
+      "message": "Please maintain 2 line spaces between sections everywhere",
+      "revId": "15d12ba74c9f6a4d70606ba89fa08054da8df31a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a62ba5a0_cf7f08f6",
+        "filename": "lib/oem/ieisystem/snmp/redfish_snmp_utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-03-27T09:24:47Z",
+      "side": 1,
+      "message": "Please maintain line spaces after the section name everywhere",
+      "revId": "15d12ba74c9f6a4d70606ba89fa08054da8df31a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b5171f9_8ac8078d",
+        "filename": "lib/oem/ieisystem/snmp/redfish_snmp_utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-03-27T09:24:47Z",
+      "side": 1,
+      "message": "Maintain2 line spaces after every keyword or testcase everywhere",
+      "revId": "15d12ba74c9f6a4d70606ba89fa08054da8df31a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c322be02_9b9a60ec",
+        "filename": "lib/oem/ieisystem/snmp/redfish_snmp_utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-03-27T09:24:47Z",
+      "side": 1,
+      "message": "Remove the extra space",
+      "revId": "15d12ba74c9f6a4d70606ba89fa08054da8df31a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
