@@ -335,8 +335,11 @@ Verify Direct Fan Control
     # Count the number of speeds > ${min_speed}.
     ${count}=  Set Variable  ${0}
     FOR  ${speed}  IN  @{speeds}
-        ${count}=  Set Variable If  ${speed} > ${min_speed}
-        ...  Evaluate  ${count}+1  ELSE  Set Variable  ${count}
+        IF  ${speed} > ${min_speed}
+            ${count}=  Evaluate  ${count}+1
+        ELSE
+            ${count}=  Set Variable  ${count}
+        END
         # Because each fan has two rotating fan blades, the count should be
         # equual to 2*${number_of_fans}.  On water-cooled systems some
         # speeds may be reported by hwmon as 0.  That is expected,
