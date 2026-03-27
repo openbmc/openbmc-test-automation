@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e52430dd_e8f47eae",
+        "filename": "gui/gui_test/security_and_access_menu/test_sessions_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-03-27T09:29:13Z",
+      "side": 1,
+      "message": "Arguments in the descriptions should match with defined [Arguments]\n\nPlease make changes to all applicable places\n\nValid_status_codes -\u003e Valid_status_codes\nExpected_count -\u003e Expected_count",
+      "range": {
+        "startLine": 85,
+        "startChar": 4,
+        "endLine": 90,
+        "endChar": 0
+      },
+      "revId": "fd82ead29e0a3c69f15ad14c31db1c7dc1ae5e33",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a2715362_bc20048e",
         "filename": "gui/gui_test/security_and_access_menu/test_sessions_sub_menu.robot",
         "patchSetId": 5
@@ -31,6 +54,52 @@
       "writtenOn": "2026-03-27T09:28:05Z",
       "side": 1,
       "message": "Maintain 2 line spaces between keywords or testcases everywhere",
+      "revId": "fd82ead29e0a3c69f15ad14c31db1c7dc1ae5e33",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60796538_4ecdb675",
+        "filename": "gui/gui_test/security_and_access_menu/test_sessions_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-03-27T09:29:13Z",
+      "side": 1,
+      "message": "Arguments in the descriptions should match with defined [Arguments]",
+      "range": {
+        "startLine": 135,
+        "startChar": 3,
+        "endLine": 136,
+        "endChar": 24
+      },
+      "revId": "fd82ead29e0a3c69f15ad14c31db1c7dc1ae5e33",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77e88ca1_8fbfdd96",
+        "filename": "gui/gui_test/security_and_access_menu/test_sessions_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-03-27T09:29:13Z",
+      "side": 1,
+      "message": "session_instance",
+      "range": {
+        "startLine": 148,
+        "startChar": 6,
+        "endLine": 148,
+        "endChar": 22
+      },
       "revId": "fd82ead29e0a3c69f15ad14c31db1c7dc1ae5e33",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
