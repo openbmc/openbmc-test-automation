@@ -39,6 +39,30 @@
       },
       "revId": "8b960aafd922691afd88e89f8734a092edc7e1da",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cb15f82_43736f60",
+        "filename": "ipmi/test_ipmi_cipher.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1001808
+      },
+      "writtenOn": "2026-03-27T03:06:25Z",
+      "side": 1,
+      "message": "Good catch.\n\nYou\u0027re right — this is a code issue. The current usage of `Set Variable If` is not correct since it does not execute keywords.\n\nThis has already been fixed in a separate commit:\nhttps://gerrit.openbmc.org/c/openbmc/openbmc-test-automation/+/88723\n\nThanks for pointing it out.",
+      "parentUuid": "b9c82825_8f9cdc7d",
+      "range": {
+        "startLine": 209,
+        "startChar": 34,
+        "endLine": 209,
+        "endChar": 38
+      },
+      "revId": "8b960aafd922691afd88e89f8734a092edc7e1da",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
