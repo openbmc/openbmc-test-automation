@@ -33,6 +33,24 @@
       "message": "Can we combine test cases at lines 119, 128, and 137? because identical logic and differ only in input data. These can be combined into a single template-based test for better readability and maintainability. Something like below\n\nVerify Timezone Offsets\n    [Documentation]    Verify multiple timezone offsets.\n    [Template]    Set Timezone And Verify Offset\n\n    # timezone          expected_offset\n    Asia/Tokyo          +09:00\n    Australia/Darwin    +09:30\n    Etc/UTC             +00:00",
       "revId": "3ee883d89fb5f061b5e1172bee8e88a7cd9f94c4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16d16c80_3b15d664",
+        "filename": "redfish/managers/test_managers_bmc_time.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1002230
+      },
+      "writtenOn": "2026-03-27T12:23:58Z",
+      "side": 1,
+      "message": "You\u0027re right, makes sense.",
+      "parentUuid": "03a30433_cdf93976",
+      "revId": "3ee883d89fb5f061b5e1172bee8e88a7cd9f94c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
