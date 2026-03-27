@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "82a3633a_eac07e0e",
+        "filename": "gui/gui_test/security_and_access_menu/test_sessions_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-03-27T10:09:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05b7cefa_95dca53e",
+      "revId": "fd82ead29e0a3c69f15ad14c31db1c7dc1ae5e33",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e52430dd_e8f47eae",
@@ -65,6 +83,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5535d73_7ee9119d",
+        "filename": "gui/gui_test/security_and_access_menu/test_sessions_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-03-27T10:09:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c3aefd7c_71cdbc93",
+      "range": {
+        "startLine": 85,
+        "startChar": 4,
+        "endLine": 90,
+        "endChar": 0
+      },
+      "revId": "fd82ead29e0a3c69f15ad14c31db1c7dc1ae5e33",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a2715362_bc20048e",
@@ -78,6 +120,24 @@
       "writtenOn": "2026-03-27T09:28:05Z",
       "side": 1,
       "message": "Maintain 2 line spaces between keywords or testcases everywhere",
+      "revId": "fd82ead29e0a3c69f15ad14c31db1c7dc1ae5e33",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0baa262_e92aed66",
+        "filename": "gui/gui_test/security_and_access_menu/test_sessions_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-03-27T10:09:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2715362_bc20048e",
       "revId": "fd82ead29e0a3c69f15ad14c31db1c7dc1ae5e33",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -105,6 +165,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2f8a98f_3fdde23f",
+        "filename": "gui/gui_test/security_and_access_menu/test_sessions_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-03-27T10:09:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "60796538_4ecdb675",
+      "range": {
+        "startLine": 135,
+        "startChar": 3,
+        "endLine": 136,
+        "endChar": 24
+      },
+      "revId": "fd82ead29e0a3c69f15ad14c31db1c7dc1ae5e33",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "77e88ca1_8fbfdd96",
@@ -118,6 +202,30 @@
       "writtenOn": "2026-03-27T09:29:13Z",
       "side": 1,
       "message": "session_instance",
+      "range": {
+        "startLine": 148,
+        "startChar": 6,
+        "endLine": 148,
+        "endChar": 22
+      },
+      "revId": "fd82ead29e0a3c69f15ad14c31db1c7dc1ae5e33",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f2c006d_3d929c08",
+        "filename": "gui/gui_test/security_and_access_menu/test_sessions_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-03-27T10:09:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77e88ca1_8fbfdd96",
       "range": {
         "startLine": 148,
         "startChar": 6,
