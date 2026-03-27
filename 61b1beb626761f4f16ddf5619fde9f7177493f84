@@ -16,6 +16,23 @@
       "message": "updated as per the comment.",
       "revId": "61b1beb626761f4f16ddf5619fde9f7177493f84",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49c8c42f_57e8bbfd",
+        "filename": "gui/gui_test/security_and_access_menu/test_sessions_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1002804
+      },
+      "writtenOn": "2026-03-27T10:14:51Z",
+      "side": 1,
+      "message": "please remove the empty line",
+      "revId": "61b1beb626761f4f16ddf5619fde9f7177493f84",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
