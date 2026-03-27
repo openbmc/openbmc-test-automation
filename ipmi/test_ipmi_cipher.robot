@@ -206,10 +206,11 @@ Verify Cipher ID And Supported Algorithm For Channel
     ${resp}=  Strip String  ${resp}
 
     # channel 14 represents current channel in which we send request.
-    ${channel_num}=  Set Variable If  '${channel_num}' == '14'
-    ...  Convert To Hex  ${CHANNEL_NUMBER}  length=2
-    ...  ELSE
-    ...  Convert To Hex  ${channel_num}  length=2
+    IF  '${channel_num}' == '14'
+        ${channel_num}=  Convert To Hex  ${CHANNEL_NUMBER}  length=2
+    ELSE
+        ${channel_num}=  Convert To Hex  ${channel_num}  length=2
+    END
 
     IF  '${index_value}' == '0x80'
         Verify Algorithm By Cipher Suite For Channel  ${resp}  ${channel_num}
