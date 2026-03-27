@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "691d0a71_3c968ef2",
+        "filename": "gui/gui_test/operations_menu/test_kvm_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-03-27T09:31:34Z",
+      "side": 1,
+      "message": "nit: align the spaces\n\n```\nDocumentation   Test OpenBMC \"KVM\" sub menu of \"Operations\".\n\nResource        ../../lib/gui_resource.robot\n\nSuite Setup     Launch Browser And Login GUI\nSuite Teardown  Close All Browsers\n\nTest Tags       KVM_Sub_Menu\n```",
+      "range": {
+        "startLine": 3,
+        "startChar": 15,
+        "endLine": 11,
+        "endChar": 0
+      },
+      "revId": "44aff48bc9b3b7955698d9e75b9e8afba896e1e1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
