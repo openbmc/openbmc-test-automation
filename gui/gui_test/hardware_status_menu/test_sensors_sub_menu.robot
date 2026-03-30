@@ -110,7 +110,7 @@ Verify Filter By Severity Button OK
 
     Wait Until Page Contains Element  ${xpath_sensors_filter}  timeout=15s
     Click Element  ${xpath_sensors_filter}
-
+    Sleep  5s
     # Select OK severity from filter.
     Wait Until Page Contains Element  ${xpath_filter_ok}  timeout=5s
 
