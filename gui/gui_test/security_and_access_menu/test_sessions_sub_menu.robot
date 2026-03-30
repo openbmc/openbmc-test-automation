@@ -177,6 +177,29 @@ Verify View All Sessions For WebUI Session
     # Click the cancel button in the popup.
     Click Element  ${confirm_cancel}
 
+Test Redfish Created Session Reflects On GUI
+    [Documentation]  Create session via redfish and verify the session
+    ...  reflects on gui.
+    [Tags]  Verify_Created_Redfish_Session_Reflects_On_GUI
+    [Teardown]  Delete All Redfish Sessions
+
+    # Navigate to gui sessions page.
+    Navigate To Required Sub Menu  ${xpath_security_and_access_menu}  ${xpath_sessions_sub_menu}  sessions
+
+    # Create a new user session.
+    ${resp}=  Redfish.Post  /redfish/v1/SessionService/Sessions
+    ...  body={'UserName':'${OPENBMC_USERNAME}', 'Password': '${OPENBMC_PASSWORD}'}
+    ...  valid_status_codes=[${HTTP_CREATED}]
+
+    # Extract the session id.
+    ${session_id}=  Set Variable  ${resp.dict['@odata.id'].split('/')[-1]}
+
+    # Refresh the sessions page.
+    Click Element  ${xpath_refresh_button}
+
+    # Verify the session exists.
+    Page Should Contain  ${session_id}
+
 *** Keywords ***
 
 Get Session Member And Verify Session Count
