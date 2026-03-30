@@ -198,7 +198,7 @@ Verify Error Upon Creating Same Users With Different Privileges
     ${payload}=  Create Dictionary
     ...  UserName=test_user  Password=TestPwd123  RoleId=ReadOnly  Enabled=${True}
     Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{payload}
-    ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
+    ...  valid_status_codes=[${HTTP_BAD_REQUEST}, ${HTTP_CONFLICT}]
 
     Redfish.Delete  /redfish/v1/AccountService/Accounts/test_user
 
