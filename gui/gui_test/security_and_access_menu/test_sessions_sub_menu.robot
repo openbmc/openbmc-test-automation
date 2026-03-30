@@ -3,7 +3,7 @@ Documentation   Test OpenBMC GUI "Sessions" sub-menu of "Security and access" me
 
 Resource        ../../lib/gui_resource.robot
 
-Suite Setup     Launch Browser And Login GUI
+Suite Setup     Suite Setup Execution
 Suite Teardown  Close All Browsers
 
 Test Tags       Sessions_Sub_Menu
@@ -13,12 +13,6 @@ Test Tags       Sessions_Sub_Menu
 @{webui_sessionTimeout_value}   60  180
 
 *** Test Cases ***
-
-Verify Navigation To Sessions Page
-    [Documentation]  Verify navigation to sessions page.
-    [Tags]  Verify_Navigation_To_Sessions_Page
-
-    Navigate To Required Sub Menu  ${xpath_secuity_and_accesss_menu}  ${xpath_sessions_sub_menu}  sessions
 
 Verify Session Timeout Validation For WebUI Session
     [Documentation]  Verify session timeout validation for WebUI session.
@@ -79,6 +73,27 @@ Verify Session Timeout Validation For WebUI Session
 
     # Verify session timeout value restored successfully.
     should be equal as integers  ${restore_session_timeout}  ${DEFAULT_SESSION_TIMEOUT}
+
+
+Test Redfish Created Session Reflects On GUI
+    [Documentation]  Create session via redfish and verify the session
+    ...  reflects on gui.
+    [Tags]  Verify_Created_Redfish_Session_Reflects_On_GUI
+    [Teardown]  Delete All Redfish Sessions
+
+    # Create a new user session.
+    ${resp}=  Redfish.Post  /redfish/v1/SessionService/Sessions
+    ...  body={'UserName':'${OPENBMC_USERNAME}', 'Password': '${OPENBMC_PASSWORD}'}
+    ...  valid_status_codes=[${HTTP_CREATED}]
+
+    # Extract the session id.
+    ${session_id}=  Set Variable  ${resp.dict['@odata.id'].split('/')[-1]}
+
+    # Refresh the sessions page.
+    Click Element  ${xpath_refresh_button}
+
+    # Verify the session exists.
+    Page Should Contain  ${session_id}
 
 
 *** Keywords ***
@@ -155,3 +170,12 @@ Check Session Expired After Timeout
 
     Redfish.Get Properties  ${session_instance}  valid_status_codes=[${HTTP_NOT_FOUND}]
     Log  Session ${session_instance} correctly expired after timeout.
+
+Suite Setup Execution
+    [Documentation]  Do test case setup tasks.
+
+    # Login bmc gui.
+    Launch Browser And Login GUI
+
+   # Navigate to gui sessions page.
+    Navigate To Required Sub Menu  ${xpath_secuity_and_accesss_menu}  ${xpath_sessions_sub_menu}  sessions
