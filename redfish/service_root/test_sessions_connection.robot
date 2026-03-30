@@ -16,6 +16,7 @@ Test Tags        Sessions_Connection
 ${DURATION}                 6h
 ${INTERVAL}                 30s
 ${REBOOT_INTERVAL}          30m
+${SSH_SESSION_LIMIT}        63
 
 *** Test Cases ***
 
@@ -29,7 +30,6 @@ Create Session And Check Connection Stability
 
     Repeat Keyword  ${DURATION}  Send Heartbeat
 
-
 Create Session And Check Connection Stability On Reboot
     [Documentation]  Create Session And Check Connection Stability On Reboot
     [Tags]  Create_Session_And_Check_Connection_Stability_On_Reboot
@@ -39,6 +39,31 @@ Create Session And Check Connection Stability On Reboot
     Redfish.Login
 
     Repeat Keyword  ${DURATION}  Check Connection On Reboot
+
+Verify BMC Session Service Limits for SSH Connections
+    [Documentation]  Verify BMC Session Service limits for SSH connections.
+    [Tags]    Verify_BMC_Session_Service_Limits_for_SSH_Connections
+    [Setup]   SSHLibrary.Close All Connections
+    [Teardown]  Run Keywords  SSHLibrary.Close All Connections  AND
+    ...    Delete All Redfish Sessions
+
+    # Open SSH sessions up to limit and verify each login is successful.
+    FOR  ${i}  IN RANGE  ${SSH_SESSION_LIMIT}
+        ${status}=  Run Keyword And Return Status
+        ...  Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}  host=${OPENBMC_HOST}
+        Should Be True  ${status}
+        Sleep  1s
+    END
+
+    ${ssh_connections}=  SSHLibrary.Get Connections
+    ${ssh_count}=  Get Length  ${ssh_connections}
+    Log  SSH sessions created: ${ssh_count}
+    Should Be Equal As Integers  ${ssh_count}  ${SSH_SESSION_LIMIT}
+
+    # Verify one additional SSH login beyond limit fails.
+    ${extra_status}=  Run Keyword And Return Status
+    ...  Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}  host=${OPENBMC_HOST}
+    Should Be Equal  ${extra_status}  ${False}
 
 *** Keywords ***
 
