@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bd588c1_5a0c2595",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-03-30T07:45:25Z",
+      "side": 1,
+      "message": "This test works on environment. Just have a minor comment please check on it.",
+      "revId": "96e9c484819b5bbf350966444b7065c9bd91678b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56774369_9c43b1df",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-03-30T07:45:25Z",
+      "side": 1,
+      "message": "there is a ${metric_report_base_uri} variable already defined for it why not make use of it",
+      "range": {
+        "startLine": 106,
+        "startChar": 48,
+        "endLine": 106,
+        "endChar": 90
+      },
+      "revId": "96e9c484819b5bbf350966444b7065c9bd91678b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bb02adb_059d9868",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-03-30T07:45:25Z",
+      "side": 1,
+      "message": "there is a ${metric_report_base_uri} variable already defined for it why not make use of it",
+      "range": {
+        "startLine": 111,
+        "startChar": 0,
+        "endLine": 111,
+        "endChar": 139
+      },
+      "revId": "96e9c484819b5bbf350966444b7065c9bd91678b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
