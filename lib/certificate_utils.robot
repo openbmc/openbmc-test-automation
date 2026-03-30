@@ -70,6 +70,7 @@ Get Certificate File Content From BMC
 
     # Description of argument(s):
     # cert_type      Certificate type (e.g. "Client" or "CA").
+
     IF  '${cert_type}' == 'Client'
         ${certificate}    ${stderr}    ${rc}=    BMC Execute Command    cat /etc/nslcd/certs/cert.pem
     END
@@ -168,6 +169,7 @@ Verify Certificate Visible Via OpenSSL
 
 Delete All CA Certificate Via Redfish
     [Documentation]  Delete all CA certificate via Redfish.
+
     ${cert_list}=  Redfish_Utils.Get Member List  /redfish/v1/Managers/${MANAGER_ID}/Truststore/Certificates
     FOR  ${cert}  IN  @{cert_list}
       Redfish.Delete  ${cert}  valid_status_codes=[${HTTP_NO_CONTENT}]
@@ -182,6 +184,7 @@ Delete Certificate Via BMC CLI
 
     # Description of argument(s):
     # cert_type           Certificate type (e.g. "Client" or "CA").
+
     IF  '${cert_type}' == 'Client'
        ${certificate_file_path}=  Set Variable  /etc/nslcd/certs/cert.pem
        ${certificate_service}=  Set Variable  phosphor-certificate-manager@nslcd.service

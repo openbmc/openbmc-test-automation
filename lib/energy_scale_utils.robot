@@ -66,7 +66,7 @@ Set DCMI Power Limit And Verify
     [Arguments]  ${power_limit}
 
     # Description of argument(s):
-    # limit      The power limit in watts
+    # power_limit      The power limit in watts
 
     ${cmd}=  Catenate  dcmi power set_limit limit ${power_limit}
     Run External IPMI Standard Command  ${cmd}
