@@ -9,8 +9,9 @@ Resource           ../lib/boot_utils.robot
 
 # User defined path to do the cleanup.
 ${CLEANUP_DIR_PATH}  ${EMPTY}
+
 # List that holds space separated filepaths to skip from cleanup.
-${SKIP_LIST}  ${EMPTY}
+${SKIP_LIST}         ${EMPTY}
 
 *** Keywords ***
 
@@ -21,7 +22,7 @@ Cleanup Dir
 
     # Description of argument(s):
     # cleanup_dir_path  Directory path to do the cleanup.
-    # skip_list  List of files to skip from cleanup.
+    # skip_list         List of files to skip from cleanup.
 
     Should Not Be Empty  ${cleanup_dir_path}
     Should Not Be Empty  ${SKIP_LIST}

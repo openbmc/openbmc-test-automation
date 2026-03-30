@@ -14,7 +14,6 @@ ${OS_RUNNING_TIMEOUT}            30
 *** Keywords ***
 
 Set BIOS Attribute Value And Verify
-
     [Documentation]  Set BIOS attribute handle with attribute value and verify.
     [Arguments]      ${attr_handle}  ${attr_val}  ${verify}=${True}
 
@@ -50,7 +49,6 @@ Set BIOS Attribute Value And Verify
 
 
 Set Optional BIOS Attribute Values And Verify
-
     [Documentation]  For the given BIOS attribute handle update with optional
     ...              attribute values and verify.
     [Arguments]  ${attr_handle}  @{attr_val_list}
@@ -67,7 +65,6 @@ Set Optional BIOS Attribute Values And Verify
 
 
 Verify BIOS Attribute
-
     [Documentation]  Verify BIOS attribute value.
     [Arguments]  ${attr_handle}  ${attr_val}
 
