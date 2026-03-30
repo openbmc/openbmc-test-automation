@@ -96,6 +96,8 @@ Login GUI
     # password  The password to be used for login.
 
     Go To  ${OPENBMC_GUI_URL}
+    # Sets the webpage zoom level to 50%
+    Execute Javascript    document.body.style.zoom="50%"
     # Check if page has username input box, if not logout.
     ${exists}=  Run Keyword And Return Status  Page Should Contain Element
     ...    ${xpath_login_username_input}

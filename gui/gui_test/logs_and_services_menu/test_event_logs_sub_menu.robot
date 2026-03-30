@@ -22,7 +22,7 @@ ${xpath_event_to_date}            //*[@id="input-to-date"]
 ${xpath_select_all_events}        //*[@data-test-id="eventLogs-checkbox-selectAll"]
 ${xpath_event_action_delete}      //*[@data-test-id="table-button-deleteSelected"]
 ${xpath_event_action_export}      //*[contains(text(),"Export")]
-${xpath_event_action_cancel}      //button[contains(text(),"Cancel")]
+${xpath_event_action_cancel}      //button[contains(normalize-space(.),"Cancel")]
 ${xpath_delete_first_row}         //*[@data-test-id="eventLogs-button-deleteRow-0"][2]
 ${xpath_confirm_delete}           //button[text()="Delete"]
 ${xpath_event_status_resolved}    //*[@data-test-id="tableFilter-checkbox-Resolved"]
@@ -189,8 +189,9 @@ Verify Resolving Multiple Error Logs In GUI
 
     Create Error Logs  ${3}
     Refresh GUI
-
+    Sleep  5s
     Select All Events
+    Sleep  5s
     Click Element  ${xpath_event_logs_resolve}
 
     # Since we are selecting 'all events', 3+1 logs are resolved including informational.
