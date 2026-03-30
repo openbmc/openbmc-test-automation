@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc402a4d_0a230404",
+        "filename": "lib/oem/ieisystem/snmp/redfish_snmp_utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1001808
+      },
+      "writtenOn": "2026-03-30T01:17:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b787424_a15bbf5d",
+      "revId": "15d12ba74c9f6a4d70606ba89fa08054da8df31a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a62ba5a0_cf7f08f6",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-03-27T09:24:47Z",
       "side": 1,
       "message": "Please maintain line spaces after the section name everywhere",
+      "revId": "15d12ba74c9f6a4d70606ba89fa08054da8df31a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a45d203_9221dd54",
+        "filename": "lib/oem/ieisystem/snmp/redfish_snmp_utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1001808
+      },
+      "writtenOn": "2026-03-30T01:17:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a62ba5a0_cf7f08f6",
       "revId": "15d12ba74c9f6a4d70606ba89fa08054da8df31a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -52,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9bc32a0_5d074dea",
+        "filename": "lib/oem/ieisystem/snmp/redfish_snmp_utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1001808
+      },
+      "writtenOn": "2026-03-30T01:17:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b5171f9_8ac8078d",
+      "revId": "15d12ba74c9f6a4d70606ba89fa08054da8df31a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c322be02_9b9a60ec",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-03-27T09:24:47Z",
       "side": 1,
       "message": "Remove the extra space",
+      "revId": "15d12ba74c9f6a4d70606ba89fa08054da8df31a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dcb5cf1_224c3da0",
+        "filename": "lib/oem/ieisystem/snmp/redfish_snmp_utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1001808
+      },
+      "writtenOn": "2026-03-30T01:17:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c322be02_9b9a60ec",
       "revId": "15d12ba74c9f6a4d70606ba89fa08054da8df31a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
