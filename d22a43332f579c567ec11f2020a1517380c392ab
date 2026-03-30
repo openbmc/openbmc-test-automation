@@ -16,6 +16,24 @@
       "message": "Is this fixes are tested?",
       "revId": "d22a43332f579c567ec11f2020a1517380c392ab",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "621d530d_61667c39",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001808
+      },
+      "writtenOn": "2026-03-30T00:55:16Z",
+      "side": 1,
+      "message": "I tested some of the cases, and since the changes follow the same pattern, the rest should work as expected. Let me know if you want me to verify all of them.",
+      "parentUuid": "41d54768_9894d82f",
+      "revId": "d22a43332f579c567ec11f2020a1517380c392ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
