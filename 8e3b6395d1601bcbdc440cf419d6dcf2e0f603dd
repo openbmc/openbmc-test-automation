@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0c5ec7ba_ae02325d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-03-30T09:53:00Z",
+      "side": 1,
+      "message": "Hi @gkeishin@gmail.com,\n\nCan you please confirm the suggestion that was provided earlier by @sridevra@in.ibm.com",
+      "revId": "8e3b6395d1601bcbdc440cf419d6dcf2e0f603dd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cbd918c8_0d50b05f",
         "filename": "redfish/managers/test_certificate.robot",
         "patchSetId": 2
