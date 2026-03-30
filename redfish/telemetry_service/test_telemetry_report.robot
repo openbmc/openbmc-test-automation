@@ -99,6 +99,19 @@ Verify Telemetry Service Defaults
     Valid Value  telemetryservice['Triggers']['@odata.id']
     ...  ['/redfish/v1/TelemetryService/Triggers']
 
+Verify Metric Reports Defaults
+    [Documentation]  Verify Metric Reports Defaults.
+    [Tags]  Verify_Metric_Reports_Defaults
+
+    ${metric_reports}=  Redfish.Get Properties  /redfish/v1/TelemetryService/MetricReports
+    ...  valid_status_codes=[${HTTP_OK}]
+
+    ${metric_reports_count}=  Get Length  ${metric_reports['Members']}
+
+    Valid Value  metric_reports['@odata.id']  ['/redfish/v1/TelemetryService/MetricReports', '/redfish/v1/TelemetryService/MetricReports/']
+    Valid Value  metric_reports['Name']  ['Metric Report Collection']
+    Valid Value  metric_reports['Members@odata.count']  [${metric_reports_count}]
+
 
 *** Keywords ***
 
