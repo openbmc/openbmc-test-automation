@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6632521_d7cfb75b",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp_eth0.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-03-30T06:17:38Z",
+      "side": 1,
+      "message": "```\nDocumentation   Test BMC DHCP multiple network interface functionalities.\n...             Run on setup eth0 in DHCP and eth1 in static.\n```",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 4,
+        "endChar": 0
+      },
+      "revId": "6d392f0fabd658473d5ce501230cc9c10e19e558",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
