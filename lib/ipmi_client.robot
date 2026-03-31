@@ -230,6 +230,22 @@ Run External IPMI Raw Command Return Output
 
     RETURN  ${rc}  ${output}
 
+
+Verify The Channel Via IPMI
+    [Documentation]  Verify if the given channel is valid via IPMI command.
+    [Arguments]  ${channel_number}
+
+    # Description of argument(s):
+    # channel_number    Interface channel number.
+
+    # See if chanel_num is valid through get channel info cmd
+    ${cmd}=  Catenate  raw ${IPMI_RAW_CMD['Get Channel Info']['get'][0]}
+    ...  ${channel_number}
+
+    ${rc}  ${resp}=  Run External IPMI Raw Command Return Output  ${cmd}
+    RETURN  ${rc} == 0
+
+
 Run External IPMI Raw Command
     [Documentation]  Run the external IPMI raw command.
     [Arguments]  ${command}  ${fail_on_err}=${1}  &{options}

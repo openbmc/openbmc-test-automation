@@ -189,12 +189,9 @@ Verify Cipher ID And Supported Algorithm For Channel
     # index_value    0x80 for list algorithm by cipher suite.
     #                0x00 for supported algorithms.
 
-    # See if chanel_num is valid through get channel info cmd
-    ${cmd}=  Catenate  raw ${IPMI_RAW_CMD['Get Channel Info']['get'][0]}
-    ...  ${channel_num}
-
-    ${rc}  ${resp}=  Run External IPMI Raw Command Return Output  ${cmd}
-    IF  ${rc} != 0
+    # See if channel is valid.
+    ${is_channel_valid}=  Verify The Channel Via IPMI  ${channel_num}
+    IF  not ${is_channel_valid}
         Log  Channel ${channel_num} is not valid or not available, skipping cipher check
         RETURN
     END
