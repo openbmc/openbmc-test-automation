@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f01d9bd5_79f89dc2",
+        "filename": "lib/network_utils.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-03-31T09:39:24Z",
+      "side": 1,
+      "message": "Typo : machine_ip",
+      "revId": "ff9eb8a43a594c15614647fdcefca2f5b258a3c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45b01768_f54fb225",
+        "filename": "lib/network_utils.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-03-31T09:39:24Z",
+      "side": 1,
+      "message": "Dont we need to specify exception type: except Exception:",
+      "revId": "ff9eb8a43a594c15614647fdcefca2f5b258a3c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
