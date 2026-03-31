@@ -1,5 +1,4 @@
 *** Settings ***
-
 Documentation   Test OpenBMC GUI "Sessions" sub-menu of "Security and access" menu.
 
 Resource        ../../lib/gui_resource.robot
@@ -21,7 +20,7 @@ Verify Navigation To Sessions Page
 
     Navigate To Required Sub Menu  ${xpath_secuity_and_accesss_menu}  ${xpath_sessions_sub_menu}  sessions
 
-Verify Session Timeout Validation for WebUI Session
+Verify Session Timeout Validation For WebUI Session
     [Documentation]  Verify session timeout validation for WebUI session.
     [Tags]  Verify_Session_Timeout_Validation_For_WebUI_Session
     [Setup]  Run Keywords
