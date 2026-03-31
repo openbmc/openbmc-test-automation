@@ -385,6 +385,16 @@ Verify Channel Auth Capabilities
     # channel           Interface channel number.
     # privilege_level   User Privilege level (e.g. 4-Administator, 3-Operator, 2-Readonly).
 
+    # See if channel is valid through get channel info cmd.
+    ${cmd}=  Catenate  raw ${IPMI_RAW_CMD['Get Channel Info']['get'][0]}
+    ...  ${channel}
+
+    ${rc}  ${resp}=  Run External IPMI Raw Command Return Output  ${cmd}
+    IF  ${rc} != 0
+        Log  Channel ${channel} is not valid or not available, skipping auth check
+        Return From Keyword
+    END
+
     # Python module:  get_channel_auth_capabilities(channel_number, privilege_level)
     ${channel_auth_cap}=  Get Channel Auth Capabilities  ${channel}  ${privilege_level}
     Rprint Vars  channel_auth_cap
@@ -408,6 +418,17 @@ Verify Channel Auth Capabilities For Invalid Channel
     # channel   Interface channel number.
 
     ${channel_in_hex}=  Convert To Hex  ${channel}  prefix=0x
+
+    # See if channel is valid through get channel info cmd.
+    ${cmd}=  Catenate  raw ${IPMI_RAW_CMD['Get Channel Info']['get'][0]}
+    ...  ${channel_in_hex}
+
+    ${rc}  ${resp}=  Run External IPMI Raw Command Return Output  ${cmd}
+    IF  ${rc} != 0
+        Log  Channel ${channel_in_hex} is not valid or not available, skipping auth check
+        Return From Keyword
+    END
+
     ${cmd}=  Catenate  ${IPMI_RAW_CMD['Get Channel Auth Cap']['get'][0]} ${channel_in_hex} 0x04
 
     Verify Invalid IPMI Command  ${cmd}  0xcc
