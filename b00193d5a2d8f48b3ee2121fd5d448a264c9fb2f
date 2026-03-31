@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5721533b_f99ee0a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-03-31T15:29:07Z",
+      "side": 1,
+      "message": "For securoty reference https://github.com/openbmc/openbmc-test-automation/security/dependabot/6",
+      "revId": "b00193d5a2d8f48b3ee2121fd5d448a264c9fb2f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
