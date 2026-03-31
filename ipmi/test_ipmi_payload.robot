@@ -508,6 +508,13 @@ Verify Payload Version
     # Description of argument(s):
     # channel_number     Input channel number.
 
+    # See if channel is valid.
+    ${is_channel_valid}=  Verify the Channel Via IPMI  ${channel_number}
+    IF  not ${is_channel_valid}
+        Log  Channel ${channel_number} is not valid or not available, skipping payload check
+        RETURN
+    END
+
     Verify Payload Type Version  ${channel_number}  &{standard_payload_types}
     Verify Payload Type Version  ${channel_number}  &{session_setup_payload_types}
 
@@ -527,6 +534,13 @@ Verify Payload Support
 
     Run Keyword And Return If  '${invalid_channel}' == '${1}'
     ...  Verify Invalid IPMI Command  ${raw_cmd}  0xcc
+
+    # See if channel is valid.
+    ${is_channel_valid}=  Verify the Channel Via IPMI  ${channel_number}
+    IF  not ${is_channel_valid}
+        Log  Channel ${channel_number} is not valid or not available, skipping payload check
+        RETURN
+    END
 
     # will be executed only if invalid_channel == 0.
     ${resp}=  Run IPMI Command  ${raw_cmd}
