@@ -16,6 +16,23 @@
       "message": "Merge conflict.. please fix",
       "revId": "7e86a49b80f33c5e0bf82431b4a1919cb0e2b814",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "801a3ffb_24529150",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-03-31T03:49:26Z",
+      "side": 1,
+      "message": "y",
+      "revId": "7e86a49b80f33c5e0bf82431b4a1919cb0e2b814",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
