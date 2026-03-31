@@ -508,6 +508,16 @@ Verify Payload Version
     # Description of argument(s):
     # channel_number     Input channel number.
 
+    # See if channel_number is valid through get channel info cmd
+    ${cmd}=  Catenate  raw ${IPMI_RAW_CMD['Get Channel Info']['get'][0]}
+    ...  ${channel_number}
+
+    ${rc}  ${resp}=  Run External IPMI Raw Command Return Output  ${cmd}
+    IF  ${rc} != 0
+        Log  Channel ${channel_number} is not valid or not available, skipping payload check
+        Return From Keyword
+    END
+
     Verify Payload Type Version  ${channel_number}  &{standard_payload_types}
     Verify Payload Type Version  ${channel_number}  &{session_setup_payload_types}
 
@@ -527,6 +537,16 @@ Verify Payload Support
 
     Run Keyword And Return If  '${invalid_channel}' == '${1}'
     ...  Verify Invalid IPMI Command  ${raw_cmd}  0xcc
+
+    # See if channel_number is valid through get channel info cmd
+    ${cmd}=  Catenate  raw ${IPMI_RAW_CMD['Get Channel Info']['get'][0]}
+    ...  ${channel_number}
+
+    ${rc}  ${resp}=  Run External IPMI Raw Command Return Output  ${cmd}
+    IF  ${rc} != 0
+        Log  Channel ${channel_number} is not valid or not available, skipping payload check
+        Return From Keyword
+    END
 
     # will be executed only if invalid_channel == 0.
     ${resp}=  Run IPMI Command  ${raw_cmd}
