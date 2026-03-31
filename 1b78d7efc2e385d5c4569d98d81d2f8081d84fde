@@ -16,6 +16,24 @@
       "message": "Suggestion and see if this is better ?\n\n\n```\nFOR  ${line}  IN  @{lines}\n    ${line}\u003d  Strip String  ${line}\n    Continue For Loop If  \u0027${line}\u0027 \u003d\u003d \u0027\u0027\n    \n    ${should_filter}\u003d  Set Variable  ${False}\n    FOR  ${pattern}  IN  @{ignore_list}\n        IF  \u0027${pattern}\u0027 in \u0027${line}\u0027\n            ${should_filter}\u003d  Set Variable  ${True}\n            BREAK\n        END\n    END\n    \n    IF  not ${should_filter}\n        Append To List  ${filtered}  ${line}\n    END\nEND\n```\n\n\nSome improvement thoughs :\n1. Add BREAK to exit inner loop once pattern matches\n2. Skip empty lines early with Continue For Loop If\n3. Removed redundant final strip operation\n4. Better variable naming (${should_filter} vs ${skip})",
       "revId": "1b78d7efc2e385d5c4569d98d81d2f8081d84fde",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57012542_83580db7",
+        "filename": "lib/ipmi_client.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1001808
+      },
+      "writtenOn": "2026-03-31T07:05:07Z",
+      "side": 1,
+      "message": "Thanks for the suggestions, they are very helpful.\n\nI’ve applied most of the improvements:\n\n* Added `BREAK` to exit the inner loop early\n* Skipped empty lines earlier in the loop\n* Renamed the variable to `${should_filter}` for better readability\n\nHowever, regarding the final `Strip String` removal, I ran the test cases after applying the change and encountered failures. It seems that in our current flow, the concatenated output may still contain leading/trailing newlines or spaces, so the final strip operation is still required to keep the expected output format.\n\nGiven this, I suggest keeping the final `Strip String` for now to ensure consistency with existing test expectations.",
+      "parentUuid": "42024693_d1999f5a",
+      "revId": "1b78d7efc2e385d5c4569d98d81d2f8081d84fde",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
