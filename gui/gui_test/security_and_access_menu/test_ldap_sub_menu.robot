@@ -379,7 +379,7 @@ Update LDAP User Role And Read Network Configuration Via GUI
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  network-settings
 
     ${resp}=  Redfish.Get  ${REDFISH_NW_ETH0_URI}  valid_status_codes=[${valid_status_codes}]
-    Return From Keyword If  ${valid_status_codes} == ${HTTP_FORBIDDEN}
+    IF  ${valid_status_codes} == ${HTTP_FORBIDDEN}  RETURN
 
     ${host_name}=  Redfish.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  HostName
     Textfield Value Should Be  ${xpath_hostname_input}  ${host_name}

@@ -331,7 +331,7 @@ Delete Local Server Partition File
     ${match_conf_file_list}=  Get Matches  ${conf_file_list}  regexp=.*-file  case_insensitive=${True}
 
     ${num_records}=  Get Length  ${match_conf_file_list}
-    Return From Keyword If  ${num_records} == ${0}  ${EMPTY}
+    IF  ${num_records} == ${0}  RETURN  ${EMPTY}
 
     FOR  ${conf_file}  IN  @{match_conf_file_list}
       ${file_exist}=  Run Keyword And Return Status  OperatingSystem.File Should Exist  ${conf_file}
@@ -408,7 +408,7 @@ Return Description Of Response
     # }
 
     ${status}=  Run Keyword And Return Status  Evaluate  isinstance(${resp_text}, dict)
-    Return From Keyword If  '${status}' == 'False'  ${resp_text}
+    IF  '${status}' == 'False'  RETURN  ${resp_text}
     ${message}=  Evaluate  json.loads('''${resp_text}''')  json
 
     RETURN  ${message["Description"]}

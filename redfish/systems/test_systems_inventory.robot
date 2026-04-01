@@ -327,7 +327,7 @@ Verify FRU Inventory Minimums
 
     Rprint Vars  fru_type  num_valid_frus  min_num_frus
 
-    Return From Keyword If  ${num_valid_frus} >= ${min_num_frus}
+    IF  ${num_valid_frus} >= ${min_num_frus}  RETURN
     Fail  Too few "${fru_type}" FRUs found, found only ${num_valid_frus}.
 
 
