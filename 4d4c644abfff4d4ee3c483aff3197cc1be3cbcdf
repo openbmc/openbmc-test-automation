@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9ef33ab2_ed545363",
+        "filename": "gui/gui_test/operations_menu/test_kvm_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-04-01T08:59:03Z",
+      "side": 1,
+      "message": "Navigation should done in suite setup . no need to perfrom same steps again and again.",
+      "revId": "4d4c644abfff4d4ee3c483aff3197cc1be3cbcdf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "85ccd1f7_ef1beae8",
         "filename": "gui/gui_test/operations_menu/test_kvm_sub_menu.robot",
         "patchSetId": 1
