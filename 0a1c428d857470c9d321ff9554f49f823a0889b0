@@ -16,6 +16,23 @@
       "message": "zhengguowei  this broke the community HW CI test run.. Fixed it and merged it..\n\nPlease check the latest on your setup if it works for you.. \n\nmerging the code to unblock community CI .. For more on community discord discussion https://discord.gg/NXAQDJRWN",
       "revId": "0a1c428d857470c9d321ff9554f49f823a0889b0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7632601a_c58a79ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-01T20:15:51Z",
+      "side": 1,
+      "message": "Enable IPMI User And Verify :: Enable IPMI user and verify that th... | PASS |\n------------------------------------------------------------------------------\nIpmi.Test Ipmi User :: Test suite for OpenBMC IPMI user management.   | PASS |\n2 tests, 2 passed, 0 failed\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d",
+      "revId": "0a1c428d857470c9d321ff9554f49f823a0889b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ],
   "submitRequirementResults": []
