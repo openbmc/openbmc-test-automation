@@ -135,7 +135,7 @@ Test Setup Execution
 
     ${obmc_state_status}=  Run Keyword And Return Status
     ...  Should Contain  ${obmc_current_state}  ${obmc_test_setup_state}
-    Return From Keyword If  '${obmc_state_status}' == 'True'
+    IF  '${obmc_state_status}' == 'True'  RETURN
 
     ${obmc_standby_state}=  Run Keyword And Return Status
     ...  Should Contain  ${obmc_current_state}  ${obmc_standby_state}

@@ -196,7 +196,7 @@ Verify Cipher ID And Supported Algorithm For Channel
     ${rc}  ${resp}=  Run External IPMI Raw Command Return Output  ${cmd}
     IF  ${rc} != 0
         Log  Channel ${channel_num} is not valid or not available, skipping cipher check
-        Return From Keyword
+        RETURN
     END
 
     ${cmd}=  Catenate  ${IPMI_RAW_CMD['Cipher Suite']['get'][0]}

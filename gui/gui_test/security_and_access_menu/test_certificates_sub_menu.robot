@@ -217,7 +217,9 @@ Test Setup Execution
     #Check if Generate CSR is open, if open close it.
     ${generate_csr_open}=    Run Keyword And Return Status    Element Should Be Visible
     ...    ${xpath_close_generate_csr}
-    Run Keyword If    ${generate_csr_open}    Click Element    ${xpath_close_generate_csr}
+    IF  ${generate_csr_open}
+        Click Element    ${xpath_close_generate_csr}
+    END
     Click Element  ${xpath_secuity_and_accesss_menu}
     Click Element  ${xpath_certificates_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  certificates
