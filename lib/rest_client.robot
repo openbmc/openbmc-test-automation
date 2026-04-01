@@ -228,7 +228,7 @@ Log Out OpenBMC
 
     ${headers}=  Create Dictionary  Content-Type=application/json
     ...  X-Auth-Token=${XAUTH_TOKEN}
-    ${data}=  Create dictionary  data=@{EMPTY}
+    ${data}=  Create Dictionary  data=@{EMPTY}
 
     # If there is no active session it will throw the following exception
     # "Non-existing index or alias 'openbmc'"

@@ -94,7 +94,7 @@ Run Dbus IPMI RAW Command
     ${cmd}=   Catenate   ${cmd} ${valueinBytes}
     ${output}   ${stderr}=  Execute Command  ${cmd}  return_stderr=True
     Should Be Empty      ${stderr}
-    set test variable    ${OUTPUT}     "${output}"
+    Set Test Variable    ${OUTPUT}     "${output}"
 
 
 Run Dbus IPMI Standard Command
@@ -178,7 +178,7 @@ Run External IPMI Standard Command
     ${command_string}=  Process IPMI User Options  ${command}
     ${ipmi_cmd}=  Create IPMI Ext Command String  ${command_string}  &{options}
     Qprint Issuing  ${ipmi_cmd}
-    ${rc}  ${output}=  Run And Return RC and Output  ${ipmi_cmd}
+    ${rc}  ${output}=  Run And Return RC And Output  ${ipmi_cmd}
 
     ${lines}=  Split String  ${output}  \n
     ${filtered}=  Create List
@@ -226,7 +226,7 @@ Run External IPMI Raw Command Return Output
     ${ipmi_cmd}=  Create IPMI Ext Command String  ${command_string}  &{options}
     Qprint Issuing  ${ipmi_cmd}
 
-    ${rc}  ${output}=  Run And Return RC and Output  ${ipmi_cmd}
+    ${rc}  ${output}=  Run And Return RC And Output  ${ipmi_cmd}
 
     RETURN  ${rc}  ${output}
 
@@ -278,7 +278,7 @@ Deactivate SOL Via IPMI
 
     ${ipmi_cmd}=  Create IPMI Ext Command String  sol deactivate
     Qprint Issuing  ${ipmi_cmd}
-    ${rc}  ${output}=  Run and Return RC and Output  ${ipmi_cmd}
+    ${rc}  ${output}=  Run And Return RC And Output  ${ipmi_cmd}
 
     IF  ${rc} > 0
         Run Keyword And Ignore Error  Terminate Process  sol_proc
@@ -383,7 +383,7 @@ Copy ipmitool
 
     OperatingSystem.File Should Exist  tools/ipmitool  msg=${ipmitool_error}
     Import Library      SCPLibrary      AS       scp
-    scp.Open connection     ${OPENBMC_HOST}     username=${OPENBMC_USERNAME}      password=${OPENBMC_PASSWORD}
+    scp.Open Connection     ${OPENBMC_HOST}     username=${OPENBMC_USERNAME}      password=${OPENBMC_PASSWORD}
     scp.Put File    tools/ipmitool   /tmp
     SSHLibrary.Open Connection     ${OPENBMC_HOST}
     SSHLibrary.Login   ${OPENBMC_USERNAME}    ${OPENBMC_PASSWORD}

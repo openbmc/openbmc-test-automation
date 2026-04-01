@@ -173,7 +173,7 @@ def set_ffdc_defaults(ffdc_dir_path=None, ffdc_prefix=None):
                 BuiltIn().fail(error_message)
             FFDC_LOG_PATH = os.path.normpath(FFDC_LOG_PATH) + os.sep
 
-            cmd_buf = ["Get Test Dir and Name"]
+            cmd_buf = ["Get Test Dir And Name"]
             gp.print_issuing(cmd_buf)
             suitename, testname = BuiltIn().run_keyword(*cmd_buf)
 
