@@ -61,7 +61,7 @@ ${check_performance}              ${1}
 Check BMC Performance
     [Documentation]  Check BMC basic CPU Mem File system performance.
 
-    Return From Keyword If   not ${check_performance}
+    IF  not ${check_performance}  RETURN
 
     Check BMC CPU Performance
     Check BMC Mem Performance
@@ -778,7 +778,7 @@ Delete Error Log Entry
     # /xyz/openbmc_project/logging/entry/1/callouts/0
     ${callout_entry}=  Run Keyword And Return Status
     ...  Should Match Regexp  ${entry_path}  /callout[s]?(/|$)
-    Return From Keyword If  ${callout_entry}
+    IF  ${callout_entry}  RETURN
 
     ${data}=  Create Dictionary  data=@{EMPTY}
     ${resp}=  Openbmc Delete Request  ${entry_path}  data=${data}  quiet=${quiet}

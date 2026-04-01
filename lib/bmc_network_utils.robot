@@ -214,7 +214,7 @@ Delete IP And Object
      FOR  ${ip_uri}  IN  @{ip_uri_list}
        ${ip_addr1}=  Read Attribute  ${ip_uri}  Address
        IF  '${ip_addr}' == '${ip_addr1}'
-          Exit For Loop
+          BREAK
        END
      END
 

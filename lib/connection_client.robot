@@ -31,12 +31,13 @@ Open Connection And Log In
     # If no host was provided, add ${OPENBMC_HOST} to the dictionary
     ${has_host}=  Run Keyword And Return Status
     ...           Dictionary Should Contain Key  ${connection_args}  host
-    Run Keyword If  ${has_host} == ${FALSE}
-    ...             Set To Dictionary  ${connection_args}  host=${OPENBMC_HOST}
+    IF  ${has_host} == ${FALSE}
+      Set To Dictionary  ${connection_args}  host=${OPENBMC_HOST}
+    END
 
-    Run Keyword If
-    ...   '${SSH_PORT}' != '${EMPTY}' and '${HTTPS_PORT}' != '${EMPTY}'
-    ...   User input SSH And HTTPs Ports
+    IF  '${SSH_PORT}' != '${EMPTY}' and '${HTTPS_PORT}' != '${EMPTY}'
+      User input SSH And HTTPs Ports
+    END
 
     # Check to see if a port to connect to was provided.
     ${has_port}=  Run Keyword And Return Status
@@ -45,21 +46,23 @@ Open Connection And Log In
     # If the ${SSH_PORT} is set and no port was provided, add the defined port
     # to the dictionary and open the connection. Otherwise, open the connection
     # with the either the provided port or the default port.
-    Run Keyword If  '${SSH_PORT}' != '${EMPTY}' and ${has_port} == ${FALSE}
-    ...            Run Keywords
-    ...            Set To Dictionary  ${connection_args}  port=${SSH_PORT}  AND
-    ...            SSHLibrary.Open connection  &{connection_args}
-    ...   ELSE  Run Keyword   SSHLibrary.Open connection  &{connection_args}
+    IF  '${SSH_PORT}' != '${EMPTY}' and ${has_port} == ${FALSE}
+        Set To Dictionary  ${connection_args}  port=${SSH_PORT}
+        SSHLibrary.Open connection  &{connection_args}
+    ELSE
+        SSHLibrary.Open connection  &{connection_args}
+    END
 
     SSHLibrary.Login  ${username}  ${password}
 
 Open Connection For SCP
     [Documentation]  Open a connection for SCP.
     Import Library      SCPLibrary      AS       scp
-    Run Keyword If  '${SSH_PORT}' == '${EMPTY}'  scp.Open connection  ${OPENBMC_HOST}
-    ...  username=${OPENBMC_USERNAME}  password=${OPENBMC_PASSWORD}
-    ...  ELSE   Run Keyword    scp.Open connection  ${OPENBMC_HOST}  port=${SSH_PORT}
-    ...  username=${OPENBMC_USERNAME}  password=${OPENBMC_PASSWORD}
+    IF  '${SSH_PORT}' == '${EMPTY}'  scp.Open connection  ${OPENBMC_HOST}
+        username=${OPENBMC_USERNAME}  password=${OPENBMC_PASSWORD}
+    ELSE   Run Keyword    scp.Open connection  ${OPENBMC_HOST}  port=${SSH_PORT}
+        username=${OPENBMC_USERNAME}  password=${OPENBMC_PASSWORD}
+    END
 
 
 User input SSH And HTTPs Ports
@@ -81,8 +84,10 @@ Validate Or Open Connection
     #                  contain, but does not need to contain, the host or alias.
 
     # Check to make sure we have an alias or host to search for.
-    Run Keyword If  '${host}' == '${EMPTY}'  Should Not Be Equal  ${alias}  None
-    ...  msg=Need to provide a host or an alias.  values=False
+    IF  '${host}' == '${EMPTY}'
+      Should Not Be Equal  ${alias}  None
+      ...  msg=Need to provide a host or an alias.  values=False
+    END
 
     # Search the dictionary to see if it includes the host and alias.
     ${host_exists}=  Run Keyword And Return Status
@@ -92,16 +97,21 @@ Validate Or Open Connection
 
     # Add the alias and host back into the dictionary of connection arguments,
     # if needed.
-    Run Keyword If  '${host}' != '${EMPTY}' and ${host_exists} == ${FALSE}
-    ...             Set to Dictionary  ${connection_args}  host  ${host}
-    Run Keyword If  '${alias}' != 'None' and ${alias_exists} == ${FALSE}
-    ...             Set to Dictionary  ${connection_args}  alias  ${alias}
+    IF  '${host}' != '${EMPTY}' and ${host_exists} == ${FALSE}
+        Set to Dictionary  ${connection_args}  host  ${host}
+    END
+
+    IF  '${alias}' != 'None' and ${alias_exists} == ${FALSE}
+        Set to Dictionary  ${connection_args}  alias  ${alias}
+    END
 
     @{open_connections}=  Get Connections
     # If there are no open connections, open one and return.
-    Run Keyword If  '${open_connections}' == '[]'
-    ...             Open Connection and Log In  &{connection_args}
-    Return From Keyword If  '${open_connections}' == '[]'
+    IF  '${open_connections}' == '[]'
+        Open Connection and Log In  &{connection_args}
+    END
+
+    IF  '${open_connections}' == '[]'  RETURN
 
     # Connect to the alias or host that matches. If both are given, only connect
     # to a connection that has both.
@@ -113,25 +123,21 @@ Validate Or Open Connection
         ${no_alias}=  Evaluate  '${alias}' == 'None'
         ${given_host}=  Evaluate  '${host}' != '${EMPTY}'
         ${no_host}=  Evaluate  '${host}' == '${EMPTY}'
-        Run Keyword If
-        ...    ${given_alias} and ${given_host} and ${alias_match} and ${host_match}
-        ...    Run Keywords
-        ...      Switch Connection  ${alias}  AND
-        ...      Log To Console  Found connection. Switched to ${alias} ${host}  AND
-        ...      Return From Keyword If  ${alias_match} and ${host_match}
-        ...    ELSE  Run Keyword If
-        ...      ${given_alias} and ${no_host} and ${alias_match}
-        ...      Run Keywords
-        ...        Switch Connection  ${alias}  AND
-        ...        Log To Console  Found connection. Switched to: ${alias}  AND
-        ...        Return From Keyword If  ${alias_match}
-        ...    ELSE  Run Keyword If
-        ...       ${given_host} and ${no_alias} and ${host_match}
-        ...       Run Keywords
-        ...         Switch Connection  ${connection.index}  AND
-        ...         Log To Console  Found Connection. Switched to: ${host}  AND
-        ...         Return From Keyword If  ${host_match}
+        IF  ${given_alias} and ${given_host} and ${alias_match} and ${host_match}
+            Switch Connection  ${alias}
+            Log To Console  Found connection. Switched to ${alias} ${host}
+            IF  ${alias_match} and ${host_match}  RETURN
+        ELSE IF  ${given_alias} and ${no_host} and ${alias_match}
+            Switch Connection  ${alias}  AND
+            Log To Console  Found connection. Switched to: ${alias}
+            IF  ${alias_match}  RETURN
+        ELSE IF  ${given_host} and ${no_alias} and ${host_match}
+            Switch Connection  ${connection.index}
+            Log To Console  Found Connection. Switched to: ${host}
+            IF  ${host_match}  RETURN
+        END
     END
+
     # If no connections are found, open a connection with the provided args.
     Log  No connection with provided arguments.  Opening a connection.
     Open Connection and Log In  &{connection_args}

@@ -306,7 +306,9 @@ Byte Conversion
     #   Equivalent dbus-send argument for smaller IPMI raw command:
     #   byte:0x00 byte:0x06 byte:0x00 byte:0x36
 
-    IF   ${argLength} == 9     Return from Keyword    ${valueinBytesWithoutArray}
+    IF   ${argLength} == 9
+        RETURN  ${valueinBytesWithoutArray}
+    END
     RETURN    ${valueinBytesWithArray}
 
 
