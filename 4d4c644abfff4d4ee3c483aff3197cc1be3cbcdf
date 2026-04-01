@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "36e78353_138125aa",
+        "filename": "gui/gui_test/operations_menu/test_kvm_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-04-01T18:33:34Z",
+      "side": 1,
+      "message": "Thanks for the suggestion @rramyasr@in.ibm.com. Have modified the steps.",
+      "parentUuid": "aafd50d4_c345383f",
+      "revId": "4d4c644abfff4d4ee3c483aff3197cc1be3cbcdf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9ef33ab2_ed545363",
         "filename": "gui/gui_test/operations_menu/test_kvm_sub_menu.robot",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2026-04-01T08:59:03Z",
       "side": 1,
       "message": "Navigation should done in suite setup . no need to perfrom same steps again and again.",
+      "revId": "4d4c644abfff4d4ee3c483aff3197cc1be3cbcdf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9679517e_26f31bff",
+        "filename": "gui/gui_test/operations_menu/test_kvm_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-04-01T18:33:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ef33ab2_ed545363",
       "revId": "4d4c644abfff4d4ee3c483aff3197cc1be3cbcdf",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -60,6 +96,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "df10b8de_70488786",
+        "filename": "gui/gui_test/operations_menu/test_kvm_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-04-01T18:33:34Z",
+      "side": 1,
+      "message": "Modified the test cases.",
+      "parentUuid": "85ccd1f7_ef1beae8",
+      "range": {
+        "startLine": 35,
+        "startChar": 4,
+        "endLine": 35,
+        "endChar": 18
+      },
+      "revId": "4d4c644abfff4d4ee3c483aff3197cc1be3cbcdf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8fc2d2c9_c55dc1c5",
         "filename": "gui/gui_test/operations_menu/test_kvm_sub_menu.robot",
         "patchSetId": 1
@@ -71,6 +131,24 @@
       "writtenOn": "2026-04-01T07:46:13Z",
       "side": 1,
       "message": "add one line space before line 43 for readablity\n\nmake the below change for line 43\n```\n # Open new tab button should not be present in the sub KVM page.\n ```",
+      "revId": "4d4c644abfff4d4ee3c483aff3197cc1be3cbcdf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72592cae_925a8e68",
+        "filename": "gui/gui_test/operations_menu/test_kvm_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-04-01T18:33:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8fc2d2c9_c55dc1c5",
       "revId": "4d4c644abfff4d4ee3c483aff3197cc1be3cbcdf",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
