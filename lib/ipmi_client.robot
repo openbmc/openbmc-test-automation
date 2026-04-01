@@ -184,7 +184,7 @@ Run External IPMI Standard Command
     FOR  ${line}  IN  @{lines}
         ${line}=  Strip String  ${line}
         IF  '${line}' == '${EMPTY}'
-            Continue
+            CONTINUE
         END
         ${should_filter}=  Set Variable  ${False}
         FOR  ${pattern}  IN  @{ignore_list}
