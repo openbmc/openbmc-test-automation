@@ -928,7 +928,7 @@ Smart Power Off
     ...  quiet=${loc_quiet}
 
     IF  '${status}' == 'PASS'
-        Return From Keyword
+        RETURN
     END
 
     ${cmd_buf}=  Catenate  REST Hard Power Off \ stack_mode=skip

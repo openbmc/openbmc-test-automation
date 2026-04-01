@@ -41,10 +41,10 @@ Get Logging Entry List
 
     ${entry_list}=  Create List
     ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}list  quiet=${1}
-    Return From Keyword If  ${resp.status_code} == ${HTTP_NOT_FOUND}
+    IF  ${resp.status_code} == ${HTTP_NOT_FOUND}  RETURN
 
     FOR  ${entry}  IN  @{resp.json()["data"]}
-        Continue For Loop If  '${entry.rsplit('/', 1)[1]}' == 'callout'
+        IF  '${entry.rsplit('/', 1)[1]}' == 'callout'  CONTINUE
         Append To List  ${entry_list}  ${entry}
     END
 
@@ -68,7 +68,7 @@ Logging Entry Should Exist
          ${resp}=  Read Properties  ${entry}
          ${status}=  Run Keyword And Return Status
          ...  Should Be Equal As Strings  ${message_id}  ${resp["Message"]}
-         Return From Keyword If  ${status} == ${TRUE}  ${entry}
+         IF  ${status} == ${TRUE}  RETURN  ${entry}
     END
 
     Fail  No ${message_id} logging entry found.
@@ -99,9 +99,9 @@ Get Error Logs
 
     ${status}  ${error_logs}=  Run Keyword And Ignore Error  Read Properties
     ...  /xyz/openbmc_project/logging/entry/enumerate  timeout=30  quiet=${quiet}
-    Return From Keyword If  '${status}' == 'FAIL'  &{EMPTY}
+    IF  '${status}' == 'FAIL'  RETURN  &{EMPTY}
     ${num_filter_struct_args}=  Get Length  ${filter_struct_args}
-    Return From Keyword If  '${num_filter_struct_args}' == '${0}'  ${error_logs}
+    IF  '${num_filter_struct_args}' == '${0}'  RETURN  ${error_logs}
     ${filtered_error_logs}=  Filter Struct  ${error_logs}  &{filter_struct_args}
     RETURN  ${filtered_error_logs}
 
@@ -155,7 +155,7 @@ Logging Test Binary Exist
 Clear Existing Error Logs
     [Documentation]  If error log isn't empty, reboot the BMC to clear the log.
     ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}${1}
-    Return From Keyword If  ${resp.status_code} == ${HTTP_NOT_FOUND}
+    IF  ${resp.status_code} == ${HTTP_NOT_FOUND}  RETURN
     Initiate BMC Reboot
     Wait Until Keyword Succeeds  10 min  10 sec
     ...  Is BMC Ready
@@ -293,7 +293,7 @@ Get Redfish Event Logs
     END
 
     ${num_filter_struct_args}=  Get Length  ${filter_struct_args}
-    Return From Keyword If  '${num_filter_struct_args}' == '${0}'  &{packed_dict}
+    IF  '${num_filter_struct_args}' == '${0}'  RETURN  &{packed_dict}
     ${filtered_error_logs}=  Filter Struct  ${packed_dict}  &{filter_struct_args}
 
     RETURN  ${filtered_error_logs}

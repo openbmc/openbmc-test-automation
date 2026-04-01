@@ -519,7 +519,7 @@ Check HTX Run Status
     Should Contain  ${htx_errlog}  file </tmp/htx/htxerr> is empty
     ...  msg=HTX geterrorlog was not empty.
 
-    Return From Keyword If  "${sleep_time}" == "${0}"
+    IF  "${sleep_time}" == "${0}"  RETURN
 
     Run Key U  Sleep \ ${sleep_time}
 
@@ -534,9 +534,9 @@ Shutdown HTX Exerciser
     Printn  ${shutdown}
 
     ${down1}=  Evaluate  'shutdown successfully' in $shutdown
-    Return From Keyword If  '${down1}' == 'True'
+    IF  '${down1}' == 'True'  RETURN
     ${down2}=  Evaluate  'No MDT is currently running' in $shutdown
-    Return From Keyword If  '${down2}' == 'True'
+    IF  '${down2}' == 'True'  RETURN
     Fail  msg=Shutdown returned unexpected message.
 
 

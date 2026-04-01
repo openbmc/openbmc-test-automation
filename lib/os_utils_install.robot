@@ -14,8 +14,9 @@ Prep OS For HTX Installation
     Boot To OS
     ${status}=  Run Keyword And Return Status  Tool Exist  htxcmdline
 
-    Return From Keyword If  '${status}' == 'True'
-    ...  HTX tool already installed.
+    IF  '${status}' == 'True'
+       RETURN  HTX tool already installed.
+    END
 
     # Downloads the package lists from the repositories and "update"
     # them to get information on the newest versions of packages and
@@ -34,7 +35,7 @@ Prep OS For OPAL PRD Installation
     Boot To OS
     ${status}=  Run Keyword And Return Status  Tool Exist  opal-gard
 
-    Return From Keyword If  '${status}' == 'True'  ${False}
+    IF  '${status}' == 'True'  RETURN  ${False}
 
 
     # Downloads the package lists from the repositories and "updates"
