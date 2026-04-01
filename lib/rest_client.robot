@@ -320,7 +320,7 @@ Write Attribute
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
     # Verify the attribute was set correctly if the caller requested it.
-    Return From Keyword If  ${verify} == ${FALSE}
+    IF  ${verify} == ${FALSE}  RETURN
 
     ${expected_value}=  Set Variable If  '${expected_value}' == '${EMPTY}'
     ...  ${kwargs['data']['data']}  ${expected_value}
