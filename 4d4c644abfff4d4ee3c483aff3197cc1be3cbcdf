@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aafd50d4_c345383f",
+        "filename": "gui/gui_test/operations_menu/test_kvm_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-04-01T09:03:47Z",
+      "side": 1,
+      "message": "Suite Setup     Suite Setup\nSuite Teardown  Close All Browsers\n\nTest Tags       KVM_Sub_Menu\n\n*** Variables ***\n\n${xpath_kvm_ctl_alt_delete_button}       //button[contains(normalize-space(), \u0027Send Ctrl+Alt+Delete\u0027)]\n${xpath_kvm_new_tab_button}               //button[contains(normalize-space(), \u0027Open in new tab\u0027)]\n\n*** Test Cases ***\n\nVerify Navigation To KVM Page\n    [Documentation]  Verify navigation to KVM page.\n    [Tags]  Verify_Navigation_To_KVM_Page\n\n    Page Should contain    kvm\n\nVerify Existence Of All Sections And Buttons In KVM Page\n    [Documentation]  Verify existence of all sections and buttons in KVM page.\n    [Tags]  Verify_Existence_Of_All_Sections_And_Buttons_In_KVM_Page\n\n    Page Should Contain  Status\n    Page Should Contain Element  ${xpath_kvm_ctl_alt_delete_button}\n    Page Should Contain Element  ${xpath_kvm_new_tab_button}\u2028\u2028\n\n\n\nVerify Navigation To Open New Tab In KVM Page\n    [Documentation]  Verify navigation to open new tab in KVM page.\n    [Tags]  Verify_Navigation_To_Open_New_Tab_In_KVM_Page\n\n    Click Element  ${xpath_kvm_new_tab_button}\n    Wait Until Keyword Succeeds  30 sec  5 sec  Switch Window  NEW\n\n    # Maximize the new window\n    Maximize Browser Window\n    Wait Until Page Contains  Status  timeout\u003d30s\n    Page Should Contain Element  ${xpath_kvm_ctl_alt_delete_button}\n\n    # Open new tab button should not be present in the sub kvm page.\n    Page Should Not Contain Element  ${xpath_kvm_new_tab_button}\n\n\n\n***  Keyword  ***\n\nSuite Setup\n    [Documentation] Perform suite setup operation\n         Launch Browser And Login GUI\n         Navigate To Required Sub Menu  ${xpath_operations_menu}  ${xpath_kvm_sub_menu}  kvm\n\n\n\n\n\nNote : calling navigation in each and every test not needed that suite setup will take care. \n\nI modified existing code and please take a look this is my suggestion.",
+      "revId": "4d4c644abfff4d4ee3c483aff3197cc1be3cbcdf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9ef33ab2_ed545363",
         "filename": "gui/gui_test/operations_menu/test_kvm_sub_menu.robot",
         "patchSetId": 1
