@@ -283,7 +283,7 @@ Get Num Valid FRUs
     # fru_type  The type of fru (e.g. "Processors", "Memory", etc.).
 
     ${fru_records}=  Get Valid FRUs  ${fru_type}
-    ${num_valid_frus}=  Get length  ${fru_records}
+    ${num_valid_frus}=  Get Length  ${fru_records}
 
     RETURN  ${num_valid_frus}
 
