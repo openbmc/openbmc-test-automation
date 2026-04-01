@@ -16,6 +16,24 @@
       "message": "Thanks for the update!\n\nI noticed there are still some remaining usages of deprecated keywords (e.g., `Run Keyword If`, `Return From Keyword`) in a few places. Just wanted to check — was this intentional, or were these missed during the update?",
       "revId": "7087ee36d846fdfe1051da95e889266e406a609b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e8d5c8d_61064ab8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-01T06:06:04Z",
+      "side": 1,
+      "message": "I just did for resource files under lib/ .. Yes there are still in other places which we will do in another commits in batches.",
+      "parentUuid": "36be555a_e86d367e",
+      "revId": "7087ee36d846fdfe1051da95e889266e406a609b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
