@@ -571,7 +571,7 @@ Write New JSON List
     # Description of argument(s):
     # json_tmp_file_path   Name of file to write to.
     # json_field_name      Name to give json list element.
-    Append to File  ${json_tmp_file_path}  { "${json_field_name}" : [
+    Append To File  ${json_tmp_file_path}  { "${json_field_name}" : [
 
 
 Close New JSON List
@@ -579,7 +579,7 @@ Close New JSON List
     [Arguments]  ${json_tmp_file_path}
     # Description of argument(s):
     # json_tmp_file_path  Path of file to write to.
-    Append to File  ${json_tmp_file_path}  ]}
+    Append To File  ${json_tmp_file_path}  ]}
 
 
 Retrieve HW Info And Write
@@ -599,7 +599,7 @@ Retrieve HW Info And Write
 
     Close New JSON List  ${json_tmp_file_path}
     IF  '${last}' == 'false'
-        Append to File  ${json_tmp_file_path}  ,
+        Append To File  ${json_tmp_file_path}  ,
     END
 
 Retrieve HW Info And Write List
@@ -623,7 +623,7 @@ Retrieve HW Info And Write List
     END
     Close New JSON List  ${json_tmp_file_path}
     IF  '${last}' == 'false'
-       Append to File  ${json_tmp_file_path}  ,
+       Append To File  ${json_tmp_file_path}  ,
     END
 
 Retrieve Hardware Info
@@ -632,7 +632,7 @@ Retrieve Hardware Info
     # Description of argument(s):
     # class  Device class to retrieve with lshw.
     ${output}  ${stderr}  ${rc}=  OS Execute Command  lshw -c ${class} -json
-    ${output}=  Verify JSON string  ${output}
+    ${output}=  Verify JSON String  ${output}
     RETURN  ${output}
 
 
@@ -641,7 +641,7 @@ Verify JSON String
     [Arguments]  ${unver_string}
     # Description of argument(s):
     # unver_string  JSON String we will be checking for lshw comma errors.
-    ${unver_string}=  Convert to String  ${unver_string}
+    ${unver_string}=  Convert To String  ${unver_string}
     ${ver_string}=  Replace String Using Regexp  ${unver_string}  }\\s*{  },{
     RETURN  ${ver_string}
 

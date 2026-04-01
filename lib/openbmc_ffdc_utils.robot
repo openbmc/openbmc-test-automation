@@ -24,13 +24,13 @@ ${TEST_HISTORY}    ${FFDC_LOG_PATH}${/}test_history.txt
 
 *** Keywords ***
 
-Get Test Dir and Name
+Get Test Dir And Name
     [Documentation]    SUITE_NAME and TEST_NAME are automatic variables
     ...                and is populated dynamically by the robot framework
     ...                during execution
-    ${suite_name}=     Get strip string   ${SUITE_NAME}
+    ${suite_name}=     Get Strip String   ${SUITE_NAME}
     ${suite_name}=     Catenate  SEPARATOR=${EMPTY}   ${FFDC_TIME}_   ${suite_name}
-    ${test_name}=      Get strip string   ${TEST_NAME}
+    ${test_name}=      Get Strip String   ${TEST_NAME}
     ${test_name}=   Catenate  SEPARATOR=${EMPTY}  ${FFDC_TIME}_   ${test_name}
     RETURN  ${suite_name}   ${test_name}
 
@@ -57,7 +57,7 @@ Write Data To File
 Get Current Time Stamp
     [Documentation]     Get the current time stamp data
     ${cur_time}=    Get Current Date   result_format=%Y-%m-%d %H:%M:%S:%f
-    ${cur_time}=    Get strip string   ${cur_time}
+    ${cur_time}=    Get Strip String   ${cur_time}
     RETURN  ${cur_time}
 
 

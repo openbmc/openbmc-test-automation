@@ -36,7 +36,7 @@ Open Connection And Log In
     END
 
     IF  '${SSH_PORT}' != '${EMPTY}' and '${HTTPS_PORT}' != '${EMPTY}'
-      User input SSH And HTTPs Ports
+      User Input SSH And HTTPs Ports
     END
 
     # Check to see if a port to connect to was provided.
@@ -48,16 +48,18 @@ Open Connection And Log In
     # with the either the provided port or the default port.
     IF  '${SSH_PORT}' != '${EMPTY}' and ${has_port} == ${FALSE}
         Set To Dictionary  ${connection_args}  port=${SSH_PORT}
-        SSHLibrary.Open connection  &{connection_args}
+        SSHLibrary.Open Connection  &{connection_args}
     ELSE
-        SSHLibrary.Open connection  &{connection_args}
+        SSHLibrary.Open Connection  &{connection_args}
     END
 
     SSHLibrary.Login  ${username}  ${password}
 
 Open Connection For SCP
     [Documentation]  Open a connection for SCP.
+
     Import Library      SCPLibrary      AS       scp
+
     IF  '${SSH_PORT}' == '${EMPTY}'
         scp.Open connection  ${OPENBMC_HOST}
         ...  username=${OPENBMC_USERNAME}  password=${OPENBMC_PASSWORD}
@@ -67,7 +69,7 @@ Open Connection For SCP
     END
 
 
-User input SSH And HTTPs Ports
+User Input SSH And HTTPs Ports
     [Documentation]   Update the global SSH and HTTPs port variable for QEMU
     ${port_num}=    Convert To Integer    ${SSH_PORT}
     ${SSH_PORT}=    Replace Variables     ${port_num}
@@ -100,17 +102,17 @@ Validate Or Open Connection
     # Add the alias and host back into the dictionary of connection arguments,
     # if needed.
     IF  '${host}' != '${EMPTY}' and ${host_exists} == ${FALSE}
-        Set to Dictionary  ${connection_args}  host  ${host}
+        Set To Dictionary  ${connection_args}  host  ${host}
     END
 
     IF  '${alias}' != 'None' and ${alias_exists} == ${FALSE}
-        Set to Dictionary  ${connection_args}  alias  ${alias}
+        Set To Dictionary  ${connection_args}  alias  ${alias}
     END
 
     @{open_connections}=  Get Connections
     # If there are no open connections, open one and return.
     IF  '${open_connections}' == '[]'
-        Open Connection and Log In  &{connection_args}
+        Open Connection And Log In  &{connection_args}
     END
 
     IF  '${open_connections}' == '[]'  RETURN
@@ -142,7 +144,7 @@ Validate Or Open Connection
 
     # If no connections are found, open a connection with the provided args.
     Log  No connection with provided arguments.  Opening a connection.
-    Open Connection and Log In  &{connection_args}
+    Open Connection And Log In  &{connection_args}
 
 
 Clear System Entry From Knownhosts
