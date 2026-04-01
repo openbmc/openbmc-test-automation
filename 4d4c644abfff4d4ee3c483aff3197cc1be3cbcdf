@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85ccd1f7_ef1beae8",
+        "filename": "gui/gui_test/operations_menu/test_kvm_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-04-01T07:46:13Z",
+      "side": 1,
+      "message": "why to verify all actions ?? already that is performed in Verify_Existence_Of_All_Sections_And_Buttons_In_KVM_Page",
+      "range": {
+        "startLine": 35,
+        "startChar": 4,
+        "endLine": 35,
+        "endChar": 18
+      },
+      "revId": "4d4c644abfff4d4ee3c483aff3197cc1be3cbcdf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fc2d2c9_c55dc1c5",
+        "filename": "gui/gui_test/operations_menu/test_kvm_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-04-01T07:46:13Z",
+      "side": 1,
+      "message": "add one line space before line 43 for readablity\n\nmake the below change for line 43\n```\n # Open new tab button should not be present in the sub KVM page.\n ```",
+      "revId": "4d4c644abfff4d4ee3c483aff3197cc1be3cbcdf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
