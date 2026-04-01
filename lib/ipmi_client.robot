@@ -26,7 +26,11 @@ ${HOST}                         -H
 ${RAW}                          raw
 ${IPMITOOL_PATH}                /tmp/ipmitool
 ${expected_max_ids}             15
-${empty_name_pattern}           ^User Name\\s.*\\s:\\s$
+
+# Pattern to detect empty User Name fields in IPMI output
+# Matches User Name lines with empty values
+# (spaces followed by colon and optional trailing whitespace)
+${empty_name_pattern}           ^User Name\\s+:\\s*$
 
 *** Keywords ***
 
@@ -183,7 +187,7 @@ Run External IPMI Standard Command
 
     FOR  ${line}  IN  @{lines}
         ${line}=  Strip String  ${line}
-        IF  '${line}' == '${EMPTY}'
+        IF  not $line
             CONTINUE
         END
         ${should_filter}=  Set Variable  ${False}
