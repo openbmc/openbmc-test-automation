@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36be555a_e86d367e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001808
+      },
+      "writtenOn": "2026-04-01T05:54:34Z",
+      "side": 1,
+      "message": "Thanks for the update!\n\nI noticed there are still some remaining usages of deprecated keywords (e.g., `Run Keyword If`, `Return From Keyword`) in a few places. Just wanted to check — was this intentional, or were these missed during the update?",
+      "revId": "7087ee36d846fdfe1051da95e889266e406a609b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
