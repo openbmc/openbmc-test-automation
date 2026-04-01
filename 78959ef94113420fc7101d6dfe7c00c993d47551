@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f56a7ff6_1a02569a",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-04-01T19:39:47Z",
+      "side": 1,
+      "message": "These same new steps have also been added in:\nFile: ipmi/test_ipmi_payload.robot  \nKeyword: Verify Payload Version  \nCommit: (https://gerrit.openbmc.org/c/openbmc/openbmc-test-automation/+/88806)\n\nI suggest creating a common keyword called \"Verify the Channel Via IPMI\" and adding it to /lib/ipmi_client.robot.\n\nThis way, it can be reused from both ipmi/test_ipmi_general.robot and ipmi/test_ipmi_payload.robot",
+      "range": {
+        "startLine": 388,
+        "startChar": 4,
+        "endLine": 396,
+        "endChar": 7
+      },
+      "revId": "78959ef94113420fc7101d6dfe7c00c993d47551",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
