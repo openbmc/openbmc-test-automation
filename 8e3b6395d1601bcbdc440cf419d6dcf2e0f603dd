@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dfaa17bf_7c40cc62",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-01T15:39:49Z",
+      "side": 1,
+      "message": "We are okay with using the same keyword name within the suite as long as the verification methods are different.\n\nIt also appears that the context of the check is the same across all occurrences. If that is the case, it would be best to place the common keyword in a shared location, such as lib/bmc_redfish_utils.robot.\n\nExample:\nThe keyword “Verify Supported And Unsupported Methods” is identical in multiple places.\nFiles:\n\nredfish/managers/test_bmc_logservices.robot\nredfish/telemetry_service/test_telemetry_report.robot",
+      "parentUuid": "0c5ec7ba_ae02325d",
+      "revId": "8e3b6395d1601bcbdc440cf419d6dcf2e0f603dd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cbd918c8_0d50b05f",
         "filename": "redfish/managers/test_certificate.robot",
         "patchSetId": 2
