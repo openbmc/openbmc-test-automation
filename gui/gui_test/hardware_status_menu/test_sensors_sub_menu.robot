@@ -84,7 +84,6 @@ Verify Invalid Text In Filter Sensors Search
 Verify Clear All Button In Sensor Page
     [Documentation]  Select all severity and verify clear all button de-selects all severity.
     [Tags]  Verify_Clear_All_Button_In_Sensor_Page
-    [Teardown]  Click Element  ${xpath_sensors_filter}
 
     Wait Until Page Contains Element  ${xpath_sensors_filter}  timeout=15s
     Click Element  ${xpath_sensors_filter}
@@ -102,6 +101,7 @@ Verify Clear All Button In Sensor Page
     Click Element  ${xpath_sensors_filter}
     ${text}=  Get text  ${xpath_selected_severity}
     Should Be Empty  ${text}
+
 
 Verify Filter By Severity Button OK
     [Documentation]  Select severity button OK from filter and verify.
@@ -138,5 +138,6 @@ Suite Setup Execution
 
 Clean Up Filter Values
     [Documentation]  Do clean up filter values after test execution
+
     Click Element  ${xpath_sensors_filter}
     Click Element  ${xpath_filter_clear_all}
