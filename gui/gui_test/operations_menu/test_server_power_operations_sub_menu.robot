@@ -7,7 +7,7 @@ Resource        ../../../lib/state_manager.robot
 
 Suite Setup     Launch Browser And Login GUI
 Suite Teardown  Close All Browsers
-Test Setup      Navigate to Server Power Operation Page
+Test Setup      Navigate To Server Power Operation Page
 
 Test Tags      Server_Power_Operations_Sub_Menu
 
@@ -61,7 +61,7 @@ Verify Save Button With Readonly User
     [Documentation]  Verify Save button On Server Power Operation page with readonly user.
     [Tags]  Verify_Save_Button_With_Readonly_User
     [Setup]  Run Keywords  Create Readonly User And Login To GUI
-    ...      AND  Navigate to Server Power Operation Page
+    ...      AND  Navigate To Server Power Operation Page
     [Teardown]  Delete Readonly User And Logout Current GUI Session
 
     Click Element  ${xpath_save_button}
@@ -154,7 +154,7 @@ Verify Server Power Operations Page With Readonly User When Host On State
     [Documentation]  Verify Server Power Operations page with readonly user when Host On state.
     [Tags]  Verify_Server_Power_Operations_Page_With_Readonly_User_When_Host_On_State
     [Setup]  Run Keywords  Power On Server  AND  Create Readonly User And Login To GUI
-    ...      AND  Navigate to Server Power Operation Page
+    ...      AND  Navigate To Server Power Operation Page
     [Teardown]  Delete Readonly User And Logout Current GUI Session
 
     # Perform Reboot operation.
@@ -190,7 +190,7 @@ Verify PowerOn Button Should Present At Power Off
 Verify Server Power Operations Page With Readonly User When Host Off State
     [Documentation]  Verify Server Power Operations page with readonly user when Host Off state.
     [Setup]  Run Keywords  Power Off Server  AND  Create Readonly User And Login To GUI
-    ...      AND  Navigate to Server Power Operation Page
+    ...      AND  Navigate To Server Power Operation Page
     [Tags]  Verify_Server_Power_Operations_Page_With_Readonly_User_When_Host_Off_State
     [Teardown]  Delete Readonly User And Logout Current GUI Session
 
@@ -202,7 +202,7 @@ Verify Server Power Operations Page With Readonly User When Host Off State
 
 *** Keywords ***
 
-Navigate to Server Power Operation Page
+Navigate To Server Power Operation Page
     [Documentation]  Go to server power operation page.
 
     Click Element  ${xpath_operations_menu}

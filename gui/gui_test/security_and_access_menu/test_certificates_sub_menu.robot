@@ -53,11 +53,11 @@ Verify Existence Of All Sections In Certificate Page
     [Documentation]  Verify existence of all sections in certificate page.
     [Tags]  Verify_Existence_Of_All_Sections_In_Certificate_Page
 
-    Page should contain  Certificate
-    Page should contain  Issued by
-    Page should contain  Issued to
-    Page should contain  Valid from
-    Page should contain  Valid until
+    Page Should Contain  Certificate
+    Page Should Contain  Issued by
+    Page Should Contain  Issued to
+    Page Should Contain  Valid from
+    Page Should Contain  Valid until
 
 
 Verify Existence Of Add Certificate Button
