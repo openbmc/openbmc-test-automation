@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b2d6e14_d81719e6",
+        "filename": "redfish/managers/test_certificate.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-04-02T10:46:09Z",
+      "side": 1,
+      "message": "create a variable foe this URI",
+      "range": {
+        "startLine": 259,
+        "startChar": 50,
+        "endLine": 259,
+        "endChar": 80
+      },
+      "revId": "b374128f6304942b636872e7c664bac8bade4e4e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
