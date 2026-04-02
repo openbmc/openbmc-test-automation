@@ -16,6 +16,24 @@
       "message": "Please provide the output from the curl command that retrieves the TimeZoneName property.",
       "revId": "25cff94cc485c3488e3abbe70a8a15f757a61741",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b72be86b_018bb929",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002230
+      },
+      "writtenOn": "2026-04-02T07:31:26Z",
+      "side": 1,
+      "message": "It\u0027s in the test plan of the BMCWeb code change linked to this change (https://github.com/openbmc/bmcweb/commit/22c8e70d0c41e06d15b5533f121ae704fbe8a0fb):\n```\n$ curl -s -k -H \u0027Content-type: application/json\u0027 -u root:0penBmc https://localhost:8443/redfish/v1/Managers/bmc | jq \u0027.DateTime, .DateTimeLocalOffset, .TimeZoneName\u0027\n\"2026-03-19T11:03:16-07:00\"\n\"-07:00\"\n\"PST8PDT\"\n\n$ curl -i -k -H \u0027Content-type: application/json\u0027 -u root:0penBmc -d \u0027{\"TimeZoneName\": \"UTC\"}\u0027 -X PATCH https://localhost:8443/redfish/v1/Managers/bmc\nHTTP/1.1 204 No Content\nAllow: GET, PATCH\nOData-Version: 4.0\nStrict-Transport-Security: max-age\u003d31536000; includeSubdomains\nPragma: no-cache\nCache-Control: no-store, max-age\u003d0\nX-Content-Type-Options: nosniff\nDate: Thu, 19 Mar 2026 18:03:28 GMT\nContent-Length: 0\n\n$ curl -s -k -H \u0027Content-type: application/json\u0027 -u root:0penBmc https://localhost:8443/redfish/v1/Managers/bmc | jq \u0027.DateTime, .DateTimeLocalOffset, .TimeZoneName\u0027\n\"2026-03-19T18:03:53+00:00\"\n\"+00:00\"\n\"UTC\"\n\n$ curl -i -k -H \u0027Content-type: application/json\u0027 -u root:0penBmc -d \u0027{\"TimeZoneName\": \"Asia/Tokyo\"}\u0027 -X PATCH https://localhost:8443/redfish/v1/Managers/bmc\nHTTP/1.1 204 No Content\nAllow: GET, PATCH\nOData-Version: 4.0\nStrict-Transport-Security: max-age\u003d31536000; includeSubdomains\nPragma: no-cache\nCache-Control: no-store, max-age\u003d0\nX-Content-Type-Options: nosniff\nDate: Thu, 19 Mar 2026 18:04:20 GMT\nContent-Length: 0\n\n$ curl -s -k -H \u0027Content-type: application/json\u0027 -u root:0penBmc https://localhost:8443/redfish/v1/Managers/bmc | jq \u0027.DateTime, .DateTimeLocalOffset, .TimeZoneName\u0027\n\"2026-03-20T03:04:32+09:00\"\n\"+09:00\"\n\"Asia/Tokyo\"\n```",
+      "parentUuid": "890c9794_944ef618",
+      "revId": "25cff94cc485c3488e3abbe70a8a15f757a61741",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
