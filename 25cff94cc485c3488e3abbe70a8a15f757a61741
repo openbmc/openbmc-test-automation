@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "890c9794_944ef618",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-04-02T04:27:19Z",
+      "side": 1,
+      "message": "Please provide the output from the curl command that retrieves the TimeZoneName property.",
+      "revId": "25cff94cc485c3488e3abbe70a8a15f757a61741",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
