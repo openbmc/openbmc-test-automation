@@ -22,6 +22,30 @@
       },
       "revId": "78959ef94113420fc7101d6dfe7c00c993d47551",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e04654fd_9b5a18f0",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1001808
+      },
+      "writtenOn": "2026-04-02T07:47:24Z",
+      "side": 1,
+      "message": "Thanks for the suggestion.\n\nThe channel validation logic has been refactored into a common keyword **\"Verify the Channel Via IPMI\"** and moved to `/lib/ipmi_client.robot`.\n\nIt is now reused in `ipmi/test_ipmi_general.robot`,`ipmi/test_ipmi_payload.robot` and `ipmi/test_ipmi_cipher.robot` which helps reduce duplication and keeps the implementation consistent.",
+      "parentUuid": "f56a7ff6_1a02569a",
+      "range": {
+        "startLine": 388,
+        "startChar": 4,
+        "endLine": 396,
+        "endChar": 7
+      },
+      "revId": "78959ef94113420fc7101d6dfe7c00c993d47551",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
