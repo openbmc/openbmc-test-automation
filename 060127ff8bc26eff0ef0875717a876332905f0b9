@@ -16,6 +16,40 @@
       "message": "Reviewers please take a look again. Thanks",
       "revId": "060127ff8bc26eff0ef0875717a876332905f0b9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "453df8d5_503a8226",
+        "filename": "gui/gui_test/security_and_access_menu/test_sessions_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-04-02T04:24:05Z",
+      "side": 1,
+      "message": "Please give 2 line space after each testcase.",
+      "revId": "060127ff8bc26eff0ef0875717a876332905f0b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7ba662c_1c2d7ded",
+        "filename": "gui/gui_test/security_and_access_menu/test_sessions_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-04-02T04:24:05Z",
+      "side": 1,
+      "message": "why navigation needed for each and every test.\nCan u move this navigation line to Suite setup ? \n\neg:\n\nSuite Setup    Suite Setup Execution    \n\n***  keywords  ***\n\nSuite Setup Execution \n   [Documentation]  ...\n       Launch Browser And Login GUI\n       # Navigate to gui sessions page.\n       Navigate To Required Sub Menu  ${xpath_secuity_and_accesss_menu}  ${xpath_sessions_sub_menu}  sessions",
+      "revId": "060127ff8bc26eff0ef0875717a876332905f0b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
