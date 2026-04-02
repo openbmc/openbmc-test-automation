@@ -27,20 +27,18 @@ ${xpath_input_company_unit}        //*[@data-test-id='modalGenerateCsr-input-com
 ${xpath_input_common_name}         //*[@data-test-id='modalGenerateCsr-input-commonName']
 ${xpath_input_contact_person}      //*[@data-test-id='modalGenerateCsr-input-contactPerson']
 ${xpath_input_email_address}       //*[@data-test-id='modalGenerateCsr-input-emailAddress']
-${xpath_generate_csr_submit}       //button[contains(normalize-space(.),"Generate CSR")]
-${xpath_csr_cancel_button}         //button[contains(normalize-space(.),"Cancel")]
+${xpath_generate_csr_submit}       //button[text()='Generate CSR']
+${xpath_csr_cancel_button}         //button[normalize-space()='Generate CSR']/preceding-sibling::button
 ${xpath_select_algorithm_button}   //*[@data-test-id='modalGenerateCsr-select-keyPairAlgorithm']
 ${xpath_delete_ca_certificate}     (//*[@title="Delete certificate"])[2]
 ${xpath_delete_ldap_certificate}   (//*[@title="Delete certificate"])[3]
 ${xpath_delete_https_certificate}  (//*[@title="Delete certificate"])[4]
 ${xpath_delete_button}             //button[contains(normalize-space(.),"Delete")]
 ${xpath_cancel_button}             //button[contains(normalize-space(.),"Cancel")]
-#${xpath_confirm_delete_button}  to confirm the deletion of ceriticate.
-${xpath_confirm_delete_button}   //button[@class='btn btn-md btn-primary' and contains(normalize-space(.), 'Delete')]
-#${xpath_cancel_delete_button} to cancel the deletion of ceriticate.
-${xpath_cancel_delete_button}    //div[@id='__BVID__162719___BV_modal__']//button[@type='button'][normalize-space()='Cancel']
-#${xpath_close_generate_csr"} to close the Generate CSR page if its open , before opening any other sub menus
-${xpath_close_generate_csr}       ////button[@class="btn-close"]
+${xpath_confirm_delete_button}     //button[text()='Delete']
+${xpath_cancel_delete_button}      //button[normalize-space()='Delete']/preceding-sibling::button
+${xpath_close_generate_csr}        (//button[contains(@class,'btn-close')])[3]
+
 
 *** Test Cases ***
 
@@ -91,6 +89,7 @@ Verify Generate CSR Certificate Button
     Page Should Contain Element  ${xpath_generate_csr_submit}
     Page Should Contain Element  ${xpath_key_pair_algoritham}
 
+
 Verify Informational Message Under Add Certificate
     [Documentation]  Verify informational message under add certificate tab.
     [Tags]  Verify_Informational_Message_Under_Add_Certificate
@@ -115,8 +114,8 @@ Verify Installed CA Certificate
     [Documentation]  Install CA certificate and verify the same via GUI.
     [Tags]  Verify_Installed_CA_Certificate
     #Added Test Setup Execution in Setup to navigate to Certificates page.
-    [Setup]    Run Keywords  Delete All CA Certificate Via Redfish  AND
-    ...  Test Setup Execution
+    [Setup]  Run Keywords  Delete All CA Certificate Via Redfish  AND
+    ...      Test Setup Execution
 
     # Install CA certificate via Redfish.
     ${file_data}=  Generate Certificate File Data  CA
@@ -176,7 +175,7 @@ Verify Cancel Button While Deleting The CA Certificate
 
      Click Element  ${xpath_delete_ca_certificate}
      Click Element  ${xpath_cancel_delete_button}
-     Page Should Not Contain Element  Click Element  ${xpath_cancel_delete_button}
+     Page Should Not Contain  ${xpath_cancel_delete_button}
 
 
 Verify Certificate Page With Readonly User
