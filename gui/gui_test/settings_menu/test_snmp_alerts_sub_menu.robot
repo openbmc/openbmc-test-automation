@@ -53,7 +53,7 @@ Verify Existence Of All Buttons In SNMP Alerts Page
     [Documentation]  Verify existence of all buttons in SNMP alerts page.
     [Tags]  Verify_Existence_Of_All_Buttons_In_SNMP_Alerts_Page
 
-    Page should Contain Button  ${xpath_add_destination}
+    Page Should Contain Button  ${xpath_add_destination}
 
 
 Verify Existence Of All Fields In Add Destination
@@ -164,7 +164,7 @@ Configure Multiple SNMP Managers On BMC Via GUI And Verify Persistency On BMC Re
     [Teardown]  Run Keywords  Delete SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
     ...  AND  Delete SNMP Manager Via Redfish  ${SNMP_MGR2_IP}  ${SNMP_DEFAULT_PORT}
 
-    ${ip_address_list}=  Create list  ${SNMP_MGR1_IP}  ${SNMP_MGR2_IP}
+    ${ip_address_list}=  Create List  ${SNMP_MGR1_IP}  ${SNMP_MGR2_IP}
     Configure SNMP Manager Via GUI  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
     Wait Until Page Contains  ${SNMP_MGR1_IP}  timeout=45s
 
@@ -530,11 +530,11 @@ Start Multiple SNMP Managers On Specific Port
     Open Connection And Log In  ${SNMP_MGR1_USERNAME}  ${SNMP_MGR1_PASSWORD}
     ...  alias=snmp_server1  host=${SNMP_MGR1_IP}
 
-    SSHLibrary.write  ${SNMP_TRAPD_CMD} ${SNMP_MGR1_IP}:${SNMP_DEFAULT_PORT} &
+    SSHLibrary.Write  ${SNMP_TRAPD_CMD} ${SNMP_MGR1_IP}:${SNMP_DEFAULT_PORT} &
 
     Open Connection And Log In  ${SNMP_MGR2_USERNAME}  ${SNMP_MGR2_PASSWORD}
     ...  alias=snmp_server2  host=${SNMP_MGR2_IP}
 
     # The execution of the SNMP_TRAPD_CMD is necessary to cause SNMP to begin
     # listening to SNMP messages.
-    SSHLibrary.write  ${SNMP_TRAPD_CMD} ${SNMP_MGR2_IP}:${NON_DEFAULT_PORT1} &
+    SSHLibrary.Write  ${SNMP_TRAPD_CMD} ${SNMP_MGR2_IP}:${NON_DEFAULT_PORT1} &

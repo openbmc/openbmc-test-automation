@@ -203,8 +203,8 @@ Set Default Event Service State
 Suite Setup Execution
     [Documentation]  Do the suite setup.
 
-    Should Not be Empty  ${REMOTE_SERVER_IP}
-    Should Not be Empty  ${HTTPS_PORT}
+    Should Not Be Empty  ${REMOTE_SERVER_IP}
+    Should Not Be Empty  ${HTTPS_PORT}
 
     Redfish.Login
 

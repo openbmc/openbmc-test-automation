@@ -78,7 +78,7 @@ Verify Session Timeout Validation For WebUI Session
     Set Default Session Timeout Via Redfish
 
     # Verify session timeout value restored successfully.
-    should be equal as integers  ${restore_session_timeout}  ${DEFAULT_SESSION_TIMEOUT}
+    Should Be Equal As Integers  ${restore_session_timeout}  ${DEFAULT_SESSION_TIMEOUT}
 
 
 *** Keywords ***

@@ -342,7 +342,7 @@ Verify Coexistence of Staticv6 and Linklocal
 Modify DHCP Properties By Toggling And Verify
     [Documentation]  Modify DHCP properties by toggling and verify.
     [Tags]  Modify_DHCP_Properties_By_Toggling_And_Verify
-    [Template]  Toggle DHCPv4 property And Verify
+    [Template]  Toggle DHCPv4 Property And Verify
 
     # property                 xpath_property
 
@@ -429,7 +429,7 @@ Verify MAC Address On Eth1 Interface
 Configure Hostname Via GUI And Verify
     [Documentation]  Login to GUI Network page, configure hostname and verify.
     [Tags]  Configure_Hostname_Via_GUI_And_Verify
-    [Teardown]  Configure the Hostname Back And Verify
+    [Teardown]  Configure The Hostname Back And Verify
 
     ${hostname}=  Get BMC Hostname
     Set Suite Variable  ${hostname}
@@ -584,7 +584,7 @@ Verify DHCPv4 Enable And Disable On Eth1 Via GUI
     [Documentation]  Verify DHCPv4 toggle on eth1 via GUI, Note: Enable testcase need DHCP setup.
     [Tags]  Verify_DHCPv4_Enable_And_Disable_On_Eth1_Via_GUI
     [Template]  Toggle DHCPv4 State And Verify
-    [Teardown]  Assign Static IP Address on Eth1
+    [Teardown]  Assign Static IP Address On Eth1
 
     # desired_dhcpv4_state
     Enabled
@@ -985,7 +985,7 @@ Launch Browser Login GUI And Navigate To Network Page
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  network
     Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
 
-Configure the Hostname Back And Verify
+Configure The Hostname Back And Verify
     [Documentation]  Configure the hostname back.
 
     Configure And Verify Network Settings Via GUI
@@ -1717,7 +1717,7 @@ Get IPv4 Values From Eth1
     RETURN  @{network_configurations}
 
 
-Assign Static IP Address on Eth1
+Assign Static IP Address On Eth1
     [Documentation]  Assigning static IPv4 on eth1.
 
     Sleep  ${NETWORK_TIMEOUT}

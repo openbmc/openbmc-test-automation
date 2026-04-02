@@ -53,7 +53,7 @@ Verify Existence Of All Sections In User Management Page
     [Documentation]  Verify existence of all sections in user management page.
     [Tags]  Verify_Existence_Of_All_Sections_In_User_Management_Page
 
-    Page should contain  View privilege role descriptions
+    Page Should Contain  View privilege role descriptions
 
 
 Verify Existence Of All Input Boxes In User Management Page
@@ -67,8 +67,8 @@ Verify Existence Of All Buttons In User Management Page
     [Documentation]  Verify existence of all buttons in user management page.
     [Tags]  Verify_Existence_Of_All_Buttons_In_User_Management_Page
 
-    Page should contain Button  ${xpath_account_policy}
-    Page should contain Button  ${xpath_add_user}
+    Page Should Contain Button  ${xpath_account_policy}
+    Page Should Contain Button  ${xpath_add_user}
     Page Should Contain Element  ${xpath_edit_user}
     Page Should Contain Element  ${xpath_delete_user}
 
@@ -191,7 +191,7 @@ Test Modifying User Privilege Of Existing User Via GUI
     # Modify user privilege via GUI.
     Wait Until Keyword Succeeds  30 sec   5 sec  Click Element
     ...  //td[text()='${username}']/following-sibling::*/*/*[@title='Edit user']
-    Select From List by Value  ${xpath_privilege_list_button}  ${modify_privilege}
+    Select From List By Value  ${xpath_privilege_list_button}  ${modify_privilege}
 
     # Submit changes.
     Click Element  ${xpath_submit_button}
@@ -325,7 +325,7 @@ Verify Creating User With Invalid Password Length Via GUI
     Input Text  ${xpath_username_input_button}  ${user_name}
 
     # Set user privilege.
-    Select From List by Value  ${xpath_privilege_list_button}  Administrator
+    Select From List By Value  ${xpath_privilege_list_button}  Administrator
 
     # Set user password.
     Input Text  ${xpath_password_input_button}  testuser1223456789123456789
@@ -346,7 +346,7 @@ Verify Creating User With Invalid Password Length Via GUI
     Input Text  ${xpath_username_input_button}  ${user_name}
 
     # Set user privilege.
-    Select From List by Value  ${xpath_privilege_list_button}  Administrator
+    Select From List By Value  ${xpath_privilege_list_button}  Administrator
 
     # Set user password.
     Input Text  ${xpath_password_input_button}  testusr
@@ -382,7 +382,7 @@ Create User And Verify
 
     # Input username, password and privilege.
     Input Text  ${xpath_username_input_button}  ${user_name}
-    Select From List by Value  ${xpath_privilege_list_button}  ${user_privilege}
+    Select From List By Value  ${xpath_privilege_list_button}  ${user_privilege}
 
     Input Text  ${xpath_password_input_button}  ${test_user_password}
 

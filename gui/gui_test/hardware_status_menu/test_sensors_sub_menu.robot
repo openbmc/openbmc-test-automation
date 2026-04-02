@@ -100,7 +100,7 @@ Verify Clear All Button In Sensor Page
     # De-select all severity using clear all button in filter.
     Click Element At Coordinates  ${xpath_filter_clear_all}  0  0
     Click Element  ${xpath_sensors_filter}
-    ${text}=  Get text  ${xpath_selected_severity}
+    ${text}=  Get Text  ${xpath_selected_severity}
     Should Be Empty  ${text}
 
 Verify Filter By Severity Button OK

@@ -6,7 +6,7 @@ Resource        ../../lib/gui_resource.robot
 
 Suite Setup     Suite Setup Execution
 Suite Teardown  Suite Teardown Execution
-Test Setup      Navigate To Date and Time Page
+Test Setup      Navigate To Date And Time Page
 
 Test Tags      Date_And_Time_Sub_Menu
 
@@ -84,7 +84,7 @@ Verify Date And Time From Configuration Section
     ${manual_time}=  Get Value  ${xpath_manual_time}
 
     ${cli_date_time}=  CLI Get BMC DateTime
-    Should contain  ${cli_date_time}  ${manual_date}  ${manual_time}
+    Should Contain  ${cli_date_time}  ${manual_date}  ${manual_time}
 
 
 Verify Display Of Date And Time In GUI Page
@@ -93,7 +93,7 @@ Verify Display Of Date And Time In GUI Page
 
     # Set Default timezone in profile settings page.
     Set Timezone In Profile Settings Page  Default
-    Navigate To Date and Time Page
+    Navigate To Date And Time Page
 
     # Get date and time from Redfish.
     ${redfish_date_time}=  CLI Get BMC DateTime
@@ -142,7 +142,7 @@ Verify Date And Time Change To Browser Offset Time
     # Need to compare "CST UTC-6" text so removing the spaces and other values.
 
     ${text}=  Set Variable  ${xpath_browser_offset_text.split("(")[1].split(")")[0]}
-    Navigate To Date and Time Page
+    Navigate To Date And Time Page
     Page Should Contain  ${text}
 
 
@@ -184,7 +184,7 @@ Verify Setting Manual BMC Time
     ${manual_time}=  Get Value  ${xpath_manual_time}
 
     ${cli_date_time}=  CLI Get BMC DateTime
-    Should contain  ${cli_date_time}  ${manual_date}  ${manual_time}
+    Should Contain  ${cli_date_time}  ${manual_date}  ${manual_time}
 
 
 Verify Setting Invalid Date And Time Is Not Allowed
@@ -264,9 +264,9 @@ Setup To Power Off And Navigate
    ...  time page.
 
    Power Off Server
-   Navigate To Date and Time Page
+   Navigate To Date And Time Page
 
-Navigate To Date and Time Page
+Navigate To Date And Time Page
     [Documentation]  Navigate to the date and time page from main menu.
 
     Click Element  ${xpath_settings_menu}
@@ -274,7 +274,7 @@ Navigate To Date and Time Page
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  date-time
     Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
 
-Set Manual Date and Time Via GUI
+Set Manual Date And Time Via GUI
     [Documentation]  Set BMC date and time to one month in future via GUI.
 
     ${cli_date_time}=  CLI Get BMC DateTime
@@ -299,7 +299,7 @@ Switch From Manual To NTP
     # loop_count        Number of loops to move from manual to NTP.
 
     FOR  ${x}  IN RANGE  ${loop_count}
-       Set Manual Date and Time Via GUI
+       Set Manual Date And Time Via GUI
        # Set BMC date time to sync with NTP server.
        Click Element At Coordinates  ${xpath_select_ntp}  0  0
        Input Text  ${xpath_ntp_server1}  216.239.35.0
