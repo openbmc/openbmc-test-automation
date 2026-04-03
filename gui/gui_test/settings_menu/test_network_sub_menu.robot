@@ -42,9 +42,9 @@ ${xpath_dhcp_toggle_switch}              //*[@data-test-id='networkSettings-swit
 ${xpath_dhcpv6_toggle_switch}            (//dt[normalize-space()='DHCP']/following-sibling::dd[1]//input[@class='form-check-input'])[2]
 ${xpath_slaac_toggle_switch}             (//dt[normalize-space()='IPv6 auto config']/following-sibling::dd[1]//input[@class='form-check-input'])[1]
 ${xpath_lldp_toggle_switch}              (//*[@data-test-id='networkSettings-switch-useNtp'])[2]
-${xpath_ntp_switch_button}               //dt[normalize-space()='Use NTP servers']/following-sibling::dd[1]
-${xpath_dns_switch_button}               //dt[normalize-space()='Use DNS servers']/following-sibling::dd[1]
-${xpath_domainname_switch_button}        //dt[normalize-space()='Use domain name']/following-sibling::dd[1]
+${xpath_ntp_switch_button}               //dt[normalize-space()='Use NTP servers']/following-sibling::dd[1]//label[@class='form-check-label']
+${xpath_dns_switch_button}               //dt[normalize-space()='Use DNS servers']/following-sibling::dd[1]//label[@class='form-check-label']
+${xpath_domainname_switch_button}        //dt[normalize-space()='Use domain name']/following-sibling::dd[1]//label[@class='form-check-label']
 ${xpath_success_popup}                   //div[@role='alert'][contains(.,'Successfully')]
 ${xpath_failure_popup}                   //div[@role='alert'][contains(.,'Error')]
 ${ipv4_elements}                         //h2[contains(., "IPv4")]/following::table[1]/tbody/tr/td[1]
@@ -53,10 +53,8 @@ ${ipv4_addr_origin_elements}             //h2[contains(text(),'IPv4')]//followin
 ...                                      //td[@aria-colindex='4']
 ${ipv6_addr_origin_elements}             //h2[contains(text(),'IPv6')]//following::table[1]
 ...                                      //td[@aria-colindex='3']
-${xpath_delete_ipv4_addres}              //*[text()='IP_PLACEHOLDER']/following::td[4]
-...                                      //*[@title="Delete IPv4 address"]
-${xpath_delete_ipv6_addres}              //*[text()='IP_PLACEHOLDER']/following::td[3]
-...                                      //*[@title="Delete IPv6 address"]
+${xpath_delete_ipv4_addres}              //*[text()='IP_PLACEHOLDER']/following::td[4]//*[@title="Delete IPv4 address"]
+${xpath_delete_ipv6_addres}              //*[text()='IP_PLACEHOLDER']/following::td[3]//*[@title="Delete IPv6 address"]
 ${xpath_edit_ipv4_addres}                //*[text()='${test_ipv4_addr}']/following::td[4]
 ...                                      //*[@title="Edit static IPv4 address"]
 ${xpath_edit_ipv6_addres}                //*[text()='${test_ipv6_addr}']/following::td[3]
@@ -105,6 +103,8 @@ ${ipv6_without_leadingzeroes_addr}       2001:22:33::111
 ${ipv6_onehextet_zero}                   2001:0022:1133::1111
 ${ipv6_eliminate_onehextet_zero}         2001:22:1133::1111
 ${compressed_ipv4}                       ::10.5.5.6
+${ipv4_mapped_ipv6}                      00::FFFF:10.5.5.6
+${ipv4_mapped_ipv6_expected}             ::ffff:10.5.5.6
 ${compressed_ipv6}                       ::a05:506
 ${link_local_addr}                       fe80::
 ${link_local_prefix_len}                 10
@@ -305,13 +305,14 @@ Configure And Verify Static IPv6 Address
     [Template]  Add Static IPv6 Address And Verify Via GUI
     [Teardown]  Run Keyword And Ignore Error  Delete All Static IP Addresses  ipv6
     ...  ${ipv6_without_leadingzeroes_addr}  ${ipv6_eliminate_onehextet_zero}
-    ...  ${ipv6_multi_block_addr}  ${compressed_ipv6}  ${test_ipv6_addr}
+    ...  ${ipv6_multi_block_addr}  ${compressed_ipv6}  ${test_ipv6_addr}  ${ipv4_mapped_ipv6_expected}
 
     # ipv6                           prefix_length          status         expected_ipv6
     ${ipv6_with_leadingzeroes_addr}  ${test_prefix_length}  Success        ${ipv6_without_leadingzeroes_addr}
     ${ipv6_onehextet_zero}           ${test_prefix_length}  Success        ${ipv6_eliminate_onehextet_zero}
     ${ipv6_multi_block}              ${test_prefix_length}  Success        ${ipv6_multi_block_addr}
     ${compressed_ipv4}               ${test_prefix_length}  Success        ${compressed_ipv6}
+    ${ipv4_mapped_ipv6}              ${test_prefix_length}  Success        ${ipv4_mapped_ipv6_expected}
     ${test_ipv6_addr}                ${test_prefix_length}  Success
     ${ipv4_hexword_addr}             ${test_prefix_length}  Invalid format
     ${invalid_hexadec_ipv6}          ${test_prefix_length}  Invalid format
@@ -955,6 +956,26 @@ Configure Eth0 In Static Eth1 In DHCPv4 And Verify Adding Static IPv6 On Both In
     Configure Static IPv6 On Both Interfaces
 
 
+Delete IPv4 Address On Eth1 Via IPv6 And Verify
+   [Documentation]  Delete IPv4 Address on eth1 via IPv6 and verify.
+   [Tags]  Delete_IPv4_Address_On_Eth1_Via_IPv6_And_Verify
+   [Setup]  Add Static IP Address And Verify  ${test_ipv4_addr_2}  ${test_subnet_mask}
+   ...  ${default_gateway_2}  Success  2
+
+   Delete IP Address And Verify  ipv4  ${test_ipv4_addr_2}  2
+
+
+Modify IPv4 Address On Eth1 Via IPv6 And Verify
+    [Documentation]  Edit IPv4 address on eth1 via IPv6 and verify.
+    [Tags]  Modify_IPv4_Address_On_Eth1_Via_IPv6_And_Verify
+    [Setup]  Add Static IP Address And Verify  ${test_ipv4_addr}  ${test_subnet_mask}
+    ...  ${default_gateway_2}  Success  2
+    [Teardown]  Run Keyword And Ignore Error  Delete IP Address And Verify  ipv4
+    ...  ${test_ipv4_addr_1}  2
+
+    Modify IP Address And Verify  ipv4  ${test_ipv4_addr}  ${test_ipv4_addr_1}  2
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -1206,11 +1227,12 @@ Verify Popup Message And Close Popup
 
 Delete IP Address And Verify
     [Documentation]  Delete IPv4 or IPv6 address and verify deletion via GUI and BMC.
-    [Arguments]  ${ip_version}  ${ip_addr}
+    [Arguments]  ${ip_version}  ${ip_addr}  ${CHANNEL_NUMBER}=1
 
     # Description of argument(s):
-    # ip_version   Either 'ipv4' or 'ipv6'.
-    # ip_addr      IP address to be deleted.
+    # ip_version       Either 'ipv4' or 'ipv6'.
+    # ip_addr          IP address to be deleted.
+    # CHANNEL_NUMBER   Ethernet channel number, 1(eth0) or 2(eth1).
 
     ${template}=  Set Variable If  '${ip_version}' == 'ipv4'
     ...  ${xpath_delete_ipv4_addres}  ${xpath_delete_ipv6_addres}
@@ -1220,9 +1242,17 @@ Delete IP Address And Verify
 
     Reload Page
     Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=120s
+    
+    # Switch to the correct interface if channel 2 (eth1)
+    IF  '${CHANNEL_NUMBER}' == '2'
+        Wait Until Element Is Enabled  ${xpath_eth1_interface}  timeout=30s
+        Click Element  ${xpath_eth1_interface}
+    END
     Wait Until Element Is Enabled  ${delete_xpath}
 
-    Click Element  ${delete_xpath}
+    # Using JavaScript click to bypass Selenium interactability issues
+    ${element}=  Get WebElement  ${delete_xpath}
+    Execute JavaScript    arguments[0].click();    ARGUMENTS    ${element}
     Wait Until Keyword Succeeds  5x  1s
     ...  Click Element  ${xpath_delete_button}
     Wait Until Page Contains Element  ${xpath_success_message}
@@ -1254,20 +1284,33 @@ Delete All Static IP Addresses
 
 Modify IP Address And Verify
     [Documentation]  Modify IPv4 or IPv6 address via GUI.
-    [Arguments]  ${ip_version}  ${old_ip}  ${new_ip}
+    [Arguments]  ${ip_version}  ${old_ip}  ${new_ip}  ${CHANNEL_NUMBER}=1
 
     # Description of argument(s):
-    # ip_version   Either 'ipv4' or 'ipv6'.
-    # old_ip       The existing IP address visible on GUI(ipv4 or ipv6).
-    # new_ip       The new IP address to update(ipv4 or ipv6).
+    # ip_version       Either 'ipv4' or 'ipv6'.
+    # old_ip           The existing IP address visible on GUI(ipv4 or ipv6).
+    # new_ip           The new IP address to update(ipv4 or ipv6).
+    # CHANNEL_NUMBER   Ethernet channel number, 1(eth0) or 2(eth1).
 
+    Reload Page
     Wait Until Element Is Not Visible  ${xpath_page_loading_progress_bar}  timeout=120s
 
-    # Edit button based on version.
-    ${edit_button}=  Set Variable If  '${ip_version}' == 'ipv4'
-    ...  ${xpath_edit_ipv4_addres}  ${xpath_edit_ipv6_addres}
+    # Switch to the correct interface if channel 2 (eth1)
+    IF  '${CHANNEL_NUMBER}' == '2'
+        Click Element  ${xpath_eth1_interface}
+    END
+
+    # Edit button based on version - create dynamic xpath with old_ip
+    ${edit_button_template}=  Set Variable If  '${ip_version}' == 'ipv4'
+    ...  //*[text()='OLD_IP_PLACEHOLDER']/following::td[4]//*[@title="Edit static IPv4 address"]
+    ...  //*[text()='OLD_IP_PLACEHOLDER']/following::td[3]//*[@title="Edit static IPv6 address"]
+    
+    ${edit_button}=  Replace String  ${edit_button_template}  OLD_IP_PLACEHOLDER  ${old_ip}
+    
     Wait Until Element Is Enabled  ${edit_button}
-    Click Element  ${edit_button}
+    # Using JavaScript click to bypass Selenium interactability issues
+    ${element}=  Get WebElement  ${edit_button}
+    Execute JavaScript    arguments[0].click();    ARGUMENTS    ${element}
 
     # Add new IP and save.
     Input Text  ${xpath_input_ip_address}  ${new_ip}
@@ -1278,9 +1321,9 @@ Modify IP Address And Verify
 
     # Verify IP on BMC.
     IF  '${ip_version}' == 'ipv4'
-      ${edit_status}=  Run Keyword And Return Status  Verify IP On BMC  ${new_ip}
+      ${edit_status}=  Run Keyword And Return Status  Verify IP On BMC  ${new_ip}  ${CHANNEL_NUMBER}
     ELSE
-      ${edit_status}=  Run Keyword And Return Status  Verify IPv6 On BMC  ${new_ip}
+      ${edit_status}=  Run Keyword And Return Status  Verify IPv6 On BMC  ${new_ip}  ${CHANNEL_NUMBER}
     END
 
     Should Be Equal  ${edit_status}  ${True}

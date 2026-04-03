@@ -60,7 +60,10 @@ Set MAC Address
 
 Get BMC IP Info
     [Documentation]  Get system IP address and prefix length.
+    [Arguments]  ${CHANNEL_NUMBER}=1
 
+    # Description of argument(s):
+    # CHANNEL_NUMBER   Ethernet channel number, 1(eth0) or 2(eth1).
 
     # Get system IP address and prefix length details using "ip addr"
     # Sample Output of "ip addr":
@@ -90,6 +93,7 @@ Get BMC IP Info
 
     RETURN  ${ip_data}
 
+
 Get BMC Route Info
     [Documentation]  Get system route info.
 
@@ -102,6 +106,7 @@ Get BMC Route Info
     ...  /sbin/ip route
 
     RETURN  ${cmd_output}
+
 
 Get BMC MAC Address
     [Documentation]  Get system MAC address.
@@ -147,6 +152,7 @@ Get BMC MAC Address List
 
     RETURN  ${mac_list}
 
+
 Get BMC Hostname
     [Documentation]  Get BMC hostname.
 
@@ -156,6 +162,7 @@ Get BMC Hostname
     ${output}  ${stderr}  ${rc}=  BMC Execute Command  hostname
 
     RETURN  ${output}
+
 
 Get FW Env MAC Address
     [Documentation]  Get FW Env MAC address.
@@ -201,6 +208,7 @@ Get List Of IP Address Via REST
 
     RETURN  @{ip_list}
 
+
 Delete IP And Object
     [Documentation]  Delete IP and object.
     [Arguments]  ${ip_addr}  @{ip_uri_list}
@@ -239,6 +247,7 @@ Delete IP And Object
     ${ip_data}=  Get BMC IP Info
     Should Not Contain Match  ${ip_data}  ${ip_addr}*
     ...  msg=IP address not deleted.
+
 
 Get First Non Pingable IP From Subnet
     [Documentation]  Find first non-pingable IP from the subnet and return it.
@@ -284,6 +293,7 @@ Validate MAC On BMC
     Should Be True  ${status}
     ...  msg=MAC address ${system_mac} does not match ${mac_new_addr}.
 
+
 Validate MAC On FW Env
     [Documentation]  Validate MAC on FW Env.
     [Arguments]  ${mac_addr}
@@ -297,6 +307,7 @@ Validate MAC On FW Env
     ${status}=  Compare MAC Address  ${fw_env_addr}  ${mac_new_addr}
     Should Be True  ${status}
     ...  msg=MAC address ${fw_env_addr} does not match ${mac_new_addr}.
+
 
 Truncate MAC Address
     [Documentation]  Truncates and returns user provided MAC address.
@@ -331,6 +342,7 @@ Truncate MAC Address
     END
     ${user_new_mac_string}=   Evaluate  ":".join(${user_new_mac_list})
     RETURN  ${user_new_mac_string}
+
 
 Truncate MAC Bits
     [Documentation]  Truncates user provided MAC address byte to bits.
@@ -374,13 +386,14 @@ Configure Hostname
 
 Verify IP On BMC
     [Documentation]  Verify IP on BMC.
-    [Arguments]  ${ip}
+    [Arguments]  ${ip}  ${CHANNEL_NUMBER}=1
 
     # Description of argument(s):
-    # ip  IP address to be verified (e.g. "10.7.7.7").
+    # ip               IP address to be verified (e.g. "10.7.7.7").
+    # CHANNEL_NUMBER   Ethernet channel number, 1(eth0) or 2(eth1).
 
     # Get IP address details on BMC using IP command.
-    @{ip_data}=  Get BMC IP Info
+    @{ip_data}=  Get BMC IP Info  ${CHANNEL_NUMBER}
     Should Contain Match  ${ip_data}  ${ip}/*
     ...  msg=IP address does not exist.
 
