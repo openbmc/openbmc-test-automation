@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "91bd29d0_1f43f634",
+        "filename": "lib/ipmi_client.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1001808
+      },
+      "writtenOn": "2026-04-03T00:54:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3cef3dc6_2020aa00",
+      "range": {
+        "startLine": 234,
+        "startChar": 7,
+        "endLine": 234,
+        "endChar": 10
+      },
+      "revId": "0e7c6c310fda93bd62abcc4a559a273bb37d1334",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "60843843_f0f4cb2a",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-04-02T16:19:03Z",
       "side": 1,
       "message": "missing alignment",
+      "range": {
+        "startLine": 240,
+        "startChar": 0,
+        "endLine": 246,
+        "endChar": 22
+      },
+      "revId": "0e7c6c310fda93bd62abcc4a559a273bb37d1334",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b8a9a5c_4fa56795",
+        "filename": "lib/ipmi_client.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1001808
+      },
+      "writtenOn": "2026-04-03T00:54:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "60843843_f0f4cb2a",
       "range": {
         "startLine": 240,
         "startChar": 0,
