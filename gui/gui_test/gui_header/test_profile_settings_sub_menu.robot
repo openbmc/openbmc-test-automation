@@ -16,9 +16,6 @@ Test Tags      Profile_Settings_Sub_Menu
 ${xpath_new_password}                  //*[@data-test-id='profileSettings-input-newPassword']
 ${xpath_confirm_password}              //*[@data-test-id='profileSettings-input-confirmPassword']
 ${xpath_logged_usename}                //*[@data-test-id='appHeader-container-user']
-${xpath_default_UTC}                   //*[@data-test-id='profileSettings-radio-defaultUTC']
-${xpath_profile_settings_save_button}  //*[@data-test-id='profileSettings-button-saveSettings']
-${xpath_browser_offset}                //*[@data-test-id='profileSettings-radio-browserOffset']
 
 *** Test Cases ***
 
@@ -70,21 +67,7 @@ Verify Default UTC Timezone Display
     [Tags]  Verify_Default_UTC_Timezone_Display
     [Teardown]  Logout GUI
 
-    Click Element At Coordinates    ${xpath_default_UTC}    0    0
-    Click Element  ${xpath_profile_settings_save_button}
-    Verify Success Message On BMC GUI Page
-
-    # Navigate to the overview page.
-
-    Click Element  ${xpath_overview_menu}
-    Wait Until Page Contains  Overview  timeout=30s
-
-    ${cli_date_time}=  CLI Get BMC DateTime
-
-    # Fetching hour and minute from BMC CLI to handle seconds difference during execution.
-
-    ${cli_hour_and_min}=  Convert Date  ${cli_date_time}  result_format=%H:%M
-    Page Should Contain  ${cli_hour_and_min}
+    Verify Timezone Display On Overview Page  ${xpath_default_UTC}
 
 
 Verify Profile Setting Menu With Readonly User
@@ -98,14 +81,40 @@ Verify Profile Setting Menu With Readonly User
     Input Text  ${xpath_new_password}  ${OPENBMC_PASSWORD}
     Input Text  ${xpath_confirm_password}  ${OPENBMC_PASSWORD}
     Click Element At Coordinates    ${xpath_default_UTC}    0    0
-    Click Element  ${xpath_profile_settings_save_button}
+    Click Element  ${xpath_save_settings_button}
 
     # Readonly user have access to change self password,
     # So expecting success messages on this page.
     Verify Success Message On BMC GUI Page
     Click Element At Coordinates  ${xpath_browser_offset}  0   0
-    Click Element  ${xpath_profile_settings_save_button}
+    Click Element  ${xpath_save_settings_button}
     Verify Success Message On BMC GUI Page
+
+
+Verify Browser Offset Timezone Display
+    [Documentation]  Set browser offset timezone display via GUI and verify timezone value in overview page.
+    [Tags]  Verify_Browser_Offset_Timezone_Display
+    [Teardown]  Logout GUI
+
+    Verify Timezone Display On Overview Page  ${xpath_browser_offset}  -5 hours
+
+
+Verify Admin User Password Update In Profile Settings Page
+    [Documentation]  Verify admin user can update password in profile settings page.
+    [Tags]  Verify_Admin_User_Password_Update_In_Profile_Settings_Page
+    [Setup]  Run Keywords  Create Admin User And Login To GUI   testadmin  Newpass123
+    ...  AND  Test Setup Execution
+    [Teardown]  Delete Admin User And Logout Current GUI Session  testadmin
+
+    # Input new password value and submit.
+    Input Text  ${xpath_new_password}  ${OPENBMC_PASSWORD}
+    Input Text  ${xpath_confirm_password}  ${OPENBMC_PASSWORD}
+    Click Element  ${xpath_save_settings_button}
+    Verify Success Message On BMC GUI Page
+
+    # Login GUI with new password.
+    Login GUI  testadmin  ${OPENBMC_PASSWORD}
+    Wait Until Page Contains Element  ${xpath_logged_usename}  timeout=30s
 
 
 *** Keywords ***
@@ -121,3 +130,57 @@ Test Setup Execution
     Click Element  ${xpath_profile_settings}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  profile-settings
     Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
+
+
+Verify Timezone Display On Overview Page
+    [Documentation]  Set timezone display and verify time on overview page.
+    [Arguments]  ${timezone_xpath}  ${time_offset}=0 hours
+
+    # Description of argument(s):
+    # timezone_xpath      xpath to select timezone (eg. Default or Browser_offset).
+    # time_offset         Time difference to adjust CLI time to match selected timezone.
+
+    Click Element At Coordinates  ${timezone_xpath}  0  0
+    Click Element  ${xpath_save_settings_button}
+    Verify Success Message On BMC GUI Page
+
+    Click Element  ${xpath_overview_menu}
+    Wait Until Page Contains  Overview  timeout=30s
+
+    # Fetch current BMC date and time from CLI.
+    ${cli_date_time}=  CLI Get BMC DateTime
+
+    # Adjust CLI time according to browser offset.
+    ${adjusted_time}=  Add Time To Date  ${cli_date_time}  ${time_offset}
+    ${cli_hour_min}=  Convert Date  ${adjusted_time}  result_format=%H:%M
+    Page Should Contain  ${cli_hour_min}
+
+
+Create Admin User And Login To GUI
+    [Documentation]   Creating admin user with administrator privilege and Login BMC GUI.
+    [Arguments]  ${username}  ${password}
+
+    # Description of argument(s):
+    # username       The username to be used for login.
+    # password       The password to be used for login.
+
+    # Creating admin via redfish and login BMC GUI.
+    Redfish.Login
+    Redfish Create User  ${username}  ${password}  Administrator  ${True}
+    Login GUI  ${username}  ${password}
+
+
+Delete Admin User And Logout Current GUI Session
+    [Documentation]  Logout current GUI session and delete admin user.
+    [Arguments]  ${username}
+
+    # Description of argument(s):
+    # username       The username to be used for logout.
+
+    # Delete admin user and Logout current GUI session.
+    Logout GUI
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/${username}
+    Close Browser
+
+    # Login BMC GUI with default user.
+    Launch Browser And Login GUI
