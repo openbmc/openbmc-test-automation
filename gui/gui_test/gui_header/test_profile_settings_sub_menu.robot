@@ -17,8 +17,8 @@ ${xpath_new_password}                  //*[@data-test-id='profileSettings-input-
 ${xpath_confirm_password}              //*[@data-test-id='profileSettings-input-confirmPassword']
 ${xpath_logged_usename}                //*[@data-test-id='appHeader-container-user']
 ${xpath_default_UTC}                   //*[@data-test-id='profileSettings-radio-defaultUTC']
-${xpath_profile_settings_save_button}  //*[@data-test-id='profileSettings-button-saveSettings']
 ${xpath_browser_offset}                //*[@data-test-id='profileSettings-radio-browserOffset']
+${xpath_browser_offset_UTC}            //*[@data-test-id='profileSettings-radio-browserOffset']
 
 *** Test Cases ***
 
@@ -71,7 +71,7 @@ Verify Default UTC Timezone Display
     [Teardown]  Logout GUI
 
     Click Element At Coordinates    ${xpath_default_UTC}    0    0
-    Click Element  ${xpath_profile_settings_save_button}
+    Click Element  ${xpath_save_settings_button}
     Verify Success Message On BMC GUI Page
 
     # Navigate to the overview page.
@@ -98,14 +98,55 @@ Verify Profile Setting Menu With Readonly User
     Input Text  ${xpath_new_password}  ${OPENBMC_PASSWORD}
     Input Text  ${xpath_confirm_password}  ${OPENBMC_PASSWORD}
     Click Element At Coordinates    ${xpath_default_UTC}    0    0
-    Click Element  ${xpath_profile_settings_save_button}
+    Click Element  ${xpath_save_settings_button}
 
     # Readonly user have access to change self password,
     # So expecting success messages on this page.
     Verify Success Message On BMC GUI Page
     Click Element At Coordinates  ${xpath_browser_offset}  0   0
-    Click Element  ${xpath_profile_settings_save_button}
+    Click Element  ${xpath_save_settings_button}
     Verify Success Message On BMC GUI Page
+
+
+Verify Browser Offset Timezone Display
+    [Documentation]  Set browser offset timezone display via GUI and verify timezone value in overview page.
+    [Tags]  Verify_Browser_Offset_Timezone_Display
+    [Teardown]  Logout GUI
+
+    Click Element At Coordinates  ${xpath_browser_offset}  0  0
+    Click Element  ${xpath_save_settings_button}
+    Verify Success Message On BMC GUI Page
+
+    # Navigate to the overview page to validate updated time.
+    Click Element  ${xpath_overview_menu}
+    Wait Until Page Contains  Overview  timeout=30s
+
+    # Fetch current BMC date and time from CLI.
+    ${cli_date_time}=  CLI Get BMC DateTime
+
+    # Adjust CLI time according to browser offset.
+    ${adjusted_time}=  Add Time To Date  ${cli_date_time}  -5 hours
+    ${cli_hour_and_min}=  Convert Date  ${adjusted_time}  result_format=%H:%M
+    Page Should Contain  ${cli_hour_and_min}
+
+
+Verify Admin User Password Update In Profile Settings Page
+    [Documentation]  Verify admin user can update password in profile settings page.
+    [Tags]  Verify_Admin_User_Password_Update_In_Profile_Settings_Page
+    [Setup]  Run Keywords  Login GUI  admin  ${OPENBMC_PASSWORD}  AND  Test Setup Execution
+    [Teardown]  Run Keywords  Reset Admin Password Via GUI  AND  Logout GUI
+
+    ${admin_new_password}=  Set Variable  Newpass123
+
+    # Input new password value and submit.
+    Input Text  ${xpath_new_password}  ${admin_new_password}
+    Input Text  ${xpath_confirm_password}  ${admin_new_password}
+    Click Element  ${xpath_save_settings_button}
+    Verify Success Message On BMC GUI Page
+
+    # Login GUI with new password.
+    Login GUI  admin  ${admin_new_password}
+    Wait Until Page Contains Element  ${xpath_logged_usename}  timeout=30s
 
 
 *** Keywords ***
@@ -121,3 +162,17 @@ Test Setup Execution
     Click Element  ${xpath_profile_settings}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  profile-settings
     Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
+
+
+Reset Admin Password Via GUI
+    [Documentation]  Reset admin password to original password via GUI.
+
+    Click Element  ${xpath_root_button_menu}
+    Click Element  ${xpath_profile_settings}
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
+
+    # Input password value and submit.
+    Input Text  ${xpath_new_password}  ${OPENBMC_PASSWORD}
+    Input Text  ${xpath_confirm_password}  ${OPENBMC_PASSWORD}
+    Click Element  ${xpath_save_settings_button}
+    Verify Success Message On BMC GUI Page
