@@ -1109,8 +1109,8 @@ Verify All The Addresses Are Intact
     ${ipv4_addressorigin_list}  ${ipv4_addr_list}=
     ...  Get Address Origin List And IPv4 or IPv6 Address  IPv4Addresses  ${channel_number}
 
-    Should be Equal  ${initial_ipv4_addressorigin_list}  ${ipv4_addressorigin_list}
-    Should be Equal  ${initial_ipv4_addr_list}  ${ipv4_addr_list}
+    Should Be Equal  ${initial_ipv4_addressorigin_list}  ${ipv4_addressorigin_list}
+    Should Be Equal  ${initial_ipv4_addr_list}  ${ipv4_addr_list}
 
 
 Get Interface ID Of IPv6
@@ -1319,7 +1319,7 @@ Delete Multiple Static IPv6 Address On BMC
     ${active_channel_config}=  Get Active Channel Config
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${channel_number}']['name']}
 
-    Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
+    Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
     ...    valid_status_codes=${valid_status_codes}
 
     # Note: Network restart takes around 15-18s after patch request processing.

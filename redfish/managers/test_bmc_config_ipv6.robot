@@ -381,7 +381,7 @@ Suite Setup Execution
     ${active_channel_config}=  Get Active Channel Config
     Set Suite Variable  ${active_channel_config}
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
-    Set Suite variable  ${ethernet_interface}
+    Set Suite Variable  ${ethernet_interface}
     ${test_gateway}=  Get BMC Default Gateway
     Set Suite Variable  ${test_gateway}
 

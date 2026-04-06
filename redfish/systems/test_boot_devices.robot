@@ -145,7 +145,7 @@ Verify Boot Source Override Policy Persistency With Enabled Mode As Continuous A
 Verify Boot Source Override Policy With Enabled Mode As Once After Host Reboot
     [Documentation]  Verify Boot Source Override Policy with Enabled Mode As Once After Host Reboot.
     [Tags]           Verify_Boot_Source_Override_Policy_With_Enabled_Mode_As_Once_After_Host_Reboot
-    [Template]  Verify Boot Source Override with Enabled Mode As Once After Host Reboot
+    [Template]  Verify Boot Source Override With Enabled Mode As Once After Host Reboot
 
     #BootSourceOverrideTarget    BootSourceOverrideMode
     Hdd                         UEFI
@@ -163,7 +163,7 @@ Verify Boot Source Override Policy With Enabled Mode As Once After Host Reboot
 Verify Boot Source Override Policy With Enabled Mode As Continuous After Host Reboot
     [Documentation]  Verify Boot Source Override Policy With Enabled Mode As Continuous After Host Reboot.
     [Tags]           Verify_Boot_Source_Override_Policy_With_Enabled_Mode_As_Continuous_After_Host_Reboot
-    [Template]  Verify Boot Source Override with Enabled Mode As Continuous After Host Reboot
+    [Template]  Verify Boot Source Override With Enabled Mode As Continuous After Host Reboot
 
     #BootSourceOverrideTarget    BootSourceOverrideMode
     Hdd                         UEFI
@@ -179,9 +179,9 @@ Verify Boot Source Override Policy With Enabled Mode As Continuous After Host Re
 
 
 Verify Boot Source Override With Enabled Mode As Once After Host Reboot For Bios Setup
-    [Documentation]  Verify Boot Source Override with Enabled Mode As Once After Host Reboot For Bios Setup.
+    [Documentation]  Verify Boot Source Override With Enabled Mode As Once After Host Reboot For Bios Setup.
     [Tags]           Verify_Boot_Source_Override_With_Enabled_Mode_As_Once_After_Host_Reboot_For_Bios_Setup
-    [Template]  Verify Boot Source Override with Enabled Mode As Once After Host Reboot
+    [Template]  Verify Boot Source Override With Enabled Mode As Once After Host Reboot
 
     #BootSourceOverrideTarget   BootSourceOverrideMode   Biosflag
     BiosSetup                   UEFI                     True
@@ -189,9 +189,9 @@ Verify Boot Source Override With Enabled Mode As Once After Host Reboot For Bios
 
 
 Verify Boot Source Override With Enabled Mode As Continuous After Host Reboot For Bios Setup
-    [Documentation]  Verify Boot Source Override with Enabled Mode As Continuous After Host Reboot For Bios Setup.
+    [Documentation]  Verify Boot Source Override With Enabled Mode As Continuous After Host Reboot For Bios Setup.
     [Tags]           Verify_Boot_Source_Override_With_Enabled_Mode_As_Continuous_After_Host_Reboot_For_Bios_Setup
-    [Template]  Verify Boot Source Override with Enabled Mode As Continuous After Host Reboot
+    [Template]  Verify Boot Source Override With Enabled Mode As Continuous After Host Reboot
 
     #BootSourceOverrideTarget   BootSourceOverrideMode   Biosflag
     BiosSetup                   UEFI                     True
@@ -309,8 +309,8 @@ Verify Boot Source Override After BMC Reboot
     END
 
 
-Verify Boot Source Override with Enabled Mode As Once After Host Reboot
-    [Documentation]  Verify Boot Source Override with Enabled Mode As Once After Host Reboot.
+Verify Boot Source Override With Enabled Mode As Once After Host Reboot
+    [Documentation]  Verify Boot Source Override With Enabled Mode As Once After Host Reboot.
     [Arguments]      ${override_target}  ${override_mode}=UEFI  ${is_bios_setup}=False
 
     # Description of argument(s):
@@ -373,8 +373,8 @@ Verify Boot Source Override with Enabled Mode As Once After Host Reboot
         Should Be Equal As Strings  ${resp["BootSourceOverrideMode"]}  Legacy
     END
 
-Verify Boot Source Override with Enabled Mode As Continuous After Host Reboot
-    [Documentation]  Verify Boot Source Override with Enabled Mode As Continuous After Host Reboot.
+Verify Boot Source Override With Enabled Mode As Continuous After Host Reboot
+    [Documentation]  Verify Boot Source Override With Enabled Mode As Continuous After Host Reboot.
     [Arguments]      ${override_target}  ${override_mode}=UEFI  ${is_bios_setup}=False
 
     # Description of argument(s):

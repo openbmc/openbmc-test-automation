@@ -20,7 +20,7 @@ Verify Navigation To KVM Page
     [Documentation]  Verify navigation to KVM page.
     [Tags]  Verify_Navigation_To_KVM_Page
 
-    Page Should contain    KVM
+    Page Should Contain    KVM
 
 
 Verify Existence Of All Sections And Buttons In KVM Page

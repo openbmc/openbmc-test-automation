@@ -169,7 +169,7 @@ Verify Boot Count After BMC Reboot
     [Documentation]  Verify boot count increments on BMC reboot.
     [Tags]  Verify_Boot_Count_After_BMC_Reboot
     [Setup]  Run Keywords  Update NTP Test Initial Status  AND
-    ...  Set NTP state  ${TRUE}
+    ...  Set NTP State  ${TRUE}
     [Teardown]  Restore NTP Status
 
     Set BMC Boot Count  ${0}
@@ -268,7 +268,7 @@ Update NTP Test Initial Status
     Set Suite Variable  ${original_ntp}
 
 
-Set NTP state
+Set NTP State
     [Documentation]  Set NTP service inactive.
     [Arguments]  ${state}
 
@@ -284,7 +284,7 @@ Restore NTP Status
     [Documentation]  Restore NTP Status.
 
     IF  '${original_ntp["ProtocolEnabled"]}' == 'True'
-        Set NTP state  ${TRUE}
+        Set NTP State  ${TRUE}
     ELSE
-        Set NTP state  ${FALSE}
+        Set NTP State  ${FALSE}
     END

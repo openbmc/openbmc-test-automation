@@ -18,7 +18,7 @@ Test Tags           Power_Voltage_Readings
 Get Power Sensor Voltage Records
     [Documentation]  Get the power voltage records.
     [Tags]  Get_Power_Sensor_Voltage_Records
-    [Template]  Get Voltage Records and Verify
+    [Template]  Get Voltage Records And Verify
 
     # record_type   reading_type
     Voltages        ReadingVolts
@@ -26,7 +26,7 @@ Get Power Sensor Voltage Records
 
 *** Keywords ***
 
-Get Voltage Records and Verify
+Get Voltage Records And Verify
     [Documentation]  Get the power records for voltages.
     [Arguments]  ${record_type}  ${reading_type}
 

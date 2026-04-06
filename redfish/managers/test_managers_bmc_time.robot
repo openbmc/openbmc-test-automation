@@ -43,7 +43,7 @@ Verify Set Time Using Redfish
 
     ${old_bmc_time}=  CLI Get BMC DateTime
     # Add 3 days to current date.
-    ${new_bmc_time}=  Add Time to Date  ${old_bmc_time}  3 Days
+    ${new_bmc_time}=  Add Time To Date  ${old_bmc_time}  3 Days
     Redfish Set DateTime  ${new_bmc_time}
     ${cli_bmc_time}=  CLI Get BMC DateTime
     ${time_diff}=  Subtract Date From Date  ${cli_bmc_time}
