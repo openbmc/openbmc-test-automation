@@ -67,6 +67,40 @@
       "message": "why  Run Keywords  needed here ?",
       "revId": "6f41ebcb2e187a065fe0434d0ac54f0665509f33",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0d60ac4_91babfe9",
+        "filename": "gui/gui_test/gui_header/test_profile_settings_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-04-06T12:51:59Z",
+      "side": 1,
+      "message": "make this keyword generic\n\nexample:\n\nCreate User And Login To GUI\nArguments as user_name  user_password",
+      "revId": "6f41ebcb2e187a065fe0434d0ac54f0665509f33",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b2486a9_0240692c",
+        "filename": "gui/gui_test/gui_header/test_profile_settings_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-04-06T12:51:59Z",
+      "side": 1,
+      "message": "Make this keyword generic\n\nexample:\n\nDelete User And Logout From GUI",
+      "revId": "6f41ebcb2e187a065fe0434d0ac54f0665509f33",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
