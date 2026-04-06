@@ -675,6 +675,53 @@ Test Network Response On Specified Host State
     off
 
 
+Verify NameServers Field Cannot Be Directly Modified Via PATCH
+    [Documentation]  Verify NameServers field cannot be directly modified via PATCH.
+    [Tags]  Verify_NameServers_Field_Cannot_Be_Directly_Modified_Via_PATCH
+
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+
+    # Get current NameServers value before attempting modification.
+    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+    ${original_nameservers}=  Get From Dictionary  ${resp.dict}  NameServers
+
+    # Attempt to directly modify NameServers should fail as it is a read-only field.
+    ${payload}=  Create Dictionary  NameServers=${static_name_servers}
+    Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+    ...  body=${payload}  valid_status_codes=[${HTTP_BAD_REQUEST}, ${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Verify NameServers value remains unchanged after failed PATCH attempt.
+    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+    ${current_nameservers}=  Get From Dictionary  ${resp.dict}  NameServers
+    Should Be Equal  ${original_nameservers}  ${current_nameservers}
+    ...  msg=NameServers should remain unchanged after failed PATCH attempt
+
+
+Verify NameServers Includes StaticNameServers After Configuration
+    [Documentation]  Verify NameServers includes StaticNameServers after configuration.
+    [Tags]  Verify_NameServers_Includes_StaticNameServers_After_Configuration
+    [Setup]  DNS Test Setup Execution
+    [Teardown]  Run Keywords
+    ...  Configure Static Name Servers  AND  Test Teardown Execution
+
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+
+    # Get initial NameServers.
+    ${initial_nameservers}=  Redfish.Get Attribute
+    ...  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  NameServers
+
+    # Configure StaticNameServers.
+    Configure Static Name Servers  ${static_name_servers}
+
+    # Verify NameServers includes configured StaticNameServers.
+    ${updated_nameservers}=  Redfish.Get Attribute
+    ...  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  NameServers
+    List Should Contain Sub List  ${updated_nameservers}  ${static_name_servers}
+    ...  msg=NameServers does not include configured StaticNameServers.
+
+
 *** Keywords ***
 
 Test Setup Execution
