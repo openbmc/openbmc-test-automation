@@ -680,7 +680,7 @@ Verify PEL Delete
     ${pel_ids}=  Get PEL Log Via BMC CLI
     ${id}=  Get From List  ${pel_ids}  -1
     Peltool  -d ${id}  parse_json=False
-    Run Keyword and Expect Error  *PEL not found*  Peltool  -i ${id}
+    Run Keyword And Expect Error  *PEL not found*  Peltool  -i ${id}
 
 
 Verify Mandatory Fields For Predictive Error

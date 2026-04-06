@@ -48,7 +48,7 @@ Configure VMI Both Interfaces In Different Subnet And Verify
 Configure VMI Both Interfaces In Dynamic And Verify
     [Documentation]  Configure VMI both interfaces in dynamic And Verify.
     [Tags]  Configure_VMI_Both_Interfaces_In_Dynamic_And_Verify
-    [Teardown]   Run keywords  Set VMI IPv4 Origin  ${False}
+    [Teardown]   Run Keywords  Set VMI IPv4 Origin  ${False}
     ...  AND  Set VMI IPv4 Origin  ${False}  ${HTTP_ACCEPTED}  ${interface_list}[1]
     ...  AND  Test Teardown Execution
 
@@ -62,7 +62,7 @@ Configure VMI First Interface In Static And Second In Dynamic And Verify
     [Documentation]  Configure VMI first interface in static mode and second interface in dynamic mode
     ...  and verify first gets static ip details and second gets dynamic ip details.
     [Tags]  Configure_VMI_First_Interface_In_Static_And_Second_In_Dynamic_And_Verify
-    [Teardown]   Run keywords  Delete VMI IPv4 Address  AND
+    [Teardown]   Run Keywords  Delete VMI IPv4 Address  AND
     ...  Set VMI IPv4 Origin  ${False}  ${HTTP_ACCEPTED}  ${interface_list}[1]
     ...  AND  Test Teardown Execution
 
@@ -77,7 +77,7 @@ Configure VMI First Interface In Dynamic And Second In Static And Verify
     [Documentation]  Configure VMI first interface in dynamic mode and second interface in static mode
     ...  and verify first gets dynamic ip details and second gets static ip details.
     [Tags]  Configure_VMI_First_Interface_In_Dynamic_And_Second_In_Static_And_Verify
-    [Teardown]   Run keywords  Set VMI IPv4 Origin  ${False}  AND
+    [Teardown]   Run Keywords  Set VMI IPv4 Origin  ${False}  AND
     ...  Delete VMI IPv4 Address  IPv4StaticAddresses  ${HTTP_ACCEPTED}  ${interface_list}[1]
     ...  AND  Test Teardown Execution
 

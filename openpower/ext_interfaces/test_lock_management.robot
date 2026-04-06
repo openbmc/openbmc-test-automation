@@ -720,7 +720,7 @@ Release Locks On Resource
     Should Be Equal As Strings  ${resp.status_code}  ${status_code}
 
 
-Release locks And Delete Session
+Release Locks And Delete Session
     [Documentation]  Release locks and delete redfish session.
     [Arguments]  ${session_info}  ${trans_id_list}
 
@@ -751,7 +751,7 @@ Acquire Lock On Another Lock
 
     Verify Lock On Resource  ${session_info}  ${trans_id_list}
 
-    Release locks And Delete Session  ${session_info}  ${trans_id_list}
+    Release Locks And Delete Session  ${session_info}  ${trans_id_list}
 
 
 Verify Fail To Acquire Read And Write In Single Request
@@ -809,7 +809,7 @@ Verify Empty Lock Records For Invalid Session
     ${lock_length1}=  Get Length  ${lock_list1}
 
     ${session_info2}=  Copy Dictionary  ${session_info1}  deepcopy=True
-    set to dictionary  ${session_info2}  SessionIDs  xxyXyyYZZz
+    Set To Dictionary  ${session_info2}  SessionIDs  xxyXyyYZZz
 
     ${lock_list2}=  Get Locks List On Resource  ${session_info2}
     ${lock_length2}=  Get Length  ${lock_list2}
@@ -838,7 +838,7 @@ Verify Acquire Lock Fails On Another Lock
     Verify Lock On Resource  ${session_info}  ${trans_id_list}
     ${trans_id}=  Redfish Post Acquire Lock  ${lock_type_list}[1]  status_code=${HTTP_CONFLICT}
 
-    Release locks And Delete Session  ${session_info}  ${trans_id_list}
+    Release Locks And Delete Session  ${session_info}  ${trans_id_list}
 
 
 Verify Acquire Lock After Reboot
@@ -863,7 +863,7 @@ Verify Acquire Lock After Reboot
     Append To List  ${trans_id_list}  ${trans_id}
     Verify Lock On Resource  ${session_info}  ${trans_id_list}
 
-    Release locks And Delete Session  ${session_info}  ${trans_id_list}
+    Release Locks And Delete Session  ${session_info}  ${trans_id_list}
 
 
 Verify Acquire Multiple Lock Request At CEC Level
@@ -886,7 +886,7 @@ Verify Acquire Multiple Lock Request At CEC Level
 
     Redfish Post Acquire Lock  ${lock_type_list}[1]  status_code=${HTTP_CONFLICT}
 
-    Release locks And Delete Session  ${session_info}  ${trans_id_list}
+    Release Locks And Delete Session  ${session_info}  ${trans_id_list}
 
 
 Post Reboot Acquire Lock
@@ -1355,11 +1355,11 @@ Verify Lock Records For Multiple Invalid Session
     ${session_info1}=  Create Session With ClientID  ${client_id}
 
     ${session_info2}=  Copy Dictionary  ${session_info1}  deepcopy=True
-    set to dictionary  ${session_info2}  SessionIDs  ${invalid_session_ids}[0]
+    Set To Dictionary  ${session_info2}  SessionIDs  ${invalid_session_ids}[0]
     Append To List  ${session_dict_list}  ${session_info2}
 
     ${session_info3}=  Copy Dictionary  ${session_info1}  deepcopy=True
-    set to dictionary  ${session_info3}  SessionIDs  ${invalid_session_ids}[0]
+    Set To Dictionary  ${session_info3}  SessionIDs  ${invalid_session_ids}[0]
     Append To List  ${session_dict_list}  ${session_info3}
 
     ${lock_list1}=  Get Locks List On Resource  ${session_info1}
@@ -1403,7 +1403,7 @@ Verify Lock Records For Multiple Invalid And Valid Session
     Verify Lock On Resource  ${session_info1}[0]  ${trans_id_list1}
 
     ${session_info2}=  Copy List  ${session_info1}  deepcopy=True
-    set to dictionary  ${session_info2}[0]  SessionIDs  ${invalid_session_ids}[0]
+    Set To Dictionary  ${session_info2}[0]  SessionIDs  ${invalid_session_ids}[0]
     Append To List  ${session_dict_list}  ${session_info2}[0]
 
     Verify List Of Session Lock On Resource  ${session_dict_list}  ${lock_list}
@@ -1419,7 +1419,7 @@ Verify Lock Records For Multiple Invalid And Valid Session
     Redfish Delete Session  ${session_info1}[0]
 
 
-Delete All Redfish and HMC Sessions
+Delete All Redfish And HMC Sessions
     [Documentation]  Delete all active redfish sessions.
 
     ${saved_session_info}=  Get Redfish Session Info

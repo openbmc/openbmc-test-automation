@@ -619,7 +619,7 @@ Send CSR To VMI And Get Signed
 
     ${resp}=  POST On Session  openbmc  ${cert_uri}  json=${csr_data}  headers=${headers}
     ...  timeout=${read_timeout}  expected_status=any
-    Log to console  ${resp.content}
+    Log To Console  ${resp.content}
 
     RETURN  ${resp}
 
@@ -740,8 +740,8 @@ Get Certificate Signed By VMI
     ${subject_signed_csr}=  Get Subject   ${test_cert_file}  False
     ${pubKey_signed_csr}=  Get Public Key  ${test_cert_file}  False
 
-    Should be equal as strings    ${subject_signed_csr}    ${subject_csr}
-    Should be equal as strings    ${pubKey_signed_csr}     ${pubKey_csr}
+    Should Be Equal As Strings    ${subject_signed_csr}    ${subject_csr}
+    Should Be Equal As Strings    ${pubKey_signed_csr}     ${pubKey_csr}
 
 
 Suite Setup Execution
