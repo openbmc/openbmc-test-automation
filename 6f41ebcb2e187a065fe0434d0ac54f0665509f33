@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50a90a43_3ce200ec",
+        "filename": "gui/gui_test/gui_header/test_profile_settings_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-04-06T10:45:30Z",
+      "side": 1,
+      "message": "This xpath not specific to browser offset or UTC time . complete page having single save button so keeping old variable is good.",
+      "revId": "6f41ebcb2e187a065fe0434d0ac54f0665509f33",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31b8152d_691a0335",
+        "filename": "gui/gui_test/gui_header/test_profile_settings_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-04-06T10:45:30Z",
+      "side": 1,
+      "message": "same xpath u r using for 2 different variables, what would be the reason ?",
+      "revId": "6f41ebcb2e187a065fe0434d0ac54f0665509f33",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f4118a8_4ae8dd95",
+        "filename": "gui/gui_test/gui_header/test_profile_settings_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-04-06T10:45:30Z",
+      "side": 1,
+      "message": "same set of lines covered in testcase : Verify Default UTC Timezone Display line number : 68, Can u please create a keyword and just reuse.",
+      "revId": "6f41ebcb2e187a065fe0434d0ac54f0665509f33",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d54aa87_eb47741e",
+        "filename": "gui/gui_test/gui_header/test_profile_settings_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-04-06T10:45:30Z",
+      "side": 1,
+      "message": "why  Run Keywords  needed here ?",
+      "revId": "6f41ebcb2e187a065fe0434d0ac54f0665509f33",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
