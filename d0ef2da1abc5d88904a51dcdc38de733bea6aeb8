@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b2fe6c6_dd3b6f0e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-04-06T13:41:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fceae033_cb0690f6",
+      "revId": "d0ef2da1abc5d88904a51dcdc38de733bea6aeb8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "48062d21_e76ce93b",
@@ -31,6 +49,30 @@
       "writtenOn": "2026-04-06T12:56:22Z",
       "side": 1,
       "message": "PATCH -\u003e Redfish Patch Operation\n\ninstead of PATCH give a proper info",
+      "range": {
+        "startLine": 678,
+        "startChar": 57,
+        "endLine": 678,
+        "endChar": 62
+      },
+      "revId": "d0ef2da1abc5d88904a51dcdc38de733bea6aeb8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28604c9c_71b1f665",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-04-06T13:41:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48062d21_e76ce93b",
       "range": {
         "startLine": 678,
         "startChar": 57,
