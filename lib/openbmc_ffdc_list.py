@@ -281,6 +281,7 @@ FFDC_METHOD_CALL = {
         "Sys Inventory Files": "System Inventory Files",
         "Dump Files": "SCP Dump Files",
         "PEL Files": "Collect PEL Log",
+        "Var Log Files": "Collect Var Log",
         # "Redfish Log": "Enumerate Redfish Resources",
         "Log Redfish Session Count": "Get BMC Active Session Count",
         "Firmware Log": (

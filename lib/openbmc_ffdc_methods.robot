@@ -732,3 +732,11 @@ Get OS Distro Release Info
     ${stdout}  ${stderr}  ${rc}=  OS Execute Command  uname  ignore_err=${0}
 
     RETURN  ${stdout}
+
+
+Collect Var Log
+    [Documentation]  Collect log files recursively from /var/log directory on BMC.
+
+    Create Directory  ${FFDC_DIR_PATH}${/}var_log_files/
+    scp.Get File  /var/log/
+    ...  ${FFDC_DIR_PATH}${/}var_log_files  recursive=True
