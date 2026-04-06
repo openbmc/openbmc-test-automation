@@ -144,8 +144,8 @@ Print Websocket Monitor Log
     [Documentation]  Show the contents of the monitor output file.
 
     ${websocket_monitor_log}=  OperatingSystem.Get File  ${monitor_file}
-    Log to Console  websocket_monitor_log:
-    Log to Console  ${websocket_monitor_log}
+    Log To Console  websocket_monitor_log:
+    Log To Console  ${websocket_monitor_log}
 
 
 Suite Setup Execution

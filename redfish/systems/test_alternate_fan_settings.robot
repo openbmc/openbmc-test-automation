@@ -65,7 +65,7 @@ Verify Supported Fan Thermal Modes Available
 Verify Supported Fan Thermal Modes Switch At Standby
     [Documentation]  Check that supported modes are set successfully at standby.
     [Tags]  Verify_Supported_Fan_Thermal_Modes_Switch_At_Standby
-    [Template]  Set and Verify Thermal Mode Switches
+    [Template]  Set And Verify Thermal Mode Switches
 
     # pre_req_state      thermal_mode_type
     Off                  DEFAULT
@@ -77,7 +77,7 @@ Verify Supported Fan Thermal Modes Switch At Standby
 Verify Supported Fan Thermal Modes Switch At Runtime
     [Documentation]  Check that supported modes are set successfully at runtime.
     [Tags]  Verify_Supported_Fan_Thermal_Modes_Switch_At_Runtime
-    [Template]  Set and Verify Thermal Mode Switches
+    [Template]  Set And Verify Thermal Mode Switches
 
     # pre_req_state      thermal_mode
     On                   DEFAULT
@@ -89,7 +89,7 @@ Verify Supported Fan Thermal Modes Switch At Runtime
 Verify Supported Fan Thermal Mode Remains Set After Boot
     [Documentation]  Check that supported modes remain set at runtime.
     [Tags]  Verify_Supported_Fan_Thermal_Mode_Remains_Set_After_Boot
-    [Template]  Set and Verify Thermal Mode After Boot
+    [Template]  Set And Verify Thermal Mode After Boot
 
     # pre_req_state      thermal_mode_type
     Off                  DEFAULT
@@ -100,7 +100,7 @@ Verify Supported Fan Thermal Mode Remains Set After Boot
 
 *** Keywords ***
 
-Set and Verify Thermal Mode Switches
+Set And Verify Thermal Mode Switches
     [Documentation]  Verify the thermal mode switches successfully at standby or runtime.
     [Arguments]  ${pre_req_state}  ${thermal_mode}
 
@@ -119,7 +119,7 @@ Set and Verify Thermal Mode Switches
     Rprint Vars  current
 
 
-Set and Verify Thermal Mode After Boot
+Set And Verify Thermal Mode After Boot
     [Documentation]  Verify the thermal mode remains set at runtime.
     [Arguments]  ${pre_req_state}  ${thermal_mode}
 
@@ -127,7 +127,7 @@ Set and Verify Thermal Mode After Boot
     # pre_req_state      Set the state of the host to Standby or Runtime (e.g. "Running")
     # thermal_mode       Read the supported thermal mode (e.g. "CUSTOM")
 
-    Set and Verify Thermal Mode Switches  ${pre_req_state}  ${thermal_mode}
+    Set And Verify Thermal Mode Switches  ${pre_req_state}  ${thermal_mode}
 
     Run Key U  Redfish Power On \ stack_mode=normal \ quiet=1
     Redfish.Login

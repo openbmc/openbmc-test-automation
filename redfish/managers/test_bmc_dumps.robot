@@ -85,7 +85,7 @@ Verify Internal Failure Initiated BMC Dump Size
 
     # Verify that only one BMC dump is generated after injecting error.
     ${dump_entries}=  Get BMC Dump Entries
-    ${length}=  Get length  ${dump_entries}
+    ${length}=  Get Length  ${dump_entries}
     Should Be Equal As Integers  ${length}  ${1}
 
     # Max size for dump is 20 MB = 20x1024x1024 Byte.
@@ -350,7 +350,7 @@ Verify Core Dump After Terminating Dump Manager Service
 
     # Verifying that there is only one dump.
     ${dump_entries}=  Get BMC Dump Entries
-    ${length}=  Get length  ${dump_entries}
+    ${length}=  Get Length  ${dump_entries}
     Should Be Equal As Integers  ${length}  ${1}
 
 
@@ -462,7 +462,7 @@ Verify Core Watchdog Initiated BMC Dump
 
     # Verify that only one BMC dump is available.
     ${dump_entry_list}=  Get BMC Dump Entries
-    ${length}=  Get length  ${dump_entry_list}
+    ${length}=  Get Length  ${dump_entry_list}
     Should Be Equal As Integers  ${length}  ${1}
 
 
@@ -515,8 +515,8 @@ Extract BMC Dump
     ${var}=  Fetch From Left  ${bmc_dump_timestamp}  .
     ${var}=  Remove String  ${var}  -  T  :
     ${bmc_extraction_folders}=  OperatingSystem.List Directories In Directory  .  BMCDUMP*${var}
-    ${cnt}=  Get length  ${bmc_extraction_folders}
-    should be equal as numbers  ${cnt}  1
+    ${cnt}=  Get Length  ${bmc_extraction_folders}
+    Should Be Equal As Numbers  ${cnt}  1
 
     RETURN  ${bmc_extraction_folders}[0]
 
@@ -541,7 +541,7 @@ Is BMC Dump Available
     ${dump_entries}=  Get BMC Dump Entries
 
     # Verifying that BMC dump is available.
-    ${length}=  Get length  ${dump_entries}
+    ${length}=  Get Length  ${dump_entries}
     Should Be True  0 < ${length}
 
 

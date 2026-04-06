@@ -41,7 +41,7 @@ Suite Setup Execution
 
     ${active_channel_config}=  Get Active Channel Config
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
-    Set Suite variable  ${ethernet_interface}
+    Set Suite Variable  ${ethernet_interface}
 
     Redfish.Login
     ${initial_lldp_config}=  Get Initial LLDP Configuration
