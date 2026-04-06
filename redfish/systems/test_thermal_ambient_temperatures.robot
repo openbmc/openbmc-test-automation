@@ -21,7 +21,7 @@ Test Tags           Thermal_Ambient_Temperatures
 Get Ambient Temperature Records
     [Documentation]  Get the ambient temperature records.
     [Tags]  Get_Ambient_Temperature_Records
-    [Template]  Get Thermal Records and Verify
+    [Template]  Get Thermal Records And Verify
 
     # record_type   reading_type
     Temperatures    ReadingCelsius
@@ -37,12 +37,12 @@ Reboot And Check Ambient Temperature Records Are Valid
     Redfish.Login
     Redfish Purge Event Log
 
-    Get Thermal Records and Verify  Temperatures  ReadingCelsius
+    Get Thermal Records And Verify  Temperatures  ReadingCelsius
 
 
 *** Keywords ***
 
-Get Thermal Records and Verify
+Get Thermal Records And Verify
     [Documentation]  Get the thermal records for temperatures.
     [Arguments]  ${record_type}  ${reading_type}
 

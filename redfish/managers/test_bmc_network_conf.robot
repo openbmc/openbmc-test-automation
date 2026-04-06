@@ -822,7 +822,7 @@ Verify Network Response On Specified Host State
     IF  '${host_state}' == 'on'
         Redfish Power On  stack_mode=skip
     ELSE
-        Redfish Power off  stack_mode=skip
+        Redfish Power Off  stack_mode=skip
     END
 
     Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}

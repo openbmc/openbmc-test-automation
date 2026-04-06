@@ -430,7 +430,7 @@ Verify ReadOnly User Privilege
 Verify History Password For Redfish Admin And Readonly User
     [Documentation]  Verify previously used password can be set
     [Tags]  Verify_History_Password_For_Redfish_Admin_And_Readonly_User
-    [Template]  Verify History Password for Redfish User
+    [Template]  Verify History Password For Redfish User
 
     #username        role_id
     admin_user       Administrator
@@ -473,7 +473,7 @@ Verify Standard User Roles Defined By Redfish
     @{operator}=  Create List  Login  ConfigureComponents  ConfigureSelf
     @{readOnly}=  Create List  Login  ConfigureSelf
 
-    ${roles_dict}=  create dictionary  admin_privileges=${admin}  operator_privileges=${operator}
+    ${roles_dict}=  Create Dictionary  admin_privileges=${admin}  operator_privileges=${operator}
     ...  readOnly_privileges=${readOnly}
 
     ${resp}=  redfish.Get  /redfish/v1/AccountService/Roles/Administrator
@@ -1044,7 +1044,7 @@ Create User With Unsupported Password Format And Verify
     ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
 
 
-Verify History Password for Redfish User
+Verify History Password For Redfish User
     [Documentation]  Verify that previous password can be used
     [Arguments]  ${user_name}  ${role_id}
 

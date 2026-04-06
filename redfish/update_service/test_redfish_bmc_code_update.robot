@@ -281,7 +281,7 @@ Redfish Multiple Upload Image And Check Progress State
     Log To Console  Uploading second image.
     ${resp2}=  Upload Image To BMC  ${redfish_update_uri}  timeout=${600}  data=${file_bin_data2}
 
-    ${task_info2}=    evaluate    json.loads('''${resp2.content}''')    json
+    ${task_info2}=  Evaluate    json.loads('''${resp2.content}''')    json
 
     Sleep  3s
 
@@ -291,7 +291,7 @@ Redfish Multiple Upload Image And Check Progress State
     Wait Until Keyword Succeeds  5 min  10 sec
     ...  Verify Task Progress State  ${task_inv2}  ${task_inv_dict['TaskException']}
 
-    ${task_info1}=    evaluate    json.loads('''${resp1.content}''')    json
+    ${task_info1}=  Evaluate    json.loads('''${resp1.content}''')    json
     Log  ${task_info1}
 
     ${task_inv1}=  Get Task Inventory  ${task_info1}

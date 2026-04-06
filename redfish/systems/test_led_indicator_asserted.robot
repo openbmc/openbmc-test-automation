@@ -23,7 +23,7 @@ Test Tags           Led_Indicator_Asserted
 Verify LED Lamp Test Asserted At Standby
     [Documentation]  Verify the LED asserted at standby is set to off or blinking.
     [Tags]  Verify_LED_Lamp_Test_Asserted_At_Standby
-    [Template]  Set and Verify Lamp LED Indicator
+    [Template]  Set And Verify Lamp LED Indicator
 
     # pre_req_state     asserted     expected_indicator_led
     Off                 1            Blinking
@@ -33,7 +33,7 @@ Verify LED Lamp Test Asserted At Standby
 Verify LED Lamp Test Asserted At Runtime
     [Documentation]  Verify the LED asserted at runtime is set to off or blinking.
     [Tags]  Verify_LED_Lamp_Test_Asserted_At_Runtime
-    [Template]  Set and Verify Lamp LED Indicator
+    [Template]  Set And Verify Lamp LED Indicator
 
     # pre_req_state     asserted     expected_indicator_led
     On                  1            Blinking
@@ -43,7 +43,7 @@ Verify LED Lamp Test Asserted At Runtime
 Verify LED Power Supply Units Asserted At Standby
     [Documentation]  Verify the power supply units are asserted at standby to lit or off.
     [Tags]  Verify_LED_Power_Supply_Units_Asserted_At_Standby
-    [Template]  Set and Verify LED Indicator
+    [Template]  Set And Verify LED Indicator
 
     # pre_req_state     asserted                                        expected_indicator_led
     Off                 "xyz.openbmc_project.Led.Physical.Action.On"    Lit
@@ -53,7 +53,7 @@ Verify LED Power Supply Units Asserted At Standby
 Verify LED Power Supply Units Asserted At Runtime
     [Documentation]  Verify the power supply units are asserted at runtime to lit or off.
     [Tags]  Verify_LED_Power_Supply_Units_Asserted_At_Runtime
-    [Template]  Set and Verify LED Indicator
+    [Template]  Set And Verify LED Indicator
 
     # pre_req_state     asserted                                        expected_indicator_led
     On                  "xyz.openbmc_project.Led.Physical.Action.On"    Lit
@@ -63,7 +63,7 @@ Verify LED Power Supply Units Asserted At Runtime
 Verify LED Fans Asserted At Standby
     [Documentation]  Verify the fans are asserted at standby to lit or off.
     [Tags]  Verify_LED_Fans_Asserted_At_Standby
-    [Template]  Set and Verify Fan LED Indicators
+    [Template]  Set And Verify Fan LED Indicators
 
     # pre_req_state     asserted                                        expected_indicator_led
     Off                 "xyz.openbmc_project.Led.Physical.Action.On"    Lit
@@ -73,7 +73,7 @@ Verify LED Fans Asserted At Standby
 Verify LED Fans Asserted At Runtime
     [Documentation]  Verify the fans are asserted at runtime to lit or off.
     [Tags]  Verify_LED_Fans_Asserted_At_Runtime
-    [Template]  Set and Verify Fan LED Indicators
+    [Template]  Set And Verify Fan LED Indicators
 
     # pre_req_state     asserted                                        expected_indicator_led
     On                  "xyz.openbmc_project.Led.Physical.Action.On"    Lit
@@ -92,7 +92,7 @@ Verify Location Indicator Active status
 
 *** Keywords ***
 
-Set and Verify Lamp LED Indicator
+Set And Verify Lamp LED Indicator
     [Documentation]  Verify the indicator LED for the group lamp test is asserted.
     [Arguments]  ${pre_req_state}  ${asserted}  ${expected_indicator_led}
 
@@ -121,7 +121,7 @@ Set and Verify Lamp LED Indicator
     Verify Indicator LEDs  ${expected_indicator_led}
 
 
-Set and Verify LED Indicator
+Set And Verify LED Indicator
     [Documentation]  Verify the indicator LED for the power supply units are asserted.
     [Arguments]  ${pre_req_state}  ${asserted}  ${expected_indicator_led}
 
@@ -172,7 +172,7 @@ Verify Indicator LEDs
     END
 
 
-Set and Verify Fan LED Indicators
+Set And Verify Fan LED Indicators
     [Documentation]  Verify the indicator LED for the fans are asserted.
     [Arguments]  ${pre_req_state}  ${asserted}  ${expected_indicator_led}
 
