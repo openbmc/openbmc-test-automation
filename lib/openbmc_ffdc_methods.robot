@@ -732,3 +732,23 @@ Get OS Distro Release Info
     ${stdout}  ${stderr}  ${rc}=  OS Execute Command  uname  ignore_err=${0}
 
     RETURN  ${stdout}
+
+
+Collect Var Log
+    [Documentation]  Collect log files recursively from /var/log directory on BMC.
+
+    Create Directory  ${FFDC_DIR_PATH}${/}var_log_files/
+    
+    # List all files in /var/log
+    ${file_list}=  SSHLibrary.Execute Command  find /var/log -type f
+    @{files}=  Split String  ${file_list}  \n
+    
+    FOR  ${file}  IN  @{files}
+        TRY
+            scp.Get File  ${file}  ${FFDC_DIR_PATH}${/}var_log_files/
+        EXCEPT  SCPException  AS  ${error}
+            Log  Skipped ${file}: ${error}  WARN
+            CONTINUE
+        END
+    END
+
