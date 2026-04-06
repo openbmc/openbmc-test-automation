@@ -16,6 +16,24 @@
       "message": "Please create a new user and try this test , if there is chance Teardown fails means our complete GUI test suite going to fail if admin password not set back with same password.",
       "revId": "887ca7b4d5cb1fd5b719c919d80d52e66bd615e8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c258f13_8f6987be",
+        "filename": "gui/gui_test/gui_header/test_profile_settings_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1001957
+      },
+      "writtenOn": "2026-04-06T09:47:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fddaeaec_3b04cba4",
+      "revId": "887ca7b4d5cb1fd5b719c919d80d52e66bd615e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
