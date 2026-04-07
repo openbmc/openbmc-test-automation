@@ -58,7 +58,7 @@ Verify OCC State After Host Reboot
     RF SYS GracefulRestart
     Verify OCC State  ${1}
     ${occ_count_after}=  Count OCC Object Entry
-    Should be Equal  ${occ_count_before}  ${occ_count_after}
+    Should Be Equal  ${occ_count_before}  ${occ_count_after}
 
 
 Verify OCC State After BMC Reset
@@ -69,7 +69,7 @@ Verify OCC State After BMC Reset
     Redfish OBMC Reboot (run)
     Verify OCC State  ${1}
     ${occ_count_after}=  Count OCC Object Entry
-    Should be Equal  ${occ_count_before}  ${occ_count_after}
+    Should Be Equal  ${occ_count_before}  ${occ_count_after}
 
 
 Verify OCC State At Standby

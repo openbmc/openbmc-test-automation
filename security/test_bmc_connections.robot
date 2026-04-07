@@ -80,7 +80,7 @@ Verify User Cannot Login After 5 Non-Logged In Sessions
     [Documentation]  User should not be able to login when there
     ...  are 5 non-logged in sessions.
     [Tags]  Verify_User_Cannot_Login_After_5_Non-Logged_In_Sessions
-    [Setup]  Confirm Ability to Connect Then Close All Connections
+    [Setup]  Confirm Ability To Connect Then Close All Connections
     [Teardown]  Run Keywords  Process.Terminate All Processes  AND
     ...  SSHLibrary.Close All Connections  AND  FFDC On Test Case Fail
 
@@ -144,7 +144,7 @@ Make Large Number Of Wrong SSH Login Attempts And Check Stability
     FOR  ${iter}  IN RANGE  ${1}  ${loop_iteration} + 1
       Log To Console  ${iter}th iteration
       ${invalid_password}=   Catenate  ${OPENBMC_PASSWORD}${iter}
-      Run Keyword and Ignore Error
+      Run Keyword And Ignore Error
       ...  Open Connection And Log In  ${OPENBMC_USERNAME}  ${invalid_password}
 
       # Every 100th iteration Login with correct credentials
@@ -177,7 +177,7 @@ Test Stability On Large Number Of Wrong Login Attempts To GUI
 
     FOR  ${iter}  IN RANGE  ${1}  ${iterations} + 1
         Log To Console  ${iter}th login
-        Run Keyword And Ignore Error  Login to GUI With Incorrect Credentials
+        Run Keyword And Ignore Error  Login To GUI With Incorrect Credentials
 
         # Every 100th iteration, check BMC GUI is responsive.
         IF  ${iter} % 100 == 0
@@ -348,7 +348,7 @@ Set Account Lockout Threshold
    Redfish.Patch  /redfish/v1/AccountService  body=[('AccountLockoutThreshold', 0)]
 
 
-Login to GUI With Incorrect Credentials
+Login To GUI With Incorrect Credentials
     [Documentation]  Attempt to login to GUI as root, providing incorrect password argument.
 
     Input Text  ${xpath_login_username_input}  root
@@ -383,7 +383,7 @@ Invalid Credentials Redfish Login Attempts
     IF  ${fail_count} > ${0}  FAIL  Could not Login to Redfish ${fail_count} times
 
 
-Confirm Ability to Connect Then Close All Connections
+Confirm Ability To Connect Then Close All Connections
     [Documentation]  Confirm that SSH login works, otherwise, skip this test.
     ...  If login succeeds, close all SSH connections to BMC to prepare for test.
 

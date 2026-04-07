@@ -135,4 +135,4 @@ Start SNMP Manager
 
     # The execution of the SNMP_TRAPD_CMD is necessary to cause SNMP to begin
     # listening to SNMP messages.
-    SSHLibrary.write  ${SNMP_TRAPD_CMD} &
+    SSHLibrary.Write  ${SNMP_TRAPD_CMD} &

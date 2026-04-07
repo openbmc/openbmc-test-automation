@@ -35,7 +35,7 @@ Verify Service Agents For Service Types
     @{parameters}=  Split String  ${SLP_SERVICES}  ${\n}
 
     FOR  ${parameter}  IN  @{parameters}
-      ${output}=  Run SLP command  ${service_agents}  ${parameter}
+      ${output}=  Run SLP Command  ${service_agents}  ${parameter}
       Verify Service Agents  ${output}  ${parameter}
     END
 
@@ -47,7 +47,7 @@ Suite Setup Execution
     ${output}=  Run  which slptool
     Should Not Be Empty  ${output}
     ...  msg=slptool not installed.
-    ${SLP_SERVICES}=  Run SLP command  ${service_types}
+    ${SLP_SERVICES}=  Run SLP Command  ${service_types}
     Set Suite Variable  ${SLP_SERVICES}
 
 Run SLP Command

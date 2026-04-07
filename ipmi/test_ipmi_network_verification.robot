@@ -105,7 +105,7 @@ Get IP Address Source And Verify Using Redfish
 
     FOR  ${ipv4_address}  IN  @{ipv4_addresses}
       ${ip_address_source}=
-      ...  Set Variable if  '${ipv4_address['Address']}' == '${lan_config['IP Address']}'
+      ...  Set Variable If  '${ipv4_address['Address']}' == '${lan_config['IP Address']}'
       ...  ${ipv4_address['AddressOrigin']} Address
       IF  "${ip_address_source}" != 'None'  BREAK
     END

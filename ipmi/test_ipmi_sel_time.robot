@@ -73,7 +73,7 @@ Verify Set SEL Time On NTP Mode
     # Gives Hexa decimal raw command data request with the prefix of 0x.
     ${sel_date_raw}=  Converting Date To HexaDecimal  ${sel_date}
 
-    ${Set_sel_time}=  Run Keyword and Expect Error  *${IPMI_RAW_CMD['SEL_entry']['Set_SEL_Time'][2]}*
+    ${Set_sel_time}=  Run Keyword And Expect Error  *${IPMI_RAW_CMD['SEL_entry']['Set_SEL_Time'][2]}*
     ...  Run IPMI Command  ${IPMI_RAW_CMD['SEL_entry']['Set_SEL_Time'][0]} ${sel_date_raw}
     Should Contain  ${Set_sel_time}  ${IPMI_RAW_CMD['SEL_entry']['Set_SEL_Time'][1]}
 
@@ -168,7 +168,7 @@ Verify SEL Set Time For Invalid Data Request
     ${sel_date_raw}=  Converting Date To HexaDecimal  ${current_date}
 
     # Set Invalid SEL Time with one extra request byte.
-    ${Set_seltime_invalid}=  Run Keyword and Expect Error  *${IPMI_RAW_CMD['SEL_entry']['Set_SEL_Time'][4]}*
+    ${Set_seltime_invalid}=  Run Keyword And Expect Error  *${IPMI_RAW_CMD['SEL_entry']['Set_SEL_Time'][4]}*
     ...  Run IPMI Command  ${IPMI_RAW_CMD['SEL_entry']['Set_SEL_Time'][0]} ${sel_date_raw} 0x00
     Should Contain  ${Set_seltime_invalid}  ${IPMI_RAW_CMD['SEL_entry']['Set_SEL_Time'][3]}
 
@@ -190,7 +190,7 @@ Verify SEL Set Time For Incomplete Data Request
 
     # Set incomplete SEL Time with one less request byte.
     ${Set_seltime_incomplete}=
-    ...  Run Keyword and Expect Error  *${IPMI_RAW_CMD['SEL_entry']['Set_SEL_Time'][4]}*
+    ...  Run Keyword And Expect Error  *${IPMI_RAW_CMD['SEL_entry']['Set_SEL_Time'][4]}*
     ...  Run IPMI Command  ${IPMI_RAW_CMD['SEL_entry']['Set_SEL_Time'][0]} ${sel_date_raw}
     Should Contain  ${Set_seltime_incomplete}  ${IPMI_RAW_CMD['SEL_entry']['Set_SEL_Time'][3]}
 

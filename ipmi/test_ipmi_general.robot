@@ -203,7 +203,7 @@ Verify Chassis Identify via IPMI
     [Documentation]  Set chassis identify using IPMI and verify.
     [Tags]  Verify_Chassis_Identify_via_IPMI
     [Setup]  Redfish.Login
-    [Teardown]  Redfish.logout
+    [Teardown]  Redfish.Logout
 
     # Set to default "chassis identify" and verify that LED blinks for 15s.
     Run IPMI Standard Command  chassis identify
@@ -224,7 +224,7 @@ Verify Chassis Identify Off And Force Identify On via IPMI
     [Documentation]  Set chassis identify to "off" and "force" using IPMI and verify.
     [Tags]  Verify_Chassis_Identify_Off_And_Force_Identify_On_via_IPMI
     [Setup]  Redfish.Login
-    [Teardown]  Redfish.logout
+    [Teardown]  Redfish.Logout
 
     # Set the LED to "Force Identify On".
     Run IPMI Standard Command  chassis identify force
