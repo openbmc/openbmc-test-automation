@@ -31,10 +31,9 @@ ${xpath_generate_csr_submit}       //button[text()='Generate CSR']
 ${xpath_csr_cancel_button}         //button[normalize-space()='Generate CSR']/preceding-sibling::button
 ${xpath_select_algorithm_button}   //*[@data-test-id='modalGenerateCsr-select-keyPairAlgorithm']
 ${xpath_delete_ca_certificate}     (//*[@title="Delete certificate"])[2]
-${xpath_delete_ldap_certificate}   (//*[@title="Delete certificate"])[3]
-${xpath_delete_https_certificate}  (//*[@title="Delete certificate"])[4]
-${xpath_delete_button}             //button[contains(normalize-space(.),"Delete")]
-${xpath_cancel_button}             //button[contains(normalize-space(.),"Cancel")]
+${xpath_delete_ldap_certificate}   //tr[.//td[normalize-space()='LDAP Certificate']]//button[@disabled]
+${xpath_delete_https_certificate}  //tr[.//td[normalize-space()='HTTPS Certificate']]//button[@disabled]
+${xpath_cancel_button}             //button[normalize-space()='Add']/preceding-sibling::button[1]
 ${xpath_confirm_delete_button}     //button[text()='Delete']
 ${xpath_cancel_delete_button}      //button[normalize-space()='Delete']/preceding-sibling::button
 ${xpath_close_generate_csr}        (//button[contains(@class,'btn-close')])[3]
@@ -104,7 +103,8 @@ Verify Informational Message Under Add Certificate
 Verify Delete Button Should Be Disabled For HTTPS And LDAP Certificates
     [Documentation]  Verify delete buttons should be disabled for HTTPS and LDAP certificates.
     [Tags]  Verify_Delete_Button_Should_Be_Disabled_For_HTTPS_And_LDAP_Certificates
-    [Setup]  Install CA Certificate
+    [Setup]  Run Keywords  Delete Certificate Via BMC CLI  Client  AND
+    ...      Install And Verify Certificate Via Redfish  Client  Valid Certificate Valid Privatekey  ok
 
     Element Should Be Disabled  ${xpath_delete_ldap_certificate}
     Element Should Be Disabled  ${xpath_delete_https_certificate}
