@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34f6e45b_c813318a",
+        "filename": "ipmi/test_ipmi_payload.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-04-07T07:37:44Z",
+      "side": 1,
+      "message": "Need to change the keyword to \"Verify The Channel Via IPMI\".",
+      "range": {
+        "startLine": 512,
+        "startChar": 36,
+        "endLine": 512,
+        "endChar": 37
+      },
+      "revId": "0eeb83e0143bd0151272467e4a9fb89612e10cfe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
