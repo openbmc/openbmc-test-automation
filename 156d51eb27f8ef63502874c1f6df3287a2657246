@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a293122_f86852ba",
+        "filename": "gui/gui_test/gui_header/test_profile_settings_sub_menu.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-04-07T06:42:20Z",
+      "side": 1,
+      "message": "Create a admin\n\nMake sure line should not exceed 110 charachter",
+      "range": {
+        "startLine": 160,
+        "startChar": 22,
+        "endLine": 160,
+        "endChar": 29
+      },
+      "revId": "156d51eb27f8ef63502874c1f6df3287a2657246",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7edb7a4_68b7aac7",
+        "filename": "gui/gui_test/gui_header/test_profile_settings_sub_menu.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-04-07T06:42:20Z",
+      "side": 1,
+      "message": "Created testadmin\n\n-\u003e create admin user",
+      "range": {
+        "startLine": 167,
+        "startChar": 14,
+        "endLine": 167,
+        "endChar": 23
+      },
+      "revId": "156d51eb27f8ef63502874c1f6df3287a2657246",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c62b209_a9da2d08",
+        "filename": "gui/gui_test/gui_header/test_profile_settings_sub_menu.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-04-07T06:42:20Z",
+      "side": 1,
+      "message": "admin",
+      "range": {
+        "startLine": 174,
+        "startChar": 59,
+        "endLine": 174,
+        "endChar": 68
+      },
+      "revId": "156d51eb27f8ef63502874c1f6df3287a2657246",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a23069b_706bab5a",
+        "filename": "gui/gui_test/gui_header/test_profile_settings_sub_menu.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-04-07T06:42:20Z",
+      "side": 1,
+      "message": "admin",
+      "range": {
+        "startLine": 180,
+        "startChar": 13,
+        "endLine": 180,
+        "endChar": 22
+      },
+      "revId": "156d51eb27f8ef63502874c1f6df3287a2657246",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
