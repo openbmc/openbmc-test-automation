@@ -16,6 +16,24 @@
       "message": "Common XAPTH exist in  gui_variables.py , removed redundant XPATH variable for test suite\n\n\nplease update the commit mesage",
       "revId": "9eb53f486bf29d129f40c9cb56eb3454044bcbcb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b85e544_8005ed81",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001957
+      },
+      "writtenOn": "2026-04-07T15:30:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a29c977b_5417012d",
+      "revId": "9eb53f486bf29d129f40c9cb56eb3454044bcbcb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
