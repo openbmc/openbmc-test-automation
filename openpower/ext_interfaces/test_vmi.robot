@@ -90,7 +90,7 @@ Verify User Cannot Delete ReadOnly Property IPv4Addresses
         Set VMI IPv4 Origin  ${False}  ${HTTP_ACCEPTED}
     END
     Set Static IPv4 Address To VMI And Verify  ${test_ipv4}  ${test_gateway}  ${test_netmask}
-    Delete VMI IPv4 Address  IPv4Addresses  valid_status_code=${HTTP_FORBIDDEN}
+    Delete VMI IPv4 Address  IPv4Addresses  valid_status_code=${HTTP_METHOD_NOT_ALLOWED}
 
 
 Assign Valid And Invalid Static IPv4 Address To VMI
@@ -147,12 +147,14 @@ Verify Persistency Of VMI IPv4 Details After Host Reboot
     Set VMI IPv4 Origin  ${True}  ${HTTP_ACCEPTED}
     Redfish Power Off  stack_mode=skip
     Redfish Power On
+    Wait For Host Boot Progress To Reach Required State
     Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}
 
     # Verifying persistency of static address.
     Switch VMI IPv4 Origin And Verify Details
     Redfish Power Off  stack_mode=skip
     Redfish Power On
+    Wait For Host Boot Progress To Reach Required State
     Set Static IPv4 Address To VMI And Verify  ${test_ipv4}  ${test_gateway}  ${test_netmask}
 
 
@@ -179,6 +181,7 @@ Verify Successful VMI IP Static Configuration On HOST Boot After Session Delete
     Redfish.Login
     Redfish Power Off
     Redfish Power On
+    Wait For Host Boot Progress To Reach Required State
 
     Verify VMI Network Interface Details  ${test_ipv4}  Static  ${test_gateway}  ${test_netmask}
 
@@ -194,6 +197,7 @@ Verify Persistency Of VMI DHCP IP Configuration After Multiple HOST Reboots
     FOR  ${i}  IN RANGE  ${2}
         Redfish Power Off
         Redfish Power On
+        Wait For Host Boot Progress To Reach Required State
         Verify VMI Network Interface Details  ${vmi_ip_config["IPv4_Address"]}
         ...  DHCP  ${vmi_ip_config["IPv4_Gateway"]}  ${vmi_ip_config["IPv4_SubnetMask"]}
     END
@@ -202,7 +206,7 @@ Verify Persistency Of VMI DHCP IP Configuration After Multiple HOST Reboots
 Enable DHCP When Static IP Configured And Verify Static IP
     [Documentation]  Enable DHCP when static ip configured and verify static ip
     [Tags]  Enable_DHCP_When_Static_IP_Configured_And_Verify_Static_IP
-    [Setup]  Redfish Power On
+    [Setup]  Run Keywords  Redfish Power On  AND  Wait For Host Boot Progress To Reach Required State
     [Teardown]  Test Teardown Execution
 
     Set Static IPv4 Address To VMI And Verify  ${test_ipv4}  ${test_gateway}  ${test_netmask}
@@ -219,6 +223,7 @@ Verify VMI Static IP Configuration Persist On BMC Reset Before Host Boot
     Set Static IPv4 Address To VMI And Verify  ${test_ipv4}  ${test_gateway}  ${test_netmask}
     Redfish OBMC Reboot (off)  stack_mode=skip
     Redfish Power On
+    Wait For Host Boot Progress To Reach Required State
     # Verifying the VMI static configuration
     Verify VMI Network Interface Details  ${test_ipv4}  Static   ${test_gateway}  ${test_netmask}
 
@@ -231,6 +236,7 @@ Add Static IP When Host Poweroff And Verify On Poweron
 
     Set Static IPv4 Address To VMI And Verify  ${test_ipv4}  ${test_gateway}  ${test_netmask}
     Redfish Power On
+    Wait For Host Boot Progress To Reach Required State
     Verify VMI Network Interface Details  ${test_ipv4}  Static  ${test_gateway}  ${test_netmask}
 
 
@@ -243,6 +249,7 @@ Add VMI Static IP When Host Poweroff And Verify Static IP On BMC Reset
     Set Static IPv4 Address To VMI And Verify  ${test_ipv4}  ${test_gateway}  ${test_netmask}
     Redfish OBMC Reboot (off)  stack_mode=skip
     Redfish Power On
+    Wait For Host Boot Progress To Reach Required State
     Verify VMI Network Interface Details  ${test_ipv4}  Static  ${test_gateway}  ${test_netmask}
 
 
@@ -267,7 +274,7 @@ Verify User Cannot Delete VMI DHCP IP Address
     [Setup]  Set VMI IPv4 Origin  ${True}
     [Teardown]  Test Teardown Execution
 
-    Delete VMI IPv4 Address  IPv4Addresses  valid_status_code=${HTTP_FORBIDDEN}
+    Delete VMI IPv4 Address  IPv4Addresses  valid_status_code=${HTTP_METHOD_NOT_ALLOWED}
     ${resp}=  Redfish.Get
     ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${ethernet_interface}
     Should Not Be Empty  ${resp.dict["IPv4Addresses"]}
@@ -476,6 +483,7 @@ Enable DHCP When Host Is Off And Verify After Poweron
 
     Set VMI IPv4 Origin  ${True}
     Redfish Power On  stack_mode=skip
+    Wait For Host Boot Progress To Reach Required State
     Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}
 
 
@@ -487,6 +495,7 @@ Disable DHCP When Host Is Off And Verify New State Reflects After Power On
 
     Set VMI IPv4 Origin  ${False}
     Redfish Power On  stack_mode=skip
+    Wait For Host Boot Progress To Reach Required State
     Verify VMI Network Interface Details  ${default}  Static  ${default}  ${default}
 
 
