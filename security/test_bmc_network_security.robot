@@ -131,7 +131,7 @@ Flood Redfish Interface With Packets With Flags And Check Stability
 Send Network Packets Continuously To SOL Port
     [Documentation]  Send network packets continuously to SOL port and verify stability.
     [Tags]  Send_Network_Packets_Continuously_To_SOL_Port
-    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND  Close all connections
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND  Close All Connections
 
     # Send large number of packets to SOL port.
     ${packet_loss}=  Send Network Packets And Get Packet Loss

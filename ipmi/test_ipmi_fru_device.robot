@@ -77,7 +77,7 @@ Verify Get FRU Inventory Area Info For Invalid Device Data
     [Tags]  Verify_Get_FRU_Inventory_Area_Info_For_Invalid_Device_Data
 
     # Verify response for invalid FRU device id.
-    Run Keyword and Expect Error  *${IPMI_RAW_CMD['FRU']['Inventory_Area_Info'][1]}*
+    Run Keyword And Expect Error  *${IPMI_RAW_CMD['FRU']['Inventory_Area_Info'][1]}*
     ...  Run IPMI Command  ${IPMI_RAW_CMD['FRU']['Inventory_Area_Info'][0]} ${fru_device_id_invalid}
 
 
@@ -86,7 +86,7 @@ Verify Get FRU Inventory Area Info For Invalid Data Request
     [Tags]  Verify_Get_FRU_Inventory_Area_Info_For_Invalid_Data_Request
 
     # Verify response for invalid response data - extra bytes.
-    Run Keyword and Expect Error  *${IPMI_RAW_CMD['FRU']['Inventory_Area_Info'][2]}*
+    Run Keyword And Expect Error  *${IPMI_RAW_CMD['FRU']['Inventory_Area_Info'][2]}*
     ...  Run IPMI Command  ${IPMI_RAW_CMD['FRU']['Inventory_Area_Info'][0]} ${fru_device_id} 0x00
 
 

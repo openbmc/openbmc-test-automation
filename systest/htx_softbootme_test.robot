@@ -88,7 +88,7 @@ Run HTX Soft Bootme Exerciser
         ...   Run Keyword And Return Status   Ping Host  ${OS_HOST}
 
         IF   '${l_ping}' == '${False}'
-            Log to console   ("OS Host is rebooting")
+            Log To Console   ("OS Host is rebooting")
             # Wait for OS (re) Boot - Max 20 minutes
             FOR   ${waitindex}   IN RANGE   40
                 Run Key U  Sleep \ 30s

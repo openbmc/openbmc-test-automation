@@ -699,8 +699,8 @@ Configure Initial Settings
     # Open telnet connection and ignore the error, in case telnet session is
     # already opened by the program calling this keyword.
     Run Keyword And Ignore Error  Open Telnet Connection To BMC Serial Console
-    Telnet.write  ifconfig eth0 ${host} netmask ${mask}
-    Telnet.write  route add default gw ${gw_ip}
+    Telnet.Write  ifconfig eth0 ${host} netmask ${mask}
+    Telnet.Write  route add default gw ${gw_ip}
 
 
 Install Debug Tarball On BMC

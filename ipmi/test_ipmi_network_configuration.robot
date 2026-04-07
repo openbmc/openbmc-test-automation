@@ -60,7 +60,7 @@ Verify IPMI Inband Network Configuration
     ...  ${REDFISH_NW_ETH_IFACE}${interface}  IPv4Addresses
 
     FOR  ${ipv4_address}  IN  @{ipv4_addresses}
-        ${ip_address}=  Set Variable if  '${ipv4_address['Address']}' == '${STATIC_IP}'
+        ${ip_address}=  Set Variable If  '${ipv4_address['Address']}' == '${STATIC_IP}'
                         ...  ${ipv4_address}
         IF  ${ip_address} != None  BREAK
     END

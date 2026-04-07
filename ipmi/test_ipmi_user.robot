@@ -340,7 +340,7 @@ Verify IPMI Root User Password Change
     [Documentation]  Change IPMI root user password and verify that
     ...  root user is able to run IPMI command.
     [Tags]  Verify_IPMI_Root_User_Password_Change
-    [Setup]  Skip if  len( '${OPENBMC_PASSWORD}' ) < 8
+    [Setup]  Skip If  len( '${OPENBMC_PASSWORD}' ) < 8
     ...  msg= Do not run this test if len( OPENBMC_PASSWORD ) < 8
     # Reason: if OPENBMC_PASSWORD is not at least 8 characters,
     #         it cannot be restored in the Teardown step.

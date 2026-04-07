@@ -338,7 +338,7 @@ Set Account Lockout Threshold
    # account_lockout_threshold    Set lockout threshold value.
    # account_lockout_duration     Set lockout duration value.
 
-   Redfish.login
+   Redfish.Login
    ${payload}=  Create Dictionary  AccountLockoutThreshold=${account_lockout_threshold}
    ...  AccountLockoutDuration=${account_lockout_duration}
    Redfish.Patch  /redfish/v1/AccountService/  body=&{payload}
@@ -407,4 +407,4 @@ Set Password Via Redfish
     ...  Redfish.Patch  /redfish/v1/AccountService/Accounts/${admin_user}
     ...  body={'Password': '${new_password}'}
 
-    Should be Equal  ${status}  ${expect_result}
+    Should Be Equal  ${status}  ${expect_result}

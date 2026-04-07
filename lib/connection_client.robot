@@ -61,10 +61,10 @@ Open Connection For SCP
     Import Library      SCPLibrary      AS       scp
 
     IF  '${SSH_PORT}' == '${EMPTY}'
-        scp.Open connection  ${OPENBMC_HOST}
+        scp.Open Connection  ${OPENBMC_HOST}
         ...  username=${OPENBMC_USERNAME}  password=${OPENBMC_PASSWORD}
     ELSE
-        scp.Open connection  ${OPENBMC_HOST}  port=${SSH_PORT}
+        scp.Open Connection  ${OPENBMC_HOST}  port=${SSH_PORT}
         ...  username=${OPENBMC_USERNAME}  password=${OPENBMC_PASSWORD}
     END
 

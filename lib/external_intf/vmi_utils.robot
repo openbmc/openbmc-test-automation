@@ -47,7 +47,7 @@ Set Static IPv4 Address To VMI And Verify
     # valid_status_code  Expected valid status code from GET request. Default is HTTP_ACCEPTED.
     # interface          VMI interface (eg. eth0 or eth1).
 
-    ${ip_details}=  Create dictionary  Address=${ip}  SubnetMask=${netmask}  Gateway=${gateway}
+    ${ip_details}=  Create Dictionary  Address=${ip}  SubnetMask=${netmask}  Gateway=${gateway}
     ${ip_data}=  Create List  ${ip_details}
     ${resp}=  Redfish.Patch  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${interface}
     ...  body={'IPv4StaticAddresses':${ip_data}}  valid_status_codes=[${valid_status_code}]
