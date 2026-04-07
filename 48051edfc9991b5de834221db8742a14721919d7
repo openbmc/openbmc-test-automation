@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b28089b0_1a0be0b2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2026-04-07T15:41:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e59e0dc_0dfadc18",
+      "revId": "48051edfc9991b5de834221db8742a14721919d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "193f791f_2eabaa6b",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-04-07T15:26:25Z",
       "side": 1,
       "message": "Boot System To Runtime\n    Documentation]  Boot the system to runtime state by performing a power off, power on sequence, and waiting for boot completion.",
+      "revId": "48051edfc9991b5de834221db8742a14721919d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2025b4f0_b9414f84",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 1126,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2026-04-07T15:41:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "193f791f_2eabaa6b",
       "revId": "48051edfc9991b5de834221db8742a14721919d7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
