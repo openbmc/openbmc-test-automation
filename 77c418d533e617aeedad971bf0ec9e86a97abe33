@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "192a08d8_c8ceb7a6",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-04-07T07:38:18Z",
+      "side": 1,
+      "message": "We can create a re-usable keyword for \nRedfish Power Off  stack_mode\u003dskip\nRedfish Power On\nWait For Host Boot Progress To Reach Required State \n\nThis will remove the code redundancy.",
+      "revId": "77c418d533e617aeedad971bf0ec9e86a97abe33",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
