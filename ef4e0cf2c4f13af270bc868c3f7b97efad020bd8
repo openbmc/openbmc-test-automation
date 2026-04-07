@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40daa737_4b8257ff",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 959,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-07T15:38:38Z",
+      "side": 1,
+      "message": "Delete IPv4 Address On Eth1 Via IPv6 And Verify\n\nthis test case name is bit confusing..  \n\nvia IPv6 ??? and same thing for the other test case name also..",
+      "revId": "ef4e0cf2c4f13af270bc868c3f7b97efad020bd8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c1cf993_c9162904",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 969,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-07T15:38:38Z",
+      "side": 1,
+      "message": "Ther term Edit here please change it..  since it UI.. either say it Modify or Update",
+      "range": {
+        "startLine": 969,
+        "startChar": 21,
+        "endLine": 969,
+        "endChar": 26
+      },
+      "revId": "ef4e0cf2c4f13af270bc868c3f7b97efad020bd8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90267b21_92b821a1",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 1255,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-07T15:38:38Z",
+      "side": 1,
+      "message": "Best Practice: Use JavaScript click only when standard Click Element fails due to interactability issues. Always prefer standard Selenium clicks when possible to ensure tests reflect real user behavior.",
+      "range": {
+        "startLine": 1252,
+        "startChar": 0,
+        "endLine": 1255,
+        "endChar": 74
+      },
+      "revId": "ef4e0cf2c4f13af270bc868c3f7b97efad020bd8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
