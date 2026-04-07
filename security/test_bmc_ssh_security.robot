@@ -52,7 +52,7 @@ Verify BMC SSH Weak Cipher And Algorithm
 
     Printn
     ${ssh_cmd_buf}=  Catenate  ssh -o NumberOfPasswordPrompts=0 -o UserKnownHostsFile=/dev/null
-    ...  -o StrictHostKeyChecking=no -vv ${OPENBMC_HOST} 2>&1
+    ...  -o StrictHostKeyChecking=no -vv ${OPENBMC_HOST} -p ${SSH_PORT} 2>&1
 
     ${rc}  ${std_err}=  Shell Cmd  ! ${ssh_cmd_buf}
     Log  std_err=${std_err}  console=yes
