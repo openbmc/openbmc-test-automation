@@ -36,6 +36,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ce6bd8f_4025d848",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 959,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-04-08T06:21:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ca4fd4e_e817bf2b",
+      "revId": "ef4e0cf2c4f13af270bc868c3f7b97efad020bd8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c1cf993_c9162904",
@@ -120,6 +138,30 @@
       "side": 1,
       "message": "Yeah george, tried various standard selenium clicks and waits aswell but since vue3 changes code is not stable. that is reason used javascript click.",
       "parentUuid": "90267b21_92b821a1",
+      "range": {
+        "startLine": 1252,
+        "startChar": 0,
+        "endLine": 1255,
+        "endChar": 74
+      },
+      "revId": "ef4e0cf2c4f13af270bc868c3f7b97efad020bd8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f4c8f24_68c80ea9",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 1255,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-04-08T06:21:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49b42287_57a899aa",
       "range": {
         "startLine": 1252,
         "startChar": 0,
