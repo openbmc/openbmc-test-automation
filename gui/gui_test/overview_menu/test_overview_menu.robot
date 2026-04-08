@@ -34,6 +34,10 @@ ${xpath_operating_mode}                          //dt[contains(text(),'Operating
 ${xpath_machine_model}                           //dt[contains(text(),'Model')]/following-sibling::dd[1]
 ${xpath_serial_number}                           //dt[contains(text(),'Serial number')]/following-sibling::dd[1]
 ${xpath_hostname}                                //dt[contains(text(),'Hostname')]/following-sibling::dd[1]
+${xpath_power_tab_power_consumption}             //dt[contains(text(),'Current power consumption')]/following-sibling::dd[1]
+${xpath_overview_power_consumption}              //dt[contains(text(),'Power consumption')]/following-sibling::dd[1]
+${xpath_dumps_count}                             //dt[contains(text(),'Total')]/following-sibling::dd[1]
+
 
 *** Test Cases ***
 
@@ -340,12 +344,22 @@ Verify Server LED Turn Off And On With Readonly User
     Verify Error And Unauthorized Message On GUI
 
 
+Verify Total Dumps Count Under Dumps Section
+    [Documentation]  Verify total dumps count in overview page matches Redfish.
+    [Tags]  Verify_Total_Dumps_Count_Under_Dumps_Section
+
+    ${redfish_dump_count}=  Redfish.Get Attribute  ${REDFISH_DUMP_URI}  Members@odata.count
+    ${gui_dump_count}=  Get Text  ${xpath_dumps_count}
+    Should Be Equal As Integers  ${gui_dump_count}  ${redfish_dump_count}
+
+
+
 ###  Power Off Test Cases  ###
 
 Verify BMC Information At Host Power Off State
     [Documentation]  Verify that BMC information is displayed at host power off state.
     [Tags]  Verify_BMC_Information_At_Host_Power_Off_State
-    [Setup]  Run Keywords  Power On Server  AND  Test Setup Execution
+    [Setup]  Run Keywords  Power Off Server  AND  Test Setup Execution
 
     ${firmware_version}=  Redfish Get BMC Version
     Page Should Contain  ${firmware_version}
@@ -361,6 +375,23 @@ Verify Overview Hostname Matches Redfish Hostname
 
     # Verify GUI Overview hostname matches Redfish hostname.
     Should Be Equal  ${overview_hostname}  ${redfish_hostname}
+
+
+Verify Power Consumption At Host Power Off State
+    [Documentation]  Verify power consumption at host powered off state.
+    [Tags]  Verify_Power_Consumption_At_Host_Power_Off_State
+
+    Verify Power Consumption Value According To Host State  Power Off Server
+
+
+###  Power ON Test Cases  ###
+
+Verify Power Consumption At Host Power On State
+    [Documentation]  Verify power consumption in overview page matches power page when host is in power on.
+    [Tags]  Verify_Power_Consumption_At_Host_Power_On_State
+    [Setup]  Run Keywords  Power On Server  AND  Test Setup Execution
+
+    Verify Power Consumption Value According To Host State  Power On Server
 
 
 *** Keywords ***
@@ -394,4 +425,23 @@ Set IndicatorLED State
 
     Redfish.Patch  /redfish/v1/Systems/${SYSTEM_ID}  body={"LocationIndicatorActive": ${led_state}}
     ...  valid_status_codes=${expect_resp_code}
+
+
+Verify Power Consumption Value According To Host State
+    [Documentation]  Verify power consumption value according to host state.
+    [Arguments]  ${power_status}
+
+    # Description of argument(s):
+    # power_status     Server power state (Power On / Power Off).
+
+    ${power_value}=  Get Text  ${xpath_overview_power_consumption}
+
+    IF  '${power_status}' == 'Power Off Server'
+        Should Be Equal As Strings  ${power_value}  Not available
+    ELSE
+        Click Element  ${xpath_power_information_view_more_button}
+        Wait Until Page Contains Element  ${xpath_power_heading}  timeout=30
+        ${power_tab_value}=  Get Text  ${xpath_power_tab_power_consumption}
+        Should Be Equal As Strings  ${power_value}  ${power_tab_value}
+    END
 
