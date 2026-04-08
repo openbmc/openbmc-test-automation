@@ -34,6 +34,7 @@ ${xpath_operating_mode}                          //dt[contains(text(),'Operating
 ${xpath_machine_model}                           //dt[contains(text(),'Model')]/following-sibling::dd[1]
 ${xpath_serial_number}                           //dt[contains(text(),'Serial number')]/following-sibling::dd[1]
 ${xpath_hostname}                                //dt[contains(text(),'Hostname')]/following-sibling::dd[1]
+${OVERVIEW_BMC_DATE_TIME}                        xpath=//dd[contains(@data-test-id,'overviewQuickLinks-text-bmcTime')]
 
 *** Test Cases ***
 
@@ -192,6 +193,28 @@ Verify BMC Time In Overview Page
     ${converted_date}=  Convert Date  ${date_time}  result_format=%Y-%m-%d
 
     Page Should Contain  ${converted_date}
+
+
+Verifying RTC Synchronization On BMC Time And Overview Page
+    [Documentation]  Verify RTC synchronization on BMC time and overview page.
+    [Tags]    Verifying_RTC_Synchronization_On_BMC_Time_And_Overview_Page
+
+    # Get the time from overview page.
+    Wait Until Page Contains Element    ${OVERVIEW_BMC_DATE_TIME}
+    ${bmc_datetime_web}=    Get Text    ${OVERVIEW_BMC_DATE_TIME}
+
+    # Get the RTC date from BMC console, 
+    # And compare with overview page date.
+    ${rtc_date_time}=    Get RTC Date And Time From Bmc Console
+
+    ${bmc_converted_date}=  Convert Date  ${bmc_datetime_web}  result_format=%Y-%m-%d
+    ${rtc_converted_date}=  Convert Date  ${rtc_date_time}  result_format=%Y-%m-%d
+    Should Be Equal  ${bmc_converted_date}  ${rtc_converted_date}
+
+    # Get the redfish date time and compare with RTC date.
+    ${redfish_date_time}=  Redfish.Get Attribute  ${REDFISH_BASE_URI}Managers/${MANAGER_ID}  DateTime
+    ${redfish_converted_date}=  Convert Date  ${redfish_date_time}  result_format=%Y-%m-%d
+    Should Be Equal  ${redfish_converted_date}  ${rtc_converted_date}
 
 
 Verify View More Button For Dumps
@@ -383,6 +406,7 @@ Verify Identify LED State Via Redfish
     ${led_state}=  Redfish.Get Attribute  /redfish/v1/Systems/${SYSTEM_ID}  LocationIndicatorActive
     Should Be True  '${led_state}' == '${expected_state}'
 
+
 Set IndicatorLED State
     [Documentation]  Perform redfish PATCH operation.
     [Arguments]  ${led_state}  ${expect_resp_code}=[200, 204]
@@ -395,3 +419,12 @@ Set IndicatorLED State
     Redfish.Patch  /redfish/v1/Systems/${SYSTEM_ID}  body={"LocationIndicatorActive": ${led_state}}
     ...  valid_status_codes=${expect_resp_code}
 
+
+Get RTC Date And Time From Bmc Console
+    [Documentation]    Get RTC date and time from BMC console.
+
+    # Get the RTC date and time from BMC console and return it.
+    ${time}=  Get BMC Date Time
+    ${rtc_time}=    Strip String    ${time['rtc_time']}
+
+    RETURN    ${rtc_time}
