@@ -89,6 +89,11 @@ Run IPMI Standard Command
 Run Dbus IPMI RAW Command
     [Documentation]  Run the raw IPMI command through dbus.
     [Arguments]    ${command}
+
+    # Description of argument(s):
+    # command                       The IPMI command string to be executed
+    #                               (e.g. "0x06 0x36").
+
     ${valueinBytes}=   Byte Conversion  ${command}
     ${cmd}=   Catenate   ${dbushostipmicmd1} ${dbusHostIpmiCmdReceivedMsg}
     ${cmd}=   Catenate   ${cmd} ${valueinBytes}
@@ -100,6 +105,11 @@ Run Dbus IPMI RAW Command
 Run Dbus IPMI Standard Command
     [Documentation]  Run the standard IPMI command through dbus.
     [Arguments]    ${command}
+
+    # Description of argument(s):
+    # command                       The IPMI command string to be executed
+    #                               (e.g. "0x06 0x36").
+
     Copy ipmitool
     ${stdout}    ${stderr}    ${output}=  Execute Command
     ...    ${IPMITOOL_PATH} -I dbus ${command}    return_stdout=True
@@ -309,6 +319,11 @@ Byte Conversion
     ...               byte:0x00 byte:0x04 byte:0x00 byte:0x30
     ...               array:byte:9,0x01,0x00,0x35,0x00,0x00,0x00,0x00,0x00,0x00
     [Arguments]     ${args}
+
+    # Description of argument(s):
+    # args          The Sample argument
+    #               (e.g. "0x04 0x30 9 0x01 0x00 0x35 0x00 0x00 0x00 0x00 0x00").
+
     ${argLength}=   Get Length  ${args}
     Set Global Variable  ${arrayByte}   array:byte:
     @{listargs}=   Split String  ${args}
@@ -345,6 +360,10 @@ Byte Conversion
 Set NetFn Byte
     [Documentation]  Set the network function byte.
     [Arguments]    ${word}
+
+    # Description of argument(s):
+    # word         Input word for setting network function byte.
+
     ${netfnByteLocal}=  Catenate   byte:${word}
     Set Global Variable  ${netfnByte}  ${netfnByteLocal}
 
@@ -352,6 +371,10 @@ Set NetFn Byte
 Set Cmd Byte
     [Documentation]  Set the command byte.
     [Arguments]    ${word}
+
+    # Description of argument(s):
+    # word         Input word for setting command byte.
+
     ${cmdByteLocal}=  Catenate   byte:${word}
     Set Global Variable  ${cmdByte}  ${cmdByteLocal}
 
@@ -359,6 +382,10 @@ Set Cmd Byte
 Set Array Byte
     [Documentation]  Set the array byte.
     [Arguments]    ${word}
+
+    # Description of argument(s):
+    # word         Input word for setting array byte.
+
     ${arrayByteLocal}=   Catenate   SEPARATOR=  ${arrayByte}  ${word}
     ${arrayByteLocal}=   Catenate   SEPARATOR=  ${arrayByteLocal}   ,
     Set Global Variable  ${arrayByte}   ${arrayByteLocal}
@@ -366,6 +393,7 @@ Set Array Byte
 
 Copy ipmitool
     [Documentation]  Copy the ipmitool to the BMC.
+
     ${ipmitool_error}=  Catenate  The ipmitool program could not be found in the tools directory.
     ...  It is not part of the automation code by default. You must manually copy or link the correct openbmc
     ...  version of the tool in to the tools directory in order to run this test suite.
@@ -560,8 +588,9 @@ Verify IPMI Username Visible
 Delete Created User
     [Documentation]  Delete created IPMI user.
     [Arguments]  ${userid}
+
     # Description of argument(s):
-    # userid  The user ID (e.g. "1", "2", etc.).
+    # userid     The user ID (e.g. "1", "2", etc.).
 
     Run IPMI Standard Command  user set name ${userid} ""
     Sleep  5s
@@ -607,14 +636,14 @@ Create SEL
     # Create a SEL.
     # Example:
     # a | 02/14/2020 | 01:16:58 | Sensor_type #0x17 |  | Asserted
-    # Description of argument(s):
-    #    ${sensor_type}            Type of the sensor used in hexadecimal (can be fan, temp etc.,),
-    #                              obtained from Sensor Type field in - ipmitool sdr get "sensor_name".
-    #                              Example: Sensor Type (Threshold) : Fan (0x04), here 0xHH is sensor type.
 
-    #    ${sensor_number}          Sensor number of the sensor in hexadecimal.
-    #                              obtained from Sensor ID field in - ipmitool sdr get "sensor_name".
-    #                              Example: Sensor ID : SENSOR_1 (0xHH), here 0xHH is sensor number.
+    # Description of argument(s):
+    # sensor_type            Type of the sensor used in hexadecimal (can be fan, temp etc.,),
+    #                        obtained from Sensor Type field in - ipmitool sdr get "sensor_name".
+    #                        Example: Sensor Type (Threshold) : Fan (0x04), here 0xHH is sensor type.
+    # sensor_number          Sensor number of the sensor in hexadecimal.
+    #                        obtained from Sensor ID field in - ipmitool sdr get "sensor_name".
+    #                        Example: Sensor ID : SENSOR_1 (0xHH), here 0xHH is sensor number.
 
     ${cmd}=  Catenate  ${IPMI_RAW_CMD['SEL_entry']['Create_SEL'][0]} 0x${GEN_ID_BYTE_1} 0x${GEN_ID_BYTE_2}
     ...  ${IPMI_RAW_CMD['SEL_entry']['Create_SEL'][1]} 0x${sensor_type} 0x${sensor_number}
@@ -656,12 +685,12 @@ Fetch Sensor Details From SDR
     [Arguments]  ${sensor_name}  ${setting}
 
     # Description of argument(s):
-    #    ${sensor_number}        Sensor number of the sensor in hexadecimal.
-    #                            obtained sensor name from - 'ipmitool sensor' command.
-    #                            Example: a | 02/14/2020 | 01:16:58 | Sensor_type #0x17 |  | Asserted
-    #                            here, a is the sensor name.
+    # sensor_name        Sensor number of the sensor in hexadecimal.
+    #                    obtained sensor name from - 'ipmitool sensor' command.
+    #                    Example: a | 02/14/2020 | 01:16:58 | Sensor_type #0x17 |  | Asserted
+    #                    here, a is the sensor name.
 
-    #    ${setting}              Field to fetch data. Example : Sensor ID, Sensor Type (Threshold), etc,.
+    # setting            Field to fetch data. Example : Sensor ID, Sensor Type (Threshold), etc,.
 
     ${resp}=  Run IPMI Standard Command  sdr get "${sensor_name}"
 
@@ -677,9 +706,9 @@ Get Bytes From SDR Sensor
     [Arguments]  ${sensor_detail}
 
     # Description of argument(s):
-    #    ${sensor_detail}      Requested field and the value from the sdr get ipmi command.
-    #                          Example : if Sensor ID is the requesting setting, then,
-    #                          ${sensor_detail} will be "Sensor ID : SENSOR_1 (0xHH)"
+    # sensor_detail      Requested field and the value from the sdr get ipmi command.
+    #                    Example : if Sensor ID is the requesting setting, then,
+    #                    sensor_detail will be "Sensor ID : SENSOR_1 (0xHH)"
 
     ${sensor_detail}=  Split String  ${sensor_detail}  (0x
     ${sensor_hex}=  Replace String  ${sensor_detail[1]}  )  ${EMPTY}
@@ -736,8 +765,8 @@ Verify Invalid IPMI Command
     [Arguments]  ${ipmi_cmd}  ${error_code}=0xc9
 
     #  Description Of Arguments.
-    #  ${ipmi_cmd}   - IPMI raw cmd with invalid data length.
-    #  ${error_code} - Expected error code e.g 0xc7, 0xcc.
+    #  ipmi_cmd     IPMI raw cmd with invalid data length.
+    #  error_code   Expected error code e.g 0xc7, 0xcc.
 
     ${resp}=  Run IPMI Command  ${ipmi_cmd}  fail_on_err=0
 
@@ -748,10 +777,11 @@ Identify Request Data
     [Documentation]  Convert text from variable declared to request data.
     [Arguments]  ${string}
 
+    # Description of argument(s):
+    # string             Any string to be converted to hex.
+
     # Convert string to hexadecimal data for each character.
     # Return the hex data with prefix of 0x as string and list of hex data.
-    # Description of argument(s):
-    #    string             Any string to be converted to hex.
 
     # Given a string, convert to hexadecimal and prefix with 0x
     ${hex1}=  Create List
