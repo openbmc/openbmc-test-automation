@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4ca4fd4e_e817bf2b",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 959,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-04-08T04:34:03Z",
+      "side": 1,
+      "message": "Yeah, george it is logging in via static ipv6 then performing the delete on eth1.",
+      "parentUuid": "40daa737_4b8257ff",
+      "revId": "ef4e0cf2c4f13af270bc868c3f7b97efad020bd8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7c1cf993_c9162904",
         "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
         "patchSetId": 4
@@ -31,6 +49,30 @@
       "writtenOn": "2026-04-07T15:38:38Z",
       "side": 1,
       "message": "Ther term Edit here please change it..  since it UI.. either say it Modify or Update",
+      "range": {
+        "startLine": 969,
+        "startChar": 21,
+        "endLine": 969,
+        "endChar": 26
+      },
+      "revId": "ef4e0cf2c4f13af270bc868c3f7b97efad020bd8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a880656_f0be3df3",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 969,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-04-08T04:34:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c1cf993_c9162904",
       "range": {
         "startLine": 969,
         "startChar": 21,
@@ -54,6 +96,30 @@
       "writtenOn": "2026-04-07T15:38:38Z",
       "side": 1,
       "message": "Best Practice: Use JavaScript click only when standard Click Element fails due to interactability issues. Always prefer standard Selenium clicks when possible to ensure tests reflect real user behavior.",
+      "range": {
+        "startLine": 1252,
+        "startChar": 0,
+        "endLine": 1255,
+        "endChar": 74
+      },
+      "revId": "ef4e0cf2c4f13af270bc868c3f7b97efad020bd8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49b42287_57a899aa",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 1255,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-04-08T04:34:03Z",
+      "side": 1,
+      "message": "Yeah george, tried various standard selenium clicks and waits aswell but since vue3 changes code is not stable. that is reason used javascript click.",
+      "parentUuid": "90267b21_92b821a1",
       "range": {
         "startLine": 1252,
         "startChar": 0,
