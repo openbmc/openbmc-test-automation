@@ -22,6 +22,30 @@
       },
       "revId": "e6f0d442a88aced194d323de8f282aaa3fff15ef",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a4829af_b56baef1",
+        "filename": "lib/ipmi_client.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-04-08T09:46:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e48eb415_2309f933",
+      "range": {
+        "startLine": 366,
+        "startChar": 0,
+        "endLine": 366,
+        "endChar": 4
+      },
+      "revId": "e6f0d442a88aced194d323de8f282aaa3fff15ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
