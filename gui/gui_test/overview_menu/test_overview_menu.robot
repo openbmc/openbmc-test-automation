@@ -35,6 +35,12 @@ ${xpath_machine_model}                           //dt[contains(text(),'Model')]/
 ${xpath_serial_number}                           //dt[contains(text(),'Serial number')]/following-sibling::dd[1]
 ${xpath_hostname}                                //dt[contains(text(),'Hostname')]/following-sibling::dd[1]
 ${xpath_overview_data_time}                      //dd[contains(@data-test-id,'overviewQuickLinks-text-bmcTime')]
+${xpath_overview_power_consumption}              //dt[contains(text(),'Power consumption')]/following-sibling::dd[1]
+${xpath_overview_idle_power_saver}               //dt[contains(text(),'Idle power saver')]/following-sibling::dd[1]
+${xpath_overview_power_cap}                      //dt[contains(text(),'Power cap')]/following-sibling::dd[1]
+${xpath_overview_power_mode}                     //dt[contains(text(),'Power mode')]/following-sibling::dd[1]
+${ENV_METRICS_URI}                               ${REDFISH_CHASSIS_URI}/${CHASSIS_ID}/EnvironmentMetrics
+
 
 *** Test Cases ***
 
@@ -368,7 +374,7 @@ Verify Server LED Turn Off And On With Readonly User
 Verify BMC Information At Host Power Off State
     [Documentation]  Verify that BMC information is displayed at host power off state.
     [Tags]  Verify_BMC_Information_At_Host_Power_Off_State
-    [Setup]  Run Keywords  Power On Server  AND  Test Setup Execution
+    [Setup]  Run Keywords  Power Off Server  AND  Test Setup Execution
 
     ${firmware_version}=  Redfish Get BMC Version
     Page Should Contain  ${firmware_version}
@@ -384,6 +390,14 @@ Verify Overview Hostname Matches Redfish Hostname
 
     # Verify GUI Overview hostname matches Redfish hostname.
     Should Be Equal  ${overview_hostname}  ${redfish_hostname}
+
+
+Verify Power Information Should Display At Host Power Off State
+    [Documentation]  Verify Power Information is displayed at host power off state.
+    [Tags]  Verify_Power_Information_Should_Display_At_Host_Power_Off_State
+    [Setup]  Run Keywords  Power Off Server  AND  Test Setup Execution
+
+    Verify Power Information Section  PowerOff
 
 
 *** Keywords ***
@@ -429,3 +443,51 @@ Get RTC Date And Time From BMC Console
     ${rtc_time}=  Strip String  ${bmc_time['rtc_time']}
 
     RETURN  ${rtc_time}
+
+
+Verify Power Information Section
+    [Documentation]  Verify values under power information section in overview page.
+    [Arguments]  ${power_status}
+
+    # Description of argument(s):
+    # power_status     Server power state (PowerOn/PowerOff).
+
+    # Verify power consumption value.
+    ${power_value}=  Get Text  ${xpath_overview_power_consumption}
+    IF  '${power_status}' == 'PowerOn'
+        Click Element  ${xpath_power_information_view_more_button}
+        Wait Until Page Contains Element  ${xpath_power_heading}  timeout=30
+        ${power_tab_value}=  Get Text  ${xpath_power_tab_power_consumption}
+        Should Be Equal As Strings  ${power_value}  ${power_tab_value}
+    ELSE
+        Should Be Equal As Strings  ${power_value}  Not available
+    END
+
+    # Verify power cap value.
+    ${redfish_power_cap}=  Redfish.Get Attribute  ${ENV_METRICS_URI}  PowerLimitWatts
+    Element Should Contain  ${xpath_overview_power_cap}  ${redfish_power_cap['SetPoint']}
+
+    # Verify idle power saver.
+    ${redfish_idle_power_saver}=  Redfish.Get Attribute  ${SYSTEM_BASE_URI}  IdlePowerSaver
+    ${idle_power_saver_enabled_status}=  Get From Dictionary  ${redfish_idle_power_saver}  Enabled
+    IF  ${idle_power_saver_enabled_status}
+        Element Should Contain  ${xpath_overview_idle_power_saver}  Enabled
+    ELSE
+        Element Should Contain  ${xpath_overview_idle_power_saver}  Disabled
+    END
+
+    # Verify power mode value.
+    ${redfish_power_mode}=  Redfish.Get Attribute  ${SYSTEM_BASE_URI}  PowerMode
+    ${power_mode_type}=  IF  '${redfish_power_mode}' == 'MaximumPerformance'
+    ...  Set Variable  Maximum performance
+    ...  ELSE IF  '${redfish_power_mode}' == 'EfficiencyFavorPower'
+    ...  Set Variable  Energy efficient
+    ...  ELSE IF  '${redfish_power_mode}' == 'PowerSaving'
+    ...  Set Variable  Maximum energy saver
+    ...  ELSE  Set Variable  ${redfish_power_mode}
+    Element Should Contain  ${xpath_overview_power_mode}  ${power_mode_type}
+
+    # Verify View more link and navigation to Power page.
+    Wait Until Page Contains Element  ${xpath_power_information_view_more_button}  timeout=30
+    Click Element  ${xpath_power_information_view_more_button}
+    Wait Until Page Contains Element  ${xpath_power_heading}  timeout=30
