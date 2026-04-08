@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e48eb415_2309f933",
+        "filename": "lib/ipmi_client.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-08T07:01:03Z",
+      "side": 1,
+      "message": "Fix white spaces",
+      "range": {
+        "startLine": 366,
+        "startChar": 0,
+        "endLine": 366,
+        "endChar": 4
+      },
+      "revId": "e6f0d442a88aced194d323de8f282aaa3fff15ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
