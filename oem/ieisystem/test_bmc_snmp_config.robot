@@ -11,12 +11,11 @@ Resource  ../../lib/logging_utils.robot
 Library  String
 Library  SSHLibrary
 
-Suite Setup    Redfish.Login
-Test Teardown  FFDC On Test Case Fail
-Suite Teardown  Redfish.Logout
+Suite Setup      Redfish.Login
+Test Teardown    FFDC On Test Case Fail
+Suite Teardown   Redfish.Logout
 
-Force Tags     BMC_SNMP_Config
-
+Test Tags        BMC_SNMP_Config
 
 *** Test Cases ***
 
