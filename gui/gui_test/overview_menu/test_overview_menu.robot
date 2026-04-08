@@ -34,6 +34,8 @@ ${xpath_operating_mode}                          //dt[contains(text(),'Operating
 ${xpath_machine_model}                           //dt[contains(text(),'Model')]/following-sibling::dd[1]
 ${xpath_serial_number}                           //dt[contains(text(),'Serial number')]/following-sibling::dd[1]
 ${xpath_hostname}                                //dt[contains(text(),'Hostname')]/following-sibling::dd[1]
+${xpath_overview_power_consumption}              //dt[contains(text(),'Power consumption')]/following-sibling::dd[1]
+
 
 *** Test Cases ***
 
@@ -345,7 +347,7 @@ Verify Server LED Turn Off And On With Readonly User
 Verify BMC Information At Host Power Off State
     [Documentation]  Verify that BMC information is displayed at host power off state.
     [Tags]  Verify_BMC_Information_At_Host_Power_Off_State
-    [Setup]  Run Keywords  Power On Server  AND  Test Setup Execution
+    [Setup]  Run Keywords  Power Off Server  AND  Test Setup Execution
 
     ${firmware_version}=  Redfish Get BMC Version
     Page Should Contain  ${firmware_version}
@@ -361,6 +363,14 @@ Verify Overview Hostname Matches Redfish Hostname
 
     # Verify GUI Overview hostname matches Redfish hostname.
     Should Be Equal  ${overview_hostname}  ${redfish_hostname}
+
+
+Verify Power Consumption At Host Power Off State
+    [Documentation]  Verify power consumption at host powered off state.
+    [Tags]  Verify_Power_Consumption_At_Host_Power_Off_State
+    [Setup]  Run Keywords  Power Off Server  AND  Test Setup Execution
+
+    Verify Power Consumption Value According To Host State  PowerOff
 
 
 *** Keywords ***
@@ -395,3 +405,18 @@ Set IndicatorLED State
     Redfish.Patch  /redfish/v1/Systems/${SYSTEM_ID}  body={"LocationIndicatorActive": ${led_state}}
     ...  valid_status_codes=${expect_resp_code}
 
+
+Verify Power Consumption Value According To Host State
+    [Documentation]  Verify power consumption value according to host state.
+    [Arguments]  ${power_status}
+
+    # Description of argument(s):
+    # power_status     Server power state (PowerOn/PowerOff).
+
+    ${power_value}=  Get Text  ${xpath_overview_power_consumption}
+
+    IF  '${power_status}' == 'PowerOn'
+        Should Not Be Equal As Strings  ${power_value}  Not available
+    ELSE
+        Should Be Equal As Strings  ${power_value}  Not available
+    END
