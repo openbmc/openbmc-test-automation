@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7a738b2_cebf4d77",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-09T17:15:15Z",
+      "side": 1,
+      "message": "\"Overiew\" is misspelled - should be \"Overview\"",
+      "revId": "c279a858f70c40c824a18f51f8b82281d6a06dd5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3beab269_6011a7de",
+        "filename": "gui/gui_test/gui_header/test_gui_header.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-09T17:15:15Z",
+      "side": 1,
+      "message": "Correct spelling to \"Overview\"",
+      "revId": "c279a858f70c40c824a18f51f8b82281d6a06dd5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f57ab478_60d11083",
+        "filename": "gui/gui_test/gui_header/test_gui_header.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-09T17:15:15Z",
+      "side": 1,
+      "message": "Correct spelling to \"idle\"",
+      "revId": "c279a858f70c40c824a18f51f8b82281d6a06dd5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1916820b_b86a85ac",
+        "filename": "gui/gui_test/gui_header/test_gui_header.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-09T17:15:15Z",
+      "side": 1,
+      "message": "The code accesses `${idle_power_saver[\u0027Enabled\u0027]}` assuming it\u0027s a dictionary, but there\u0027s no validation that this key exists or that the structure is as expected\n\n\nAdd error handling or validate the structure before accessing the nested key. Consider using `Get From Dictionary` with a default value or checking if the key exists first",
+      "revId": "c279a858f70c40c824a18f51f8b82281d6a06dd5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
