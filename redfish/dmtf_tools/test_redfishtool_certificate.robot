@@ -1,11 +1,9 @@
 *** Settings ***
-
-
 Documentation     Suite to test certificate via DMTF redfishtool.
 
+Library           Collections
 Library           OperatingSystem
 Library           String
-Library           Collections
 Library           JSONLibrary
 
 Resource          ../../lib/resource.robot
@@ -16,7 +14,7 @@ Resource          ../../lib/dmtf_redfishtool_utils.robot
 
 Suite Setup       Suite Setup Execution
 
-Test Tags        Redfishtool_Certificate
+Test Tags         Redfishtool_Certificate
 
 *** Variables ***
 
