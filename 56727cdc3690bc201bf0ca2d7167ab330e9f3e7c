@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffa07186_b656ac96",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-04-09T16:53:03Z",
+      "side": 1,
+      "message": "u can remove xpath and just use //dd[contains(@data-test-id,\u0027overviewQuickLinks-text-bmcTime\u0027)]",
+      "revId": "56727cdc3690bc201bf0ca2d7167ab330e9f3e7c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
