@@ -1,11 +1,9 @@
 *** Settings ***
-
-
 Documentation     Verify Redfish tool general functionality.
 
+Library           Collections
 Library           OperatingSystem
 Library           String
-Library           Collections
 
 Resource          ../../lib/resource.robot
 Resource          ../../lib/bmc_redfish_resource.robot
@@ -15,7 +13,7 @@ Resource          ../../lib/dmtf_redfishtool_utils.robot
 
 Suite Setup       Suite Setup Execution
 
-Test Tags        Redfishtool_General
+Test Tags         Redfishtool_General
 
 *** Variables ***
 
