@@ -380,8 +380,8 @@ Add Multiple IPv6 Address And Verify
 Verify Coexistence Of Static IPv6 And SLAAC On BMC
     [Documentation]  Verify static IPv6 And SLAAC both coexist.
     [Tags]  Verify_Coexistence_Of_Static_IPv6_And_SLAAC_On_BMC
-    [Setup]  Configure IPv6 Address On BMC  ${test_ipv6_addr}  ${test_prefix_length}
-             Set SLAAC Configuration State And Verify  ${True}
+    [Setup]  Run Keywords  Configure IPv6 Address On BMC  ${test_ipv6_addr}  ${test_prefix_length}
+    ...      AND  Set SLAAC Configuration State And Verify  ${True}
     [Teardown]  Delete IPv6 Address  ${test_ipv6_addr}
 
     Sleep  ${NETWORK_TIMEOUT}s
