@@ -2,9 +2,10 @@
 Documentation  This module provides one wrapper keyword for each kind of boot
 ...            test supported by obmc_boot_test.py.
 
-Resource  ../extended/obmc_boot_test_resource.robot
+Resource       ../extended/obmc_boot_test_resource.robot
 
 *** Keywords ***
+
 REST Power On
     [Documentation]  Do "REST Power On" boot test.
     [Arguments]  ${stack_mode}=${stack_mode}  ${quiet}=${quiet}

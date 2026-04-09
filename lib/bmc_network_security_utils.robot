@@ -13,10 +13,10 @@ Send Network Packets And Get Packet Loss
 
     # Description of argument(s):
     # host         The host name or IP address of the target system.
+    # num          Number of packets to be sent.
     # packet_type  The type of packets to be sent ("tcp, "udp", "icmp").
     # port         Network port.
     # icmp_type    Type of ICMP packets (e.g. 8, 13, 17, etc.).
-    # num          Number of packets to be sent.
 
     # This keyword expects host, port, type and number of packets to be sent
     # and rate at which packets to be sent, should be given in command line.
@@ -39,10 +39,9 @@ Send Network Packets With Flags And Verify Stability
 
     # Description of argument(s):
     # host         The host name or IP address of the target system.
-    # packet_type  The type of packets to be sent ("tcp, "udp", "icmp").
+    # num          Number of packets to be sent.
     # port         Network port.
     # flags        Type of flag to be set (e.g. SYN, ACK, RST, FIN, ALL).
-    # num          Number of packets to be sent.
 
     # This keyword expects host, port, type and number of packets to be sent
     # and rate at which packets to be sent, should be given in command line.

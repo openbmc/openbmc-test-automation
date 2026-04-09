@@ -43,9 +43,9 @@ ${REDFISH_SYS_STATE_WAIT_TIMEOUT}    120 Seconds
 
 *** Keywords ***
 
-
 Verify Ping And REST Authentication
     [Documentation]  Verify ping and rest authentication.
+
     ${l_ping}=   Run Keyword And Return Status
     ...    Ping Host  ${OPENBMC_HOST}
     IF  '${l_ping}' == '${False}'  Fail   msg=Ping Failed
@@ -96,6 +96,7 @@ Check If BMC Is Up
 
 Flush REST Sessions
     [Documentation]   Removes all the active session objects
+
     Delete All Sessions
 
 
@@ -132,10 +133,10 @@ Login To OS Host
     [Arguments]  ${os_host}=${OS_HOST}  ${os_username}=${OS_USERNAME}
     ...          ${os_password}=${OS_PASSWORD}
 
-    # Description of arguments:
-    # ${os_host} IP address of the OS Host.
-    # ${os_username}  OS Host Login user name.
-    # ${os_password}  OS Host Login passwrd.
+    # Description of argument(s):
+    # os_host        IP address of the OS Host.
+    # os_username    OS Host Login user name.
+    # os_password    OS Host Login passwrd.
 
     Redfish Power On  stack_mode=skip  quiet=1
 
@@ -198,6 +199,7 @@ Initiate OS Host Power Off
 Set System LED State
     [Documentation]  Set given system LED via REST.
     [Arguments]  ${led_name}  ${led_state}
+
     # Description of argument(s):
     # led_name     System LED name (e.g. heartbeat, identify, beep).
     # led_state    LED state to be set (e.g. On, Off).
@@ -431,6 +433,7 @@ Is PNOR Flashing
 Is PNOR Flash Done
     [Documentation]  Get BIOS 'Flash Done' status.  This indicates that the
     ...              PNOR flashing has completed.
+
     ${status}=    Get Flash BIOS Status
     Should Be Equal As Strings     ${status}     Flash Done
 
@@ -512,6 +515,7 @@ Set BMC Power Policy
 Delete Error Logs
     [Documentation]  Delete error logs.
     [Arguments]  ${quiet}=${0}
+
     # Description of argument(s):
     # quiet    If enabled, turns off logging to console.
 

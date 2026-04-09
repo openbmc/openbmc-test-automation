@@ -57,6 +57,10 @@ Redfish BMC Reset Operation
     [Documentation]  Do Redfish BMC reset operation.
     [Arguments]  ${reset_type}=GracefulRestart
 
+    # Description of arguments:
+    # reset_type     Type of power operation.
+    #                (e.g. On/ForceOff/GracefulRestart/GracefulShutdown)
+
     # Example:
     # "Actions": {
     #    "#Manager.Reset": {
