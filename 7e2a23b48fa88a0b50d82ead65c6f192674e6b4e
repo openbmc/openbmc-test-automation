@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "de3b6157_694fb694",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-04-09T07:38:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b25e4f6_1d5d611d",
+      "range": {
+        "startLine": 423,
+        "startChar": 27,
+        "endLine": 423,
+        "endChar": 30
+      },
+      "revId": "7e2a23b48fa88a0b50d82ead65c6f192674e6b4e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cd3827ba_37336bc8",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-04-08T13:32:03Z",
       "side": 1,
       "message": "inconsistent spacing.. Please limit to two space only",
+      "range": {
+        "startLine": 428,
+        "startChar": 3,
+        "endLine": 431,
+        "endChar": 0
+      },
+      "revId": "7e2a23b48fa88a0b50d82ead65c6f192674e6b4e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0d0bbbc_3e16d142",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-04-09T07:38:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd3827ba_37336bc8",
       "range": {
         "startLine": 428,
         "startChar": 3,
