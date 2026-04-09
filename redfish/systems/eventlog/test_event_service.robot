@@ -258,6 +258,21 @@ Delete Specific Subscription
     Redfish.Delete    ${subscription_instance}[0]
     ...    valid_status_codes=[${${HTTP_OK}}, ${HTTP_NO_CONTENT}]
 
+Check And Create Subscription
+    [Documentation]  Check if subscription exists and create one if not.
+
+    ${subscription_list}=  Redfish_Utils.Get Member List
+    ...  /redfish/v1/EventService/Subscriptions
+
+    ${length}=  Get Length  ${subscription_list}
+
+    IF  ${length} > 0
+        RETURN
+    END
+
+    Try Subscription Creation
+
+
 Try Subscription Creation
      [Documentation]  Create valid or invalid subscription for event notification.
      [Arguments]  ${Context}=Test_Context  ${Destination}=https://${REMOTE_SERVER_IP}:${HTTPS_PORT}/
