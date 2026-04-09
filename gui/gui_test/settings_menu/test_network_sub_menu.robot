@@ -105,7 +105,6 @@ ${ipv6_eliminate_onehextet_zero}         2001:22:1133::1111
 ${compressed_ipv4}                       ::10.5.5.6
 ${ipv4_mapped_ipv6}                      00::FFFF:10.5.5.6
 ${ipv4_mapped_ipv6_expected}             ::ffff:10.5.5.6
-${compressed_ipv6}                       ::a05:506
 ${link_local_addr}                       fe80::
 ${link_local_prefix_len}                 10
 ${test_prefix_length}                    64
@@ -312,6 +311,7 @@ Configure And Verify Static IPv6 Address
     ${ipv6_onehextet_zero}           ${test_prefix_length}  Success        ${ipv6_eliminate_onehextet_zero}
     ${ipv6_multi_block}              ${test_prefix_length}  Success        ${ipv6_multi_block_addr}
     ${compressed_ipv4}               ${test_prefix_length}  Success        ${compressed_ipv6}
+    ${standard_ipv4_rep}             ${test_prefix_length}  Success        ${compressed_ipv6}
     ${ipv4_mapped_ipv6}              ${test_prefix_length}  Success        ${ipv4_mapped_ipv6_expected}
     ${test_ipv6_addr}                ${test_prefix_length}  Success
     ${ipv4_hexword_addr}             ${test_prefix_length}  Invalid format
@@ -974,6 +974,26 @@ Modify IPv4 Address On Eth1 Via IPv6 And Verify
     ...  ${test_ipv4_addr_1}  2
 
     Modify IP Address And Verify  ipv4  ${test_ipv4_addr}  ${test_ipv4_addr_1}  2
+
+
+Delete IPv6 Address On Eth1 Via IPv6 And Verify
+   [Documentation]  Delete IPv6 Address on eth1 via IPv6 and verify.
+   [Tags]  Delete_IPv6_Address_On_Eth1_Via_IPv6_And_Verify
+   [Setup]  Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr_2}
+   ...  ${test_prefix_length}  Success  ${test_ipv6_addr_2}  2
+
+   Delete IP Address And Verify  ipv6  ${test_ipv6_addr_2}  2
+
+
+Modify IPv6 Address On Eth1 Via IPv6 And Verify
+    [Documentation]  Update IPv6 address on eth1 via IPv6 and verify.
+    [Tags]  Modify_IPv6_Address_On_Eth1_Via_IPv6_And_Verify
+    [Setup]  Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr}
+    ...  ${test_prefix_length}  Success  ${test_ipv6_addr}  2
+    [Teardown]  Run Keyword And Ignore Error  Delete IP Address And Verify  ipv6
+    ...  ${test_ipv6_addr_1}  2
+
+    Modify IP Address And Verify  ipv6  ${test_ipv6_addr}  ${test_ipv6_addr_1}  2
 
 
 *** Keywords ***
