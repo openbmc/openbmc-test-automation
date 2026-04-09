@@ -806,8 +806,8 @@ Get Current Channel Name List
     [Arguments]  ${channel_list}  ${channel_config_json}
 
     # Description of Arguments
-    # ${channel_list}        - list Contains all available active channels.
-    # ${channel_config_json} - output of /usr/share/ipmi-providers/channel_config.json file.
+    # channel_list           list Contains all available active channels.
+    # channel_config_json    output of /usr/share/ipmi-providers/channel_config.json file.
 
     FOR  ${channel_number}  ${values}  IN  &{channel_config_json}
         IF  '${values['name']}' == 'SELF'
@@ -823,7 +823,7 @@ Get Active Ethernet Channel List
     [Arguments]  ${current_channel}=${0}
 
     # Description of Arguments
-    # ${current_channel}        Current channel number.
+    # current_channel        Current channel number.
 
     ${valid_channel_number_interface_names}=  Get Channel Number For All Interface
 
