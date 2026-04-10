@@ -160,17 +160,21 @@ Is Host Rebooted
 
 Is Chassis On
     [Documentation]  Check if chassis state is "On".
+
     ${power_state}=  Get Chassis Power State
     Should Be Equal  On  ${power_state}
 
 
 Is Chassis Off
     [Documentation]  Check if chassis state is "Off".
+
     ${power_state}=  Get Chassis Power State
     Should Be Equal  Off  ${power_state}
 
+
 Is Host Quiesced
     [Documentation]  Check if host state is quiesced.
+
     ${host_state}=  Get Host State
     ${status}=  Run Keyword And Return Status  Should Be Equal
     ...  ${host_state}  Quiesced
@@ -190,29 +194,38 @@ Recover Quiesced Host
 Get Host State
     [Documentation]  Return the state of the host as a string.
     [Arguments]  ${quiet}=${QUIET}
-    # quiet - Suppress REST output logging to console.
+
+    # Description of argument(s):
+    # quiet      Suppress REST output logging to console.
+
     ${state}=
     ...  Read Attribute  ${HOST_STATE_URI}  CurrentHostState
     ...  quiet=${quiet}
     RETURN  ${state.rsplit('.', 1)[1]}
 
+
 Get Host Trans State
     [Documentation]  Return the transition state of host as a string.
     ...              e.g. On, Off, Reboot
     [Arguments]  ${quiet}=${QUIET}
+
     # Description of arguments:
-    # quiet  Suppress REST output logging to console.
+    # quiet      Suppress REST output logging to console.
 
     ${state}=
     ...  Read Attribute  ${HOST_STATE_URI}  RequestedHostTransition
     ...  quiet=${quiet}
     RETURN  ${state.rsplit('.', 1)[1]}
 
+
 Get Chassis Power State
     [Documentation]  Return the power state of the Chassis
     ...              as a string.
     [Arguments]  ${quiet}=${QUIET}
-    # quiet - Suppress REST output logging to console.
+
+    # Description of argument(s):
+    # quiet      Suppress REST output logging to console.
+
     ${state}=
     ...  Read Attribute  ${CHASSIS_STATE_URI}  CurrentPowerState
     ...  quiet=${quiet}
@@ -222,7 +235,10 @@ Get Chassis Power State
 Get BMC State
     [Documentation]  Return the state of the BMC.
     [Arguments]  ${quiet}=${QUIET}
-    # quiet - Suppress REST output logging to console.
+
+    # Description of argument(s):
+    # quiet      Suppress REST output logging to console.
+
     ${state}=
     ...  Read Attribute  ${BMC_STATE_URI}  CurrentBMCState  quiet=${quiet}
     RETURN  ${state.rsplit('.', 1)[1]}
@@ -231,7 +247,9 @@ Get BMC State
 Put BMC State
     [Documentation]  Put BMC in given state.
     [Arguments]  ${expected_state}
-    # expected_state - expected BMC state
+
+    # Description of argument(s):
+    # expected_state     expected BMC state.
 
     ${bmc_state}=  Get BMC State
     IF  '${bmc_state}' == '${expected_state}'
@@ -264,6 +282,7 @@ Initiate BMC Reboot
 Check If BMC Reboot Is Initiated
     [Documentation]  Checks whether BMC Reboot is initiated by checking
     ...              BMC connection loss.
+
     # Reboot adds 3 seconds delay before forcing reboot
     # To minimize race conditions, we wait for 7 seconds
     Sleep  7s
@@ -272,20 +291,27 @@ Check If BMC Reboot Is Initiated
     IF  '${alive}' == '${False}'  RETURN  ${False}
     RETURN    ${True}
 
+
 Is BMC Ready
     [Documentation]  Check if BMC state is Ready.
     ${bmc_state}=  Get BMC State
     Should Be Equal  ${BMC_READY_STATE}  ${bmc_state}
 
+
 Is BMC Not Ready
     [Documentation]  Check if BMC state is Not Ready.
+
     ${bmc_state}=  Get BMC State
     Should Be Equal  ${BMC_NOT_READY_STATE}  ${bmc_state}
+
 
 Wait For BMC State
     [Documentation]  Wait until given BMC state is reached.
     [Arguments]  ${state}
-    # state - BMC state to wait for
+
+    # Description of argument(s):
+    # state        Expected BMC state.
+
     IF  '${state}' == '${BMC_READY_STATE}'
         Wait Until Keyword Succeeds  10 min  10 sec  Is BMC Ready
     ELSE IF  '${state}' == '${BMC_NOT_READY_STATE}'
@@ -297,6 +323,7 @@ Wait For BMC State
 
 Set State Interface Version
     [Documentation]  Set version to indicate which interface to use.
+
     ${resp}=  Openbmc Get Request  ${CHASSIS_STATE_URI}
     ${status}=  Run Keyword And Return Status
     ...  Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
@@ -309,6 +336,7 @@ Set State Interface Version
 
 Power Off Request
     [Documentation]  Select appropriate poweroff keyword.
+
     IF  '${OBMC_STATES_VERSION}' == '${0}'
         Initiate Power Off
     ELSE
@@ -318,6 +346,7 @@ Power Off Request
 
 Wait For BMC Ready
     [Documentation]  Check BMC state and wait for BMC Ready.
+
     Wait Until Keyword Succeeds  10 min  10 sec  Is BMC Ready
 
 
