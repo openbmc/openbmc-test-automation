@@ -54,9 +54,9 @@ Redfish Host Code Update
     ${state}=  Get Pre Reboot State
     Rprint Vars  state
 
-   Print Timen  Performing firmware update ${image_version}.
+    Print Timen  Performing firmware update ${image_version}.
 
-   Redfish Update Firmware
+    Redfish Update Firmware
 
 
 *** Keywords ***

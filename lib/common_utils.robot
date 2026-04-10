@@ -497,7 +497,7 @@ IP Address To Hex String
 
 
 BMC CPU Performance Check
-   [Documentation]   Minimal 10% of proc should be free in this instance
+    [Documentation]   Minimal 10% of proc should be free in this instance
 
     ${bmc_cpu_usage_output}  ${stderr}  ${rc}=  BMC Execute Command
     ...  ${bmc_cpu_usage_cmd}

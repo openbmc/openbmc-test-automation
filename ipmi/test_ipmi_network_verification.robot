@@ -171,7 +171,7 @@ Verify Set In Progress
     ...              via IPMI raw Command.
     [Tags]  Verify_Set_In_Progress
 
-   # Set the Set In Progress
+    # Set the Set In Progress
     ${output_msg}=  Run Inband IPMI Raw Command
     ...  ${IPMI_RAW_CMD['LAN_Config_Params']['Set'][0]} ${CHANNEL_NUMBER} 0x00 0x01
 

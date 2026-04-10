@@ -967,9 +967,9 @@ Delete VMI Static IP Address Using Different Users
 
 
 Config VMI Static IP Address Using Different Users
-   [Documentation]  Update user role and update vmi static ip address.
-   [Arguments]  ${username}  ${password}  ${ip}  ${gateway}  ${netmask}
-   ...  ${valid_status_code}
+    [Documentation]  Update user role and update vmi static ip address.
+    [Arguments]  ${username}  ${password}  ${ip}  ${gateway}  ${netmask}
+    ...  ${valid_status_code}
 
     # Description of argument(s):
     # username            The host username.
@@ -987,8 +987,8 @@ Config VMI Static IP Address Using Different Users
 
 
 Read VMI Static IP Address Using Different Users
-   [Documentation]  Update user role and read vmi static ip address.
-   [Arguments]  ${username}  ${password}  ${valid_status_code}
+    [Documentation]  Update user role and read vmi static ip address.
+    [Arguments]  ${username}  ${password}  ${valid_status_code}
 
     # Description of argument(s):
     # username            The host username.

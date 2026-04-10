@@ -958,7 +958,7 @@ Verify PEL Transmission To Host
     ELSE IF  "${error_type}" == "unrecoverable_error"
         BMC Execute Command  ${CMD_UNRECOVERABLE_ERROR}
     ELSE IF  "${error_type}" == "predictive_error"
-       BMC Execute Command  ${CMD_PREDICTIVE_ERROR}
+        BMC Execute Command  ${CMD_PREDICTIVE_ERROR}
     END
 
     ${pel_records}=  Get Pel Data From Bmc  True  True

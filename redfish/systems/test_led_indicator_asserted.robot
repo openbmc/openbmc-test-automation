@@ -86,9 +86,7 @@ Verify Location Indicator Active status
     [setup]     Set Suite LED Indicator Initial Value
     [Teardown]  Set Initial Value  ${value}
 
-
-   Set And Verify LED Location Indicator Active  ${set_value}
-
+    Set And Verify LED Location Indicator Active  ${set_value}
 
 *** Keywords ***
 

@@ -201,7 +201,7 @@ Verify SEL Time In SEL Entry
 
     Clear The SEL
 
-   # change to manual, get current time and add future year (here, 5years).
+    # change to manual, get current time and add future year (here, 5years).
     ${sel_date}=  Get Specific Sel Date  5
 
     # Gives hexa decimal raw command data request with the prefix of 0x.

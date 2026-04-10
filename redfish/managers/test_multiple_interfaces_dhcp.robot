@@ -56,9 +56,9 @@ Enable DHCP On Eth1 And Verify System Is Accessible By Eth0
     Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
 
 Set Network Property via Redfish And Verify
-   [Documentation]  Set network property via Redfish and verify.
-   [Tags]  Set_Network_Property_via_Redfish_And_Verify
-   [Template]  Apply DHCP Config
+    [Documentation]  Set network property via Redfish and verify.
+    [Tags]  Set_Network_Property_via_Redfish_And_Verify
+    [Template]  Apply DHCP Config
 
     # property
     ${dns_enable_dict}
@@ -71,9 +71,9 @@ Set Network Property via Redfish And Verify
     ${disable_multiple_properties}
 
 Set Network Property For DHCPv6 via Redfish And Verify
-   [Documentation]  Set network property for DHCPv6 via Redfish and verify.
-   [Tags]  Set_Network_Property_For_DHCPv6_via_Redfish_And_Verify
-   [Template]  Apply DHCPv6 Config And Verify
+    [Documentation]  Set network property for DHCPv6 via Redfish and verify.
+    [Tags]  Set_Network_Property_For_DHCPv6_via_Redfish_And_Verify
+    [Template]  Apply DHCPv6 Config And Verify
 
     # property
     ${dns_enable_dict}
@@ -202,10 +202,10 @@ Verify Ethernet Config Property
     #   UseNTPServers    :True
     #   UseDNSServers    :True
 
-   ${key_map}=  Get Dictionary Items  ${property}
-   FOR  ${key}  ${value}  IN  @{key_map}
-      Should Be Equal As Strings  ${response_data['${key}']}  ${value}
-   END
+    ${key_map}=  Get Dictionary Items  ${property}
+    FOR  ${key}  ${value}  IN  @{key_map}
+       Should Be Equal As Strings  ${response_data['${key}']}  ${value}
+    END
 
 Restore Configuration
     [Documentation]  Restore the configuration to Both Static Network

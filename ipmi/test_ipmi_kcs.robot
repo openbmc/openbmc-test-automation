@@ -35,7 +35,7 @@ Verify KCS Raw IPMI Multiple Times
 *** Keywords ***
 
 Suite Setup Execution
-   [Documentation]  Do suite setup tasks.
+    [Documentation]  Do suite setup tasks.
 
     Should Not Be Empty  ${OS_HOST}  msg=Please provide required parameter OS_HOST
     Should Not Be Empty  ${OS_USERNAME}  msg=Please provide required parameter OS_USERNAME

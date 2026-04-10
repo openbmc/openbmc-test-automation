@@ -469,7 +469,7 @@ Verify Coexistence Of IPv6 Addresses Type Combination On BMC
     ...    AND  Set SLAAC Configuration State And Verify  ${slaac_channel_1}  [${HTTP_OK}]  ${1}
     [Template]  Verify IPv6 Addresses Coexist
 
-   # type1  type2.
+    # type1  type2.
     Static  DHCPv6
     DHCPv6  SLAAC
     SLAAC   Static
@@ -949,7 +949,7 @@ Delete IPv6 Static Default Gateway
             Append To List  ${patch_list}  ${null}
         ELSE
             Append To List  ${patch_list}  ${empty_dict}
-      END
+        END
     END
 
     # Run patch command only if given IP is found on BMC.
@@ -1174,7 +1174,7 @@ Set And Verify SLAAC Property On Both Interfaces
     IF  "${slaac_value_1}" == "${True}"
          Should Not Be Empty  ${ipv6_slaac_addr}  SLAAC
     ELSE
-        Should Not Contain  ${ipv6_addressorigin_list}  SLAAC
+         Should Not Contain  ${ipv6_addressorigin_list}  SLAAC
     END
 
     # Check SLAAC Settings for eth1.
@@ -1183,7 +1183,7 @@ Set And Verify SLAAC Property On Both Interfaces
     IF  "${slaac_value_2}" == "${True}"
          Should Not Be Empty  ${ipv6_slaac_addr}  SLAAC
     ELSE
-        Should Not Contain  ${ipv6_addressorigin_list}  SLAAC
+         Should Not Contain  ${ipv6_addressorigin_list}  SLAAC
     END
 
     Verify All The Addresses Are Intact  ${1}

@@ -1062,7 +1062,7 @@ Set DHCPEnabled To Enable Or Disable
         ...  /redfish/v1/Managers/${MANAGER_ID}/EthernetInterfaces/${interface}
         ...  body=${data}  valid_status_codes=${valid_status_code}
     ELSE
-       ${resp}=  RedfishIPv6.Patch
+        ${resp}=  RedfishIPv6.Patch
         ...  /redfish/v1/Managers/${MANAGER_ID}/EthernetInterfaces/${interface}
         ...  body=${data}  valid_status_codes=${valid_status_code}
     END

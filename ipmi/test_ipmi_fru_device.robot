@@ -278,8 +278,8 @@ Compare IPMI FRU With DBUS
     ...  if the serial number is present in both FRU and dbus dictionaries.
     [Arguments]  ${ipmi_fru}
 
-   # Description of Argument(s):
-   # ipmi_fru    IPMI FRU device details.
+    # Description of Argument(s):
+    # ipmi_fru    IPMI FRU device details.
 
     # With each IPMI FRU key, get the corresponding valid from dbus dictionary,
     # Execute the value which is dbus uri and,

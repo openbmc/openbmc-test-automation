@@ -31,12 +31,12 @@ Verify Sensor Monitoring
     ${resp}=  Redfish.Get  /redfish/v1/Chassis/${CHASSIS_ID}
     ...  valid_status_codes=[${HTTP_OK}]
 
-   Should Be Equal As Strings  ${resp.dict['Sensors']['@odata.id']}
-   ...  /redfish/v1/Chassis/${CHASSIS_ID}/Sensors
-   Should Be Equal As Strings  ${resp.dict['Thermal']['@odata.id']}
-   ...  /redfish/v1/Chassis/${CHASSIS_ID}/Thermal
-   Should Be Equal As Strings  ${resp.dict['Power']['@odata.id']}
-   ...  /redfish/v1/Chassis/${CHASSIS_ID}/Power
+    Should Be Equal As Strings  ${resp.dict['Sensors']['@odata.id']}
+    ...  /redfish/v1/Chassis/${CHASSIS_ID}/Sensors
+    Should Be Equal As Strings  ${resp.dict['Thermal']['@odata.id']}
+    ...  /redfish/v1/Chassis/${CHASSIS_ID}/Thermal
+    Should Be Equal As Strings  ${resp.dict['Power']['@odata.id']}
+    ...  /redfish/v1/Chassis/${CHASSIS_ID}/Power
 
     # Check sensors in /redfish/v1/Chassis/{ChassisId}/Power
     ${resp}=  Redfish.Get  /redfish/v1/Chassis/${CHASSIS_ID}/Power

@@ -83,7 +83,7 @@ Test Teardown Execution
     IF  ${REDFISH_SUPPORTED}
         Redfish Set Auto Reboot  RetryAttempts
     ELSE
-       Set Auto Reboot  ${1}
+        Set Auto Reboot  ${1}
     END
 
     Redfish.Logout

@@ -76,9 +76,9 @@ Run IPMI Standard Command
     IF  '${IPMI_COMMAND}' == 'External'
         ${resp}=  Run External IPMI Standard Command  ${command}  ${fail_on_err}  ${expected_rc}  &{options}
     ELSE IF  '${IPMI_COMMAND}' == 'Inband'
-       ${resp}=  Run Inband IPMI Standard Command  ${command}  ${fail_on_err}
+        ${resp}=  Run Inband IPMI Standard Command  ${command}  ${fail_on_err}
     ELSE IF  '${IPMI_COMMAND}' == 'Dbus'
-       ${resp}=  Run Dbus IPMI Standard Command  ${command}
+        ${resp}=  Run Dbus IPMI Standard Command  ${command}
     ELSE
         Fail  msg=Invalid IPMI Command type provided : ${IPMI_COMMAND}
     END
