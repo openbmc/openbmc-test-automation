@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a8aebc66_1b765530",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-10T08:17:43Z",
+      "side": 1,
+      "message": "You removed this test case from it\n\n\nVerify Navigation To Sessions Page\n\nif its intentional, please add in the commit message why please",
+      "revId": "19566c27ae5a10044e5aa3830ae427a356377d38",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ec05eb57_bb284162",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 6
@@ -14,6 +31,23 @@
       "writtenOn": "2026-04-10T07:29:19Z",
       "side": 1,
       "message": "Looks good to me.",
+      "revId": "19566c27ae5a10044e5aa3830ae427a356377d38",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f7150b5_7749edff",
+        "filename": "gui/gui_test/security_and_access_menu/test_sessions_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-10T08:17:43Z",
+      "side": 1,
+      "message": "Fix the under-indented line here",
       "revId": "19566c27ae5a10044e5aa3830ae427a356377d38",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
