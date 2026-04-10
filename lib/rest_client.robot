@@ -17,6 +17,7 @@ ${QUIET}  ${0}
 ${XAUTH_TOKEN}  ${EMPTY}
 
 *** Keywords ***
+
 OpenBMC Get Request
     [Documentation]  Do REST GET request and return the result.
     # Example result data:
@@ -29,7 +30,9 @@ OpenBMC Get Request
     #   "message": "200 OK",
     #   "status": "ok"
     # }
+
     [Arguments]    ${uri}    ${timeout}=30  ${quiet}=${QUIET}  &{kwargs}
+
     # Description of argument(s):
     # uri      The URI to establish connection with
     #          (e.g. '/xyz/openbmc_project/software/').
@@ -58,6 +61,7 @@ OpenBMC Post Request
     # Example result data:
     # <Response [200]>
     [Arguments]    ${uri}    ${timeout}=10  ${quiet}=${QUIET}  &{kwargs}
+
     # Description of argument(s):
     # uri      The URI to establish connection with
     #          (e.g. '/xyz/openbmc_project/software/').
@@ -108,6 +112,7 @@ OpenBMC Delete Request
     [Documentation]  Do REST request to delete the resource identified by the
     ...  URI.
     [Arguments]    ${uri}    ${timeout}=10   ${quiet}=${QUIET}    &{kwargs}
+
     # Description of argument(s):
     # uri      The URI to establish connection with
     #          (e.g. '/xyz/openbmc_project/software/').
@@ -242,6 +247,10 @@ Log Out OpenBMC
 Log Request
     [Documentation]  Log the specific REST URI, method name on the console.
     [Arguments]    &{kwargs}
+
+    # Description of argument(s):
+    # kwargs   Any additional arguments to be passed.
+    
     ${msg}=  Catenate  SEPARATOR=  URI:  ${AUTH_URI}  ${kwargs["base_uri"]}
     ...  , method:  ${kwargs["method"]}  , args:  ${kwargs["args"]}
     Logging    ${msg}    console=True
@@ -251,6 +260,9 @@ Log Response
     [Documentation]  Log the response code on the console.
     [Arguments]    ${resp}
 
+    # Description of argument(s):
+    # resp         Response in dictionary format.
+
     ${msg}=  Catenate  SEPARATOR=  Response code:  ${resp.status_code}
     ...  , Content:  ${resp.content}
     Logging    ${msg}    console=True
@@ -259,6 +271,11 @@ Log Response
 Logging
     [Documentation]  Log the specified message on the console.
     [Arguments]    ${msg}    ${console}=default False
+
+    # Description of argument(s):
+    # msg          Message to be logged.
+    # console      Set True to display console output else False.
+
     Log  ${msg}  console=True
 
 
@@ -269,6 +286,7 @@ Read Attribute
     # 0
     [Arguments]    ${uri}    ${attr}    ${timeout}=10  ${quiet}=${QUIET}
     ...  ${expected_value}=${EMPTY}
+
     # Description of argument(s):
     # uri               URI of the object that the attribute lives on
     #                   (e.g. '/xyz/openbmc_project/software/').
@@ -335,6 +353,7 @@ Read Properties
     #  u'/xyz/openbmc_project/software/active',
     #  u'/xyz/openbmc_project/software/functional']
     [Arguments]  ${uri}  ${timeout}=10  ${quiet}=${QUIET}
+
     # Description of argument(s):
     # uri               URI of the object
     #                   (e.g. '/xyz/openbmc_project/software/').
@@ -349,6 +368,7 @@ Read Properties
 Call Method
     [Documentation]  Invoke the specific REST service method.
     [Arguments]  ${uri}  ${method}  ${timeout}=10  ${quiet}=${QUIET}  &{kwargs}
+
     # Description of arguments:
     # uri      The URI to establish connection with
     #          (e.g. '/xyz/openbmc_project/software/').
