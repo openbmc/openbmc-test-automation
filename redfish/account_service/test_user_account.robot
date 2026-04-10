@@ -59,7 +59,7 @@ Verify Redfish Operator User Persistence After Reboot
     Redfish OBMC Reboot (off)  stack_mode=normal
 
     # Verify users after reboot.
-     Redfish Verify User  operator_user  TestPwd123  Operator        ${True}
+    Redfish Verify User  operator_user  TestPwd123  Operator        ${True}
 
 
 Redfish Create and Verify Admin User

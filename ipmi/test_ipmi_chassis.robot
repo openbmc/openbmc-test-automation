@@ -306,8 +306,8 @@ Get Default Chassis System Boot Options
     # Description of argument(s):
     # default   To get the default chassis system boot option value(e.g. "True", "False").
 
-     ${resp}=  Run IPMI Command
-     ...  ${IPMI_RAW_CMD['system_boot_options']['Get_Boot_Options'][0]}
+    ${resp}=  Run IPMI Command
+    ...  ${IPMI_RAW_CMD['system_boot_options']['Get_Boot_Options'][0]}
 
     IF  ${default}
         Set Suite Variable  ${DEFAULT_SET_IN_PROGRESS}  ${resp}

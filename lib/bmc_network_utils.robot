@@ -219,12 +219,12 @@ Delete IP And Object
 
     # Find IP object having this IP address.
 
-     FOR  ${ip_uri}  IN  @{ip_uri_list}
+    FOR  ${ip_uri}  IN  @{ip_uri_list}
        ${ip_addr1}=  Read Attribute  ${ip_uri}  Address
        IF  '${ip_addr}' == '${ip_addr1}'
           BREAK
        END
-     END
+    END
 
     # If the given IP address is not configured, return.
     # Otherwise, delete the IP and object.
@@ -462,7 +462,7 @@ CLI Get And Verify Name Servers
     IF  ${valid_status_codes} == [${HTTP_OK},${HTTP_NO_CONTENT}]
         Should Be True  ${cmd_status}
     ELSE
-         Should Not Be True  ${cmd_status}
+        Should Not Be True  ${cmd_status}
     END
 
 Get Network Configuration
