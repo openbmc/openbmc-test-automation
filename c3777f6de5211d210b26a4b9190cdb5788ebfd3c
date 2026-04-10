@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4cda98a_5646ee01",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-04-10T07:34:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1a5aeeb_00a9a398",
+      "revId": "c3777f6de5211d210b26a4b9190cdb5788ebfd3c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3a1d6ea3_9b5185c5",
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d7debb42_cc93e0ff",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-04-10T07:34:41Z",
+      "side": 1,
+      "message": "This is the expected IPv6 for the ${standard_ipv4_rep}...so kept both the IPs in utils file so that abhijit can use them for the redfish testcases.",
+      "parentUuid": "3a1d6ea3_9b5185c5",
+      "revId": "c3777f6de5211d210b26a4b9190cdb5788ebfd3c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "89e7fa86_05ab414e",
         "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
         "patchSetId": 3
@@ -48,6 +84,24 @@
       "writtenOn": "2026-04-10T07:26:34Z",
       "side": 1,
       "message": "This is a GUI test.. so add GUI or UI in the documentation. else it sounded like any test case redfish/ network etc test cases",
+      "revId": "c3777f6de5211d210b26a4b9190cdb5788ebfd3c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4adbf052_f59897c1",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 980,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-04-10T07:34:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "89e7fa86_05ab414e",
       "revId": "c3777f6de5211d210b26a4b9190cdb5788ebfd3c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
