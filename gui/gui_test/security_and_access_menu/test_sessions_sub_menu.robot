@@ -10,7 +10,13 @@ Test Tags       Sessions_Sub_Menu
 
 *** Variables ***
 
-@{webui_sessionTimeout_value}   60  180
+@{webui_sessionTimeout_value}       60  180
+${session_log_page}                 //table[contains(@id,'"table-session-logs")]
+${sessions_table_checkbox}          //*[@data-test-id='sessions-checkbox-selectRow-0']
+${session_table_popup}              //*[@class='toolbar-content']
+${confirm_disconnect_popup}         //*[@data-test-id='table-button-disconnectSelected']
+${disconnect_session_page}          //*[text()="Disconnect session"]
+${confirm_disconnect_session}       //*[@class='btn btn-md btn-primary']
 
 *** Test Cases ***
 
@@ -79,6 +85,54 @@ Verify Session Timeout Validation For WebUI Session
 
     # Verify session timeout value restored successfully.
     Should Be Equal As Integers  ${restore_session_timeout}  ${DEFAULT_SESSION_TIMEOUT}
+
+Verify Disconnect Session Validation For WebUI Session
+    [Documentation]  Verify disconnect session validation for WebUI session.
+    [Tags]  Verify_Disconnect_Session_Validation_For_WebUI_Session
+    [Setup]  Run Keywords
+    ...  Redfish.Login    AND
+    ...  Delete All Redfish Sessions    AND
+    ...  Close All Browsers
+    [Teardown]  Delete All Redfish Sessions
+
+    # GET redfish session timeout value.
+    ${resp}=  Redfish.Get Properties  ${REDFISH_BASE_URI}SessionService
+    ...  valid_status_codes=[${HTTP_OK}]
+
+    # GET the session count before login, should be 1.
+    Get Session Member And Verify Session Count  valid_status_code=${HTTP_OK}
+    ...  expected_count=${1}
+
+    # Launch browser and login GUI, which will create a WebUI session.
+    Launch Browser And Login GUI
+    Navigate To Required Sub Menu  ${xpath_secuity_and_accesss_menu}
+    ...  ${xpath_sessions_sub_menu}  sessions
+
+    # GET the session count after login, should be 2.
+    Get Session Member And Verify Session Count  valid_status_code=${HTTP_OK}
+    ...  expected_count=${2}
+
+    # Select the session checkbox for the first session in the sessions table.
+    Click Element At Coordinates  ${sessions_table_checkbox}  0  0
+
+    # Wait until the disconnect session popup is displayed.
+    Wait Until Page Contains Element  ${session_table_popup}
+
+    # Click the disconnect session button in the popup.
+    Click Element  ${confirm_disconnect_popup}
+
+    # Wait until the disconnect session confirmation page is displayed.
+    Page Should Contain Element  ${disconnect_session_page}
+
+    # Click the confirm disconnect session button.
+    Click Element  ${confirm_disconnect_session}
+
+    # Wait until the login page is displayed.
+    Wait Until Page Contains Element  ${xpath_login_button}
+
+    # GET the session count after login, should be 1.
+    Get Session Member And Verify Session Count  valid_status_code=${HTTP_OK}
+    ...  expected_count=${1}
 
 
 *** Keywords ***
