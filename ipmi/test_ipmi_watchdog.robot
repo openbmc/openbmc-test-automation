@@ -345,7 +345,7 @@ Get Watchdog Timer And Compare To Start Value
     # start_timer_integer     The initial value for the watchdog timer.
 
     # Get Watchdog Timer.
-     ${resp}=  Run IPMI Command  ${IPMI_RAW_CMD['Watchdog']['Get'][0]}
+    ${resp}=  Run IPMI Command  ${IPMI_RAW_CMD['Watchdog']['Get'][0]}
     @{timer_value}=  Split String  ${resp}
 
     # Convert to integer and compare with start value.

@@ -145,9 +145,9 @@ Generate Error On BMC And Verify Trap On SNMP
     [Tags]  Generate_Error_On_BMC_And_Verify_Trap_On_SNMP
     [Template]  Create Error On BMC And Verify If Trap Is Sent
 
-     # event_log                                              expected_error
-     ${CMD_TEST_TRAP} ${SNMP_MGR1_IP} ${SNMP_DEFAULT_PORT}    ${SNMP_TEST_TRAP_EVENT}
-     ${CMD_SEL_LOG_CLEAR}                                     ${SEL_LOG_CLEAR_EVENT}
+    # event_log                                              expected_error
+    ${CMD_TEST_TRAP} ${SNMP_MGR1_IP} ${SNMP_DEFAULT_PORT}    ${SNMP_TEST_TRAP_EVENT}
+    ${CMD_SEL_LOG_CLEAR}                                     ${SEL_LOG_CLEAR_EVENT}
 
 
 Configure SNMP Manager With Less Octet IP And Verify
