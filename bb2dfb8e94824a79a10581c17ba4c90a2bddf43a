@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "64290507_1f0548c5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-04-10T08:49:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21aaa72d_47ec7bb9",
+      "revId": "bb2dfb8e94824a79a10581c17ba4c90a2bddf43a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d6972865_f8c52ce5",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-04-10T08:40:54Z",
       "side": 1,
       "message": "The variable `${session_log_page}` is declared but never used in the test case.\n\n\nis this intentionally added for future use ?",
+      "revId": "bb2dfb8e94824a79a10581c17ba4c90a2bddf43a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78b5b1db_510e057f",
+        "filename": "gui/gui_test/security_and_access_menu/test_sessions_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-04-10T08:49:57Z",
+      "side": 1,
+      "message": "wrongly added the variable, now I have removed.",
+      "parentUuid": "d6972865_f8c52ce5",
       "revId": "bb2dfb8e94824a79a10581c17ba4c90a2bddf43a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
