@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ed13a3c_74f282a9",
+        "filename": "redfish/systems/eventlog/test_event_service.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-11T15:01:19Z",
+      "side": 1,
+      "message": "\u0027Return From Keyword If\u0027 is deprecated since Robot Framework version 5.*, use \u0027IF and RETURN\u0027 instead\n\n\n  IF  ${length} \u003e 0\n             RETURN\n  END",
+      "revId": "0a5b8f05d65e8ee892d16aed7662a0b1debc3ceb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
