@@ -121,6 +121,10 @@ Filter Chassis Members
     [Documentation]  Filter chassis members to only include those matching the CHASSIS_ID pattern.
     [Arguments]  ${members}  ${chassis_id_pattern}
 
+    # Description of argument(s):
+    # members              List of chassis members.
+    # chassis_id_pattern   Chassis string pattern (Ex. chassis, xyz)
+
     ${filtered_list}=  Create List
 
     FOR  ${member}  IN  @{members}
@@ -145,6 +149,10 @@ Aggregate Power States
     ...         Logs which chassis are not in "On" state
     [Arguments]  ${power_states}  ${chassis_uris}
 
+    # Description of argument(s):
+    # power_states   List of chassis power states.
+    # chassis_uris   List of chassis URIs.
+
     # Count occurrences of each state
     ${on_count}=  Count Values In List  ${power_states}  On
     ${total}=  Get Length  ${power_states}
@@ -168,6 +176,10 @@ Log Chassis Not On
     [Documentation]  Log which chassis are not in "On" state.
     [Arguments]  ${power_states}  ${chassis_uris}
 
+    # Description of argument(s):
+    # power_states   List of chassis power states.
+    # chassis_uris   List of chassis URIs.
+
     ${index}=  Set Variable  ${0}
 
     FOR  ${power_state}  IN  @{power_states}
@@ -185,6 +197,9 @@ Aggregate Status States
     ...         If all chassis are "StandbyOffline", system is "StandbyOffline"
     ...         Otherwise, use the most common state
     [Arguments]  ${status_states}
+
+    # Description of argument(s):
+    # status_states    List of chassis status and states.
 
     # Count occurrences of each state
     ${enabled_count}=  Count Values In List  ${status_states}  Enabled

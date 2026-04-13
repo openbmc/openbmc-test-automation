@@ -153,6 +153,7 @@ Match OCC And CPU State Count
 Verify OCC State
     [Documentation]  Check OCC active state.
     [Arguments]  ${expected_occ_active}=${1}
+
     # Description of Argument(s):
     # expected_occ_active  The expected occ_active value (i.e. 1/0).
 
@@ -324,7 +325,7 @@ Trigger OCC Reset And Wait For OCC Active State
 
 Get Sensors Dbus Tree List
     [Documentation]  Get the list dbus path of the given sensor object and
-    ...              return the populatedlist.
+    ...              return the populated list.
 
     ${dbus_obj_var}=  Set Variable
     ...  xyz.openbmc_project.HwmonTempSensor
@@ -450,6 +451,7 @@ Get Fan Attribute Value
     [Arguments]  ${fan_dict}  ${key_value}
 
     # Description of Argument(s):
+    # fan_dict       Fan related info in dictionary format.
     # key_value      User input attribute value in the dictionary.
 
     ${empty_dicts}=  Create Dictionary
