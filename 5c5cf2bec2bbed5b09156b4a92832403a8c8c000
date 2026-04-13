@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2afad1e_be4e9d93",
+        "filename": "gui/gui_test/gui_header/test_gui_header.robot",
+        "patchSetId": 13
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-04-13T07:45:57Z",
+      "side": 0,
+      "message": "please dont remove the file.. \n\ndo the checkout of the original gui/gui_test/gui_header/test_gui_header.robot",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 16
+      },
+      "revId": "5c5cf2bec2bbed5b09156b4a92832403a8c8c000",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

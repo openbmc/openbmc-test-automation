@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32e9cb56_138859e5",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 13
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-04-13T07:45:57Z",
+      "side": 1,
+      "message": "In Setup make sure that host is powered off",
+      "revId": "8199acbfdcdce43f2e9f964199f5dc1e151191b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15369ee7_4ce74820",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 13
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-04-13T07:45:57Z",
+      "side": 1,
+      "message": "PowerOff\n\nplease use [Template] approach",
+      "range": {
+        "startLine": 373,
+        "startChar": 60,
+        "endLine": 373,
+        "endChar": 76
+      },
+      "revId": "8199acbfdcdce43f2e9f964199f5dc1e151191b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44d53e15_67a2d04d",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 13
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-04-13T07:45:57Z",
+      "side": 1,
+      "message": "PowerOff or PowerOn\n\nnit: avoid using spaces for variable values",
+      "range": {
+        "startLine": 418,
+        "startChar": 28,
+        "endLine": 418,
+        "endChar": 44
+      },
+      "revId": "8199acbfdcdce43f2e9f964199f5dc1e151191b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
