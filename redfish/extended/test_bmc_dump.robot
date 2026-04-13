@@ -33,7 +33,7 @@ Verify Dump After Host Watchdog Error Injection
 
     Wait Until Keyword Succeeds  300 sec  20 sec  Is Host Rebooted
 
-    #Get dump details
+    # Get dump details
     @{dump_entry_list}=  Read Properties  ${DUMP_ENTRY_URI}
 
     # Verifying that there is only one dump

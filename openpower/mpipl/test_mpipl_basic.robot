@@ -130,7 +130,7 @@ Required Dumps Should Exist
     Log To Console  BMC dumps generated: ${bmc_dump['Members@odata.count']}
     Should Be True  ${bmc_dump['Members@odata.count']} >= 1  msg=No BMC dump generated.
 
-    #"Members": [
+    # "Members": [
     #   {
     #       "@odata.id": "/redfish/v1/Systems/system/LogServices/Dump/Entries/System_1",
     #       "@odata.type": "#LogEntry.v1_8_0.LogEntry",

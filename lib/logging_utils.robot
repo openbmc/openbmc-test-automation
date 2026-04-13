@@ -249,27 +249,27 @@ Install Tarball
 Get Event Logs
     [Documentation]  Get all available EventLog entries.
 
-    #{
-    #  "@odata.context": "/redfish/v1/$metadata#LogEntryCollection.LogEntryCollection",
-    #  "@odata.id": "/redfish/v1/Systems/system/LogServices/EventLog/Entries",
-    #  "@odata.type": "#LogEntryCollection.LogEntryCollection",
-    #  "Description": "Collection of System Event Log Entries",
-    #  "Members": [
-    #  {
-    #    "@odata.context": "/redfish/v1/$metadata#LogEntry.LogEntry",
-    #    "@odata.id": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/1",
-    #    "@odata.type": "#LogEntry.v1_4_0.LogEntry",
-    #    "Created": "2019-05-29T13:19:27+00:00",
-    #    "EntryType": "Event",
-    #    "Id": "1",
-    #    "Message": "org.open_power.Host.Error.Event",
-    #    "Name": "System DBus Event Log Entry",
-    #    "Severity": "Critical"
-    #  }
-    #  ],
-    #  "Members@odata.count": 1,
-    #  "Name": "System Event Log Entries"
-    #}
+    # {
+    #   "@odata.context": "/redfish/v1/$metadata#LogEntryCollection.LogEntryCollection",
+    #   "@odata.id": "/redfish/v1/Systems/system/LogServices/EventLog/Entries",
+    #   "@odata.type": "#LogEntryCollection.LogEntryCollection",
+    #   "Description": "Collection of System Event Log Entries",
+    #   "Members": [
+    #   {
+    #     "@odata.context": "/redfish/v1/$metadata#LogEntry.LogEntry",
+    #     "@odata.id": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/1",
+    #     "@odata.type": "#LogEntry.v1_4_0.LogEntry",
+    #     "Created": "2019-05-29T13:19:27+00:00",
+    #     "EntryType": "Event",
+    #     "Id": "1",
+    #     "Message": "org.open_power.Host.Error.Event",
+    #     "Name": "System DBus Event Log Entry",
+    #     "Severity": "Critical"
+    #   }
+    #   ],
+    #   "Members@odata.count": 1,
+    #   "Name": "System Event Log Entries"
+    # }
 
     ${members}=  Redfish.Get Attribute  ${EVENT_LOG_URI}Entries  Members
     RETURN  ${members}

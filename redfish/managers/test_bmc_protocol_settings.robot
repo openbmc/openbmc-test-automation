@@ -258,12 +258,12 @@ Configure NTP SSH And IPMI Settings And Verify
     [Teardown]  Run Keywords  FFDC On Test Case Fail
     ...  AND  Enable SSH Protocol  ${True}
 
-    #ssh_state   ipmi_state   persistency_check   ntp_state
-    ${True}      ${False}     ${False}            ${False}
-    ${False}     ${True}      ${False}            ${False}
-    ${False}     ${True}      ${False}            ${True}
-    ${False}     ${False}     ${False}            ${False}
-    ${True}      ${True}      ${False}            ${True}
+    # ssh_state   ipmi_state   persistency_check   ntp_state
+    ${True}       ${False}     ${False}            ${False}
+    ${False}      ${True}      ${False}            ${False}
+    ${False}      ${True}      ${False}            ${True}
+    ${False}      ${False}     ${False}            ${False}
+    ${True}       ${True}      ${False}            ${True}
 
 
 Verify Port 22 SSH Access Restricted For Admin And ReadOnly Users

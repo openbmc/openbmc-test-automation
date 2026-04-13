@@ -47,19 +47,19 @@ Verify BMC Redfish Boot Source Override with Enabled Mode As Once
     [Tags]           Verify_BMC_Redfish_Boot_Source_Override_with_Enabled_Mode_As_Once
     [Template]  Set And Verify Boot Source Override
 
-    #BootSourceOverrideEnabled    BootSourceOverrideTarget    BootSourceOverrideMode
-    Once                          Hdd                         UEFI
-    Once                          Pxe                         UEFI
-    Once                          Diags                       UEFI
-    Once                          Cd                          UEFI
-    Once                          BiosSetup                   UEFI
-    Once                          None                        UEFI
-    Once                          Hdd                         Legacy
-    Once                          Pxe                         Legacy
-    Once                          Diags                       Legacy
-    Once                          Cd                          Legacy
-    Once                          BiosSetup                   Legacy
-    Once                          None                        Legacy
+    # BootSourceOverrideEnabled    BootSourceOverrideTarget    BootSourceOverrideMode
+    Once                           Hdd                         UEFI
+    Once                           Pxe                         UEFI
+    Once                           Diags                       UEFI
+    Once                           Cd                          UEFI
+    Once                           BiosSetup                   UEFI
+    Once                           None                        UEFI
+    Once                           Hdd                         Legacy
+    Once                           Pxe                         Legacy
+    Once                           Diags                       Legacy
+    Once                           Cd                          Legacy
+    Once                           BiosSetup                   Legacy
+    Once                           None                        Legacy
 
 
 Verify BMC Redfish Boot Source Override with Enabled Mode As Continuous
@@ -67,19 +67,19 @@ Verify BMC Redfish Boot Source Override with Enabled Mode As Continuous
     [Tags]           Verify_BMC_Redfish_Boot_Source_Override_with_Enabled_Mode_As_Continuous
     [Template]  Set And Verify Boot Source Override
 
-    #BootSourceOverrideEnabled    BootSourceOverrideTarget    BootSourceOverrideMode
-    Continuous                    Hdd                         UEFI
-    Continuous                    Pxe                         UEFI
-    Continuous                    Diags                       UEFI
-    Continuous                    Cd                          UEFI
-    Continuous                    BiosSetup                   UEFI
-    Continuous                    None                        UEFI
-    Continuous                    Hdd                         Legacy
-    Continuous                    Pxe                         Legacy
-    Continuous                    Diags                       Legacy
-    Continuous                    Cd                          Legacy
-    Continuous                    BiosSetup                   Legacy
-    Continuous                    None                        Legacy
+    # BootSourceOverrideEnabled    BootSourceOverrideTarget    BootSourceOverrideMode
+    Continuous                     Hdd                         UEFI
+    Continuous                     Pxe                         UEFI
+    Continuous                     Diags                       UEFI
+    Continuous                     Cd                          UEFI
+    Continuous                     BiosSetup                   UEFI
+    Continuous                     None                        UEFI
+    Continuous                     Hdd                         Legacy
+    Continuous                     Pxe                         Legacy
+    Continuous                     Diags                       Legacy
+    Continuous                     Cd                          Legacy
+    Continuous                     BiosSetup                   Legacy
+    Continuous                     None                        Legacy
 
 
 Verify BMC Redfish Boot Source Override with Enabled Mode As Disabled
@@ -87,19 +87,19 @@ Verify BMC Redfish Boot Source Override with Enabled Mode As Disabled
     [Tags]           Verify_BMC_Redfish_Boot_Source_Override_with_Enabled_Mode_As_Disabled
     [Template]  Set And Verify Boot Source Override
 
-    #BootSourceOverrideEnabled    BootSourceOverrideTarget    BootSourceOverrideMode
-    Disabled                      Hdd                         UEFI
-    Disabled                      Pxe                         UEFI
-    Disabled                      Diags                       UEFI
-    Disabled                      Cd                          UEFI
-    Disabled                      BiosSetup                   UEFI
-    Disabled                      None                        UEFI
-    Disabled                      Hdd                         Legacy
-    Disabled                      Pxe                         Legacy
-    Disabled                      Diags                       Legacy
-    Disabled                      Cd                          Legacy
-    Disabled                      BiosSetup                   Legacy
-    Disabled                      None                        Legacy
+    # BootSourceOverrideEnabled    BootSourceOverrideTarget    BootSourceOverrideMode
+    Disabled                       Hdd                         UEFI
+    Disabled                       Pxe                         UEFI
+    Disabled                       Diags                       UEFI
+    Disabled                       Cd                          UEFI
+    Disabled                       BiosSetup                   UEFI
+    Disabled                       None                        UEFI
+    Disabled                       Hdd                         Legacy
+    Disabled                       Pxe                         Legacy
+    Disabled                       Diags                       Legacy
+    Disabled                       Cd                          Legacy
+    Disabled                       BiosSetup                   Legacy
+    Disabled                       None                        Legacy
 
 
 Verify Boot Source Override Policy Persistency With Enabled Mode As Once After BMC Reboot
@@ -107,19 +107,19 @@ Verify Boot Source Override Policy Persistency With Enabled Mode As Once After B
     [Tags]           Verify_Boot_Source_Override_Policy_Persistency_With_Enabled_Mode_As_Once_After_BMC_Reboot
     [Template]  Verify Boot Source Override After BMC Reboot
 
-    #BootSourceOverrideEnabled    BootSourceOverrideTarget    BootSourceOverrideMode
-    Once                          Hdd                         UEFI
-    Once                          Pxe                         UEFI
-    Once                          Diags                       UEFI
-    Once                          Cd                          UEFI
-    Once                          BiosSetup                   UEFI
-    Once                          None                        UEFI
-    Once                          Hdd                         Legacy
-    Once                          Pxe                         Legacy
-    Once                          Diags                       Legacy
-    Once                          Cd                          Legacy
-    Once                          BiosSetup                   Legacy
-    Once                          None                        Legacy
+    # BootSourceOverrideEnabled    BootSourceOverrideTarget    BootSourceOverrideMode
+    Once                           Hdd                         UEFI
+    Once                           Pxe                         UEFI
+    Once                           Diags                       UEFI
+    Once                           Cd                          UEFI
+    Once                           BiosSetup                   UEFI
+    Once                           None                        UEFI
+    Once                           Hdd                         Legacy
+    Once                           Pxe                         Legacy
+    Once                           Diags                       Legacy
+    Once                           Cd                          Legacy
+    Once                           BiosSetup                   Legacy
+    Once                           None                        Legacy
 
 
 Verify Boot Source Override Policy Persistency With Enabled Mode As Continuous After BMC Reboot
@@ -127,19 +127,19 @@ Verify Boot Source Override Policy Persistency With Enabled Mode As Continuous A
     [Tags]           Verify_Boot_Source_Override_Policy_Persistency_With_Enabled_Mode_As_Continuous_After_BMC_Reboot
     [Template]  Verify Boot Source Override After BMC Reboot
 
-    #BootSourceOverrideEnabled    BootSourceOverrideTarget    BootSourceOverrideMode
-    Continuous                    Hdd                         UEFI
-    Continuous                    Pxe                         UEFI
-    Continuous                    Diags                       UEFI
-    Continuous                    Cd                          UEFI
-    Continuous                    BiosSetup                   UEFI
-    Continuous                    None                        UEFI
-    Continuous                    Hdd                         Legacy
-    Continuous                    Pxe                         Legacy
-    Continuous                    Diags                       Legacy
-    Continuous                    Cd                          Legacy
-    Continuous                    BiosSetup                   Legacy
-    Continuous                    None                        Legacy
+    # BootSourceOverrideEnabled    BootSourceOverrideTarget    BootSourceOverrideMode
+    Continuous                     Hdd                         UEFI
+    Continuous                     Pxe                         UEFI
+    Continuous                     Diags                       UEFI
+    Continuous                     Cd                          UEFI
+    Continuous                     BiosSetup                   UEFI
+    Continuous                     None                        UEFI
+    Continuous                     Hdd                         Legacy
+    Continuous                     Pxe                         Legacy
+    Continuous                     Diags                       Legacy
+    Continuous                     Cd                          Legacy
+    Continuous                     BiosSetup                   Legacy
+    Continuous                     None                        Legacy
 
 
 Verify Boot Source Override Policy With Enabled Mode As Once After Host Reboot
@@ -147,17 +147,17 @@ Verify Boot Source Override Policy With Enabled Mode As Once After Host Reboot
     [Tags]           Verify_Boot_Source_Override_Policy_With_Enabled_Mode_As_Once_After_Host_Reboot
     [Template]  Verify Boot Source Override With Enabled Mode As Once After Host Reboot
 
-    #BootSourceOverrideTarget    BootSourceOverrideMode
-    Hdd                         UEFI
-    Pxe                         UEFI
-    Diags                       UEFI
-    Cd                          UEFI
-    None                        UEFI
-    Hdd                         Legacy
-    Pxe                         Legacy
-    Diags                       Legacy
-    Cd                          Legacy
-    None                        Legacy
+    # BootSourceOverrideTarget    BootSourceOverrideMode
+    Hdd                           UEFI
+    Pxe                           UEFI
+    Diags                         UEFI
+    Cd                            UEFI
+    None                          UEFI
+    Hdd                           Legacy
+    Pxe                           Legacy
+    Diags                         Legacy
+    Cd                            Legacy
+    None                          Legacy
 
 
 Verify Boot Source Override Policy With Enabled Mode As Continuous After Host Reboot
@@ -165,17 +165,17 @@ Verify Boot Source Override Policy With Enabled Mode As Continuous After Host Re
     [Tags]           Verify_Boot_Source_Override_Policy_With_Enabled_Mode_As_Continuous_After_Host_Reboot
     [Template]  Verify Boot Source Override With Enabled Mode As Continuous After Host Reboot
 
-    #BootSourceOverrideTarget    BootSourceOverrideMode
-    Hdd                         UEFI
-    Pxe                         UEFI
-    Diags                       UEFI
-    Cd                          UEFI
-    None                        UEFI
-    Hdd                         Legacy
-    Pxe                         Legacy
-    Diags                       Legacy
-    Cd                          Legacy
-    None                        Legacy
+    # BootSourceOverrideTarget    BootSourceOverrideMode
+    Hdd                          UEFI
+    Pxe                          UEFI
+    Diags                        UEFI
+    Cd                           UEFI
+    None                         UEFI
+    Hdd                          Legacy
+    Pxe                          Legacy
+    Diags                        Legacy
+    Cd                           Legacy
+    None                         Legacy
 
 
 Verify Boot Source Override With Enabled Mode As Once After Host Reboot For Bios Setup
@@ -183,9 +183,9 @@ Verify Boot Source Override With Enabled Mode As Once After Host Reboot For Bios
     [Tags]           Verify_Boot_Source_Override_With_Enabled_Mode_As_Once_After_Host_Reboot_For_Bios_Setup
     [Template]  Verify Boot Source Override With Enabled Mode As Once After Host Reboot
 
-    #BootSourceOverrideTarget   BootSourceOverrideMode   Biosflag
-    BiosSetup                   UEFI                     True
-    BiosSetup                   Legacy                   True
+    # BootSourceOverrideTarget   BootSourceOverrideMode   Biosflag
+    BiosSetup                    UEFI                     True
+    BiosSetup                    Legacy                   True
 
 
 Verify Boot Source Override With Enabled Mode As Continuous After Host Reboot For Bios Setup
@@ -193,9 +193,9 @@ Verify Boot Source Override With Enabled Mode As Continuous After Host Reboot Fo
     [Tags]           Verify_Boot_Source_Override_With_Enabled_Mode_As_Continuous_After_Host_Reboot_For_Bios_Setup
     [Template]  Verify Boot Source Override With Enabled Mode As Continuous After Host Reboot
 
-    #BootSourceOverrideTarget   BootSourceOverrideMode   Biosflag
-    BiosSetup                   UEFI                     True
-    BiosSetup                   Legacy                   True
+    # BootSourceOverrideTarget   BootSourceOverrideMode   Biosflag
+    BiosSetup                    UEFI                     True
+    BiosSetup                    Legacy                   True
 
 
 *** Keywords ***

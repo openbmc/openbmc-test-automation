@@ -211,7 +211,7 @@ Verify And Modify Systems Instance Collection Properties
     [Tags]    Verify_And_Modify_Systems_Instance_Collection_Properties
     [Template]  Modify Systems Instance Collection Properties
 
-    #Action_type                    #Parameter
+    # Action_type                   # Parameter
     AutomaticRetryConfig            Disabled
     AutomaticRetryConfig            RetryAttempts
     BootSourceOverrideTarget        Pxe

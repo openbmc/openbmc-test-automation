@@ -117,7 +117,7 @@ Generate Error On BMC And Verify SNMP Trap Is Sent To Non Default Port
 
     # event_log                                              expected_error
 
-    #Send test trap
+    # Send test trap
     ${CMD_TEST_TRAP} ${SNMP_MGR1_IP} ${NON_DEFAULT_PORT1}    ${SNMP_TEST_TRAP_EVENT}
 
     # Generate SEL log clear event.

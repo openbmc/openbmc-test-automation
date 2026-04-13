@@ -258,8 +258,8 @@ Test IPMI User Privilege Level
     [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
     ...  Delete Created User  ${random_userid}
 
-    #Privilege level     User Cmd Status  Operator Cmd Status  Admin Cmd Status
-    ${user_priv}         Passed           Failed               Failed
+    # Privilege level     User Cmd Status  Operator Cmd Status  Admin Cmd Status
+    ${user_priv}          Passed           Failed               Failed
 
 
 Test IPMI Operator Privilege Level
@@ -270,8 +270,8 @@ Test IPMI Operator Privilege Level
     [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
     ...  Delete Created User  ${random_userid}
 
-    #Privilege level     User Cmd Status  Operator Cmd Status  Admin Cmd Status
-    ${operator_priv}     Passed           Passed               Failed
+    # Privilege level     User Cmd Status  Operator Cmd Status  Admin Cmd Status
+    ${operator_priv}      Passed           Passed               Failed
 
 
 Test IPMI Administrator Privilege Level
@@ -281,8 +281,8 @@ Test IPMI Administrator Privilege Level
     [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
     ...  Delete Created User  ${random_userid}
 
-    #Privilege level     User Cmd Status  Operator Cmd Status  Admin Cmd Status
-    ${admin_level_priv}  Passed           Passed               Passed
+    # Privilege level     User Cmd Status  Operator Cmd Status  Admin Cmd Status
+    ${admin_level_priv}   Passed           Passed               Passed
 
 
 Enable IPMI User And Verify

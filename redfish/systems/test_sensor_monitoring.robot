@@ -215,7 +215,7 @@ Check Sensors Present
     #           ...
     #       }...
     #   }
-    #}
+    # }
 
     ${curr_sensor_name_list}=  Get Sensors Name List From Redfish
     ...  ${sensor_info_list}

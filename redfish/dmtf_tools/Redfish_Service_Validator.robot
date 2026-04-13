@@ -40,9 +40,9 @@ Run Redfish Service Validator With Additional Roles
     [Tags]  Run_Redfish_Service_Validator_With_Additional_Roles
     [Template]  Create User And Run Service Validator
 
-    #username      password       role        enabled
-    operator_user  0penBmc123     Operator    ${True}
-    readonly_user  0penBmc123     ReadOnly    ${True}
+    # username      password       role        enabled
+    operator_user   0penBmc123     Operator    ${True}
+    readonly_user   0penBmc123     ReadOnly    ${True}
 
 *** Keywords ***
 

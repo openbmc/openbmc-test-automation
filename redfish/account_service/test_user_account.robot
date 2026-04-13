@@ -432,9 +432,9 @@ Verify History Password For Redfish Admin And Readonly User
     [Tags]  Verify_History_Password_For_Redfish_Admin_And_Readonly_User
     [Template]  Verify History Password For Redfish User
 
-    #username        role_id
-    admin_user       Administrator
-    readonly_user    ReadOnly
+    # username        role_id
+    admin_user        Administrator
+    readonly_user     ReadOnly
 
 
 Verify Minimum Password Length For Redfish Admin And Readonly User
@@ -443,9 +443,9 @@ Verify Minimum Password Length For Redfish Admin And Readonly User
     [Tags]  Verify_Minimum_Password_Length_For_Redfish_Admin_And_Readonly_User
     [Template]  Verify Minimum Password Length For Redfish User
 
-    #username        role_id
-    admin_user       Administrator
-    readonly_user    ReadOnly
+    # username        role_id
+    admin_user        Administrator
+    readonly_user     ReadOnly
 
 
 Verify Standard User Roles Defined By Redfish
@@ -500,7 +500,7 @@ Verify SSH Login Access With Admin User
     ...              in the community sphere..
     [Tags]  Verify_SSH_Login_Access_With_Admin_User
 
-    #Create an admin user and verify SSH login.
+    # Create an admin user and verify SSH login.
     Create Admin User And Verify SSH Login
 
     Redfish.Login
@@ -510,10 +510,10 @@ Verify SSH Login Is Revoked For Deleted User
     [Documentation]  Verify SSH login access is revoked for deleted User.
     [Tags]    Verify_SSH_Login_Is_Revoked_For_Deleted_User
 
-    #Create an admin user and verify SSH login.
+    # Create an admin user and verify SSH login.
     Create Admin User And Verify SSH Login
 
-    #Login with root user.
+    # Login with root user.
     Redfish.Login
 
     # Delete the admin user.
@@ -540,7 +540,7 @@ Redfish Create and Verify Admin User With Invalid Password Format
     [Template]  Create User With Unsupported Password Format And Verify
     [Tags]  Redfish_Create_and_Verify_Admin_User_With_Invalid_Password_Format
 
-    # username       role_id        password
+    # username      role_id        password
     admin_user      Administrator  snellens
     admin_user      Administrator  10000001
     admin_user      Administrator  12345678
@@ -557,7 +557,7 @@ Redfish Create and Verify Readonly User With Invalid Password Format
     [Template]  Create User With Unsupported Password Format And Verify
     [Tags]  Redfish_Create_and_Verify_Readonly_User_With_Invalid_Password_Format
 
-    # username       role_id        password
+    # username      role_id        password
     readonly_user   ReadOnly       snellens
     readonly_user   ReadOnly       10000001
     readonly_user   ReadOnly       12345678
@@ -575,7 +575,7 @@ Verify Admin And Readonly User Password Is Not Same As Username
     [Template]  Create User With Unsupported Password Format And Verify
     [Tags]      Verify_Admin_And_Readonly_User_Password_Is_Not_Same_As_Username
 
-    # username        role_id             password
+    # username       role_id             password
     AdminUser1       Administrator       AdminUser1
     ReadOnlyUser1    ReadOnly            ReadOnlyUser1
 
@@ -643,7 +643,7 @@ Verify AccountService Roles Instance With Unsupported Methods
     Redfish.Patch    /redfish/v1/AccountService/Roles/Administrator
     ...    valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
 
-    #Delete operation on Account Service Roles Instance
+    # Delete operation on Account Service Roles Instance
     Redfish.Delete    /redfish/v1/AccountService/Roles/Administrator
     ...    valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
 
@@ -781,18 +781,18 @@ Redfish Create And Verify User
     #                     should be enabled (${True}, ${False}).
 
     # Example:
-    #{
-    #  "@odata.context": "/redfish/v1/$metadata#ManagerAccount.ManagerAccount",
-    #  "@odata.id": "/redfish/v1/AccountService/Accounts/test1",
-    #  "@odata.type": "#ManagerAccount.v1_0_3.ManagerAccount",
-    #  "Description": "User Account",
-    #  "Enabled": true,
-    #  "Id": "test1",
-    #  "Links": {
-    #    "Role": {
-    #      "@odata.id": "/redfish/v1/AccountService/Roles/Administrator"
-    #  }
-    #},
+    # {
+    #   "@odata.context": "/redfish/v1/$metadata#ManagerAccount.ManagerAccount",
+    #   "@odata.id": "/redfish/v1/AccountService/Accounts/test1",
+    #   "@odata.type": "#ManagerAccount.v1_0_3.ManagerAccount",
+    #   "Description": "User Account",
+    #   "Enabled": true,
+    #   "Id": "test1",
+    #   "Links": {
+    #     "Role": {
+    #       "@odata.id": "/redfish/v1/AccountService/Roles/Administrator"
+    #   }
+    # },
 
     Redfish Create User  ${username}  ${password}  ${role_id}  ${enabled}
 
