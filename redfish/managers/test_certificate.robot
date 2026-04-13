@@ -199,7 +199,7 @@ Verify Expired Certificate Replace
     [Tags]  Verify_Expired_Certificate_Replace
     [Setup]  Run Keywords  Get Current BMC Date  AND  Modify BMC Date
     [Template]  Replace Certificate Via Redfish
-    #[Teardown]  Run Keywords  FFDC On Test Case Fail  AND  Restore BMC Date
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND  Restore BMC Date
 
     # cert_type  cert_format           expected_status.
     Server       Expired Certificate   ok
@@ -252,17 +252,20 @@ Verify Certificates Location Via Redfish
     Should Be Equal  ${match}  ${True}
     ...  msg=Verify the location of certificates via Redfish fail.
 
+
 Verify Certificate Service Unsupported Methods
     [Documentation]  Verify certificate service with unsupported methods.
     [Tags]  Verify_Certificate_Service_Unsupported_Methods
 
     Verify Supported And Unsupported Methods  uri=${REDFISH_CERTIFICATE_SERVICE_URI}
 
+
 Verify Certificate Locations Unsupported Methods
     [Documentation]  Verify certificate locations with unsupported methods.
     [Tags]  Verify_Certificate_Locations_Unsupported_Methods
 
     Verify Supported And Unsupported Methods  uri=${REDFISH_CERTIFICATE_SERVICE_URI}/CertificateLocations
+
 
 *** Keywords ***
 
