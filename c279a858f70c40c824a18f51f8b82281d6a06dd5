@@ -36,6 +36,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e1da993_7ec00354",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1001957
+      },
+      "writtenOn": "2026-04-13T10:32:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4ae2c1a_d31aa443",
+      "revId": "c279a858f70c40c824a18f51f8b82281d6a06dd5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3beab269_6011a7de",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Due to duplicate testcase removed it",
       "parentUuid": "3beab269_6011a7de",
+      "revId": "c279a858f70c40c824a18f51f8b82281d6a06dd5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd1c3c0e_f0a0d379",
+        "filename": "gui/gui_test/gui_header/test_gui_header.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1001957
+      },
+      "writtenOn": "2026-04-13T10:32:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "397aaac0_b7b43380",
       "revId": "c279a858f70c40c824a18f51f8b82281d6a06dd5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -106,6 +142,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3eecaa9_0b7fde74",
+        "filename": "gui/gui_test/gui_header/test_gui_header.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1001957
+      },
+      "writtenOn": "2026-04-13T10:32:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d2d34ab_53c45d3e",
+      "revId": "c279a858f70c40c824a18f51f8b82281d6a06dd5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1916820b_b86a85ac",
@@ -137,6 +191,24 @@
       "side": 1,
       "message": "Due to duplicate testcase removed it",
       "parentUuid": "1916820b_b86a85ac",
+      "revId": "c279a858f70c40c824a18f51f8b82281d6a06dd5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd9b2950_b8aa279f",
+        "filename": "gui/gui_test/gui_header/test_gui_header.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1001957
+      },
+      "writtenOn": "2026-04-13T10:32:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81b0eb37_c25ae459",
       "revId": "c279a858f70c40c824a18f51f8b82281d6a06dd5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
