@@ -1,8 +1,8 @@
 *** Settings ***
 Documentation   Find services and service agents on the system.
 
-Library         OperatingSystem
 Library         Collections
+Library         OperatingSystem
 Library         String
 
 Resource        ../lib/utils.robot
