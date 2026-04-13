@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation  This module contains keywords for list manipulation.
 
-Library  Collections
+Library        Collections
 
 *** Keywords ***
 
@@ -61,9 +61,10 @@ Intersect Lists
 
 Subtract Lists
     [Documentation]  Subtract list 2 from list 1 and return the result.
-    #  Return list contain items from the list 1 which are not present
-    #  in the list 2.
+    ...  Return list contain items from the list 1 which are not present
+    ...  in the list 2.
     [Arguments]  ${list1}  ${list2}
+
     # Description of argument(s):
     # list1      The base list which is to be subtracted from.
     # list2      The list which is to be subtracted from list1.
