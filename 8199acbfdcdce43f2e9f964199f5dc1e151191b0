@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6eefafd9_70dde1ba",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 13
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1001957
+      },
+      "writtenOn": "2026-04-13T10:27:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32e9cb56_138859e5",
+      "revId": "8199acbfdcdce43f2e9f964199f5dc1e151191b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "15369ee7_4ce74820",
@@ -41,6 +59,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "52db024c_88c95d6c",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 13
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1001957
+      },
+      "writtenOn": "2026-04-13T10:27:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15369ee7_4ce74820",
+      "range": {
+        "startLine": 373,
+        "startChar": 60,
+        "endLine": 373,
+        "endChar": 76
+      },
+      "revId": "8199acbfdcdce43f2e9f964199f5dc1e151191b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "44d53e15_67a2d04d",
@@ -54,6 +96,30 @@
       "writtenOn": "2026-04-13T07:45:57Z",
       "side": 1,
       "message": "PowerOff or PowerOn\n\nnit: avoid using spaces for variable values",
+      "range": {
+        "startLine": 418,
+        "startChar": 28,
+        "endLine": 418,
+        "endChar": 44
+      },
+      "revId": "8199acbfdcdce43f2e9f964199f5dc1e151191b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26bc2cc7_b5239561",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 13
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 1001957
+      },
+      "writtenOn": "2026-04-13T10:27:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44d53e15_67a2d04d",
       "range": {
         "startLine": 418,
         "startChar": 28,
