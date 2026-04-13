@@ -2,8 +2,8 @@
 Documentation  Utilities for Robot keywords that do not use REST.
 
 Library                 DateTime
-Library                 Process
 Library                 OperatingSystem
+Library                 Process
 Library                 String
 Resource                ../lib/resource.robot
 Resource                ../lib/connection_client.robot

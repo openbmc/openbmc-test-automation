@@ -1,13 +1,13 @@
 *** Settings ***
 Documentation    Module to test IPMI chipher functionality.
 
+Library          String
 Resource         ../lib/ipmi_client.robot
 Resource         ../lib/openbmc_ffdc.robot
 Resource         ../lib/bmc_network_utils.robot
 Library          ../lib/ipmi_utils.py
 Library          ../lib/var_funcs.py
 Variables        ../data/ipmi_raw_cmd_table.py
-Library          String
 
 
 Suite Setup      IPMI Cipher Suite Setup

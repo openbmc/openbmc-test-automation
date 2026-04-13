@@ -1,8 +1,10 @@
 *** Settings ***
+Documentation     Generic REST client keywords collection.
+
 Library           Collections
+Library           OperatingSystem
 Library           String
 Library           RequestsLibrary
-Library           OperatingSystem
 Resource          resource.robot
 Library           disable_warning_urllib.py
 Library           utils.py

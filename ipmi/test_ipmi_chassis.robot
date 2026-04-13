@@ -1,12 +1,12 @@
 *** Settings ***
 Documentation    Module to test IPMI chassis functionality.
 
+Library          Collections
 Resource         ../lib/ipmi_client.robot
 Resource         ../lib/openbmc_ffdc.robot
 Resource         ../lib/boot_utils.robot
 Resource         ../lib/bmc_dbus.robot
 Library          ../lib/ipmi_utils.py
-Library          Collections
 Variables        ../data/ipmi_raw_cmd_table.py
 
 Suite Setup      Redfish.Login

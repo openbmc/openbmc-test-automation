@@ -38,8 +38,8 @@ Documentation  Make a general hardware stress in a partition with all the
 # bootme:
 #   This configures the cron to reboot the system and re-run the HTX profile.
 
-Library         SSHLibrary
 Library         String
+Library         SSHLibrary
 Library         ../lib/bmc_ssh_utils.py
 Resource        ../lib/resource.robot
 Resource        ../lib/os_utilities.robot

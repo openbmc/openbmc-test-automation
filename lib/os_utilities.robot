@@ -1,6 +1,8 @@
 *** Settings ***
 Documentation      Keywords for system test.
 
+Library            DateTime
+Library            OperatingSystem
 Library            ../lib/gen_robot_keyword.py
 Library            ../lib/gen_print.py
 Library            ../lib/gen_robot_print.py
@@ -10,8 +12,6 @@ Resource           ../lib/utils.robot
 Resource           ../lib/state_manager.robot
 Resource           ../lib/rest_client.robot
 Resource           ../lib/htx_resource.robot
-Library            OperatingSystem
-Library            DateTime
 
 *** Variables ***
 

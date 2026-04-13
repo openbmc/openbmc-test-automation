@@ -1,6 +1,14 @@
 *** Settings ***
 Documentation  Connections and authentication module stability tests.
 
+Library   Collections
+Library   OperatingSystem
+Library   Screenshot
+Library   Telnet  30 Seconds
+Library   XvfbRobot
+Library   SSHLibrary
+Library   SeleniumLibrary  120  120
+
 Resource  ../lib/bmc_redfish_resource.robot
 Resource  ../lib/bmc_network_utils.robot
 Resource  ../lib/openbmc_ffdc.robot
@@ -10,20 +18,11 @@ Resource  ../lib/connection_client.robot
 Resource  ../gui/lib/gui_resource.robot
 Library   ../lib/bmc_network_utils.py
 
-Library   SSHLibrary
-Library   Collections
-Library   XvfbRobot
-Library   OperatingSystem
-Library   SeleniumLibrary  120  120
-Library   Telnet  30 Seconds
-Library   Screenshot
-
-
 Suite Setup   Redfish.Logout
 
 Variables     ../gui/data/gui_variables.py
 
-Test Tags    BMC_Connections
+Test Tags     BMC_Connections
 
 *** Variables ***
 
