@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec02f03c_eb39133f",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 18
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1001957
+      },
+      "writtenOn": "2026-04-13T11:15:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9bbc4aa5_1246f66d",
+      "revId": "1117d193f7c42245a7dea63c9b8cb4646eed0429",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e17526fa_12da3727",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-04-13T10:55:17Z",
       "side": 1,
       "message": "don;t click on view button. try to get value from overview page only. This test specific to overview page.",
+      "revId": "1117d193f7c42245a7dea63c9b8cb4646eed0429",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6eb5ee76_671bf576",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 18
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1001957
+      },
+      "writtenOn": "2026-04-13T11:15:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e17526fa_12da3727",
       "revId": "1117d193f7c42245a7dea63c9b8cb4646eed0429",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
