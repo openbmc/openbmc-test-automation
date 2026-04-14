@@ -16,6 +16,24 @@
       "message": "I\u0027m ok with this changes.. but would like to know if this is coming from which changes in upstream ? can u dig up a bit for information ?",
       "revId": "c997624c6ed7b20c8c6b46d44157a678033dfa3f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10fed6b9_c43ee97f",
+        "filename": "redfish/dmtf_tools/test_redfishtool_local_user.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-04-14T06:32:16Z",
+      "side": 1,
+      "message": "Yess from upstream https://github.com/openbmc/bmcweb/commit/793bce1895f015ae27a0ce5fa4c75e38c2dadfd6",
+      "parentUuid": "fe1b6654_06ca8b95",
+      "revId": "c997624c6ed7b20c8c6b46d44157a678033dfa3f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
