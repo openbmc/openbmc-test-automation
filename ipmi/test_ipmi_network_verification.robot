@@ -256,7 +256,7 @@ Verify Cipher Suite Privilege
     ${cipher_suite_privilege_length}=  Get Length  ${cipher_suite_privilege}
     Should Be Equal  '${cipher_suite_privilege_length}'  '10'
 
-    #44b = Maximum privilege for cipher suite.
+    # 44b = Maximum privilege for cipher suite.
     FOR  ${channel_number}  IN RANGE  2  ${cipher_suite_privilege_length}
       Should Be Equal  '${cipher_suite_privilege[${channel_number}]}'  '44'
     END

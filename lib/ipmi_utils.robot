@@ -22,7 +22,7 @@ Verify KCS Interface Commands
 
     Wait Until Keyword Succeeds  2 min  10 sec  Is BMC Unpingable
     Wait Until Keyword Succeeds  3 min  10 sec  Is BMC Operational
-    ## Waiting time to get KCS interface enabled.
+    ### Waiting time to get KCS interface enabled.
     Wait Until Keyword Succeeds  3 min  10 sec
     ...  Run Inband IPMI Raw Command  ${IPMI_RAW_CMD['Device ID']['Get'][0]}
 

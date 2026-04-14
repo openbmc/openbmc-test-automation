@@ -1,3 +1,6 @@
+*** Settings ***
+Documentation    SNMP required variables resource file.
+
 *** Variables ***
 
 # SNMP related parameters.
