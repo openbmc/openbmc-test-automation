@@ -18,6 +18,12 @@ ${test_ipv4_addr1}           10.7.7.8
 ${test_subnet_mask}          255.255.255.0
 ${ipv6_multi_short}          2001::33::111
 ${invalid_hexadec_ipv6}      x:x:x:x:x:x:10.5.5.6
+${ipv6_leading_zero}         2001:0022:0033::0111
+${ipv6_eliminate_zero}       2001:22:33::111
+${ipv6_firsthextet_zero}     2001:0022:1133::1111
+${ipv6_eliminate_zero1}      2001:22:1133::1111
+${ipv6_contigeous_zero}      2001:0022:0000:0000:1:2:3:8
+${ipv6_zero_compression}     2001:22::1:2:3:8
 
 *** Keywords ***
 
