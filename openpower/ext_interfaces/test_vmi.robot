@@ -666,7 +666,7 @@ Configure IPv6 Static Default Gateway On VMI And Verify
     ${resp}=  Redfish.Get
     ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${ethernet_interface}
     ${vmi_ipv6_gateways}=  Get From Dictionary  ${resp.dict}  IPv6StaticDefaultGateways
-    ${vmi_ipv6_gateway} =  Get From List  ${vmi_ipv6_gateways}  0
+    ${vmi_ipv6_gateway}=  Get From List  ${vmi_ipv6_gateways}  0
     Should Be Equal  ${vmi_ipv6_gateway["Address"]}  ${test_vmi_ipv6gateway}
 
 

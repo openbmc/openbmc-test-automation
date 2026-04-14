@@ -123,7 +123,7 @@ Switch Between DHCP And Static
     [Teardown]  Set DHCPEnabled To Enable Or Disable  True  eth1
 
     # Fetch the IP details before.
-    ${ip_addr_before}  ${gateway_before}  ${subnetmask_before}  Get DHCP IP Info
+    ${ip_addr_before}  ${gateway_before}  ${subnetmask_before}=  Get DHCP IP Info
 
     # Switch Between Static and DHCP.
     FOR  ${i}  IN RANGE  ${10}
@@ -133,7 +133,7 @@ Switch Between DHCP And Static
     Sleep  5s
 
     # Fetch the IP details after.
-    ${ip_addr_after}  ${gateway_after}  ${subnetmask_after}  Get DHCP IP Info
+    ${ip_addr_after}  ${gateway_after}  ${subnetmask_after}=  Get DHCP IP Info
 
     # DHCP Details must be the same before and after.
     Should Be Equal  ${ip_addr_before}  ${ip_addr_after}

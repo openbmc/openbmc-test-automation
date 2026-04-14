@@ -327,7 +327,7 @@ Delete Local Server Partition File
     ...  will get deleted after the uploads. If partition file name consist
     ...  of “-file” then partition file gets deleted.
 
-    @{conf_file_list} =  OperatingSystem.List Files In Directory  ${EXECDIR}
+    @{conf_file_list}=  OperatingSystem.List Files In Directory  ${EXECDIR}
     ${match_conf_file_list}=  Get Matches  ${conf_file_list}  regexp=.*-file  case_insensitive=${True}
 
     ${num_records}=  Get Length  ${match_conf_file_list}
@@ -467,7 +467,7 @@ Redfish Upload Partition File
     #              if user pass small_file_size the create file with small
     #              size keyword gets executed.
 
-    @{Partition_file_list} =  Split String  ${file_name}  ,
+    @{Partition_file_list}=  Split String  ${file_name}  ,
     ${num_records}=  Get Length  ${Partition_file_list}
 
     Create Partition File  ${Partition_file_list}
@@ -494,7 +494,7 @@ Redfish Fail To Upload Partition File
     #                     else user provide the information when user upload the partition with file size
     #                     below lower linit of allowed partition or more than of large allowed partition.
 
-    @{Partition_file_list} =  Split String  ${file_name}  ,
+    @{Partition_file_list}=  Split String  ${file_name}  ,
 
     Create Partition File  ${Partition_file_list}
     Upload Partition File To BMC  ${Partition_file_list}  ${status_code}  ${response_message}
@@ -517,7 +517,7 @@ Redfish Upload Partition File In Loop
     # Description of argument(s):
     # file_name    Partition file name.
 
-    @{Partition_file_list} =  Split String  ${file_name}  ,
+    @{Partition_file_list}=  Split String  ${file_name}  ,
     Create Partition File  ${Partition_file_list}
 
     Upload Partition File To BMC  ${Partition_file_list}  ${HTTP_OK}  ${FILE_UPLOAD_MESSAGE}
@@ -569,7 +569,7 @@ Redfish Partition File Persistency
     # Description of argument(s):
     # file_name    Partition file name.
 
-    @{Partition_file_list} =  Split String  ${file_name}  ,
+    @{Partition_file_list}=  Split String  ${file_name}  ,
     ${num_records}=  Get Length  ${Partition_file_list}
     Create Partition File  ${Partition_file_list}
     Upload Partition File To BMC  ${Partition_file_list}  ${HTTP_OK}  ${FILE_UPLOAD_MESSAGE}
@@ -645,7 +645,7 @@ Redfish Read Partition File
     # file_name      Partition file name.
     # reboot_flag    Reboot flag.
 
-    @{Partition_file_list} =  Split String  ${file_name}  ,
+    @{Partition_file_list}=  Split String  ${file_name}  ,
     ${content_dict}=  Add Content To Files  ${Partition_file_list}
 
     ${num_records}=  Get Length  ${Partition_file_list}
@@ -682,7 +682,7 @@ Redfish Update Partition File With Same Content
     # file_name      Partition file name.
     # reboot_flag    Reboot flag.
 
-    @{Partition_file_list} =  Split String  ${file_name}  ,
+    @{Partition_file_list}=  Split String  ${file_name}  ,
     ${content_dict}=  Add Content To Files  ${Partition_file_list}  ${0}
 
     Upload Partition File To BMC  ${Partition_file_list}  ${HTTP_OK}  ${FILE_UPLOAD_MESSAGE}
@@ -716,7 +716,7 @@ Redfish Update Partition File With Different Content
     # file_name      Partition file name.
     # reboot_flag    Reboot flag.
 
-    @{Partition_file_list} =  Split String  ${file_name}  ,
+    @{Partition_file_list}=  Split String  ${file_name}  ,
     ${content_dict}=  Add Content To Files  ${Partition_file_list}  ${0}
 
     Upload Partition File To BMC  ${Partition_file_list}  ${HTTP_OK}  ${FILE_UPLOAD_MESSAGE}
@@ -780,7 +780,7 @@ Redfish Delete Non Existence Partition File
     # Description of argument(s):
     # file_name    Partition file name.
 
-    @{Partition_file_list} =  Split String  ${file_name}  ,
+    @{Partition_file_list}=  Split String  ${file_name}  ,
     Delete BMC Partition File  ${Partition_file_list}  ${HTTP_NOT_FOUND}  ${RESOURCE_NOT_FOUND_MESSAGE}
 
 
@@ -798,7 +798,7 @@ Non Admin User To Upload Partition File
     Redfish Create User  ${username}  ${password}  ${role}  ${enabled}
     Delete All Sessions
     Initialize OpenBMC  rest_username=${username}  rest_password=${password}
-    @{Partition_file_list} =  Split String  ${file_name}  ,
+    @{Partition_file_list}=  Split String  ${file_name}  ,
     Create Partition File  ${Partition_file_list}
     Upload Partition File To BMC  ${Partition_file_list}  ${HTTP_FORBIDDEN}  ${FORBIDDEN_MESSAGE}  ${False}
     Delete Local Partition File  ${Partition_file_list}
@@ -819,7 +819,7 @@ Non Admin Delete Non Existence Partition File
     Redfish Create User  ${username}  ${password}  ${role}  ${enabled}
     Delete All Sessions
     Initialize OpenBMC  rest_username=${username}  rest_password=${password}
-    @{Partition_file_list} =  Split String  ${file_name}  ,
+    @{Partition_file_list}=  Split String  ${file_name}  ,
     Delete BMC Partition File  ${Partition_file_list}  ${HTTP_FORBIDDEN}  ${FORBIDDEN_MESSAGE}
 
 
@@ -845,7 +845,7 @@ Check Redfish Upload Partition File Name With Character Limit To BMC
     # status_code     HTTPS status code.
     # message         Expected message of from upload partition file URI.
 
-    @{Partition_file_list} =  Split String  ${file_name}  ,
+    @{Partition_file_list}=  Split String  ${file_name}  ,
     ${num_records}=  Get Length  ${Partition_file_list}
     Create Partition File  ${Partition_file_list}
 
@@ -871,7 +871,7 @@ Check Redfish Fail To Upload Partition File Name With Special Character To BMC
     # status_code     HTTPS status code.
     # message         Expected message from upload partition file URI.
 
-    @{Partition_file_list} =  Split String  ${file_name}  ,
+    @{Partition_file_list}=  Split String  ${file_name}  ,
     ${num_records}=  Get Length  ${Partition_file_list}
 
     Create Partition File  ${Partition_file_list}
@@ -892,13 +892,13 @@ Redfish Upload Partition File From Path
     # Description of argument(s):
     # PARTITION_FILE_PATH    Partition file path.
 
-    ${file_list} =  OperatingSystem.List Files In Directory  ${PARTITION_FILE_PATH}
+    ${file_list}=  OperatingSystem.List Files In Directory  ${PARTITION_FILE_PATH}
 
     ${num_records}=  Get Length  ${file_list}
     Should Not Be Equal As Integers  ${num_records}  0
 
     FOR  ${file_name}  IN  @{file_list}
-      @{Partition_file_list} =  Split String  ${file_name}  ,
+      @{Partition_file_list}=  Split String  ${file_name}  ,
       ${num_records}=  Get Length  ${Partition_file_list}
       Upload Partition File To BMC  file_name=${Partition_file_list}
       ...  status_code=${HTTP_OK}  expected_message=${FILE_UPLOAD_MESSAGE}  path=${PARTITION_FILE_PATH}

@@ -576,9 +576,9 @@ Generate CSR String
     [Documentation]  Generate a CSR string.
 
     # Note: Generates and returns CSR string.
-    ${csr_gen_time} =  Get Current Date Time
+    ${csr_gen_time}=  Get Current Date Time
     ${CSR_FILE}=  Catenate  SEPARATOR=_  ${csr_gen_time}  csr_server.csr
-    ${CSR_KEY}=   Catenate  SEPARATOR=_  ${csr_gen_time}  csr_server.key
+    ${CSR_KEY}=  Catenate  SEPARATOR=_  ${csr_gen_time}  csr_server.key
     Set Test Variable  ${CSR_FILE}
     Set Test Variable  ${CSR_KEY}
     ${ssl_cmd}=  Set Variable  openssl req -new -newkey rsa:2048 -nodes -keyout ${CSR_KEY} -out ${CSR_FILE}
@@ -733,7 +733,7 @@ Get Certificate Signed By VMI
 
     # create a crt file with certificate string
     ${signed_cert}=  Set Variable  ${cert["Certificate"]}
-    ${testcert_gen_time} =  Get Current Date Time
+    ${testcert_gen_time}=  Get Current Date Time
     ${test_cert_file}=   Catenate  SEPARATOR=_  ${testcert_gen_time}  test_certificate.cert
 
     Create File  ${test_cert_file}  ${signed_cert}

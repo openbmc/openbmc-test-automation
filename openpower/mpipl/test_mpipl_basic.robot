@@ -90,7 +90,7 @@ Redfish Initiated MPIPL
 
     # Trigger MPIPL
     Log To Console  Trigger System dump
-    ${payload} =  Create Dictionary
+    ${payload}=  Create Dictionary
     ...  DiagnosticDataType=OEM  OEMDiagnosticDataType=System
     Redfish.Post  ${DUMP_URI}/Actions/LogService.CollectDiagnosticData  body=&{payload}
     ...  valid_status_codes=[${HTTP_ACCEPTED}]

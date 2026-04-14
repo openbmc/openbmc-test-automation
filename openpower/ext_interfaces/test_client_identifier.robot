@@ -187,7 +187,7 @@ Verify A Non Admin Session Created With ClientID
     FOR  ${client}  ${session}  IN ZIP  ${client_ids}  ${session_ids}
       ${resp}=  Redfish Get Request  /redfish/v1/SessionService/Sessions/${session["Id"]}
       Rprint Vars  resp.json()
-      @{words} =  Split String  ${resp.json()["ClientOriginIPAddress"]}  :
+      @{words}=  Split String  ${resp.json()["ClientOriginIPAddress"]}  :
       ${ip_address}=  Get Running System IP
       Set Test Variable  ${temp_ipaddr}  ${words}[-1]
       Valid Value  client  ['${resp.json()["Oem"]["OpenBMC"]["ClientID"]}']

@@ -200,7 +200,7 @@ Create Error On BMC And Verify If Trap Is Sent
     ...  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}  ${snmp_manager_id}
     SSHLibrary.Execute Command  sudo pkill -9 snmptrapd
 
-    ${lines} =  Split To Lines 	 ${SNMP_LISTEN_OUT}
+    ${lines}=  Split To Lines 	 ${SNMP_LISTEN_OUT}
     ${trap_info_line_one}=  Get From List  ${lines}  -2
     Log Many  ${trap_info_line_one}
     ${trap_info_line_two}=  Get From List  ${lines}  -1

@@ -50,7 +50,7 @@ Get Voltage Records And Verify
     END
     Valid Value  num_invalid_records  valid_values=[0]
 
-    ${cmd}  Catenate  [x for x in ${records}
+    ${cmd}=  Catenate  [x for x in ${records}
     ...  if not x['LowerThresholdNonCritical'] <= x['ReadingVolts'] <= x['UpperThresholdNonCritical']]
     ${invalid_records}=  Evaluate  ${cmd}
 

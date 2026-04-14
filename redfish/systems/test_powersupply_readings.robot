@@ -86,7 +86,7 @@ Verify Voltage Records
 
     ${records}=  Redfish.Get Attribute  ${redfish_uri}  ${record_type}
 
-    ${cmd}  Catenate  [x for x in ${records}
+    ${cmd}=  Catenate  [x for x in ${records}
     ...  if not x['LowerThresholdNonCritical'] <= x['${reading_type}'] <= x['UpperThresholdNonCritical']]
     ${invalid_records}=  Evaluate  ${cmd}
 
