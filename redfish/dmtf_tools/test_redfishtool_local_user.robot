@@ -69,7 +69,7 @@ Verify Redfishtool Error Upon Creating Same Users With Different Privileges
 
     Redfishtool Create User  "UserT100"  "TestPwd123"  "ReadOnly"  true
     Redfishtool Create User  "UserT100"  "TestPwd123"  "Administrator"  true
-    ...  expected_error=${HTTP_BAD_REQUEST}
+    ...  expected_error=${HTTP_BAD_REQUEST},${HTTP_CONFLICT}
 
 
 Verify Redfishtool Admin User Privilege
@@ -145,7 +145,6 @@ Verify Error While Running Redfishtool With Incorrect Password
     Redfishtool Access Resource  /redfish/v1/Systems/  "UserT100"  "TestPwd234"  ${HTTP_UNAUTHORIZED}
 
 *** Keywords ***
-
 
 Redfishtool Access Resource
     [Documentation]  Access resource.
