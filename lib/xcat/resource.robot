@@ -1,3 +1,6 @@
+*** Settings ***
+Documentation   XCAT required variables resource file.
+
 *** Variables ***
 
 # XCAT related parameters
