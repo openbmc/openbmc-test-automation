@@ -2,7 +2,6 @@
 Documentation      Keywords for system related tools installation.
 ...                For HTX refer to https://github.com/open-power/HTX
 
-
 Resource     ../lib/boot_utils.robot
 Resource     ../lib/os_utilities.robot
 
@@ -80,7 +79,7 @@ Install HTX On RedHat
     #            (e.g. http://server.com/projects/htx_package.rpm )
 
 
-    ${stdout}  ${stderr}  ${rc}  OS Execute Command
+    ${stdout}  ${stderr}  ${rc}=  OS Execute Command
     ...  wget ${htx_rpm}  ignore_err=1
     Should Not Contain  ${stderr}  ERROR
     @{str}=  Split String From Right  ${htx_rpm}  /  1
