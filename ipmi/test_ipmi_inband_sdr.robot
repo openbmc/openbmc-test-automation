@@ -31,8 +31,8 @@ Verify Get SDR For Maximum Record Via IPMI
     FOR  ${record}  IN RANGE  0  ${record_count}
         # Convert number to hexadecimal record ID.
         ${recordhex}=  Convert To Hex  ${record}  length=4  lowercase=yes
-        ${first_digit}    Set Variable    ${recordhex}[0:2]
-        ${second_digit}    Set Variable    ${recordhex}[2:4]
+        ${first_digit}=  Set Variable  ${recordhex}[0:2]
+        ${second_digit}=  Set Variable  ${recordhex}[2:4]
 
         # Get SDR command.
         ${resp}=  Run IPMI Standard Command

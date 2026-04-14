@@ -250,7 +250,7 @@ Set Invalid SOL Non Volatile Bit Rate
     [Tags]  Set_Invalid_SOL_Non_Volatile_Bit_Rate
 
     # Set Invalid non-volatile-bit-rate from SOL Info.
-    ${resp} =  Run Keyword And Expect Error  *${IPMI_RAW_CMD['SOL']['Set_SOL'][0]}*
+    ${resp}=  Run Keyword And Expect Error  *${IPMI_RAW_CMD['SOL']['Set_SOL'][0]}*
     ...  Run External IPMI Standard Command  sol set non-volatile-bit-rate ${invalid_bit_rate}
 
     # Compares whether valid values are displayed.

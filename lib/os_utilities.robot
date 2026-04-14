@@ -226,12 +226,12 @@ Get CPU Max Temperature
     # Filter the dictionary to get just the CPU temperature info.
     ${cmd}=  Catenate  {k:v for k,v in $temperature_objs.items()
     ...  if re.match('${SENSORS_URI}temperature/p.*core.*temp', k)}
-    ${cpu_temperatuture_objs}  Evaluate  ${cmd}  modules=re
+    ${cpu_temperatuture_objs}=  Evaluate  ${cmd}  modules=re
     # Create a list of the CPU temperature values (current).
     ${cpu_temperatures}=  Evaluate
     ...  [ x['Value'] for x in $cpu_temperatuture_objs.values() ]
 
-    ${cpu_max_temp}  Evaluate  int(max(map(int, $cpu_temperatures))/1000)
+    ${cpu_max_temp}=  Evaluate  int(max(map(int, $cpu_temperatures))/1000)
     RETURN  ${cpu_max_temp}
 
 
@@ -248,7 +248,7 @@ Get CPU Min Temperature
     ${cpu_temperatures}=  Evaluate
     ...  [ x['Value'] for x in $cpu_temperatuture_objs.values() ]
 
-    ${cpu_min_temp}  Evaluate  int(min(map(int, $cpu_temperatures))/1000)
+    ${cpu_min_temp}=  Evaluate  int(min(map(int, $cpu_temperatures))/1000)
     RETURN  ${cpu_min_temp}
 
 
@@ -614,7 +614,7 @@ Retrieve HW Info And Write List
     # last                 Is this the last element in the parent JSON?
     Write New JSON List  ${json_tmp_file_path}  ${json_field_name}
     FOR  ${class}  IN  @{list}
-      ${tail}  Get From List  ${list}  -1
+      ${tail}=  Get From List  ${list}  -1
       IF  '${tail}' == '${class}'
           Retrieve HW Info And Write  ${class}  ${json_tmp_file_path}  true
       ELSE

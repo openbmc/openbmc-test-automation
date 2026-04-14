@@ -74,7 +74,7 @@ Run HTX Soft Bootme Exerciser
 
     ${runtime}=  Convert Time  ${boot_interval}
 
-    ${startTime} =    Get Current Date
+    ${startTime}=    Get Current Date
     IF  '${HTX_MDT_PROFILE}' == 'mdt.bu'
         Create Default MDT Profile
     END
@@ -114,9 +114,8 @@ Run HTX Soft Bootme Exerciser
             Rprint Vars  loop_count
         END
 
-        ${currentTime} =    Get Current Date
-        ${elapsedTimeSec} =
-        ...   Subtract Date From Date
+        ${currentTime}=    Get Current Date
+        ${elapsedTimeSec}=  Subtract Date From Date
         ...   ${currentTime}   ${startTime}   result_format=number   exclude_millis=True
         IF   ${runtime} < ${elapsedTimeSec}  BREAK
     END
