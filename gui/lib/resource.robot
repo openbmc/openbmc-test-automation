@@ -307,4 +307,3 @@ Logout And Close Browser
     Click Button  ${xpath_button_user_action}
     Click Button  ${xpath_button_logout}
     Close Browser
-

@@ -25,4 +25,3 @@ Log System Driver Data
 
     ${bmc_model}=  Get BMC System Model
     Log  BMC Model=${bmc_model}
-

@@ -41,4 +41,3 @@ Test Setup Execution
 
     Printn
     Download DMTF Tool  ${rsv_dir_path}  ${rsv_github_url}  ${branch_name}
-

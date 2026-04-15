@@ -935,4 +935,3 @@ Smart Power Off
     ${cmd_buf}=  Catenate  REST Hard Power Off \ stack_mode=skip
     ...  \ \ quiet=${loc_quiet}
     Run Key U  ${cmd_buf}  quiet=${loc_quiet}
-

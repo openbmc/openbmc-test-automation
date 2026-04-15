@@ -182,4 +182,3 @@ Template Check Property
     Should Be Empty  ${stderr}
     ${length}=  Get Length  ${output}
     Should Be True  ${length} > 1
-

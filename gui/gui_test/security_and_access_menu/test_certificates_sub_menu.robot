@@ -1,5 +1,4 @@
 *** Settings ***
-
 Documentation  Test OpenBMC GUI "Certificates" sub-menu of "Security and access".
 
 Resource        ../../lib/gui_resource.robot
@@ -9,7 +8,7 @@ Suite Setup     Suite Setup Execution
 Suite Teardown  Close All Browsers
 Test Setup      Test Setup Execution
 
-Test Tags      Certificates_Sub_Menu
+Test Tags       Certificates_Sub_Menu
 
 *** Variables ***
 
@@ -247,4 +246,3 @@ Install CA Certificate
     Click Element    ${xpath_secuity_and_accesss_menu}
     Click Element    ${xpath_certificates_sub_menu}
     Wait Until Page Contains  CA Certificate  timeout=10
-
