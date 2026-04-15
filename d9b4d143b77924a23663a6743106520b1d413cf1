@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0109bb5a_c35f812a",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-04-15T07:49:43Z",
+      "side": 1,
+      "message": "Give a space before ipv6_address_verified",
+      "revId": "d9b4d143b77924a23663a6743106520b1d413cf1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
