@@ -147,4 +147,3 @@ Verify Ethernet Config Property
     FOR  ${key}  ${value}  IN  @{key_map}
         Should Be Equal As Strings  ${response_data['${key}']}  ${value}
     END
-

@@ -27,4 +27,3 @@ Log BMC Driver Details
     ...  return_stderr=True
     Should Be Empty  ${stderr}
     Log  ${output}
-

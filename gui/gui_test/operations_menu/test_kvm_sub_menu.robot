@@ -1,5 +1,4 @@
 *** Settings ***
-
 Documentation   Test OpenBMC "KVM" sub menu of "Operations".
 
 Resource        ../../lib/gui_resource.robot
@@ -55,4 +54,3 @@ Suite Setup Execution
 
     Launch Browser And Login GUI
     Navigate To Required Sub Menu  ${xpath_operations_menu}  ${xpath_kvm_sub_menu}  kvm
-

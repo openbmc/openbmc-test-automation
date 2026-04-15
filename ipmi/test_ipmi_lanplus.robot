@@ -28,4 +28,3 @@ Verify Lanplus Interface
     [Tags]  Verify_Lanplus_Interface
 
     Verify Lanplus Interface Commands
-

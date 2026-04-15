@@ -551,4 +551,3 @@ Get Sensor Id For Sensor
     # Example of output for ${sensor_id} is 0x41.
 
     RETURN  ${sensor_id}
-

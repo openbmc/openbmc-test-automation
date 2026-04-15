@@ -64,4 +64,3 @@ Verify IPMI Disable Persistency After BMC Reboot
     # Verify that IPMI remains disabled after reboot.
     Run Keyword And Expect Error  *Unable to establish IPMI*
     ...  Run External IPMI Standard Command  lan print ${CHANNEL_NUMBER}
-

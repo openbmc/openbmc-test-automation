@@ -398,4 +398,3 @@ Get Redfish Event Log Entries
     ${resp}=  Redfish.Get  ${EVENT_LOG_URI}Entries
 
     RETURN  ${resp.dict}
-

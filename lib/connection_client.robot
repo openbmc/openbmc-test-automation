@@ -151,4 +151,3 @@ Clear System Entry From Knownhosts
     [Documentation]   Delete OPENBMC_HOST entry from known_hosts file.
     ${cmd}=  Set Variable  sed '/${OPENBMC_HOST}/d' -i ~/.ssh/known_hosts
     ${rc}  ${output}=  Run And Return RC And Output  ${cmd}
-

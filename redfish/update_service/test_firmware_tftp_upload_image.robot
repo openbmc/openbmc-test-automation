@@ -201,4 +201,3 @@ Same Firmware Install Two Times
     # Check if the existing firmware is functional.
     Pass Execution If  ${software_inventory_record['functional']}
     ...  The existing ${image_version} firmware is already functional.
-

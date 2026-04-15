@@ -386,4 +386,3 @@ Update LDAP User Role And Read Network Configuration Via GUI
 
     ${mac_address}=  Redfish.Get Attribute  ${REDFISH_NW_ETH0_URI}  MACAddress
     Textfield Value Should Be  ${xpath_mac_address_input}  ${mac_address}
-

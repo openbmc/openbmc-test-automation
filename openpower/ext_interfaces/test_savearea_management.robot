@@ -905,4 +905,3 @@ Redfish Upload Partition File From Path
       Verify Partition File On BMC  ${Partition_file_list}  Partition_status=1
       Delete BMC Partition File  ${Partition_file_list}  ${HTTP_OK}  ${FILE_DELETED_MESSAGE}
     END
-
