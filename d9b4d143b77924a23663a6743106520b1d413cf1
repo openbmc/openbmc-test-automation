@@ -16,6 +16,24 @@
       "message": "Give a space before ipv6_address_verified",
       "revId": "d9b4d143b77924a23663a6743106520b1d413cf1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ea28f9e_6f5d878b",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-04-15T08:06:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0109bb5a_c35f812a",
+      "revId": "d9b4d143b77924a23663a6743106520b1d413cf1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
