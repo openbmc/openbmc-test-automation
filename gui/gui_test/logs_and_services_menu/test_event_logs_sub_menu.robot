@@ -17,8 +17,8 @@ ${xpath_filter_event}             //button[contains(normalize-space(.),"Filter")
 ${xpath_event_severity_ok}        //*[@data-test-id="tableFilter-checkbox-OK"]
 ${xpath_event_severity_warning}   //*[@data-test-id="tableFilter-checkbox-Warning"]
 ${xpath_event_severity_critical}  //*[@data-test-id="tableFilter-checkbox-Critical"]
-${xpath_event_from_date}          //*[@id="input-from-date"]
-${xpath_event_to_date}            //*[@id="input-to-date"]
+${xpath_event_from_date}          (//input[@class='dp-input'])[1]
+${xpath_event_to_date}            (//input[@class='dp-input'])[2]
 ${xpath_select_all_events}        //*[@data-test-id="eventLogs-checkbox-selectAll"]
 ${xpath_event_action_delete}      //*[@data-test-id="table-button-deleteSelected"]
 ${xpath_event_action_export}      //*[contains(text(),"Export")]
@@ -36,6 +36,7 @@ ${xpath_clear_search}             //button[@title="Clear search input"]
 ${xpath_event_log_resolve}        //*[@name="switch"]
 ${xpath_event_logs_resolve}       //button[contains(normalize-space(.),'Resolve')]
 ${xpath_event_log_data}           //td[contains(normalize-space(.)),'Critical']/following-sibling::td[3]
+
 
 *** Test Cases ***
 
@@ -146,7 +147,7 @@ Verify Existence Of All Fields In Event Logs Page
     [Tags]  Verify_Existence_Of_All_Fields_In_Event_Logs_Page
     [Template]  Page Should Contain
 
-    # Expected parameters
+    # Expected parameters.
     ID
     Severity
     Date
@@ -219,9 +220,9 @@ Suite Setup Execution
     [Documentation]  Do suite setup tasks.
 
     Launch Browser And Login GUI
-    Navigate To Event Logs Page
+    Navigate To Required Sub Menu  ${xpath_logs_menu}  ${xpath_event_logs_sub_menu}  event-logs
     Redfish.Login
-    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
+
 
 Suite Teardown Execution
     [Documentation]  Suite teardown tasks.
@@ -229,12 +230,6 @@ Suite Teardown Execution
     Redfish.Logout
     Close Browser
 
-Navigate To Event Logs Page
-    [Documentation]  Navigate to the event logs page from main menu.
-
-    Click Element  ${xpath_logs_menu}
-    Click Element  ${xpath_event_logs_sub_menu}
-    Wait Until Keyword Succeeds  30 sec  5 sec  Location Should Contain  event-logs
 
 Create Error Logs
     [Documentation]  Create given number of error logs.
