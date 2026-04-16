@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7a8a65c_41dacf83",
+        "filename": "gui/gui_test/logs_and_services_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-04-16T15:07:06Z",
+      "side": 1,
+      "message": "Keyword level we are taking care of that \n\nNavigate To Required Sub Menu\n    [Documentation]  Navigate to required sub menu from main menu.\n    [Arguments]  ${xpath_main_menu}  ${xpath_sub_menu}  ${sub_menu_text}\n\n    # Description of argument(s):\n    # xpath_main_menu    Locator of main menu.\n    # xpath_sub_menu     Locator of sub menu.\n    # sub_menu_text      Text of sub menu.\n\n    ${present}\u003d    Run Keyword And Return Status\n    ...  Element Should Be Visible    ${xpath_sub_menu}\n\n    IF  not ${present}\n        Wait And Click Element  ${xpath_main_menu}\n    END\n    Wait And Click Element  ${xpath_sub_menu}  wait_timeout\u003d60s\n    Location Should Contain  ${sub_menu_text}\n    Wait Until Element Is Not Visible  ${xpath_page_loading_progress_bar}  timeout\u003d1min",
+      "parentUuid": "c8d6f1fe_99397445",
+      "revId": "a11177897bda3faabe81f53a4a76b91ad11af100",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3d3a81cd_2e3a9508",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-04-16T14:03:08Z",
       "side": 1,
       "message": "Remove the \"i\" character from line 1. Change i*** Settings *** to *** Settings ***",
+      "revId": "a11177897bda3faabe81f53a4a76b91ad11af100",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2208843_27dfdea4",
+        "filename": "gui/gui_test/logs_and_services_menu/test_progress_logs_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-04-16T15:07:06Z",
+      "side": 1,
+      "message": "Done. Thanks for pointing.",
+      "parentUuid": "3d3a81cd_2e3a9508",
       "revId": "a11177897bda3faabe81f53a4a76b91ad11af100",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
