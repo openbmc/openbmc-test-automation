@@ -43,7 +43,7 @@ Verify Existence Of All Buttons And Input Boxes In Sensor Page
     Page Should Contain Element  ${xpath_sensors_filter}
     Click Element  ${xpath_sensors_filter}
 
-    #Search field
+    # Search field
     Page Should Contain Element  ${xpath_sensors_search}
 
 

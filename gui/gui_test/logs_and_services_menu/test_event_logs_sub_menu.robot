@@ -146,7 +146,7 @@ Verify Existence Of All Fields In Event Logs Page
     [Tags]  Verify_Existence_Of_All_Fields_In_Event_Logs_Page
     [Template]  Page Should Contain
 
-    #Expected parameters
+    # Expected parameters
     ID
     Severity
     Date

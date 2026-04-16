@@ -228,7 +228,7 @@ Set Policy Via GUI
     IF  '${state}' == 'Enabled'
       ${opposite_state_gui}  ${opposite_state_redfish}=  Set Variable  Disabled  ${False}
     ELSE
-      ${opposite_state_gui}  ${opposite_state_redfish} =  Set Variable  Enabled  ${True}
+      ${opposite_state_gui}  ${opposite_state_redfish}=  Set Variable  Enabled  ${True}
     END
 
     # Setting policy to an opposite value via Redfish.

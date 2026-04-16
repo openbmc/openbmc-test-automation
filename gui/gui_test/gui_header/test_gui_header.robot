@@ -57,12 +57,12 @@ Verify System Serial And Model Number In GUI Header Page
     [Setup]  Run Keywords  Launch Browser And Login GUI  AND  Redfish Login
     [Teardown]  Run Keywords  Close Browser  AND  Redfish.Logout
 
-   # Model.
-   ${redfish_model_number}=  Redfish.Get Attribute  ${SYSTEM_BASE_URI}  Model
-   Element Should Be Visible  //*[@data-test-id='appHeader-container-overview']
-   ...  /following-sibling::*/*[text()='${redfish_model_number}']
+    # Model.
+    ${redfish_model_number}=  Redfish.Get Attribute  ${SYSTEM_BASE_URI}  Model
+    Element Should Be Visible  //*[@data-test-id='appHeader-container-overview']
+    ...  /following-sibling::*/*[text()='${redfish_model_number}']
 
-   # Serial Number.
-   ${redfish_serial_number}=  Redfish.Get Attribute  ${SYSTEM_BASE_URI}  SerialNumber
-   Element Should Be Visible  //*[@data-test-id='appHeader-container-overview']
-   ...  /following-sibling::*/*[text()='${redfish_serial_number}']
+    # Serial Number.
+    ${redfish_serial_number}=  Redfish.Get Attribute  ${SYSTEM_BASE_URI}  SerialNumber
+    Element Should Be Visible  //*[@data-test-id='appHeader-container-overview']
+    ...  /following-sibling::*/*[text()='${redfish_serial_number}']

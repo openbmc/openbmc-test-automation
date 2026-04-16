@@ -22,7 +22,7 @@ Verify Navigation To Profile Settings Page
     [Tags]  Verify_Navigation_To_Profile_Settings_Page
     [Teardown]  Logout GUI
 
-   Page Should Contain  Profile settings
+    Page Should Contain  Profile settings
 
 
 Verify Existence Of All Sections In Profile Settings Page

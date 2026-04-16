@@ -188,7 +188,7 @@ Check IPMI OEMpartialadd Reject
 
 
 Test Setup Execution
-   [Documentation]  Do test case setup tasks.
+    [Documentation]  Do test case setup tasks.
 
     Redfish.Login
     Redfish Purge Event Log

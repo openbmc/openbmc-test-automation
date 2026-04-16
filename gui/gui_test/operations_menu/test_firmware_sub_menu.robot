@@ -13,7 +13,7 @@ Test Tags      Firmware_Sub_Menu
 
 ${xpath_firmware_heading}                //h1[text()="Firmware"]
 ${xpath_add_file_button}                 //span[@class='add-file-btn btn btn-secondary']
-#${xpath_add_file_button_disabled} is Xpath of add file button in host poweron state.
+# ${xpath_add_file_button_disabled} is Xpath of add file button in host poweron state.
 ${xpath_add_file_button_disabled}        //span[@class='add-file-btn btn disabled btn-secondary']
 ${xpath_start_update_button}             //*[@data-test-id="firmware-button-startUpdate"]
 ${xpath_switch_to_running}               //*[@data-test-id="firmware-button-switchToRunning"]
@@ -95,7 +95,7 @@ Verify Existence Of All Buttons In Firmware Page At Host Power On
 *** Keywords ***
 
 Suite Setup Execution
-   [Documentation]  Do test case setup tasks.
+    [Documentation]  Do test case setup tasks.
 
     Launch Browser And Login GUI
     Click Element  ${xpath_operations_menu}

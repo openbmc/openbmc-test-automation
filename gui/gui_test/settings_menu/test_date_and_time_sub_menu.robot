@@ -1,5 +1,4 @@
 *** Settings ***
-
 Documentation   Test OpenBMC GUI "Date and time" sub-menu of "Settings".
 
 Resource        ../../lib/gui_resource.robot
@@ -88,8 +87,8 @@ Verify Date And Time From Configuration Section
 
 
 Verify Display Of Date And Time In GUI Page
-     [Documentation]  Get date and time from Redfish and verify it via GUI date and time page.
-     [Tags]  Verify_Display_Of_Date_And_Time_In_GUI_Page
+    [Documentation]  Get date and time from Redfish and verify it via GUI date and time page.
+    [Tags]  Verify_Display_Of_Date_And_Time_In_GUI_Page
 
     # Set Default timezone in profile settings page.
     Set Timezone In Profile Settings Page  Default
@@ -248,13 +247,13 @@ Verify Moving From Manual To NTP
 *** Keywords ***
 
 Suite Setup Execution
-   [Documentation]  Do test case setup tasks.
+    [Documentation]  Do test case setup tasks.
 
     Launch Browser And Login GUI
     Maximize Browser Window
 
 Suite Teardown Execution
-   [Documentation]  Do the post suite teardown.
+    [Documentation]  Do the post suite teardown.
 
     Run Keyword And Ignore Error  Logout GUI
     Close Browser
