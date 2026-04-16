@@ -50,7 +50,7 @@ Verify Navigation To Open New Tab In KVM Page
 *** Keywords ***
 
 Suite Setup Execution
-   [Documentation]  Perform suite setup operation.
+    [Documentation]  Perform suite setup operation.
 
     Launch Browser And Login GUI
     Navigate To Required Sub Menu  ${xpath_operations_menu}  ${xpath_kvm_sub_menu}  kvm

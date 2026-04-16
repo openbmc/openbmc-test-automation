@@ -674,7 +674,7 @@ Verify Coexistence Of DHCPv6 Staticv6 And LinkLocalv6 On Both Interfaces
 
 
 Configure DHCPv6 On Eth0 And Verify Existing Network Configurations On BMC Reboot
-   [Documentation]  Configure DHCPv6 on eth0 and verify existing network configurations
+    [Documentation]  Configure DHCPv6 on eth0 and verify existing network configurations
     ...    on BMC reboot.
     [Tags]  Configure_DHCPv6_On_Eth0_And_Verify_Existing_Network_Configurations_On_BMC_Reboot
     [Setup]  Set And Verify DHCPv6 States  Enabled  Disabled

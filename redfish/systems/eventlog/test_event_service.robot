@@ -225,7 +225,7 @@ Test Setup Execution
     Delete All Subscriptions  ${subscription_list}
 
     # Verify Redfish event service attribute ServiceEnabled is set to True.
-    ${resp} =  Redfish_utils.Get Attribute  /redfish/v1/EventService  ServiceEnabled
+    ${resp}=  Redfish_utils.Get Attribute  /redfish/v1/EventService  ServiceEnabled
     Should Be Equal As Strings  ${resp}  ${True}
 
 
@@ -292,9 +292,9 @@ Try Subscription Creation
      # DeliveryRetryPolicy  The delivery retry policy for the subscription (e.g. SuspendRetries).
      # Valid_status_codes   The valid status codes for the subscription (e.g. [201, 400]).
 
-    ${subscription_list}=  Redfish_Utils.Get Member List
-    ...  /redfish/v1/EventService/Subscriptions
-    Should Be Empty  ${subscription_list}
+     ${subscription_list}=  Redfish_Utils.Get Member List
+     ...  /redfish/v1/EventService/Subscriptions
+     Should Be Empty  ${subscription_list}
 
      ${payload}=  Create Dictionary  Context=${Context}  Destination=${Destination}
      ...    EventFormatType=${EventFormatType}  Protocol=${Protocol}  RegistryPrefixes=${RegistryPrefixes}
@@ -303,4 +303,4 @@ Try Subscription Creation
      Set Test Variable  ${payload}
 
      Redfish.Post  /redfish/v1/EventService/Subscriptions  body=&{payload}
-    ...  valid_status_codes=[${Valid_status_codes}]
+     ...  valid_status_codes=[${Valid_status_codes}]

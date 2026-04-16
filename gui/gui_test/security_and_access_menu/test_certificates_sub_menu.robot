@@ -112,7 +112,6 @@ Verify Delete Button Should Be Disabled For HTTPS And LDAP Certificates
 Verify Installed CA Certificate
     [Documentation]  Install CA certificate and verify the same via GUI.
     [Tags]  Verify_Installed_CA_Certificate
-    #Added Test Setup Execution in Setup to navigate to Certificates page.
     [Setup]  Run Keywords  Delete All CA Certificate Via Redfish  AND
     ...      Test Setup Execution
 
@@ -172,9 +171,9 @@ Verify Cancel Button While Deleting The CA Certificate
     [Tags]  Verify_Cancel_Button_While_Deleting_The_CA_Certificate
     [Setup]  Install CA Certificate
 
-     Click Element  ${xpath_delete_ca_certificate}
-     Click Element  ${xpath_cancel_delete_button}
-     Page Should Not Contain  ${xpath_cancel_delete_button}
+    Click Element  ${xpath_delete_ca_certificate}
+    Click Element  ${xpath_cancel_delete_button}
+    Page Should Not Contain  ${xpath_cancel_delete_button}
 
 
 Verify Certificate Page With Readonly User
@@ -192,7 +191,6 @@ Verify Certificate Page With Readonly User
 
 Generate Certificate File Data
     [Documentation]  Generate data of certificate file.
-
     [Arguments]  ${cert_type}
 
     # Description of Arguments(s):
@@ -212,7 +210,8 @@ Generate Certificate File Data
 
 Test Setup Execution
     [Documentation]  Do test case setup tasks.
-    #Check if Generate CSR is open, if open close it.
+    # Check if Generate CSR is open, if open close it.
+
     ${generate_csr_open}=    Run Keyword And Return Status    Element Should Be Visible
     ...    ${xpath_close_generate_csr}
     IF  ${generate_csr_open}

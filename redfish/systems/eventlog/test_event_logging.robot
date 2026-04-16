@@ -92,27 +92,27 @@ Test Event Entry Numbering Reset On Restart
     [Tags]  Test_Event_Entry_Numbering_Reset_On_Restart
     [Setup]  Redfish Power Off  stack_mode=skip
 
-    #{
-    #  "@odata.context": "/redfish/v1/$metadata#LogEntryCollection.LogEntryCollection",
-    #  "@odata.id": "/redfish/v1/Systems/system/LogServices/EventLog/Entries",
-    #  "@odata.type": "#LogEntryCollection.LogEntryCollection",
-    #  "Description": "Collection of System Event Log Entries",
-    #  "Members": [
-    #  {
-    #    "@odata.context": "/redfish/v1/$metadata#LogEntry.LogEntry",
-    #    "@odata.id": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/1",
-    #    "@odata.type": "#LogEntry.v1_4_0.LogEntry",
-    #    "Created": "2019-05-29T13:19:27+00:00",
-    #    "EntryType": "Event",
-    #    "Id": "1",               <----- Event log ID
-    #    "Message": "org.open_power.Host.Error.Event",
-    #    "Name": "System DBus Event Log Entry",
-    #    "Severity": "Critical"
-    #  }
-    #  ],
-    #  "Members@odata.count": 1,
-    #  "Name": "System Event Log Entries"
-    #}
+    # {
+    #   "@odata.context": "/redfish/v1/$metadata#LogEntryCollection.LogEntryCollection",
+    #   "@odata.id": "/redfish/v1/Systems/system/LogServices/EventLog/Entries",
+    #   "@odata.type": "#LogEntryCollection.LogEntryCollection",
+    #   "Description": "Collection of System Event Log Entries",
+    #   "Members": [
+    #   {
+    #     "@odata.context": "/redfish/v1/$metadata#LogEntry.LogEntry",
+    #     "@odata.id": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/1",
+    #     "@odata.type": "#LogEntry.v1_4_0.LogEntry",
+    #     "Created": "2019-05-29T13:19:27+00:00",
+    #     "EntryType": "Event",
+    #     "Id": "1",               <----- Event log ID
+    #     "Message": "org.open_power.Host.Error.Event",
+    #     "Name": "System DBus Event Log Entry",
+    #     "Severity": "Critical"
+    #   }
+    #   ],
+    #   "Members@odata.count": 1,
+    #   "Name": "System Event Log Entries"
+    # }
 
     Create Test PEL Log
     Create Test PEL Log
@@ -153,27 +153,27 @@ Create Test Event Log And Verify Time Stamp
     [Documentation]  Create event logs and verify time stamp.
     [Tags]  Create_Test_Event_Log_And_Verify_Time_Stamp
 
-    #{
-    #  "@odata.context": "/redfish/v1/$metadata#LogEntryCollection.LogEntryCollection",
-    #  "@odata.id": "/redfish/v1/Systems/system/LogServices/EventLog/Entries",
-    #  "@odata.type": "#LogEntryCollection.LogEntryCollection",
-    #  "Description": "Collection of System Event Log Entries",
-    #  "Members": [
-    #  {
-    #    "@odata.context": "/redfish/v1/$metadata#LogEntry.LogEntry",
-    #    "@odata.id": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/1",
-    #    "@odata.type": "#LogEntry.v1_4_0.LogEntry",
-    #    "Created": "2023-05-10T10:26:02.186+00:00", <--- Time stamp
-    #    "EntryType": "Event",
-    #    "Id": "1",
-    #    "Message": "org.open_power.Host.Error.Event",
-    #    "Name": "System DBus Event Log Entry",
-    #    "Severity": "Critical"
-    #  }
-    #  ],
-    #  "Members@odata.count": 1,
-    #  "Name": "System Event Log Entries"
-    #}
+    # {
+    #   "@odata.context": "/redfish/v1/$metadata#LogEntryCollection.LogEntryCollection",
+    #   "@odata.id": "/redfish/v1/Systems/system/LogServices/EventLog/Entries",
+    #   "@odata.type": "#LogEntryCollection.LogEntryCollection",
+    #   "Description": "Collection of System Event Log Entries",
+    #   "Members": [
+    #   { 
+    #     "@odata.context": "/redfish/v1/$metadata#LogEntry.LogEntry",
+    #     "@odata.id": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/1",
+    #     "@odata.type": "#LogEntry.v1_4_0.LogEntry",
+    #     "Created": "2023-05-10T10:26:02.186+00:00", <--- Time stamp
+    #     "EntryType": "Event",
+    #     "Id": "1",
+    #     "Message": "org.open_power.Host.Error.Event",
+    #     "Name": "System DBus Event Log Entry",
+    #     "Severity": "Critical"
+    #   }
+    #   ],
+    #   "Members@odata.count": 1,
+    #   "Name": "System Event Log Entries"
+    # }
 
     Redfish Purge Event Log
 
@@ -346,7 +346,7 @@ Test Event Log Wrapping
     ${log_entries}=  Filter Struct  ${event_log}  [('Id', '1')]
     Rprint Vars  log_entries
 
-    ${length_log_entries}  Get Length  ${log_entries}
+    ${length_log_entries}=  Get Length  ${log_entries}
     Should Be Equal As Integers  ${length_log_entries}  0
     ...  msg=The event log should have wrapped such that entry ID 1 is now purged.
 
@@ -366,7 +366,7 @@ Verify Default Value Of Resolved Field Is False For An Error Log Via Redfish
 *** Keywords ***
 
 Suite Setup Execution
-   [Documentation]  Do test case setup tasks.
+    [Documentation]  Do test case setup tasks.
 
     Redfish.Login
 
@@ -383,7 +383,7 @@ Suite Teardown Execution
 
 
 Test Setup Execution
-   [Documentation]  Do test case setup tasks.
+    [Documentation]  Do test case setup tasks.
 
     Redfish Purge Event Log
 

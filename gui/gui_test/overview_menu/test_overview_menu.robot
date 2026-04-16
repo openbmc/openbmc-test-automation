@@ -165,7 +165,7 @@ Verify Server LED Turn On
     [Tags]  Verify_Server_LED_Turn_On
 
     # Turn Off the server LED via Redfish and refresh GUI.
-    #Set IndicatorLED State  Off
+    # Set IndicatorLED State  Off
     Set IndicatorLED State  True
     Refresh GUI
 

@@ -1,5 +1,4 @@
 *** Settings ***
-
 Documentation   Test suite for OpenBMC GUI "Factory reset" sub-menu of "Settings" menu.
 
 Resource        ../../lib/gui_resource.robot
@@ -7,7 +6,7 @@ Resource        ../../lib/gui_resource.robot
 Suite Setup     Suite Setup Execution
 Suite Teardown  Close Browser
 
-Test Tags      Factory_Reset_Sub_Menu
+Test Tags       Factory_Reset_Sub_Menu
 
 *** Variables ***
 
@@ -17,7 +16,7 @@ ${xpath_reset_server_radio_button}       //*[@data-test-id='factoryReset-radio-r
 ${xpath_reset_bmc_server_radio_button}   //*[@data-test-id='factoryReset-radio-resetToDefaults']
 ${xpath_cancel_button}                   //button[normalize-space()='Cancel']
 ${xpath_reset_server_settings}           //button[normalize-space()='Reset server settings']
-#${xpath_reset_server_and_bmc_settings} to confirm reset server and bmc factory reset.
+# ${xpath_reset_server_and_bmc_settings} to confirm reset server and bmc factory reset.
 ${xpath_reset_bmc_andserver_settings}    //button[normalize-space()='Reset BMC and server settings']
 
 *** Test Cases ***
