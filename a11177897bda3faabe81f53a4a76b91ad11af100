@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8d6f1fe_99397445",
+        "filename": "gui/gui_test/logs_and_services_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-16T14:03:08Z",
+      "side": 1,
+      "message": "Verify that the Navigate To Required Sub Menu keyword includes appropriate wait logic. If not, this wait should be retained.\n\nIn earlier code remove has a wait time. The tests may start before page fully loads, potentially causing flaky test failures",
+      "revId": "a11177897bda3faabe81f53a4a76b91ad11af100",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d3a81cd_2e3a9508",
+        "filename": "gui/gui_test/logs_and_services_menu/test_progress_logs_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-16T14:03:08Z",
+      "side": 1,
+      "message": "Remove the \"i\" character from line 1. Change i*** Settings *** to *** Settings ***",
+      "revId": "a11177897bda3faabe81f53a4a76b91ad11af100",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
