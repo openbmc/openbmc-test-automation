@@ -122,9 +122,9 @@ Enable SSH Via GUI And Verify Persistency On BMC Reboot
 
     Set Policy Via GUI  SSH  Enabled
 
-    #Reboot BMC via GUI
+    Reboot BMC via GUI
 
-    #Wait Until Keyword Succeeds  5 min  30 sec  Open Connection And Login
+    Wait Until Keyword Succeeds  5 min  30 sec  Open Connection And Login
 
 
 Enable IPMI Via GUI And Verify Persistency On BMC Reboot
@@ -144,7 +144,7 @@ Disable SSH Via GUI And Verify Persistency On BMC Reboot
     ...  verify that SSH to BMC stops working after disabling SSH on BMC reboot.
     [Tags]  Disable_SSH_Via_GUI_And_Verify_Persistency_On_BMC_Reboot
     [Teardown]  Run Keywords  Wait Until Keyword Succeeds  2 min  15 sec  Enable SSH Protocol  ${True}
-    ...  AND  Wait Until Keyword Succeeds  2 min  15 sec  Open Connection And Login
+    ...         AND  Wait Until Keyword Succeeds  2 min  15 sec  Open Connection And Login
 
     Set Policy Via GUI  SSH  Disabled
 
@@ -162,7 +162,7 @@ Disable IPMI Via GUI And Verify Persistency On BMC Reboot
     ...  verify persistency of IPMI command does not work on BMC reboot.
     [Tags]  Disable_IPMI_Via_GUI_And_Verify_Persistency_On_BMC_Reboot
     [Teardown]  Run Keywords  Wait Until Keyword Succeeds  2 min  15 sec  Enable IPMI Protocol  ${True}
-    ...  AND  Wait Until Keyword Succeeds  2 min  15 sec  Run IPMI Standard Command  sel info
+    ...         AND  Wait Until Keyword Succeeds  2 min  15 sec  Run IPMI Standard Command  sel info
 
     Set Policy Via GUI  IPMI  Disabled
 
