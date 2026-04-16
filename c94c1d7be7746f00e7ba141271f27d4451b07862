@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "400bcf6d_2345b33d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-16T14:44:19Z",
+      "side": 1,
+      "message": "The title has a grammatical issue: \"Added test configure valid static IPv6\" should be \"Add test to configure valid static IPv6\" or \"Added test to configure valid static IPv6\". The body also lacks detail about what makes this test different from existing IPv6 tests.\n\n\nIn the body, explain that this test specifically validates IPv6 address normalization (leading zeros, zero compression) when configured from an IPv6 session.",
+      "revId": "c94c1d7be7746f00e7ba141271f27d4451b07862",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b661ee4_caea7462",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-16T14:44:19Z",
+      "side": 1,
+      "message": "Ensure consistent spacing/alignment",
+      "revId": "c94c1d7be7746f00e7ba141271f27d4451b07862",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bf1c5ae_88643598",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-16T14:44:19Z",
+      "side": 1,
+      "message": "In the original Test Teardown Execution, Redfish.Logout is called before RedfishIPv6.Logout. \n\nAfter the change, Redfish.Logout is moved to Suite Teardown Execution. However, the new test case uses RedfishIPv6 session, and the test teardown only calls RedfishIPv6.Logout. This means if a test uses the regular Redfish session, it won\u0027t be logged out in the test teardown.\n\n\nRecommendation: Verify that all existing tests properly handle their session cleanup. Consider keeping both logout calls in test teardown with Run Keyword And Ignore Error to ensure both session types are cleaned up.",
+      "revId": "c94c1d7be7746f00e7ba141271f27d4451b07862",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
