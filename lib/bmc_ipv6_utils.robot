@@ -20,6 +20,8 @@ ${ipv6_multi_short}          2001::33::111
 ${invalid_hexadec_ipv6}      x:x:x:x:x:x:10.5.5.6
 ${standard_ipv4_rep}         0000:0000:0000:0000:0000:0000:10.5.5.6
 ${compressed_ipv6}           ::a05:506
+${ipv4_link_local_prefix}    169.254
+${link_local_addr}           fe80::
 
 *** Keywords ***
 
