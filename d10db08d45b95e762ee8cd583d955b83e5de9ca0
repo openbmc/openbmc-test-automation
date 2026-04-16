@@ -16,6 +16,24 @@
       "message": "Issue: Continue For Loop If is deprecated since Robot Framework 5.0\nCurrent Code:\nLine 2043: Continue For Loop If ${is_link_local}\nLine 2050: Continue For Loop If not ${is_reachable}\nRecommendation: Replace with IF and CONTINUE statements:\n# Line 2043:\nIF  ${is_link_local}\n    CONTINUE\nEND\n\n# Line 2050:\nIF  not ${is_reachable}\n    CONTINUE\nEND",
       "revId": "d10db08d45b95e762ee8cd583d955b83e5de9ca0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4707a826_673888f6",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 2043,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-04-16T14:56:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "affebfa4_7b92979e",
+      "revId": "d10db08d45b95e762ee8cd583d955b83e5de9ca0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
