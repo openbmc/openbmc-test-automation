@@ -1,4 +1,4 @@
-*** Settings ***
+i*** Settings ***
 
 Documentation   Test OpenBMC GUI "Progress logs" sub-menu.
 
@@ -14,8 +14,8 @@ Test Tags      Progress_Logs_Sub_Menu
 
 ${xpath_progress_logs_heading}   //h1[text()="Progress logs"]
 ${xpath_search_logs_input}       //*[contains(@id,"searchInput")]
-${xpath_from_date_input}         //*[@id="input-from-date"]
-${xpath_to_date_input}           //*[@id="input-to-date"]
+${xpath_from_date_input}         (//input[@class='dp-input'])[1]
+${xpath_to_date_input}           (//input[@class='dp-input'])[2]
 
 
 *** Test Cases ***
@@ -32,11 +32,11 @@ Verify Existence Of All Input Boxes In Progress Logs Page
     [Tags]  Verify_Existence_Of_All_Input_Boxes_In_Progress_Logs_Page
 
     # Search logs.
-    Page Should Contain Element  ${xpath_search_logs_input}
+    Page Should Contain Element   ${xpath_search_logs_input}
 
-    # Date filter.
-    Page Should Contain Element  ${xpath_from_date_input}  limit=1
-    Page Should Contain Element  ${xpath_to_date_input}  limit=1
+    # Date From and To filter.
+    Page Should Contain Element   ${xpath_from_date_input}  limit=1
+    Page Should Contain Element   ${xpath_to_date_input}  limit=1
 
 
 Verify Existence Of All Sections In Progress Logs Page
@@ -64,7 +64,4 @@ Suite Setup Execution
     [Documentation]  Do suite setup tasks.
 
     Launch Browser And Login GUI
-    Click Element  ${xpath_logs_menu}
-    Click Element  ${xpath_progress_logs_sub_menu}
-    Wait Until Keyword Succeeds  30 sec  5 sec  Location Should Contain  post-code-logs
-    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
+    Navigate To Required Sub Menu  ${xpath_logs_menu}  ${xpath_progress_logs_sub_menu}   post-code-logs
