@@ -22,7 +22,7 @@ ${xpath_poweron_button}                    //*[@data-test-id='serverPowerOperati
 ${xpath_save_button}                       //button[contains(normalize-space(.),'Save')]
 ${xpath_shutdown_orderly_radio}            //*[@data-test-id='serverPowerOperations-radio-shutdownOrderly']
 ${xpath_shutdown_immediate_radio}          //*[@data-test-id='serverPowerOperations-radio-shutdownImmediate']
-${xpath_confirm_button}                    //button[contains(text(),'Confirm')]
+${xpath_confirm_button}                    //button[normalize-space()='Confirm']
 ${xpath_current_power_state}               //*[@data-test-id='powerServerOps-text-hostStatus']
 ${xpath_reboot_immediate_radio}            //*[@data-test-id='serverPowerOperations-radio-rebootImmediate']
 
@@ -53,6 +53,7 @@ Verify Existence Of All Input Boxes In Host Os Boot Settings
 
     # Added a delay for the page to load boot settings section.
     Wait Until Page Contains  Boot settings  timeout=5
+
     Page Should Contain Element  ${xpath_enable_onetime_boot_checkbox}
     Page Should Contain Element  ${xpath_boot_option_select}
 
