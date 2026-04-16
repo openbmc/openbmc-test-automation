@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a47f192_27e02264",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-16T12:57:32Z",
+      "side": 1,
+      "message": "New Test case for Sessions webUI\" but the actual change adds a test case for \"Dump Logs\" page, not Sessions\n\nCan we update the commit title to accurately reflect the change.",
+      "revId": "f537dc32eebd293b7401d93ca6360f41cf1b89b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c2215cd_d357f34e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-16T12:57:32Z",
+      "side": 1,
+      "message": "This is a new test suite with this mentioned test case, can u also update a document to state this is a new test suite wit the test case ?",
+      "revId": "f537dc32eebd293b7401d93ca6360f41cf1b89b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5351ec7_7c17ded1",
+        "filename": "gui/gui_test/logs_and_services_menu/test_dump_logs_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-16T12:57:32Z",
+      "side": 1,
+      "message": "Expand documentation to mention that it also verifies filter options and clear functionality: \n\n\"Verify existence and basic functionality of all buttons, filters, and controls in Dump Logs page\"",
+      "revId": "f537dc32eebd293b7401d93ca6360f41cf1b89b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe46fba9_9922490b",
+        "filename": "gui/gui_test/logs_and_services_menu/test_dump_logs_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-16T12:57:32Z",
+      "side": 1,
+      "message": "Just a thought on this the test manually clicks each of the four dump types with repetitive code\n\nRecommendation: Consider using a FOR loop to iterate through dump types, making the test more maintainable:\n\n@{dump_types}\u003d  Create List  ${xpath_dump_bmc_entry}  ${xpath_dump_hostboot_entry}\n...  ${xpath_dump_resource_entry}  ${xpath_dump_system_entry}\nFOR  ${dump_type}  IN  @{dump_types}\n    Page Should Contain Element  ${dump_type}  limit\u003d1\n    Click Element At Coordinates  ${dump_type}  0  0\nEND\n\n\nbut i\u0027m ok with the current you have also.. Juat a FYI note for improvement",
+      "revId": "f537dc32eebd293b7401d93ca6360f41cf1b89b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
