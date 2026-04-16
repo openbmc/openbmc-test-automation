@@ -28,7 +28,6 @@ ${prefix_length_def}         None
 ${invalid_staticv6_gateway}  9.41.164.1
 ${new_mac_addr}              AA:E2:84:14:28:79
 ${linklocal_addr_format}     fe80::[0-9a-f:]+$
-${link_local_addr}           fe80::
 ${link_local_prefix_len}     10
 ${ipv6_leading_zero}         2001:0022:0033::0111
 ${ipv6_firsthextet_zero}     2001:0022:1133::1111
