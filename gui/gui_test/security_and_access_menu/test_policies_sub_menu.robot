@@ -67,7 +67,7 @@ Verify Existence Of All Buttons In Policies Page
 
 Enable SSH Via GUI And Verify
     [Documentation]  Login to GUI Policies page,enable SSH toggle and
-    ...  verify that SSH to BMC starts working after enabling SSH.
+    ...              verify that SSH to BMC starts working after enabling SSH.
     [Tags]  Enable_SSH_Via_GUI_And_Verify
 
     Set Policy Via GUI  SSH  Enabled
@@ -76,7 +76,7 @@ Enable SSH Via GUI And Verify
 
 Disable SSH Via GUI And Verify
     [Documentation]  Login to GUI Policies page,disable SSH and
-    ...  verify that SSH to BMC stops working after disabling SSH.
+    ...              verify that SSH to BMC stops working after disabling SSH.
     [Tags]  Disable_SSH_Via_GUI_And_Verify
     [Teardown]  Run Keywords  Enable SSH Protocol  ${True}  AND
     ...  Wait Until Keyword Succeeds  30 sec  15 sec  Open Connection And Login
@@ -92,7 +92,7 @@ Disable SSH Via GUI And Verify
 
 Disable IPMI Via GUI And Verify
     [Documentation]  Login to GUI Policies page,disable IPMI and
-    ...  verify that IPMI command does not work after disabling IPMI.
+    ...              verify that IPMI command does not work after disabling IPMI.
     [Tags]  Disable_IPMI_Via_GUI_And_Verify
 
     Set Policy Via GUI  IPMI  Disabled
@@ -107,7 +107,7 @@ Disable IPMI Via GUI And Verify
 
 Enable IPMI Via GUI And Verify
     [Documentation]  Login to GUI Policies page,enable IPMI and
-    ...  verify that IPMI command works after enabling IPMI.
+    ...              verify that IPMI command works after enabling IPMI.
     [Tags]  Enable_IPMI_Via_GUI_And_Verify
 
     Set Policy Via GUI  IPMI  Enabled
@@ -117,19 +117,19 @@ Enable IPMI Via GUI And Verify
 
 Enable SSH Via GUI And Verify Persistency On BMC Reboot
     [Documentation]  Login to GUI Policies page,enable SSH and
-    ...  verify persistency of SSH connection on BMC reboot.
+    ...              verify persistency of SSH connection on BMC reboot.
     [Tags]  Enable_SSH_Via_GUI_And_Verify_Persistency_On_BMC_Reboot
 
     Set Policy Via GUI  SSH  Enabled
 
-    #Reboot BMC via GUI
+    Reboot BMC via GUI
 
-    #Wait Until Keyword Succeeds  5 min  30 sec  Open Connection And Login
+    Wait Until Keyword Succeeds  5 min  30 sec  Open Connection And Login
 
 
 Enable IPMI Via GUI And Verify Persistency On BMC Reboot
     [Documentation]  Login to GUI Policies page,enable IPMI and
-    ...  verify persistency of IPMI command work on BMC reboot.
+    ...              verify persistency of IPMI command work on BMC reboot.
     [Tags]  Enable_IPMI_Via_GUI_And_Verify_Persistency_On_BMC_Reboot
 
     Set Policy Via GUI  IPMI  Enabled
@@ -141,10 +141,10 @@ Enable IPMI Via GUI And Verify Persistency On BMC Reboot
 
 Disable SSH Via GUI And Verify Persistency On BMC Reboot
     [Documentation]  Login to GUI Policies page,disable SSH and
-    ...  verify that SSH to BMC stops working after disabling SSH on BMC reboot.
+    ...              verify that SSH to BMC stops working after disabling SSH on BMC reboot.
     [Tags]  Disable_SSH_Via_GUI_And_Verify_Persistency_On_BMC_Reboot
     [Teardown]  Run Keywords  Wait Until Keyword Succeeds  2 min  15 sec  Enable SSH Protocol  ${True}
-    ...  AND  Wait Until Keyword Succeeds  2 min  15 sec  Open Connection And Login
+    ...         AND  Wait Until Keyword Succeeds  2 min  15 sec  Open Connection And Login
 
     Set Policy Via GUI  SSH  Disabled
 
@@ -159,10 +159,10 @@ Disable SSH Via GUI And Verify Persistency On BMC Reboot
 
 Disable IPMI Via GUI And Verify Persistency On BMC Reboot
     [Documentation]  Login to GUI Policies page,disable IPMI and
-    ...  verify persistency of IPMI command does not work on BMC reboot.
+    ...               verify persistency of IPMI command does not work on BMC reboot.
     [Tags]  Disable_IPMI_Via_GUI_And_Verify_Persistency_On_BMC_Reboot
     [Teardown]  Run Keywords  Wait Until Keyword Succeeds  2 min  15 sec  Enable IPMI Protocol  ${True}
-    ...  AND  Wait Until Keyword Succeeds  2 min  15 sec  Run IPMI Standard Command  sel info
+    ...         AND  Wait Until Keyword Succeeds  2 min  15 sec  Run IPMI Standard Command  sel info
 
     Set Policy Via GUI  IPMI  Disabled
 
@@ -178,7 +178,7 @@ Disable IPMI Via GUI And Verify Persistency On BMC Reboot
 
 Configure SSH And IPMI Settings Via GUI And Verify
     [Documentation]  Login to GUI Policies page,set SSH and IPMI toggle and
-    ...  verify SSH & IPMI after the settings.
+    ...              verify SSH & IPMI after the settings.
     [Tags]  Configure_SSH_And_IPMI_Settings_Via_GUI_And_Verify
     [Setup]  Fetch IPMI And SSH Settings
     [Template]  Set SSH And IPMI State Via GUI
@@ -193,7 +193,7 @@ Configure SSH And IPMI Settings Via GUI And Verify
 
 Configure SSH And IPMI Settings Via GUI And Verify Its Persistency
     [Documentation]  Login to GUI Policies page,set SSH and IPMI toggle and
-    ...  verify SSH & IPMI settings after BMC reboot.
+    ...              verify SSH & IPMI settings after BMC reboot.
     [Tags]  Configure_SSH_And_IPMI_Settings_Via_GUI_And_Verify_Its_Persistency
     [Setup]  Fetch IPMI And SSH Settings
     [Template]  Set SSH And IPMI State Via GUI
