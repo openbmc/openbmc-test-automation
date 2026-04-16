@@ -5,6 +5,7 @@ Documentation   Test OpenBMC GUI "Network" sub-menu of "Settings".
 Resource        ../../lib/gui_resource.robot
 Resource        ../../../lib/bmc_network_utils.robot
 Resource        ../../../lib/bmc_ipv6_utils.robot
+Resource        ../../../lib/protocol_setting_utils.robot
 
 Suite Setup     Suite Setup Execution
 Suite Teardown  Close Browser
@@ -83,6 +84,7 @@ ${xpath_eth1_dhcpv4_button}              (//dt[normalize-space()='DHCP']/followi
 ${xpath_dhcpv4_alert}                    //button[normalize-space()='Enable' or normalize-space()='Disable']
 ${xpath_eth0_ipv4_default_gateway}       //h2[contains(text(),'IPv4')]//following::table[1]//tr[last()]/td[2]
 ${xpath_overlay}                         //div[contains(@style, 'opacity')]
+${xpath_bmc_ssh_toggle}                  //*[@data-test-id='policies-toggle-bmcShell']/following-sibling::label
 ${dns_server}                            10.10.10.10
 ${test_ipv4_addr}                        10.7.7.7
 ${test_ipv4_gateway}                     10.7.7.1
@@ -121,6 +123,8 @@ ${out_of_range_netmask}                  255.256.255.0
 ${more_byte_netmask}                     255.255.255.0.0
 ${lowest_netmask}                        128.0.0.0
 ${incomplete_df_gw}                      10.3.3
+${ipv4_link_local_prefix}                169.254
+${ipv6_link_local_prefix}                fe80
 ${test_hostname}                         openbmc
 
 *** Test Cases ***
@@ -996,17 +1000,36 @@ Modify IPv6 Address On Eth1 Via IPv6 And Verify
     Modify IP Address And Verify  ipv6  ${test_ipv6_addr}  ${test_ipv6_addr_1}  2
 
 
+Enable SSH And Verify Connectivity Via IPv4 And IPv6
+    [Documentation]  Enable SSH via GUI and verify SSH connectivity works via both IPv4 and IPv6.
+    [Tags]  Enable_SSH_And_Verify_Connectivity_Via_IPv4_And_IPv6
+    [Setup]  Run Keywords  Navigate To Policies Page  AND  Redfish.Login
+    [Teardown]  Run Keywords  Close All Connections  AND  Navigate To Network Page
+
+    # Toggle SSH and verify connectivity.
+    Toggle SSH And Verify Via IP Protocol  enable  both
+
+
+Disable SSH And Verify No Connectivity Via IPv4 And IPv6
+    [Documentation]  Disable SSH and verify no SSH connectivity via IPv4 and IPv6.
+    [Tags]  Disable_SSH_And_Verify_No_Connectivity_Via_IPv4_And_IPv6
+    [Setup]  Run Keywords  Navigate To Policies Page  AND  Redfish.Login
+    [Teardown]  Run Keywords  Wait Until Keyword Succeeds  1 min  10 sec  Enable SSH Protocol  ${True}
+    ...  AND  Wait Until Keyword Succeeds  1 min  15 sec  Open Connection And Login
+    ...  AND  Navigate To Network Page
+
+    # Toggle SSH and verify no connectivity.
+    Toggle SSH And Verify Via IP Protocol  disable  both
+
+
 *** Keywords ***
 
 Suite Setup Execution
     [Documentation]  Do suite setup tasks.
 
     Launch Browser And Login GUI
-    Wait Until Keyword Succeeds  1 min  15 sec
-    ...  Click Element  ${xpath_settings_menu}
-    Click Element  ${xpath_network_sub_menu}
-    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  network
-    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
+    Ensure SSH Is Enabled Via GUI
+    Navigate To Network Page
     ${OPENBMC_HOST}=  Evaluate  "${OPENBMC_HOST}".replace("[","").replace("]","")
     Set Suite Variable  ${OPENBMC_HOST}
     ${default_gateway}=  Get BMC Default Gateway
@@ -1932,3 +1955,136 @@ Verify IPv4 Remains Intact After Static IPv6 Config
     Should Be Equal  ${ipv4_before}  ${ipv4_after}
     Run Keyword And Ignore Error
     ...  Delete IP Address And Verify  ipv6  ${test_ipv6_addr_2}
+
+
+Navigate To Policies Page
+    [Documentation]  Navigate to policies page.
+
+    # First click on Security and Access menu to expand it.
+    Wait Until Keyword Succeeds  30 sec  15 sec  Click Element  ${xpath_secuity_and_accesss_menu}
+    Wait Until Keyword Succeeds  30 sec  15 sec  Click Element  ${xpath_policies_sub_menu}
+    Wait Until Keyword Succeeds  30 sec  15 sec  Location Should Contain  policies
+    Wait Until Element Is Not Visible  ${xpath_page_loading_progress_bar}  timeout=60s
+
+
+Navigate To Network Page
+    [Documentation]  Navigate to network page.
+
+    Wait Until Keyword Succeeds  1 min  15 sec  Click Element  ${xpath_settings_menu}
+    Click Element  ${xpath_network_sub_menu}
+    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  network
+    Wait Until Element Is Not Visible  ${xpath_page_loading_progress_bar}  timeout=60s
+
+
+Ensure SSH Is Enabled Via GUI
+    [Documentation]  Ensure SSH is enabled via GUI, navigate to policies page and enable if needed.
+
+    Navigate To Policies Page
+
+    # Check current SSH toggle state.
+    ${ssh_toggle_text}=  Get Text  ${xpath_bmc_ssh_toggle}
+
+    # If SSH is disabled, enable it.
+    IF  '${ssh_toggle_text}' != 'Enabled'
+        Click Element  ${xpath_bmc_ssh_toggle}
+        Wait Until Keyword Succeeds  1 min  10 sec
+        ...  Element Text Should Be  ${xpath_bmc_ssh_toggle}  Enabled
+        Sleep  ${NETWORK_TIMEOUT}s
+    END
+
+
+Toggle SSH And Verify Via IP Protocol
+    [Documentation]  Toggle SSH state on the policies page and verify connectivity via specified IP protocol(s).
+    ...              Supports enabling or disabling SSH and testing via IPv4, IPv6, or both protocols.
+    ...              Automatically skips link-local addresses and unreachable IPs.
+    [Arguments]  ${ssh_action}  ${ip_protocol}=both
+
+    # Description of argument(s):
+    # ssh_action    Action to perform: 'enable' or 'disable'.
+    # ip_protocol   IP protocol to test: 'ipv4', 'ipv6', or 'both' (default).
+
+    # Toggle SSH state on Policies page.
+    ${ssh_toggle_text}=  Get Text  ${xpath_bmc_ssh_toggle}
+    ${target_state}=  Set Variable If  '${ssh_action}' == 'enable'  Enabled  Disabled
+
+    IF  '${ssh_toggle_text}' != '${target_state}'
+        Click Element  ${xpath_bmc_ssh_toggle}
+        Wait Until Keyword Succeeds  1 min  10 sec
+        ...  Element Text Should Be  ${xpath_bmc_ssh_toggle}  ${target_state}
+        Sleep  ${NETWORK_TIMEOUT}s
+    END
+
+    # Navigate to Network page to collect IP addresses.
+    Navigate To Network Page
+
+    # Verify SSH connectivity based on action and protocol for both eth0 and eth1.
+    FOR  ${channel}  IN  1  2
+        IF  '${ip_protocol}' == 'ipv4' or '${ip_protocol}' == 'both'
+            Verify SSH For Protocol  ipv4  ${channel}  ${ssh_action}  ${ipv4_link_local_prefix}
+        END
+
+        IF  '${ip_protocol}' == 'ipv6' or '${ip_protocol}' == 'both'
+            Verify SSH For Protocol  ipv6  ${channel}  ${ssh_action}  ${ipv6_link_local_prefix}
+        END
+    END
+
+
+Verify SSH For Protocol
+    [Documentation]  Verify SSH connectivity for a specific IP protocol on a channel.
+    [Arguments]  ${protocol}  ${channel}  ${ssh_action}  ${link_local_prefix}
+
+    # Description of argument(s):
+    # protocol            IP protocol: 'ipv4' or 'ipv6'.
+    # channel             Ethernet channel number: 1 (eth0) or 2 (eth1).
+    # ssh_action          Expected SSH state: 'enable' or 'disable'.
+    # link_local_prefix   Link-local prefix to skip (e.g., '169.254' or 'fe80').
+
+    ${ip_list}=  Collect All IP Addresses On Both Interfaces  ${protocol}  ${channel}
+    ${list_length}=  Get Length  ${ip_list}
+    IF  ${list_length} > 0
+        Verify SSH Connectivity  ${ip_list}  ${ssh_action}  ${link_local_prefix}
+    ELSE
+        Log  No ${protocol} addresses found on channel ${channel}  level=WARN
+    END
+
+
+Verify SSH Connectivity
+    [Documentation]  Verify SSH connectivity for given IP addresses.
+    [Arguments]  ${ip_list}  ${expected_result}  ${skip_prefix}
+
+    # Description of argument(s):
+    # ip_list          List of IP addresses to test.
+    # expected_result  'enable' if SSH should work, 'disable' if it should fail.
+    # skip_prefix      IP prefix to skip (e.g., '169.254' for IPv4 link-local, 'fe80' for IPv6 link-local).
+
+    FOR  ${ip_addr}  IN  @{ip_list}
+        # Skip link-local addresses.
+        ${is_link_local}=  Run Keyword And Return Status
+        ...  Should Start With  ${ip_addr}  ${skip_prefix}
+        IF  ${is_link_local}
+            CONTINUE
+        END
+
+        # Check if IP is reachable using ping (IPv4 or IPv6).
+        ${is_ipv6}=  Run Keyword And Return Status  Should Contain  ${ip_addr}  :
+        ${ping_cmd}=  Set Variable If  ${is_ipv6}  ping6 -c 2 ${ip_addr}  ping -c 2 ${ip_addr}
+        ${ping_rc}  ${ping_output}=  Run And Return RC And Output  ${ping_cmd}
+        ${is_reachable}=  Run Keyword And Return Status  Should Be Equal As Integers  ${ping_rc}  0
+        IF  not ${is_reachable}
+            CONTINUE
+        END
+
+        IF  '${expected_result}' == 'enable'
+            Wait Until Keyword Succeeds  ${NETWORK_TIMEOUT}  ${NETWORK_RETRY_TIME}
+            ...  Verify SSH Login And Commands Work  ${ip_addr}
+        ELSE
+            TRY
+                ${status}=  Run Keyword And Return Status
+                ...  Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}  host=${ip_addr}
+                Should Be Equal As Strings  ${status}  False
+                ...  msg=FAIL: SSH login unexpectedly succeeded via ${ip_addr} after disabling SSH. Expected connection to be refused.
+            FINALLY
+                Run Keyword And Ignore Error  Close All Connections
+            END
+        END
+    END
