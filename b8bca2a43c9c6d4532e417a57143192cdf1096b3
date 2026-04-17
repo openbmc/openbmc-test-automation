@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f34e64d_3522dff3",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 1959,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-04-17T13:59:53Z",
+      "side": 1,
+      "message": "Capitalize only the first word and keep the rest in lowercase. This will applicable to all documentation.",
+      "range": {
+        "startLine": 1959,
+        "startChar": 33,
+        "endLine": 1959,
+        "endChar": 42
+      },
+      "revId": "b8bca2a43c9c6d4532e417a57143192cdf1096b3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a807415_f5c62d07",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 1961,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-04-17T13:59:53Z",
+      "side": 1,
+      "message": "Need to end with a period.",
+      "range": {
+        "startLine": 1961,
+        "startChar": 56,
+        "endLine": 1961,
+        "endChar": 58
+      },
+      "revId": "b8bca2a43c9c6d4532e417a57143192cdf1096b3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
