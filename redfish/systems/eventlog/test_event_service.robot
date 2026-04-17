@@ -24,7 +24,7 @@ ${Maximum_subscription_count}   20
 @{Service_state}                ${False}  ${True}
 @{Invalid_service_state}        FALSE  TRUE  1  0  on  off
 
-** Test Cases **
+*** Test Cases ***
 
 Verify Add Subscribe Server For Event Notification
     [Documentation]  Subscribe a remote server and verify if added successful.
