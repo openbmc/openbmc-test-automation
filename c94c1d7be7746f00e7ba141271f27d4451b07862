@@ -50,6 +50,24 @@
       "message": "In the original Test Teardown Execution, Redfish.Logout is called before RedfishIPv6.Logout. \n\nAfter the change, Redfish.Logout is moved to Suite Teardown Execution. However, the new test case uses RedfishIPv6 session, and the test teardown only calls RedfishIPv6.Logout. This means if a test uses the regular Redfish session, it won\u0027t be logged out in the test teardown.\n\n\nRecommendation: Verify that all existing tests properly handle their session cleanup. Consider keeping both logout calls in test teardown with Run Keyword And Ignore Error to ensure both session types are cleaned up.",
       "revId": "c94c1d7be7746f00e7ba141271f27d4451b07862",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0e1baea_332462d2",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-04-17T06:53:15Z",
+      "side": 1,
+      "message": "Made this change as in previous code Redfish.Login was done in Suite Setup Execution. But Redfish.Logout was present in Test Teardown Execution and no Redfish.Login done for each tests.",
+      "parentUuid": "5bf1c5ae_88643598",
+      "revId": "c94c1d7be7746f00e7ba141271f27d4451b07862",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
