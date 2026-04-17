@@ -15,7 +15,7 @@ Test Teardown       Test Teardown Execution
 
 Test Tags          Event_Logging
 
-** Variables ***
+*** Variables ***
 
 ${max_num_event_logs}  ${200}
 

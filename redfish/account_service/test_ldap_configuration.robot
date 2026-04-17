@@ -22,7 +22,7 @@ ${hostname}             ${EMPTY}
 ${test_ip}              10.6.6.6
 ${test_mask}            255.255.255.0
 
-** Test Cases **
+*** Test Cases ***
 
 Verify LDAP Configuration Created
     [Documentation]  Verify that LDAP configuration created.

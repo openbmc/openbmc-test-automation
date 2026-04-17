@@ -17,7 +17,7 @@ Test Tags        Sensor_Monitoring
 ${OPENBMC_CONN_METHOD}  ssh
 ${IPMI_COMMAND}         Inband
 
-** Test Cases **
+*** Test Cases ***
 
 Verify Sensor Monitoring
     [Documentation]  Verify the redfish sensor monitoring according to the BMC
