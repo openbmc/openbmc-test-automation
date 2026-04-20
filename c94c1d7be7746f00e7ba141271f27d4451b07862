@@ -104,6 +104,24 @@
       "parentUuid": "5bf1c5ae_88643598",
       "revId": "c94c1d7be7746f00e7ba141271f27d4451b07862",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b383364_2765323a",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-20T14:12:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b0e1baea_332462d2",
+      "revId": "c94c1d7be7746f00e7ba141271f27d4451b07862",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
