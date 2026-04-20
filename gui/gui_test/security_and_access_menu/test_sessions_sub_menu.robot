@@ -16,6 +16,12 @@ ${session_table_popup}              //*[@class='toolbar-content']
 ${confirm_disconnect_popup}         //*[@data-test-id='table-button-disconnectSelected']
 ${disconnect_session_page}          //*[text()="Disconnect session"]
 ${confirm_disconnect_session}       //*[@class='btn btn-md btn-primary']
+${webui_sessions}                   ${10}
+${view_page_button}                 //*[@id='pagination-items-per-page']
+${sessions_table_select_all}        //*[@data-test-id='sessions-checkbox-selectAll']
+${page_selection}                   xpath=//select[@id="pagination-items-per-page"]
+${confirm_cancel}                   //*[@class='btn btn-md btn-secondary d-block']
+${selected_count_locator}           //*[@class='toolbar-content']
 
 *** Test Cases ***
 
@@ -133,6 +139,43 @@ Verify Disconnect Session Validation For WebUI Session
     Get Session Member And Verify Session Count  valid_status_code=${HTTP_OK}
     ...  expected_count=${1}
 
+Verify View All Sessions For WebUI Session
+    [Documentation]  Verify view all sessions for WebUI session.
+    [Tags]  Verify_View_All_Sessions_For_WebUI_Session
+    [Setup]  Run Keywords
+    ...  Redfish.Login    AND
+    ...  Delete All Redfish Sessions    AND
+    ...  Close All Browsers
+    [Teardown]  Run Keywords
+    ...    Delete All Redfish Sessions  AND
+    ...  Close All Browsers
+
+    # Create multiple WebUI sessions.
+    Create Multiple WebUI Sessions And Navigate To Sessions Page
+
+    # Click item per page dropdown and select view all option.
+    Click Element  ${view_page_button}
+    Select From List By Label  ${page_selection}  View all
+    Sleep  5s
+
+    # Click the select all checkbox for the sessions table.
+    Click Element  ${sessions_table_select_all}
+
+    # Wait until the session table popup is displayed.
+    Wait Until Page Contains Element  ${session_table_popup}
+
+    # Get the selected count text from the toolbar.
+    ${selected_count_text}=  Get Text  ${selected_count_locator}
+
+    # Extract the selected sessions count from the text.
+    ${selected_sessions}=  Fetch From Left  ${selected_count_text}  ${SPACE}
+    ${selected_sessions}=  Convert To Integer  ${selected_sessions}
+
+    # Verify the selected sessions count is equal to the total webui sessions.
+    Should Be Equal As Integers  ${selected_sessions}  ${webui_sessions}
+
+    # Click the cancel button in the popup.
+    Click Element  ${confirm_cancel}
 
 *** Keywords ***
 
@@ -208,3 +251,17 @@ Check Session Expired After Timeout
 
     Redfish.Get Properties  ${session_instance}  valid_status_codes=[${HTTP_NOT_FOUND}]
     Log  Session ${session_instance} correctly expired after timeout.
+
+Create Multiple WebUI Sessions And Navigate To Sessions Page
+    [Documentation]  Create multiple WebUI sessions and navigate to sessions page.
+
+    ${sessions_to_create}=  Evaluate  ${webui_sessions} - 1
+
+    FOR  ${i}  IN RANGE   ${sessions_to_create}
+        Launch Browser And Login GUI
+        Wait Until Element Is Visible  ${xpath_overview_menu}  timeout=10s
+    END
+
+    # Navigate to sessions page.
+    Navigate To Required Sub Menu  ${xpath_secuity_and_accesss_menu}
+    ...  ${xpath_sessions_sub_menu}  sessions
