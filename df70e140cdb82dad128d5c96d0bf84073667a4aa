@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4bd0c53_e056cb3a",
+        "filename": "lib/bmc_ipv6_utils.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-20T14:17:58Z",
+      "side": 1,
+      "message": "Variable names like ${ipv6_eliminate_zero} and ${ipv6_eliminate_zero1} are similar and could be confused.\n\nSuggestion: Consider more descriptive names:\n\n${ipv6_with_leading_zeros}        2001:0022:0033::0111\n${ipv6_normalized_no_leading}     2001:22:33::111\n${ipv6_with_first_hextet_zeros}   2001:0022:1133::1111\n${ipv6_normalized_first_hextet}   2001:22:1133::1111\n${ipv6_with_contiguous_zeros}     2001:0022:0000:0000:1:2:3:8\n${ipv6_zero_compressed}           2001:22::1:2:3:8\n\nWhy: More descriptive names make the test intent clearer and reduce confusion.",
+      "revId": "df70e140cdb82dad128d5c96d0bf84073667a4aa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
