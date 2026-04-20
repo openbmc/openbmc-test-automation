@@ -16,6 +16,12 @@ ${session_table_popup}              //*[@class='toolbar-content']
 ${confirm_disconnect_popup}         //*[@data-test-id='table-button-disconnectSelected']
 ${disconnect_session_page}          //*[text()="Disconnect session"]
 ${confirm_disconnect_session}       //*[@class='btn btn-md btn-primary']
+${webui_sessions}                   ${10}
+${view_page_button}                 //*[@id='pagination-items-per-page']
+${sessions_table_select_all}        //*[@data-test-id='sessions-checkbox-selectAll']
+${page_selection}                   xpath=//select[@id="pagination-items-per-page"]
+${confirm_cancel}                   //*[@class='btn btn-md btn-secondary d-block']
+${selected_count}                   //*[@class='toolbar-content']
 
 *** Test Cases ***
 
@@ -133,6 +139,49 @@ Verify Disconnect Session Validation For WebUI Session
     Get Session Member And Verify Session Count  valid_status_code=${HTTP_OK}
     ...  expected_count=${1}
 
+Verify View All Sessions For WebUI Session
+    [Documentation]  Verify view all sessions for WebUI session.
+    [Tags]  Verify_View_All_Sessions_For_WebUI_Session
+    [Setup]  Run Keywords
+    ...  Redfish.Login    AND
+    ...  Delete All Redfish Sessions    AND
+    ...  Close All Browsers
+
+    FOR  ${i}  IN RANGE   ${webui_sessions}-1
+        # Launch browser and login GUI, which will create a WebUI session.
+        Launch Browser And Login GUI
+        sleep  5s
+    END
+
+    # Navigate to sessions page.
+    Navigate To Required Sub Menu  ${xpath_secuity_and_accesss_menu}
+    ...  ${xpath_sessions_sub_menu}  sessions
+
+    # Click item per page dropdown and select view all option.
+    Click Element  ${view_page_button}
+    Select From List By Label    ${page_selection}    View all
+    Sleep  5s
+
+    # Click the select all checkbox for the sessions table.
+    Click Element At Coordinates  ${sessions_table_select_all}  0  0
+
+    # Wait until the session table popup is displayed.
+    Wait Until Page Contains Element    ${session_table_popup}
+
+    # Get the selected count text from the toolbar.
+    ${selected_count_text}=  Get Text  ${selected_count}
+
+    # Split the selected count text to extract the number of selected sessions.
+    ${split_selected_count_text}=    Split String    ${selected_count_text}    \n
+    ${split_selected_count_text}=  Set Variable  ${split_selected_count_text[0]}
+    ${split_session_count}=    Split String    ${split_selected_count_text}    ${SPACE}
+    ${selected_sessions}=  Set Variable  ${split_session_count[0]}
+
+    # Verify the selected sessions count is equal to the total webui sessions.
+    Should Be Equal As Integers  ${selected_sessions}  ${webui_sessions}
+
+    # Click the cancel button in the popup.
+    Click Element  ${confirm_cancel}
 
 *** Keywords ***
 
