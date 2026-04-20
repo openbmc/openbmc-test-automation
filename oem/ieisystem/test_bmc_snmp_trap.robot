@@ -187,7 +187,8 @@ Configure SNMP Manager With Out Of Range IP On BMC And Verify
     [Tags]  Configure_SNMP_Manager_With_Out_Of_Range_IP_On_BMC_And_Verify
     [Teardown]  Reset SNMP Manager Config Via Redfish  ${SNMP_DEFAULT_IP}  ${SNMP_DEFAULT_PORT}
 
-    Configure SNMP Manager Via Redfish  ${out_of_range_ip}  ${SNMP_DEFAULT_PORT}  ${snmp_manager_id}  ${HTTP_BAD_REQUEST}
+    Configure SNMP Manager Via Redfish
+    ...  ${out_of_range_ip}  ${SNMP_DEFAULT_PORT}  ${snmp_manager_id}  ${HTTP_BAD_REQUEST}
 
     ${status}=  Run Keyword And Return Status
     ...  Verify SNMP Manager Configured On BMC  ${out_of_range_ip}  ${SNMP_DEFAULT_PORT}

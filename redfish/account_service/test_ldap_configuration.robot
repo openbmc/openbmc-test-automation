@@ -530,7 +530,8 @@ Switch LDAP Type And Verify Login Fails
 
     # Enable the inverse LDAP type
     Disable Other LDAP  ${True}
-    Create LDAP Configuration  ${LDAP_TYPE_1}  ${LDAP_SERVER_URI_1}  ${LDAP_BIND_DN_1}  ${LDAP_BIND_DN_PASSWORD_1}  ${LDAP_BASE_DN_1}
+    Create LDAP Configuration
+    ...  ${LDAP_TYPE_1}  ${LDAP_SERVER_URI_1}  ${LDAP_BIND_DN_1}  ${LDAP_BIND_DN_PASSWORD_1}  ${LDAP_BASE_DN_1}
     Redfish.Logout
     Sleep  10s
 

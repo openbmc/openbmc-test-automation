@@ -325,7 +325,8 @@ Redfish Update Certificate Upload In Loop
     # count    Loop count.
 
     FOR  ${index}  IN RANGE  ${count}
-      ${resp}=  Run Keyword And Return Status  Redfish.Get  ${REDFISH_HTTPS_CERTIFICATE_URI}/1  valid_status_codes=[${HTTP_OK}]
+      ${resp}=  Run Keyword And Return Status
+      ...  Redfish.Get  ${REDFISH_HTTPS_CERTIFICATE_URI}/1  valid_status_codes=[${HTTP_OK}]
       Should Be Equal As Strings  ${resp}  ${True}
 
       ${cert_file_path}=  Generate Certificate File Via Openssl  Valid Certificate Valid Privatekey

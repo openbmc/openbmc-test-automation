@@ -76,7 +76,8 @@ Verify Immediate Shutdown
     [Tags]  Verify_Immediate_Shutdown
     [Setup]   Launch Browser And Login GUI
 
-    Navigate To Required Sub Menu  ${xpath_operations_menu}  ${xpath_server_power_operations_sub_menu}  server-power-operations
+    Navigate To Required Sub Menu
+    ...  ${xpath_operations_menu}  ${xpath_server_power_operations_sub_menu}  server-power-operations
     Power On Server
 
     Click Element At Coordinates  ${xpath_shutdown_immediate_radio}  0  0
@@ -111,7 +112,8 @@ Verify Shutdown And Reboot Buttons Presence At Power On
     [Tags]  Verify_Shutdown_And_Reboot_Buttons_Presence_At_Power_On
     [Setup]   Launch Browser And Login GUI
 
-    Navigate To Required Sub Menu  ${xpath_operations_menu}  ${xpath_server_power_operations_sub_menu}  server-power-operations
+    Navigate To Required Sub Menu
+    ...  ${xpath_operations_menu}  ${xpath_server_power_operations_sub_menu}  server-power-operations
     Power On Server
 
     # TODO: Implement power on using GUI later.
@@ -138,7 +140,8 @@ Verify Host Orderly Reboot
     [Tags]  Verify_Host_Orderly_Reboot
     [Setup]  Power On Server
 
-    Navigate To Required Sub Menu  ${xpath_operations_menu}  ${xpath_server_power_operations_sub_menu}  server-power-operation
+    Navigate To Required Sub Menu
+    ...  ${xpath_operations_menu}  ${xpath_server_power_operations_sub_menu}  server-power-operation
 
     Click Element  ${xpath_reboot_button}
     # Delay for confirm button to appear.
