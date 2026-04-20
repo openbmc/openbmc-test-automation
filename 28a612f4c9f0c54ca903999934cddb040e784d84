@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60428ab9_efa68f11",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 1995,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-20T10:01:58Z",
+      "side": 1,
+      "message": "Issue #5: Documentation could be more descriptive\n\n# Current code \n\n[Documentation]  Toggle SSH state and verify connectivity via IPv4 and/or IPv6.\n[Arguments]  ${ssh_action}  ${ip_protocol}\u003dboth\n\n\nFix: Add more detail about the keyword\u0027s behavior:\n\n[Documentation]  Toggle SSH state on the policies page and verify connectivity via specified IP protocol(s).\n...              Supports enabling or disabling SSH and testing via IPv4, IPv6, or both protocols.\n...              Automatically skips link-local addresses and unreachable IPs.\n[Arguments]  ${ssh_action}  ${ip_protocol}\u003dboth\n\n\nWhy: More detailed documentation helps future maintainers understand the keyword\u0027s full capabilities and behavior.",
+      "revId": "28a612f4c9f0c54ca903999934cddb040e784d84",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d31e7ac_ae91f672",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 2019,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-20T10:01:58Z",
+      "side": 1,
+      "message": "Issue #1: Missing validation before list access\nLocation: gui/gui_test/settings_menu/test_network_sub_menu.robot\n\n# Current code\n${ipv4_list}\u003d  Collect All IP Addresses On Both Interfaces  ipv4  ${channel}\nVerify SSH Connectivity  ${ipv4_list}  ${ssh_action}  169.254\n\nIssue: The code doesn\u0027t validate that ${ipv4_list} contains elements before passing it to Verify SSH Connectivity. If no IPv4 addresses are found, the FOR loop in Verify SSH Connectivity will silently skip without any indication.\n\nFix Required:\n\n${ipv4_list}\u003d  Collect All IP Addresses On Both Interfaces  ipv4  ${channel}\n${list_length}\u003d  Get Length  ${ipv4_list}\nIF  ${list_length} \u003e 0\n    Verify SSH Connectivity  ${ipv4_list}  ${ssh_action}  169.254\nELSE\n    Log  No IPv4 addresses found on channel ${channel}  level\u003dWARN\nEND\n\n\nWhy: Ensures test provides clear feedback when no IP addresses are available, making test failures easier to diagnose",
+      "revId": "28a612f4c9f0c54ca903999934cddb040e784d84",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e08dd23_520947d6",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 2024,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-20T10:01:58Z",
+      "side": 1,
+      "message": "Issue #4: Magic string \u0027169.254\u0027 and \u0027fe80\u0027 could be constants\nLocation: gui/gui_test/settings_menu/test_network_sub_menu.robot\n\n# Current code\nVerify SSH Connectivity  ${ipv4_list}  ${ssh_action}  169.254\nVerify SSH Connectivity  ${ipv6_list}  ${ssh_action}  fe80\nFix: Define as constants in Variables section:\n\n*** Variables ***\n${IPV4_LINK_LOCAL_PREFIX}    169.254\n${IPV6_LINK_LOCAL_PREFIX}    fe80\n\nWhy: Improves code readability and makes the intent of skipping link-local addresses more explicit.",
+      "revId": "28a612f4c9f0c54ca903999934cddb040e784d84",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
