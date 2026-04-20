@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7176a83_47775d66",
+        "filename": "gui/gui_test/security_and_access_menu/test_sessions_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-20T14:09:56Z",
+      "side": 1,
+      "message": "Sleep    capitalize it for Robot Framework keywords\n\n\nand in general using fixed sleep times makes tests slower and less reliable. The test waits 5 seconds regardless of actual page load time.  if it can be make better that would be great.\n\nExamples: \nWait Until Element Is Visible    ${xpath_sessions_sub_menu}    timeout\u003d10s\nWait Until Element Is Visible    ${page_selection}    timeout\u003d10s",
+      "revId": "a321212a16e778775b615ab359ff68b73cf818c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f58759f3_cd51f597",
+        "filename": "gui/gui_test/security_and_access_menu/test_sessions_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-20T14:09:56Z",
+      "side": 1,
+      "message": "Multiple string split operations make the code harder to maintain. If the UI text format changes, multiple lines need updating.\n\n\n# Simplified approach using regex or more robust parsing something like this ? \n\nTake a look and see. \n\n${selected_count_text}\u003d  Get Text  ${selected_count}\n# Assuming format is \"N selected\" or \"N items selected\"\n${selected_sessions}\u003d  Fetch From Left    ${selected_count_text}    ${SPACE}\n${selected_sessions}\u003d  Convert To Integer    ${selected_sessions}\n\nSimpler parsing logic is easier to maintain and less prone to breaking if UI text format changes slightly.",
+      "revId": "a321212a16e778775b615ab359ff68b73cf818c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
