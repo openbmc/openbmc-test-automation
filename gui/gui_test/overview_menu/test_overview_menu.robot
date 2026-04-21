@@ -40,6 +40,7 @@ ${xpath_overview_idle_power_saver}               //dt[contains(text(),'Idle powe
 ${xpath_overview_power_cap}                      //dt[contains(text(),'Power cap')]/following-sibling::dd[1]
 ${xpath_overview_power_mode}                     //dt[contains(text(),'Power mode')]/following-sibling::dd[1]
 ${ENV_METRICS_URI}                               ${REDFISH_CHASSIS_URI}/${CHASSIS_ID}/EnvironmentMetrics
+${xpath_dumps_count}                             //dt[contains(text(),'Total')]/following-sibling::dd[1]
 
 
 *** Test Cases ***
@@ -367,6 +368,17 @@ Verify Server LED Turn Off And On With Readonly User
     Refresh GUI
     Click Element  ${xpath_led_button}
     Verify Error And Unauthorized Message On GUI
+
+
+Verify Dumps Total Count Under Dumps Section
+    [Documentation]  Verify total dumps count under dumps section matches Redfish value.
+    [Tags]  Verify_Dumps_Total_Count_Under_Dumps_Section
+
+    ${redfish_dump_count}=  Redfish.Get Attribute  ${REDFISH_DUMP_URI}  Members@odata.count
+    ${xpath_dumps_total_count}=  Set Variable  ${xpath_dumps_count}
+    ${gui_dump_count}=  Get Text  ${xpath_dumps_total_count}
+
+    Should Be Equal As Integers  ${gui_dump_count}  ${redfish_dump_count}
 
 
 ###  Power Off Test Cases  ###
