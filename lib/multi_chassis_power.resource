@@ -186,7 +186,8 @@ Log Chassis Not On
         ${chassis_uri}=  Get From List  ${chassis_uris}  ${index}
 
         IF  '${power_state}' != 'On'
-        ...  Log To Console  WARNING: Chassis ${chassis_uri} PowerState is '${power_state}' (not On)  WARN
+            Log To Console  Chassis ${chassis_uri} PowerState is '${power_state}' not On.
+        END
 
         ${index}=  Evaluate  ${index} + 1
     END
