@@ -7,7 +7,7 @@ Resource         ../lib/utils.robot
 
 *** Variables ***
 
-${cmd_prefix}    ipmitool -I lanplus -C 17 -p 623 -U ${IPMI_USERNAME} -P ${IPMI_PASSWORD}
+${cmd_prefix}    ipmitool -I lanplus -C 17 -p ${IPMI_PORT} -U ${IPMI_USERNAME} -P ${IPMI_PASSWORD}
 
 
 *** Keywords ***
