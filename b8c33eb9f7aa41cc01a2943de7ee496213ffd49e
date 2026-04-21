@@ -16,6 +16,24 @@
       "message": "change xpath_dumps_total_count varibale name to this -\u003e gui_dump_count",
       "revId": "b8c33eb9f7aa41cc01a2943de7ee496213ffd49e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b314aded_bce4582e",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-04-21T09:23:39Z",
+      "side": 1,
+      "message": "${redfish_dump_count}\u003d  Redfish.Get Attribute  ${REDFISH_DUMP_URI}  Members@odata.count\n${gui_dump_count}\u003d  Get Text  ${xpath_dumps_count}\nShould Be Equal As Integers  ${gui_dump_count}  ${redfish_dump_count}\n\nuse this to minimize one line",
+      "parentUuid": "c5d0da0f_32c2b6d8",
+      "revId": "b8c33eb9f7aa41cc01a2943de7ee496213ffd49e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
