@@ -16,6 +16,24 @@
       "message": "Verify total dumps count matches Redfish vs GUI",
       "revId": "863b837dcf0d6d8f1d434a21a5b808a4c88d9f07",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d54c94b0_21ffefc2",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1001957
+      },
+      "writtenOn": "2026-04-21T09:12:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca686740_747c8465",
+      "revId": "863b837dcf0d6d8f1d434a21a5b808a4c88d9f07",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
