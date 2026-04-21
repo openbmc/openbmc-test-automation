@@ -34,6 +34,24 @@
       "parentUuid": "c5d0da0f_32c2b6d8",
       "revId": "b8c33eb9f7aa41cc01a2943de7ee496213ffd49e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36680e2f_1f4b2e3b",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1001957
+      },
+      "writtenOn": "2026-04-21T09:31:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b314aded_bce4582e",
+      "revId": "b8c33eb9f7aa41cc01a2943de7ee496213ffd49e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
