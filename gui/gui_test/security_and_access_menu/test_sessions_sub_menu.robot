@@ -22,6 +22,7 @@ ${sessions_table_select_all}        //*[@data-test-id='sessions-checkbox-selectA
 ${page_selection}                   xpath=//select[@id="pagination-items-per-page"]
 ${confirm_cancel}                   //*[@class='btn btn-md btn-secondary d-block']
 ${selected_count_locator}           //*[@class='toolbar-content']
+${xpath_search_box}                 //*[@class='form-control search-input']
 
 *** Test Cases ***
 
@@ -199,6 +200,37 @@ Test Redfish Created Session Reflects On GUI
 
     # Verify the session exists.
     Page Should Contain  ${session_id}
+
+Verify Search Sessions On WebUI Session
+    [Documentation]  Verify search sessions functionality on WebUI session.
+    [Tags]  Verify_Search_Sessions_On_WebUI_Session
+    [Setup]  Run Keywords  Redfish.Login  AND
+    ...  Delete All Redfish Sessions  AND  Close All Browsers
+
+    Create Multiple WebUI Sessions And Navigate To Sessions Page
+
+    ${session_member_list}=  Redfish_Utils.Get Member List  ${REDFISH_SESSION}
+
+    Should Not Be Empty  ${session_member_list}
+    ...    msg=No active sessions found to validate search functionality
+
+    ${session_count}=  Get Length  ${session_member_list}
+
+    FOR  ${i}  IN RANGE  ${session_count}
+
+        VAR  ${session_member}  ${session_member_list}[${i}]
+        ${session_member_id}=  Fetch From Right  ${session_member}  /
+
+        # Input the session ID in the search box to filter sessions.
+        Input Text  ${xpath_search_box}  ${session_member_id}
+
+        # Verify the session is displayed in the filtered results.
+        Page Should Contain  ${session_member_id}
+
+        # Clear the search box to prepare for the next session validation.
+        Clear Element Text  ${xpath_search_box}
+
+    END
 
 *** Keywords ***
 
