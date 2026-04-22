@@ -142,10 +142,7 @@ Verify Disconnect Session Validation For WebUI Session
 Verify View All Sessions For WebUI Session
     [Documentation]  Verify view all sessions for WebUI session.
     [Tags]  Verify_View_All_Sessions_For_WebUI_Session
-    [Setup]  Run Keywords
-    ...  Redfish.Login    AND
-    ...  Delete All Redfish Sessions    AND
-    ...  Close All Browsers
+
     [Teardown]  Run Keywords
     ...    Delete All Redfish Sessions  AND
     ...  Close All Browsers
@@ -176,6 +173,35 @@ Verify View All Sessions For WebUI Session
 
     # Click the cancel button in the popup.
     Click Element  ${confirm_cancel}
+
+Verify Search Sessions On WebUI Session
+    [Documentation]  Verify search sessions functionality on WebUI session.
+    [Tags]  Verify_Search_Sessions_On_WebUI_Session
+    [Setup]  Run Keywords
+    ...  Redfish.Login    AND
+    ...  Delete All Redfish Sessions    AND
+    ...  Close All Browsers
+
+    Create Multiple WebUI Sessions And Navigate To Sessions Page
+
+    ${session_member_list}=  Redfish_Utils.Get Member List  ${REDFISH_SESSION}
+    ${session_count}=  Get Length  ${session_member_list}
+
+    FOR  ${i}  IN RANGE  ${session_count}
+
+        ${session_member}=  Set Variable  ${session_member_list}[${i}]
+        ${session_memeber_id}=  Fetch From Right  ${session_member}  /
+
+        # Input the session id in the search box.
+        Input Text  ${xpath_search_box}  ${session_memeber_id}
+
+        # Verify the session is displayed.
+        Page Should Contain  ${session_memeber_id}
+
+        # Clear the search box for next iteration.
+        Clear Element Text  ${xpath_search_box}
+
+    END
 
 *** Keywords ***
 
