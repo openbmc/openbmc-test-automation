@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "366043fe_f7ae038d",
+        "filename": "gui/gui_test/security_and_access_menu/test_sessions_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-22T16:22:00Z",
+      "side": 1,
+      "message": "${selected_count} (line 24) is an xpath locator (global variable)\n${selected_count_text} is a local variable holding text content\nThe naming is confusing because \"count\" suggests a number, not a locator\n\nRecommendation: Rename the xpath variable to follow the project\u0027s naming convention:\n\n${xpath_selected_count_toolbar}     //*[@class\u003d\u0027toolbar-content\u0027]\n\nOr:\n\n${selected_count_locator}           //*[@class\u003d\u0027toolbar-content\u0027]",
+      "revId": "1dae7b467cda16f9707eefa0abb68959756a2ccc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14804565_bf5e44d5",
+        "filename": "gui/gui_test/security_and_access_menu/test_sessions_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-22T16:22:00Z",
+      "side": 1,
+      "message": "The test case creates 10 WebUI sessions but doesn\u0027t include a [Teardown] to clean them up, potentially affecting subsequent tests.\n\n\nImpact:\n\nMultiple browser instances may remain open\nSessions may not be cleaned up properly\nCould cause resource leaks or affect subsequent tests\nSuite teardown Close All Browsers (line 7) may not be sufficient if test fails mid-execution\n\nRecommendation: Add explicit teardown to ensure cleanup:\n\n[Teardown]  Run Keywords\n...  Delete All Redfish Sessions    AND\n...  Close All Browsers",
+      "revId": "1dae7b467cda16f9707eefa0abb68959756a2ccc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b537460_deedb6ae",
+        "filename": "gui/gui_test/security_and_access_menu/test_sessions_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-22T16:22:00Z",
+      "side": 1,
+      "message": "Recommendation: Use standard Click Element unless there\u0027s a specific reason for coordinate-based clicking:\n\nClick Element  ${sessions_table_select_all}\n\nIf coordinate clicking is necessary (e.g., to avoid clicking a label), document why:\n\n//# Click at coordinates to ensure checkbox itself is clicked, not the label\nClick Element At Coordinates  ${sessions_table_select_all}  0  0",
+      "revId": "1dae7b467cda16f9707eefa0abb68959756a2ccc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0cca83c_c431819d",
+        "filename": "gui/gui_test/security_and_access_menu/test_sessions_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-22T16:22:00Z",
+      "side": 1,
+      "message": "The expression ${webui_sessions}-1 is evaluated as a string concatenation, not arithmetic subtraction in Robot Framework. This will cause a syntax error.\n\nCorrect Approach:\n\n${sessions_to_create}\u003d  Evaluate  ${webui_sessions} - 1\nFOR  ${i}  IN RANGE   ${sessions_to_create}\n\nRecommendation: Use Robot Framework\u0027s Evaluate keyword for arithmetic operations or use IN RANGE with explicit numeric values.",
+      "revId": "1dae7b467cda16f9707eefa0abb68959756a2ccc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
