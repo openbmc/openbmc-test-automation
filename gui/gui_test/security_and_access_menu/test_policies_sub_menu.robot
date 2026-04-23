@@ -6,14 +6,14 @@ Resource         ../../lib/gui_resource.robot
 Resource         ../lib/ipmi_client.robot
 Resource         ../lib/protocol_setting_utils.robot
 Resource         ../lib/common_utils.robot
+
 Suite Setup      Run Keywords  Launch Browser And Login GUI  AND  Redfish.Login
 Suite Teardown   Close Browser
 Test Setup       Test Setup Execution
 
-Test Tags       Policies_Sub_Menu
+Test Tags        Policies_Sub_Menu
 
 *** Variables ***
-
 
 ${xpath_policies_heading}                     //h1[text()="Policies"]
 ${xpath_bmc_ssh_toggle}                       //*[@data-test-id='policies-toggle-bmcShell']
@@ -26,6 +26,7 @@ ${xpath_rtad_toggle}                          //*[@data-test-id='policies-toggle
 ${xpath_usb_firmware_update_policy_toggle}    //*[@data-test-id='policies-toggle-usbFirmwareUpdatePolicy']
 ${xpath_secure_version_lockin_toggle}         //*[@data-test-id='policies-toggle-svle']
 ${xpath_host_usb_enablement_toggle}           //*[@data-test-id='policies-toggle-hostUsb']
+${xpath_basic_authentication_toggle}          //*[@data-test-id='policies-toggle-basic-auth']
 
 
 *** Test Cases ***
@@ -49,6 +50,7 @@ Verify Existence Of All Sections In Policies Page
     Page Should Contain  USB firmware update policy
     Page Should Contain  Secure version lock-in
     Page Should Contain  Host USB enablement
+    Page Should Contain  Basic Authentication
 
 
 Verify Existence Of All Buttons In Policies Page
@@ -63,6 +65,7 @@ Verify Existence Of All Buttons In Policies Page
     Page Should Contain Element  ${xpath_usb_firmware_update_policy_toggle}
     Page Should Contain Element  ${xpath_secure_version_lockin_toggle}
     Page Should Contain Element  ${xpath_host_usb_enablement_toggle}
+    Page Should Contain Element  ${xpath_basic_authentication_toggle}
 
 
 Enable SSH Via GUI And Verify
