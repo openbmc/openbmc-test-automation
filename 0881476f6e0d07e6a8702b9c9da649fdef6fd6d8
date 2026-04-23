@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02a7d944_6256f1a3",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2026-04-23T05:59:35Z",
+      "side": 1,
+      "message": "${HOST_SOL_PORT}",
+      "range": {
+        "startLine": 345,
+        "startChar": 54,
+        "endLine": 345,
+        "endChar": 58
+      },
+      "revId": "0881476f6e0d07e6a8702b9c9da649fdef6fd6d8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
