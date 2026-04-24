@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7146e490_b48105aa",
+        "filename": "gui/gui_test/logs_and_services_menu/test_dump_logs_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-04-24T11:18:16Z",
+      "side": 1,
+      "message": "Actually all test suite having the same format.",
+      "parentUuid": "0b21eb9c_929f382e",
+      "revId": "4f0bfd5509d203d3db319fb4082a7f56e2aab660",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bea1289e_49c8af1d",
         "filename": "gui/gui_test/logs_and_services_menu/test_dump_logs_sub_menu.robot",
         "patchSetId": 4
@@ -31,6 +49,30 @@
       "writtenOn": "2026-04-24T09:57:03Z",
       "side": 1,
       "message": "Instead of single test case can u please split the test individual verifications",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 49
+      },
+      "revId": "4f0bfd5509d203d3db319fb4082a7f56e2aab660",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa8fdb4c_eb8b6b04",
+        "filename": "gui/gui_test/logs_and_services_menu/test_dump_logs_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-04-24T11:18:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bea1289e_49c8af1d",
       "range": {
         "startLine": 24,
         "startChar": 0,
@@ -64,6 +106,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e07a37b_f65bbdf0",
+        "filename": "gui/gui_test/logs_and_services_menu/test_dump_logs_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-04-24T11:18:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e51b60d1_21f27b9b",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 7
+      },
+      "revId": "4f0bfd5509d203d3db319fb4082a7f56e2aab660",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "be59b42e_d553c091",
@@ -77,6 +143,24 @@
       "writtenOn": "2026-04-24T10:13:43Z",
       "side": 1,
       "message": "Add one empty line.",
+      "revId": "4f0bfd5509d203d3db319fb4082a7f56e2aab660",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c825641_5ada177a",
+        "filename": "gui/gui_test/logs_and_services_menu/test_dump_logs_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-04-24T11:18:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be59b42e_d553c091",
       "revId": "4f0bfd5509d203d3db319fb4082a7f56e2aab660",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
