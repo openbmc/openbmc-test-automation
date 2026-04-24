@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7128d2d2_96e8af21",
+        "filename": "gui/gui_test/logs_and_services_menu/test_dump_logs_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-04-24T13:52:12Z",
+      "side": 1,
+      "message": "nit: one line space after variables section",
+      "revId": "0b3fb9ce90944e672f7b2d918106545e89610e92",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f64169e7_8a39d90f",
+        "filename": "gui/gui_test/logs_and_services_menu/test_dump_logs_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-04-24T13:52:12Z",
+      "side": 1,
+      "message": "nit: bmc gui -\u003e BMC GUI",
+      "range": {
+        "startLine": 67,
+        "startChar": 12,
+        "endLine": 67,
+        "endChar": 19
+      },
+      "revId": "0b3fb9ce90944e672f7b2d918106545e89610e92",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54d60ba5_8d4a5964",
+        "filename": "gui/gui_test/logs_and_services_menu/test_dump_logs_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-04-24T13:52:12Z",
+      "side": 1,
+      "message": "nit: gui -\u003e GUI",
+      "range": {
+        "startLine": 70,
+        "startChar": 18,
+        "endLine": 70,
+        "endChar": 21
+      },
+      "revId": "0b3fb9ce90944e672f7b2d918106545e89610e92",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
