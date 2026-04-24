@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ce9a6a82_3e0f172d",
+        "filename": "gui/gui_test/logs_and_services_menu/test_dump_logs_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-04-24T13:55:18Z",
+      "side": 1,
+      "message": "Dont exceed 110 character limit",
+      "range": {
+        "startLine": 48,
+        "startChar": 4,
+        "endLine": 48,
+        "endChar": 107
+      },
+      "revId": "0b3fb9ce90944e672f7b2d918106545e89610e92",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f64169e7_8a39d90f",
         "filename": "gui/gui_test/logs_and_services_menu/test_dump_logs_sub_menu.robot",
         "patchSetId": 7
