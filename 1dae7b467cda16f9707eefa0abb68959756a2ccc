@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "25a43915_a6844f1b",
+        "filename": "gui/gui_test/security_and_access_menu/test_sessions_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-04-24T09:07:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "366043fe_f7ae038d",
+      "revId": "1dae7b467cda16f9707eefa0abb68959756a2ccc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "14804565_bf5e44d5",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-04-22T16:22:00Z",
       "side": 1,
       "message": "The test case creates 10 WebUI sessions but doesn\u0027t include a [Teardown] to clean them up, potentially affecting subsequent tests.\n\n\nImpact:\n\nMultiple browser instances may remain open\nSessions may not be cleaned up properly\nCould cause resource leaks or affect subsequent tests\nSuite teardown Close All Browsers (line 7) may not be sufficient if test fails mid-execution\n\nRecommendation: Add explicit teardown to ensure cleanup:\n\n[Teardown]  Run Keywords\n...  Delete All Redfish Sessions    AND\n...  Close All Browsers",
+      "revId": "1dae7b467cda16f9707eefa0abb68959756a2ccc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3980716d_5dcc9e5e",
+        "filename": "gui/gui_test/security_and_access_menu/test_sessions_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-04-24T09:07:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14804565_bf5e44d5",
       "revId": "1dae7b467cda16f9707eefa0abb68959756a2ccc",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -52,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb427a31_f30c05e4",
+        "filename": "gui/gui_test/security_and_access_menu/test_sessions_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-04-24T09:07:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b537460_deedb6ae",
+      "revId": "1dae7b467cda16f9707eefa0abb68959756a2ccc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e0cca83c_c431819d",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-04-22T16:22:00Z",
       "side": 1,
       "message": "The expression ${webui_sessions}-1 is evaluated as a string concatenation, not arithmetic subtraction in Robot Framework. This will cause a syntax error.\n\nCorrect Approach:\n\n${sessions_to_create}\u003d  Evaluate  ${webui_sessions} - 1\nFOR  ${i}  IN RANGE   ${sessions_to_create}\n\nRecommendation: Use Robot Framework\u0027s Evaluate keyword for arithmetic operations or use IN RANGE with explicit numeric values.",
+      "revId": "1dae7b467cda16f9707eefa0abb68959756a2ccc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "052acf12_33753417",
+        "filename": "gui/gui_test/security_and_access_menu/test_sessions_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-04-24T09:07:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0cca83c_c431819d",
       "revId": "1dae7b467cda16f9707eefa0abb68959756a2ccc",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
