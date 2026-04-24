@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "60aa1c58_2f27342f",
+        "filename": "gui/gui_test/logs_and_services_menu/test_dump_logs_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-04-24T17:45:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7128d2d2_96e8af21",
+      "revId": "0b3fb9ce90944e672f7b2d918106545e89610e92",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ce9a6a82_3e0f172d",
@@ -31,6 +49,30 @@
       "writtenOn": "2026-04-24T13:55:18Z",
       "side": 1,
       "message": "Dont exceed 110 character limit",
+      "range": {
+        "startLine": 48,
+        "startChar": 4,
+        "endLine": 48,
+        "endChar": 107
+      },
+      "revId": "0b3fb9ce90944e672f7b2d918106545e89610e92",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8223bf71_b184a68f",
+        "filename": "gui/gui_test/logs_and_services_menu/test_dump_logs_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-04-24T17:45:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce9a6a82_3e0f172d",
       "range": {
         "startLine": 48,
         "startChar": 4,
@@ -64,6 +106,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a39d3f5_5953cfa8",
+        "filename": "gui/gui_test/logs_and_services_menu/test_dump_logs_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-04-24T17:45:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f64169e7_8a39d90f",
+      "range": {
+        "startLine": 67,
+        "startChar": 12,
+        "endLine": 67,
+        "endChar": 19
+      },
+      "revId": "0b3fb9ce90944e672f7b2d918106545e89610e92",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "54d60ba5_8d4a5964",
@@ -77,6 +143,30 @@
       "writtenOn": "2026-04-24T13:52:12Z",
       "side": 1,
       "message": "nit: gui -\u003e GUI",
+      "range": {
+        "startLine": 70,
+        "startChar": 18,
+        "endLine": 70,
+        "endChar": 21
+      },
+      "revId": "0b3fb9ce90944e672f7b2d918106545e89610e92",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6add8bd_1ece1b9d",
+        "filename": "gui/gui_test/logs_and_services_menu/test_dump_logs_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-04-24T17:45:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54d60ba5_8d4a5964",
       "range": {
         "startLine": 70,
         "startChar": 18,
