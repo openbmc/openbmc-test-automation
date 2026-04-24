@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9a1614cd_6f31a06e",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2026-04-24T09:56:31Z",
+      "side": 1,
+      "message": "as am using it multiple time, am calling keyword here",
+      "parentUuid": "c80aa3c2_db9017a9",
+      "revId": "36cc98848e14faba318de1c51e60053c0870bb7b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "80cce8b1_aefa2b84",
         "filename": "security/test_bmc_expire_password.robot",
         "patchSetId": 11
@@ -31,6 +49,24 @@
       "writtenOn": "2026-04-24T08:02:08Z",
       "side": 1,
       "message": "Please rename this to `Delete User And Close Connections And Logout` to reflect what it does.",
+      "revId": "36cc98848e14faba318de1c51e60053c0870bb7b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6966e6a9_8d0f556c",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2026-04-24T09:56:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80cce8b1_aefa2b84",
       "revId": "36cc98848e14faba318de1c51e60053c0870bb7b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -52,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "df4f5022_1c70d548",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2026-04-24T09:56:31Z",
+      "side": 1,
+      "message": "here am deleting the single user and also this keyword will use to delete the user whose password has changed. so will keep this as it is.",
+      "parentUuid": "f25726f7_fa8e2ab5",
+      "revId": "36cc98848e14faba318de1c51e60053c0870bb7b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3411f319_591bdd3d",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-04-24T08:02:08Z",
       "side": 1,
       "message": "It replicates the \"Open Connection And Log In\" logic, except of hardcoded port and checking login status.",
+      "revId": "36cc98848e14faba318de1c51e60053c0870bb7b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e175498_05861daf",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2026-04-24T09:56:31Z",
+      "side": 1,
+      "message": "yes am verifying login for 2200, so i have given this name",
+      "parentUuid": "3411f319_591bdd3d",
       "revId": "36cc98848e14faba318de1c51e60053c0870bb7b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
