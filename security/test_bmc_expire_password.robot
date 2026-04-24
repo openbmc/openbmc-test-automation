@@ -328,6 +328,26 @@ Verify Maximum Failed Attempts For Admin User And Check Account Locked
     Redfish.Login  ${admin_user}  ${admin_password}
 
 
+Change Admin Password And Verify SSH Port 2200 Login Fails With Old Password
+    [Documentation]  Change admin user password and verify SSH login on port 2200
+    ...  fails with old password.
+    [Tags]  Change_Admin_Password_And_Verify_SSH_Port_2200_Login_Fails_With_Old_Password
+    [Setup]  Redfish Create User  ${admin_user}  ${default_adminuser_passwd}  Administrator  ${True}
+    [Teardown]  Delete User And Close Connection  ${admin_user}
+
+    Redfish.Login
+
+    # Change admin password to a new password.
+    Redfish.Patch  /redfish/v1/AccountService/Accounts/${admin_user}
+    ...  body={'Password': '${admin_password}'}  valid_status_codes=[${HTTP_OK}]
+
+    # Verify that SSH login on port 2200 with old password fails.
+    Verify SSH Port 2200 Login  ${admin_user}  ${default_adminuser_passwd}  ${False}
+
+    # Verify that SSH login on port 2200 works with new password.
+    Verify SSH Port 2200 Login  ${admin_user}  ${admin_password}  ${True}
+
+
 *** Keywords ***
 
 Set Account Lockout Threshold
@@ -408,3 +428,31 @@ Set Password Via Redfish
     ...  body={'Password': '${new_password}'}
 
     Should Be Equal  ${status}  ${expect_result}
+
+
+Delete User And Close Connection
+    [Documentation]  Delete the specified user account and close all connections.
+    [Arguments]  ${user}
+
+    # Description of argument(s):
+    # user    Username of the account to be deleted.
+
+    Redfish.Delete    /redfish/v1/AccountService/Accounts/${user}
+    ...    valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
+    Close All Connections
+    Redfish.Logout
+
+
+Verify SSH Port 2200 Login
+    [Documentation]  Verify SSH login on port 2200 with given credentials.
+    [Arguments]  ${username}  ${password}  ${expected_Status}
+
+    # Description of argument(s):
+    # username        Username to attempt login.
+    # password        Password to attempt login.
+    # expected_status Expected status (eg:true or false).
+
+    SSHLibrary.Open Connection  ${OPENBMC_HOST}  port=2200
+    ${login_status}=  Run Keyword And Return Status
+    ...  SSHLibrary.Login  ${username}  ${password}
+    Should Be Equal  ${login_status}  ${expected_status}
