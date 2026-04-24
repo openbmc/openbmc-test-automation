@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c80aa3c2_db9017a9",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1002230
+      },
+      "writtenOn": "2026-04-24T08:02:08Z",
+      "side": 1,
+      "message": "Please consider using already existing keyword:\n```\n${login_status}\u003d  Run Keyword And Return Status\n    ...  Open Connection And Log In  ${admin_user}  ${admin_password}  host\u003d${OPENBMC_HOST}  port\u003d${HOST_SOL_PORT}\n    Should Be Equal  ${login_status}  ${True}\n```",
+      "revId": "36cc98848e14faba318de1c51e60053c0870bb7b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80cce8b1_aefa2b84",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1002230
+      },
+      "writtenOn": "2026-04-24T08:02:08Z",
+      "side": 1,
+      "message": "Please rename this to `Delete User And Close Connections And Logout` to reflect what it does.",
+      "revId": "36cc98848e14faba318de1c51e60053c0870bb7b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f25726f7_fa8e2ab5",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1002230
+      },
+      "writtenOn": "2026-04-24T08:02:08Z",
+      "side": 1,
+      "message": "Consider using existing `Delete BMC Users Via Redfish` keyword.",
+      "revId": "36cc98848e14faba318de1c51e60053c0870bb7b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3411f319_591bdd3d",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1002230
+      },
+      "writtenOn": "2026-04-24T08:02:08Z",
+      "side": 1,
+      "message": "It replicates the \"Open Connection And Log In\" logic, except of hardcoded port and checking login status.",
+      "revId": "36cc98848e14faba318de1c51e60053c0870bb7b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
