@@ -21,6 +21,8 @@ ${old_ldap_privilege}   Administrator
 ${hostname}             ${EMPTY}
 ${test_ip}              10.6.6.6
 ${test_mask}            255.255.255.0
+${TEST_LOCAL_USER}      test_local_user
+${TEST_USER_PASSWORD}   TestPwd123
 
 *** Test Cases ***
 
@@ -226,6 +228,58 @@ Verify LDAP User With Read Privilege Should Not Do Host Poweron
     [Template]  Set Read Privilege And Check Poweron
 
     ReadOnly
+
+
+Verify Local User Disable By LDAP User And Enable By Local Admin
+    [Documentation]  Create local user from local admin, disable the user using
+    ...  LDAP user and then enable via local admin user and verify.
+    [Tags]  Verify_Local_User_Disable_By_LDAP_User_And_Enable_By_Local_Admin
+    [Setup]  Run Keywords  Redfish.Login  AND
+    ...  Update LDAP Configuration With LDAP User Role And Group  ${LDAP_TYPE}
+    ...  Administrator  ${GROUP_NAME}
+    [Teardown]  Run Keywords
+    ...  Run Keyword And Ignore Error  Redfish.Logout  AND
+    ...  Redfish.Login  AND
+    ...  Redfish.Delete  ${REDFISH_ACCOUNTS_URI}${TEST_LOCAL_USER}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]  AND
+    ...  FFDC On Test Case Fail
+
+    # Create local user with ReadOnly role using local admin credentials.
+    Redfish Create User  ${TEST_LOCAL_USER}  ${TEST_USER_PASSWORD}  ReadOnly  ${True}
+
+    # Verify newly created user can login.
+    Verify User Login And Logout  ${TEST_LOCAL_USER}  ${TEST_USER_PASSWORD}
+
+    # Login with LDAP user having Administrator privilege.
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+
+    # Disable the local user account.
+    Set User Account Enabled State  ${TEST_LOCAL_USER}  ${False}
+
+    # Verify user account is in disabled state.
+    Verify User Account Enabled State  ${TEST_LOCAL_USER}  ${False}
+    ...  msg=User account was not disabled by LDAP user.
+
+    Redfish.Logout
+
+    # Verify disabled user cannot login.
+    Verify User Cannot Login  ${TEST_LOCAL_USER}  ${TEST_USER_PASSWORD}
+
+    # Login with local admin to re-enable the user.
+    Redfish.Login  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+
+    # Enable the local user account.
+    Set User Account Enabled State  ${TEST_LOCAL_USER}  ${True}
+
+    # Verify user account is in enabled state.
+    Verify User Account Enabled State  ${TEST_LOCAL_USER}  ${True}
+    ...  msg=User account was not enabled by local admin.
+
+    # Verify re-enabled user can login successfully.
+    Verify User Login And Logout  ${TEST_LOCAL_USER}  ${TEST_USER_PASSWORD}
+
+    # Restore local admin session for subsequent tests.
+    Redfish.Login  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
 
 
 Update LDAP Group Name And Verify Operations
@@ -587,6 +641,60 @@ Update LDAP Config And Verify Set Host Name
     # allowed to change the hostname.
     Redfish.Patch  ${REDFISH_NW_ETH0_URI}  body={'HostName': '${hostname}'}
     ...  valid_status_codes=${valid_status_codes}
+
+Set User Account Enabled State
+    [Documentation]  Set user account enabled or disabled state.
+    [Arguments]  ${username}  ${enabled_state}
+
+    # Description of argument(s):
+    # username        The username to modify.
+    # enabled_state   ${True} to enable, ${False} to disable.
+
+    ${payload}=  Create Dictionary  Enabled=${enabled_state}
+    Redfish.Patch  ${REDFISH_ACCOUNTS_URI}${username}  body=&{payload}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+
+Verify User Account Enabled State
+    [Documentation]  Verify user account enabled state.
+    [Arguments]  ${username}  ${expected_state}  ${msg}=User account state mismatch
+
+    # Description of argument(s):
+    # username         The username to verify.
+    # expected_state   Expected enabled state (${True} or ${False}).
+    # msg              Custom error message.
+
+    ${user_enabled}=  Redfish.Get Attribute
+    ...  ${REDFISH_ACCOUNTS_URI}${username}  Enabled
+    Should Be Equal  ${user_enabled}  ${expected_state}  msg=${msg}
+
+
+Verify User Cannot Login
+    [Documentation]  Verify that user cannot login (negative test).
+    [Arguments]  ${username}  ${password}
+
+    # Description of argument(s):
+    # username  The username to attempt login.
+    # password  The password to attempt login.
+
+    ${status}=  Run Keyword And Return Status
+    ...  Redfish.Login  ${username}  ${password}
+    Should Be Equal  ${status}  ${False}
+    ...  msg=User ${username} was able to login when it should be disabled.
+
+
+Verify User Login And Logout
+    [Documentation]  Verify user can login and logout successfully.
+    [Arguments]  ${username}  ${password}
+
+    # Description of argument(s):
+    # username  The username to login.
+    # password  The password to login.
+
+    Redfish.Logout
+    Redfish.Login  ${username}  ${password}
+    Redfish.Logout
+
 
 Disable Other LDAP
     [Documentation]  Disable other LDAP configuration.
