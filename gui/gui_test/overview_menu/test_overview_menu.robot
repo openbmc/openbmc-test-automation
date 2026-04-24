@@ -41,6 +41,10 @@ ${xpath_overview_power_cap}                      //dt[contains(text(),'Power cap
 ${xpath_overview_power_mode}                     //dt[contains(text(),'Power mode')]/following-sibling::dd[1]
 ${ENV_METRICS_URI}                               ${REDFISH_CHASSIS_URI}/${CHASSIS_ID}/EnvironmentMetrics
 ${xpath_dumps_count}                             //dt[contains(text(),'Total')]/following-sibling::dd[1]
+${xpath_asset_tag_edit_button}                   //button//*[local-name()='svg' and @title='Edit asset tag']
+${xpath_asset_tag_input}                         //input[@id="asset-tag"]
+${xpath_asset_tag_save_button}                   //button[normalize-space()="Save"]
+${xpath_asset_tag_cancel_button}                 //button[normalize-space()="Cancel"]
 
 
 *** Test Cases ***
@@ -380,6 +384,20 @@ Verify Dumps Total Count Under Dumps Section
     Should Be Equal As Integers  ${gui_dump_count}  ${redfish_dump_count}
 
 
+Verify Asset Tag Save Button On Overview Page
+    [Documentation]  Verify that asset tag is successfully updated using save action.
+    [Tags]  Verify_Asset_Tag_Save_Button_on_Overview_Page
+
+    Verify Asset Tag Update On Overview Page    save
+
+
+Verify Asset Tag Cancel Button On Overview Page
+    [Documentation]  Verify that asset tag update is discarded using cancel action.
+    [Tags]  Verify_Asset_Tag_Cancel_Button_On_Overview_Page
+
+    Verify Asset Tag Update On Overview Page    cancel
+
+
 ###  Power Off Test Cases  ###
 
 Verify BMC Information At Host Power Off State
@@ -409,6 +427,18 @@ Verify Power Information Should Display At Host Power Off State
     [Setup]  Run Keywords  Power Off Server  AND  Test Setup Execution
 
     Verify Power Information Section  PowerOff
+
+
+###  Readonly User  ###
+
+Verify Asset Tag Update With Readonly User
+    [Documentation]  Verify that readonly user fails to update asset tag
+    ...  and verify the error and unauthorized messages.
+    [Tags]  Verify_Asset_Tag_Update_With_Readonly_User
+    [Setup]  Create Readonly User And Login To GUI
+    [Teardown]  Delete Readonly User And Logout Current GUI Session
+
+    Verify Asset Tag Update On Overview Page  save  readonly
 
 
 *** Keywords ***
@@ -502,3 +532,37 @@ Verify Power Information Section
     Wait Until Page Contains Element  ${xpath_power_information_view_more_button}  timeout=30
     Click Element  ${xpath_power_information_view_more_button}
     Wait Until Page Contains Element  ${xpath_power_heading}  timeout=30
+
+
+Verify Asset Tag Update On Overview Page
+    [Documentation]  Verify asset tag update with options such as save, cancel
+    ...              for user with readonly or admin privilege
+    [Arguments]  ${action}  ${user_type}=normal
+
+    # Description of argument(s):
+    # action      Perform actions as Save,Cancel.
+    # user_type   Readonly and admin users.
+
+    # Click edit button.
+    Wait AND Click Element  ${xpath_asset_tag_edit_button}
+
+    Wait Until Element Is Visible  ${xpath_asset_tag_input}  timeout=10
+    ${overview_asset_tag}=  Get Text  ${xpath_asset_tag}
+    ${new_asset_tag}=  Set Variable  ${overview_asset_tag}_new
+
+    # Input asset tag with new value.
+    Input Text  ${xpath_asset_tag_input}  ${new_asset_tag}
+
+    # Perform Action and Validations.
+    IF  '${action}' == 'save'
+       Click Element  ${xpath_asset_tag_save_button}
+       IF  '${user_type}' == 'readonly'
+           Verify Error And Unauthorized Message On GUI
+       ELSE
+           Verify Success Message On BMC GUI Page
+       END
+    ELSE
+      Click Element  ${xpath_asset_tag_cancel_button}
+    END
+    Page Should Not Contain  ${xpath_asset_tag_cancel_button}
+    Element Should Contain  ${xpath_asset_tag}  ${overview_asset_tag}
