@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9679015_b424a212",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-04-24T12:00:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4348b03_6062e332",
+      "revId": "866e743babf77d569aa98950d1b50aee69033281",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7194d496_790eba64",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-04-24T10:16:53Z",
       "side": 1,
       "message": "username line number : 660, 674, 688 same name but different description. can you make consistent. same for password.",
+      "revId": "866e743babf77d569aa98950d1b50aee69033281",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a0d20a2_9bef1744",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 647,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-04-24T12:00:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7194d496_790eba64",
       "revId": "866e743babf77d569aa98950d1b50aee69033281",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
