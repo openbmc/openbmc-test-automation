@@ -1,7 +1,7 @@
 inventory_dict = {
     "core": ["PrettyName", "Present", "Functional"],
-    "fan": ["PrettyName", "Present", "MeetsMinimumShipLevel", "Functional"],
-    "fan_wc": ["PrettyName", "Present", "MeetsMinimumShipLevel"],
+    "fan": ["PrettyName", "Present", "Functional"],
+    "fan_wc": ["PrettyName", "Present"],
     "fru": [
         "PrettyName",
         "Present",

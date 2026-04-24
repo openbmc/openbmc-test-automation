@@ -49,14 +49,12 @@ yaml_core_list = [
 # yaml file paths for fan.
 yaml_fan_list = [
     "Inventory/Item.interface.yaml",
-    "Inventory/Decorator/MeetsMinimumShipLevel.interface.yaml",
     "State/Decorator/OperationalStatus.interface.yaml",
 ]
 
 # yaml file paths for fan_wc (fans in water-cooled system).
 yaml_fan_wc_list = [
     "Inventory/Item.interface.yaml",
-    "Inventory/Decorator/MeetsMinimumShipLevel.interface.yaml",
 ]
 
 # yaml file paths for GPU.
