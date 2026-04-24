@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "20eb68f0_635eaf6b",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1002230
+      },
+      "writtenOn": "2026-04-24T10:18:10Z",
+      "side": 1,
+      "message": "TBH I still don\u0027t see a valid reason of creating a new keyword.",
+      "parentUuid": "9a1614cd_6f31a06e",
+      "revId": "36cc98848e14faba318de1c51e60053c0870bb7b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "80cce8b1_aefa2b84",
         "filename": "security/test_bmc_expire_password.robot",
         "patchSetId": 11
