@@ -328,6 +328,26 @@ Verify Maximum Failed Attempts For Admin User And Check Account Locked
     Redfish.Login  ${admin_user}  ${admin_password}
 
 
+Change Admin Password And Verify SSH SOL Login Fails With Old Password
+    [Documentation]  Change admin user password and verify SSH login on SOL port
+    ...  fails with old password.
+    [Tags]  Change_Admin_Password_And_Verify_SSH_SOL_Login_Fails_With_Old_Password
+    [Setup]  Redfish Create User  ${admin_user}  ${default_adminuser_passwd}  Administrator  ${True}
+    [Teardown]  Delete User And Close Connection And Logout  ${admin_user}
+
+    Redfish.Login
+
+    # Change admin password to a new password.
+    Redfish.Patch  /redfish/v1/AccountService/Accounts/${admin_user}
+    ...  body={'Password': '${admin_password}'}  valid_status_codes=[${HTTP_OK}]
+
+    # Verify that SSH login on SOL port works with new password.
+    Verify SSH Login via SOL Port  ${admin_user}  ${admin_password}  ${True}
+
+    # Verify that SSH login on SOL port with old password fails.
+    Verify SSH Login via SOL Port  ${admin_user}  ${default_adminuser_passwd}  ${False}
+
+
 *** Keywords ***
 
 Set Account Lockout Threshold
@@ -408,3 +428,32 @@ Set Password Via Redfish
     ...  body={'Password': '${new_password}'}
 
     Should Be Equal  ${status}  ${expect_result}
+
+
+Delete User And Close Connection And Logout
+    [Documentation]  Delete the specified user account, close all connections
+    ...  and logout.
+    [Arguments]  ${user}
+
+    # Description of argument(s):
+    # user    Username of the account to be deleted.
+
+    Redfish.Delete    /redfish/v1/AccountService/Accounts/${user}
+    ...    valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
+    Close All Connections
+    Redfish.Logout
+
+
+Verify SSH Login via SOL Port
+    [Documentation]  Verify SSH login on SOL port with given credentials.
+    [Arguments]  ${username}  ${password}  ${expected_Status}
+
+    # Description of argument(s):
+    # username        Username to attempt login.
+    # password        Password to attempt login.
+    # expected_status Expected status (eg:true or false).
+
+    ${login_status}=  Run Keyword And Return Status
+    ...  Open Connection And Log In  ${username}  ${password}
+    ...  port=${HOST_SOL_PORT}
+    Should Be Equal  ${login_status}  ${expected_status}
