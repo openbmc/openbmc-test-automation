@@ -45,6 +45,7 @@ ${xpath_asset_tag_edit_button}                   //button//*[local-name()='svg' 
 ${xpath_asset_tag_input}                         //input[@id="asset-tag"]
 ${xpath_asset_tag_save_button}                   //button[normalize-space()="Save"]
 ${xpath_asset_tag_cancel_button}                 //button[normalize-space()="Cancel"]
+${xpath_power_tab_power_consumption}             //dt[contains(text(),'Current power consumption')]/following-sibling::dd[1]
 
 
 *** Test Cases ***
@@ -441,6 +442,16 @@ Verify Asset Tag Update With Readonly User
     Verify Asset Tag Update On Overview Page  save  readonly
 
 
+# Power On test cases.
+
+Verify Power Information Should Display At Host Power On State
+    [Documentation]  Verify Power Information is displayed at host power on state.
+    [Tags]  Verify_Power_Information_Should_Display_At_Host_Power_On_State
+    [Setup]  Run Keywords  Power On Server  AND  Test Setup Execution
+
+    Verify Power Information Section  PowerOn
+
+
 *** Keywords ***
 
 Test Setup Execution
@@ -495,7 +506,7 @@ Verify Power Information Section
 
     # Verify power consumption value.
     ${power_value}=  Get Text  ${xpath_overview_power_consumption}
-    IF  '${power_status}' == 'PowerOn'
+    IF  '${power_value}' != 'Not available'
         Click Element  ${xpath_power_information_view_more_button}
         Wait Until Page Contains Element  ${xpath_power_heading}  timeout=30
         ${power_tab_value}=  Get Text  ${xpath_power_tab_power_consumption}
@@ -503,6 +514,11 @@ Verify Power Information Section
     ELSE
         Should Be Equal As Strings  ${power_value}  Not available
     END
+
+    # Navigate back to overview for consistency.
+    Click Element  ${xpath_overview_menu}
+    Wait Until Page Contains Element  ${xpath_overview_page_header}
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
 
     # Verify power cap value.
     ${redfish_power_cap}=  Redfish.Get Attribute  ${ENV_METRICS_URI}  PowerLimitWatts
@@ -554,15 +570,15 @@ Verify Asset Tag Update On Overview Page
     Input Text  ${xpath_asset_tag_input}  ${new_asset_tag}
 
     # Perform Action and Validations.
-    IF  '${action}' == 'save'
-       Click Element  ${xpath_asset_tag_save_button}
-       IF  '${user_type}' == 'readonly'
+    IF  '${action}' == 'save'
+       Click Element  ${xpath_asset_tag_save_button}
+       IF  '${user_type}' == 'readonly'
            Verify Error And Unauthorized Message On GUI
-       ELSE
-           Verify Success Message On BMC GUI Page
-       END
-    ELSE
-      Click Element  ${xpath_asset_tag_cancel_button}
-    END
+       ELSE
+           Verify Success Message On BMC GUI Page
+       END
+    ELSE
+      Click Element  ${xpath_asset_tag_cancel_button}
+    END
     Page Should Not Contain  ${xpath_asset_tag_cancel_button}
     Element Should Contain  ${xpath_asset_tag}  ${overview_asset_tag}
