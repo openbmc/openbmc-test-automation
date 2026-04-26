@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57486bc0_cd897d5f",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-04-26T12:02:34Z",
+      "side": 1,
+      "message": "```\n [Documentation]  Verify that readonly user fails to update asset tag\n ...  and verify the error and unauthorized messages.\n```",
+      "range": {
+        "startLine": 435,
+        "startChar": 20,
+        "endLine": 436,
+        "endChar": 53
+      },
+      "revId": "9e99d56926eb03d6b232a9bb86631f7e62f9ac3e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "521d2b87_72ae72d9",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-04-26T12:02:34Z",
+      "side": 1,
+      "message": "Verify asset tag update with options such as save, cancel for user with readonly or admin privilege",
+      "range": {
+        "startLine": 538,
+        "startChar": 21,
+        "endLine": 538,
+        "endChar": 81
+      },
+      "revId": "9e99d56926eb03d6b232a9bb86631f7e62f9ac3e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47caf96d_1d616885",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-04-26T12:02:34Z",
+      "side": 1,
+      "message": "user_privilege_type\n\nMissing description of args",
+      "range": {
+        "startLine": 539,
+        "startChar": 30,
+        "endLine": 539,
+        "endChar": 39
+      },
+      "revId": "9e99d56926eb03d6b232a9bb86631f7e62f9ac3e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c37736f4_ee420064",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-04-26T12:02:34Z",
+      "side": 1,
+      "message": "This logic works but this meant for normal user\n\nI would prefer to have seperate IF block for the normal user\n\nor add this logic in else block",
+      "range": {
+        "startLine": 567,
+        "startChar": 3,
+        "endLine": 573,
+        "endChar": 7
+      },
+      "revId": "9e99d56926eb03d6b232a9bb86631f7e62f9ac3e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
