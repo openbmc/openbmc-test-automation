@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c65d60a_729738ce",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1002804
+      },
+      "writtenOn": "2026-04-27T11:12:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "979a0d57_dab7c073",
+      "range": {
+        "startLine": 562,
+        "startChar": 4,
+        "endLine": 562,
+        "endChar": 28
+      },
+      "revId": "3cb7e5b0389678ef6eaec30efae00e908a339893",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "162fda3c_36069e7a",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-04-27T10:32:21Z",
       "side": 1,
       "message": "give two whitespaces after Click Element keyword",
+      "range": {
+        "startLine": 563,
+        "startChar": 6,
+        "endLine": 563,
+        "endChar": 50
+      },
+      "revId": "3cb7e5b0389678ef6eaec30efae00e908a339893",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ccf59a5_db6e50ef",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 1002804
+      },
+      "writtenOn": "2026-04-27T11:12:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "162fda3c_36069e7a",
       "range": {
         "startLine": 563,
         "startChar": 6,
