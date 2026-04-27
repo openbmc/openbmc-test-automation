@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72d97f59_fa34f04a",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-27T17:26:57Z",
+      "side": 1,
+      "message": "[Arguments]  ${action}  ${user_type}\u003dnormal\n\n    # Description of argument(s):\n    # action       Action to perform: \u0027save\u0027 or \u0027cancel\u0027\n    # user_type    User privilege level: \u0027readonly\u0027 or \u0027admin\u0027\n\nno need to explicitly tell service user,",
+      "revId": "40edc9da4322f37d3acaffcfdb50030ddc60978f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "275c140e_0c625aa6",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-27T17:26:57Z",
+      "side": 1,
+      "message": "Potential Logic Issue with Readonly User Setup (Lines 547-549)\nSeverity: Medium File: gui/gui_test/overview_menu/test_overview_menu.robot Line: 547-549\n\nIssue: The keyword includes logic to create a readonly user, but the test case \"Verify Asset Tag Update With Readonly User\" already has [Setup] Create Readonly User And Login To GUI in its setup (Line 436). This creates redundant user creation.\n\nWhy: Redundant user creation causes several problems:\n\nPerformance: Creating users twice unnecessarily slows down test execution\nPotential Conflicts: Attempting to create the same user twice may cause errors or unexpected behavior\nMaintenance Burden: Two places to update if user creation logic changes\nCode Clarity: Unclear which creation is actually needed, confusing for future maintainers\nTest Reliability: If the first creation succeeds but second fails (or vice versa), test behavior becomes unpredictable\nBest Practice Violation: DRY (Don\u0027t Repeat Yourself) principle - setup logic should be in one place\nCurrent Code:\n\n    # Setup for readonly user.\n    IF  \u0027${user_type}\u0027 \u003d\u003d \u0027readonly\u0027\n       Create Readonly User And Login To GUI\n    END\n\nRecommendation: Remove the redundant user creation from the keyword since it\u0027s already handled in the test case setup:\n\n    # Note: Readonly user setup is handled by test case [Setup] when needed\nOr alternatively, remove the [Setup] from the test case and rely solely on the keyword\u0027s logic.",
+      "revId": "40edc9da4322f37d3acaffcfdb50030ddc60978f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd9ff1e8_6ef76da2",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-27T17:26:57Z",
+      "side": 1,
+      "message": "Potential Race Condition (Line 552)\nSeverity: Low File: gui/gui_test/overview_menu/test_overview_menu.robot Line: 552\n\nIssue: Using Wait AND Click Element without verifying the element is clickable could lead to flaky tests.\n\nWhy: Waiting only for element visibility doesn\u0027t guarantee clickability, which can cause:\n\nFlaky Tests: Element might be visible but disabled, covered by another element, or still animating\nFalse Failures: Tests fail intermittently in CI/CD pipelines due to timing issues\nDebugging Difficulty: Race conditions are hard to reproduce and diagnose\nCI/CD Instability: Flaky tests reduce confidence in the test suite and slow down development\nBest Practice: Selenium/Robot Framework best practices recommend explicit wait for clickability\nReal-World Scenarios:\nButton might be visible but disabled during page load\nModal overlays or loading spinners might cover the button\nCSS animations might make button temporarily unclickable\n\n\nCurrent Code:\n\n    Wait AND Click Element  ${xpath_asset_tag_edit_button}\n\n\nRecommendation: Add explicit wait for element to be clickable:\n\n    Wait Until Element Is Enabled  ${xpath_asset_tag_edit_button}  timeout\u003d10\n    Click Element  ${xpath_asset_tag_edit_button}",
+      "revId": "40edc9da4322f37d3acaffcfdb50030ddc60978f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "764980e2_904a8e0c",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-27T17:26:57Z",
+      "side": 1,
+      "message": "Variable Naming Inconsistency and Deprecated Keyword (Lines 555-556)\nSeverity: Medium File: gui/gui_test/overview_menu/test_overview_menu.robot Line: 555-556\n\nIssue: Two problems: (1) The variable ${new_hostname} is misleading because it\u0027s being used for asset tag, not hostname. (2) Using deprecated Set Variable keyword instead of modern VAR syntax.\n\nWhy:\n\nMisleading variable names cause significant problems:\n\nConfusion: Developers reading the code will expect hostname operations, not asset tag operations\nMaintenance Errors: Future changes to hostname logic might accidentally modify asset tag logic (or vice versa)\nDebugging Difficulty: When tests fail, misleading names make it harder to identify the actual problem\nCopy-Paste Errors: This suggests the code was copied from hostname-related tests without proper adaptation\nSemantic Mismatch: The test is about asset tags, but variables reference hostname - creates cognitive dissonance\nUsing deprecated Set Variable is problematic:\n\nSet Variable is deprecated since Robot Framework 7.0 (Robocop: DEPR05)\nModern VAR syntax is more concise, readable, and maintainable\nDeprecated keywords will eventually be removed from Robot Framework\nUsing deprecated syntax makes code harder to maintain and update\nVAR syntax is the recommended approach in all new code\nCurrent Code:\n\n    ${overview_hostname}\u003d  Get Text  ${xpath_hostname}\n    ${new_hostname}\u003d  Set Variable  ${overview_hostname}_new\n    \nRecommendation: Use accurate variable names AND modern VAR syntax:\n\n    ${current_asset_tag}\u003d  Get Text  ${xpath_hostname}\n    VAR    ${new_asset_tag}    ${current_asset_tag}_new",
+      "revId": "40edc9da4322f37d3acaffcfdb50030ddc60978f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df72697c_1cf0fbc9",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-27T17:26:57Z",
+      "side": 1,
+      "message": "Inconsistent Indentation in IF Block (Lines 562-570)\nSeverity: Medium File: gui/gui_test/overview_menu/test_overview_menu.robot Line: 562-570\n\nIssue: The indentation inside the nested IF blocks is inconsistent. Line 560 has incorrect indentation.\n\nWhy: Consistent indentation is critical in Robot Framework because:\n\nIt defines the logical structure and scope of control flow statements\nInconsistent indentation makes code harder to read and maintain\nIt can lead to confusion about which statements belong to which block\nRobot Framework style guide recommends 4 spaces per indentation level\nMixed indentation (6 spaces vs 7 spaces) suggests copy-paste errors or manual editing mistakes\nAutomated tools (robocop, robot.tidy) will flag this as a style violation\n\nCurrent Code:\n\n    IF  \u0027${action}\u0027 \u003d\u003d \u0027save\u0027\n      Click Element  ${xpath_asset_tag_save_button}\n       IF  \u0027${user_type}\u0027 \u003d\u003d \u0027readonly\u0027\n          Verify Error And Unauthorized Message On GUI\n       ELSE\n          Verify Success Message On BMC GUI Page\n       END\n       Page Should Not Contain  ${xpath_asset_tag_save_button}\n       Element Should Contain  ${xpath_asset_tag} ${new_hostname}\n\nProblem: Line 563 uses 6 spaces, while lines 564-570 use 7 spaces. This creates inconsistent indentation levels.\n\nRecommendation: Use consistent indentation (4 spaces per level):\n\n    IF  \u0027${action}\u0027 \u003d\u003d \u0027save\u0027\n        Click Element  ${xpath_asset_tag_save_button}\n        IF  \u0027${user_type}\u0027 \u003d\u003d \u0027readonly\u0027\n            Verify Error And Unauthorized Message On GUI\n        ELSE\n            Verify Success Message On BMC GUI Page\n        END\n        Page Should Not Contain  ${xpath_asset_tag_save_button}\n        Element Should Contain  ${xpath_asset_tag}  ${new_hostname}",
+      "revId": "40edc9da4322f37d3acaffcfdb50030ddc60978f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "072fd61b_2e235628",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-27T17:26:57Z",
+      "side": 1,
+      "message": "2. Incorrect Variable Reference in Assertion (Line 570)\nSeverity: High File: gui/gui_test/overview_menu/test_overview_menu.robot Line: 570\n\nIssue: Missing space between XPath variable and the expected value in the Element Should Contain assertion. This will cause a syntax error.\n\nWhy: Robot Framework requires at least two spaces (or a tab) to separate arguments. With only one space, Robot Framework will interpret ${xpath_asset_tag} ${new_hostname} as a single concatenated string argument instead of two separate arguments. The Element Should Contain keyword expects exactly 2 arguments (locator and expected text), so this will cause:\n\nRuntime error: \"Keyword \u0027Element Should Contain\u0027 expected 2 arguments, got 1\"\nTest execution failure\nIncorrect validation logic\n\nCurrent Code:\n\n       Element Should Contain  ${xpath_asset_tag} ${new_hostname}\n\nProblem: There\u0027s only one space between ${xpath_asset_tag} and ${new_hostname}, which violates Robot Framework\u0027s argument separation rules.\n\nRecommendation: Add proper spacing or use separate arguments:\n\n       Element Should Contain  ${xpath_asset_tag}  ${new_hostname}",
+      "revId": "40edc9da4322f37d3acaffcfdb50030ddc60978f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89e021e6_14fae40c",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-27T17:26:57Z",
+      "side": 1,
+      "message": "Missing Validation After Cancel Action (Lines 571-573)\nSeverity: Low File: gui/gui_test/overview_menu/test_overview_menu.robot Line: 571-573\n\nIssue: The ELSE block (cancel action) only verifies the cancel button disappears but doesn\u0027t verify that the asset tag value was NOT changed.\n\nWhy: Incomplete validation creates a weak test that might miss bugs:\n\nIncomplete Test Coverage: The test doesn\u0027t verify the primary purpose of the Cancel button (discarding changes)\nFalse Confidence: Test passes even if Cancel button saves changes instead of discarding them\nRegression Risk: Future code changes could break Cancel functionality without test detection\nTest Purpose Mismatch: Test documentation says \"verify that asset tag update is discarded\" but code doesn\u0027t verify this\nReal Bug Scenario: If Cancel button has a bug and saves changes anyway, this test would still pass\nBest Practice: Every test should verify both positive outcomes (what should happen) and negative outcomes (what should NOT happen)\n\nCurrent Code:\n\n   ELSE\n      Click Element  ${xpath_asset_tag_cancel_button}\n      Page Should Not Contain  ${xpath_asset_tag_cancel_button}\n    END\n    \n    \nRecommendation: Add validation that the original value is preserved:\n\n   ELSE\n      Click Element  ${xpath_asset_tag_cancel_button}\n      Page Should Not Contain  ${xpath_asset_tag_cancel_button}\n      Element Should Contain  ${xpath_asset_tag}  ${overview_hostname}\n    END",
+      "revId": "40edc9da4322f37d3acaffcfdb50030ddc60978f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
