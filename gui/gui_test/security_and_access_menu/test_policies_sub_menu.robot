@@ -27,9 +27,11 @@ ${xpath_usb_firmware_update_policy_toggle}    //*[@data-test-id='policies-toggle
 ${xpath_secure_version_lockin_toggle}         //*[@data-test-id='policies-toggle-svle']
 ${xpath_host_usb_enablement_toggle}           //*[@data-test-id='policies-toggle-hostUsb']
 ${xpath_basic_authentication_toggle}          //*[@data-test-id='policies-toggle-basic-auth']
+...  /following-sibling::label
 
 
 *** Test Cases ***
+*** Comments ***
 
 Verify Navigation To Policies Page
     [Documentation]  Verify navigation to policies page.
@@ -209,6 +211,16 @@ Configure SSH And IPMI Settings Via GUI And Verify Its Persistency
     Disabled        Enabled      True
 
 
+Verify Basic Authentication Toggle Operation On Policies Page
+    [Documentation]  Verify basic authentication toggle operation on policies page.
+    [Tags]  Verify_Basic_Authentication_Toggle_Operation_On_Policies_Page
+    [Teardown]  Set Basic Authentication Policy To Initial State  ${initial_basic_auth_setting}
+
+    VAR  ${toast_msg}  Successfully updated Basic Authentication.
+    Toggle Required Policy Option And Verify  ${initial_basic_auth_setting}
+    ...  ${xpath_basic_authentication_toggle}  ${toast_msg}
+
+
 *** Keywords ***
 
 Test Setup Execution
@@ -218,6 +230,8 @@ Test Setup Execution
     Click Element  ${xpath_policies_sub_menu}
     Wait Until Keyword Succeeds  30 sec  15 sec  Location Should Contain  policies
     Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=1min
+    ${initial_basic_auth_setting}=  Get Text  ${xpath_basic_authentication_toggle}
+    Set Suite Variable  ${initial_basic_auth_setting}
 
 Set Policy Via GUI
 
@@ -293,7 +307,6 @@ Set SSH And IPMI State Via GUI
     #                     (Valid Values: True or False).
 
     ${current_ssh_state}=  Get Text  ${xpath_bmc_ssh_toggle}
-
     IF  '${ssh_state}' == '${current_ssh_state}'
       # When SSH state is already set to the given value, click SSH toggle
       # button twice to reset SSH value back to its original value.
@@ -330,3 +343,63 @@ Fetch IPMI And SSH Settings
     Set Suite Variable  ${initial_ssh_setting}
     ${initial_ipmi_setting}=  Get Text  ${xpath_network_ipmi_toggle}
     Set Suite Variable  ${initial_ipmi_setting}
+
+
+Toggle Policy Option And Verify Toast Message
+    [Documentation]  Toggle required policy option and verify toast message.
+    [Arguments]  ${xpath_input_toggle_option}  ${expected_toast_msg}
+    ...  ${expected_toggle_status}
+
+    # Description of argument(s):
+    # xpath_input_toggle_option    Input required xpath toggle option.
+    # expected_toast_msg           Expected toast message post toggle option.
+    # expected_toggle_status       Expected toggle status.
+
+    # Performing first toggle operation.
+    Click Element  ${xpath_input_toggle_option}
+    Page Should Contain  ${expected_toast_msg}
+    # Refresh GUI and wait to reflect policy status.
+    Wait Until Keyword Succeeds  1 min  30 sec
+    ...  Refresh Gui And Verify Element Value  ${xpath_input_toggle_option}  ${expected_toggle_status}
+
+
+Toggle Required Policy Option And Verify
+    [Documentation]  Toggle required policy option and verify.
+    [Arguments]  ${initial_option_value}  ${xpath_input_toggle_option}
+    ...  ${expected_toast_msg}
+
+    # Description of argument(s):
+    # initial_option_value         Intial policy option value.
+    # xpath_input_toggle_option    Input required xpath toggle option.
+    # expected_toast_msg           Expected toast message post toggle option.
+
+    IF  '$initial_option_value' == 'Enabled'
+        VAR  ${expected_toggle_status}  Disabled
+        VAR  ${next_expected_toggle_status}  Enabled
+    ELSE
+        VAR  ${expected_toggle_status}  Enabled
+        VAR  ${next_expected_toggle_status}  Disabled
+    END
+
+    # Performing first toggle operation.
+    Toggle Policy Option And Verify Toast Message  ${xpath_input_toggle_option}
+    ...  ${expected_toast_msg}  ${expected_toggle_status}
+
+    # Performing next toggle operation.
+    Toggle Policy Option And Verify Toast Message  ${xpath_input_toggle_option}
+    ...  ${expected_toast_msg}  ${next_expected_toggle_status}
+
+ 
+Set Basic Authentication Policy To Initial State
+    [Documentation]  Set basic authentication policy option to initial state.
+    [Arguments]  ${initial_option_value}
+
+    # Description of argument(s):
+    # initial_option_value         Initial policy option value.
+
+    IF  '$initial_option_value' == 'Enabled'
+        VAR  ${basic_auth_state}  'Enabled'
+    ELSE
+        VAR  ${basic_auth_state}  'Disabled'
+    END
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body={"HTTPBasicAuth":${basic_auth_state}}
