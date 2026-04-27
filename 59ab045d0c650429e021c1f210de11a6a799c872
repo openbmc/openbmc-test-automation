@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fa56628_4cf99432",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-04-27T12:40:52Z",
+      "side": 1,
+      "message": "Remove",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 16
+      },
+      "revId": "59ab045d0c650429e021c1f210de11a6a799c872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38a14a2c_28907693",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-04-27T12:40:52Z",
+      "side": 1,
+      "message": "Remove",
+      "range": {
+        "startLine": 213,
+        "startChar": 0,
+        "endLine": 213,
+        "endChar": 18
+      },
+      "revId": "59ab045d0c650429e021c1f210de11a6a799c872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "465b718f_3fed29f3",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-04-27T12:40:52Z",
+      "side": 1,
+      "message": "Change to Click Element\nWait Until Keyword Succeeds\nRefresh GUI And Verify Element Value",
+      "range": {
+        "startLine": 359,
+        "startChar": 4,
+        "endLine": 359,
+        "endChar": 17
+      },
+      "revId": "59ab045d0c650429e021c1f210de11a6a799c872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95daac92_5fd46fec",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-04-27T12:40:52Z",
+      "side": 1,
+      "message": "Remove space",
+      "range": {
+        "startLine": 386,
+        "startChar": 57,
+        "endLine": 386,
+        "endChar": 58
+      },
+      "revId": "59ab045d0c650429e021c1f210de11a6a799c872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42abc410_197d0e27",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-04-27T12:40:52Z",
+      "side": 1,
+      "message": "remove space",
+      "range": {
+        "startLine": 390,
+        "startChar": 62,
+        "endLine": 390,
+        "endChar": 63
+      },
+      "revId": "59ab045d0c650429e021c1f210de11a6a799c872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70dee61c_a672492c",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-04-27T12:40:52Z",
+      "side": 1,
+      "message": "Remove space",
+      "range": {
+        "startLine": 392,
+        "startChar": 0,
+        "endLine": 392,
+        "endChar": 1
+      },
+      "revId": "59ab045d0c650429e021c1f210de11a6a799c872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
