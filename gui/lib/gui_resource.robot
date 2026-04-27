@@ -399,3 +399,28 @@ Navigate To Required Sub Menu
     Wait And Click Element  ${xpath_sub_menu}  wait_timeout=60s
     Location Should Contain  ${sub_menu_text}
     Wait Until Element Is Not Visible  ${xpath_page_loading_progress_bar}  timeout=1min
+
+
+Open In New Tab
+    [Documentation]  Open link in a new tab and check if it success
+    [Arguments]  ${xpath_new_tab}  ${header}
+    
+    # Description of Arguments:
+    # xpath_new_tab    Locator of the hyperlink
+    # header           Text of page in new window
+
+    # Get the href attribute from the xpath
+    ${url}=    Get Element Attribute  ${xpath_new_tab}  href
+    
+    # Open the hyperlink in new window
+    Execute Javascript  ARGUMENTS  ${url}  JAVASCRIPT  window.open(arguments[0], '_blank')
+
+    #Switch to new pr child window. Verify menu header is present.
+    #Close new window
+    Switch Window  NEW
+    Sleep  10s
+    Page Should Contain  ${header}
+    Close Window
+
+    #Switch to the main or parent window
+    Switch Window  MAIN
