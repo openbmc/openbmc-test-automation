@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e760fc2f_052b7407",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-27T13:55:59Z",
+      "side": 1,
+      "message": "/  use like this instead 3 hashes # Power On Test Cases\nStyle Consistency: Maintains uniform comment formatting across the codebase",
+      "revId": "a6b2537ec65a5afc302ffe6495e45988091bbdcb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b89d829_5649c85e",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-27T13:55:59Z",
+      "side": 1,
+      "message": "Issue: The keyword modification adds navigation back to overview page, but this may cause issues if the keyword is called multiple times or from different contexts.\n\nProblem:\n\nThe navigation back to overview is added inside the IF block for PowerOn state\nThis creates an asymmetry: PowerOn state navigates back, PowerOff state doesn\u0027t\nIf this keyword is called in a sequence, the navigation state becomes unpredictable\n\n\nOption : Add navigation for both states (consistent behavior)\n\n    IF  \u0027${power_value}\u0027 !\u003d \u0027Not available\u0027\n        Click Element  ${xpath_power_heading}\n        Wait Until Page Contains Element  ${xpath_power_heading}  timeout\u003d30\n        ${power_tab_value}\u003d  Get Text  ${xpath_power_tab_power_consumption}\n        Should Be Equal As Strings  ${power_value}  ${power_tab_value}\n        Click Element  ${xpath_overview_menu}\n        Wait Until Page Contains Element  ${xpath_overview_page_header}\n        Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout\u003d30\n    ELSE\n        Should Be Equal As Strings  ${power_value}  Not available\n        # Navigate back to overview for consistency\n        Click Element  ${xpath_overview_menu}\n        Wait Until Page Contains Element  ${xpath_overview_page_header}\n        Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout\u003d30\n    END",
+      "revId": "a6b2537ec65a5afc302ffe6495e45988091bbdcb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
