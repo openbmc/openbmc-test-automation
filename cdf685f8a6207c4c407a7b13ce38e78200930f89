@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fb0e438_09923d45",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-04-27T07:19:59Z",
+      "side": 1,
+      "message": "remove space",
+      "revId": "cdf685f8a6207c4c407a7b13ce38e78200930f89",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3192f4d_2805cbfe",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-04-27T07:19:59Z",
+      "side": 1,
+      "message": "remove space",
+      "revId": "cdf685f8a6207c4c407a7b13ce38e78200930f89",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
