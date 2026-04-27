@@ -49,6 +49,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "63aff691_88237c4b",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-04-27T09:13:44Z",
+      "side": 1,
+      "message": "this a xpath variable",
+      "parentUuid": "1b25518a_5bae2798",
+      "range": {
+        "startLine": 366,
+        "startChar": 19,
+        "endLine": 366,
+        "endChar": 47
+      },
+      "revId": "bfbb158b2aad2467d2b876ef5bdfca5e96c63fe4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "261167a0_4fe895a0",
         "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
         "patchSetId": 3
@@ -60,6 +84,24 @@
       "writtenOn": "2026-04-27T09:04:05Z",
       "side": 1,
       "message": "where is this ${expected_toast_msg} message defined ?\nnot seen in this file.",
+      "revId": "bfbb158b2aad2467d2b876ef5bdfca5e96c63fe4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a08fa9e_5d7c48bb",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-04-27T09:13:44Z",
+      "side": 1,
+      "message": "it is defined in [Arguments]",
+      "parentUuid": "261167a0_4fe895a0",
       "revId": "bfbb158b2aad2467d2b876ef5bdfca5e96c63fe4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -100,6 +142,24 @@
       "writtenOn": "2026-04-27T09:04:05Z",
       "side": 1,
       "message": "please change to ${xpath_input_toggle_option}",
+      "revId": "bfbb158b2aad2467d2b876ef5bdfca5e96c63fe4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0fd9551_e5382905",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-04-27T09:13:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9043105_1194c738",
       "revId": "bfbb158b2aad2467d2b876ef5bdfca5e96c63fe4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
