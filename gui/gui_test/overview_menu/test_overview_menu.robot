@@ -410,6 +410,20 @@ Verify Power Information Should Display At Host Power Off State
 
     Verify Power Information Section  PowerOff
 
+Verify Overview Opens Link In New Tab
+    [Documentation]  Verify if hyperlinks opens in new tab
+    [Tags]  Verify_Overview_Opens_Link_In_New_Tab
+
+    Open Link In New Tab  ${overview_hyperlinks}
+
+Verify Overview Hyperlink Behavior For ReadOnly User
+    [Documentation]  Verify Overview Hyperlink Behavior For ReadOnly User
+    [Tags]  Verify_Overview_Hyperlink_Behavior_For_ReadOnly_User
+    [Setup]  Create Readonly User And Login To GUI
+    [Teardown]  Delete Readonly User And Logout Current GUI Session
+
+    Open Link In New Tab  ${overview_hyperlinks}
+
 
 *** Keywords ***
 
