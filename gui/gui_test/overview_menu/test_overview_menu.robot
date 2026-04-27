@@ -410,6 +410,18 @@ Verify Power Information Should Display At Host Power Off State
 
     Verify Power Information Section  PowerOff
 
+Verify Overview Opens Link In New Tab
+    [Documentation]  Verify if hyperlinks opens in new tab
+    [Tags]  Verify_Overview_Opens_Link_In_New_Tab
+
+    [Template]  Open Link In New Tab
+
+    //a[@href='#/operations/firmware']  Firmware
+    //a[@href="#/settings/network"]  Network
+    //a[@href='#/resource-management/power']  Power
+    //a[@href="#/logs/event-logs"]  Event logs
+    //a[@href="#/hardware-status/inventory"]  Inventory and LEDs
+    //a[@href='#/logs/dumps']  Dumps
 
 *** Keywords ***
 
