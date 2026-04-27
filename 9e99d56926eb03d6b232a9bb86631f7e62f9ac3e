@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bd43aaa_d441004c",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-04-27T05:53:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57486bc0_cd897d5f",
+      "range": {
+        "startLine": 435,
+        "startChar": 20,
+        "endLine": 436,
+        "endChar": 53
+      },
+      "revId": "9e99d56926eb03d6b232a9bb86631f7e62f9ac3e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "521d2b87_72ae72d9",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-04-26T12:02:34Z",
       "side": 1,
       "message": "Verify asset tag update with options such as save, cancel for user with readonly or admin privilege",
+      "range": {
+        "startLine": 538,
+        "startChar": 21,
+        "endLine": 538,
+        "endChar": 81
+      },
+      "revId": "9e99d56926eb03d6b232a9bb86631f7e62f9ac3e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f23c48dc_03cefd3b",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-04-27T05:53:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "521d2b87_72ae72d9",
       "range": {
         "startLine": 538,
         "startChar": 21,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c2c729a_6de0f6bc",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-04-27T05:53:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47caf96d_1d616885",
+      "range": {
+        "startLine": 539,
+        "startChar": 30,
+        "endLine": 539,
+        "endChar": 39
+      },
+      "revId": "9e99d56926eb03d6b232a9bb86631f7e62f9ac3e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c37736f4_ee420064",
@@ -83,6 +155,30 @@
       "writtenOn": "2026-04-26T12:02:34Z",
       "side": 1,
       "message": "This logic works but this meant for normal user\n\nI would prefer to have seperate IF block for the normal user\n\nor add this logic in else block",
+      "range": {
+        "startLine": 567,
+        "startChar": 3,
+        "endLine": 573,
+        "endChar": 7
+      },
+      "revId": "9e99d56926eb03d6b232a9bb86631f7e62f9ac3e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14fea33e_a89d0da0",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-04-27T05:53:45Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "c37736f4_ee420064",
       "range": {
         "startLine": 567,
         "startChar": 3,
