@@ -23,6 +23,14 @@ ${test_ip}              10.6.6.6
 ${test_mask}            255.255.255.0
 ${test_local_user}      test_local_user
 ${test_user_password}   TestPwd123
+&{old_account_service}   &{EMPTY}
+&{old_ldap_config}       &{EMPTY}
+${hostname}              ${EMPTY}
+${test_ip}               10.6.6.6
+${test_mask}             255.255.255.0
+${LDAP_UNREACHABLE_URI}  ldap://192.0.2.1
+${LOCALTESTUSER}         testuser
+${TEST_USER_PASSWORD}    TestPwd123
 
 *** Test Cases ***
 
@@ -591,6 +599,58 @@ Switch LDAP Type And Verify Login Fails
     Redfish Verify LDAP Login  ${False}
     Redfish.Logout
 
+Verify Local User Management And Operations Continue During LDAP Unreachability
+    [Documentation]  Verify that local admin can create and manage local users even when LDAP server is unreachable.
+    ...  This ensures BMC remains manageable when LDAP authentication is unavailable.
+    [Tags]  Verify_Local_User_Management_And_Operations_Continue_During_LDAP_Unreachability
+    [Setup]  Run Keywords  Create LDAP Configuration  ${LDAP_TYPE}  ${LDAP_UNREACHABLE_URI}
+    ...  ${LDAP_BIND_DN}  ${LDAP_BIND_DN_PASSWORD}  ${LDAP_BASE_DN}  AND  Sleep  15s
+    ...  AND  Verify LDAP Is Unreachable
+    [Teardown]  Run Keywords  Restore LDAP URL  AND  Delete Local User If Exists  ${LOCALTESTUSER}
+    ...  AND  FFDC On Test Case Fail
+
+    # Login back with local admin user.
+    Redfish.Login
+
+    # Try to create a test user with admin privilege using local admin.
+    Redfish Create User  ${LOCALTESTUSER}  ${TEST_USER_PASSWORD}  Administrator  ${True}
+
+    # Verify the user was created with Administrator privilege.
+    Verify User Role  ${LOCALTESTUSER}  Administrator
+
+    # Verify login with the newly created admin user.
+    Redfish.Logout
+    Redfish.Login  ${LOCALTESTUSER}  ${TEST_USER_PASSWORD}
+    Redfish.Logout
+
+    # Login back with local admin to change privilege.
+    Redfish.Login
+
+    # Change the privilege from Administrator to ReadOnly.
+    Redfish.Patch  ${REDFISH_ACCOUNTS_URI}${LOCALTESTUSER}
+    ...  body={'RoleId': 'ReadOnly'}
+    ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
+
+    # Verify the privilege was changed to ReadOnly
+    Verify User Role  ${LOCALTESTUSER}  ReadOnly
+
+    # Verify login with ReadOnly user and check read operations work.
+    Redfish.Logout
+    Redfish.Login  ${LOCALTESTUSER}  ${TEST_USER_PASSWORD}
+
+    # Verify ReadOnly user can read firmware inventory.
+    ${resp}=  Redfish.Get  /redfish/v1/UpdateService/FirmwareInventory
+    Should Be True  ${resp.dict["Members@odata.count"]} >= ${1}
+
+    # Verify ReadOnly user cannot perform write operations.
+    Redfish.Patch  ${REDFISH_ACCOUNTS_URI}${LOCALTESTUSER}
+    ...  body={'RoleId': 'ReadOnly'}
+    ...  valid_status_codes=[${HTTP_FORBIDDEN}]
+
+    # Cleanup - logout and login with admin.
+    Redfish.Logout
+    Redfish.Login
+
 *** Keywords ***
 
 Redfish Verify LDAP Login
@@ -611,6 +671,16 @@ Redfish Verify LDAP Login
     Redfish.Logout
     Redfish.Login
 
+Verify LDAP Is Unreachable
+    [Documentation]  Verify that LDAP server is unreachable by attempting LDAP login.
+
+    # Try to login with LDAP user - should fail due to unreachable LDAP server.
+    ${ldap_login_status}=  Run Keyword And Return Status
+    ...  Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    Should Be Equal  ${ldap_login_status}  ${False}
+    ...  msg=LDAP is accessible, please test when it is in unreachable state.
+
+    Redfish.Login
 
 Update LDAP Config And Verify Set Host Name
     [Documentation]  Update LDAP config and verify by attempting to set host name.
@@ -646,6 +716,18 @@ Set User Account Enabled State
     ${payload}=  Create Dictionary  Enabled=${enabled_state}
     Redfish.Patch  ${REDFISH_ACCOUNTS_URI}${username}  body=&{payload}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+Verify User Role
+    [Documentation]  Verify user account role.
+    [Arguments]  ${username}  ${expected_role}
+
+    # Description of argument(s):
+    # username       The username of the user account.
+    # expected_role  The expected role (e.g., Administrator, Operator, ReadOnly).
+
+    ${resp}=  Redfish.Get  ${REDFISH_ACCOUNTS_URI}${username}
+    Should Be Equal As Strings  ${resp.dict['RoleId']}  ${expected_role}
+    ...  msg=User role mismatch. Expected: ${expected_role}, Got: ${resp.dict['RoleId']}
 
 
 Verify User Account Enabled State
@@ -778,7 +860,6 @@ Suite Setup Execution
     Disable Other LDAP
     Create LDAP Configuration
     ${hostname}=  Redfish.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  HostName
-
 
 LDAP Suite Teardown Execution
     [Documentation]  Restore ldap configuration, delete unused redfish session.
@@ -991,3 +1072,19 @@ Update LDAP User Role And Read Network Configuration
 
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
     Redfish.Get  ${REDFISH_NW_ETH0_URI}  valid_status_codes=[${valid_status_code}]
+
+
+Delete Local User If Exists
+    [Documentation]  Delete local user account if it exists.
+    [Arguments]  ${user_name}
+
+    # Description of argument(s):
+    # user_name  The user name to be deleted if it exists.
+
+    ${user_exists}=  Run Keyword And Return Status
+    ...  Redfish.Get  ${REDFISH_ACCOUNTS_URI}${user_name}
+
+    IF  ${user_exists} == ${True}
+        Redfish.Delete  ${REDFISH_ACCOUNTS_URI}${user_name}
+        ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}, ${HTTP_NOT_FOUND}]
+    END
