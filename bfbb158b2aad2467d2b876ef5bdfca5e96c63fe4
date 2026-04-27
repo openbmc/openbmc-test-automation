@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b25518a_5bae2798",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-04-27T09:04:05Z",
+      "side": 1,
+      "message": "if this is not a xpath varibale then u can use ${input_toggle_option}",
+      "range": {
+        "startLine": 366,
+        "startChar": 19,
+        "endLine": 366,
+        "endChar": 47
+      },
+      "revId": "bfbb158b2aad2467d2b876ef5bdfca5e96c63fe4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "261167a0_4fe895a0",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-04-27T09:04:05Z",
+      "side": 1,
+      "message": "where is this ${expected_toast_msg} message defined ?\nnot seen in this file.",
+      "revId": "bfbb158b2aad2467d2b876ef5bdfca5e96c63fe4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9043105_1194c738",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-04-27T09:04:05Z",
+      "side": 1,
+      "message": "please change to ${xpath_input_toggle_option}",
+      "revId": "bfbb158b2aad2467d2b876ef5bdfca5e96c63fe4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
