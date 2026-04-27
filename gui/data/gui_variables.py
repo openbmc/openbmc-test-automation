@@ -148,3 +148,22 @@ class gui_variables:
     )
     xpath_unauthorized_popup = "//*[contains(normalize-space(.),'Unauthorized')]/following-sibling::button"
     xpath_information_message = "//*[contains(text(),'Reload the browser page to get the updated content.')]"
+
+    # Hyperlink XPaths -  Used for validating hyperlinks
+
+    # Overview Page
+    # Format: {xpath_name: (xpath_locator, display_header)}
+    overview_hyperlinks = {
+        'xpath_overview_firmware_hp':
+        ("//a[@href='#/operations/firmware']", 'Firmware'),
+        'xpath_overview_network_hp':
+        ("//a[@href='#/settings/network']", 'Network'),
+        'xpath_overview_power_hp':
+        ("//a[@href='#/resource-management/power']", 'Power'),
+        'xpath_overview_event_logs_hp':
+        ("//a[@href='#/logs/event-logs']", 'Event logs'),
+        'xpath_overview_inventory_and_leds_hp': ("//a[@href='#/hardware-status/inventory']",
+         'Inventory and LEDs'),
+        'xpath_overview_dumps_hp':
+         ("//a[@href='#/logs/dumps']", 'Dumps')
+}
