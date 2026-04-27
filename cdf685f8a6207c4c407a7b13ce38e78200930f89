@@ -37,6 +37,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2b63cb2e_3d337a6c",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-04-27T07:22:16Z",
+      "side": 1,
+      "message": "pr means parent ? then make it clear",
+      "range": {
+        "startLine": 417,
+        "startChar": 19,
+        "endLine": 417,
+        "endChar": 21
+      },
+      "revId": "cdf685f8a6207c4c407a7b13ce38e78200930f89",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ffb0023b_768e4ea1",
         "filename": "gui/lib/gui_resource.robot",
         "patchSetId": 4
