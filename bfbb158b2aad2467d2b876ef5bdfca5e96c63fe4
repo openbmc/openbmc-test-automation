@@ -26,6 +26,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f23f3151_50719844",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-04-27T09:11:49Z",
+      "side": 1,
+      "message": "Remove space\nClose the brace\nClick Element ${input_xpath_toggle_option}",
+      "range": {
+        "startLine": 366,
+        "startChar": 19,
+        "endLine": 366,
+        "endChar": 47
+      },
+      "revId": "bfbb158b2aad2467d2b876ef5bdfca5e96c63fe4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "261167a0_4fe895a0",
         "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
         "patchSetId": 3
@@ -43,6 +66,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "931e8b1f_0089b69e",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-04-27T09:11:49Z",
+      "side": 1,
+      "message": "Perform Toggle And Verify\n    [Arguments]  ${xpath}  ${toast_msg}  ${expected_status}\n    click element  ${xpath}\n    Wait Until Page Contains  ${toast_msg}  timeout\u003d10s\n    wait until keyword succeeds  ${POLICY_WAIT_TIMEOUT}  ${POLICY_WAIT_INTERVAL}\n    ...  refresh gui and verify element value  ${xpath}  ${expected_status}\n\nkeyword can be written and called before and after\nPerform Toggle And Verify  ${input_xpath_toggle_option}  ${expected_toggle_status}\nPerform Toggle And Verify  ${input_xpath_toggle_option}  ${next_expected_toggle_status}",
+      "range": {
+        "startLine": 367,
+        "startChar": 3,
+        "endLine": 371,
+        "endChar": 0
+      },
+      "revId": "bfbb158b2aad2467d2b876ef5bdfca5e96c63fe4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d9043105_1194c738",
         "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
         "patchSetId": 3
@@ -54,6 +100,52 @@
       "writtenOn": "2026-04-27T09:04:05Z",
       "side": 1,
       "message": "please change to ${xpath_input_toggle_option}",
+      "revId": "bfbb158b2aad2467d2b876ef5bdfca5e96c63fe4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3375729a_63265c06",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-04-27T09:11:49Z",
+      "side": 1,
+      "message": "Wait Until Page Contains\ncan this be used?",
+      "range": {
+        "startLine": 374,
+        "startChar": 4,
+        "endLine": 376,
+        "endChar": 46
+      },
+      "revId": "bfbb158b2aad2467d2b876ef5bdfca5e96c63fe4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb8a1aba_4b45cb27",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-04-27T09:11:49Z",
+      "side": 1,
+      "message": "${auth_body}\u003d  Set Variable  \u003cvalue\u003e\nRedfish.Patch  ${REDFISH_BASE_URI}AccountService\n...  body\u003d${auth_body}  valid_status_codes\u003d[${HTTP_OK}]",
+      "range": {
+        "startLine": 387,
+        "startChar": 4,
+        "endLine": 393,
+        "endChar": 7
+      },
       "revId": "bfbb158b2aad2467d2b876ef5bdfca5e96c63fe4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
