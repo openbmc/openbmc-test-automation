@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d04353b7_99c21e0a",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1001957
+      },
+      "writtenOn": "2026-04-27T06:35:06Z",
+      "side": 1,
+      "message": "Space remove",
+      "revId": "65b0a7203c1bf1696a9d455f27991cd536ec25ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0a3a1e1_f686b3ca",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 1001957
+      },
+      "writtenOn": "2026-04-27T06:35:06Z",
+      "side": 1,
+      "message": "Space remove",
+      "revId": "65b0a7203c1bf1696a9d455f27991cd536ec25ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5298f99f_c893173f",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1001957
+      },
+      "writtenOn": "2026-04-27T06:35:06Z",
+      "side": 1,
+      "message": "Space remove for three lines",
+      "revId": "65b0a7203c1bf1696a9d455f27991cd536ec25ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
