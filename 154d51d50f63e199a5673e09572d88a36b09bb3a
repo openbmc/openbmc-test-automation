@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f26ab06_512499ec",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-04-28T06:56:05Z",
+      "side": 1,
+      "message": "Just a suggestion for these steps:\n\nSince this test repeats the same keyword with different xpath/header pairs, we can move those pairs into a global list variable. That keeps the test shorter and makes future updates easier.\n\nFor example:\n\n#new tab links collection with format: xpath|header name\n@{new_tab_links}    //a[@href\u003d\u0027#/operations/firmware\u0027]|Firmware\n...                 //a[@href\u003d\"#/settings/network\"]|Network\n...                 //a[@href\u003d\u0027#/resource-management/power\u0027]|Power\n...                 //a[@href\u003d\"#/logs/event-logs\"]|Event logs\n...                 //a[@href\u003d\"#/hardware-status/inventory\"]|Inventory and LEDs\n...                 //a[@href\u003d\u0027#/logs/dumps\u0027]|Dumps\n\nThen the test case can be written as:\n\nVerify Overview Opens Link In New Tab\n    [Documentation]  Verify if hyperlinks open in a new tab.\n    [Tags]  Verify_Overview_Opens_Link_In_New_Tab\n\n    FOR  ${link}  IN  @{new_tab_links}\n        ${xpath_new_tab}\u003d  Fetch From Left  ${link}  |\n        ${header}\u003d  Fetch From Right  ${link}  |\n        Open Link In New Tab  ${xpath_new_tab}  ${header}\n    END",
+      "range": {
+        "startLine": 412,
+        "startChar": 0,
+        "endLine": 424,
+        "endChar": 36
+      },
+      "revId": "154d51d50f63e199a5673e09572d88a36b09bb3a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
