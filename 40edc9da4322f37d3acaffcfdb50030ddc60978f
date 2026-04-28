@@ -36,6 +36,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c51264c2_e976cd7f",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-04-28T04:17:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e861bbc_41419355",
+      "revId": "40edc9da4322f37d3acaffcfdb50030ddc60978f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "275c140e_0c625aa6",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "done. Thanks",
       "parentUuid": "275c140e_0c625aa6",
+      "revId": "40edc9da4322f37d3acaffcfdb50030ddc60978f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef606174_c7a00752",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-04-28T04:17:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb77c068_dccf7d2e",
       "revId": "40edc9da4322f37d3acaffcfdb50030ddc60978f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -106,6 +142,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9f8aaaf_6261e139",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-04-28T04:17:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81ee308c_aaea021a",
+      "revId": "40edc9da4322f37d3acaffcfdb50030ddc60978f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "764980e2_904a8e0c",
@@ -137,6 +191,24 @@
       "side": 1,
       "message": "sure. updated to asset_tag",
       "parentUuid": "764980e2_904a8e0c",
+      "revId": "40edc9da4322f37d3acaffcfdb50030ddc60978f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "807b5b16_ac412259",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-04-28T04:17:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad835751_5532e2d7",
       "revId": "40edc9da4322f37d3acaffcfdb50030ddc60978f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -176,6 +248,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f193bf51_c1e152f7",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-04-28T04:17:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c584476_989ef673",
+      "revId": "40edc9da4322f37d3acaffcfdb50030ddc60978f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "072fd61b_2e235628",
@@ -211,6 +301,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cf3809e_baf5da0a",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-04-28T04:17:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "365eb24a_ce0b3ea2",
+      "revId": "40edc9da4322f37d3acaffcfdb50030ddc60978f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "89e021e6_14fae40c",
@@ -242,6 +350,24 @@
       "side": 1,
       "message": "done little more change . new version added this \n\n    # Perform Action and Validations.\n    IF  \u0027${action}\u0027 \u003d\u003d \u0027save\u0027\n       Click Element  ${xpath_asset_tag_save_button}\n       IF  \u0027${user_type}\u0027 \u003d\u003d \u0027readonly\u0027\n           Verify Error And Unauthorized Message On GUI\n       ELSE\n           Verify Success Message On BMC GUI Page\n       END\n   ELSE\n      Click Element  ${xpath_asset_tag_cancel_button}\n    END\n    Page Should Not Contain  ${xpath_asset_tag_cancel_button}\n    Element Should Contain  ${xpath_asset_tag}  ${overview_asset_tag}",
       "parentUuid": "89e021e6_14fae40c",
+      "revId": "40edc9da4322f37d3acaffcfdb50030ddc60978f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e87fafed_0b668db6",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-04-28T04:17:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe9a5399_35892fb6",
       "revId": "40edc9da4322f37d3acaffcfdb50030ddc60978f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
