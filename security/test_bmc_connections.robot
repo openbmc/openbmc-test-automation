@@ -40,7 +40,7 @@ Test Patch Without Auth Token Fails
     [Tags]   Test_Patch_Without_Auth_Token_Fails
 
     ${active_channel_config}=  Get Active Channel Config
-    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    VAR  ${ethernet_interface}    ${active_channel_config['${CHANNEL_NUMBER}']['name']}
 
     Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body={'HostName': '${hostname}'}
     ...  valid_status_codes=[${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
@@ -50,10 +50,10 @@ Flood Patch Without Auth Token And Check Stability Of BMC
     [Documentation]  Flood patch method without auth token and check BMC stability.
     [Tags]  Flood_Patch_Without_Auth_Token_And_Check_Stability_Of_BMC
 
-    @{fail_list}=  Create List
+    VAR  @{fail_list}
 
     ${active_channel_config}=  Get Active Channel Config
-    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    VAR  ${ethernet_interface}    ${active_channel_config['${CHANNEL_NUMBER}']['name']}
 
     FOR  ${iter}  IN RANGE  ${1}  ${iterations} + 1
         Log To Console  ${iter}th iteration Patch Request without valid session token
@@ -98,8 +98,11 @@ Test Post Without Auth Token Fails
     [Documentation]  Send post method without auth token and verify it throws an error.
     [Tags]   Test_Post_Without_Auth_Token_Fails
 
-    ${user_info}=  Create Dictionary
-    ...  UserName=test_user  Password=TestPwd123  RoleId=Operator  Enabled=${True}
+    VAR  &{user_info}
+    ...  UserName=test_user
+    ...  Password=TestPwd123
+    ...  RoleId=Operator
+    ...  Enabled=${True}
     Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{user_info}
     ...  valid_status_codes=[${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
 
@@ -108,10 +111,13 @@ Flood Post Without Auth Token And Check Stability Of BMC
     [Documentation]  Flood post method without auth token and check BMC stability.
     [Tags]  Flood_Post_Without_Auth_Token_And_Check_Stability_Of_BMC
 
-    @{fail_list}=  Create List
+    VAR  @{fail_list}
 
-    ${user_info}=  Create Dictionary
-    ...  UserName=test_user  Password=TestPwd123  RoleId=Operator  Enabled=${True}
+    VAR  &{user_info}
+    ...  UserName=test_user
+    ...  Password=TestPwd123
+    ...  RoleId=Operator
+    ...  Enabled=${True}
 
     FOR  ${iter}  IN RANGE  ${1}  ${iterations} + 1
         Log To Console  ${iter}th iteration Post Request without valid session token
@@ -139,7 +145,7 @@ Make Large Number Of Wrong SSH Login Attempts And Check Stability
     [Teardown]  FFDC On Test Case Fail
 
     SSHLibrary.Open Connection  ${OPENBMC_HOST}
-    @{ssh_status_list}=  Create List
+    VAR  @{ssh_status_list}
     FOR  ${iter}  IN RANGE  ${1}  ${loop_iteration} + 1
       Log To Console  ${iter}th iteration
       ${invalid_password}=   Catenate  ${OPENBMC_PASSWORD}${iter}
@@ -165,7 +171,7 @@ Test Stability On Large Number Of Wrong Login Attempts To GUI
     [Documentation]  Test stability on large number of wrong login attempts to GUI.
     [Tags]   Test_Stability_On_Large_Number_Of_Wrong_Login_Attempts_To_GUI
 
-    @{status_list}=  Create List
+    VAR  @{status_list}
 
     # Open headless browser.
     Start Virtual Display
@@ -198,7 +204,7 @@ Test BMC GUI Stability On Continuous Refresh Of GUI Home Page
     [Tags]  Test_BMC_GUI_Stability_On_Continuous_Refresh_Of_GUI_Home_Page
     [Teardown]  Close All Browsers
 
-    @{failed_list}=  Create List
+    VAR  @{failed_list}
 
     # Open headless browser.
     Start Virtual Display
@@ -249,7 +255,7 @@ Test Bmcweb Stability On Continuous Redfish Delete Operation Request Without Ses
     ...  verify bmcweb stability by sending delete request with valid session token.
     [Tags]  Test_Bmcweb_Stability_On_Continuous_Redfish_Delete_Operation_Request_Without_Session_Token
 
-    @{failed_iter_list}=  Create List
+    VAR  @{failed_iter_list}
 
     FOR  ${iter}  IN RANGE  ${iterations}
         Log To Console  ${iter}th Redfish Delete Object Request without valid session token
@@ -273,7 +279,7 @@ Verify Flood Put Method Without Auth Token
     [Tags]  Verify_Flood_Put_Method_Without_Auth_Token
     [Teardown]  Delete All BMC Partition File
 
-    @{status_list}=  Create List
+    VAR  @{status_list}
 
     FOR  ${iter}  IN RANGE  ${1}  ${iterations}
 
@@ -320,8 +326,11 @@ Login And Create User
 
     Redfish.Login
 
-    ${user_info}=  Create Dictionary
-    ...  UserName=test_user  Password=TestPwd123  RoleId=ReadOnly  Enabled=${True}
+    VAR  &{user_info}
+    ...  UserName=test_user
+    ...  Password=TestPwd123
+    ...  RoleId=ReadOnly
+    ...  Enabled=${True}
     Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{user_info}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_CREATED}]
 
@@ -332,8 +341,11 @@ Login And Delete User
 
     Redfish.Login
 
-    ${user_info}=  Create Dictionary
-    ...  UserName=test_user  Password=TestPwd123  RoleId=ReadOnly  Enabled=${True}
+    VAR  &{user_info}
+    ...  UserName=test_user
+    ...  Password=TestPwd123
+    ...  RoleId=ReadOnly
+    ...  Enabled=${True}
     Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{user_info}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_CREATED}]
     Redfish.Delete  /redfish/v1/AccountService/Accounts/test_user
@@ -364,7 +376,7 @@ Invalid Credentials Redfish Login Attempts
     # login_username   username for login user.
     # login_password   password for login user.
 
-    @{failed_iter_list}=  Create List
+    VAR  @{failed_iter_list}
 
     FOR  ${iter}  IN RANGE  ${iterations}
         Log To Console  ${iter}th Redfish login with invalid credentials
@@ -402,9 +414,11 @@ Login And Upload Partition File To BMC
 
     # Get the content of the file and upload to BMC.
     ${image_data}=  OperatingSystem.Get Binary File  100-file
-    ${headers}=  Create Dictionary  X-Auth-Token=${XAUTH_TOKEN}  Content-Type=application/octet-stream
+    VAR  &{headers}
+    ...    X-Auth-Token=${XAUTH_TOKEN}
+    ...    Content-Type=application/octet-stream
 
-    ${kwargs}=  Create Dictionary  data=${image_data}
+    VAR  &{kwargs}    data=${image_data}
     Set To Dictionary  ${kwargs}  headers  ${headers}
     ${resp}=  PUT On Session  openbmc  ${OEM_HOST_CONFIG_URI}/100-file  &{kwargs}  timeout=10
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
@@ -432,8 +446,8 @@ Delete All BMC Partition File
     [Documentation]  Delete multiple partition file on BMC via Redfish.
 
     Initialize OpenBMC
-    ${data}=  Create Dictionary
-    ${headers}=  Create Dictionary  X-Auth-Token=${XAUTH_TOKEN}
+    VAR  &{data}
+    VAR  &{headers}    X-Auth-Token=${XAUTH_TOKEN}
     Set To Dictionary  ${data}  headers  ${headers}
 
     ${resp}=  POST On Session  openbmc  ${OEM_HOST_CONFIG_ACTIONS_URI}.DeleteAll  &{data}
