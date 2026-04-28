@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16149acb_39dbab37",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-04-28T06:59:32Z",
+      "side": 1,
+      "message": "GUI - upper case to maintain consistency",
+      "range": {
+        "startLine": 362,
+        "startChar": 17,
+        "endLine": 362,
+        "endChar": 20
+      },
+      "revId": "ac3df465261efaefc13fa037428ece546ebb9d09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
