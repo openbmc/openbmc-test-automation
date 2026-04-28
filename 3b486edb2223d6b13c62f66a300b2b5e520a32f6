@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf5c7840_5de7321c",
+        "filename": "gui/gui_test/security_and_access_menu/test_sessions_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-28T16:19:31Z",
+      "side": 1,
+      "message": "Variable name has a typo: ${session_memeber_id} should be ${session_member_id}\n\nAll Occurrences to Fix:\n\nLine 197: ${session_memeber_id}\u003d Fetch From Right ${session_member} /\nLine 200: Input Text ${xpath_search_box} ${session_memeber_id}\nLine 203: Page Should Contain ${session_memeber_id}",
+      "revId": "3b486edb2223d6b13c62f66a300b2b5e520a32f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca61ef83_50a66d60",
+        "filename": "gui/gui_test/security_and_access_menu/test_sessions_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-28T16:19:31Z",
+      "side": 1,
+      "message": "Suggested Enhancement for the comments on 199, 201 and 204\n```\n\n# Input the session ID in the search box to filter sessions.\n# Verify the session is displayed in the filtered results.\n# Clear the search box to prepare for the next session validation.\n```",
+      "revId": "3b486edb2223d6b13c62f66a300b2b5e520a32f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
