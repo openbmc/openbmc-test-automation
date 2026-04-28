@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc74ce14_e590406e",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-04-28T04:44:56Z",
+      "side": 1,
+      "message": "is this required here?\nif you want you can include it the test case in #240\n[Teardown]  Run Keywords  Cleanup Local User And Restore Session  ${test_local_user}\n...  AND  FFDC On Test Case Fail",
+      "range": {
+        "startLine": 702,
+        "startChar": 4,
+        "endLine": 702,
+        "endChar": 26
+      },
+      "revId": "acea90c4bcb1e1df651ee01a80cad6ea794668ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
