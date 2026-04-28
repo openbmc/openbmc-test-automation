@@ -52,15 +52,16 @@ Get SLAAC And Static IPv6 Address And Verify Connectivity
 
 
 Enable SSH Protocol Via IPv6 And Verify
-    [Documentation]  Enable SSH protocol via eth1 and verify.
+    [Documentation]  Enable SSH protocol via IPv6 and verify.
     [Tags]  Enable_SSH_Protocol_Via_IPv6_And_Verify
+    [Template]  Enable SSH Protocol Via IPv6 Address And Verify
 
-    @{ipv6_addressorigin_list}  ${ipv6_slaac_addr}=
-    ...  Get Address Origin List And Address For Type  SLAAC  ${2}
-    Connect BMC Using IPv6 Address  ${ipv6_slaac_addr}
-    Set SSH Protocol Using IPv6 Session And Verify  ${True}
-    Verify SSH Login And Commands Work
-    Verify SSH Connection Via IPv6  ${ipv6_slaac_addr}
+    # IPv6_address_type  channel_number
+
+    SLAAC                ${1}
+    Static               ${1}
+    SLAAC                ${2}
+    Static               ${2}
 
 
 Disable SSH Protocol Via IPv6 And Verify
@@ -915,4 +916,20 @@ Configure LDAP Using IPv6 Address And Verify Login
     Should Be True  ${ldap_config['ServiceEnabled']} == ${True}
     ...  msg=LDAP service not enabled after configuration via IPv6.
     RedfishIPv6.Logout
+    Verify SSH Connection Via IPv6  ${ipv6_addr}
+
+
+Enable SSH Protocol Via IPv6 Address And Verify
+    [Documentation]  Enable SSH protocol via IPv6 address and verify.
+    [Arguments]  ${ipv6_address_type}  ${channel_number}
+
+    # Description of argument(s):
+    # ipv6_address_type   Type of IPv6 address (SLAAC or Static).
+    # channel_number      Ethernet channel number: 1 (eth0) or 2 (eth1).
+
+    @{ipv6_addressorigin_list}  ${ipv6_addr}=
+    ...  Get Address Origin List And Address For Type  ${ipv6_address_type}  ${channel_number}
+    Connect BMC Using IPv6 Address  ${ipv6_addr}
+    Set SSH Protocol Using IPv6 Session And Verify  ${True}
+    Verify SSH Login And Commands Work
     Verify SSH Connection Via IPv6  ${ipv6_addr}
