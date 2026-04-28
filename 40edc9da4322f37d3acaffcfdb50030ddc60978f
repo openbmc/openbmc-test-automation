@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9e861bbc_41419355",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-04-28T03:43:59Z",
+      "side": 1,
+      "message": "sure will remove.",
+      "parentUuid": "72d97f59_fa34f04a",
+      "revId": "40edc9da4322f37d3acaffcfdb50030ddc60978f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "275c140e_0c625aa6",
         "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
         "patchSetId": 11
@@ -31,6 +49,24 @@
       "writtenOn": "2026-04-27T17:26:57Z",
       "side": 1,
       "message": "Potential Logic Issue with Readonly User Setup (Lines 547-549)\nSeverity: Medium File: gui/gui_test/overview_menu/test_overview_menu.robot Line: 547-549\n\nIssue: The keyword includes logic to create a readonly user, but the test case \"Verify Asset Tag Update With Readonly User\" already has [Setup] Create Readonly User And Login To GUI in its setup (Line 436). This creates redundant user creation.\n\nWhy: Redundant user creation causes several problems:\n\nPerformance: Creating users twice unnecessarily slows down test execution\nPotential Conflicts: Attempting to create the same user twice may cause errors or unexpected behavior\nMaintenance Burden: Two places to update if user creation logic changes\nCode Clarity: Unclear which creation is actually needed, confusing for future maintainers\nTest Reliability: If the first creation succeeds but second fails (or vice versa), test behavior becomes unpredictable\nBest Practice Violation: DRY (Don\u0027t Repeat Yourself) principle - setup logic should be in one place\nCurrent Code:\n\n    # Setup for readonly user.\n    IF  \u0027${user_type}\u0027 \u003d\u003d \u0027readonly\u0027\n       Create Readonly User And Login To GUI\n    END\n\nRecommendation: Remove the redundant user creation from the keyword since it\u0027s already handled in the test case setup:\n\n    # Note: Readonly user setup is handled by test case [Setup] when needed\nOr alternatively, remove the [Setup] from the test case and rely solely on the keyword\u0027s logic.",
+      "revId": "40edc9da4322f37d3acaffcfdb50030ddc60978f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb77c068_dccf7d2e",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-04-28T03:43:59Z",
+      "side": 1,
+      "message": "done. Thanks",
+      "parentUuid": "275c140e_0c625aa6",
       "revId": "40edc9da4322f37d3acaffcfdb50030ddc60978f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "81ee308c_aaea021a",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-04-28T03:43:59Z",
+      "side": 1,
+      "message": "Wait AND Click Element  ${xpath_asset_tag_edit_button} doing same .\nWait And Click Element\n    [Documentation]  Wait until element is visible then click the element.\n    [Arguments]  ${locator}  ${wait_timeout}\u003d10s\n\n    # Description of argument(s):\n    # locator        xpath of the element.\n    # wait_timeout   timeout for the locator to visible.\n\n    Wait Until Element Is Visible    ${locator}    timeout\u003d${wait_timeout}\n    Click Element    ${locator}",
+      "parentUuid": "fd9ff1e8_6ef76da2",
+      "revId": "40edc9da4322f37d3acaffcfdb50030ddc60978f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "764980e2_904a8e0c",
         "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
         "patchSetId": 11
@@ -65,6 +119,24 @@
       "writtenOn": "2026-04-27T17:26:57Z",
       "side": 1,
       "message": "Variable Naming Inconsistency and Deprecated Keyword (Lines 555-556)\nSeverity: Medium File: gui/gui_test/overview_menu/test_overview_menu.robot Line: 555-556\n\nIssue: Two problems: (1) The variable ${new_hostname} is misleading because it\u0027s being used for asset tag, not hostname. (2) Using deprecated Set Variable keyword instead of modern VAR syntax.\n\nWhy:\n\nMisleading variable names cause significant problems:\n\nConfusion: Developers reading the code will expect hostname operations, not asset tag operations\nMaintenance Errors: Future changes to hostname logic might accidentally modify asset tag logic (or vice versa)\nDebugging Difficulty: When tests fail, misleading names make it harder to identify the actual problem\nCopy-Paste Errors: This suggests the code was copied from hostname-related tests without proper adaptation\nSemantic Mismatch: The test is about asset tags, but variables reference hostname - creates cognitive dissonance\nUsing deprecated Set Variable is problematic:\n\nSet Variable is deprecated since Robot Framework 7.0 (Robocop: DEPR05)\nModern VAR syntax is more concise, readable, and maintainable\nDeprecated keywords will eventually be removed from Robot Framework\nUsing deprecated syntax makes code harder to maintain and update\nVAR syntax is the recommended approach in all new code\nCurrent Code:\n\n    ${overview_hostname}\u003d  Get Text  ${xpath_hostname}\n    ${new_hostname}\u003d  Set Variable  ${overview_hostname}_new\n    \nRecommendation: Use accurate variable names AND modern VAR syntax:\n\n    ${current_asset_tag}\u003d  Get Text  ${xpath_hostname}\n    VAR    ${new_asset_tag}    ${current_asset_tag}_new",
+      "revId": "40edc9da4322f37d3acaffcfdb50030ddc60978f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad835751_5532e2d7",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-04-28T03:43:59Z",
+      "side": 1,
+      "message": "sure. updated to asset_tag",
+      "parentUuid": "764980e2_904a8e0c",
       "revId": "40edc9da4322f37d3acaffcfdb50030ddc60978f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -88,6 +160,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3c584476_989ef673",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-04-28T03:43:59Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "df72697c_1cf0fbc9",
+      "revId": "40edc9da4322f37d3acaffcfdb50030ddc60978f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "072fd61b_2e235628",
         "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
         "patchSetId": 11
@@ -105,6 +195,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "365eb24a_ce0b3ea2",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-04-28T03:43:59Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "072fd61b_2e235628",
+      "revId": "40edc9da4322f37d3acaffcfdb50030ddc60978f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "89e021e6_14fae40c",
         "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
         "patchSetId": 11
@@ -116,6 +224,24 @@
       "writtenOn": "2026-04-27T17:26:57Z",
       "side": 1,
       "message": "Missing Validation After Cancel Action (Lines 571-573)\nSeverity: Low File: gui/gui_test/overview_menu/test_overview_menu.robot Line: 571-573\n\nIssue: The ELSE block (cancel action) only verifies the cancel button disappears but doesn\u0027t verify that the asset tag value was NOT changed.\n\nWhy: Incomplete validation creates a weak test that might miss bugs:\n\nIncomplete Test Coverage: The test doesn\u0027t verify the primary purpose of the Cancel button (discarding changes)\nFalse Confidence: Test passes even if Cancel button saves changes instead of discarding them\nRegression Risk: Future code changes could break Cancel functionality without test detection\nTest Purpose Mismatch: Test documentation says \"verify that asset tag update is discarded\" but code doesn\u0027t verify this\nReal Bug Scenario: If Cancel button has a bug and saves changes anyway, this test would still pass\nBest Practice: Every test should verify both positive outcomes (what should happen) and negative outcomes (what should NOT happen)\n\nCurrent Code:\n\n   ELSE\n      Click Element  ${xpath_asset_tag_cancel_button}\n      Page Should Not Contain  ${xpath_asset_tag_cancel_button}\n    END\n    \n    \nRecommendation: Add validation that the original value is preserved:\n\n   ELSE\n      Click Element  ${xpath_asset_tag_cancel_button}\n      Page Should Not Contain  ${xpath_asset_tag_cancel_button}\n      Element Should Contain  ${xpath_asset_tag}  ${overview_hostname}\n    END",
+      "revId": "40edc9da4322f37d3acaffcfdb50030ddc60978f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe9a5399_35892fb6",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-04-28T03:43:59Z",
+      "side": 1,
+      "message": "done little more change . new version added this \n\n    # Perform Action and Validations.\n    IF  \u0027${action}\u0027 \u003d\u003d \u0027save\u0027\n       Click Element  ${xpath_asset_tag_save_button}\n       IF  \u0027${user_type}\u0027 \u003d\u003d \u0027readonly\u0027\n           Verify Error And Unauthorized Message On GUI\n       ELSE\n           Verify Success Message On BMC GUI Page\n       END\n   ELSE\n      Click Element  ${xpath_asset_tag_cancel_button}\n    END\n    Page Should Not Contain  ${xpath_asset_tag_cancel_button}\n    Element Should Contain  ${xpath_asset_tag}  ${overview_asset_tag}",
+      "parentUuid": "89e021e6_14fae40c",
       "revId": "40edc9da4322f37d3acaffcfdb50030ddc60978f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
