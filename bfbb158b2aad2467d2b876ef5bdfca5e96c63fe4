@@ -211,6 +211,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0851c6d_9a02174a",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-04-28T05:15:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3375729a_63265c06",
+      "range": {
+        "startLine": 374,
+        "startChar": 4,
+        "endLine": 376,
+        "endChar": 46
+      },
+      "revId": "bfbb158b2aad2467d2b876ef5bdfca5e96c63fe4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb8a1aba_4b45cb27",
@@ -224,6 +248,30 @@
       "writtenOn": "2026-04-27T09:11:49Z",
       "side": 1,
       "message": "${auth_body}\u003d  Set Variable  \u003cvalue\u003e\nRedfish.Patch  ${REDFISH_BASE_URI}AccountService\n...  body\u003d${auth_body}  valid_status_codes\u003d[${HTTP_OK}]",
+      "range": {
+        "startLine": 387,
+        "startChar": 4,
+        "endLine": 393,
+        "endChar": 7
+      },
+      "revId": "bfbb158b2aad2467d2b876ef5bdfca5e96c63fe4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60de71d9_696ada66",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-04-28T05:15:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb8a1aba_4b45cb27",
       "range": {
         "startLine": 387,
         "startChar": 4,
