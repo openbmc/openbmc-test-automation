@@ -19,6 +19,9 @@ ${xpath_dump_hostboot_entry}     //*[contains(text(),"Hostboot Dump Entry")]
 ${xpath_dump_resource_entry}     //*[contains(text(),"Resource Dump Entry")]
 ${xpath_dump_system_entry}       //*[contains(text(),"System Dump Entry")]
 ${xpath_dump_clear_all}          //*[@data-test-id="tableFilter-button-clearAll"]
+${page_selection}                //select[@id="selectDumpType"]
+${xpath_dump_alert}              //*[@class='alert-msg']
+@{dump_types}                    BMC dump  System dump (disruptive)
 
 *** Test Cases ***
 
@@ -59,6 +62,18 @@ Verify Filter Dump Entries In Dump Logs Page
     # Click on clear all button to clear the filter selection.
     Click Element  ${xpath_dump_clear_all}
 
+Verify Dump Types In Dump Logs Page
+    [Documentation]  Verify dump types in dump logs page.
+    [Tags]  Verify_Dump_Types_In_Dump_Logs_Page
+
+    # Click on the dump type dropdown to show the options.
+    Click Element  ${page_selection}
+
+    # Select each dump type to verify the selection and the alert message.
+    FOR  ${dump_type}  IN  @{dump_types}
+        Select From List By Label  ${page_selection}  ${dump_type}
+        Page Should Contain Element  ${xpath_dump_alert}  limit=1
+    END
 
 *** Keywords ***
 
