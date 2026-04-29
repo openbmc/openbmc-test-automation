@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "46941ac3_9b9b0b3f",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-04-29T11:10:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de06e2a7_29c751bb",
+      "range": {
+        "startLine": 552,
+        "startChar": 2,
+        "endLine": 552,
+        "endChar": 85
+      },
+      "revId": "e688c9dad87ce52c08a6cd87cb3517b4c0dd964b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "18b90cb3_00bd2791",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-04-27T17:37:11Z",
       "side": 1,
       "message": "Can we use variable in line 22\n${test_ip}              10.6.6.6",
+      "range": {
+        "startLine": 558,
+        "startChar": 61,
+        "endLine": 558,
+        "endChar": 69
+      },
+      "revId": "e688c9dad87ce52c08a6cd87cb3517b4c0dd964b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9eb1e8a_8bacfd8c",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-04-29T11:10:44Z",
+      "side": 1,
+      "message": "No this is not IP to be added\nLDAP URI not reachable one needs to be configured.",
+      "parentUuid": "18b90cb3_00bd2791",
       "range": {
         "startLine": 558,
         "startChar": 61,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "62f4f383_6f4f6cd4",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-04-29T11:10:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1a8e321_88aea2f8",
+      "range": {
+        "startLine": 575,
+        "startChar": 0,
+        "endLine": 578,
+        "endChar": 62
+      },
+      "revId": "e688c9dad87ce52c08a6cd87cb3517b4c0dd964b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "840ad18a_5474450b",
@@ -83,6 +155,30 @@
       "writtenOn": "2026-04-29T04:48:00Z",
       "side": 1,
       "message": "Redfish.Patch  ${REDFISH_ACCOUNTS_URI}test_user\n    ...  body\u003d{\u0027RoleId\u0027: \u0027ReadOnly\u0027}\n    ...  valid_status_codes\u003d${HTTP_FORBIDDEN}]",
+      "range": {
+        "startLine": 605,
+        "startChar": 0,
+        "endLine": 611,
+        "endChar": 63
+      },
+      "revId": "e688c9dad87ce52c08a6cd87cb3517b4c0dd964b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11448ea8_e037dbf4",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-04-29T11:10:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "840ad18a_5474450b",
       "range": {
         "startLine": 605,
         "startChar": 0,
