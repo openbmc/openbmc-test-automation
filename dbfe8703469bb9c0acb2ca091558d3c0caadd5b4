@@ -156,6 +156,24 @@
       "message": "ssue #1: Missing error handling for Redfish.Patch operation\nLocation: Line 404 in gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot\n\nIssue: The Redfish.Patch operation in teardown has no error handling. If it fails, the system may be left in an inconsistent state with no indication of the failure.\n\nFix: Add error handling and status code validation\n```\nTRY\n    Redfish.Patch  ${REDFISH_BASE_URI}AccountService\n    ...  body\u003d{\"HTTPBasicAuth\":${basic_auth_state}}\n    ...  valid_status_codes\u003d[${HTTP_OK}]\nEXCEPT  AS  ${error}\n    Log  Failed to restore Basic Auth state: ${error}  level\u003dWARN\nEND\n```\n\nWhy: Teardown failures should be logged but not cause test failures. Silent failures make debugging difficult.",
       "revId": "dbfe8703469bb9c0acb2ca091558d3c0caadd5b4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a84f857b_e17dbb68",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-04-29T06:01:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c85fcd7_d40110ca",
+      "revId": "dbfe8703469bb9c0acb2ca091558d3c0caadd5b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
