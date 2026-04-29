@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "993b932c_4f423cce",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-29T13:11:12Z",
+      "side": 1,
+      "message": "Issue #1: Typo in Test Case Name\n\n# Current code (test_policies_sub_menu.robot:217)\nVerify Error And Unauthorized Message When Readonly User Perform Toggle Policies\nFix Required:\n\nVerify Error And Unauthorized Message When Readonly User Performs Toggle Policies\n\nWhy: The verb \"Perform\" doesn\u0027t agree with the singular subject \"Readonly User\". Should be \"Performs\" for grammatical correctness and consistency with naming conventions.",
+      "revId": "14c8459dec34716a7438c4fb829e3829d687ec09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8dd91edf_9ff2e4ba",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-29T13:11:12Z",
+      "side": 1,
+      "message": "Issue #2: Erroneous Keyword Call in Documentation Section\n\n# Current code (test_policies_sub_menu.robot:218-220)\n```\n[Documentation]  Verify error and unauthorized message are displayed when a\n...  read-only user performs toggling operations on policies page.\nVerify_Error_And_Unauthorized_Message_When_Readonly_User_Perform_Toggle_Policies\n```\nFix Required:\n\n```\n[Documentation]  Verify error and unauthorized message are displayed when a\n...  read-only user performs toggling operations on policies page.\n[Setup]  Create Readonly User And Login To GUI\n```\nWhy: Missing [Tags] for the above.",
+      "revId": "14c8459dec34716a7438c4fb829e3829d687ec09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "146e17ad_9965de7b",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-29T13:11:12Z",
+      "side": 1,
+      "message": "Issue #3: Typo in XPath Variable Name\nLocation: Line 224 in test_policies_sub_menu.robot\nIssue: Variable name contains typo - ${xpath_secuity_and_accesss_menu} has double \u0027s\u0027 in \"accesss\" and misspelled \"secuity\" (should be \"security\")\n\nFix: This is a pre-existing issue in the codebase gui/data/gui_variables.py:    xpath_secuity_and_accesss_menu\n\nWhy: While functional, it affects code quality and maintainability. Fixing in a separate change avoids scope creep.",
+      "revId": "14c8459dec34716a7438c4fb829e3829d687ec09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
