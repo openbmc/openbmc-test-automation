@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8db06320_3922b46d",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-04-29T05:59:04Z",
+      "side": 1,
+      "message": "not using in single line as it is exceeding 110 character limit",
+      "parentUuid": "fa387721_afdebc77",
+      "revId": "dbfe8703469bb9c0acb2ca091558d3c0caadd5b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "289350ce_2be3e9db",
         "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
         "patchSetId": 8
@@ -31,6 +49,24 @@
       "writtenOn": "2026-04-29T05:29:40Z",
       "side": 1,
       "message": "Issue #5: Deprecated Set Suite Variable keyword\nLocation: Line 233 in gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot\nIssue: Set Suite Variable is deprecated since Robot Framework 7.0, use VAR with scope\u003dSUITE instead \n\nFix: Replace with modern VAR syntax\n```\n# Current (deprecated)\n${initial_basic_auth_setting}\u003d  Get Text  ${xpath_basic_authentication_toggle}\nSet Suite Variable  ${initial_basic_auth_setting}\n```\n\n# Modern syntax\n```\n${initial_basic_auth_setting}\u003d  Get Text  ${xpath_basic_authentication_toggle}\nVAR  ${initial_basic_auth_setting}  ${initial_basic_auth_setting}  scope\u003dSUITE\n```",
+      "revId": "dbfe8703469bb9c0acb2ca091558d3c0caadd5b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3516df49_14474672",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-04-29T05:59:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "289350ce_2be3e9db",
       "revId": "dbfe8703469bb9c0acb2ca091558d3c0caadd5b4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -52,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1505c17d_549f51b4",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-04-29T05:59:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad2e8f15_76ea0ba9",
+      "revId": "dbfe8703469bb9c0acb2ca091558d3c0caadd5b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5e70eda9_0c6dbc67",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-04-29T05:29:40Z",
       "side": 1,
       "message": "Issue #9: Inconsistent quoting style in IF statements\nLocation: Lines 373, 397 in gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot\nIssue: IF statements use single quotes for string comparisons. Robot Framework best practices suggest double quotes.\nFix: Use consistent quoting\n```\nIF  \"${initial_option_value}\" \u003d\u003d \"Enabled\"\n```",
+      "revId": "dbfe8703469bb9c0acb2ca091558d3c0caadd5b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4350637d_28c893ee",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-04-29T05:59:04Z",
+      "side": 1,
+      "message": "Using ${initial_option_value}\" \u003d\u003d \"Enabled\" will throw error as the value is reference before assignment. Using robot suggested method \u0027$initial_option_value\u0027 \u003d\u003d \u0027Enabled\u0027\n\n```\nVariables in the original expression \"\u0027${initial_option_value}\u0027 \u003d\u003d \u0027Enabled\u0027\" were resolved before the expression was evaluated. Try using \"$initial_option_value \u003d\u003d \u0027Enabled\u0027\" syntax to avoid that. See Evaluating Expressions appendix in Robot Framework User Guide for more details.\n\n```",
+      "parentUuid": "5e70eda9_0c6dbc67",
       "revId": "dbfe8703469bb9c0acb2ca091558d3c0caadd5b4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
