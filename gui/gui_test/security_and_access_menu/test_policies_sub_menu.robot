@@ -16,16 +16,14 @@ Test Tags        Policies_Sub_Menu
 *** Variables ***
 
 ${xpath_policies_heading}                     //h1[text()="Policies"]
-${xpath_bmc_ssh_toggle}                       //*[@data-test-id='policies-toggle-bmcShell']
-...  /following-sibling::label
-${xpath_network_ipmi_toggle}                  //*[@data-test-id='polices-toggle-networkIpmi']
-...  /following-sibling::label
-${xpath_host_tpm_toggle}                      //input[@id='host-tpm-policy']
-${xpath_virtual_tpm_toggle}                   //*[@data-test-id='policies-toggle-vtpm']
-${xpath_rtad_toggle}                          //*[@data-test-id='policies-toggle-rtad']
-${xpath_usb_firmware_update_policy_toggle}    //*[@data-test-id='policies-toggle-usbFirmwareUpdatePolicy']
-${xpath_secure_version_lockin_toggle}         //*[@data-test-id='policies-toggle-svle']
-${xpath_host_usb_enablement_toggle}           //*[@data-test-id='policies-toggle-hostUsb']
+${xpath_bmc_ssh_toggle}                       //*[@data-test-id='policies-toggle-bmcShell']/following-sibling::label
+${xpath_network_ipmi_toggle}                  //*[@data-test-id='polices-toggle-networkIpmi']/following-sibling::label
+${xpath_host_tpm_toggle}                      //input[@id='host-tpm-policy']/following-sibling::label
+${xpath_virtual_tpm_toggle}                   //*[@data-test-id='policies-toggle-vtpm']/following-sibling::label
+${xpath_rtad_toggle}                          //*[@data-test-id='policies-toggle-rtad']/following-sibling::label
+${xpath_usb_firmware_update_policy_toggle}    //*[@data-test-id='policies-toggle-usbFirmwareUpdatePolicy']/following-sibling::label
+${xpath_secure_version_lockin_toggle}         //*[@data-test-id='policies-toggle-svle']/following-sibling::label
+${xpath_host_usb_enablement_toggle}           //*[@data-test-id='policies-toggle-hostUsb']/following-sibling::label
 ${xpath_basic_authentication_toggle}          //*[@data-test-id='policies-toggle-basic-auth']/following-sibling::label
 
 
@@ -219,12 +217,35 @@ Verify Basic Authentication Toggle Operation On Policies Page
     ...  ${xpath_basic_authentication_toggle}  ${toast_msg}
 
 
+Verify ReadOnly User Toggle Operations On BMC GUI Policies Menu
+    [Documentation]  Verify error and unauthorized message are displayed when a
+    ...  read-only user performs toggling operations on policies page.
+    [Tags]  Verify_ReadOnly_User_Toggle_Operations_On_BMC_GUI_Policies_Menu
+    [Setup]  Create Readonly User And Login To GUI
+    [Teardown]  Delete Readonly User And Logout Current GUI Session
+
+    Wait Until Keyword Succeeds  30 sec  15 sec  Click Element  ${xpath_security_and_access_menu}
+    Click Element  ${xpath_policies_sub_menu}
+    Wait Until Keyword Succeeds  30 sec  15 sec  Location Should Contain  policies
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=1min
+
+    VAR  @{xpath_policy_option_list}  ${xpath_bmc_ssh_toggle}  ${xpath_network_ipmi_toggle}
+    ...  ${xpath_host_tpm_toggle}  ${xpath_virtual_tpm_toggle}  ${xpath_rtad_toggle}
+    ...  ${xpath_usb_firmware_update_policy_toggle}  ${xpath_secure_version_lockin_toggle}
+    ...  ${xpath_host_usb_enablement_toggle}  ${xpath_basic_authentication_toggle}
+
+    FOR  ${xpath_policy}  IN  @{xpath_policy_option_list}
+        Click Element  ${xpath_policy}
+        Verify Error And Unauthorized Message On GUI
+    END
+
+
 *** Keywords ***
 
 Test Setup Execution
     [Documentation]  Do test case setup tasks.
 
-    Wait Until Keyword Succeeds  30 sec  15 sec  Click Element  ${xpath_secuity_and_accesss_menu}
+    Wait Until Keyword Succeeds  30 sec  15 sec  Click Element  ${xpath_security_and_access_menu}
     Click Element  ${xpath_policies_sub_menu}
     Wait Until Keyword Succeeds  30 sec  15 sec  Location Should Contain  policies
     Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=1min
