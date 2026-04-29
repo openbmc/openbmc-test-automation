@@ -86,6 +86,24 @@
       "message": "Issue #3: Typo in XPath Variable Name\nLocation: Line 224 in test_policies_sub_menu.robot\nIssue: Variable name contains typo - ${xpath_secuity_and_accesss_menu} has double \u0027s\u0027 in \"accesss\" and misspelled \"secuity\" (should be \"security\")\n\nFix: This is a pre-existing issue in the codebase gui/data/gui_variables.py:    xpath_secuity_and_accesss_menu\n\nWhy: While functional, it affects code quality and maintainability. Fixing in a separate change avoids scope creep.",
       "revId": "14c8459dec34716a7438c4fb829e3829d687ec09",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71514319_810075b4",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-04-29T13:31:26Z",
+      "side": 1,
+      "message": "xpath_secuity_and_accesss_menu typo fix i will handle it in separate commit",
+      "parentUuid": "146e17ad_9965de7b",
+      "revId": "14c8459dec34716a7438c4fb829e3829d687ec09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
