@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae8e59c4_b007c8c0",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-04-29T13:19:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "993b932c_4f423cce",
+      "revId": "14c8459dec34716a7438c4fb829e3829d687ec09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8dd91edf_9ff2e4ba",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-04-29T13:11:12Z",
       "side": 1,
       "message": "Issue #2: Erroneous Keyword Call in Documentation Section\n\n# Current code (test_policies_sub_menu.robot:218-220)\n```\n[Documentation]  Verify error and unauthorized message are displayed when a\n...  read-only user performs toggling operations on policies page.\nVerify_Error_And_Unauthorized_Message_When_Readonly_User_Perform_Toggle_Policies\n```\nFix Required:\n\n```\n[Documentation]  Verify error and unauthorized message are displayed when a\n...  read-only user performs toggling operations on policies page.\n[Setup]  Create Readonly User And Login To GUI\n```\nWhy: Missing [Tags] for the above.",
+      "revId": "14c8459dec34716a7438c4fb829e3829d687ec09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd6477fa_eee840bd",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-04-29T13:19:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8dd91edf_9ff2e4ba",
       "revId": "14c8459dec34716a7438c4fb829e3829d687ec09",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
