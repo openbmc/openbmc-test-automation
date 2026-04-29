@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa387721_afdebc77",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-29T05:29:40Z",
+      "side": 1,
+      "message": "Issue #7: Inconsistent xpath variable formatting\nLocation: Line 24 in gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot\nIssue: The xpath variable uses continuation syntax (...) which is unusual for a simple variable assignment\nFix: Combine on one line if it\u0027s part of the xpath\n\n```\n${xpath_basic_authentication_toggle}          //*[@data-test-id\u003d\u0027policies-toggle-basic-auth\u0027]/following-sibling::label\n```",
+      "revId": "dbfe8703469bb9c0acb2ca091558d3c0caadd5b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "289350ce_2be3e9db",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-29T05:29:40Z",
+      "side": 1,
+      "message": "Issue #5: Deprecated Set Suite Variable keyword\nLocation: Line 233 in gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot\nIssue: Set Suite Variable is deprecated since Robot Framework 7.0, use VAR with scope\u003dSUITE instead \n\nFix: Replace with modern VAR syntax\n```\n# Current (deprecated)\n${initial_basic_auth_setting}\u003d  Get Text  ${xpath_basic_authentication_toggle}\nSet Suite Variable  ${initial_basic_auth_setting}\n```\n\n# Modern syntax\n```\n${initial_basic_auth_setting}\u003d  Get Text  ${xpath_basic_authentication_toggle}\nVAR  ${initial_basic_auth_setting}  ${initial_basic_auth_setting}  scope\u003dSUITE\n```",
+      "revId": "dbfe8703469bb9c0acb2ca091558d3c0caadd5b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad2e8f15_76ea0ba9",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-29T05:29:40Z",
+      "side": 1,
+      "message": "Issue #6: Typo in parameter documentation\nLocation: Line 371 in gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot\nIssue: Documentation comment has typo: \"Intial\" should be \"Initial\"\nFix: Correct the spelling\n```\n# initial_option_value         Initial policy option value.\n```",
+      "revId": "dbfe8703469bb9c0acb2ca091558d3c0caadd5b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e70eda9_0c6dbc67",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-29T05:29:40Z",
+      "side": 1,
+      "message": "Issue #9: Inconsistent quoting style in IF statements\nLocation: Lines 373, 397 in gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot\nIssue: IF statements use single quotes for string comparisons. Robot Framework best practices suggest double quotes.\nFix: Use consistent quoting\n```\nIF  \"${initial_option_value}\" \u003d\u003d \"Enabled\"\n```",
+      "revId": "dbfe8703469bb9c0acb2ca091558d3c0caadd5b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c85fcd7_d40110ca",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-29T05:29:40Z",
+      "side": 1,
+      "message": "ssue #1: Missing error handling for Redfish.Patch operation\nLocation: Line 404 in gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot\n\nIssue: The Redfish.Patch operation in teardown has no error handling. If it fails, the system may be left in an inconsistent state with no indication of the failure.\n\nFix: Add error handling and status code validation\n```\nTRY\n    Redfish.Patch  ${REDFISH_BASE_URI}AccountService\n    ...  body\u003d{\"HTTPBasicAuth\":${basic_auth_state}}\n    ...  valid_status_codes\u003d[${HTTP_OK}]\nEXCEPT  AS  ${error}\n    Log  Failed to restore Basic Auth state: ${error}  level\u003dWARN\nEND\n```\n\nWhy: Teardown failures should be logged but not cause test failures. Silent failures make debugging difficult.",
+      "revId": "dbfe8703469bb9c0acb2ca091558d3c0caadd5b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
