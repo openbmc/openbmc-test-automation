@@ -16,6 +16,24 @@
       "message": "Hi @gkeishin@gmail.com\n\nNeeds clarity on this \"VAR\" Syntax, are we going to replace VAR Syntax in all the suite files.",
       "revId": "304ac7b3c9a7e167b75d56ccfc204747bdace0f3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee16ded8_a9478d70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-29T10:56:11Z",
+      "side": 1,
+      "message": "Yes, it better we start suite by suite so that we are complaint sooner before Robot Framework community pulls the plug and deprecated it.",
+      "parentUuid": "d13d9331_a9ce8f12",
+      "revId": "304ac7b3c9a7e167b75d56ccfc204747bdace0f3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
