@@ -348,6 +348,44 @@ Change Admin Password And Verify SSH SOL Login Fails With Old Password
     Verify SSH Login via SOL Port  ${admin_user}  ${default_adminuser_passwd}  ${False}
 
 
+Delete Admin User And Verify SSH SOL Login Fails
+    [Documentation]  Delete admin user and verify that SSH login on SOL port fails.
+    [Tags]  Delete_Admin_User_And_Verify_SSH_SOL_Login_Fails
+    [Setup]  Run Keywords  Redfish.Login  AND
+    ...  Redfish Create User  ${admin_user}  ${default_adminuser_passwd}  Administrator  ${True}
+    [Teardown]  Run Keywords  Close All Connections  AND  Redfish.Logout
+
+    # Verify that SSH login on SOL port works with admin user before deletion.
+    Verify SSH Login via SOL Port  ${admin_user}  ${default_adminuser_passwd}  ${True}
+    Close All Connections
+
+    # Delete the admin user account.
+    Redfish.Login
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/${admin_user}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
+
+    # Verify that SSH login on SOL port fails after user deletion.
+    Verify SSH Login via SOL Port  ${admin_user}  ${default_adminuser_passwd}  ${False}
+
+
+Expire Admin Password And Verify SSH SOL Login Fails
+    [Documentation]  Expire admin user password and verify that SSH login on SOL port fails.
+    [Tags]  Expire_Admin_Password_And_Verify_SSH_SOL_Login_Fails
+    [Setup]  Run Keywords  Redfish.Login  AND
+    ...  Redfish Create User  ${admin_user}  ${default_adminuser_passwd}  Administrator  ${True}
+    [Teardown]  Delete User And Close Connection And Logout  ${admin_user}
+
+    # Verify that SSH login on SOL port works with default password.
+    Verify SSH Login via SOL Port  ${admin_user}  ${default_adminuser_passwd}  ${True}
+    Close All Connections
+
+    # Expire the admin user password.
+    Expire Password  ${admin_user}
+
+    # Verify that SSH login on SOL port with expired password fails.
+    Verify SSH Login via SOL Port  ${admin_user}  ${default_adminuser_passwd}  ${False}
+
+
 *** Keywords ***
 
 Set Account Lockout Threshold
@@ -438,8 +476,8 @@ Delete User And Close Connection And Logout
     # Description of argument(s):
     # user    Username of the account to be deleted.
 
-    Redfish.Delete    /redfish/v1/AccountService/Accounts/${user}
-    ...    valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/${user}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
     Close All Connections
     Redfish.Logout
 
