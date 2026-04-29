@@ -144,6 +144,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6325a221_8f8dc338",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-04-29T04:52:56Z",
+      "side": 1,
+      "message": "please change it to Page Should Contain",
+      "range": {
+        "startLine": 360,
+        "startChar": 3,
+        "endLine": 360,
+        "endChar": 24
+      },
+      "revId": "59ab045d0c650429e021c1f210de11a6a799c872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62c6c8ea_aa3ee46a",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-04-29T04:52:56Z",
+      "side": 1,
+      "message": "change here also \n Wait Until Keyword Succeeds",
+      "range": {
+        "startLine": 362,
+        "startChar": 3,
+        "endLine": 362,
+        "endChar": 33
+      },
+      "revId": "59ab045d0c650429e021c1f210de11a6a799c872",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "95daac92_5fd46fec",
         "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
         "patchSetId": 5
