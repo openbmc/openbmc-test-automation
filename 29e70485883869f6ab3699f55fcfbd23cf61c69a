@@ -3,6 +3,74 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "61afb607_5a9f8bb7",
+        "filename": "redfish/managers/lib/mtls_resource.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2026-04-29T15:39:34Z",
+      "side": 1,
+      "message": "Should be aligned.\n\n```\nDocumentation    Shared keywords and variables for mTLS auth tests.\nResource         ../../../lib/resource.robot\nResource         ../../../lib/bmc_redfish_resource.robot\nResource         ../../../lib/bmc_redfish_utils.robot\nResource         ../../../lib/openbmc_ffdc.robot\nResource         ../../../lib/certificate_utils.robot\nLibrary          ../../../lib/mtls_cert_utils.py\nLibrary          Collections\nLibrary          OperatingSystem\nLibrary          RequestsLibrary\nLibrary          String\n```",
+      "revId": "29e70485883869f6ab3699f55fcfbd23cf61c69a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bdaad9b_6cbe41d7",
+        "filename": "redfish/managers/lib/mtls_resource.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2026-04-29T15:39:34Z",
+      "side": 1,
+      "message": "Add one line of space.",
+      "revId": "29e70485883869f6ab3699f55fcfbd23cf61c69a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6233f7a4_f2e3d672",
+        "filename": "redfish/managers/lib/mtls_resource.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2026-04-29T15:39:34Z",
+      "side": 1,
+      "message": "Add one line of space.",
+      "revId": "29e70485883869f6ab3699f55fcfbd23cf61c69a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77c303b6_94bd4001",
+        "filename": "redfish/managers/lib/mtls_resource.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2026-04-29T15:39:34Z",
+      "side": 1,
+      "message": "Add two line of space in between keywords.",
+      "revId": "29e70485883869f6ab3699f55fcfbd23cf61c69a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3dda5b92_15e769b6",
         "filename": "redfish/managers/test_mtls_authentication.robot",
         "patchSetId": 1
