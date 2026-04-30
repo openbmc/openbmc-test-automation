@@ -75,6 +75,30 @@
       },
       "revId": "304ac7b3c9a7e167b75d56ccfc204747bdace0f3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06fdadca_c33534b2",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-04-30T09:01:26Z",
+      "side": 1,
+      "message": "Good catch.",
+      "parentUuid": "d72d915c_4f2d9ede",
+      "range": {
+        "startLine": 43,
+        "startChar": 30,
+        "endLine": 43,
+        "endChar": 34
+      },
+      "revId": "304ac7b3c9a7e167b75d56ccfc204747bdace0f3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
