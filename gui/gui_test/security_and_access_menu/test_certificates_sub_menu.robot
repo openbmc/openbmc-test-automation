@@ -185,6 +185,7 @@ Verify Certificate Page With Readonly User
     [Teardown]  Delete Readonly User And Logout Current GUI Session
 
     Page Should Contain  No items available
+    Element Should Be Disabled  ${xpath_add_certificate_button}
 
 
 *** Keywords ***
