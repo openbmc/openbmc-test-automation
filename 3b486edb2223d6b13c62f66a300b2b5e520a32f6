@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c5a8a46_4c76b5af",
+        "filename": "gui/gui_test/security_and_access_menu/test_sessions_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-04-30T06:20:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf5c7840_5de7321c",
+      "revId": "3b486edb2223d6b13c62f66a300b2b5e520a32f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca61ef83_50a66d60",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-04-28T16:19:31Z",
       "side": 1,
       "message": "Suggested Enhancement for the comments on 199, 201 and 204\n```\n\n# Input the session ID in the search box to filter sessions.\n# Verify the session is displayed in the filtered results.\n# Clear the search box to prepare for the next session validation.\n```",
+      "revId": "3b486edb2223d6b13c62f66a300b2b5e520a32f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "474271d4_ad14090c",
+        "filename": "gui/gui_test/security_and_access_menu/test_sessions_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-04-30T06:20:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca61ef83_50a66d60",
       "revId": "3b486edb2223d6b13c62f66a300b2b5e520a32f6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
