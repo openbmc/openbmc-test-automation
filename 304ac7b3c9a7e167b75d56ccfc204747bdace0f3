@@ -34,6 +34,47 @@
       "parentUuid": "d13d9331_a9ce8f12",
       "revId": "304ac7b3c9a7e167b75d56ccfc204747bdace0f3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4368d4c4_e6f33f7a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-04-30T08:50:26Z",
+      "side": 1,
+      "message": "Got it @gkeishin@gmail.com",
+      "parentUuid": "ee16ded8_a9478d70",
+      "revId": "304ac7b3c9a7e167b75d56ccfc204747bdace0f3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d72d915c_4f2d9ede",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-04-30T08:50:26Z",
+      "side": 1,
+      "message": "2 spaces need to maintain inside the VAR assignment\nline:43,56,450",
+      "range": {
+        "startLine": 43,
+        "startChar": 30,
+        "endLine": 43,
+        "endChar": 34
+      },
+      "revId": "304ac7b3c9a7e167b75d56ccfc204747bdace0f3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
