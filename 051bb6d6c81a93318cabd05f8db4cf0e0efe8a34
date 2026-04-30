@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "323c694f_6d5ef2aa",
+        "filename": "gui/gui_test/logs_and_services_menu/test_dump_logs_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-04-30T06:12:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f186d656_4d42b079",
+      "revId": "051bb6d6c81a93318cabd05f8db4cf0e0efe8a34",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f4a37c3b_8fe3431b",
@@ -48,6 +66,24 @@
       "writtenOn": "2026-04-29T05:58:13Z",
       "side": 1,
       "message": "Let \u0027Verify Navigation To Dump Logs Page\u0027 be a first case for the test script readability and flow",
+      "revId": "051bb6d6c81a93318cabd05f8db4cf0e0efe8a34",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f931416_c4f3f577",
+        "filename": "gui/gui_test/logs_and_services_menu/test_dump_logs_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-04-30T06:12:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4a37c3b_8fe3431b",
       "revId": "051bb6d6c81a93318cabd05f8db4cf0e0efe8a34",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
