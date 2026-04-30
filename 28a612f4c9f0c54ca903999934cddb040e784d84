@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcace51f_1c2a353d",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 1001,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-04-30T11:25:41Z",
+      "side": 1,
+      "message": "We have IPv4 and IPv6 in this file so better to keep it here.",
+      "parentUuid": "4e625e5f_a9029bef",
+      "revId": "28a612f4c9f0c54ca903999934cddb040e784d84",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f0e42bdd_924c0401",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-04-21T07:01:32Z",
       "side": 1,
       "message": "this is already present in gui/gui_test/security_and_access_menu, so beeter to move these protocols related test there",
+      "revId": "28a612f4c9f0c54ca903999934cddb040e784d84",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cce6ae3a_3bd365ad",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 1958,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-04-30T11:25:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0e42bdd_924c0401",
       "revId": "28a612f4c9f0c54ca903999934cddb040e784d84",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -52,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45c4100c_dde93b65",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 1995,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-04-30T11:25:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "60428ab9_efa68f11",
+      "revId": "28a612f4c9f0c54ca903999934cddb040e784d84",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8d31e7ac_ae91f672",
@@ -69,6 +123,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ff47cc7_e0a890a4",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 2019,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-04-30T11:25:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d31e7ac_ae91f672",
+      "revId": "28a612f4c9f0c54ca903999934cddb040e784d84",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5e08dd23_520947d6",
@@ -82,6 +154,24 @@
       "writtenOn": "2026-04-20T10:01:58Z",
       "side": 1,
       "message": "Issue #4: Magic string \u0027169.254\u0027 and \u0027fe80\u0027 could be constants\nLocation: gui/gui_test/settings_menu/test_network_sub_menu.robot\n\n# Current code\nVerify SSH Connectivity  ${ipv4_list}  ${ssh_action}  169.254\nVerify SSH Connectivity  ${ipv6_list}  ${ssh_action}  fe80\nFix: Define as constants in Variables section:\n\n*** Variables ***\n${IPV4_LINK_LOCAL_PREFIX}    169.254\n${IPV6_LINK_LOCAL_PREFIX}    fe80\n\nWhy: Improves code readability and makes the intent of skipping link-local addresses more explicit.",
+      "revId": "28a612f4c9f0c54ca903999934cddb040e784d84",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "673c3773_fb9c03ad",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 2024,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-04-30T11:25:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e08dd23_520947d6",
       "revId": "28a612f4c9f0c54ca903999934cddb040e784d84",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
