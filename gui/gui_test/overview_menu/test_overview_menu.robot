@@ -46,6 +46,12 @@ ${xpath_asset_tag_input}                         //input[@id="asset-tag"]
 ${xpath_asset_tag_save_button}                   //button[normalize-space()="Save"]
 ${xpath_asset_tag_cancel_button}                 //button[normalize-space()="Cancel"]
 ${xpath_power_tab_power_consumption}             //dt[contains(text(),'Current power consumption')]/following-sibling::dd[1]
+${xpath_service_login_status}                    //dt[contains(text(),'Service login')]/following-sibling::dd[1]
+${xpath_account_status_disabled_button}          //input[@data-test-id='userManagement-radioButton-statusDisabled']
+${xpath_account_status_enabled_button}           //input[@data-test-id='userManagement-radioButton-statusEnabled']
+${xpath_save_button}                             //div[@id='modal-user']//div[@class='modal-footer']//button[text()='Save']
+${xpath_success_message}                         //*[contains(text(),'Success')]/parent::*/following-sibling::button
+${xpath_edit_button}                             //tr[.//td[text()='service']]//button[@class='btn btn-md btn-link btn-icon-only']
 
 
 *** Test Cases ***
@@ -452,6 +458,33 @@ Verify Power Information Should Display At Host Power On State
     Verify Power Information Section  PowerOn
 
 
+Verify Service User Disabled Status On Overview Page
+    [Documentation]  Verify service user shows as disabled on Overview page 
+    ...              when disabled from User Management page.
+    [Tags]  Verify_Service_User_Disabled_Status_On_Overview_Page
+ 
+    ${initial_status}=  Get Text  ${xpath_service_login_status}
+
+    # Navigate to user management page and change service user status to disabled.
+    Navigate To User Management Page
+    Click Element  ${xpath_edit_button}
+    Wait Until Page Contains Element  ${xpath_save_button}
+    Click Element  ${xpath_account_status_disabled_button}
+    Click Element  ${xpath_save_button}
+    Wait Until Page Contains Element  ${xpath_success_message}  timeout=30
+
+    # Verify status on Overview.
+    Click Element  ${xpath_overview_menu}
+    Wait Until Page Contains Element  ${xpath_overview_page_header}
+    Wait Until Element Is Not Visible  ${xpath_page_loading_progress_bar}  timeout=30
+
+    ${Disabled_status}=  Get Text  ${xpath_service_login_status}
+    Should Contain  ${Disabled_status}  Disabled
+
+    # Enabled service user.
+    Enable Service User
+
+
 *** Keywords ***
 
 Test Setup Execution
@@ -582,3 +615,24 @@ Verify Asset Tag Update On Overview Page
     END
     Page Should Not Contain  ${xpath_asset_tag_cancel_button}
     Element Should Contain  ${xpath_asset_tag}  ${overview_asset_tag}
+
+
+Navigate To User Management Page
+    [Documentation]  Navigate to User Management page via GUI.
+
+    Click Element  ${xpath_secuity_and_accesss_menu}
+    Click Element  ${xpath_user_management_sub_menu}
+    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  user-management
+    Wait Until Element Is Not Visible  ${xpath_page_loading_progress_bar}  timeout=30
+
+
+Enable Service User
+    [Documentation]  Re-enable service user.
+
+    # Navigate to user management page and change service user status to enabled.
+    Navigate To User Management Page
+    Click Element  ${xpath_edit_button}
+    Wait Until Page Contains Element  ${xpath_save_button}
+    Click Element  ${xpath_account_status_enabled_button}
+    Click Element  ${xpath_save_button}
+    Wait Until Page Contains Element  ${xpath_success_message}  timeout=30
