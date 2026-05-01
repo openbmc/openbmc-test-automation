@@ -46,6 +46,12 @@ ${xpath_asset_tag_input}                         //input[@id="asset-tag"]
 ${xpath_asset_tag_save_button}                   //button[normalize-space()="Save"]
 ${xpath_asset_tag_cancel_button}                 //button[normalize-space()="Cancel"]
 ${xpath_power_tab_power_consumption}             //dt[contains(text(),'Current power consumption')]/following-sibling::dd[1]
+${xpath_service_login_status}                    //dt[contains(text(),'Service login')]/following-sibling::dd[1]
+${xpath_account_status_disabled_button}          //input[@data-test-id='userManagement-radioButton-statusDisabled']
+${xpath_account_status_enabled_button}           //input[@data-test-id='userManagement-radioButton-statusEnabled']
+${xpath_save_button}                             //div[@id='modal-user']//div[@class='modal-footer']//button[text()='Save']
+${xpath_success_message}                         //*[contains(text(),'Success')]/parent::*/following-sibling::button
+${xpath_edit_button}                             //tr[.//td[text()='service']]//button[@class='btn btn-md btn-link btn-icon-only']
 
 
 *** Test Cases ***
@@ -452,6 +458,25 @@ Verify Power Information Should Display At Host Power On State
     Verify Power Information Section  PowerOn
 
 
+Verify Service User Disabled Status On Overview Page
+    [Documentation]  Verify service user shows as disabled on Overview page
+    ...  when disabled from User Management page.
+    [Tags]  Verify_Service_User_Disabled_Status_On_Overview_Page
+    [Teardown]  Set Service User Status  Enabled
+
+    ${initial_status}=  Get Text  ${xpath_service_login_status}
+    Should Contain  ${initial_status}  Enabled  msg=Service user should be enabled initially
+
+    # Disabled service user.
+    Set Service User Status  Disabled
+
+    # Navigate back to Overview page and verify status.
+    Test Setup Execution
+
+    ${disabled_status}=  Get Text  ${xpath_service_login_status}
+    Should Contain  ${disabled_status}  Disabled
+
+
 *** Keywords ***
 
 Test Setup Execution
@@ -582,3 +607,25 @@ Verify Asset Tag Update On Overview Page
     END
     Page Should Not Contain  ${xpath_asset_tag_cancel_button}
     Element Should Contain  ${xpath_asset_tag}  ${overview_asset_tag}
+
+
+Set Service User Status
+    [Documentation]  Enable or disable service user account.
+    [Arguments]  ${status}
+
+    # Description of argument(s):
+    # status    Account status to set (Enabled/Disabled).
+
+    Navigate To Required Sub Menu  ${xpath_security_and_access_menu}
+    ...  ${xpath_user_management_sub_menu}  user-management
+    Click Element  ${xpath_edit_button}
+    Wait Until Page Contains Element  ${xpath_save_button}
+
+    IF  '${status}' == 'Disabled'
+        Click Element  ${xpath_account_status_disabled_button}
+    ELSE
+        Click Element  ${xpath_account_status_enabled_button}
+    END
+
+    Click Element  ${xpath_save_button}
+    Verify Success Message On BMC GUI Page
