@@ -29,7 +29,7 @@ Verify Navigation To Sessions Page
     [Documentation]  Verify navigation to sessions page.
     [Tags]  Verify_Navigation_To_Sessions_Page
 
-    Navigate To Required Sub Menu  ${xpath_secuity_and_accesss_menu}  ${xpath_sessions_sub_menu}  sessions
+    Navigate To Required Sub Menu  ${xpath_security_and_access_menu}  ${xpath_sessions_sub_menu}  sessions
 
 Verify Session Timeout Validation For WebUI Session
     [Documentation]  Verify session timeout validation for WebUI session.
@@ -61,7 +61,7 @@ Verify Session Timeout Validation For WebUI Session
 
         # Launch browser and login GUI, which will create a WebUI session.
         Launch Browser And Login GUI
-        Navigate To Required Sub Menu  ${xpath_secuity_and_accesss_menu}
+        Navigate To Required Sub Menu  ${xpath_security_and_access_menu}
         ...  ${xpath_sessions_sub_menu}  sessions
 
         # GET the session count after login, should be 2.
@@ -110,7 +110,7 @@ Verify Disconnect Session Validation For WebUI Session
 
     # Launch browser and login GUI, which will create a WebUI session.
     Launch Browser And Login GUI
-    Navigate To Required Sub Menu  ${xpath_secuity_and_accesss_menu}
+    Navigate To Required Sub Menu  ${xpath_security_and_access_menu}
     ...  ${xpath_sessions_sub_menu}  sessions
 
     # GET the session count after login, should be 2.
@@ -263,5 +263,5 @@ Create Multiple WebUI Sessions And Navigate To Sessions Page
     END
 
     # Navigate to sessions page.
-    Navigate To Required Sub Menu  ${xpath_secuity_and_accesss_menu}
+    Navigate To Required Sub Menu  ${xpath_security_and_access_menu}
     ...  ${xpath_sessions_sub_menu}  sessions

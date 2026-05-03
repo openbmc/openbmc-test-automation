@@ -180,7 +180,7 @@ Verify Certificate Page With Readonly User
     [Documentation]  Verify Certificate page with readonly user.
     [Tags]  Verify_Certificate_Page_With_Readonly_User
     [Setup]  Run Keywords  Logout GUI  AND  Create Readonly User And Login To GUI
-    ...      AND  Navigate To Required Sub Menu  ${xpath_secuity_and_accesss_menu}
+    ...      AND  Navigate To Required Sub Menu  ${xpath_security_and_access_menu}
     ...      ${xpath_certificates_sub_menu}  certificates
     [Teardown]  Delete Readonly User And Logout Current GUI Session
 
@@ -218,7 +218,7 @@ Test Setup Execution
     IF  ${generate_csr_open}
         Click Element    ${xpath_close_generate_csr}
     END
-    Click Element  ${xpath_secuity_and_accesss_menu}
+    Click Element  ${xpath_security_and_access_menu}
     Click Element  ${xpath_certificates_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  certificates
     Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
@@ -243,6 +243,6 @@ Install CA Certificate
 
     # Refresh GUI and verify CA certificate availability in GUI.
     Refresh GUI
-    Click Element    ${xpath_secuity_and_accesss_menu}
+    Click Element    ${xpath_security_and_access_menu}
     Click Element    ${xpath_certificates_sub_menu}
     Wait Until Page Contains  CA Certificate  timeout=10

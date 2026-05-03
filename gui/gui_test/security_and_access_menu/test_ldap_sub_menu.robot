@@ -197,7 +197,7 @@ Suite Setup Execution
     Launch Browser And Login GUI
 
     # Navigate to https://xx.xx.xx.xx/#/security-and-access/ldap  LDAP page.
-    Click Element  ${xpath_secuity_and_accesss_menu}
+    Click Element  ${xpath_security_and_access_menu}
     Click Element  ${xpath_ldap_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  ldap
     Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
@@ -352,7 +352,7 @@ Login BMC And Navigate To LDAP Page
 
     Login GUI  ${username}  ${password}
     # Navigate to https://xx.xx.xx.xx/#/security-and-access/ldap  LDAP page.
-    Click Element  ${xpath_secuity_and_accesss_menu}
+    Click Element  ${xpath_security_and_access_menu}
     Click Element  ${xpath_ldap_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  ldap
 
