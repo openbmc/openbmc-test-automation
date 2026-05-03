@@ -224,7 +224,7 @@ Verify ReadOnly User Toggle Operations On BMC GUI Policies Menu
     [Setup]  Create Readonly User And Login To GUI
     [Teardown]  Delete Readonly User And Logout Current GUI Session
 
-    Wait Until Keyword Succeeds  30 sec  15 sec  Click Element  ${xpath_secuity_and_accesss_menu}
+    Wait Until Keyword Succeeds  30 sec  15 sec  Click Element  ${xpath_security_and_access_menu}
     Click Element  ${xpath_policies_sub_menu}
     Wait Until Keyword Succeeds  30 sec  15 sec  Location Should Contain  policies
     Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=1min
@@ -245,7 +245,7 @@ Verify ReadOnly User Toggle Operations On BMC GUI Policies Menu
 Test Setup Execution
     [Documentation]  Do test case setup tasks.
 
-    Wait Until Keyword Succeeds  30 sec  15 sec  Click Element  ${xpath_secuity_and_accesss_menu}
+    Wait Until Keyword Succeeds  30 sec  15 sec  Click Element  ${xpath_security_and_access_menu}
     Click Element  ${xpath_policies_sub_menu}
     Wait Until Keyword Succeeds  30 sec  15 sec  Location Should Contain  policies
     Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=1min

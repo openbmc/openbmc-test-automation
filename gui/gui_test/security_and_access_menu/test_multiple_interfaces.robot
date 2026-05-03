@@ -114,7 +114,7 @@ Load Certificates On BMC Via GUI
 Navigate To SSL Certificate Page
     [Documentation]  Navigate to SSL Certificate page.
 
-    Click Element  ${xpath_secuity_and_accesss_menu}
+    Click Element  ${xpath_security_and_access_menu}
     Click Element  ${xpath_certificates_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  certificates
     Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30

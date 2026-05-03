@@ -136,7 +136,7 @@ Verify User Account And Properties Saved Through Reboots
 
     # Reboot BMC and Navigate to usermanagement page.
     Reboot Server
-    Navigate To Required Sub Menu  ${xpath_secuity_and_accesss_menu}  ${xpath_user_management_sub_menu}  user-management
+    Navigate To Required Sub Menu  ${xpath_security_and_access_menu}  ${xpath_user_management_sub_menu}  user-management
 
     Click Element  ${xpath_refresh_button}
     Wait Until Page Contains  my_admin_user  timeout=15
@@ -431,7 +431,7 @@ Test Setup Execution
 
     # Navigate to https://xx.xx.xx.xx/#/access-control/user-management  user management page.
 
-    Click Element  ${xpath_secuity_and_accesss_menu}
+    Click Element  ${xpath_security_and_access_menu}
     Click Element  ${xpath_user_management_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  user-management
     Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30

@@ -87,7 +87,7 @@ class gui_variables:
     xpath_input_static_dns = "//*[@id='staticDns']"
 
     # Security and access menu
-    xpath_secuity_and_accesss_menu = (
+    xpath_security_and_access_menu = (
         "//*[@data-test-id='nav-button-security-and-access']"
     )
     xpath_sessions_sub_menu = "//*[@data-test-id='nav-item-sessions']"
