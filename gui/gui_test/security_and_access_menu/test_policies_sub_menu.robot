@@ -217,6 +217,32 @@ Verify Basic Authentication Toggle Operation On Policies Page
     ...  ${xpath_basic_authentication_toggle}  ${toast_msg}
 
 
+Verify BasicAuth Not Supported If Basic Authentication Policy Is Disabled
+    [Documentation]  Verify basic authentication for user via Redfish is not supported
+    ...  if basic authentication policy is disabled on BMC GUI.
+    [Tags]  Verify_BasicAuth_Not_Supported_If_Basic_Authentication_Policy_Is_Disabled
+    [Teardown]  Set Basic Authentication Policy To Initial State  ${initial_basic_auth_setting}
+
+    VAR  ${toast_msg}  Successfully updated Basic Authentication.
+
+    ${resp}=  Redfish.Get Properties  ${REDFISH_BASE_URI}AccountService
+    VAR  ${current_auth_value}  ${resp["Oem"]["OpenBMC"]["AuthMethods"]["BasicAuth"]}
+
+    IF  '${current_auth_value}' == 'True'
+        Toggle Policy Option And Verify Toast Message  ${xpath_basic_authentication_toggle}
+        ...  ${toast_msg}  Disabled
+        ${resp_after}=  Redfish.Get Properties  ${REDFISH_ACCOUNTS_SERVICE_URI}
+        Should Be Equal  ${resp_after["Oem"]["OpenBMC"]["AuthMethods"]["BasicAuth"]}  ${False}
+        ...  msg=BasicAuth API state did not change after GUI toggle.
+    END
+
+    # Curl Command for PATCH validating basic authentication.
+    ${cmd}=  Catenate  curl -k -i -u ${OPENBMC_USERNAME}:${OPENBMC_PASSWORD}
+    ...  ${AUTH_URI}/redfish/v1/AccountService
+    ${rc}  ${out}=  Run And Return Rc And Output  ${cmd}
+    Should Contain  ${out}  ${HTTP_UNAUTHORIZED}
+
+
 Verify ReadOnly User Toggle Operations On BMC GUI Policies Menu
     [Documentation]  Verify error and unauthorized message are displayed when a
     ...  read-only user performs toggling operations on policies page.
@@ -393,7 +419,7 @@ Toggle Required Policy Option And Verify
     # xpath_input_toggle_option    Input required xpath toggle option.
     # expected_toast_msg           Expected toast message post toggle option.
 
-    IF  '${initial_option_value}' == 'Enabled'
+    IF  '$initial_option_value' == 'Enabled'
         VAR  ${expected_toggle_status}  Disabled
         VAR  ${next_expected_toggle_status}  Enabled
     ELSE
