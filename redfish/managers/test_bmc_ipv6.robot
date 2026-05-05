@@ -29,12 +29,6 @@ ${invalid_staticv6_gateway}  9.41.164.1
 ${new_mac_addr}              AA:E2:84:14:28:79
 ${linklocal_addr_format}     fe80::[0-9a-f:]+$
 ${link_local_prefix_len}     10
-${ipv6_leading_zero}         2001:0022:0033::0111
-${ipv6_firsthextet_zero}     2001:0022:1133::1111
-${ipv6_eliminate_zero}       2001:22:33::111
-${ipv6_eliminate_zero1}      2001:22:1133::1111
-${ipv6_contigeous_zero}      2001:0022:0000:0000:1:2:3:8
-${ipv6_zero_compression}     2001:22::1:2:3:8
 
 *** Test Cases ***
 
@@ -445,16 +439,16 @@ Configure Valid IPv6 Address And Verify
     [Documentation]  Configure valid IPv6 address and verify it is getting added as expected format.
     [Tags]  Configure_Valid_IPv6_Address_And_Verify
     [Teardown]  Run Keywords
-    ...  Delete IPv6 Address  ${ipv6_zero_compression}
-    ...    AND  Delete IPv6 Address  ${ipv6_eliminate_zero}
-    ...    AND  Delete IPv6 Address  ${ipv6_eliminate_zero1}
+    ...  Delete IPv6 Address  ${ipv6_zero_compressed}
+    ...    AND  Delete IPv6 Address  ${ipv6_normalized_no_leading}
+    ...    AND  Delete IPv6 Address  ${ipv6_normalized_first_hextet}
     ...    AND  Test Teardown Execution
     [Template]  Configure IPv6 Address On BMC
 
-    # IPv6 address            prefix length          IPv6 address verified.
-    ${ipv6_contigeous_zero}   ${test_prefix_length}  ${ipv6_zero_compression}
-    ${ipv6_firsthextet_zero}  ${test_prefix_length}  ${ipv6_eliminate_zero1}
-    ${ipv6_leading_zero}      ${test_prefix_length}  ${ipv6_eliminate_zero}
+    # IPv6 address              prefix length          IPv6 address verified.
+    ${ipv6_contiguous_zeros}    ${test_prefix_length}  ${ipv6_zero_compressed}
+    ${ipv6_first_hextet_zeros}  ${test_prefix_length}  ${ipv6_normalized_first_hextet}
+    ${ipv6_leading_zeros}       ${test_prefix_length}  ${ipv6_normalized_no_leading}
 
 
 Verify Coexistence Of IPv6 Addresses Type Combination On BMC
