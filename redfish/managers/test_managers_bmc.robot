@@ -191,36 +191,22 @@ Verify Managers Collection Unsupported Methods
     [Documentation]  Verify Managers Collection with Unsupported methods.
     [Tags]  Verify_Managers_Collection_Unsupported_Methods
 
-    # Put operation on Managers Collection
-    Redfish.Put  /redfish/v1/Managers
-    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
-
-    # Post operation on Managers Collection
-    Redfish.Post  /redfish/v1/Managers
-    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
-
-    # Delete operation on Managers Collection
-    Redfish.Delete  /redfish/v1/Managers
-    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
-
-    # Patch operation on Managers Collection
-    Redfish.Patch  /redfish/v1/Managers
-    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+    Verify Supported And Unsupported Methods  uri=${REDFISH_MANAGERS_URI}
 
 Verify Redfish BMC Manager Unsupported Methods
     [Documentation]  Verify Unsupported methods of redfish BMC manager.
     [Tags]  Verify_Redfish_BMC_Manager_Unsupported_Methods
 
-    # Put operation on BMC Manager
-    Redfish.Put  /redfish/v1/Managers/${MANAGER_ID}
+    # Put operation on BMC Manager.
+    Redfish.Put  ${REDFISH_MANAGERS_URI}/${MANAGER_ID}
     ...    valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
 
-    # Post operation on BMC Manager
-    Redfish.Post  /redfish/v1/Managers/${MANAGER_ID}
+    # Post operation on BMC Manager.
+    Redfish.Post  ${REDFISH_MANAGERS_URI}/${MANAGER_ID}
     ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
 
-    # Delete operation on BMC Manager
-    Redfish.Delete  /redfish/v1/Managers/${MANAGER_ID}
+    # Delete operation on BMC Manager.
+    Redfish.Delete  ${REDFISH_MANAGERS_URI}/${MANAGER_ID}
     ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
 
 
@@ -228,21 +214,7 @@ Verify Redfish BMC Manager ResetActionInfo Unsupported Methods
     [Documentation]  Verify Unsupported methods of redfish BMC manager reset action info.
     [Tags]  Verify_Redfish_BMC_Manager_ResetActionInfo_Unsupported_Methods
 
-    # Put operation on BMC Manager ResetActionInfo
-    Redfish.Put  /redfish/v1/Managers/${MANAGER_ID}/ResetActionInfo
-    ...    valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
-
-    # Patch operation on BMC Manager ResetActionInfo
-    Redfish.Patch  /redfish/v1/Managers/${MANAGER_ID}/ResetActionInfo
-    ...    valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
-
-    # Post operation on BMC Manager ResetActionInfo
-    Redfish.Post  /redfish/v1/Managers/${MANAGER_ID}/ResetActionInfo
-    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
-
-    # Delete operation on BMC Manager ResetActionInfo
-    Redfish.Delete  /redfish/v1/Managers/${MANAGER_ID}/ResetActionInfo
-    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+    Verify Supported And Unsupported Methods  uri=${REDFISH_MANAGERS_URI}/${MANAGER_ID}/ResetActionInfo
 
 
 *** Keywords ***
