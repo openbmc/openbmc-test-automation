@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fc81e1c_00406a41",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-05-05T06:29:57Z",
+      "side": 1,
+      "message": "This is already defined in redfish/managers/test_bmc_ipv6.robot\ncan you put it in utils and use it in both places.",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 45
+      },
+      "revId": "7ff94ea3ae0c8a40170a3c955989c24185e60aa9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb9600f1_a53b6cc5",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 2051,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-05-05T06:29:57Z",
+      "side": 1,
+      "message": "Please see if you can make use of the existing keywords\nVerify SSH Login And Commands Work\nVerify SSH Connection Via IPv6  ${ipv6_slaac_addr}",
+      "range": {
+        "startLine": 2051,
+        "startChar": 0,
+        "endLine": 2051,
+        "endChar": 23
+      },
+      "revId": "7ff94ea3ae0c8a40170a3c955989c24185e60aa9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c8f0bd0_d6fe227b",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 2070,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-05-05T06:29:57Z",
+      "side": 1,
+      "message": "Can you make use of the existing keywords?\nWait For Host To Ping\nWait For IPv6 Host To Ping  ${ipv6_addr}",
+      "range": {
+        "startLine": 2070,
+        "startChar": 8,
+        "endLine": 2070,
+        "endChar": 94
+      },
+      "revId": "7ff94ea3ae0c8a40170a3c955989c24185e60aa9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
