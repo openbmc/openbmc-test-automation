@@ -42,7 +42,7 @@ Verify Task Service Attributes
     #     }
     # }
 
-    ${resp}=  Redfish.Get Properties  /redfish/v1/TaskService
+    ${resp}=  Redfish.Get Properties  ${REDFISH_TASK_SERVICE_URI}
 
     # Verify CompletedTaskOverWritePolicy is a valid value.
     Should Be True
@@ -118,14 +118,14 @@ Test Generated Task Instance Validity And Task State
     ${task_id}  ${resp_obj}=  Generate Task Instance
 
     # Verify task monitor before task completion.
-    ${resp}=  Redfish.Get  /redfish/v1/TaskService/Tasks/${task_id}/Monitor
+    ${resp}=  Redfish.Get  ${REDFISH_TASKS_URI}/${task_id}/Monitor
     ...  valid_status_codes=[${HTTP_ACCEPTED}]
 
     # Get current time from BMC console before generating task.
     ${cur_time}=  Get Current Date From BMC
 
     # Verify task start time is within 10s of current time.
-    ${resp}=  Redfish.Get Properties  /redfish/v1/TaskService/Tasks/${task_id}
+    ${resp}=  Redfish.Get Properties  ${REDFISH_TASKS_URI}/${task_id}
 
     ${start_time}=  Get Regexp Matches  ${resp["StartTime"]}
     ...  ${TIME_REGEXP_PATTERN}  1
@@ -149,11 +149,11 @@ Test Generated Task Instance Validity And Task State
     ...  check_state=${TRUE}
 
     # Verify task monitor URI after task completion.
-    ${resp}=  Redfish.Get  /redfish/v1/TaskService/Tasks/${task_id}/Monitor
+    ${resp}=  Redfish.Get  ${REDFISH_TASKS_URI}/${task_id}/Monitor
     ...  valid_status_codes=[${HTTP_NOT_FOUND}]
 
     # Verify end time is greater than start time post task completion.
-    ${resp}=  Redfish.Get Properties  /redfish/v1/TaskService/Tasks/${task_id}
+    ${resp}=  Redfish.Get Properties  ${REDFISH_TASKS_URI}/${task_id}
 
     ${end_time}=  Get Regexp Matches  ${resp["EndTime"]}
     ...  ${TIME_REGEXP_PATTERN}  1
@@ -173,12 +173,12 @@ Verify Task Persistency Post BMC Reboot
 
     Verify Generate Task Instance Completion
 
-    ${initial_task_count}=  Redfish.Get Attribute  /redfish/v1/TaskService/Tasks
+    ${initial_task_count}=  Redfish.Get Attribute  ${REDFISH_TASKS_URI}
     ...  Members@odata.count
 
     Redfish BMC Reset Operation  reset_type=ForceRestart
 
-    ${current_task_count}=  Redfish.Get Attribute  /redfish/v1/TaskService/Tasks
+    ${current_task_count}=  Redfish.Get Attribute  ${REDFISH_TASKS_URI}
     ...  Members@odata.count
 
     Should Be Equal As Integers  ${initial_task_count}  ${current_task_count}
@@ -187,21 +187,13 @@ Verify Task Service Unsupported Methods
     [Documentation]  Verify Task service with unsupported methods.
     [Tags]  Verify_Task_Service_Unsupported_Methods
 
-    # Verify Put operation on Task Service is not supported.
-    Redfish.Put  /redfish/v1/TaskService
-    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+    Verify Supported And Unsupported Methods    uri=${REDFISH_TASK_SERVICE_URI}
 
-    # Verify Post operation on Task Service is not supported.
-    Redfish.Post  /redfish/v1/TaskService
-    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+Verify Unsupported Methods for Tasks URI On Task Service
+    [Documentation]  Verify unsupported methods for Tasks URI on Task service.
+    [Tags]  Verify_Unsupported_Methods_For_Tasks_URI_On_Task_Service
 
-    # Verify Patch operation on Task Service is not supported.
-    Redfish.Patch  /redfish/v1/TaskService
-    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
-
-    # Verify Delete operation on Task Service is not supported.
-    Redfish.Delete  /redfish/v1/TaskService
-    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+    Verify Supported And Unsupported Methods    uri=${REDFISH_TASKS_URI}
 
 Verify Retrieving Deleted Tasks Instance
     [Documentation]  Verify retrieving the deleted tasks instance
@@ -212,15 +204,15 @@ Verify Retrieving Deleted Tasks Instance
     ${task_id}  ${resp}=  Generate Task Instance
 
     # Get the generated task instance.
-    Redfish.Get  /redfish/v1/TaskService/Tasks/${task_id}
+    Redfish.Get  ${REDFISH_TASKS_URI}/${task_id}
     ...  valid_status_codes=[${HTTP_OK}]
 
     # Delete the created task instance.
-    Redfish.Delete  /redfish/v1/TaskService/Tasks/${task_id}
+    Redfish.Delete  ${REDFISH_TASKS_URI}/${task_id}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
     # Retrieving the deleted task instance should return an error.
-    Redfish.Get  /redfish/v1/TaskService/Tasks/${task_id}
+    Redfish.Get  ${REDFISH_TASKS_URI}/${task_id}
     ...  valid_status_codes=[${HTTP_NOT_FOUND}]
 
 
