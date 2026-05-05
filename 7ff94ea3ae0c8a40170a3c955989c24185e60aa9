@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "837bb91d_5dcb09b9",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-05-05T07:34:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6fc81e1c_00406a41",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 45
+      },
+      "revId": "7ff94ea3ae0c8a40170a3c955989c24185e60aa9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb9600f1_a53b6cc5",
@@ -47,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "01f3830a_81236ed6",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 2051,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-05-05T07:34:32Z",
+      "side": 1,
+      "message": "these keywords are only half usefull for me and also present in other test file not resource..",
+      "parentUuid": "bb9600f1_a53b6cc5",
+      "range": {
+        "startLine": 2051,
+        "startChar": 0,
+        "endLine": 2051,
+        "endChar": 23
+      },
+      "revId": "7ff94ea3ae0c8a40170a3c955989c24185e60aa9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3c8f0bd0_d6fe227b",
@@ -60,6 +108,30 @@
       "writtenOn": "2026-05-05T06:29:57Z",
       "side": 1,
       "message": "Can you make use of the existing keywords?\nWait For Host To Ping\nWait For IPv6 Host To Ping  ${ipv6_addr}",
+      "range": {
+        "startLine": 2070,
+        "startChar": 8,
+        "endLine": 2070,
+        "endChar": 94
+      },
+      "revId": "7ff94ea3ae0c8a40170a3c955989c24185e60aa9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1de72d72_9469d489",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 2070,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-05-05T07:34:32Z",
+      "side": 1,
+      "message": "wait for host to ping and wait for ipv6 host to ping are in two different test files not in resource files.\nif we move them to resource file there will be massive code refactor as we should be moving locators aswell with the keywords",
+      "parentUuid": "3c8f0bd0_d6fe227b",
       "range": {
         "startLine": 2070,
         "startChar": 8,
