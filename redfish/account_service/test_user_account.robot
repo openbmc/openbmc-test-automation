@@ -584,69 +584,37 @@ Verify AccountService Unsupported Methods
     [Tags]  Verify_AccountService_Unsupported_Methods
 
     # Put operation on Account Services
-    Redfish.Put  /redfish/v1/AccountService
+    Redfish.Put  ${REDFISH_ACCOUNTS_SERVICE_URI}
     ...    valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
 
     # Post operation on Account Services
-    Redfish.Post  /redfish/v1/AccountService
+    Redfish.Post  ${REDFISH_ACCOUNTS_SERVICE_URI}
     ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
 
     # Delete operation on Account Services
-    Redfish.Delete  /redfish/v1/AccountService
+    Redfish.Delete  ${REDFISH_ACCOUNTS_SERVICE_URI}
     ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
 
 Verify AccountService Roles Unsupported Methods
     [Documentation]  Verify Unsupported methods of AccountService/Roles
     [Tags]  Verify_AccountService_Roles_Unsupported_Methods
 
-    # Put operation on Account Services Roles
-    Redfish.Put  /redfish/v1/AccountService/Roles
-    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
-
-    # Post operation on Account Services Roles
-    Redfish.Post  /redfish/v1/AccountService/Roles
-    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
-
-    # Delete operation on Account Services Roles
-    Redfish.Delete  /redfish/v1/AccountService/Roles
-    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
-
-    # Patch operation on Account Services Roles
-    Redfish.Patch  /redfish/v1/AccountService/Roles
-    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
-
+    Verify Supported And Unsupported Methods  uri=${REDFISH_ACCOUNTS_ROLES_URI}
+    
 Verify AccountService Roles Instance With Unsupported Methods
     [Documentation]  Verify Instance Roles for AccountService and Unsupported Methods
     [Tags]    Verify_AccountService_Roles_Instance_With_Unsupported_Methods
 
-    # GET Administrator Role Instance
-    Redfish.Get    /redfish/v1/AccountService/Roles/Administrator
-    ...    valid_status_codes=[${HTTP_OK}]
-
     # GET Operator Role Instance
-    Redfish.Get    /redfish/v1/AccountService/Roles/Operator
+    Redfish.Get    ${REDFISH_ACCOUNTS_ROLES_URI}/Operator
     ...    valid_status_codes=[${HTTP_OK}]
 
     # GET ReadOnly RoleInstance
-    Redfish.Get    /redfish/v1/AccountService/Roles/ReadOnly
+    Redfish.Get    ${REDFISH_ACCOUNTS_ROLES_URI}/ReadOnly
     ...    valid_status_codes=[${HTTP_OK}]
 
-    # Post operation on Account Service Roles Instance
-    Redfish.Post    /redfish/v1/AccountService/Roles/Administrator
-    ...    valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
-
-    # Put operation on Account Service Roles Instance
-    Redfish.Put    /redfish/v1/AccountService/Roles/Administrator
-    ...    valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
-
-    # Patch operation on Account Service Roles Instance
-    Redfish.Patch    /redfish/v1/AccountService/Roles/Administrator
-    ...    valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
-
-    # Delete operation on Account Service Roles Instance
-    Redfish.Delete    /redfish/v1/AccountService/Roles/Administrator
-    ...    valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
-
+    Verify Supported And Unsupported Methods  uri=${REDFISH_ACCOUNTS_ROLES_URI}/Administrator
+    
 Verify Account Lockout With Invalid Configuration
     [Documentation]  Verify Account Lockout configuration with invalid values.
     [Tags]  Verify_Account_Lockout_With_Invalid_Configuration
