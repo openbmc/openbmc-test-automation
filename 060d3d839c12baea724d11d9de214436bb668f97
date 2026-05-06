@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97346d9e_9de5db3a",
+        "filename": "gui/gui_test/security_and_access_menu/test_sessions_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-05-06T13:07:16Z",
+      "side": 1,
+      "message": "use VAR syntax, Set Variable is deprecated\n\n```\nVAR ${session_member}  ${session_member_list}[${i}]\n```",
+      "range": {
+        "startLine": 195,
+        "startChar": 7,
+        "endLine": 195,
+        "endChar": 70
+      },
+      "revId": "060d3d839c12baea724d11d9de214436bb668f97",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
