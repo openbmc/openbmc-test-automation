@@ -10,18 +10,24 @@ Library                 ../lib/utils.py
 Library                 ../lib/bmc_network_utils.py
 
 *** Variables ***
-${test_ipv6_addr}            2001:db8:3333:4444:5555:6666:7777:8888
-${test_ipv6_addr1}           2001:db8:3333:4444:5555:6666:7777:9999
-${test_prefix_length}        64
-${test_ipv4_addr}            10.7.7.7
-${test_ipv4_addr1}           10.7.7.8
-${test_subnet_mask}          255.255.255.0
-${ipv6_multi_short}          2001::33::111
-${invalid_hexadec_ipv6}      x:x:x:x:x:x:10.5.5.6
-${standard_ipv4_rep}         0000:0000:0000:0000:0000:0000:10.5.5.6
-${compressed_ipv6}           ::a05:506
-${ipv4_link_local_prefix}    169.254
-${link_local_addr}           fe80::
+${test_ipv6_addr}                2001:db8:3333:4444:5555:6666:7777:8888
+${test_ipv6_addr1}               2001:db8:3333:4444:5555:6666:7777:9999
+${test_prefix_length}            64
+${test_ipv4_addr}                10.7.7.7
+${test_ipv4_addr1}               10.7.7.8
+${test_subnet_mask}              255.255.255.0
+${ipv6_multi_short}              2001::33::111
+${invalid_hexadec_ipv6}          x:x:x:x:x:x:10.5.5.6
+${standard_ipv4_rep}             0000:0000:0000:0000:0000:0000:10.5.5.6
+${compressed_ipv6}               ::a05:506
+${ipv4_link_local_prefix}        169.254
+${link_local_addr}               fe80::
+${ipv6_leading_zeros}            2001:0022:0033::0111
+${ipv6_normalized_no_leading}    2001:22:33::111
+${ipv6_first_hextet_zeros}       2001:0022:1133::1111
+${ipv6_normalized_first_hextet}  2001:22:1133::1111
+${ipv6_contiguous_zeros}         2001:0022:0000:0000:1:2:3:8
+${ipv6_zero_compressed}          2001:22::1:2:3:8
 
 *** Keywords ***
 
@@ -302,6 +308,33 @@ Delete IPv6 Address
     END
 
     Validate IPv6 Network Config On BMC
+
+Delete All IP Addresses
+    [Documentation]  Delete all IPv4 or IPv6 addresses from specified channels.
+    [Arguments]  ${ip_version}  ${channel_list}  @{ip_list}
+
+    # Description of argument(s):
+    # ip_version    Either 'IPv4' or 'IPv6'.
+    # channel_list  List of channel numbers (e.g., [1, 2] for eth0 and eth1).
+    # ip_list       List of IP addresses to be deleted.
+
+    FOR  ${ip}  IN  @{ip_list}
+        FOR  ${channel}  IN  @{channel_list}
+            Run Keyword And Ignore Error  Delete IPv6 Address
+            ...  ${ip}  ${channel}  Version=${ip_version}
+        END
+    END
+
+Delete All IP Addresses From Both Channels
+    [Documentation]  Delete all IPv4 or IPv6 addresses from channels 1 and 2.
+    [Arguments]  ${ip_version}  @{ip_list}
+
+    # Description of argument(s):
+    # ip_version  Either 'IPv4' or 'IPv6'.
+    # ip_list     List of IP addresses to be deleted.
+
+    @{channels}=  Create List  ${1}  ${2}
+    Delete All IP Addresses  ${ip_version}  ${channels}  @{ip_list}
 
 
 Get IPv6 Network Configuration
