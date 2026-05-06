@@ -22,6 +22,30 @@
       },
       "revId": "154d51d50f63e199a5673e09572d88a36b09bb3a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc53dfbe_9d6941ab",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1002804
+      },
+      "writtenOn": "2026-05-06T06:05:58Z",
+      "side": 1,
+      "message": "implemented a similar approach, with a different way of defining and accessing the hyperlink xpaths",
+      "parentUuid": "3f26ab06_512499ec",
+      "range": {
+        "startLine": 412,
+        "startChar": 0,
+        "endLine": 424,
+        "endChar": 36
+      },
+      "revId": "154d51d50f63e199a5673e09572d88a36b09bb3a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
