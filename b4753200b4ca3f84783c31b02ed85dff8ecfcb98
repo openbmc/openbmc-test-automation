@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cef6de9_93b61869",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 14
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-05-06T09:41:37Z",
+      "side": 1,
+      "message": "Maintain 2 spaces on both test cases",
+      "range": {
+        "startLine": 417,
+        "startChar": 24,
+        "endLine": 417,
+        "endChar": 28
+      },
+      "revId": "b4753200b4ca3f84783c31b02ed85dff8ecfcb98",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65ed387f_85a7917d",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 14
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-05-06T09:41:37Z",
+      "side": 1,
+      "message": "current:\nVerify Overview Opens Link In New Tab ReadOnly User\n    \nrecommended:\nVerify Overview Hyperlink Behavior For Read‑Only User",
+      "range": {
+        "startLine": 419,
+        "startChar": 0,
+        "endLine": 420,
+        "endChar": 77
+      },
+      "revId": "b4753200b4ca3f84783c31b02ed85dff8ecfcb98",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d100ddb4_e2a9f588",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 14
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-05-06T09:41:37Z",
+      "side": 1,
+      "message": "Maintain 2 spaces, applicable throughout this \"Open Link In New Tab\" keyword.",
+      "range": {
+        "startLine": 415,
+        "startChar": 15,
+        "endLine": 415,
+        "endChar": 19
+      },
+      "revId": "b4753200b4ca3f84783c31b02ed85dff8ecfcb98",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a602a8e1_749082a5",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 14
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-05-06T09:41:37Z",
+      "side": 1,
+      "message": "Comments should end with a period, throughout on this keyword",
+      "range": {
+        "startLine": 417,
+        "startChar": 35,
+        "endLine": 417,
+        "endChar": 36
+      },
+      "revId": "b4753200b4ca3f84783c31b02ed85dff8ecfcb98",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
