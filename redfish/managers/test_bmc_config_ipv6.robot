@@ -18,8 +18,9 @@ Library         OperatingSystem
 Library         Process
 Library         Telnet
 
-Suite Setup     Suite Setup Execution
 Test Teardown   Test Teardown Execution
+Suite Setup     Suite Setup Execution
+Suite Teardown  Suite Teardown Execution
 
 Test Tags       BMC_IPv6_Config
 
@@ -372,6 +373,42 @@ Configure LDAP Via IPv6 And Verify Login
     Static          ${2}
 
 
+Configure Valid Static IPv6 Address Via IPv6 Address And Verify
+    [Documentation]  Configure Static IPv6 address via IPv6 session on both interfaces
+    ...  and verify normalization.
+    [Tags]  Configure_Valid_Static_IPv6_Address_Via_IPv6_Address_And_Verify
+    [Teardown]  Run Keywords
+    ...  Run Keyword And Ignore Error  Delete IPv6 Address
+    ...  ${ipv6_zero_compressed}  ${1}  Version=IPv6
+    ...  AND  Run Keyword And Ignore Error  Delete IPv6 Address
+    ...  ${ipv6_zero_compressed}  ${2}  Version=IPv6
+    ...  AND  Run Keyword And Ignore Error  Delete IPv6 Address
+    ...  ${ipv6_normalized_no_leading}  ${1}  Version=IPv6
+    ...  AND  Run Keyword And Ignore Error  Delete IPv6 Address
+    ...  ${ipv6_normalized_no_leading}  ${2}  Version=IPv6
+    ...  AND  Run Keyword And Ignore Error  Delete IPv6 Address
+    ...  ${ipv6_normalized_first_hextet}  ${1}  Version=IPv6
+    ...  AND  Run Keyword And Ignore Error  Delete IPv6 Address
+    ...  ${ipv6_normalized_first_hextet}  ${2}  Version=IPv6
+    ...  AND  Test Teardown Execution
+    [Template]  Configure IPv6 Address From IPv6 Session
+
+    # Address_type  channel    ipv6_address             prefix_length          ipv6_address_verified
+
+    SLAAC        ${1}   ${ipv6_leading_zeros}       ${test_prefix_length}  ${ipv6_normalized_no_leading}
+    Static       ${1}   ${ipv6_leading_zeros}       ${test_prefix_length}  ${ipv6_normalized_no_leading}
+    SLAAC        ${2}   ${ipv6_leading_zeros}       ${test_prefix_length}  ${ipv6_normalized_no_leading}
+    Static       ${2}   ${ipv6_leading_zeros}       ${test_prefix_length}  ${ipv6_normalized_no_leading}
+    SLAAC        ${1}   ${ipv6_first_hextet_zeros}  ${test_prefix_length}  ${ipv6_normalized_first_hextet}
+    Static       ${1}   ${ipv6_first_hextet_zeros}  ${test_prefix_length}  ${ipv6_normalized_first_hextet}
+    SLAAC        ${2}   ${ipv6_first_hextet_zeros}  ${test_prefix_length}  ${ipv6_normalized_first_hextet}
+    Static       ${2}   ${ipv6_first_hextet_zeros}  ${test_prefix_length}  ${ipv6_normalized_first_hextet}
+    SLAAC        ${1}   ${ipv6_contiguous_zeros}    ${test_prefix_length}  ${ipv6_zero_compressed}
+    Static       ${1}   ${ipv6_contiguous_zeros}    ${test_prefix_length}  ${ipv6_zero_compressed}
+    SLAAC        ${2}   ${ipv6_contiguous_zeros}    ${test_prefix_length}  ${ipv6_zero_compressed}
+    Static       ${2}   ${ipv6_contiguous_zeros}    ${test_prefix_length}  ${ipv6_zero_compressed}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -390,8 +427,13 @@ Test Teardown Execution
     [Documentation]  Test teardown execution.
 
     FFDC On Test Case Fail
-    Redfish.Logout
     Run Keyword And Ignore Error  RedfishIPv6.Logout
+
+
+Suite Teardown Execution
+    [Documentation]  Suite teardown execution.
+
+    Redfish.Logout
 
 
 Wait For IPv6 Host To Ping
@@ -916,3 +958,30 @@ Configure LDAP Using IPv6 Address And Verify Login
     ...  msg=LDAP service not enabled after configuration via IPv6.
     RedfishIPv6.Logout
     Verify SSH Connection Via IPv6  ${ipv6_addr}
+
+
+Configure IPv6 Address From IPv6 Session
+    [Documentation]  Configure IPv6 address by logging in from static/slaac IPv6
+    ...  address on both interfaces and verify it is configured in expected
+    ...  normalized (leading zeros, zero compression) format.
+    [Arguments]  ${ipv6_address_type}  ${channel_number}  ${ipv6_addr}  ${prefix_len}
+    ...  ${ipv6_addr_verified}=${None}
+
+    # Description of argument(s):
+    # ipv6_address_type    Type of IPv6 address to login from (SLAAC/Static).
+    # channel_number       Ethernet channel number, 1(eth0) or 2(eth1).
+    # ipv6_addr            IPv6 address to be configured.
+    # prefix_len           Prefix length for the IPv6 address.
+    # ipv6_addr_verified   Expected normalized IPv6 address format.
+
+    # Get IPv6 address for login session.
+    @{ipv6_address_origin_list}  ${login_ipv6_addr}=
+    ...  Get Address Origin List And Address For Type  ${ipv6_address_type}  ${channel_number}
+
+    # Establish IPv6 session.
+    Connect BMC Using IPv6 Address  ${login_ipv6_addr}
+    RedfishIPv6.Login
+
+    # Configure IPv6 address and verify it's configured in expected format.
+    Configure IPv6 Address On BMC  ${ipv6_addr}  ${prefix_len}  ${ipv6_addr_verified}
+    ...  ${channel_number}  Version=IPv6
