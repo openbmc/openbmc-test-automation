@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecf83776_066830f1",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-05-06T06:06:45Z",
+      "side": 1,
+      "message": "Issue #5: Variable Alignment Inconsistency\nLocation: Lines 23-36 in redfish/account_service/test_ldap_configuration.robot\nIssue: The new variables added (lines 34-36) use different alignment spacing compared to existing variables (lines 23-33). Existing variables align at column 30, new variables align at column 26.\nFix: Align new variables to match existing style for consistency:\n${LDAP_UNREACHABLE_URI}       ldap://192.0.2.1\n${LOCALTESTUSER}              testuser\n${TEST_USER_PASSWORD}         TestPwd123",
+      "revId": "a4455a8d2a7250f3cd7d735531d988df6b106395",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03003b77_8740a519",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 550,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-05-06T06:06:45Z",
+      "side": 1,
+      "message": "Issue #1: Test Name Does Not Match Test Logic - LDAP User Creation Not Tested\n\nLocation: Lines 545-604 in redfish/account_service/test_ldap_configuration.robot\nIssue: The test is named \"Verify LDAP User Creation With Unreachable LDAP\" but it does NOT test LDAP user creation at all. The test only verifies that LDAP login fails when the LDAP server is unreachable, then creates a LOCAL user (not an LDAP user). This is a fundamental logic error.\n\nWhy: The test claims to verify \"LDAP user creation fails\" but never attempts to create an LDAP user. LDAP users are created on the LDAP server itself, not through BMC APIs. The test creates a local BMC user via Redfish Create User, which is completely independent of LDAP configuration.\nWhat the test actually does:\n\n- Configures BMC to use an unreachable LDAP server\n- Verifies LDAP authentication fails (correct)\n- Creates a LOCAL user on the BMC (not an LDAP user)\n- Tests local user privilege changes (unrelated to LDAP)\n\nWhat the test claims to do:\n\n\"Verify LDAP user creation fails with unreachable server\"\n\n\nFix Required: Either:\n\nRename the test to accurately reflect what it tests: Verify Local User Operations When LDAP Server Unreachable\nOR change the test logic to actually test LDAP user creation failure (if that\u0027s even a valid test scenario)\n\nCurrent code:\n\n```\nVerify LDAP User Creation With Unreachable LDAP And Privilege Change Via Local Admin\n    [Documentation]  Verify LDAP user creation fails with unreachable server, then create user via local admin\n    ...  and change privilege from Administrator to ReadOnly.\n```\n    \nRecommended fix:\n```\n\nVerify Local User Operations When LDAP Server Unreachable\n    [Documentation]  Verify that local admin can create and manage local users even when LDAP server is unreachable.\n    ...  This ensures BMC remains manageable when LDAP authentication is unavailable.\n```",
+      "revId": "a4455a8d2a7250f3cd7d735531d988df6b106395",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7ee7dd8_29536f0c",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 559,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-05-06T06:06:45Z",
+      "side": 1,
+      "message": "Issue #2: Test Logic Flaw - LDAP Configuration Does Not Affect Local User Operations\n\nLocation: Lines 545-604 in redfish/account_service/test_ldap_configuration.robot\nIssue: The test configures an unreachable LDAP server, then performs local user operations (create user, change privilege, verify permissions). However, LDAP configuration has no impact on local user operations. Local users are stored in the BMC\u0027s local database and are completely independent of LDAP configuration. This test would pass identically whether LDAP is configured, misconfigured, or not configured at all.\n\nWhy: This is a critical test design flaw. The test appears to validate that \"local admin operations work when LDAP is down,\" but this is always true by design - local authentication is independent of LDAP. The test provides no meaningful validation beyond what a basic local user test would provide.\nWhat makes this a logic flaw:\n\nThe LDAP configuration step (lines 554-556) is irrelevant to the rest of the test\nLines 67-104 test local user operations that work regardless of LDAP state\nThe test creates false confidence that it\u0027s validating LDAP-related behavior when it\u0027s not\n\nFix Required: Either:\n\nRemove the LDAP configuration entirely and make this a pure local user test\nOR add meaningful LDAP-specific validation, such as:\n\nVerify LDAP users cannot login when server is unreachable\nVerify local users CAN login when LDAP is unreachable (failover scenario)\nVerify LDAP authentication resumes after restoring LDAP configuration\nTest the interaction between LDAP and local authentication\n\n\nRecommended approach:\n\n```\nVerify Local Admin Failover When LDAP Server Unreachable\n    [Documentation]  Verify that local admin authentication continues to work\n    ...  when LDAP server becomes unreachable, ensuring BMC remains accessible.\n    [Tags]  Verify_Local_Admin_Failover_When_LDAP_Server_Unreachable\n    \n    # First verify LDAP authentication works with valid configuration.\n    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}\n    Redfish.Logout\n    \n    # Configure LDAP with unreachable server.\n    Create LDAP Configuration  ${LDAP_TYPE}  ${LDAP_UNREACHABLE_URI}\n    ...  ${LDAP_BIND_DN}  ${LDAP_BIND_DN_PASSWORD}  ${LDAP_BASE_DN}\n    Sleep  15s\n    \n    # Verify LDAP authentication fails.\n    ${ldap_login_status}\u003d  Run Keyword And Return Status\n    ...  Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}\n    Should Be Equal  ${ldap_login_status}  ${False}\n    ...  msg\u003dLDAP user was able to login with unreachable LDAP server.\n    \n    # CRITICAL: Verify local admin can still login (failover).\n    Redfish.Login  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}\n    \n    # Verify local admin can perform management operations.\n    Redfish Create User  ${LOCALTESTUSER}  ${TEST_USER_PASSWORD}  Administrator  ${True}\n    Verify User Role  ${LOCALTESTUSER}  Administrator\n    \n    # Verify newly created local user can login.\n    Redfish.Logout\n    Redfish.Login  ${LOCALTESTUSER}  ${TEST_USER_PASSWORD}\n    Redfish.Logout\n    \n    # Restore LDAP and verify LDAP authentication resumes.\n    Redfish.Login\n    Restore LDAP URL\n    Sleep  15s\n    Redfish.Logout\n    \n    # Verify LDAP authentication works again.\n    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}\n    Redfish.Logout\n```",
+      "revId": "a4455a8d2a7250f3cd7d735531d988df6b106395",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9010400_20cdfda9",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-05-06T06:06:45Z",
+      "side": 1,
+      "message": "Issue #3: Hard-coded Sleep Duration Without Justification\n\nLocation: Line 556 in redfish/account_service/test_ldap_configuration.robot\nIssue: The test uses Sleep 15s after configuring LDAP with an unreachable server. Hard-coded sleep durations are fragile and can cause flaky tests or unnecessary delays.\n\nFix: Replace with a more robust wait mechanism or add a comment explaining why 15 seconds is necessary. Consider using a retry loop with timeout instead.\nWhy: Hard-coded sleeps make tests slower and less reliable. If the system responds faster, time is wasted. If it responds slower, the test may fail intermittently.\n\nSuggested improvement:\n\n# Wait for LDAP configuration to be applied (timeout mechanism would be better).\nSleep  15s\nOr better yet, implement a wait-and-verify pattern:\n\n```\n# Wait for LDAP configuration to propagate.\nWait Until Keyword Succeeds  30s  5s\n...  Verify LDAP Configuration Applied  ${LDAP_UNREACHABLE_URI}\n```",
+      "revId": "a4455a8d2a7250f3cd7d735531d988df6b106395",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
