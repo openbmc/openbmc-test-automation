@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6775348_01ee87f0",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-05-06T15:29:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ecf83776_066830f1",
+      "revId": "a4455a8d2a7250f3cd7d735531d988df6b106395",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "03003b77_8740a519",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-05-06T06:06:45Z",
       "side": 1,
       "message": "Issue #1: Test Name Does Not Match Test Logic - LDAP User Creation Not Tested\n\nLocation: Lines 545-604 in redfish/account_service/test_ldap_configuration.robot\nIssue: The test is named \"Verify LDAP User Creation With Unreachable LDAP\" but it does NOT test LDAP user creation at all. The test only verifies that LDAP login fails when the LDAP server is unreachable, then creates a LOCAL user (not an LDAP user). This is a fundamental logic error.\n\nWhy: The test claims to verify \"LDAP user creation fails\" but never attempts to create an LDAP user. LDAP users are created on the LDAP server itself, not through BMC APIs. The test creates a local BMC user via Redfish Create User, which is completely independent of LDAP configuration.\nWhat the test actually does:\n\n- Configures BMC to use an unreachable LDAP server\n- Verifies LDAP authentication fails (correct)\n- Creates a LOCAL user on the BMC (not an LDAP user)\n- Tests local user privilege changes (unrelated to LDAP)\n\nWhat the test claims to do:\n\n\"Verify LDAP user creation fails with unreachable server\"\n\n\nFix Required: Either:\n\nRename the test to accurately reflect what it tests: Verify Local User Operations When LDAP Server Unreachable\nOR change the test logic to actually test LDAP user creation failure (if that\u0027s even a valid test scenario)\n\nCurrent code:\n\n```\nVerify LDAP User Creation With Unreachable LDAP And Privilege Change Via Local Admin\n    [Documentation]  Verify LDAP user creation fails with unreachable server, then create user via local admin\n    ...  and change privilege from Administrator to ReadOnly.\n```\n    \nRecommended fix:\n```\n\nVerify Local User Operations When LDAP Server Unreachable\n    [Documentation]  Verify that local admin can create and manage local users even when LDAP server is unreachable.\n    ...  This ensures BMC remains manageable when LDAP authentication is unavailable.\n```",
+      "revId": "a4455a8d2a7250f3cd7d735531d988df6b106395",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b7b64bc_6369dadf",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 550,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-05-06T15:29:14Z",
+      "side": 1,
+      "message": "ok renaming it and changing the documentation too\n\n\"Verify Local User Operations When LDAP Server Unreachable\"",
+      "parentUuid": "03003b77_8740a519",
       "revId": "a4455a8d2a7250f3cd7d735531d988df6b106395",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9aa09b39_4ff9e54b",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 559,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-05-06T15:29:14Z",
+      "side": 1,
+      "message": "Adding this test case as we hit issues creating/deleting users when LDAP is not reachable, hence keeping the test case as is.",
+      "parentUuid": "d7ee7dd8_29536f0c",
+      "revId": "a4455a8d2a7250f3cd7d735531d988df6b106395",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f9010400_20cdfda9",
         "filename": "redfish/account_service/test_ldap_configuration.robot",
         "patchSetId": 5
@@ -65,6 +119,24 @@
       "writtenOn": "2026-05-06T06:06:45Z",
       "side": 1,
       "message": "Issue #3: Hard-coded Sleep Duration Without Justification\n\nLocation: Line 556 in redfish/account_service/test_ldap_configuration.robot\nIssue: The test uses Sleep 15s after configuring LDAP with an unreachable server. Hard-coded sleep durations are fragile and can cause flaky tests or unnecessary delays.\n\nFix: Replace with a more robust wait mechanism or add a comment explaining why 15 seconds is necessary. Consider using a retry loop with timeout instead.\nWhy: Hard-coded sleeps make tests slower and less reliable. If the system responds faster, time is wasted. If it responds slower, the test may fail intermittently.\n\nSuggested improvement:\n\n# Wait for LDAP configuration to be applied (timeout mechanism would be better).\nSleep  15s\nOr better yet, implement a wait-and-verify pattern:\n\n```\n# Wait for LDAP configuration to propagate.\nWait Until Keyword Succeeds  30s  5s\n...  Verify LDAP Configuration Applied  ${LDAP_UNREACHABLE_URI}\n```",
+      "revId": "a4455a8d2a7250f3cd7d735531d988df6b106395",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa4ab124_91d6771d",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-05-06T15:29:14Z",
+      "side": 1,
+      "message": "Keeping Sleep as hardcoded for now as it is used the same way throughout the bucket",
+      "parentUuid": "f9010400_20cdfda9",
       "revId": "a4455a8d2a7250f3cd7d735531d988df6b106395",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
