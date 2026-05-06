@@ -22,6 +22,57 @@
       },
       "revId": "8e6240698c16c3a612ef7e79910d5998787cb0f5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f6391b8_e5852330",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-05-06T14:37:24Z",
+      "side": 1,
+      "message": "Missing UI-to-API State Verification\n\nTest toggles GUI but doesn\u0027t verify the Redfish API state changed\n\nGap: Between line 240 (GUI toggle) and line 244 (curl test), there\u0027s no verification that ${resp[\"Oem\"][\"OpenBMC\"][\"AuthMethods\"][\"BasicAuth\"]} actually changed to False\n\nIf GUI toggle fails silently, test might pass even though authentication policy wasn\u0027t actually disabled\n\nImpact: False positive - test claims security policy works when it might not",
+      "revId": "8e6240698c16c3a612ef7e79910d5998787cb0f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bbe658c_5b96822e",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-05-06T14:37:24Z",
+      "side": 1,
+      "message": "Race Condition Potential\n\nNo wait/delay between GUI toggle (line 240) and authentication test (line 244)\nGUI changes might not propagate to Redfish authentication layer immediately\nCould cause intermittent test failures or false positives",
+      "revId": "8e6240698c16c3a612ef7e79910d5998787cb0f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dcddfd3_851a345e",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-05-06T14:37:24Z",
+      "side": 1,
+      "message": "Incomplete Security Validation\n\nTest only validates HTTP 401 response code in output\n\nDoesn\u0027t verify the authentication failure reason (should be \"BasicAuth disabled\" not other auth failures)",
+      "revId": "8e6240698c16c3a612ef7e79910d5998787cb0f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
