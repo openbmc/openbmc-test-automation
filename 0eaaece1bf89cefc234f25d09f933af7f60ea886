@@ -104,6 +104,24 @@
       "parentUuid": "67b729f1_c713fb7c",
       "revId": "0eaaece1bf89cefc234f25d09f933af7f60ea886",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb9a643d_62df47fe",
+        "filename": "gui/gui_test/logs_and_services_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-05-07T14:11:25Z",
+      "side": 1,
+      "message": "I can see testcase \"Select Single Error Log And Delete\" on line no.78 also uses same set of lines....if we write a keyword than we can reduce the redundancy.",
+      "parentUuid": "69919c3b_302f0ba5",
+      "revId": "0eaaece1bf89cefc234f25d09f933af7f60ea886",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
