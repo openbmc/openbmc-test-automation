@@ -278,6 +278,21 @@ Verify Port 22 SSH Access Restricted For Admin And ReadOnly Users
     readonly_user   ReadOnly       22
 
 
+Disable Admin User Verify User Is Not Allowed To Do SSH On SOL Port
+    [Documentation]  Disable admin user and verify user is not allowed to login via SSH on SOL port.
+    [Tags]  Disable_Admin_User_Verify_User_Is_Not_Allowed_To_Do_SSH_On_SOL_Port
+    [Teardown]  Set User Account State  admin_user  ${True}
+
+    Verify User Enable Disable And SSH Login  admin_user  Administrator  ${HOST_SOL_PORT}  ${False}
+
+
+Enable Admin User Verify User Is Allowed To Do SSH On SOL Port
+    [Documentation]  Enable admin user and verify user is allowed to login via SSH on SOL port.
+    [Tags]  Enable_Admin_User_Verify_User_Is_Allowed_To_Do_SSH_On_SOL_Port
+
+    Verify User Enable Disable And SSH Login  admin_user  Administrator  ${HOST_SOL_PORT}  ${True}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -350,3 +365,87 @@ Verify Protocol State
         Should Be Equal As Strings  ${resp.dict['NTP']['ProtocolEnabled']}  ${ntp_state}
         ...  msg=NTP protocol states are not matching.
     END
+
+
+Verify User Enable Disable And SSH Login
+    [Documentation]  Verify user enable/disable functionality and SSH login access.
+    [Arguments]  ${username}  ${role}  ${port}  ${enable_user}
+
+    # Description of argument(s):
+    # username      Username for the account (e.g. admin_user, service_user).
+    # role          User role (e.g. Administrator, ReadOnly).
+    # port          SSH port to test (e.g. 22, 2200).
+    # enable_user   Whether to test enable (True) or disable (False) functionality.
+
+    Run Keywords  Redfish.Login  AND  Enable SSH Protocol  ${True}
+
+    # Ensure user exists.
+    Ensure User Exists  ${username}  ${role}
+
+    IF  ${enable_user} == ${True}
+        # Test enable flow: disable -> verify blocked -> enable -> verify allowed.
+        Set User Account State  ${username}  ${False}
+        # Verify on disabling user SSH to SOL port does not work.
+        Verify SSH Login Access  ${username}  ${port}  ${False}
+        ...  msg=Disabled ${username} should not be able to login to port ${port}.
+
+        Set User Account State  ${username}  ${True}
+        Verify SSH Login Access  ${username}  ${port}  ${True}
+        ...  msg=Enabled ${username} should be able to login to port ${port}.
+    ELSE
+        # Test disable flow: enable -> verify allowed -> disable -> verify blocked.
+        Set User Account State  ${username}  ${True}
+        Verify SSH Login Access  ${username}  ${port}  ${True}
+        ...  msg=${username} should be able to login initially to port ${port}.
+
+        Set User Account State  ${username}  ${False}
+        Verify SSH Login Access  ${username}  ${port}  ${False}
+        ...  msg=Disabled ${username} should not be able to login to port ${port}.
+    END
+
+
+Ensure User Exists
+    [Documentation]  Create user if it doesn't exist.
+    [Arguments]  ${username}  ${role}
+
+    # Description of argument(s):
+    # username  Username for the account.
+    # role      User role (e.g. Administrator, ReadOnly).
+
+    ${user_exists}=  Run Keyword And Return Status
+    ...  Redfish.Get  /redfish/v1/AccountService/Accounts/${username}
+
+    Run Keyword If  not ${user_exists}
+    ...  Redfish Create User  ${username}  ${OPENBMC_PASSWORD}  ${role}  ${True}
+
+
+Set User Account State
+    [Documentation]  Enable or disable a user account.
+    [Arguments]  ${username}  ${enabled}
+
+    # Description of argument(s):
+    # username  Username for the account.
+    # enabled   Boolean state to set (True=enabled, False=disabled).
+
+    Redfish.Patch  /redfish/v1/AccountService/Accounts/${username}
+    ...  body={'Enabled': ${enabled}}  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
+    Sleep  ${SETTING_WAIT_TIMEOUT}
+
+
+Verify SSH Login Access
+    [Documentation]  Verify SSH login access matches expected state.
+    [Arguments]  ${username}  ${port}  ${should_succeed}  ${msg}=Login verification failed.
+
+    # Description of argument(s):
+    # username        Username for SSH login.
+    # port            SSH port to test.
+    # should_succeed  Expected login result (True=success, False=failure).
+    # msg             Custom error message for assertion.
+
+    ${login_status}=  Run Keyword And Return Status
+    ...  Open Connection And Log In  host=${OPENBMC_HOST}  port=${port}
+    ...  username=${username}  password=TestPwd123
+
+    Run Keyword If  ${login_status}  Close All Connections
+
+    Should Be Equal As Strings  ${login_status}  ${should_succeed}  msg=${msg}
