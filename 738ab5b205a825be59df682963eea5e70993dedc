@@ -16,6 +16,24 @@
       "message": "we have keyword to verify success message . please use that",
       "revId": "738ab5b205a825be59df682963eea5e70993dedc",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b78def5a_c71f9b92",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 633,
+      "author": {
+        "id": 1001957
+      },
+      "writtenOn": "2026-05-07T06:25:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7400bae_1dfdc802",
+      "revId": "738ab5b205a825be59df682963eea5e70993dedc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
