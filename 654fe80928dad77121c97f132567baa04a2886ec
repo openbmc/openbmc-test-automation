@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a57cab4_44bc32f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-05-07T09:29:03Z",
+      "side": 1,
+      "message": "Hi @sridevra@in.ibm.com, just want to know which image you have been used for the testing.\nfor 2600 image, I can be able to see 4 options in the policies Page.\n(bmcShell, networkIpmi, tpm-policy, RTAD).",
+      "revId": "654fe80928dad77121c97f132567baa04a2886ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
