@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "25ca3abd_411b5dcb",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-05-07T17:10:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c471de2e_f6890083",
+      "revId": "654fe80928dad77121c97f132567baa04a2886ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "22f0c158_11d13007",
@@ -48,6 +66,24 @@
       "writtenOn": "2026-05-07T15:33:06Z",
       "side": 1,
       "message": "Incorrect Variable Comparison - Variable in Quotes\n```\n# Current code (test_policies_sub_menu.robot:422)\nIF  \u0027$initial_option_value\u0027 \u003d\u003d \u0027Enabled\u0027\n\n```\n# Previous code (patchset 2, line 396)\n\n```\nIF  \u0027${initial_option_value}\u0027 \u003d\u003d \u0027Enabled\u0027\n```\nFix Required:\n```\nIF  ${initial_option_value} \u003d\u003d \u0027Enabled\u0027\n```\n\nWhy: BOTH versions are incorrect. When a variable is enclosed in quotes in Robot Framework, it\u0027s treated as a literal string, not a variable reference. Both \u0027${initial_option_value}\u0027 and \u0027$initial_option_value\u0027 compare the LITERAL STRING against \u0027Enabled\u0027, not the variable\u0027s value. The variable must be outside the quotes to be evaluated. This bug exists in both patchset 2 and 3, but patchset 3\u0027s change makes it more obvious. The test likely never worked correctly.",
+      "revId": "654fe80928dad77121c97f132567baa04a2886ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60cd05d9_a4a7a236",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-05-07T17:10:47Z",
+      "side": 1,
+      "message": "As discussed, this fails\n\n```\nVariables in the original expression \"${initial_option_value} \u003d\u003d \u0027Enabled\u0027\" were resolved before the expression was evaluated. Try using \"$initial_option_value \u003d\u003d \u0027Enabled\u0027\" syntax to avoid that. See Evaluating Expressions appendix in Robot Framework User Guide for more details.\n-----------\n```\nHence keeping the changes as is",
+      "parentUuid": "22f0c158_11d13007",
       "revId": "654fe80928dad77121c97f132567baa04a2886ec",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
