@@ -16,6 +16,40 @@
       "message": "Hi @sridevra@in.ibm.com, just want to know which image you have been used for the testing.\nfor 2600 image, I can be able to see 4 options in the policies Page.\n(bmcShell, networkIpmi, tpm-policy, RTAD).",
       "revId": "654fe80928dad77121c97f132567baa04a2886ec",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c471de2e_f6890083",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-05-07T15:33:06Z",
+      "side": 1,
+      "message": "Issue #1: Missing Redfish API State Verification After GUI Toggle\n\nLocation: Line 240 in gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot\n\nIssue: Test toggles GUI but doesn\u0027t explicitly verify the Redfish API state changed to False before testing authentication. While Toggle Policy Option And Verify Toast Message verifies GUI state, it doesn\u0027t confirm the backend API property ${resp[\"Oem\"][\"OpenBMC\"][\"AuthMethods\"][\"BasicAuth\"]} actually changed to False.\n\nFix: Add explicit Redfish API verification after GUI toggle:\n# After line 237, add:\n```\n${resp_after}\u003d  Redfish.Get Properties  ${REDFISH_ACCOUNTS_SERVICE_URI}\nShould Be Equal  ${resp_after[\"Oem\"][\"OpenBMC\"][\"AuthMethods\"][\"BasicAuth\"]}  ${False}\n...  msg\u003dBasicAuth API state did not change after GUI toggle\n```\n\nWhy: Ensures GUI changes propagate to backend API, preventing false positives if GUI toggle succeeds but API state doesn\u0027t change",
+      "revId": "654fe80928dad77121c97f132567baa04a2886ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22f0c158_11d13007",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-05-07T15:33:06Z",
+      "side": 1,
+      "message": "Incorrect Variable Comparison - Variable in Quotes\n```\n# Current code (test_policies_sub_menu.robot:422)\nIF  \u0027$initial_option_value\u0027 \u003d\u003d \u0027Enabled\u0027\n\n```\n# Previous code (patchset 2, line 396)\n\n```\nIF  \u0027${initial_option_value}\u0027 \u003d\u003d \u0027Enabled\u0027\n```\nFix Required:\n```\nIF  ${initial_option_value} \u003d\u003d \u0027Enabled\u0027\n```\n\nWhy: BOTH versions are incorrect. When a variable is enclosed in quotes in Robot Framework, it\u0027s treated as a literal string, not a variable reference. Both \u0027${initial_option_value}\u0027 and \u0027$initial_option_value\u0027 compare the LITERAL STRING against \u0027Enabled\u0027, not the variable\u0027s value. The variable must be outside the quotes to be evaluated. This bug exists in both patchset 2 and 3, but patchset 3\u0027s change makes it more obvious. The test likely never worked correctly.",
+      "revId": "654fe80928dad77121c97f132567baa04a2886ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
