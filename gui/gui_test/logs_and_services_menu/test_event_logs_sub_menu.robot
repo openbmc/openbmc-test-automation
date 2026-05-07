@@ -9,9 +9,10 @@ Variables       ../../../data/pel_variables.py
 Suite Setup     Suite Setup Execution
 Suite Teardown  Suite Teardown Execution
 
-Test Tags      Event_Logs_Sub_Menu
+Test Tags       Event_Logs_Sub_Menu
 
 *** Variables ***
+
 ${xpath_event_logs_heading}       //h1[text()="Event logs"]
 ${xpath_filter_event}             //button[contains(normalize-space(.),"Filter")]
 ${xpath_event_severity_ok}        //*[@data-test-id="tableFilter-checkbox-OK"]
@@ -73,7 +74,6 @@ Verify Existence Of All Input Boxes In Event Logs Page
     # Date filter.
     Page Should Contain Element  ${xpath_event_from_date}  limit=1
     Page Should Contain Element  ${xpath_event_to_date}  limit=1
-
 
 Select Single Error Log And Delete
     [Documentation]  Select single error log and delete it.
@@ -214,6 +214,34 @@ Verify Default Value Of Resolved Field In Error Log
     Page Should Contain  Unresolved
 
 
+Verify Error And Unauthorized Message Display When ReadOnly User Deletes Error Log
+    [Documentation]  Verify error and unauthorized message displayed when 
+    ...  readonly user deletes single error log.
+    [Tags]  Verify_Error_And_Unauthorized_Message_Display_When_ReadOnly_User_Deletes_Error_Log 
+    [Setup]  Create Readonly User And Login To GUI
+    [Teardown]  Run Keywords  Redfish Purge Event Log  AND
+    ...  Delete Readonly User And Logout Current GUI Session
+
+    # Clear error logs and navigate event-logs menu.
+    Redfish Purge Event Log
+    Navigate To Required Sub Menu  ${xpath_logs_menu}  ${xpath_event_logs_sub_menu}  event-logs
+
+    # Create new error log.
+    Create Error Logs  ${2}
+    ${number_of_events_before}=  Get Number Of Event Logs
+
+    # Delete single error log and verify error and unauthorized message.
+    Click Element  ${xpath_delete_first_row}
+    Wait Until Page Contains Element  ${xpath_confirm_delete}
+    Click Button  ${xpath_confirm_delete}
+    Verify Error And Unauthorized Message On GUI
+
+    # Make sure the count of error log remains same.
+    ${number_of_events_after}=  Get Number Of Event Logs
+    Should Be Equal  ${number_of_events_before}  ${number_of_events_after}
+    ...  msg=Failed as readonly user was able to delete error log.
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -227,6 +255,7 @@ Suite Setup Execution
 Suite Teardown Execution
     [Documentation]  Suite teardown tasks.
 
+    Redfish Purge Event Log
     Redfish.Logout
     Close Browser
 
