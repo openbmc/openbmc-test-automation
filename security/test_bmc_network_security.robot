@@ -241,6 +241,6 @@ Establish TCP Connections And Get Connection Failures
     # and rate at which connectionss to be sent, should be given in command line.
     # By default it sends 4 TCP connections at 1 connection/second.
 
-    ${cmd_buf}=  Set Variable  --delay ${delay} ${target_host} -c ${num} --${packet_type} -p ${http_port}
+    VAR  ${cmd_buf}  --delay ${delay} ${target_host} -c ${num} --${packet_type} -p ${http_port}
     ${nping_result}=  Nping  ${cmd_buf}
     RETURN   ${nping_result['percent_failed']}

@@ -20,7 +20,7 @@ Check BMCWeb Service After Attempted GET With Invalid URL
     [Documentation]  Request BMC GET with invalid URL.
     [Tags]  Check_BMCWeb_Service_After_Attempted_GET_With_Invalid_URL
 
-    ${invalid_url}=  Set Variable   https://${OPENBMC_HOST}:${HTTPS_PORT}/'redfish\\['
+    VAR  ${invalid_url}  https://${OPENBMC_HOST}:${HTTPS_PORT}/'redfish\\['
 
     # Exhaust bmcweb restart policy by crashing 4 times in succession.
     Repeat Keyword  ${LOOP_COUNT} times  Run  ${curl_tool} -k ${invalid_url}
@@ -35,4 +35,4 @@ Test Setup Execution
 
     ${cmd_tool}=  Run  which curl
     Should Contain  ${cmd_tool}  curl
-    Set Test Variable  ${curl_tool}  ${cmd_tool}
+    VAR  ${curl_tool}  ${cmd_tool}  scope=TEST
