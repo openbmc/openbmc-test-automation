@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "99409d4b_5f119cc7",
+        "filename": "gui/gui_test/logs_and_services_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-05-07T12:50:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d5713ce_d09176e6",
+      "revId": "0eaaece1bf89cefc234f25d09f933af7f60ea886",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3ab3c258_ad0dda18",
@@ -35,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d264efa6_d3b42f10",
+        "filename": "gui/gui_test/logs_and_services_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-05-07T12:50:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ab3c258_ad0dda18",
+      "revId": "0eaaece1bf89cefc234f25d09f933af7f60ea886",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "67b729f1_c713fb7c",
@@ -48,6 +84,24 @@
       "writtenOn": "2026-05-07T11:49:48Z",
       "side": 1,
       "message": "we can keep line no.234,235 and 236 in keyword - \"Delete First Error Log\" which can be reused.",
+      "revId": "0eaaece1bf89cefc234f25d09f933af7f60ea886",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69919c3b_302f0ba5",
+        "filename": "gui/gui_test/logs_and_services_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-05-07T12:50:20Z",
+      "side": 1,
+      "message": "Not required. As I wont be using this method else where",
+      "parentUuid": "67b729f1_c713fb7c",
       "revId": "0eaaece1bf89cefc234f25d09f933af7f60ea886",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
