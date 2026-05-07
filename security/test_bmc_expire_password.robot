@@ -109,8 +109,8 @@ Verify Error While Creating User With Expired Password
 
     Verify User Password Expired Using Redfish  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
     Redfish.Login
-    ${payload}=  Create Dictionary
-    ...  UserName=admin_user  Password=TestPwd123  RoleId=Administrator  Enabled=${True}
+    VAR  ${payload}  UserName=admin_user  Password=TestPwd123  RoleId=Administrator
+    ...  Enabled=${True}
     Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{payload}
     ...  valid_status_codes=[${HTTP_FORBIDDEN}]
 
@@ -172,8 +172,8 @@ Verify New Password Persistency After BMC Reboot
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
 
     # Create specified user.
-    ${payload}=  Create Dictionary
-    ...  UserName=admin_user  Password=TestPwd123  RoleId=Administrator  Enabled=${True}
+    VAR  ${payload}  UserName=admin_user  Password=TestPwd123  RoleId=Administrator
+    ...  Enabled=${True}
     Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{payload}
     ...  valid_status_codes=[${HTTP_CREATED}]
     Redfish.Logout
@@ -252,8 +252,8 @@ Verify Error While Creating User With Expired Admin Password
     Verify User Password Expired Using Redfish  ${admin_user}  ${default_adminuser_passwd}
 
     # Create new user with expired admin password and expect an error.
-    ${payload}=  Create Dictionary
-    ...  UserName=admin_user1  Password=TestPwd123  RoleId=Administrator  Enabled=${True}
+    VAR  ${payload}  UserName=admin_user1  Password=TestPwd123  RoleId=Administrator
+    ...  Enabled=${True}
     Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{payload}
     ...  valid_status_codes=[${HTTP_FORBIDDEN}]
 
@@ -397,7 +397,7 @@ Set Account Lockout Threshold
    # account_lockout_duration     Set lockout duration value.
 
    Redfish.Login
-   ${payload}=  Create Dictionary  AccountLockoutThreshold=${account_lockout_threshold}
+   VAR  ${payload}  AccountLockoutThreshold=${account_lockout_threshold}
    ...  AccountLockoutDuration=${account_lockout_duration}
    Redfish.Patch  /redfish/v1/AccountService/  body=&{payload}
    gen_robot_valid.Valid Length  OPENBMC_PASSWORD  min_length=8
