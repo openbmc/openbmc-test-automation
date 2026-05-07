@@ -233,6 +233,9 @@ Verify BasicAuth Not Supported If Basic Authentication Policy Is Disabled
     IF  '${current_auth_value}' == 'True'
         Toggle Policy Option And Verify Toast Message  ${xpath_basic_authentication_toggle}
         ...  ${toast_msg}  Disabled
+        ${resp_after}=  Redfish.Get Properties  ${REDFISH_ACCOUNTS_SERVICE_URI}
+        Should Be Equal  ${resp_after["Oem"]["OpenBMC"]["AuthMethods"]["BasicAuth"]}  ${False}
+        ...  msg=BasicAuth API state did not change after GUI toggle.
     END
 
     # Curl Command for PATCH validating basic authentication.
