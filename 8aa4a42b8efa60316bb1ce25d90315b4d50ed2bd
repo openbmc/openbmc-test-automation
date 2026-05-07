@@ -22,6 +22,30 @@
       },
       "revId": "8aa4a42b8efa60316bb1ce25d90315b4d50ed2bd",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16fe42a6_7254c2ee",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-05-07T06:23:22Z",
+      "side": 1,
+      "message": "Try to see navigate to required menu will work",
+      "parentUuid": "9c377c2e_e6bb0dac",
+      "range": {
+        "startLine": 471,
+        "startChar": 0,
+        "endLine": 475,
+        "endChar": 1
+      },
+      "revId": "8aa4a42b8efa60316bb1ce25d90315b4d50ed2bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
