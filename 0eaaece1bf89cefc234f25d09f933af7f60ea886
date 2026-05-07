@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d5713ce_d09176e6",
+        "filename": "gui/gui_test/logs_and_services_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-05-07T11:43:09Z",
+      "side": 1,
+      "message": "remove space at the end of line",
+      "revId": "0eaaece1bf89cefc234f25d09f933af7f60ea886",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ab3c258_ad0dda18",
+        "filename": "gui/gui_test/logs_and_services_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-05-07T11:43:09Z",
+      "side": 1,
+      "message": "same as above",
+      "revId": "0eaaece1bf89cefc234f25d09f933af7f60ea886",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
