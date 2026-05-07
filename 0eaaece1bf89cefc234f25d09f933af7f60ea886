@@ -33,6 +33,23 @@
       "message": "same as above",
       "revId": "0eaaece1bf89cefc234f25d09f933af7f60ea886",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67b729f1_c713fb7c",
+        "filename": "gui/gui_test/logs_and_services_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-05-07T11:49:48Z",
+      "side": 1,
+      "message": "we can keep line no.234,235 and 236 in keyword - \"Delete First Error Log\" which can be reused.",
+      "revId": "0eaaece1bf89cefc234f25d09f933af7f60ea886",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
