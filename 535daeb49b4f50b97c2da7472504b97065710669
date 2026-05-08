@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd807fcd_c7d44205",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-05-08T12:45:00Z",
+      "side": 1,
+      "message": "@nandakumarb@ami.com\n\nPlease check this upstream commit for ur reference https://gerrit.openbmc.org/c/openbmc/webui-vue/+/89544",
+      "revId": "535daeb49b4f50b97c2da7472504b97065710669",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
