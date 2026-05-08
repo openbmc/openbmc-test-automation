@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e79b231f_9f57e34c",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-05-08T07:04:21Z",
+      "side": 1,
+      "message": "this should go as part of tear donw",
+      "range": {
+        "startLine": 477,
+        "startChar": 3,
+        "endLine": 478,
+        "endChar": 36
+      },
+      "revId": "b9b1a6ab0e20298c06e5ad672cb60c27ef0711d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
