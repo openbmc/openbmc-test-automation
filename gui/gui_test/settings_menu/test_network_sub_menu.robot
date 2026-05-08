@@ -50,10 +50,8 @@ ${xpath_success_popup}                   //div[@role='alert'][contains(.,'Succes
 ${xpath_failure_popup}                   //div[@role='alert'][contains(.,'Error')]
 ${ipv4_elements}                         //h2[contains(., "IPv4")]/following::table[1]/tbody/tr/td[1]
 ${ipv6_elements}                         //h2[contains(., "IPv6")]/following::table[1]/tbody/tr/td[1]
-${ipv4_addr_origin_elements}             //h2[contains(text(),'IPv4')]//following::table[1]
-...                                      //td[@aria-colindex='4']
-${ipv6_addr_origin_elements}             //h2[contains(text(),'IPv6')]//following::table[1]
-...                                      //td[@aria-colindex='3']
+${ipv4_addr_origin_elements}             //h2[text()='IPv4']//following::table[1]//tbody/tr/td[4]
+${ipv6_addr_origin_elements}             //h2[text()='IPv6']//following::table[1]//tbody/tr/td[3]
 ${xpath_delete_ipv4_addres}              //*[text()='IP_PLACEHOLDER']/following::td[4]//*[@title="Delete IPv4 address"]
 ${xpath_delete_ipv6_addres}              //*[text()='IP_PLACEHOLDER']/following::td[3]//*[@title="Delete IPv6 address"]
 ${xpath_edit_ipv4_addres}                //*[text()='${test_ipv4_addr}']/following::td[4]
@@ -1019,6 +1017,24 @@ Disable SSH And Verify No Connectivity Via IPv4 And IPv6
     Toggle SSH And Verify Via IP Protocol  disable  both
 
 
+Verify Only One IPv4 Origin Should Be Present At A Time
+    [Documentation]  Verify that only one IPv4 origin type should be present at a time in the IPv4 grid.
+    [Tags]  Verify_Only_One_IPv4_Origin_Should_Be_Present_At_A_Time
+
+    Verify Only One IPv4 Origin Type Is Present
+
+
+Gateway Value Must Not Get Erased On Toggling The DHCP Properties
+    [Documentation]  Verify that gateway value is not erased when toggling DHCP properties.
+    [Tags]  Gateway_Value_Must_Not_Get_Erased_On_Toggling_The_DHCP_Properties
+    [Template]  Toggle DHCP Property And Verify Gateway Intact
+
+    # property                 xpath_property
+    UseNTPServers              ${xpath_ntp_switch_button}
+    UseDNSServers              ${xpath_dns_switch_button}
+    UseDomainName              ${xpath_domainname_switch_button}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -1958,7 +1974,7 @@ Navigate To Policies Page
     [Documentation]  Navigate to policies page.
 
     # First click on Security and Access menu to expand it.
-    Wait Until Keyword Succeeds  30 sec  15 sec  Click Element  ${xpath_secuity_and_accesss_menu}
+    Wait Until Keyword Succeeds  30 sec  15 sec  Click Element  ${xpath_security_and_access_menu}
     Wait Until Keyword Succeeds  30 sec  15 sec  Click Element  ${xpath_policies_sub_menu}
     Wait Until Keyword Succeeds  30 sec  15 sec  Location Should Contain  policies
     Wait Until Element Is Not Visible  ${xpath_page_loading_progress_bar}  timeout=60s
@@ -2085,3 +2101,47 @@ Verify SSH Connectivity
             END
         END
     END
+
+
+Verify Only One IPv4 Origin Type Is Present
+    [Documentation]  Verify that only one IPv4 origin type is present in the IPv4 grid at a time.
+
+    # Navigate to eth0 interface.
+    Wait Until Element Is Enabled  ${xpath_eth0_interface}  timeout=60s
+    Click Element  ${xpath_eth0_interface}
+    Wait Until Element Is Enabled  ${xpath_static_ipv4}  timeout=30s
+
+    # Get all IPv4 address origins from the grid.
+    ${ipv4_elems}=  Get WebElements  ${ipv4_addr_origin_elements}
+    ${ipv4_origin_list}=  Get IP Origins  @{ipv4_elems}
+
+    # Get unique IPv4 origin types present in the grid.
+    ${unique_ipv4_origins}=  Evaluate  list(set($ipv4_origin_list))
+
+    # Verify that only one IPv4 origin type is present.
+    ${origin_count}=  Get Length  ${unique_ipv4_origins}
+    Should Be True  ${origin_count} <= 1
+    ...  msg=Only one IPv4 origin type should be present at a time in the IPv4 grid. Found: ${unique_ipv4_origins}
+
+
+Toggle DHCP Property And Verify Gateway Intact
+    [Documentation]  Toggle DHCP property and verify gateway value remains intact.
+    [Arguments]  ${property}  ${xpath_property}
+
+    # Description of argument(s):
+    # property          DHCP Property name (e.g. UseDNSServers, UseDomainName, etc.).
+    # xpath_property    xpath of the DHCPv4 property.
+
+    # Get gateway value before toggling DHCP property.
+    ${gateway_before}=  Get Text  ${xpath_eth0_ipv4_default_gateway}
+    Should Not Be Empty  ${gateway_before}
+    ...  msg=Gateway value should not be empty before toggling ${property}.
+
+    # Toggle the DHCP property.
+    Toggle DHCPv4 Property And Verify  ${property}  ${xpath_property}
+    Wait Until Element Is Not Visible  ${xpath_page_loading_progress_bar}  timeout=60s
+
+    # Verify gateway value remains the same after toggling.
+    ${gateway_after}=  Get Text  ${xpath_eth0_ipv4_default_gateway}
+    Should Be Equal  ${gateway_before}  ${gateway_after}
+    ...  msg=Gateway value should not change after toggling ${property}.
