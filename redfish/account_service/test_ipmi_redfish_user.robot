@@ -30,12 +30,15 @@ Create Admin Redfish User And Verify Login Via IPMI
     [Documentation]  Create user using redfish and verify via IPMI.
     [Tags]  Create_Admin_Redfish_User_And_Verify_Login_Via_IPMI
 
+    VAR  ${random_username}  ${EMPTY}
     ${random_username}=  Generate Random String  8  [LETTERS]
-    Set Test Variable  ${random_username}
 
-    ${payload}=  Create Dictionary
-    ...  UserName=${random_username}  Password=${valid_password}
-    ...  RoleId=Administrator  Enabled=${True}
+    VAR  &{payload}
+    ...  UserName=${random_username}
+    ...  Password=${valid_password}
+    ...  RoleId=Administrator
+    ...  Enabled=${True}
+
     Redfish.Post  /redfish/v1/AccountService/Accounts  body=&{payload}
     ...  valid_status_codes=[${HTTP_CREATED}]
 
@@ -49,19 +52,24 @@ Update User Password Via Redfish And Verify Using IPMI
     [Documentation]  Update user password via Redfish and verify using IPMI.
     [Tags]  Update_User_Password_Via_Redfish_And_Verify_Using_IPMI
 
+    VAR  ${random_username}  ${EMPTY}
     # Create user using Redfish.
     ${random_username}=  Generate Random String  8  [LETTERS]
-    Set Test Variable  ${random_username}
 
-    ${payload}=  Create Dictionary
-    ...  UserName=${random_username}  Password=${valid_password}
-    ...  RoleId=Administrator  Enabled=${True}
+    VAR  &{payload}
+    ...  UserName=${random_username}
+    ...  Password=${valid_password}
+    ...  RoleId=Administrator
+    ...  Enabled=${True}
+
     Redfish.Post  /redfish/v1/AccountService/Accounts  body=&{payload}
     ...  valid_status_codes=[${HTTP_CREATED}]
 
     # Update user password using Redfish.
-    ${payload}=  Create Dictionary  Password=${valid_password2}
+    VAR  &{payload}  Password=${valid_password2}
+
     Redfish.Patch  /redfish/v1/AccountService/Accounts/${random_username}  body=&{payload}
+    ...  valid_status_codes=[${HTTP_NO_CONTENT}]
 
     # Verify that IPMI command works with new password and fails with older password.
     Verify IPMI Username And Password  ${random_username}  ${valid_password2}
@@ -74,19 +82,24 @@ Update User Privilege Via Redfish And Verify Using IPMI
     [Documentation]  Update user privilege via Redfish and verify using IPMI.
     [Tags]  Update_User_Privilege_Via_Redfish_And_Verify_Using_IPMI
 
+    VAR  ${random_username}  ${EMPTY}
     # Create user using Redfish with admin privilege.
     ${random_username}=  Generate Random String  8  [LETTERS]
-    Set Test Variable  ${random_username}
 
-    ${payload}=  Create Dictionary
-    ...  UserName=${random_username}  Password=${valid_password}
-    ...  RoleId=Administrator  Enabled=${True}
+    VAR  &{payload}
+    ...  UserName=${random_username}
+    ...  Password=${valid_password}
+    ...  RoleId=Administrator
+    ...  Enabled=${True}
+
     Redfish.Post  /redfish/v1/AccountService/Accounts  body=&{payload}
     ...  valid_status_codes=[${HTTP_CREATED}]
 
     # Update user privilege to operator using Redfish.
-    ${payload}=  Create Dictionary  RoleId=Operator
+    VAR  &{payload}  RoleId=Operator
+
     Redfish.Patch  /redfish/v1/AccountService/Accounts/${random_username}  body=&{payload}
+    ...  valid_status_codes=[${HTTP_NO_CONTENT}]
 
     # Verify new user privilege level via IPMI.
     ${resp}=  Run IPMI Standard Command  user list ${CHANNEL_NUMBER}
@@ -109,13 +122,16 @@ Delete User Via Redfish And Verify Using IPMI
     [Documentation]  Delete user via redfish and verify using IPMI.
     [Tags]  Delete_User_Via_Redfish_And_Verify_Using_IPMI
 
+    VAR  ${random_username}  ${EMPTY}
     # Create user using Redfish.
     ${random_username}=  Generate Random String  8  [LETTERS]
-    Set Test Variable  ${random_username}
 
-    ${payload}=  Create Dictionary
-    ...  UserName=${random_username}  Password=${valid_password}
-    ...  RoleId=Administrator  Enabled=${True}
+    VAR  &{payload}
+    ...  UserName=${random_username}
+    ...  Password=${valid_password}
+    ...  RoleId=Administrator
+    ...  Enabled=${True}
+
     Redfish.Post  /redfish/v1/AccountService/Accounts  body=&{payload}
     ...  valid_status_codes=[${HTTP_CREATED}]
 
@@ -225,10 +241,12 @@ Verify Failure To Exceed Max Number Of Users
     # Get existing user count.
     ${existing_user_count}=  Get User Count Of Not IPMI Account Type
 
-    ${payload}=  Create Dictionary  Password=${valid_password}
-    ...  RoleId=Administrator  Enabled=${True}
+    VAR  &{payload}
+    ...  Password=${valid_password}
+    ...  RoleId=Administrator
+    ...  Enabled=${True}
 
-    @{username_list}=  Create List
+    VAR  @{username_list}  @{EMPTY}
 
     # Create users to reach maximum users count (i.e. 15 users).
     FOR  ${INDEX}  IN RANGE  ${existing_user_count}  ${max_num_users}
@@ -269,9 +287,9 @@ IPMI Create Random User Plus Password And Privilege
     # password      Password to be assigned for the user.
     # privilege     Privilege level for the user (e.g. "1", "2", "3", etc.).
 
+    VAR  ${random_username}  ${EMPTY}  scope=SUITE
     # Create IPMI user.
     ${random_username}=  Generate Random String  8  [LETTERS]
-    Set Suite Variable  ${random_username}
 
     ${random_userid}=  Find Free User Id
     IPMI Create User  ${random_userid}  ${random_username}
@@ -345,7 +363,8 @@ Find Free User Id
 Get All User Account Names
     [Documentation]  Get all user account names in list format.
 
-    @{username_list}=  Create List
+    VAR  @{username_list}  @{EMPTY}
+
     ${resp}=  Redfish.Get  /redfish/v1/AccountService/Accounts/
     ${current_users}=  Get From Dictionary  ${resp.dict}  Members
     FOR  ${user}  IN  @{current_users}
