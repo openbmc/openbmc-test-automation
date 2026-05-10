@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe61abd9_ca8fdd18",
+        "filename": "redfish/managers/lib/mtls_resource.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1002230
+      },
+      "writtenOn": "2026-05-10T06:28:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61afb607_5a9f8bb7",
+      "revId": "29e70485883869f6ab3699f55fcfbd23cf61c69a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7bdaad9b_6cbe41d7",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-04-29T15:39:34Z",
       "side": 1,
       "message": "Add one line of space.",
+      "revId": "29e70485883869f6ab3699f55fcfbd23cf61c69a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec0341db_77dab911",
+        "filename": "redfish/managers/lib/mtls_resource.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1002230
+      },
+      "writtenOn": "2026-05-10T06:28:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7bdaad9b_6cbe41d7",
       "revId": "29e70485883869f6ab3699f55fcfbd23cf61c69a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -52,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9debd989_0dbc859f",
+        "filename": "redfish/managers/lib/mtls_resource.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1002230
+      },
+      "writtenOn": "2026-05-10T06:28:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6233f7a4_f2e3d672",
+      "revId": "29e70485883869f6ab3699f55fcfbd23cf61c69a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "77c303b6_94bd4001",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-04-29T15:39:34Z",
       "side": 1,
       "message": "Add two line of space in between keywords.",
+      "revId": "29e70485883869f6ab3699f55fcfbd23cf61c69a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de323949_64c3a440",
+        "filename": "redfish/managers/lib/mtls_resource.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1002230
+      },
+      "writtenOn": "2026-05-10T06:28:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77c303b6_94bd4001",
       "revId": "29e70485883869f6ab3699f55fcfbd23cf61c69a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
