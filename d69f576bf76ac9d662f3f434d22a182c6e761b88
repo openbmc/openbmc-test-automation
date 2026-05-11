@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1a7fd92_95ced4bd",
+        "filename": "lib/mtls_cert_utils.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-05-11T15:26:18Z",
+      "side": 1,
+      "message": "Add input validation:\n\n```\nif not ca_cert_pem or not isinstance(ca_cert_pem, str):\n    raise ValueError(\"ca_cert_pem must be a non-empty string\")\nif not ca_key_pem or not isinstance(ca_key_pem, str):\n    raise ValueError(\"ca_key_pem must be a non-empty string\")\nif not ca_cert_pem.strip().startswith(\u0027-----BEGIN CERTIFICATE-----\u0027):\n    raise ValueError(\"ca_cert_pem does not appear to be a valid PEM certificate\")\n```\n\nClear error messages help identify configuration issues quickly",
+      "revId": "d69f576bf76ac9d662f3f434d22a182c6e761b88",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "699e5f0b_e6e2c1f7",
+        "filename": "lib/mtls_cert_utils.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-05-11T15:26:18Z",
+      "side": 1,
+      "message": "Add try-except with informative error messages:\n```\n\ntry:\n    with open(cert_path, \"w\") as f:\n        f.write(cert_pem)\n    with open(key_path, \"w\") as f:\n        f.write(key_pem)\nexcept IOError as e:\n    raise IOError(f\"Failed to write certificate files: {e}\") from e\n```\n\nBetter error messages aid debugging when file operations fail.",
+      "revId": "d69f576bf76ac9d662f3f434d22a182c6e761b88",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e216e587_17c44dff",
+        "filename": "redfish/managers/lib/mtls_resource.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-05-11T15:26:18Z",
+      "side": 1,
+      "message": "Add validation:\n```\n${hostname}\u003d  Redfish.Get Attribute\n...  /redfish/v1/Managers/${MANAGER_ID}/NetworkProtocol\n...  HostName\nShould Not Be Empty  ${hostname}  msg\u003dBMC hostname is required for UPN certificate generation\n```\n\nPrevents silent failures when hostname is not configured.",
+      "revId": "d69f576bf76ac9d662f3f434d22a182c6e761b88",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c00e4816_d18583d2",
+        "filename": "redfish/managers/lib/mtls_resource.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-05-11T15:26:18Z",
+      "side": 1,
+      "message": "Replace Sleep with inline verification\n```\nWait Until Keyword Succeeds  30s  2s\n...  Redfish.Get  ${REDFISH_CA_CERTIFICATE_URI}/${resp.dict[\u0027Id\u0027]}\n...  valid_status_codes\u003d[${HTTP_OK}]\n```\n Dynamic waiting is more reliable across different system speeds and reduces test execution time. The verification ensures the certificate is actually accessible before proceeding.",
+      "revId": "d69f576bf76ac9d662f3f434d22a182c6e761b88",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69796f36_8bed5814",
+        "filename": "redfish/managers/lib/mtls_resource.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-05-11T15:26:18Z",
+      "side": 1,
+      "message": "```\nShould Be Equal As Integers  ${code}  ${200}\n...  msg\u003dmTLS authentication failed with status ${code}, expected 200\n```",
+      "revId": "d69f576bf76ac9d662f3f434d22a182c6e761b88",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57edeb8b_8d607ab4",
+        "filename": "redfish/managers/lib/mtls_resource.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-05-11T15:26:18Z",
+      "side": 1,
+      "message": "${HTTP_OK}                               200\ncan we use those those variables instead of the value directly.\n\nrefer lib/rest_response_code.robot",
+      "revId": "d69f576bf76ac9d662f3f434d22a182c6e761b88",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e66e4c8_f7ae1651",
+        "filename": "redfish/managers/lib/mtls_resource.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-05-11T15:26:18Z",
+      "side": 1,
+      "message": "```\nShould Not Be Equal As Integers  ${code}  ${200}\n...  msg\u003dmTLS authentication should have failed but got status ${code}\n```",
+      "revId": "d69f576bf76ac9d662f3f434d22a182c6e761b88",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
