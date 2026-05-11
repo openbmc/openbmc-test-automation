@@ -236,9 +236,6 @@ Test Setup Execution
     # Get all VLAN ID on interface eth0.
     ${vlan_ids}=  Get VLAN IDs
 
-    ${initial_vlan_config}=  Create List
-    Set Suite Variable  ${initial_vlan_config}
-
     FOR  ${vlan_id}  IN  @{vlan_ids}
         ${vlan_records}=  Read Properties
         ...  ${NETWORK_MANAGER}eth0_${vlan_id}${/}enumerate  quiet=1
@@ -288,7 +285,7 @@ Suite Teardown Execution
     ${length}=  Get Length  ${initial_vlan_config}
     IF  ${length} == ${0}  RETURN
 
-    ${previous_id}=  Set Variable  ${EMPTY}
+    VAR  ${previous_id}  ${EMPTY}
     FOR  ${index}  IN RANGE  0  ${length}  3
         IF  '${initial_vlan_config[${index+1}]}' == '${EMPTY}'
             Create VLAN  ${initial_vlan_config[${index}]}

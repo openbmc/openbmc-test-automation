@@ -64,8 +64,8 @@ Suite Setup Execution
     ...  Get Network Configuration Using Channel Number  ${2}
     FOR  ${network_configuration}  IN  @{network_configurations}
         IF  '${network_configuration['Address']}' == '${OPENBMC_HOST_ETH1}'
-            Set Suite Variable   ${eth1_subnet_mask}  ${network_configuration['SubnetMask']}
-            Set Suite Variable   ${eth1_gateway}  ${network_configuration['Gateway']}
+            VAR  ${eth1_subnet_mask}  ${network_configuration['SubnetMask']}  scope=SUITE
+            VAR  ${eth1_gateway}  ${network_configuration['Gateway']}  scope=SUITE
             BREAK
         END
     END
@@ -74,8 +74,8 @@ Suite Setup Execution
     ...  Get Network Configuration Using Channel Number  ${1}
     FOR  ${network_configuration}  IN  @{network_configurations}
       IF  '${network_configuration['Address']}' == '${OPENBMC_HOST}'
-          Set Suite Variable  ${eth0_subnet_mask}  ${network_configuration['SubnetMask']}
-          Set Suite Variable  ${eth0_gateway}  ${network_configuration['Gateway']}
+          VAR  ${eth0_subnet_mask}  ${network_configuration['SubnetMask']}  scope=SUITE
+          VAR  ${eth0_gateway}  ${network_configuration['Gateway']}  scope=SUITE
           BREAK
       END
     END
@@ -89,8 +89,7 @@ Get Network Configuration Using Channel Number
     #                  eth1 (e.g. "1").
 
     ${active_channel_config}=  Get Active Channel Config
-    ${ethernet_interface}=
-    ...  Set Variable  ${active_channel_config['${channel_number}']['name']}
+    VAR  ${ethernet_interface}  ${active_channel_config['${channel_number}']['name']}
     ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
 
     @{network_configurations}=
