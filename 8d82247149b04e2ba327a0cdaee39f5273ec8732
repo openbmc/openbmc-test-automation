@@ -34,6 +34,24 @@
       "parentUuid": "02de473f_04980a29",
       "revId": "8d82247149b04e2ba327a0cdaee39f5273ec8732",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "415abc71_e65eb68e",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2026-05-11T10:43:52Z",
+      "side": 1,
+      "message": "OK, then move it to user management common librbary",
+      "parentUuid": "62b39fa5_6d97f9d2",
+      "revId": "8d82247149b04e2ba327a0cdaee39f5273ec8732",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
