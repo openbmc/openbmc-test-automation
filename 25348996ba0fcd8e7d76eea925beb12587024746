@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44f3fd46_2c153d47",
+        "filename": "gui/gui_test/security_and_access_menu/test_sessions_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-05-11T08:31:10Z",
+      "side": 1,
+      "message": "Missing validation before list access\n\nLocation: Line 194 in test_sessions_sub_menu.robot\nIssue: The test accesses ${session_member_list}[${i}] without validating that the list is not empty\n\nFix: Add validation before the FOR loop:\n\n```\nShould Not Be Empty    ${session_member_list}\n...    msg\u003dNo active sessions found to validate search functionality\n```\nor check the ${session_count} is not 0\n\nWhy: If no sessions exist, the test will fail with a cryptic index error instead of a clear message explaining the precondition failure",
+      "revId": "25348996ba0fcd8e7d76eea925beb12587024746",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
