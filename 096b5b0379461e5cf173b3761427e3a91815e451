@@ -46,6 +46,30 @@
       },
       "revId": "096b5b0379461e5cf173b3761427e3a91815e451",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0954dcd2_6ed75ca7",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-05-11T05:55:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8d9dc2d_cdfaae4b",
+      "range": {
+        "startLine": 174,
+        "startChar": 23,
+        "endLine": 174,
+        "endChar": 25
+      },
+      "revId": "096b5b0379461e5cf173b3761427e3a91815e451",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
