@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a6b7259_39c1b315",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-05-11T06:29:03Z",
+      "side": 1,
+      "message": "need the same change here as well\nVAR  \u0026{data}  \u0026{EMPTY}",
+      "range": {
+        "startLine": 449,
+        "startChar": 4,
+        "endLine": 449,
+        "endChar": 21
+      },
+      "revId": "40ebbea19aa42bf839756a6dcabb1a21acfa1788",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
