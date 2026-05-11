@@ -21,6 +21,9 @@ ${old_ldap_privilege}   Administrator
 ${hostname}             ${EMPTY}
 ${test_ip}              10.6.6.6
 ${test_mask}            255.255.255.0
+${LDAP_UNREACHABLE_URI}  ldap://192.0.2.1
+${LOCAL_ADMIN_USER}     ldap_local_admin
+${LOCAL_ADMIN_PASSWORD}  TestPwd123
 
 *** Test Cases ***
 
@@ -542,6 +545,28 @@ Switch LDAP Type And Verify Login Fails
 
     # Login using LDAP type must fail
     Redfish Verify LDAP Login  ${False}
+    Redfish.Logout
+
+Verify Local Admin User Creation When LDAP Is Unreachable
+    [Documentation]  Verify local administrator user can be created and used when LDAP is unreachable.
+    [Tags]  Verify_Local_Admin_User_Creation_When_LDAP_Is_Unreachable
+    [Teardown]  Run Keywords  Redfish.Login  AND
+    ...  Redfish.Delete  /redfish/v1/AccountService/Accounts/${LOCAL_ADMIN_USER}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]  AND
+    ...  Restore LDAP URL  AND  FFDC On Test Case Fail
+
+    # Configure LDAP to use an unreachable server.
+    Create LDAP Configuration  ${LDAP_TYPE}  ${LDAP_UNREACHABLE_URI}
+    ...  ${LDAP_BIND_DN}  ${LDAP_BIND_DN_PASSWORD}  ${LDAP_BASE_DN}
+
+    Redfish Verify LDAP Login  ${False}
+
+    # Create a local administrator user.
+    Redfish Create User  ${LOCAL_ADMIN_USER}  ${LOCAL_ADMIN_PASSWORD}  Administrator  ${True}  ${True}
+    Redfish.Logout
+
+    # Verify the newly created local administrator user is able to log in.
+    Redfish.Login  ${LOCAL_ADMIN_USER}  ${LOCAL_ADMIN_PASSWORD}
     Redfish.Logout
 
 *** Keywords ***
