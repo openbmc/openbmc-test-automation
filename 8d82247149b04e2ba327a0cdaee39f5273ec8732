@@ -87,6 +87,24 @@
       "message": "put these scenarios in ./redfish/account_service/test_user_account.robot",
       "revId": "8d82247149b04e2ba327a0cdaee39f5273ec8732",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8d1f4fb_df106086",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2026-05-12T11:12:14Z",
+      "side": 1,
+      "message": "as discussed, this is part of open ssh suite, so will keep it is same suite. User management ones i have moved it to lib",
+      "parentUuid": "59afbad5_fa8047e8",
+      "revId": "8d82247149b04e2ba327a0cdaee39f5273ec8732",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
