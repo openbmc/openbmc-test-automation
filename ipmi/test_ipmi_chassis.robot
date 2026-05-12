@@ -310,7 +310,7 @@ Get Default Chassis System Boot Options
     ...  ${IPMI_RAW_CMD['system_boot_options']['Get_Boot_Options'][0]}
 
     IF  ${default}
-        Set Suite Variable  ${DEFAULT_SET_IN_PROGRESS}  ${resp}
+        VAR  ${DEFAULT_SET_IN_PROGRESS}  ${resp}  scope=SUITE
     ELSE
         RETURN  ${resp}
     END
@@ -367,7 +367,7 @@ Check Chassis Status Via IPMI
     # Last bit corresponds whether Power is on
     Should Be Equal As Strings  ${state[-1]}  1
     # bit 1-2 corresponds to power restore policy
-    ${policy}=  Set Variable  ${state[1:3]}
+    VAR  ${policy}  ${state[1:3]}
 
     # condition to verify each power policy
     IF  '${power_policy}' == 'always-off'
@@ -409,8 +409,7 @@ Test Setup Execution
     [Documentation]  Do test setup tasks.
 
     ${chassis_status}=  Get Chassis Status
-    Set Test Variable  ${initial_power_policy}  ${chassis_status['power_restore_policy']}
-
+    VAR  ${initial_power_policy}  ${chassis_status['power_restore_policy']}
 
 Test Teardown Execution
     [Documentation]  Do Test Teardown tasks.
@@ -434,7 +433,7 @@ Get Default BMC Boot Flag Valid Bit Clearing Via IPMI
     ...  ${IPMI_RAW_CMD['system_boot_options']['Get_Boot_Flag'][0]}
 
     IF  ${default}
-        Set Suite Variable  ${DEFAULT_SET_IN_PROGRESS}  ${resp}
+        VAR  ${DEFAULT_SET_IN_PROGRESS}  ${resp}  scope=SUITE
     ELSE
         RETURN  ${resp}
     END
@@ -468,7 +467,7 @@ Get Default Chassis System Boot Options Boot Flags Via IPMI
             Set List Value  ${boot_flag_parts}  ${index}  ${prefixed}
         END
         ${boot_flag_data}=  Catenate  @{boot_flag_parts}
-        Set Suite Variable  ${DEFAULT_Chassis_Boot_Flag}  ${boot_flag_data}
+        VAR  ${DEFAULT_Chassis_Boot_Flag}  ${boot_flag_data}  scope=SUITE
     ELSE
         RETURN  ${resp}
     END
