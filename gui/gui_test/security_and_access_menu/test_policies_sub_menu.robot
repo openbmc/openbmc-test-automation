@@ -25,6 +25,8 @@ ${xpath_usb_firmware_update_policy_toggle}    //*[@data-test-id='policies-toggle
 ${xpath_secure_version_lockin_toggle}         //*[@data-test-id='policies-toggle-svle']/following-sibling::label
 ${xpath_host_usb_enablement_toggle}           //*[@data-test-id='policies-toggle-hostUsb']/following-sibling::label
 ${xpath_basic_authentication_toggle}          //*[@data-test-id='policies-toggle-basic-auth']/following-sibling::label
+${bios_attr_vtpm}                             pvm_vtpm
+${bios_attr_rtad}                             pvm_rtad
 
 
 *** Test Cases ***
@@ -207,6 +209,28 @@ Configure SSH And IPMI Settings Via GUI And Verify Its Persistency
     Disabled        Enabled      True
 
 
+Verify RTAD Toggle Operation On Policies Page
+    [Documentation]  Verify RTAD toggle operation on policies page.
+    [Tags]   Verify_RTAD_Toggle_Operation_On_Policies_Page
+    [Teardown]  Set Policy To Initial State Via Redfish BIOS Attribute  ${bios_attr_rtad}
+    ...  ${initial_rtad_setting}
+
+    VAR  ${toast_msg}  Applying changes to RTAD. Changes made to RTAD will take effect on next reboot.
+    Toggle Required Policy Option And Verify  ${initial_rtad_setting}
+    ...  ${xpath_rtad_toggle}  ${toast_msg}
+
+
+Verify Virutal TPM Toggle Operation On Policies Page
+    [Documentation]  Verify virtual TPM toggle operation on policies page.
+    [Tags]  Verify_Virutal_TPM_Toggle_Operation_On_Policies_Page
+    [Teardown]  Set Policy To Initial State Via Redfish BIOS Attribute  ${bios_attr_vtpm}
+    ...  ${initial_vtpm_setting}
+
+    VAR  ${toast_msg}  Successfully updated VirtualTPM.
+    Toggle Required Policy Option And Verify  ${initial_vtpm_setting}
+    ...  ${xpath_virtual_tpm_toggle}  ${toast_msg}
+
+
 Verify Basic Authentication Toggle Operation On Policies Page
     [Documentation]  Verify basic authentication toggle operation on policies page.
     [Tags]  Verify_Basic_Authentication_Toggle_Operation_On_Policies_Page
@@ -278,6 +302,11 @@ Test Setup Execution
     ${initial_basic_auth_setting}=  Get Text  ${xpath_basic_authentication_toggle}
     VAR  ${initial_basic_auth_setting}  ${initial_basic_auth_setting}  scope=SUITE
 
+    ${initial_rtad_setting}=  Get Text  ${xpath_rtad_toggle}
+    VAR  ${initial_rtad_setting}  ${initial_rtad_setting}  scope=SUITE
+
+    ${initial_vtpm_setting}=  Get Text  ${xpath_virtual_tpm_toggle}
+    VAR  ${initial_vtpm_setting}  ${initial_vtpm_setting}  scope=SUITE
 
 Set Policy Via GUI
 
@@ -455,3 +484,22 @@ Set Basic Authentication Policy To Initial State
     EXCEPT  AS  ${error}
         Log  Failed to restore Basic Auth state: ${error}  level=WARN
     END
+
+
+Set Policy To Initial State Via Redfish BIOS Attribute
+    [Documentation]  Set required policy to initial state via Redfish BIOS attribute.
+    [Arguments]  ${bios_attribute}  ${initial_option_value}
+
+    # Description of argument(s):
+    # bios_attribute               BIOS attribute name of the policy.
+    # initial_option_value         Initial policy option value.
+
+    IF  '$initial_option_value' == 'Enabled'
+        VAR  ${bios_attr_setting}  Enabled
+    ELSE
+        VAR  ${bios_attr_setting}  Disabled
+    END
+
+    Set BIOS Attribute  ${bios_attribute}  ${bios_attr_setting}
+    ${bios_attr_after_setting}=  Get BIOS Attribute
+    Should Be Equal  ${bios_attr_setting}  ${bios_attr_after_setting['${bios_attribute}']}
