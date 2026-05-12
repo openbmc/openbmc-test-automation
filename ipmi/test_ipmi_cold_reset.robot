@@ -125,8 +125,7 @@ Get The Sensor Name And Threshold
 
     # Description of Argument(s):
     #    ${sensor_list}    All the sensors listed with ipmi sensor list command.
-
-    @{tmp_list}=  Create List
+    VAR  @{tmp_list}  @{EMPTY}
 
     @{sensor_list_lines}=  Split To Lines  ${sensor_list}
 
@@ -136,7 +135,7 @@ Get The Sensor Name And Threshold
       IF  '${discrete_sensor_status}' == 'True'  CONTINUE
       ${sensor_details}=  Split String  ${sensor}  |
       ${get_sensor_name}=  Get From List  ${sensor_details}  0
-      ${sensor_name}=  Set Variable  ${get_sensor_name.strip()}
+      VAR  ${sensor_name}  ${get_sensor_name.strip()}
       Append To List  ${tmp_list}  ${sensor_name}
     END
 
@@ -160,11 +159,11 @@ Selecting Random Sensor Name And Threshold Value
     ${random_sensor_name}=  Evaluate  random.choice(${tmp_list})  random
 
     # Create Dictionary For Threshold Key With Threshold Values
-    &{tmp_dict}=  Create Dictionary
+    VAR  &{tmp_dict}  &{EMPTY}
     ${sensor_threshold}=  Get Lines Containing String  ${sensor_list}  ${random_sensor_name}
     @{ipmi_sensor}=  Split String  ${sensor_threshold}  |
     ${get_ipmi_lower_non_recoverable_threshold}=  Get From List  ${ipmi_sensor}  4
-    ${ipmi_lower_non_recoverable_threshold}=  Set Variable  ${get_ipmi_lower_non_recoverable_threshold.strip()}
+    VAR  ${ipmi_lower_non_recoverable_threshold}  ${get_ipmi_lower_non_recoverable_threshold.strip()}
     ${lower_non_recoverable_threshold_status}=  Run Keyword And Return Status  Should Not Contain
     ...  ${ipmi_lower_non_recoverable_threshold}  na
     IF  '${lower_non_recoverable_threshold_status}' == 'True'
@@ -172,7 +171,7 @@ Selecting Random Sensor Name And Threshold Value
     END
 
     ${get_ipmi_lower_critical_threshold}=  Get From List  ${ipmi_sensor}  5
-    ${ipmi_lower_critical_threshold}=  Set Variable  ${get_ipmi_lower_critical_threshold.strip()}
+    VAR  ${ipmi_lower_critical_threshold}  ${get_ipmi_lower_critical_threshold.strip()}
     ${lower_critical_threshold_status}=  Run Keyword And Return Status  Should Not Contain
     ...  ${ipmi_lower_critical_threshold}  na
     IF  '${lower_critical_threshold_status}' == 'True'
@@ -180,7 +179,7 @@ Selecting Random Sensor Name And Threshold Value
     END
 
     ${get_ipmi_lower_non_critical_threshold}=  Get From List  ${ipmi_sensor}  6
-    ${ipmi_lower_non_critical_threshold}=  Set Variable  ${get_ipmi_lower_non_critical_threshold.strip()}
+    VAR  ${ipmi_lower_non_critical_threshold}  ${get_ipmi_lower_non_critical_threshold.strip()}
     ${lower_non_critical_threshold_status}=  Run Keyword And Return Status  Should Not Contain
     ...  ${ipmi_lower_non_critical_threshold}  na
     IF  '${lower_non_critical_threshold_status}' == 'True'
@@ -188,7 +187,7 @@ Selecting Random Sensor Name And Threshold Value
     END
 
     ${get_ipmi_upper_non_critical_threshold}=  Get From List  ${ipmi_sensor}  7
-    ${ipmi_upper_non_critical_threshold}=  Set Variable  ${get_ipmi_upper_non_critical_threshold.strip()}
+    VAR  ${ipmi_upper_non_critical_threshold}  ${get_ipmi_upper_non_critical_threshold.strip()}
     ${upper_non_critical_threshold_status}=  Run Keyword And Return Status  Should Not Contain
     ...  ${ipmi_upper_non_critical_threshold}  na
     IF  '${upper_non_critical_threshold_status}' == 'True'
@@ -196,7 +195,7 @@ Selecting Random Sensor Name And Threshold Value
     END
 
     ${get_ipmi_upper_critical_threshold}=  Get From List  ${ipmi_sensor}  8
-    ${ipmi_upper_critical_threshold}=  Set Variable  ${get_ipmi_upper_critical_threshold.strip()}
+    VAR  ${ipmi_upper_critical_threshold}  ${get_ipmi_upper_critical_threshold.strip()}
     ${upper_critical_threshold_status}=  Run Keyword And Return Status  Should Not Contain
     ...  ${ipmi_upper_critical_threshold}  na
     IF  '${upper_critical_threshold_status}' == 'True'
@@ -204,7 +203,7 @@ Selecting Random Sensor Name And Threshold Value
     END
 
     ${get_ipmi_upper_non_recoverable_threshold}=  Get From List  ${ipmi_sensor}  9
-    ${ipmi_upper_non_recoverable_threshold}=  Set Variable  ${get_ipmi_upper_non_recoverable_threshold.strip()}
+    VAR  ${ipmi_upper_non_recoverable_threshold}  ${get_ipmi_upper_non_recoverable_threshold.strip()}
     ${upper_non_recoverable_threshold_status}=  Run Keyword And Return Status  Should Not Contain
     ...  ${ipmi_upper_non_recoverable_threshold}  na
     IF  '${upper_non_recoverable_threshold_status}' == 'True'
@@ -244,15 +243,16 @@ Getting Sensor Threshold Value Based On Threshold Key
     ${new_data}=  Run IPMI Standard Command  sensor | grep -i "${sensor_name}"
     ${new_sensor_details}=  Split String  ${new_data}  |
 
-    ${index_value}=  Set Variable If
-    ...  '${threshold_key}' == 'lnr'  ${4}
-    ...  '${threshold_key}' == 'lcr'  ${5}
-    ...  '${threshold_key}' == 'lnc'  ${6}
-    ...  '${threshold_key}' == 'unc'  ${7}
-    ...  '${threshold_key}' == 'ucr'  ${8}
-    ...  '${threshold_key}' == 'unr'  ${9}
+    VAR  &{threshold_index_map}
+    ...  lnr=${4}
+    ...  lcr=${5}
+    ...  lnc=${6}
+    ...  unc=${7}
+    ...  ucr=${8}
+    ...  unr=${9}
+
+    VAR  ${index_value}  ${threshold_index_map}[${threshold_key}]
 
     ${get_sensor_new_threshold_value}=  Get From List  ${new_sensor_details}  ${index_value}
-    ${sensor_new_threshold_value}=  Set Variable  ${get_sensor_new_threshold_value.strip()}
-
+    VAR  ${sensor_new_threshold_value}  ${get_sensor_new_threshold_value.strip()}
     RETURN  ${sensor_new_threshold_value}
