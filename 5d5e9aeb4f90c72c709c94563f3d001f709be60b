@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09b2442c_90c94f03",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-05-12T05:56:24Z",
+      "side": 1,
+      "message": "Teardown lines are redundant... try creating a keyword delete all ipv6 addresses and use it as template in teardown. Make sure to keep argument for ipv4 and ipv6. for reference check gui delete all operation",
+      "revId": "5d5e9aeb4f90c72c709c94563f3d001f709be60b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
