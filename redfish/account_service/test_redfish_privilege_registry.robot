@@ -130,12 +130,17 @@ Verify Admin User Privileges Via Redfish
 
     Redfish.Login   ${admin_user}   ${admin_password}
 
-    ${payload}=  Create Dictionary
-    ...  UserName=${post_user}  Password=${post_password}  RoleId=Operator  Enabled=${true}
+    VAR  &{payload}
+    ...  UserName=${post_user}
+    ...  Password=${post_password}
+    ...  RoleId=Operator
+    ...  Enabled=${true}
+
     Redfish.Post  ${REDFISH_ACCOUNTS_URI}  body=&{payload}
     ...  valid_status_codes=[${HTTP_CREATED}]
 
-    ${data}=  Create Dictionary  UserName=${patched_user}
+    VAR  &{data}  UserName=${patched_user}
+
     Redfish.Patch  ${REDFISH_ACCOUNTS_URI}${test_user}  body=&{data}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
@@ -148,12 +153,17 @@ Verify Operator User Privileges Via Redfish
 
     Redfish.Login   ${operator_user}   ${operator_password}
 
-    ${payload}=  Create Dictionary
-    ...  UserName=${post_user}  Password=${post_password}  RoleId=Operator  Enabled=${true}
+    VAR  &{payload}
+    ...  UserName=${post_user}
+    ...  Password=${post_password}
+    ...  RoleId=Operator
+    ...  Enabled=${true}
+
     Redfish.Post  ${REDFISH_ACCOUNTS_URI}  body=&{payload}
     ...  valid_status_codes=[${HTTP_FORBIDDEN}]
 
-    ${data}=  Create Dictionary  UserName=${patched_user}
+    VAR  &{data}  UserName=${patched_user}
+
     Redfish.Patch  ${REDFISH_ACCOUNTS_URI}${test_user}  body=&{data}
     ...  valid_status_codes=[${HTTP_FORBIDDEN}]
 
@@ -169,12 +179,17 @@ Verify ReadOnly User Privileges Via Redfish
 
     Redfish.Login   ${readonly_user}   ${readonly_password}
 
-    ${payload}=  Create Dictionary
-    ...  UserName=${post_user}  Password=${post_password}  RoleId=Operator  Enabled=${true}
+    VAR  &{payload}
+    ...  UserName=${post_user}
+    ...  Password=${post_password}
+    ...  RoleId=Operator
+    ...  Enabled=${true}
+
     Redfish.Post  ${REDFISH_ACCOUNTS_URI}  body=&{payload}
     ...  valid_status_codes=[${HTTP_FORBIDDEN}]
 
-    ${data}=  Create Dictionary  UserName=${patched_user}
+    VAR  &{data}  UserName=${patched_user}
+
     Redfish.Patch  ${REDFISH_ACCOUNTS_URI}${test_user}  body=&{data}
     ...  valid_status_codes=[${HTTP_FORBIDDEN}]
 
@@ -210,7 +225,7 @@ Get Redfish Privilege Registry Json URL
     ${resp}=  Redfish.Get
     ...  /redfish/v1/Registries/PrivilegeRegistry/
     @{location}=  Get From Dictionary  ${resp.dict}  Location
-    ${uri}=   Set Variable   ${location[0]['Uri']}
+    VAR  ${uri}  ${location[0]['Uri']}
     RETURN   ${uri}
 
 Create And Verify Various Privilege Users
