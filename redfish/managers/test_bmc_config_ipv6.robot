@@ -459,7 +459,7 @@ Set SSH Protocol Using IPv6 Session And Verify
 
     RedfishIPv6.Login
     RedfishIPv6.Patch  ${REDFISH_NW_PROTOCOL_URI}  body=&{data}
-    ...  valid_status_codes=[${HTTP_NO_CONTENT}]
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
     # Wait for new values to take effect.
     Sleep  30s

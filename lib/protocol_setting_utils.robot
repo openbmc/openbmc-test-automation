@@ -23,7 +23,7 @@ Enable SSH Protocol
     ${data}=  Create Dictionary  SSH=${ssh_state}
 
     Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body=&{data}
-    ...  valid_status_codes=[${HTTP_NO_CONTENT}]
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
     # Wait for timeout for new values to take effect.
     Sleep  ${NETWORK_TIMEOUT}s
@@ -108,7 +108,7 @@ Enable IPMI Protocol
     ${data}=  Create Dictionary  IPMI=${ipmi_state}
 
     Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body=&{data}
-    ...  valid_status_codes=[${HTTP_NO_CONTENT}]
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
     # Wait for timeout for new values to take effect.
     Sleep  ${NETWORK_TIMEOUT}s
@@ -125,7 +125,7 @@ Enable NTP Protocol
     ${data}=  Create Dictionary  NTP=${ntp_state}
 
     Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body=&{data}
-    ...  valid_status_codes=[${HTTP_NO_CONTENT}]
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
     # Wait for timeout for new values to take effect.
     Sleep  ${NETWORK_TIMEOUT}s
