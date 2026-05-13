@@ -175,6 +175,24 @@
       "parentUuid": "5a83fb94_2649d2a0",
       "revId": "a4455a8d2a7250f3cd7d735531d988df6b106395",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b75043b4_e1b9f8f7",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2026-05-13T06:15:40Z",
+      "side": 1,
+      "message": "Pls use timers defined in network resource file",
+      "parentUuid": "f382ec5c_a2bfb1aa",
+      "revId": "a4455a8d2a7250f3cd7d735531d988df6b106395",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
