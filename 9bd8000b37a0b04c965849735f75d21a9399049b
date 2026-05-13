@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd75106e_5d9e2508",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 18
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1002804
+      },
+      "writtenOn": "2026-05-13T05:10:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38619f9f_065c84ee",
+      "range": {
+        "startLine": 420,
+        "startChar": 8,
+        "endLine": 420,
+        "endChar": 39
+      },
+      "revId": "9bd8000b37a0b04c965849735f75d21a9399049b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6e8b8d8_08451899",
@@ -41,6 +65,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4c5b25e_b291e0e3",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 18
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1002804
+      },
+      "writtenOn": "2026-05-13T05:10:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6e8b8d8_08451899",
+      "revId": "9bd8000b37a0b04c965849735f75d21a9399049b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fdd43661_2cd7f125",
@@ -54,6 +96,24 @@
       "writtenOn": "2026-05-12T15:30:53Z",
       "side": 1,
       "message": "Add space after #",
+      "revId": "9bd8000b37a0b04c965849735f75d21a9399049b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9b1a61d_15670df3",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 18
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1002804
+      },
+      "writtenOn": "2026-05-13T05:10:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fdd43661_2cd7f125",
       "revId": "9bd8000b37a0b04c965849735f75d21a9399049b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
