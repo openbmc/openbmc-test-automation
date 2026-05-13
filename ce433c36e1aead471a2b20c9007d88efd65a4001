@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc07bfee_8dfc2ca9",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 2115,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-05-13T14:53:00Z",
+      "side": 1,
+      "message": "Missing validation for empty IPv4 grid scenario\n\nCurrent Code:\n```\n${ipv4_elems}\u003d  Get WebElements  ${ipv4_addr_origin_elements}\n${ipv4_origin_list}\u003d  Get IP Origins  @{ipv4_elems}\n```\nIssue: The keyword doesn\u0027t validate whether any IPv4 addresses exist in the grid before checking origin uniqueness. If the grid is empty (no IPv4 addresses configured), Get WebElements returns an empty list, and the test would pass even though it hasn\u0027t validated the actual constraint.\n\nFix: Add validation to ensure at least one IPv4 address exists before checking origin uniqueness:\n\n```\n${ipv4_elems}\u003d  Get WebElements  ${ipv4_addr_origin_elements}\n${elem_count}\u003d  Get Length  ${ipv4_elems}\nShould Be True  ${elem_count} \u003e 0\n...  msg\u003dNo IPv4 addresses found in grid. At least one IPv4 address must be configured to verify origin uniqueness.\n${ipv4_origin_list}\u003d  Get IP Origins  @{ipv4_elems}\n```\n\nWhy: From a network configuration perspective, the test should validate the constraint only when IPv4 addresses are actually configured. An empty grid is a different state that should be explicitly handled or documented.",
+      "revId": "ce433c36e1aead471a2b20c9007d88efd65a4001",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9da1ed86_d72810bb",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 2127,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-05-13T14:53:00Z",
+      "side": 1,
+      "message": "No verification of DHCP property state after toggle\n\nCurrent Code:\n```\n# Toggle the DHCP property.\nToggle DHCPv4 Property And Verify  ${property}  ${xpath_property}\nWait Until Element Is Not Visible  ${xpath_page_loading_progress_bar}  timeout\u003d60s\n```\n\nIssue: The keyword relies entirely on Toggle DHCPv4 Property And Verify to handle the toggle operation, but doesn\u0027t independently verify the final state of the DHCP property. If the toggle operation fails silently or the property reverts, the test would still pass as long as the gateway remains unchanged.\n\nFix: Add explicit verification of the DHCP property state after toggle:\n```\n\n# Get initial DHCP property state\n${initial_state}\u003d  Get Element Attribute  ${xpath_property}  checked\n\n# Toggle the DHCP property.\nToggle DHCPv4 Property And Verify  ${property}  ${xpath_property}\nWait Until Element Is Not Visible  ${xpath_page_loading_progress_bar}  timeout\u003d60s\n\n# Verify property state actually changed\n${final_state}\u003d  Get Element Attribute  ${xpath_property}  checked\nShould Not Be Equal  ${initial_state}  ${final_state}\n...  msg\u003dDHCP property ${property} did not toggle as expected.\n```\n\nWhy: From a GUI testing perspective, verifying the actual state change ensures the toggle operation succeeded. This is critical for network configuration where a failed toggle could leave the system in an inconsistent state.",
+      "revId": "ce433c36e1aead471a2b20c9007d88efd65a4001",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32e3c19e_bc6c098c",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 2136,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-05-13T14:53:00Z",
+      "side": 1,
+      "message": "Race condition risk in gateway value capture\n\nCurrent Code:\n\n```\n# Get gateway value before toggling DHCP property.\n${gateway_before}\u003d  Get Text  ${xpath_eth0_ipv4_default_gateway}\nShould Not Be Empty  ${gateway_before}\n```\n\nIssue: The keyword captures the gateway value immediately without ensuring the page is fully loaded or the gateway element is stable. In GUI automation, network configuration pages may have dynamic updates or delayed rendering, leading to race conditions where the gateway value is captured before it\u0027s fully populated.\n\nFix: Add explicit wait for element stability:\n\n```\n# Get gateway value before toggling DHCP property.\nWait Until Element Is Visible  ${xpath_eth0_ipv4_default_gateway}  timeout\u003d30s\nWait Until Element Is Enabled  ${xpath_eth0_ipv4_default_gateway}  timeout\u003d30s\n${gateway_before}\u003d  Get Text  ${xpath_eth0_ipv4_default_gateway}\nShould Not Be Empty  ${gateway_before}\n```\n\nWhy: Network configuration UIs often have asynchronous updates. Ensuring element stability before capture prevents flaky test failures and ensures reliable gateway value comparison.",
+      "revId": "ce433c36e1aead471a2b20c9007d88efd65a4001",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
