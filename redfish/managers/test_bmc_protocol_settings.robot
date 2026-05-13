@@ -311,7 +311,7 @@ Set SSH IPMI And NTP Protocol
     END
 
     Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body=&{data}
-    ...  valid_status_codes=[${HTTP_NO_CONTENT}]
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
     # Wait for timeout for new values to take effect.
     Sleep  ${SETTING_WAIT_TIMEOUT}
