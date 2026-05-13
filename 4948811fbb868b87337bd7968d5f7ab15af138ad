@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c250e639_89105968",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 14
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2026-05-13T06:48:04Z",
+      "side": 1,
+      "message": "user_state",
+      "range": {
+        "startLine": 373,
+        "startChar": 48,
+        "endLine": 373,
+        "endChar": 62
+      },
+      "revId": "4948811fbb868b87337bd7968d5f7ab15af138ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58e19981_79d51837",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 14
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2026-05-13T06:48:04Z",
+      "side": 1,
+      "message": "use defined timers",
+      "revId": "4948811fbb868b87337bd7968d5f7ab15af138ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
