@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9206c3c4_6cc376d7",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2026-05-13T10:28:04Z",
+      "side": 1,
+      "message": "this need to be done at setup level",
+      "revId": "0ac91c500b20eefc9e2bdd967d6a97d21a5133b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
