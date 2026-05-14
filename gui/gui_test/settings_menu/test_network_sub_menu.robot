@@ -113,6 +113,14 @@ ${negative_ip}                           10.-7.-7.-7
 ${less_octet_ip}                         10.3.36
 ${hex_ip}                                0xa.0xb.0xc.0xd
 ${spl_char_ip}                           @@@.%%.44.11
+${first_octet_lowest_ip}                 1.7.7.7
+${second_octet_lowest_ip}                10.0.7.7
+${third_octet_lowest_ip}                 10.7.0.7
+${fourth_octet_lowest_ip}                10.7.7.1
+${first_octet_threshold_ip}              223.7.7.7
+${second_octet_threshold_ip}             10.255.7.7
+${third_octet_threshold_ip}              10.7.255.7
+${fourth_octet_threshold_ip}             10.7.7.254
 ${threshold_netmask}                     255.255.255.255
 ${test_subnet_mask}                      255.255.255.0
 ${alpha_netmask}                         ff.ff.ff.ff
@@ -263,13 +271,26 @@ Configure And Verify Static IP Address
 
 
 Configure And Verify Multiple Static IP Address
-    [Documentation]  Login to GUI Network page, configure multiple static IP address and verify.
+    [Documentation]  Login to GUI Network page, configure multiple static IP addresses including
+    ...  boundary conditions (lowest and threshold values for each octet), and verify.
     [Tags]  Configure_And_Verify_Multiple_Static_IP_Address
+    [Template]  Add Static IP Address And Verify
     [Teardown]  Run Keyword And Ignore Error  Delete All Static IP Addresses  ipv4
-    ...  ${test_ipv4_addr}  ${test_ipv4_addr_1}
+    ...  ${test_ipv4_addr}  ${test_ipv4_addr_1}  ${first_octet_threshold_ip}  ${second_octet_threshold_ip}
+    ...  ${third_octet_threshold_ip}  ${fourth_octet_threshold_ip}  ${first_octet_lowest_ip}
+    ...  ${second_octet_lowest_ip}  ${third_octet_lowest_ip}  ${fourth_octet_lowest_ip}
 
-    Add Static IP Address And Verify  ${test_ipv4_addr}  ${test_subnet_mask}  ${default_gateway}  Success
-    Add Static IP Address And Verify  ${test_ipv4_addr_1}  ${test_subnet_mask}  ${default_gateway}  Success
+    # ip_addresses                subnet_masks         gateway             expected_status
+    ${test_ipv4_addr}             ${test_subnet_mask}  ${default_gateway}  Success
+    ${test_ipv4_addr_1}           ${test_subnet_mask}  ${default_gateway}  Success
+    ${first_octet_lowest_ip}      ${test_subnet_mask}  ${default_gateway}  Success
+    ${second_octet_lowest_ip}     ${test_subnet_mask}  ${default_gateway}  Success
+    ${third_octet_lowest_ip}      ${test_subnet_mask}  ${default_gateway}  Success
+    ${fourth_octet_lowest_ip}     ${test_subnet_mask}  ${default_gateway}  Success
+    ${first_octet_threshold_ip}   ${test_subnet_mask}  ${default_gateway}  Success
+    ${second_octet_threshold_ip}  ${test_subnet_mask}  ${default_gateway}  Success
+    ${third_octet_threshold_ip}   ${test_subnet_mask}  ${default_gateway}  Success
+    ${fourth_octet_threshold_ip}  ${test_subnet_mask}  ${default_gateway}  Success
 
 
 Configure And Verify Invalid Static IP Address
@@ -1033,6 +1054,26 @@ Gateway Value Must Not Get Erased On Toggling The DHCP Properties
     UseNTPServers              ${xpath_ntp_switch_button}
     UseDNSServers              ${xpath_dns_switch_button}
     UseDomainName              ${xpath_domainname_switch_button}
+
+
+Verify BMC Connection Remains Intact When One IPv6 Address Goes Down
+    [Documentation]  Configure two IPv6 addresses on same interface, delete one,
+    ...  and verify BMC connection remains intact.
+    [Tags]  Verify_BMC_Connection_Remains_Intact_When_One_IPv6_Address_Goes_Down
+    [Setup]  Run Keywords  Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr}
+    ...  ${test_prefix_length}  Success
+    ...  AND  Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr_1}
+    ...  ${test_prefix_length}  Success
+    [Teardown]  Run Keyword And Ignore Error
+    ...  Delete All Static IP Addresses  ipv6  ${test_ipv6_addr}  ${test_ipv6_addr_1}
+
+    # Verify both IPv6 addresses are visible in GUI.
+    Page Should Contain  ${test_ipv6_addr}
+    Page Should Contain  ${test_ipv6_addr_1}
+
+    # Delete first IPv6 address and verify BMC connection remains intact.
+    Delete IPv6 Address And Verify BMC Connection
+    ...  ${test_ipv6_addr}  ${test_ipv6_addr_1}
 
 
 *** Keywords ***
@@ -2151,3 +2192,53 @@ Toggle DHCP Property And Verify Gateway Intact
     ${gateway_after}=  Get Text  ${xpath_eth0_ipv4_default_gateway}
     Should Be Equal  ${gateway_before}  ${gateway_after}
     ...  msg=Gateway value should not change after toggling ${property}.
+
+
+Delete IPv6 Address And Verify BMC Connection
+    [Documentation]  Delete an IPv6 address and verify BMC connection remains intact
+    ...  with the remaining IPv6 address.
+    [Arguments]  ${ipv6_addr_to_delete}  ${ipv6_addr_remaining}
+
+    # Description of argument(s):
+    # ipv6_addr_to_delete    IPv6 address to be deleted.
+    # ipv6_addr_remaining    IPv6 address that should remain after deletion.
+
+    # Delete the specified IPv6 address via GUI.
+    Delete IP Address And Verify  ipv6  ${ipv6_addr_to_delete}
+
+    # Wait for network to stabilize and verify IPv6 address is deleted.
+    Wait Until Keyword Succeeds  ${NETWORK_TIMEOUT}s  5s
+    ...  Verify IPv6 Not Present On BMC  ${ipv6_addr_to_delete}
+
+    # Verify the remaining IPv6 address still exists on BMC.
+    Verify IPv6 On BMC  ${ipv6_addr_remaining}
+
+    # Verify GUI is still accessible and responsive.
+    Reload Page
+    Wait Until Element Is Not Visible  ${xpath_page_loading_progress_bar}  timeout=30
+    Page Should Contain Element  ${xpath_network_heading}
+
+    # Verify the remaining IPv6 address is still visible in GUI.
+    Page Should Contain  ${ipv6_addr_remaining}
+
+    # Verify BMC is still reachable via Redfish.
+    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}eth0
+    Should Be Equal As Strings  ${resp.status}  200
+
+    # Verify network configuration is intact with the remaining IPv6 address.
+    @{ipv6_address_origin_list}  ${ipv6_addr_list}=
+    ...  Get Address Origin List And IPv4 or IPv6 Address  IPv6Addresses
+    Should Contain  ${ipv6_addr_list}  ${ipv6_addr_remaining}
+    ...  msg=Remaining IPv6 address ${ipv6_addr_remaining} not found in network configuration.
+
+
+Verify IPv6 Not Present On BMC
+    [Documentation]  Verify that the specified IPv6 address is not present on BMC.
+    [Arguments]  ${ipv6_address}
+
+    # Description of argument(s):
+    # ipv6_address    IPv6 address to verify is not present.
+
+    ${status}=  Run Keyword And Return Status  Verify IPv6 On BMC  ${ipv6_address}
+    Should Be Equal  ${status}  ${False}
+    ...  msg=IPv6 address ${ipv6_address} still exists on BMC.
