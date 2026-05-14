@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e4710d7_f98c2a3a",
+        "filename": "redfish/account_service/test_ipmi_redfish_user.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-05-14T12:22:39Z",
+      "side": 1,
+      "message": "Please do it in one line, since its not too long",
+      "revId": "62dc2e528cc0f9a2e122162adfa7d7d7ae578529",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a58b4c68_2f5da459",
+        "filename": "redfish/account_service/test_ipmi_redfish_user.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-05-14T12:22:39Z",
+      "side": 1,
+      "message": "you may want to initialize to ${EMPTY}",
+      "revId": "62dc2e528cc0f9a2e122162adfa7d7d7ae578529",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2076b39d_8f3c28f3",
+        "filename": "redfish/account_service/test_ipmi_redfish_user.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-05-14T12:22:39Z",
+      "side": 1,
+      "message": "Please do it in one line, since its not too long",
+      "revId": "62dc2e528cc0f9a2e122162adfa7d7d7ae578529",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa363ed6_a662c6ba",
+        "filename": "redfish/account_service/test_ipmi_redfish_user.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-05-14T12:22:39Z",
+      "side": 1,
+      "message": "You may want to initialize to ${EMPTY}",
+      "revId": "62dc2e528cc0f9a2e122162adfa7d7d7ae578529",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5559237f_7aeadef1",
+        "filename": "redfish/account_service/test_ipmi_redfish_user.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-05-14T12:22:39Z",
+      "side": 1,
+      "message": "You may want to initialize to ${EMPTY}",
+      "revId": "62dc2e528cc0f9a2e122162adfa7d7d7ae578529",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "119c88a8_a654b6d3",
+        "filename": "redfish/account_service/test_ipmi_redfish_user.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-05-14T12:22:39Z",
+      "side": 1,
+      "message": "Why commented ?",
+      "revId": "62dc2e528cc0f9a2e122162adfa7d7d7ae578529",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
