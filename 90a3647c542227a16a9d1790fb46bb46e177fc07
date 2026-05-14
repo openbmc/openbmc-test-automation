@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca6f3a32_691284e4",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-05-14T12:13:44Z",
+      "side": 1,
+      "message": "Missing Initial Status Validation\n\n```\nCurrent Code:\n${initial_status}\u003d  Get Text  ${xpath_service_login_status}\n```\n\nIssue: The test captures initial status but doesn\u0027t validate it or use it for verification. The test should verify that the initial status is \"Enabled\" before proceeding, or use the captured value to ensure the status actually changed.\n\nFix: Add validation after capturing initial status:\n```\n\n${initial_status}\u003d  Get Text  ${xpath_service_login_status}\nShould Contain  ${initial_status}  Enabled  msg\u003dService user should be enabled initially\n```\n\nWhy: Without validating the initial state, the test could pass even if the service user was already disabled, making the test less reliable. Validating the initial state ensures the test starts from a known good state.",
+      "revId": "90a3647c542227a16a9d1790fb46bb46e177fc07",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da94b0c7_f062ce5a",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-05-14T12:13:44Z",
+      "side": 1,
+      "message": "xpath_secuity_and_accesss_menu\n\nthere is no xpath by this name, do u mean xpath_security_and_access_menu ?",
+      "revId": "90a3647c542227a16a9d1790fb46bb46e177fc07",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
