@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dc49d1c_48524bb6",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 2115,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-05-14T05:19:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc07bfee_8dfc2ca9",
+      "revId": "ce433c36e1aead471a2b20c9007d88efd65a4001",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9da1ed86_d72810bb",
@@ -35,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfe59b23_8fc38fe5",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 2127,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-05-14T05:19:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9da1ed86_d72810bb",
+      "revId": "ce433c36e1aead471a2b20c9007d88efd65a4001",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "32e3c19e_bc6c098c",
@@ -48,6 +84,24 @@
       "writtenOn": "2026-05-13T14:53:00Z",
       "side": 1,
       "message": "Race condition risk in gateway value capture\n\nCurrent Code:\n\n```\n# Get gateway value before toggling DHCP property.\n${gateway_before}\u003d  Get Text  ${xpath_eth0_ipv4_default_gateway}\nShould Not Be Empty  ${gateway_before}\n```\n\nIssue: The keyword captures the gateway value immediately without ensuring the page is fully loaded or the gateway element is stable. In GUI automation, network configuration pages may have dynamic updates or delayed rendering, leading to race conditions where the gateway value is captured before it\u0027s fully populated.\n\nFix: Add explicit wait for element stability:\n\n```\n# Get gateway value before toggling DHCP property.\nWait Until Element Is Visible  ${xpath_eth0_ipv4_default_gateway}  timeout\u003d30s\nWait Until Element Is Enabled  ${xpath_eth0_ipv4_default_gateway}  timeout\u003d30s\n${gateway_before}\u003d  Get Text  ${xpath_eth0_ipv4_default_gateway}\nShould Not Be Empty  ${gateway_before}\n```\n\nWhy: Network configuration UIs often have asynchronous updates. Ensuring element stability before capture prevents flaky test failures and ensures reliable gateway value comparison.",
+      "revId": "ce433c36e1aead471a2b20c9007d88efd65a4001",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba3143d5_89ddf2ce",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 2136,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-05-14T05:19:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32e3c19e_bc6c098c",
       "revId": "ce433c36e1aead471a2b20c9007d88efd65a4001",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
