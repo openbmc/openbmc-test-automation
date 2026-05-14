@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7aee0206_8cf82662",
+        "filename": "lib/bmc_ipv6_utils.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 720,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-05-14T10:21:59Z",
+      "side": 1,
+      "message": "kindly change the line as below,\n\n IF  \u0027${dhcpv6_operating_mode}\u0027 \u003d\u003d \u0027Disabled\u0027\n      VAR  ${data}  ${DISABLE_DHCPv6}\nELSE\n      VAR  ${data}  ${ENABLE_DHCPv6}\nEND",
+      "range": {
+        "startLine": 720,
+        "startChar": 32,
+        "endLine": 720,
+        "endChar": 33
+      },
+      "revId": "bd7314c803bbca37667450590ca50a655cf61cf1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c31e6bb_8ff43267",
+        "filename": "lib/bmc_ipv6_utils.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 722,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-05-14T10:21:59Z",
+      "side": 1,
+      "message": "VAR  ${ethernet_interface}  ${active_channel_config[\u0027${channel_number}\u0027][\u0027name\u0027]}",
+      "range": {
+        "startLine": 722,
+        "startChar": 32,
+        "endLine": 722,
+        "endChar": 42
+      },
+      "revId": "bd7314c803bbca37667450590ca50a655cf61cf1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1dadd3d_1eb912f7",
+        "filename": "lib/bmc_ipv6_utils.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 737,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-05-14T10:21:59Z",
+      "side": 1,
+      "message": "VAR  ${ethernet_interface}  ${active_channel_config[\u0027${channel_number}\u0027][\u0027name\u0027]}",
+      "range": {
+        "startLine": 737,
+        "startChar": 44,
+        "endLine": 737,
+        "endChar": 65
+      },
+      "revId": "bd7314c803bbca37667450590ca50a655cf61cf1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
