@@ -39,6 +39,24 @@
       "message": "use defined timers",
       "revId": "4948811fbb868b87337bd7968d5f7ab15af138ad",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bfc6e38_01947024",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 14
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2026-05-15T07:26:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58e19981_79d51837",
+      "revId": "4948811fbb868b87337bd7968d5f7ab15af138ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
