@@ -14,8 +14,8 @@ Test Tags          Telemetry_Report
 
 *** Variables ***
 
-${metric_definition_base_uri}  /redfish/v1/TelemetryService/MetricReportDefinitions
-${metric_report_base_uri}      /redfish/v1/TelemetryService/MetricReports
+${metric_definition_base_uri}  ${REDFISH_TELEMETRY_URI}MetricReportDefinitions
+${metric_report_base_uri}      ${REDFISH_TELEMETRY_URI}MetricReports
 &{user_tele_def}               ambient temperature=Ambient.*Temp    pcie temperature=PCIE.*Temp
 ...                            processor temperature=proc.*temp    dimm temperature=dimm.*temp
 ...                            battery voltage=Battery_Voltage    total power=total_power
@@ -43,10 +43,10 @@ Verify Error After Exceeding Maximum Report Creation
     [Documentation]  Verify error while creating telemetry report more than max report limit.
     [Tags]  Verify_Error_After_Exceeding_Maximum_Report_Creation
 
-    ${report_name}=  Set Variable  Testreport
+    VAR  ${report_name}  Testreport
 
     # Create maximum number of reports.
-    ${resp}=  Redfish.Get Properties  /redfish/v1/TelemetryService
+    ${resp}=  Redfish.Get Properties  ${REDFISH_TELEMETRY_URI}
     FOR  ${i}  IN RANGE  ${resp["MaxReports"]}
         Create Basic Telemetry Report   total power  Periodic  LogToMetricReportsCollection
         ...  delete_report=False
@@ -86,7 +86,7 @@ Verify Telemetry Service Defaults
     [Tags]  Verify_Telemetry_Service_Defaults
 
     # Get Telemetry Service Default properties
-    ${telemetryservice}=    Redfish.Get Properties    /redfish/v1/TelemetryService
+    ${telemetryservice}=    Redfish.Get Properties    ${REDFISH_TELEMETRY_URI}
     ...    valid_status_codes=[${HTTP_OK}]
 
     # Validate Telemetry Service properties
@@ -121,15 +121,12 @@ Suite Setup Execution
 
     Redfish.Login
     Redfish Power On  stack_mode=skip
-    ${metric_definitions_list}=
-    ...  Redfish_Utils.Get Member List  /redfish/v1/TelemetryService/MetricDefinitions
 
+    VAR  ${metric_definitions_list}  Redfish_Utils.Get Member List  ${metric_definition_base_uri}
+    ...  scope=SUITE
     # Create a dictionary of ordinary english naming and actual naming of
     # telemetry definition.
-    ${english_actual_teleDef}=   Create Dictionary
-
-    Set Suite Variable  ${english_actual_teleDef}
-    Set Suite Variable  ${metric_definitions_list}
+    VAR  &{english_actual_teleDef}  &{EMPTY}  scope=SUITE
 
     Set To Dictionary  ${english_actual_teleDef}  invalid value  invalid_value
 
@@ -182,17 +179,18 @@ Create Basic Telemetry Report
     # expected_result           Expected result of report creation - success or fail.
     # delete_report             Flag to decide if telemetry report needs to be deleted after creation.
 
-    ${metric_definition_name}=  Set Variable  ${english_actual_teleDef}[${metric_definition_name}]
+    VAR  ${metric_definition_name}  ${english_actual_teleDef}[${metric_definition_name}]
+    
     Skip If  '${metric_definition_name}' == 'Not found'  Metric definition is not found.
 
     ${resp}=  Redfish.Get Properties
-    ...  /redfish/v1/TelemetryService/MetricDefinitions/${metric_definition_name}
+    ...  ${metric_definition_base_uri}/${metric_definition_name}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
     ${telemetry_data_unavailable}=  Run Keyword And Return Status  Should Contain  ${resp}  error
     IF  ${telemetry_data_unavailable} == ${True}
-        ${metricProperties}=  Set Variable  ""
+        VAR  ${metricProperties}  ""
     ELSE
-        ${metricProperties}=  Set Variable  ${resp["MetricProperties"]}
+        VAR  ${metricProperties}  ${resp["MetricProperties"]}
     END
     # Example of response from above Redfish GET request.
     # "@odata.id": "/redfish/v1/TelemetryService/MetricDefinitions/Ambient_0_Temp",
@@ -225,9 +223,11 @@ Create Basic Telemetry Report
     ${body}=  Replace String  ${body}  '  "
     ${dict}=  Evaluate  json.loads('''${body}''')  json
 
-    ${status_code_expected}=  Set Variable If
-    ...  '${expected_result}' == 'success'  [${HTTP_CREATED}]
-    ...  '${expected_result}' == 'fail'  [${HTTP_BAD_REQUEST}]
+    IF  '${expected_result}' == 'success'
+        VAR  ${status_code_expected}  [${HTTP_CREATED}]
+    ELSE IF  '${expected_result}' == 'fail'
+        VAR  ${status_code_expected}  [${HTTP_BAD_REQUEST}]
+    END
 
     Redfish.Post  ${metric_definition_base_uri}  body=&{dict}
     ...  valid_status_codes=${status_code_expected}
@@ -250,7 +250,7 @@ Create Basic Telemetry Report
 Delete All Telemetry Reports
     [Documentation]  Delete all existing telemetry reports.
 
-    ${report_list}=  Redfish_Utils.Get Member List  /redfish/v1/TelemetryService/MetricReportDefinitions
+    ${report_list}=  Redfish_Utils.Get Member List  ${metric_definition_base_uri}
     FOR  ${report}  IN  @{report_list}
       Redfish.Delete  ${report}  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
     END
