@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5d00ace_b3dbf19d",
+        "filename": "redfish/account_service/test_ipmi_redfish_user.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-05-18T07:07:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e4710d7_f98c2a3a",
+      "revId": "62dc2e528cc0f9a2e122162adfa7d7d7ae578529",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a58b4c68_2f5da459",
@@ -35,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b68726d_12b17e1f",
+        "filename": "redfish/account_service/test_ipmi_redfish_user.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-05-18T07:07:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a58b4c68_2f5da459",
+      "revId": "62dc2e528cc0f9a2e122162adfa7d7d7ae578529",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2076b39d_8f3c28f3",
@@ -48,6 +84,24 @@
       "writtenOn": "2026-05-14T12:22:39Z",
       "side": 1,
       "message": "Please do it in one line, since its not too long",
+      "revId": "62dc2e528cc0f9a2e122162adfa7d7d7ae578529",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b509e0a_139f74c3",
+        "filename": "redfish/account_service/test_ipmi_redfish_user.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-05-18T07:07:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2076b39d_8f3c28f3",
       "revId": "62dc2e528cc0f9a2e122162adfa7d7d7ae578529",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -71,6 +125,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7734fb9a_4d565ec7",
+        "filename": "redfish/account_service/test_ipmi_redfish_user.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-05-18T07:07:09Z",
+      "side": 1,
+      "message": "yes, Have missed to add it. Thanks for addressing it.",
+      "parentUuid": "fa363ed6_a662c6ba",
+      "revId": "62dc2e528cc0f9a2e122162adfa7d7d7ae578529",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5559237f_7aeadef1",
         "filename": "redfish/account_service/test_ipmi_redfish_user.robot",
         "patchSetId": 5
@@ -82,6 +154,24 @@
       "writtenOn": "2026-05-14T12:22:39Z",
       "side": 1,
       "message": "You may want to initialize to ${EMPTY}",
+      "revId": "62dc2e528cc0f9a2e122162adfa7d7d7ae578529",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f2c1cff_411e32c4",
+        "filename": "redfish/account_service/test_ipmi_redfish_user.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-05-18T07:07:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5559237f_7aeadef1",
       "revId": "62dc2e528cc0f9a2e122162adfa7d7d7ae578529",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -99,6 +189,24 @@
       "writtenOn": "2026-05-14T12:22:39Z",
       "side": 1,
       "message": "Why commented ?",
+      "revId": "62dc2e528cc0f9a2e122162adfa7d7d7ae578529",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e14d687_bb627bab",
+        "filename": "redfish/account_service/test_ipmi_redfish_user.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-05-18T07:07:09Z",
+      "side": 1,
+      "message": "my mistake have missed to uncomment it. updated the lines.",
+      "parentUuid": "119c88a8_a654b6d3",
       "revId": "62dc2e528cc0f9a2e122162adfa7d7d7ae578529",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
