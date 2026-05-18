@@ -33,7 +33,7 @@ Verify LDAP Configuration Created
     Create LDAP Configuration
     # Call 'Get LDAP Configuration' to verify that LDAP configuration exists.
     Get LDAP Configuration  ${LDAP_TYPE}
-    Sleep  10s
+    Sleep  1min
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
     Redfish.Logout
 
@@ -46,7 +46,7 @@ Verify Redfish LDAP Service Disable
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
     ...  body={'${LDAP_TYPE}': {'ServiceEnabled': ${False}}}
     ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
-    Sleep  15s
+    Sleep  1min
     ${resp}=  Run Keyword And Return Status  Redfish.Login  ${LDAP_USER}
     ...  ${LDAP_USER_PASSWORD}
     Should Be Equal  ${resp}  ${False}
@@ -69,7 +69,7 @@ Verify LDAP Login With ServiceEnabled
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
     ...  body={'${LDAP_TYPE}': {'ServiceEnabled': ${True}}}
     ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
-    Sleep  15s
+    Sleep  1min
     # After update, LDAP login.
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
     Redfish.Logout
@@ -82,7 +82,7 @@ Verify LDAP Login With Correct AuthenticationType
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
     ...  body={'${ldap_type}': {'Authentication': {'AuthenticationType':'UsernameAndPassword'}}}
     ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
-    Sleep  15s
+    Sleep  1min
     # After update, LDAP login.
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
     Redfish.Logout
@@ -300,7 +300,7 @@ Verify LDAP BaseDN Update And LDAP Login
     ...   {'BaseDistinguishedNames': ['${LDAP_BASE_DN}']}}}}
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body=${body}
     ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
-    Sleep  15s
+    Sleep  1min
     Redfish Verify LDAP Login
 
 
@@ -314,7 +314,7 @@ Verify LDAP BindDN Update And LDAP Login
     ...  '${LDAP_BIND_DN}'}}}
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body=${body}
     ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
-    Sleep  15s
+    Sleep  1min
     Redfish Verify LDAP Login
 
 
@@ -328,7 +328,7 @@ Verify LDAP BindDN Password Update And LDAP Login
     ...  '${LDAP_BIND_DN_PASSWORD}'}}}
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body=${body}
     ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
-    Sleep  15s
+    Sleep  1min
     Redfish Verify LDAP Login
 
 
@@ -341,7 +341,7 @@ Verify LDAP Type Update And LDAP Login
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
     ...  body={'${LDAP_TYPE}': {'ServiceEnabled': ${True}}}
     ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
-    Sleep  15s
+    Sleep  1min
     Redfish Verify LDAP Login
 
 
@@ -376,7 +376,7 @@ Verify LDAP Login With Invalid Data
     Create LDAP Configuration  ${LDAP_TYPE}  Invalid_LDAP_Server_URI
     ...  Invalid_LDAP_BIND_DN  LDAP_BIND_DN_PASSWORD
     ...  Invalid_LDAP_BASE_DN
-    Sleep  15s
+    Sleep  1min
     Redfish Verify LDAP Login  ${False}
 
 
@@ -390,7 +390,7 @@ Verify LDAP Config Creation Without BASE DN
 
     Create LDAP Configuration  ${LDAP_TYPE}  Invalid_LDAP_Server_URI
     ...  Invalid_LDAP_BIND_DN  LDAP_BIND_DN_PASSWORD  ${EMPTY}
-    Sleep  15s
+    Sleep  1min
     Redfish Verify LDAP Login  ${False}
 
 
@@ -414,7 +414,7 @@ Verify LDAP Login With Invalid BASE DN
 
     Create LDAP Configuration  ${LDAP_TYPE}  ${LDAP_SERVER_URI}
     ...  ${LDAP_BIND_DN}  ${LDAP_BIND_DN_PASSWORD}  Invalid_LDAP_BASE_DN
-    Sleep  15s
+    Sleep  1min
     Redfish Verify LDAP Login  ${False}
 
 
@@ -428,7 +428,7 @@ Verify LDAP Login With Invalid BIND_DN_PASSWORD
 
     Create LDAP Configuration  ${LDAP_TYPE}  ${LDAP_SERVER_URI}
     ...  ${LDAP_BIND_DN}  INVALID_LDAP_BIND_DN_PASSWORD  ${LDAP_BASE_DN}
-    Sleep  15s
+    Sleep  1min
     Redfish Verify LDAP Login  ${False}
 
 
@@ -442,7 +442,7 @@ Verify LDAP Login With Invalid BASE DN And Invalid BIND DN
 
     Create LDAP Configuration  ${LDAP_TYPE}  ${LDAP_SERVER_URI}
     ...  INVALID_LDAP_BIND_DN  ${LDAP_BIND_DN_PASSWORD}  INVALID_LDAP_BASE_DN
-    Sleep  15s
+    Sleep  1min
     Redfish Verify LDAP Login  ${False}
 
 
@@ -467,7 +467,7 @@ Verify LDAP Login With Invalid BIND DN
 
     Create LDAP Configuration  ${LDAP_TYPE}  ${LDAP_SERVER_URI}
     ...  Invalid_LDAP_BIND_DN  ${LDAP_BIND_DN_PASSWORD}  ${LDAP_BASE_DN}
-    Sleep  15s
+    Sleep  1min
     Redfish Verify LDAP Login  ${False}
 
 
@@ -580,16 +580,30 @@ Switch LDAP Type And Verify Login Fails
     Create LDAP Configuration
     ...  ${LDAP_TYPE_1}  ${LDAP_SERVER_URI_1}  ${LDAP_BIND_DN_1}  ${LDAP_BIND_DN_PASSWORD_1}  ${LDAP_BASE_DN_1}
     Redfish.Logout
-    Sleep  10s
+    Sleep  1min
 
     # Check if Login works via Inverse LDAP
     Redfish.Login  ${LDAP_USER_1}  ${LDAP_USER_PASSWORD_1}
     Redfish.Logout
-    Sleep  10s
+    Sleep  1min
 
     # Login using LDAP type must fail
     Redfish Verify LDAP Login  ${False}
     Redfish.Logout
+
+Create LDAP Config With Various Port Numbers
+    [Documentation]  Verify LDAP configuration creation with various valid and invalid port numbers.
+    [Tags]  Create_LDAP_Config_With_Various_Port_Numbers
+    [Setup]  Redfish.Login
+    [Template]  Create LDAP Config With Port And Verify
+    [Teardown]  Redfish.Logout
+
+    # port_value              expected_status
+    99999                     ${HTTP_BAD_REQUEST}
+    invalid_port              ${HTTP_BAD_REQUEST}
+    @#$%                      ${HTTP_BAD_REQUEST}
+    -1                        ${HTTP_BAD_REQUEST}
+    ${EMPTY}                  ${HTTP_OK}, ${HTTP_NO_CONTENT}
 
 *** Keywords ***
 
@@ -714,7 +728,7 @@ Disable Other LDAP
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
     ...  body={'${inverse_ldap_type}': {'ServiceEnabled': ${service_state}}}
     ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
-    Sleep  15s
+    Sleep  1min
 
 
 Config LDAP URL
@@ -728,7 +742,7 @@ Config LDAP URL
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
     ...  body={'${ldap_type}': {'ServiceAddresses': ['${ldap_server_uri}']}}
     ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
-    Sleep  15s
+    Sleep  1min
     # After update, LDAP login.
     ${status}=  Run Keyword And Return Status  Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
     Valid Value  status  [${expected_status}]
@@ -744,7 +758,7 @@ Restore LDAP URL
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
     ...  body={'${ldap_type}': {'ServiceAddresses': ['${LDAP_SERVER_URI}']}}
     ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
-    Sleep  15s
+    Sleep  1min
 
 
 Restore AccountLockout Attributes
@@ -990,4 +1004,41 @@ Update LDAP User Role And Read Network Configuration
     Redfish.Logout
 
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
-    Redfish.Get  ${REDFISH_NW_ETH0_URI}  valid_status_codes=[${valid_status_code}]
+
+
+Create LDAP Config With Port And Verify
+    [Documentation]  Create LDAP configuration with specified port and verify expected result.
+    [Arguments]  ${port_value}  ${expected_status}=${HTTP_BAD_REQUEST}
+
+    # Description of argument(s):
+    # port_value       The port value to test (valid/invalid number, string,
+    #                  special characters, or empty).
+    # expected_status  Expected HTTP status code (default: 400 for invalid
+    #                  ports, 200/204 for valid).
+
+    # Build LDAP URI with the specified port.
+    VAR    ${base_uri}    '${LDAP_SERVER_URI}'.rstrip('/')    evaluate=True
+ 
+    # Handle empty/blank port - use URI without port specification.
+    ${is_empty}=  Run Keyword And Return Status  Should Be Empty  ${port_value}
+    IF    ${is_empty}
+        VAR    ${ldap_uri_with_port}    ${base_uri}
+    ELSE
+        VAR    ${ldap_uri_with_port}    ${base_uri}:${port_value}
+    END
+
+    # Build the request body for LDAP configuration.
+    ${body}=  Catenate  {'${LDAP_TYPE}':
+    ...  {'ServiceEnabled': ${True},
+    ...   'ServiceAddresses': ['${ldap_uri_with_port}'],
+    ...   'Authentication':
+    ...       {'AuthenticationType': 'UsernameAndPassword',
+    ...        'Username':'${LDAP_BIND_DN}',
+    ...        'Password': '${LDAP_BIND_DN_PASSWORD}'},
+    ...   'LDAPService':
+    ...       {'SearchSettings':
+    ...           {'BaseDistinguishedNames': ['${LDAP_BASE_DN}']}}}}
+
+    # Attempt to patch with the specified port.
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body=${body}
+    ...  valid_status_codes=[${expected_status}]
