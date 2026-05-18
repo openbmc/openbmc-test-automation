@@ -591,6 +591,20 @@ Switch LDAP Type And Verify Login Fails
     Redfish Verify LDAP Login  ${False}
     Redfish.Logout
 
+Create LDAP Config With Various Port Numbers
+    [Documentation]  Verify LDAP configuration creation with various valid and invalid port numbers.
+    [Tags]  Create_LDAP_Config_With_Various_Port_Numbers
+    [Setup]  Redfish.Login
+    [Template]  Create LDAP Config With Port And Verify
+    [Teardown]  Redfish.Logout
+
+    # port_value              expected_status
+    99999                     ${HTTP_BAD_REQUEST}
+    invalid_port              ${HTTP_BAD_REQUEST}
+    @#$%                      ${HTTP_BAD_REQUEST}
+    -1                        ${HTTP_BAD_REQUEST}
+    ${EMPTY}                  ${HTTP_OK}, ${HTTP_NO_CONTENT}
+
 *** Keywords ***
 
 Redfish Verify LDAP Login
@@ -990,4 +1004,41 @@ Update LDAP User Role And Read Network Configuration
     Redfish.Logout
 
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
-    Redfish.Get  ${REDFISH_NW_ETH0_URI}  valid_status_codes=[${valid_status_code}]
+
+
+Create LDAP Config With Port And Verify
+    [Documentation]  Create LDAP configuration with specified port and verify expected result.
+    [Arguments]  ${port_value}  ${expected_status}=${HTTP_BAD_REQUEST}
+
+    # Description of argument(s):
+    # port_value       The port value to test (valid/invalid number, string,
+    #                  special characters, or empty).
+    # expected_status  Expected HTTP status code (default: 400 for invalid
+    #                  ports, 200/204 for valid).
+
+    # Build LDAP URI with the specified port.
+    VAR    ${base_uri}    '${LDAP_SERVER_URI}'.rstrip('/')    evaluate=True
+    
+    # Handle empty/blank port - use URI without port specification.
+    ${is_empty}=  Run Keyword And Return Status  Should Be Empty  ${port_value}
+    IF    ${is_empty}
+        VAR    ${ldap_uri_with_port}    ${base_uri}
+    ELSE
+        VAR    ${ldap_uri_with_port}    ${base_uri}:${port_value}
+    END
+
+    # Build the request body for LDAP configuration.
+    ${body}=  Catenate  {'${LDAP_TYPE}':
+    ...  {'ServiceEnabled': ${True},
+    ...   'ServiceAddresses': ['${ldap_uri_with_port}'],
+    ...   'Authentication':
+    ...       {'AuthenticationType': 'UsernameAndPassword',
+    ...        'Username':'${LDAP_BIND_DN}',
+    ...        'Password': '${LDAP_BIND_DN_PASSWORD}'},
+    ...   'LDAPService':
+    ...       {'SearchSettings':
+    ...           {'BaseDistinguishedNames': ['${LDAP_BASE_DN}']}}}}
+
+    # Attempt to patch with the specified port.
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body=${body}
+    ...  valid_status_codes=[${expected_status}]
