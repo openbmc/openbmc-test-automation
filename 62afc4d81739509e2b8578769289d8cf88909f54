@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5228eca_6dcfe68b",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 16
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2026-05-19T06:21:43Z",
+      "side": 1,
+      "message": "Can you align the last line.\n```\n    Description of argument(s):\n    username      Username for the account (e.g. admin_user, service_user).\n    role          User role (e.g. Administrator, ReadOnly).\n    port          SSH port to test (e.g. 22, 2200).\n    user_state    Whether to test enable (True) or disable (False) functionality.\n\n```",
+      "revId": "62afc4d81739509e2b8578769289d8cf88909f54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41d3569a_38e4b7da",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 16
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2026-05-19T06:21:43Z",
+      "side": 1,
+      "message": "This comment is unclear to me what is getting blocked.",
+      "revId": "62afc4d81739509e2b8578769289d8cf88909f54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
