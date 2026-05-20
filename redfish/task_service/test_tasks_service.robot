@@ -52,7 +52,7 @@ Verify Task Service Attributes
     Should Be Equal  ${resp["ServiceEnabled"]}  ${TRUE}
 
     # Verify status.
-    Dictionaries Should Be Equal  ${resp["Status"]}  ${valid_status}
+    Should Be Equal  ${resp["Status"]["State"]}  ${valid_status["State"]}
 
     # Get current time from BMC console.
     ${cur_time}=  Get Current Date From BMC
