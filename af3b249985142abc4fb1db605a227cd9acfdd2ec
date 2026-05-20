@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48754456_9dd1c2ea",
+        "filename": "lib/usermanagement_utils.robot",
+        "patchSetId": 18
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-05-20T17:47:50Z",
+      "side": 1,
+      "message": "Issue #5: Ensure User Exists Creates Side Effects\nLocation: Lines 15-20 in lib/usermanagement_utils.robot\n```\nCurrent Code:\nIF  not ${user_exists}\n    Redfish Create User  ${username}  ${OPENBMC_PASSWORD}  ${role}  ${True}\nEND\n```\n\nIssue: Creates user with hardcoded enabled\u003d${True}, never deletes it, no verification of creation success.\nFix: Add cleanup and verification:\n```\nEnsure User Exists\n    [Arguments]  ${username}  ${role}  ${enabled}\u003d${True}\n    \n    ${user_exists}\u003d  Run Keyword And Return Status\n    ...  Redfish.Get  /redfish/v1/AccountService/Accounts/${username}\n    \n    IF  not ${user_exists}\n        Redfish Create User  ${username}  ${OPENBMC_PASSWORD}  ${role}  ${enabled}\n        # Verify creation succeeded\n        ${resp}\u003d  Redfish.Get  /redfish/v1/AccountService/Accounts/${username}\n        Should Be Equal As Strings  ${resp.dict[\u0027Enabled\u0027]}  ${enabled}\n        # Mark for cleanup\n        Set Test Variable  ${USER_CREATED_BY_TEST}  ${username}\n    END\n```\n\nWhy: Prevents test pollution and allows tests to control initial user state.",
+      "revId": "af3b249985142abc4fb1db605a227cd9acfdd2ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdd2750b_35a6ee3e",
+        "filename": "lib/usermanagement_utils.robot",
+        "patchSetId": 18
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-05-20T17:47:50Z",
+      "side": 1,
+      "message": "Issue #7: Undefined variable in library file\nLocation: Line 33 in lib/usermanagement_utils.robot\nCurrent Code:\n```\nSleep  ${SETTING_WAIT_TIMEOUT}\n```\n\nIssue: Variable ${SETTING_WAIT_TIMEOUT} is not defined in this library file. It relies on the caller\u0027s context, which may cause failures if called from suites that don\u0027t define this variable.\nFix: Either define the variable in this library or import it from a common variables file:\n```\n\n*** Variables ***\n${SETTING_WAIT_TIMEOUT}  30s\n```\nWhy: Libraries should be self-contained and not depend on caller\u0027s variable scope for reliability.",
+      "revId": "af3b249985142abc4fb1db605a227cd9acfdd2ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "007c97f7_a19e7213",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 18
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-05-20T17:47:50Z",
+      "side": 1,
+      "message": "Issue #1: Backwards Parameter Logic - Test Names Don\u0027t Match Behavior\n```\n# Test case at line 283\nDisable Admin User Verify User Is Not Allowed To Do SSH On SOL Port\n    Verify User Enable Disable And SSH Login  admin_user  Administrator  ${HOST_SOL_PORT}  ${False}\n\n# This calls the ELSE branch which ENABLES user first, then disables\n# But the test name says \"Disable Admin User\"\n```\n\nFix Required: The ${user_state} parameter is confusing. It should represent what action to test, not which branch to execute. Rename and refactor:\n\n```\n# Option 1: Rename parameter to match actual behavior\nVerify User Enable Disable And SSH Login\n    [Arguments]  ${username}  ${role}  ${port}  ${test_enable_flow}\n    # test_enable_flow\u003dTrue: test enabling (disable→enable)\n    # test_enable_flow\u003dFalse: test disabling (enable→disable)\n\n# Option 2: Separate into two keywords\nVerify User Disable Blocks SSH Access\n    [Arguments]  ${username}  ${role}  ${port}\n    Set User Account State  ${username}  ${True}\n    Verify SSH Login Access  ${username}  ${port}  ${True}\n    Set User Account State  ${username}  ${False}\n    Verify SSH Login Access  ${username}  ${port}  ${False}\n\nVerify User Enable Allows SSH Access\n    [Arguments]  ${username}  ${role}  ${port}\n    Set User Account State  ${username}  ${False}\n    Verify SSH Login Access  ${username}  ${port}  ${False}\n    Set User Account State  ${username}  ${True}\n    Verify SSH Login Access  ${username}  ${port}  ${True}\n```\n\nWhy: Current logic is backwards - test names don\u0027t match what the code actually does. This will cause confusion during maintenance and debugging. The \"Disable\" test actually starts by enabling the user, and vice versa.",
+      "revId": "af3b249985142abc4fb1db605a227cd9acfdd2ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e589a7bc_44be92ee",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 18
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-05-20T17:47:50Z",
+      "side": 1,
+      "message": "Issue #4: Inconsistent Teardown Between Test Cases\nLocation: Lines 283-295 in redfish/managers/test_bmc_protocol_settings.robot\nCurrent Code:\n\n```\n# Line 286 - Disable test HAS teardown\n[Teardown]  Set User Account State  admin_user  ${True}\n\n# Line 295 - Enable test has NO teardown\nEnable Admin User Verify User Is Allowed To Do SSH On SOL Port\n    [Documentation]  Enable admin user and verify user is allowed to login via SSH on SOL port.\n    [Tags]  Enable_Admin_User_Verify_User_Is_Allowed_To_Do_SSH_On_SOL_Port\n    Verify User Enable Disable And SSH Login  admin_user  Administrator  ${HOST_SOL_PORT}  ${True}\n```\n\nIssue: Only the \"Disable\" test has teardown. If \"Enable\" test fails midway, user could be left disabled, affecting subsequent tests.\n\nFix: Add consistent teardown to both tests:\n```\n\nEnable Admin User Verify User Is Allowed To Do SSH On SOL Port\n    [Documentation]  Enable admin user and verify user is allowed to login via SSH on SOL port.\n    [Tags]  Enable_Admin_User_Verify_User_Is_Allowed_To_Do_SSH_On_SOL_Port\n    [Teardown]  Set User Account State  admin_user  ${True}\n    \n    Verify User Enable Disable And SSH Login  admin_user  Administrator  ${HOST_SOL_PORT}  ${True}\n```\n\nWhy: Ensures consistent cleanup and prevents test pollution.",
+      "revId": "af3b249985142abc4fb1db605a227cd9acfdd2ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a414aaf_b98d9983",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 18
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-05-20T17:47:50Z",
+      "side": 1,
+      "message": "Issue #2: Multiple Redfish Logins Without Session Management\n```\n# Line 382 in test_bmc_protocol_settings.robot\nRun Keywords  Redfish.Login  AND  Enable SSH Protocol  ${True}\n```\n\nFix Required:\n\n```\n# Option 1: Check if already logged in\n${logged_in}\u003d  Run Keyword And Return Status  Redfish.Get  /redfish/v1/SessionService/Sessions\nIF  not ${logged_in}\n    Redfish.Login\nEND\nEnable SSH Protocol  ${True}\n\n# Option 2: Remove redundant login (Suite Setup already logs in)\nEnable SSH Protocol  ${True}\n```\n\nWhy: Suite Setup already calls Redfish.Login at line 303. Logging in again without logout creates multiple sessions, potentially exhausting BMC session limits (typically 4-16 concurrent sessions). This could cause test failures or affect other tests.",
+      "revId": "af3b249985142abc4fb1db605a227cd9acfdd2ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b718fae_cf061119",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 18
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-05-20T17:47:50Z",
+      "side": 1,
+      "message": "Issue #3: No Verification That State Change Took Effect\n```\n# Lines 389-393\nSet User Account State  ${username}  ${False}\nSleep  ${USER_STATE_WAIT_TIMEOUT}\nVerify SSH Login Access  ${username}  ${port}  ${False}\n```\n\nFix Required:\n\n```\nSet User Account State  ${username}  ${False}\n# Verify state actually changed via Redfish\nWait Until Keyword Succeeds  ${USER_STATE_WAIT_TIMEOUT}  2s\n...  Verify User State Via Redfish  ${username}  ${False}\nVerify SSH Login Access  ${username}  ${port}  ${False}\n\n# New keyword needed:\nVerify User State Via Redfish\n    [Arguments]  ${username}  ${expected_enabled}\n    ${resp}\u003d  Redfish.Get  /redfish/v1/AccountService/Accounts/${username}\n    Should Be Equal As Strings  ${resp.dict[\u0027Enabled\u0027]}  ${expected_enabled}\n```\n\nWhy: Fixed sleep assumes state propagates in exactly 10 seconds. If it takes longer, test fails. If it\u0027s faster, we waste time. More critically, we never verify the Redfish PATCH actually worked - BMC could return 200 but fail to apply the change.",
+      "revId": "af3b249985142abc4fb1db605a227cd9acfdd2ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89bb6c78_bb690219",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 18
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-05-20T17:47:50Z",
+      "side": 1,
+      "message": "ssue #6: No Verification of SSH Connection Failure Reason\nLocation: Lines 423-431 in redfish/managers/test_bmc_protocol_settings.robot\nCurrent Code:\n```\n${login_status}\u003d  Run Keyword And Return Status\n...  Open Connection And Log In  host\u003d${OPENBMC_HOST}  port\u003d${port}\n...  username\u003d${username}  password\u003d${OPENBMC_PASSWORD}\n```\n\nIssue: SSH connection could fail for many reasons (network down, SSH service stopped, wrong port, timeout), not just user disabled. Test would pass/fail for wrong reasons.\nFix: Add pre-checks and better error handling:\n```\n\n# Verify SSH service is running on the port first with a known-good user\n${ssh_service_up}\u003d  Run Keyword And Return Status\n...  Open Connection And Log In  host\u003d${OPENBMC_HOST}  port\u003d${port}\n...  username\u003d${OPENBMC_USERNAME}  password\u003d${OPENBMC_PASSWORD}  timeout\u003d5s\nRun Keyword If  ${ssh_service_up}  Close All Connections\nShould Be True  ${ssh_service_up}  msg\u003dSSH service on port ${port} is not accessible\n\n# Now test target user authentication\n${login_status}\u003d  Run Keyword And Return Status\n...  Open Connection And Log In  host\u003d${OPENBMC_HOST}  port\u003d${port}\n...  username\u003d${username}  password\u003d${OPENBMC_PASSWORD}  timeout\u003d10s\n```\n\nWhy: Distinguishes between SSH service issues and user authentication issues by first verifying service is up with a known-good account.",
+      "revId": "af3b249985142abc4fb1db605a227cd9acfdd2ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
