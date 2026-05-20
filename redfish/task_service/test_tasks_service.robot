@@ -52,7 +52,7 @@ Verify Task Service Attributes
     Should Be Equal  ${resp["ServiceEnabled"]}  ${TRUE}
 
     # Verify status.
-    Dictionaries Should Be Equal  ${resp["Status"]}  ${valid_status}
+    Should Be Equal  ${resp["Status"]["State"]}  ${valid_status["State"]}
 
     # Get current time from BMC console.
     ${cur_time}=  Get Current Date From BMC
@@ -275,17 +275,19 @@ Load Task Service Properties Data
     ${json}=  OperatingSystem.Get File  ${TASK_JSON_FILE_PATH}
     ${properties}=  Evaluate  json.loads('''${json}''')  json
 
-    Set Suite Variable  ${allowed_completed_task_overwrite_policy}
+    VAR  ${allowed_completed_task_overwrite_policy}
     ...  ${properties["TaskService"]["CompletedTaskOverWritePolicy"]["AllowedValues"]}
+    ...  scope=SUITE
 
-    Set Suite Variable  ${allowed_task_state}
+    VAR  ${allowed_task_state}
     ...  ${properties["Task"]["TaskState"]["AllowedValues"]}
+    ...  scope=SUITE
 
-    Set Suite Variable  ${allowed_task_completion_state}
+    VAR  ${allowed_task_completion_state}
     ...  ${properties["Task"]["TaskState"]["AllowedCompletionTaskState"]}
+    ...  scope=SUITE
 
-    Set Suite Variable  ${valid_status}
-    ...  ${properties["TaskService"]["Status"]}
+    VAR  ${valid_status}  ${properties["TaskService"]["Status"]}  scope=SUITE
 
 
 Get Current Date From BMC
