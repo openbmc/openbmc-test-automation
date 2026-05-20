@@ -52,6 +52,7 @@ ${xpath_account_status_enabled_button}           //input[@data-test-id='userMana
 ${xpath_save_button}                             //div[@id='modal-user']//div[@class='modal-footer']//button[text()='Save']
 ${xpath_success_message}                         //*[contains(text(),'Success')]/parent::*/following-sibling::button
 ${xpath_edit_button}                             //tr[.//td[text()='service']]//button[@class='btn btn-md btn-link btn-icon-only']
+${xpath_firmware_information_running}            //dt[contains(normalize-space(),'Running')]/following-sibling::dd[1]
 
 
 *** Test Cases ***
@@ -491,6 +492,22 @@ Verify Service User Disabled Status On Overview Page
 
     ${disabled_status}=  Get Text  ${xpath_service_login_status}
     Should Contain  ${disabled_status}  Disabled
+
+
+Verify Running Firmware Matches Redfish
+    [Documentation]  Verify Running Firmware in Overview Matches
+    ...  Redfish Running Firmware
+    [Tags]  Verify_Running_Firmware_Matches_Redfish
+
+    # Get Overview running firmware.
+    ${overview_firmware}=  Get Text  ${xpath_firmware_information_running}
+
+    # Get Redfish firmware version.
+    ${resp}=  Redfish.Get Members List  /redfish/v1/UpdateService/FirmwareInventory
+    ${redfish_firmware}=  Redfish.Get Attribute  ${resp}[0]  Version
+
+    # Verify Overview firmware matches Redfish firmware.
+    Should Be Equal  ${overview_firmware}  ${redfish_firmware}
 
 
 *** Keywords ***
