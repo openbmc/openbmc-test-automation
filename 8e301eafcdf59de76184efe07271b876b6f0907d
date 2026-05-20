@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51a6c334_76eb0d6a",
+        "filename": "gui/gui_test/security_and_access_menu/test_sessions_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-05-20T13:54:19Z",
+      "side": 1,
+      "message": "xpath_search_box is not available in this file. can u please recheck",
+      "revId": "8e301eafcdf59de76184efe07271b876b6f0907d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
