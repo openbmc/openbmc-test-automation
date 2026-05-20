@@ -16,6 +16,24 @@
       "message": "Test Redfish Created Session Reflects On GUI",
       "revId": "4bf199cc94c3b1010137871d1e88756ef3aa0a1d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d4f623a_72042685",
+        "filename": "gui/gui_test/security_and_access_menu/test_sessions_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1002803
+      },
+      "writtenOn": "2026-05-20T03:18:55Z",
+      "side": 1,
+      "message": "Fixed the test name as mentioned",
+      "parentUuid": "593cf927_a531c679",
+      "revId": "4bf199cc94c3b1010137871d1e88756ef3aa0a1d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }

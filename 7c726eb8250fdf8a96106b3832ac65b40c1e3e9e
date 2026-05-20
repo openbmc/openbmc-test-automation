@@ -16,6 +16,24 @@
       "message": "any reason why this test was remooved ?\n\n\nVerify Navigation To Sessions Page\n    [Documentation]  Verify navigation to sessions page.\n    [Tags]  Verify_Navigation_To_Sessions_Page\n\n    Navigate To Required Sub Menu  ${xpath_secuity_and_accesss_menu}  ${xpath_sessions_sub_menu}  sessions",
       "revId": "7c726eb8250fdf8a96106b3832ac65b40c1e3e9e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58a73935_91241222",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002803
+      },
+      "writtenOn": "2026-05-20T03:18:55Z",
+      "side": 1,
+      "message": "Restored the \"Verify Navigation To Sessions Page\" test case.",
+      "parentUuid": "52cb2c7a_9840b7d9",
+      "revId": "7c726eb8250fdf8a96106b3832ac65b40c1e3e9e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
