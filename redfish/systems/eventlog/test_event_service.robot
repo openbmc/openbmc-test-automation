@@ -34,7 +34,7 @@ Verify Add Subscribe Server For Event Notification
     Try Subscription Creation
 
     ${subscription_list}=  Redfish_Utils.Get Member List
-    ...  /redfish/v1/EventService/Subscriptions
+    ...  ${REDFISH_SUBSCRIPTION_URI}
 
     ${resp}=  redfish.Get  ${subscription_list[0]}
 
@@ -49,26 +49,26 @@ Verify Maximum Subscriptions For Event Notification
 
     # Create maximum subscriptions.
     FOR  ${i}  IN RANGE  1  20
-        Redfish.Post  /redfish/v1/EventService/Subscriptions  body=&{payload}
+        Redfish.Post  ${REDFISH_SUBSCRIPTION_URI}  body=&{payload}
         ...  valid_status_codes=[${HTTP_CREATED}]
     END
 
     ${subscription_list}=  Redfish_Utils.Get Member List
-    ...  /redfish/v1/EventService/Subscriptions
+    ...  ${REDFISH_SUBSCRIPTION_URI}
 
     # Verify the subscription count is 20.
     ${subscription_list_count}=  Get Length  ${subscription_list}
     Should Be Equal As Integers   ${subscription_list_count}  ${Maximum_subscription_count}
 
     # Create one more subscription which exceeds the maximum subscription count.
-    Redfish.Post  /redfish/v1/EventService/Subscriptions  body=&{payload}
+    Redfish.Post  ${REDFISH_SUBSCRIPTION_URI}  body=&{payload}
     ...   valid_status_codes=[${HTTP_SERVICE_UNAVAILABLE}]
 
     # Delete a specific subscription to free up space for a new one.
     Delete Specific Subscription
 
     # Create a new subscription again which should be successful now.
-    Redfish.Post  /redfish/v1/EventService/Subscriptions  body=&{payload}
+    Redfish.Post  ${REDFISH_SUBSCRIPTION_URI}  body=&{payload}
         ...  valid_status_codes=[${HTTP_CREATED}]
 
 Verify Event Service Collection Unsupported Methods
@@ -76,22 +76,22 @@ Verify Event Service Collection Unsupported Methods
     [Tags]  Verify_Event_Service_Collection_Unsupported_Methods
 
     # Put operation on event service collection.
-    Redfish.Put  /redfish/v1/EventService
+    Redfish.Put  ${REDFISH_EVENT_SERVICE_URI}
     ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
 
     # Post operation on event service collection.
-    Redfish.Post  /redfish/v1/EventService
+    Redfish.Post  ${REDFISH_EVENT_SERVICE_URI}
     ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
 
     # Delete operation on event service collection.
-    Redfish.Delete  /redfish/v1/EventService
+    Redfish.Delete  ${REDFISH_EVENT_SERVICE_URI}
     ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
 
 Verify Subscriptions Defaults
     [Documentation]  Verify Subscriptions default property values.
     [Tags]  Verify_Subscriptions_Defaults
 
-    ${subscriptions}=  Redfish.Get Properties  /redfish/v1/EventService/Subscriptions
+    ${subscriptions}=  Redfish.Get Properties  ${REDFISH_SUBSCRIPTION_URI}
     Rprint Vars  subscriptions
     ${subscriptions_count}=  Get Length  ${subscriptions['Members']}
 
@@ -107,11 +107,11 @@ Verify Event Service Enable And Disable Methods
 
     FOR  ${state}  IN  @{Service_state}
         # Patch operation to update service enabled state.
-        ${payload}=  Create Dictionary  ServiceEnabled=${state}
-        Redfish.Patch  /redfish/v1/EventService  body=${payload}  valid_status_codes=[${HTTP_OK}]
+        VAR  &{payload}  ServiceEnabled=${state}
+        Redfish.Patch  ${REDFISH_EVENT_SERVICE_URI}  body=${payload}  valid_status_codes=[${HTTP_OK}]
 
         # Check service enabled state changed.
-        ${resp}=  Redfish.Get Properties  /redfish/v1/EventService  valid_status_codes=[${HTTP_OK}]
+        ${resp}=  Redfish.Get Properties  ${REDFISH_EVENT_SERVICE_URI}  valid_status_codes=[${HTTP_OK}]
         ${after_policy}=  Get From Dictionary  ${resp}  ServiceEnabled
         Should Be Equal  ${after_policy}  ${state}
     END
@@ -124,8 +124,8 @@ Verify Invalid Data For Enable And Disable Event Service Methods
 
     FOR  ${state}  IN  @{Invalid_service_state}
         # Patch operation to change the service enabled state.
-        ${payload}=  Create Dictionary  ServiceEnabled=${state}
-        Redfish.Patch  /redfish/v1/EventService  body=${payload}  valid_status_codes=[${HTTP_BAD_REQUEST}]
+        VAR  &{payload}  ServiceEnabled=${state}
+        Redfish.Patch  ${REDFISH_EVENT_SERVICE_URI}  body=${payload}  valid_status_codes=[${HTTP_BAD_REQUEST}]
     END
 
 Verify Invalid Subscriptions Details For Event Notification
@@ -149,13 +149,13 @@ Verify And Modify Subscriptions Details For Event Notification
     Try Subscription Creation
 
     # Get the subscription list and check the default deliveryretrypolicy is SuspendRetries.
-    ${instance}=  Redfish.Get Members List  ${REDFISH_BASE_URI}EventService/Subscriptions
+    ${instance}=  Redfish.Get Members List  ${REDFISH_SUBSCRIPTION_URI}
     ${resp}=  Redfish.Get Properties  ${instance}[0]  valid_status_codes=[${HTTP_OK}]
     ${default_policy}=  Get From Dictionary  ${resp}  DeliveryRetryPolicy
     Should Be Equal  ${default_policy}  SuspendRetries
 
     # Patch operation to update deliveryretrypolicy.
-    ${payload}=  Create Dictionary  DeliveryRetryPolicy=TerminateAfterRetries
+    VAR  &{payload}  DeliveryRetryPolicy=TerminateAfterRetries
     Redfish.Patch  ${instance}[0]  body=${payload}  valid_status_codes=[${HTTP_OK}]
 
     # Check subscriptions deliveryretrypolicy changed.
@@ -170,18 +170,18 @@ Verify Invalid Modify Subscriptions Details For Event Notification
     Check And Create Subscription
 
     # Get the subscription list.
-    ${instance}=  Redfish.Get Members List  ${REDFISH_BASE_URI}EventService/Subscriptions
+    ${instance}=  Redfish.Get Members List  ${REDFISH_SUBSCRIPTION_URI}
 
     # Patch operation with empty body.
-    ${payload}=  Create Dictionary
+    VAR  &{payload}  &{EMPTY}
     Redfish.Patch  ${instance}[0]  body=${payload}  valid_status_codes=[${HTTP_BAD_REQUEST}]
 
     # Patch operation with empty destination.
-    ${payload}=  Create Dictionary  Destination=""
+    VAR  &{payload}  Destination=""
     Redfish.Patch  ${instance}[0]  body=&{payload}  valid_status_codes=[${HTTP_BAD_REQUEST}]
 
     # Patch operation with empty resource types and registry prefixes.
-    ${payload}=  Create Dictionary  resource_types=[]  registry_prefixes=[]
+    VAR  &{payload}  resource_types=[]  registry_prefixes=[]
     Redfish.Patch  ${instance}[0]  body=&{payload}  valid_status_codes=[${HTTP_BAD_REQUEST}]
 
 
@@ -190,15 +190,14 @@ Verify Invalid Modify Subscriptions Details For Event Notification
 Fetch Default Event Service State
     [Documentation]  Get the default state of the event service.
 
-    ${resp}=  Redfish.Get Properties  /redfish/v1/EventService  valid_status_codes=[${HTTP_OK}]
-    ${default_state}=  Get From Dictionary  ${resp}  ServiceEnabled
-    Set Test Variable  ${default_state}
+    ${resp}=  Redfish.Get Properties  ${REDFISH_EVENT_SERVICE_URI}  valid_status_codes=[${HTTP_OK}]
+    ${Value}=  Get From Dictionary  ${resp}  ServiceEnabled
+    VAR  ${default_state}  ${value}  scope=TEST
 
 Set Default Event Service State
     [Documentation]  Set the event service to its default state.
-
-    ${payload}=  Create Dictionary  ServiceEnabled=${default_state}
-    Redfish.Patch  /redfish/v1/EventService  body=${payload}  valid_status_codes=[${HTTP_OK}]
+    VAR  &{payload}  ServiceEnabled=${default_state}
+    Redfish.Patch  ${REDFISH_EVENT_SERVICE_URI}  body=${payload}  valid_status_codes=[${HTTP_OK}]
 
 Suite Setup Execution
     [Documentation]  Do the suite setup.
@@ -220,12 +219,12 @@ Test Setup Execution
     [Documentation]  Do the test setup.
 
     ${subscription_list}=  Redfish_Utils.Get Member List
-    ...  /redfish/v1/EventService/Subscriptions
+    ...  ${REDFISH_SUBSCRIPTION_URI}
 
     Delete All Subscriptions  ${subscription_list}
 
     # Verify Redfish event service attribute ServiceEnabled is set to True.
-    ${resp}=  Redfish_utils.Get Attribute  /redfish/v1/EventService  ServiceEnabled
+    ${resp}=  Redfish_utils.Get Attribute  ${REDFISH_EVENT_SERVICE_URI}  ServiceEnabled
     Should Be Equal As Strings  ${resp}  ${True}
 
 
@@ -235,7 +234,7 @@ Test Teardown Execution
     FFDC On Test Case Fail
 
     ${subscription_list}=  Redfish_Utils.Get Member List
-    ...  /redfish/v1/EventService/Subscriptions
+    ...  ${REDFISH_SUBSCRIPTION_URI}
 
     Delete All Subscriptions  ${subscription_list}
 
@@ -254,7 +253,7 @@ Delete All Subscriptions
 Delete Specific Subscription
     [Documentation]    Delete specific subscription.
 
-    ${subscription_instance}=    Redfish.Get Members List  /redfish/v1/EventService/Subscriptions
+    ${subscription_instance}=    Redfish.Get Members List  ${REDFISH_SUBSCRIPTION_URI}
     Redfish.Delete    ${subscription_instance}[0]
     ...    valid_status_codes=[${${HTTP_OK}}, ${HTTP_NO_CONTENT}]
 
@@ -262,7 +261,7 @@ Check And Create Subscription
     [Documentation]  Check if subscription exists and create one if not.
 
     ${subscription_list}=  Redfish_Utils.Get Member List
-    ...  /redfish/v1/EventService/Subscriptions
+    ...  ${REDFISH_SUBSCRIPTION_URI}
 
     ${length}=  Get Length  ${subscription_list}
 
@@ -293,14 +292,12 @@ Try Subscription Creation
      # Valid_status_codes   The valid status codes for the subscription (e.g. [201, 400]).
 
      ${subscription_list}=  Redfish_Utils.Get Member List
-     ...  /redfish/v1/EventService/Subscriptions
+     ...  ${REDFISH_SUBSCRIPTION_URI}
      Should Be Empty  ${subscription_list}
+    
+    VAR  &{payload}  Context=${Context}  Destination=${Destination}
+    ...  EventFormatType=${EventFormatType}  Protocol=${Protocol}  RegistryPrefixes=${RegistryPrefixes}
+    ...  ResourceTypes=${ResourceTypes}  DeliveryRetryPolicy=${DeliveryRetryPolicy}
 
-     ${payload}=  Create Dictionary  Context=${Context}  Destination=${Destination}
-     ...    EventFormatType=${EventFormatType}  Protocol=${Protocol}  RegistryPrefixes=${RegistryPrefixes}
-     ...    ResourceTypes=${ResourceTypes}  DeliveryRetryPolicy=${DeliveryRetryPolicy}
-
-     Set Test Variable  ${payload}
-
-     Redfish.Post  /redfish/v1/EventService/Subscriptions  body=&{payload}
+     Redfish.Post  ${REDFISH_SUBSCRIPTION_URI}  body=&{payload}
      ...  valid_status_codes=[${Valid_status_codes}]
