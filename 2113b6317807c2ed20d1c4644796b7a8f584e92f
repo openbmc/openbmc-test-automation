@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61cf73c1_8fca3aaa",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 993,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-05-21T06:40:55Z",
+      "side": 0,
+      "message": "Is this line deleted by mistake.",
+      "range": {
+        "startLine": 993,
+        "startChar": 0,
+        "endLine": 993,
+        "endChar": 82
+      },
+      "revId": "2113b6317807c2ed20d1c4644796b7a8f584e92f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
