@@ -34,6 +34,40 @@
       "parentUuid": "02dce048_b22138fd",
       "revId": "17192bac1b15acf4d49123a68a28aff83845c6b5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "299a1c69_2f9f778a",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1002804
+      },
+      "writtenOn": "2026-05-21T07:10:33Z",
+      "side": 1,
+      "message": "Test case fails in BMC environment due to \"Page Should Contains\" keyword used in \"Toggle Required Policy Option And Verify\". \n\nPlease use \"Wait Until Page Contains\" keyword so that it gives a timeout wait for toast message",
+      "revId": "17192bac1b15acf4d49123a68a28aff83845c6b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae1c8122_086c4652",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1002804
+      },
+      "writtenOn": "2026-05-21T07:10:33Z",
+      "side": 1,
+      "message": "Same comment as above",
+      "revId": "17192bac1b15acf4d49123a68a28aff83845c6b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
