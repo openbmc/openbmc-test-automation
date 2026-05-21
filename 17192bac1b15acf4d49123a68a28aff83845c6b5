@@ -71,6 +71,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e2790c9_e313f1e9",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-05-21T12:39:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "947dc936_b8cbcff0",
+      "revId": "17192bac1b15acf4d49123a68a28aff83845c6b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ae1c8122_086c4652",
