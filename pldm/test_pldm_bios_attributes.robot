@@ -174,7 +174,7 @@ Verify Set BIOS Enumeration Attribute Type
 
     @{attr_handles}=  Get Dictionary Keys  ${attr_val_data}
     FOR  ${i}  IN  @{attr_handles}
-        @{attr_val_list}=  Set Variable  ${attr_val_data}[${i}]
+        VAR  @{attr_val_list}  ${attr_val_data}[${i}]
         Validate Set BIOS Attributes With Optional Values  ${i}  @{attr_val_list}
     END
 

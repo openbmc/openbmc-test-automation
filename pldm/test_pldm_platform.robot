@@ -20,13 +20,13 @@ Verify GetPDR
     [Documentation]  Verify GetPDR (Platform Descpritor Record) response message.
     [Tags]  Verify_GetPDR
 
-    ${record_handle}=  Set Variable  ${1}
+    VAR  ${record_handle}  ${1}
     # Note: Record handle count is unknown and it is dynamic in nature.
     #       Assuming there are 100 record handle.
     FOR   ${i}  IN RANGE  100
        ${next_record_handle}=  Run Keyword  Verify GetPDR For Record Handle  ${record_handle}
        IF  ${next_record_handle} == 0  BREAK
-       ${record_handle}=  Set Variable  ${next_record_handle}
+       VAR  ${record_handle}  ${next_record_handle}
     END
 
 
