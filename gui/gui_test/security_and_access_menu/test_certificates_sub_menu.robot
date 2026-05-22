@@ -12,6 +12,7 @@ Test Tags       Certificates_Sub_Menu
 
 *** Variables ***
 
+${MAX_CA_CERTIFICATES}             3
 ${xpath_certificate_heading}       //h1[text()="Certificates"]
 ${xpath_add_certificate_button}    //button[contains(normalize-space(.),"Add new certificate")]
 ${xpath_generate_csr_button}       //*[@data-test-id='certificates-button-generateCsr']
@@ -124,6 +125,29 @@ Verify Installed CA Certificate
     Wait Until Page Contains  CA Certificate  timeout=10
 
 
+Install Multiple CA Certificates And Verify
+    [Documentation]  Install multiple CA certificates and verify them in GUI.
+    [Tags]  Install_Multiple_CA_Certificates_And_Verify
+    [Teardown]  Cleanup And Restore Single CA Certificate
+
+    Redfish.Login
+
+    # Get existing CA certificate count from BMC.
+    ${cert_list}=  Redfish_Utils.Get Member List  /redfish/v1/Managers/${MANAGER_ID}/Truststore/Certificates
+    ${cert_count}=  Get Length  ${cert_list}
+
+    # Install CA certificates to reach BMC maximum of 3 CA certificates.
+    FOR  ${INDEX}  IN RANGE  ${cert_count}  ${MAX_CA_CERTIFICATES}
+      Install And Verify Certificate Via Redfish  CA  Valid Certificate  ok  ${FALSE}
+      ${cert_count}=  Evaluate  ${cert_count} + 1
+    END
+    Redfish.Logout
+
+    # Refresh GUI and verify CA certificate entries are available in GUI.
+    Refresh GUI
+    Wait Until Page Contains  CA Certificate  timeout=10
+
+
 Verify Installed HTTPS Certificate
     [Documentation]  Install HTTPS certificate via Redfish and verify it in GUI.
     [Tags]  Verify_Installed_HTTPS_Certificate
@@ -152,6 +176,27 @@ Verify Installed LDAP Certificate
     # Refresh GUI and verify certificate is available in GUI.
     Refresh GUI
     Wait Until Page Contains  LDAP Certificate  timeout=10
+
+
+Replace CA Certificate And Verify
+    [Documentation]  Replace CA certificate and verify it in GUI.
+    [Tags]  Replace_CA_Certificate_And_Verify
+    [Setup]  Install CA Certificate
+    [Teardown]  Cleanup And Restore Single CA Certificate
+
+    # Replace CA certificate via Redfish.
+    Redfish.Login
+    ${cert_list}=  Redfish_Utils.Get Member List  /redfish/v1/Managers/${MANAGER_ID}/Truststore/Certificates
+    Should Not Be Empty  ${cert_list}  msg=No CA certificates found to replace
+    ${cert_id}=  Get From List  ${cert_list}  0
+    ${cert_id}=  Fetch From Right  ${cert_id}  /
+    Should Not Be Empty  ${cert_id}  msg=Failed to extract certificate ID
+    Replace Certificate Via Redfish  CA  Valid Certificate  ok
+    Redfish.Logout
+
+    # Refresh GUI and verify replaced CA certificate is available in GUI.
+    Refresh GUI
+    Wait Until Page Contains  CA Certificate  timeout=10
 
 
 Verify Success Message After Deleting CA Certificate
@@ -227,6 +272,10 @@ Test Setup Execution
 Suite Setup Execution
     [Documentation]  Do test case suite setup tasks.
 
+    # Remove brackets from OPENBMC_HOST for IPv6 addresses (static IPv6 or SLAAC).
+    ${OPENBMC_HOST}=  Evaluate  "${OPENBMC_HOST}".replace("[","").replace("]","")
+    Set Suite Variable  ${OPENBMC_HOST}
+    
     Launch Browser And Login GUI
     Create Directory  certificate_dir
 
@@ -246,3 +295,12 @@ Install CA Certificate
     Click Element    ${xpath_security_and_access_menu}
     Click Element    ${xpath_certificates_sub_menu}
     Wait Until Page Contains  CA Certificate  timeout=10
+
+
+Cleanup And Restore Single CA Certificate
+    [Documentation]  Clean up all CA certificates and restore one for other tests.
+
+    Redfish.Login
+    Delete All CA Certificate Via Redfish
+    Install And Verify Certificate Via Redfish  CA  Valid Certificate  ok  ${FALSE}
+    Redfish.Logout
