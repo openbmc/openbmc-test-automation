@@ -12,6 +12,7 @@ Test Tags       Certificates_Sub_Menu
 
 *** Variables ***
 
+${MUL_CA_CERTIFICATES}             3
 ${xpath_certificate_heading}       //h1[text()="Certificates"]
 ${xpath_add_certificate_button}    //button[contains(normalize-space(.),"Add new certificate")]
 ${xpath_generate_csr_button}       //*[@data-test-id='certificates-button-generateCsr']
@@ -36,6 +37,7 @@ ${xpath_cancel_button}             //button[normalize-space()='Add']/preceding-s
 ${xpath_confirm_delete_button}     //button[text()='Delete']
 ${xpath_cancel_delete_button}      //button[normalize-space()='Delete']/preceding-sibling::button
 ${xpath_close_generate_csr}        (//button[contains(@class,'btn-close')])[3]
+${xpath_ca_certificate_rows}       //tr[.//td[normalize-space()='CA Certificate']]
 
 
 *** Test Cases ***
@@ -124,6 +126,20 @@ Verify Installed CA Certificate
     Wait Until Page Contains  CA Certificate  timeout=10
 
 
+Install Multiple CA Certificates And Verify
+    [Documentation]  Install multiple CA certificates and verify them in GUI.
+    [Tags]  Install_Multiple_CA_Certificates_And_Verify
+    [Teardown]  Cleanup And Restore Single CA Certificate
+
+    Redfish.Login
+    ${initial_cert_count}=  Get CA Certificate Count Via Redfish
+    Install Multiple CA Certificates  ${initial_cert_count}  ${MUL_CA_CERTIFICATES}
+    Verify Certificate Count Via Redfish  ${MUL_CA_CERTIFICATES}
+    Redfish.Logout
+
+    Verify CA Certificate Count In GUI  ${MUL_CA_CERTIFICATES}
+
+
 Verify Installed HTTPS Certificate
     [Documentation]  Install HTTPS certificate via Redfish and verify it in GUI.
     [Tags]  Verify_Installed_HTTPS_Certificate
@@ -152,6 +168,23 @@ Verify Installed LDAP Certificate
     # Refresh GUI and verify certificate is available in GUI.
     Refresh GUI
     Wait Until Page Contains  LDAP Certificate  timeout=10
+
+
+Replace CA Certificate And Verify
+    [Documentation]  Replace CA certificate and verify it in GUI.
+    ...  Verifies that the certificate content changed and count remained at 1.
+    [Tags]  Replace_CA_Certificate_And_Verify
+    [Setup]  Install CA Certificate
+    [Teardown]  Cleanup And Restore Single CA Certificate
+
+    Redfish.Login
+    ${original_cert_string}=  Get CA Certificate Content And Verify Count  1
+    Replace Certificate Via Redfish  CA  Valid Certificate  ok
+    ${new_cert_string}=  Get CA Certificate Content And Verify Count  1
+    Verify Certificate Content Changed  ${original_cert_string}  ${new_cert_string}
+    Redfish.Logout
+
+    Verify CA Certificate Count In GUI  1
 
 
 Verify Success Message After Deleting CA Certificate
@@ -227,6 +260,10 @@ Test Setup Execution
 Suite Setup Execution
     [Documentation]  Do test case suite setup tasks.
 
+    # Remove brackets from OPENBMC_HOST for IPv6 addresses (static IPv6 or SLAAC).
+    ${OPENBMC_HOST}=  Evaluate  "${OPENBMC_HOST}".replace("[","").replace("]","")
+    Set Suite Variable  ${OPENBMC_HOST}
+
     Launch Browser And Login GUI
     Create Directory  certificate_dir
 
@@ -246,3 +283,101 @@ Install CA Certificate
     Click Element    ${xpath_security_and_access_menu}
     Click Element    ${xpath_certificates_sub_menu}
     Wait Until Page Contains  CA Certificate  timeout=10
+
+
+Cleanup And Restore Single CA Certificate
+    [Documentation]  Clean up all CA certificates and restore one for other tests.
+
+    Redfish.Login
+    Delete All CA Certificate Via Redfish
+    Install And Verify Certificate Via Redfish  CA  Valid Certificate  ok  ${FALSE}
+    Redfish.Logout
+
+
+Get CA Certificate Count Via Redfish
+    [Documentation]  Get CA certificate count from BMC via Redfish.
+
+    ${cert_list}=  Redfish_Utils.Get Member List  /redfish/v1/Managers/${MANAGER_ID}/Truststore/Certificates
+    ${cert_count}=  Get Length  ${cert_list}
+
+    RETURN  ${cert_count}
+
+
+Install Multiple CA Certificates
+    [Documentation]  Install multiple CA certificates with error handling.
+    [Arguments]  ${start_count}  ${target_count}
+
+    # Description of argument(s):
+    # start_count    Initial certificate count.
+    # target_count   Target number of certificates to reach.
+
+    FOR  ${INDEX}  IN RANGE  ${start_count}  ${target_count}
+      TRY
+        Install And Verify Certificate Via Redfish  CA  Valid Certificate  ok  ${FALSE}
+      EXCEPT
+        Log  Failed to install certificate at index ${INDEX}  level=ERROR
+        FAIL  Certificate installation failed at index ${INDEX}
+      END
+    END
+
+
+Verify Certificate Count Via Redfish
+    [Documentation]  Verify certificate count via Redfish matches expected count.
+    [Arguments]  ${expected_count}
+
+    # Description of argument(s):
+    # expected_count    Expected number of certificates.
+
+    ${cert_list}=  Redfish_Utils.Get Member List  /redfish/v1/Managers/${MANAGER_ID}/Truststore/Certificates
+    ${actual_count}=  Get Length  ${cert_list}
+    Should Be Equal As Integers  ${actual_count}  ${expected_count}
+    ...  msg=Expected ${expected_count} certificates but found ${actual_count}
+
+
+Verify CA Certificate Count In GUI
+    [Documentation]  Verify CA certificate count in GUI matches expected count.
+    [Arguments]  ${expected_count}
+
+    # Description of argument(s):
+    # expected_count    Expected number of CA certificates in GUI.
+
+    Refresh GUI
+    Wait Until Page Contains  CA Certificate  timeout=10
+    ${gui_cert_count}=  Get Element Count  ${xpath_ca_certificate_rows}
+    Should Be Equal As Integers  ${gui_cert_count}  ${expected_count}
+    ...  msg=Expected ${expected_count} CA certificates in GUI but found ${gui_cert_count}
+
+
+Get CA Certificate Content And Verify Count
+    [Documentation]  Get CA certificate content and verify count.
+    [Arguments]  ${expected_count}
+
+    # Description of argument(s):
+    # expected_count    Expected number of certificates.
+
+    ${cert_list}=  Redfish_Utils.Get Member List  /redfish/v1/Managers/${MANAGER_ID}/Truststore/Certificates
+    Should Not Be Empty  ${cert_list}  msg=No CA certificates found
+    ${actual_count}=  Get Length  ${cert_list}
+    Should Be Equal As Integers  ${actual_count}  ${expected_count}
+    ...  msg=Expected ${expected_count} certificate(s) but found ${actual_count}
+
+    ${cert_id}=  Get From List  ${cert_list}  0
+    ${cert_id}=  Fetch From Right  ${cert_id}  /
+    Should Not Be Empty  ${cert_id}  msg=Failed to extract certificate ID
+
+    ${cert_dict}=  Redfish.Get Properties  /redfish/v1/Managers/${MANAGER_ID}/Truststore/Certificates/${cert_id}
+    ${cert_string}=  Get From Dictionary  ${cert_dict}  CertificateString
+
+    RETURN  ${cert_string}
+
+
+Verify Certificate Content Changed
+    [Documentation]  Verify that certificate content has changed.
+    [Arguments]  ${original_content}  ${new_content}
+
+    # Description of argument(s):
+    # original_content    Original certificate content.
+    # new_content         New certificate content.
+
+    Should Not Be Equal  ${original_content}  ${new_content}
+    ...  msg=Certificate content did not change after replacement
