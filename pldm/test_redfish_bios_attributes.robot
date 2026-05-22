@@ -135,7 +135,7 @@ Redfish Verify Set BIOS Enumeration Attribute Type
 
     # Update multiple attribute values for corresponding attribute handle.
     FOR  ${i}  IN  @{attr_handles}
-        @{attr_val_list}=  Set Variable  ${attr_val_data}[${i}]
+        VAR  @{attr_val_list}  ${attr_val_data}[${i}]
         ${status}=  Run Keyword And Return Status
         ...  Set Optional BIOS Attribute Values And Verify  ${i}  @{attr_val_list}
         IF  ${status} == ${False}  Append To List  ${failed_attr_list}  ${i}

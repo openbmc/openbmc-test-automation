@@ -103,7 +103,7 @@ Verify GetBIOSAttributeCurrentValueByHandle
     @{attr_handles}=  Get Dictionary Keys  ${attr_val_data}
     FOR  ${i}  IN  @{attr_handles}
         ${cur_attr}=  Pldmtool  bios GetBIOSAttributeCurrentValueByHandle -a ${i}
-        @{attr_val_list}=  Set Variable  ${attr_val_data}[${i}]
+        VAR  @{attr_val_list}  ${attr_val_data}[${i}]
         IF  '${cur_attr['CurrentValue']}' not in @{attr_val_list}
             Fail  Invalid GetBIOSAttributeCurrentValueByHandle value found.
         END

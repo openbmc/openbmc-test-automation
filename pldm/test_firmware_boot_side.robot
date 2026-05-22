@@ -68,7 +68,7 @@ Firmware Side Switch Power On Loop
         ${cur_boot_side}=  PLDM Get BIOS Attribute  fw_boot_side
         Print Timen  Current BIOS attribute fw_boot_side: ${cur_boot_side}
 
-        ${next_boot_side}=  Set Variable  ${FW_BOOT_SIDE_DICT["${cur_boot_side["CurrentValue"]}"]}
+        VAR  ${next_boot_side}  ${FW_BOOT_SIDE_DICT["${cur_boot_side["CurrentValue"]}"]}
         Print Timen  Set BIOS attribute fw_boot_side: ${next_boot_side}
         PLDM Set BIOS Attribute  fw_boot_side  ${next_boot_side}
 
