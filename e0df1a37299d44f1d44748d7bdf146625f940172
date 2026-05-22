@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad55ebae_2106a721",
+        "filename": "gui/gui_test/security_and_access_menu/test_certificates_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-05-22T08:26:30Z",
+      "side": 1,
+      "message": "MAX number of CA certificates allowed is 10. Can you please check and modify the code.",
+      "range": {
+        "startLine": 140,
+        "startChar": 46,
+        "endLine": 140,
+        "endChar": 65
+      },
+      "revId": "e0df1a37299d44f1d44748d7bdf146625f940172",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
