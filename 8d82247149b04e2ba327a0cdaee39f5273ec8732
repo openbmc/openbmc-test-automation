@@ -72,6 +72,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0aa8a50_427d2ec6",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-05-22T12:48:06Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "aa218c38_96b3f0c6",
+      "revId": "8d82247149b04e2ba327a0cdaee39f5273ec8732",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "59afbad5_fa8047e8",
@@ -103,6 +121,24 @@
       "side": 1,
       "message": "as discussed, this is part of open ssh suite, so will keep it is same suite. User management ones i have moved it to lib",
       "parentUuid": "59afbad5_fa8047e8",
+      "revId": "8d82247149b04e2ba327a0cdaee39f5273ec8732",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a36d2ec_af5697c2",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-05-22T12:48:06Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b8d1f4fb_df106086",
       "revId": "8d82247149b04e2ba327a0cdaee39f5273ec8732",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
