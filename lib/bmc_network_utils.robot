@@ -898,13 +898,13 @@ Update IP Address
 
 Get IPv4 DHCP Enabled Status
     [Documentation]  Return IPv4 DHCP enabled status from redfish URI.
-    [Arguments]  ${channel_number}=${1}
+    [Arguments]  ${channel_number}=${CHANNEL_NUMBER}
 
     # Description of argument(s):
     # channel_number   Ethernet channel number, 1 is for eth0 and 2 is for eth1 (e.g. "1").
 
     ${active_channel_config}=  Get Active Channel Config
-    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${channel_number}']['name']}
     ${resp}=  Redfish.Get Attribute  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  DHCPv4
 
     RETURN  ${resp['DHCPEnabled']}
