@@ -736,63 +736,6 @@ Configure Multiple IPv6 Address On BMC
     Validate IPv6 Network Config On BMC
 
 
-Set And Verify DHCPv6 Property
-    [Documentation]  Set DHCPv6 property and verify.
-    [Arguments]  ${dhcpv6_operating_mode}=${Disabled}  ${channel_number}=${CHANNEL_NUMBER}
-
-    # Description of argument(s):
-    # dhcpv6_operating_mode    Enabled if user wants to enable DHCPv6('Enabled' or 'Disabled').
-    # channel_number           Channel number 1 or 2.
-
-    Set DHCPv6 Property  ${dhcpv6_operating_mode}  ${channel_number}
-    Verify DHCPv6 Property  ${dhcpv6_operating_mode}  ${channel_number}
-
-
-Set DHCPv6 Property
-    [Documentation]  Set DHCPv6 attribute is enables or disabled.
-    [Arguments]  ${dhcpv6_operating_mode}=${Disabled}  ${channel_number}=${CHANNEL_NUMBER}
-
-    # Description of argument(s):
-    # dhcpv6_operating_mode    Enabled if user wants to enable DHCPv6('Enabled' or 'Disabled').
-    # channel_number           Channel number 1 or 2.
-
-    ${data}=  Set Variable If  '${dhcpv6_operating_mode}' == 'Disabled'  ${DISABLE_DHCPv6}  ${ENABLE_DHCPv6}
-    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
-
-    Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
-    ...  body=${data}  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
-
-
-Verify DHCPv6 Property
-    [Documentation]  Verify DHCPv6 settings is enabled or disabled.
-    [Arguments]  ${dhcpv6_operating_mode}  ${channel_number}=${CHANNEL_NUMBER}
-
-    # Description of Argument(s):
-    # dhcpv6_operating_mode  Enable/ Disable DHCPv6.
-    # channel_number         Channel number 1 or 2.
-
-    ${ethernet_interface}=  Set Variable  ${active_channel_config['${channel_number}']['name']}
-
-    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
-    ${dhcpv6_verify}=  Get From Dictionary  ${resp.dict}  DHCPv6
-
-    Should Be Equal  '${dhcpv6_verify['OperatingMode']}'  '${dhcpv6_operating_mode}'
-
-    Sleep  30s
-
-    @{ipv6_addressorigin_list}  ${ipv6_dhcpv6_addr}=
-    ...  Get Address Origin List And IPv4 or IPv6 Address  IPv6Addresses  ${channel_number}
-
-    IF  "${dhcpv6_operating_mode}" == "Enabled"
-        @{ipv6_addressorigin_list}  ${ipv6_dhcpv6_addr}=
-        ...  Get Address Origin List And Address For Type  DHCPv6  ${channel_number}
-        Should Not Be Empty  ${ipv6_dhcpv6_addr}  msg=DHCPv6 must be present.
-    ELSE
-        Should Not Contain  ${ipv6_addressorigin_list}  DHCPv6
-    END
-
-
-
 Get IPv6 Static Default Gateway
     [Documentation]  Get IPv6 static default gateway.
 

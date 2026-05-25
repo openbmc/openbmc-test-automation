@@ -400,6 +400,28 @@ Configure Valid Static IPv6 Address Via IPv6 Address And Verify
     Static       ${2}   ${ipv6_contiguous_zeros}    ${test_prefix_length}  ${ipv6_zero_compressed}
 
 
+Verify IPv4 And IPv6 Coexistence And Redfish Access On Eth0
+    [Documentation]  Verify co-existence of various IPv4 and IPv6 address configurations on eth0
+    ...              and verify Redfish is accessible on configured addresses.
+    ...              Tests combinations of Static/DHCPv4 with Static/SLAAC/DHCPv6/LinkLocal IPv6.
+    [Tags]  Verify_IPv4_And_IPv6_Coexistence_And_Redfish_Access
+    [Setup]  Save Initial Network Configuration
+    [Teardown]  Test Teardown Execution
+    [Template]  Configure IPv4 IPv6 Combination And Verify Redfish Access
+
+    # ipv4_type  ipv6_type1    ipv6_type2
+    Static       Static        SLAAC
+    Static       Static        ${EMPTY}
+    Static       SLAAC         ${EMPTY}
+    Static       DHCPv6        ${EMPTY}
+    Static       LinkLocal     ${EMPTY}
+    DHCPv4       Static        SLAAC
+    DHCPv4       Static        ${EMPTY}
+    DHCPv4       SLAAC         ${EMPTY}
+    DHCPv4       DHCPv6        ${EMPTY}
+    DHCPv4       LinkLocal     ${EMPTY}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -992,4 +1014,219 @@ Configure IPv6 Address From IPv6 Session
     # Configure IPv6 address and verify it's configured in expected format.
     Configure IPv6 Address On BMC  ${ipv6_addr}  ${prefix_len}  ${ipv6_addr_verified}
     ...  ${channel_number}  Version=IPv6
+
+
+Configure IPv4 IPv6 Combination And Verify Redfish Access
+    [Documentation]  Configure specified IPv4 and IPv6 address combination and verify Redfish access.
+    ...              Configures the network interface, verifies addresses are present, tests Redfish
+    ...              connectivity on configured addresses, then restores original configuration.
+    [Arguments]  ${ipv4_config_type}  ${first_ipv6_type}  ${second_ipv6_type}
+
+    # Description of argument(s):
+    # ipv4_config_type  Type of IPv4 configuration (Static or DHCPv4).
+    # first_ipv6_type   First IPv6 configuration type (Static, SLAAC, DHCPv6, or LinkLocal).
+    # second_ipv6_type  Second IPv6 configuration type (SLAAC or ${EMPTY} for none).
+
+    # Make variables available to cleanup keyword at test scope.
+    VAR  ${ipv4_config_type}  ${ipv4_config_type}  scope=TEST
+    VAR  ${first_ipv6_type}  ${first_ipv6_type}  scope=TEST
+    VAR  ${second_ipv6_type}  ${second_ipv6_type}  scope=TEST
+
+    TRY
+        # Configure IPv4.
+        IF  '${ipv4_config_type}' == 'Static'
+            Add IP Address  ${test_ipv4_addr}  ${test_subnet_mask}  ${test_gateway}
+        ELSE IF  '${ipv4_config_type}' == 'DHCPv4'
+            Set DHCPEnabled To Enable Or Disable  ${True}  eth0
+        END
+
+        # Configure first IPv6 type.
+        IF  '${first_ipv6_type}' == 'Static'
+            Configure IPv6 Address On BMC  ${test_ipv6_addr}  ${test_prefix_length}
+        ELSE IF  '${first_ipv6_type}' == 'SLAAC'
+            Set SLAAC Configuration State And Verify  ${True}
+        ELSE IF  '${first_ipv6_type}' == 'DHCPv6'
+            Set And Verify DHCPv6 Property  Enabled
+        END
+
+        # Configure second IPv6 type (if provided).
+        IF  '${second_ipv6_type}' == 'SLAAC'
+            Set SLAAC Configuration State And Verify  ${True}
+        END
+
+        # Poll until configured addresses are present.
+        Wait Until Keyword Succeeds  2 min  10 sec
+        ...  Verify IPv4 And IPv6 Addresses Present  ${ipv4_config_type}  ${first_ipv6_type}  ${second_ipv6_type}
+
+        # Verify Redfish access on configured addresses.
+        Verify Redfish Access On Configured Addresses  ${ipv4_config_type}  ${first_ipv6_type}  ${second_ipv6_type}
+    FINALLY
+        # Cleanup after this combination - restore to original state.
+        Restore Network Configuration And Cleanup
+    END
+
+
+Verify IPv4 And IPv6 Addresses Present
+    [Documentation]  Verify all configured IPv4 and IPv6 addresses are present.
+    [Arguments]  ${ipv4_config_type}  ${first_ipv6_type}  ${second_ipv6_type}
+
+    # Description of argument(s):
+    # ipv4_config_type  Type of IPv4 configuration to verify (Static or DHCPv4).
+    # first_ipv6_type   First IPv6 configuration type to verify (Static, SLAAC, DHCPv6, or LinkLocal).
+    # second_ipv6_type  Second IPv6 configuration type to verify (SLAAC or ${EMPTY} for none).
+
+    @{ipv4_address_origin_list}  ${ipv4_addr_list}=
+    ...  Get Address Origin List And IPv4 or IPv6 Address  IPv4Addresses  ${1}
+    ${ipv4_origin_list}=  Combine Lists  @{ipv4_address_origin_list}
+
+    @{ipv6_address_origin_list}  ${ipv6_addr_list}=
+    ...  Get Address Origin List And IPv4 or IPv6 Address  IPv6Addresses  ${1}
+    ${ipv6_origin_list}=  Combine Lists  @{ipv6_address_origin_list}
+
+    # Verify IPv4.
+    IF  '${ipv4_config_type}' == 'Static'
+        Should Contain  ${ipv4_origin_list}  Static
+    ELSE IF  '${ipv4_config_type}' == 'DHCPv4'
+        Should Contain  ${ipv4_origin_list}  DHCP
+    END
+
+    # Verify IPv6.
+    IF  '${first_ipv6_type}' == 'Static'
+        Should Contain  ${ipv6_origin_list}  Static
+    ELSE IF  '${first_ipv6_type}' == 'SLAAC'
+        Should Contain  ${ipv6_origin_list}  SLAAC
+    ELSE IF  '${first_ipv6_type}' == 'DHCPv6'
+        Should Contain  ${ipv6_origin_list}  DHCPv6
+    ELSE IF  '${first_ipv6_type}' == 'LinkLocal'
+        Should Contain  ${ipv6_origin_list}  LinkLocal
+    END
+
+    IF  '${second_ipv6_type}' == 'SLAAC'
+        Should Contain  ${ipv6_origin_list}  SLAAC
+    END
+
+
+Verify Redfish Access On Configured Addresses
+    [Documentation]  Verify Redfish accessible on configured addresses.
+    ...              Tests baseline IPv4 Redfish access for every combination.
+    ...              For Static or SLAAC IPv6, the configured address must exist.
+    ...              If that existing IPv6 address is pingable, verify Redfish login on it.
+    ...              If it exists but is not pingable, log a warning and skip IPv6 Redfish login validation.
+    [Arguments]  ${ipv4_config_type}  ${first_ipv6_type}  ${second_ipv6_type}
+
+    # Description of argument(s):
+    # ipv4_config_type  Type of IPv4 configuration (Static or DHCPv4).
+    # first_ipv6_type   First IPv6 configuration type (Static, SLAAC, or LinkLocal).
+    # second_ipv6_type  Second IPv6 configuration type (SLAAC or ${EMPTY} for none).
+
+    # Test Redfish on Static IPv4 (always available as initial connection).
+    ${status}=  Run Keyword And Return Status
+    ...  Redfish.Get  ${REDFISH_NW_PROTOCOL_URI}
+    Should Be True  ${status}  msg=Redfish not accessible on Static IPv4: ${OPENBMC_HOST}
+
+    # Test Redfish on Static IPv6 if configured.
+    IF  '${first_ipv6_type}' == 'Static' or '${second_ipv6_type}' == 'Static'
+        @{ipv6_address_origin_list}  ${ipv6_static_addr}=
+        ...  Get Address Origin List And Address For Type  Static  ${1}
+
+        # Check if Static IPv6 address is pingable before testing Redfish.
+        ${ping_status}=  Run Keyword And Return Status  Ping Host Over IPv6  ${ipv6_static_addr}
+        IF  ${ping_status}
+            Connect BMC Using IPv6 Address  ${ipv6_static_addr}
+            ${status}=  Run Keyword And Return Status  RedfishIPv6.Login
+            Should Be True  ${status}  msg=Redfish not accessible on Static IPv6: ${ipv6_static_addr}
+            Run Keyword And Ignore Error  RedfishIPv6.Logout
+        ELSE
+            Log  Static IPv6 address ${ipv6_static_addr} exists but is not pingable, skipping Redfish verification  WARN
+        END
+    END
+
+    # Test Redfish on SLAAC IPv6 if configured.
+    IF  '${first_ipv6_type}' == 'SLAAC' or '${second_ipv6_type}' == 'SLAAC'
+        @{ipv6_address_origin_list}  ${ipv6_slaac_addr}=
+        ...  Get Address Origin List And Address For Type  SLAAC  ${1}
+
+        # Check if SLAAC IPv6 address is pingable before testing Redfish.
+        ${ping_status}=  Run Keyword And Return Status  Ping Host Over IPv6  ${ipv6_slaac_addr}
+        IF  ${ping_status}
+            Connect BMC Using IPv6 Address  ${ipv6_slaac_addr}
+            ${status}=  Run Keyword And Return Status  RedfishIPv6.Login
+            Should Be True  ${status}  msg=Redfish not accessible on SLAAC IPv6: ${ipv6_slaac_addr}
+            Run Keyword And Ignore Error  RedfishIPv6.Logout
+        ELSE
+            Log  SLAAC IPv6 address ${ipv6_slaac_addr} exists but is not pingable, skipping Redfish verification  WARN
+        END
+    END
+
+
+Save Initial Network Configuration
+    [Documentation]  Save initial network configuration for restoration.
+    ...              Saves DHCPv4, SLAAC, and DHCPv6 states as test variables.
+
+    # Description:
+    # This keyword saves the current state of DHCPv4, SLAAC, and DHCPv6 settings
+    # on eth0 so they can be restored after each test iteration.
+
+    # Get initial DHCPv4 state.
+    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}eth0
+    ${dhcp_enabled}=  Get From Dictionary  ${resp.dict['DHCPv4']}  DHCPEnabled
+    VAR  ${initial_dhcp_enabled}  ${dhcp_enabled}  scope=TEST
+
+    # Get initial SLAAC state.
+    ${ipv6_config}=  Redfish.Get Attribute  ${REDFISH_NW_ETH_IFACE}eth0  StatelessAddressAutoConfig
+    ${slaac_enabled}=  Get From Dictionary  ${ipv6_config}  IPv6AutoConfigEnabled
+    VAR  ${initial_slaac_enabled}  ${slaac_enabled}  scope=TEST
+
+    # Get initial DHCPv6 state.
+    ${dhcpv6_config}=  Redfish.Get Attribute  ${REDFISH_NW_ETH_IFACE}eth0  DHCPv6
+    ${dhcpv6_mode}=  Get From Dictionary  ${dhcpv6_config}  OperatingMode
+    VAR  ${initial_dhcpv6_mode}  ${dhcpv6_mode}  scope=TEST
+
+
+Restore Network Configuration And Cleanup
+    [Documentation]  Restore network configuration to original state and cleanup test artifacts.
+    ...              Deletes test IP addresses and restores DHCPv4, SLAAC, and DHCPv6 to original settings.
+    ...              Restore failures are logged so they are not silent during template execution.
+
+    # Description:
+    # This keyword is called after each template iteration to:
+    # 1. Delete test IP addresses added during the test
+    # 2. Restore DHCPv4, SLAAC, and DHCPv6 to their original states
+    # This ensures each test iteration starts from a clean baseline.
+
+    # Restore DHCPv4 to original state if variable exists.
+    ${dhcp_var_exists}=  Run Keyword And Return Status  Variable Should Exist  ${initial_dhcp_enabled}
+    IF  ${dhcp_var_exists}
+        ${status}  ${msg}=  Run Keyword And Ignore Error
+        ...  Set DHCPEnabled To Enable Or Disable  ${initial_dhcp_enabled}  eth0
+        Run Keyword If  '${status}' != 'PASS'  Log  Failed to restore DHCPv4 state: ${msg}  WARN
+    END
+
+    # Restore SLAAC to original state if variable exists.
+    ${slaac_var_exists}=  Run Keyword And Return Status  Variable Should Exist  ${initial_slaac_enabled}
+    IF  ${slaac_var_exists}
+        ${status}  ${msg}=  Run Keyword And Ignore Error
+        ...  Set SLAAC Configuration State And Verify  ${initial_slaac_enabled}
+        Run Keyword If  '${status}' != 'PASS'  Log  Failed to restore SLAAC state: ${msg}  WARN
+    END
+
+    # Restore DHCPv6 to original state if variable exists.
+    ${dhcpv6_var_exists}=  Run Keyword And Return Status  Variable Should Exist  ${initial_dhcpv6_mode}
+    IF  ${dhcpv6_var_exists}
+        ${status}  ${msg}=  Run Keyword And Ignore Error
+        ...  Set And Verify DHCPv6 Property  ${initial_dhcpv6_mode}
+        Run Keyword If  '${status}' != 'PASS'  Log  Failed to restore DHCPv6 state: ${msg}  WARN
+    END
+
+    Wait Until Keyword Succeeds  2 min  10 sec
+    ...  Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
+
+    # Delete test IP addresses only if they were configured as Static.
+    IF  '${ipv4_config_type}' == 'Static'
+        Run Keyword And Return Status  Delete IP Address  ${test_ipv4_addr}
+    END
+
+    IF  '${first_ipv6_type}' == 'Static'
+        Run Keyword And Return Status  Delete IPv6 Address  ${test_ipv6_addr}
+    END
 
