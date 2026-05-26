@@ -685,7 +685,7 @@ Redfish Create User
         ${status}=  Run Keyword And Return Status
         ...  Verify Redfish User Login  ${username}  ${password}
     ELSE
-        ${status}=  Set Variable  ${False}
+        VAR  ${status}  ${False}
     END
 
     IF  '${login_check}' == '${True}'  Should Be Equal  ${status}  ${enabled}
@@ -953,7 +953,7 @@ Get AuthMethods Default Values
     # }
 
     ${resp}=  Redfish.Get Attribute  ${REDFISH_ACCOUNTS_SERVICE_URI}  Oem
-    ${authmethods}=  Set Variable  ${resp['OpenBMC']['AuthMethods']}
+    VAR  ${authmethods}  ${resp['OpenBMC']['AuthMethods']}
     ${initial_value}=  Get From Dictionary  ${authmethods}  ${authmethod}
     Set Test Variable  ${initial_value}
 

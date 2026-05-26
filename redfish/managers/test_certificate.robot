@@ -242,11 +242,11 @@ Verify Certificates Location Via Redfish
 
     ${match_cert}=  Catenate
     ...  /redfish/v1/Managers/${MANAGER_ID}/Truststore/Certificates/${cert_id}
-    ${match}=  Set Variable  ${False}
+    VAR  ${match}  ${False}
 
     FOR  ${Certificates_dict}  IN  @{Links['Certificates']}
        IF  "${Certificates_dict['@odata.id']}}" != "${match_cert}}"  CONTINUE
-       ${match}=  Set Variable  ${True}
+       VAR  ${match}  ${True}
     END
 
     Should Be Equal  ${match}  ${True}
@@ -294,12 +294,13 @@ Generate CSR Via Redfish
     # key_curv_id         CSR key curv id ("prime256v1" or "secp521r1" or "secp384r1").
     # expected_status     Expected status of certificate replace Redfish
     #                     request ("ok" or "error").
+
     IF  '${cert_type}' == 'Server'
-        ${certificate_uri}=  Set Variable  ${REDFISH_HTTPS_CERTIFICATE_URI}/
+        VAR  ${certificate_uri}  ${REDFISH_HTTPS_CERTIFICATE_URI}/
     ELSE IF  '${cert_type}' == 'Client'
-        ${certificate_uri}=  Set Variable  ${REDFISH_LDAP_CERTIFICATE_URI}/
+        VAR  ${certificate_uri}  ${REDFISH_LDAP_CERTIFICATE_URI}/
     ELSE
-        ${certificate_uri}=  Set Variable  None
+        VAR  ${certificate_uri}  None
     END
 
     ${certificate_dict}=  Create Dictionary  @odata.id=${certificate_uri}
