@@ -332,7 +332,7 @@ Test Event Log Wrapping
     Should Be Equal As Strings  ${log_entries[0]["Id"]}  ${max_num_event_logs}
 
     # Create event log and verify the entry ID, ${max_num_event_logs + 1}.
-    ${next_event_log_id}=  Set Variable  ${max_num_event_logs + 1}
+    VAR  ${next_event_log_id}  ${max_num_event_logs + 1}
 
     Create Test Error Log
 
