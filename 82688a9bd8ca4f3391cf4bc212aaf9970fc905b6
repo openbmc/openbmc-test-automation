@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "41477ec0_5df925e8",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-05-27T10:04:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77e02e38_022ac23e",
+      "revId": "82688a9bd8ca4f3391cf4bc212aaf9970fc905b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f2dbaead_18d2a5e1",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-05-27T09:01:18Z",
       "side": 1,
       "message": "Fix: Consider adding a retry loop with condition checking instead of fixed sleep:\n```\n# Wait for network to stabilize after deletion.\nWait Until Keyword Succeeds  ${NETWORK_TIMEOUT}s  5s\n...  Verify IPv6 Not Present On BMC  ${ipv6_addr_to_delete}\n```\nWhy: Condition-based waits are more reliable and efficient than fixed sleeps. They make tests more deterministic and reduce overall test execution time.",
+      "revId": "82688a9bd8ca4f3391cf4bc212aaf9970fc905b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7b42b99_91de6430",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 2209,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-05-27T10:04:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2dbaead_18d2a5e1",
       "revId": "82688a9bd8ca4f3391cf4bc212aaf9970fc905b6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
