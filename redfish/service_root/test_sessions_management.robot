@@ -114,7 +114,7 @@ Verify Sessions Defaults
     [Documentation]  Verify Sessions default property values.
     [Tags]  Verify_Sessions_Defaults
 
-    ${sessions}=  Redfish.Get Properties  /redfish/v1/SessionService/Sessions
+    ${sessions}=  Redfish.Get Properties  ${REDFISH_SESSION_URI}
     Rprint Vars  sessions
     ${sessions_count}=  Get Length  ${sessions['Members']}
 
@@ -144,7 +144,7 @@ Verify Managers Defaults
     [Documentation]  Verify managers defaults.
     [Tags]  Verify_Managers_Defaults
 
-    ${managers}=  Redfish.Get Properties  /redfish/v1/Managers
+    ${managers}=  Redfish.Get Properties  ${REDFISH_MANAGERS_URI}
     Rprint Vars  managers
     ${managers_count}=  Get Length  ${managers['Members']}
 
@@ -160,7 +160,7 @@ Verify Chassis Defaults
     [Documentation]  Verify chassis defaults.
     [Tags]  Verify_Chassis_Defaults
 
-    ${chassis}=  Redfish.Get Properties  /redfish/v1/Chassis
+    ${chassis}=  Redfish.Get Properties  ${REDFISH_CHASSIS_URI}
     Rprint Vars  chassis
     ${chassis_count}=  Get Length  ${chassis['Members']}
 
@@ -178,7 +178,7 @@ Verify Systems Defaults
     [Documentation]  Verify systems defaults.
     [Tags]  Verify_Systems_Defaults
 
-    ${systems}=  Redfish.Get Properties  /redfish/v1/Systems
+    ${systems}=  Redfish.Get Properties  ${REDFISH_SYSTEMS_URI}
     Rprint Vars  systems
     ${systems_count}=  Get Length  ${systems['Members']}
     Valid Value  systems['Name']  ['Computer System Collection']
@@ -200,8 +200,8 @@ Verify Session Persistency After BMC Reboot
 
     # Check for session persistency after BMC reboot.
     # sessions here will have list of all sessions location.
-    ${sessions}=  Redfish.Get Attribute  /redfish/v1/SessionService/Sessions  Members
-    ${payload}=  Create Dictionary  @odata.id=${session_location}
+    ${sessions}=  Redfish.Get Attribute  ${REDFISH_SESSION_URI}  Members
+    VAR  &{payload}  @odata.id=${session_location}
 
     List Should Contain Value  ${sessions}  ${payload}
 
@@ -210,23 +210,22 @@ Verify Retrieving Deleted Session
     [Tags]  Verify_Retrieving_Deleted_Session
 
     # Create a new user session.
-    ${resp}=  Redfish.Post  /redfish/v1/SessionService/Sessions
+    ${resp}=  Redfish.Post  ${REDFISH_SESSION_URI}
     ...  body={'UserName':'${OPENBMC_USERNAME}', 'Password': '${OPENBMC_PASSWORD}'}
     ...  valid_status_codes=[${HTTP_CREATED}]
 
     # Extract the session ID.
-    ${session_id}=  Set Variable  ${resp.dict['@odata.id'].split('/')[-1]}
-
+    VAR  ${session_id}  ${resp.dict['@odata.id'].split('/')[-1]}
     # Get the session instance.
-    Redfish.Get  /redfish/v1/SessionService/Sessions/${session_id}
+    Redfish.Get  ${REDFISH_SESSION_URI}/${session_id}
     ...  valid_status_codes=[${HTTP_OK}]
 
     # Delete the created session.
-    Redfish.Delete  /redfish/v1/SessionService/Sessions/${session_id}
+    Redfish.Delete  ${REDFISH_SESSION_URI}/${session_id}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
     # Retrieving the deleted session should return an error.
-    Redfish.Get  /redfish/v1/SessionService/Sessions/${session_id}
+    Redfish.Get  ${REDFISH_SESSION_URI}/${session_id}
     ...  valid_status_codes=[${HTTP_NOT_FOUND}]
 
 
@@ -242,7 +241,7 @@ Create Session And Verify Response Code
     # password            The password to create a session.
     # valid_status_code   Expected response code, default is ${HTTP_CREATED}.
 
-    ${resp}=  Redfish.Post  /redfish/v1/SessionService/Sessions
+    ${resp}=  Redfish.Post  ${REDFISH_SESSION_URI}
     ...  body={'UserName':'${username}', 'Password': '${password}'}
     ...  valid_status_codes=[${valid_status_code}]
 
@@ -256,7 +255,7 @@ Set Session Timeout And Verify
     # valid_status_code   Expected response code, default is ${HTTP_OK}.
 
     Redfish.Login
-    ${data}=  Create Dictionary  SessionTimeout=${value}
+    VAR  &{data}  SessionTimeout=${value}
     Redfish.Patch  ${REDFISH_BASE_URI}SessionService
     ...  body=&{data}
     ...  valid_status_codes=[${valid_status_code}]
@@ -276,16 +275,16 @@ Create Session And Check Session Timeout
     # Description of argument(s):
     # value   timeout value in integer to be configured.
 
-    ${resp}=  Redfish.Post  /redfish/v1/SessionService/Sessions
+    ${resp}=  Redfish.Post  ${REDFISH_SESSION_URI}
     ...  body={'UserName':'${OPENBMC_USERNAME}', 'Password': '${OPENBMC_PASSWORD}'}
     ...  valid_status_codes=[${HTTP_CREATED}]
-    ${session_id}=  Set Variable  ${resp.dict['@odata.id']}
+    VAR  ${session_id}  ${resp.dict['@odata.id']}
     Sleep  ${value}s
 
-    Redfish.Get  ${REDFISH_SESSION}  valid_status_codes=[${HTTP_UNAUTHORIZED}]
+    Redfish.Get  ${REDFISH_SESSION_URI}  valid_status_codes=[${HTTP_UNAUTHORIZED}]
     # Since sessions will deleted so logging again.
     Redfish.Login
-    ${session_list}=  Redfish.Get Members List  /redfish/v1/SessionService/Sessions
+    ${session_list}=  Redfish.Get Members List  ${REDFISH_SESSION_URI}
 
     List Should Not Contain Value  ${session_list}  ${session_id}
 
@@ -297,7 +296,7 @@ Set Session Timeout And Verify Session Deleted After Timeout
     # Description of argument(s):
     # timeout_value   timeout value in integer to be configured.
 
-    ${data}=  Create Dictionary  SessionTimeout=${timeout_value}
+    VAR  &{data}  SessionTimeout=${timeout_value}
     ${resp_patch}=  Redfish.Patch  /redfish/v1/SessionService
     ...  body=&{data}  valid_status_codes=[${HTTP_OK}]
     Create Session And Check Session Timeout  ${timeout_value}
@@ -317,9 +316,9 @@ Suite Setup Execution
 
     # Skip operator user if SKIP_OPERATOR_USER is 1.
     IF  ${SKIP_OPERATOR_USER} == ${1}
-        Set Suite Variable  &{USERS}  Administrator=${ADMIN}
+        VAR  &{USERS}  Administrator=${ADMIN}  scope=SUITE
     ELSE
-        Set Suite Variable  &{USERS}  Administrator=${ADMIN}  Operator=${OPERATOR}
+        VAR  &{USERS}  Administrator=${ADMIN}  Operator=${OPERATOR}  scope=SUITE
     END
 
     Create Users With Different Roles  users=${USERS}  force=${True}

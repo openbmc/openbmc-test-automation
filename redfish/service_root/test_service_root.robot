@@ -65,7 +65,7 @@ Redfish Login Using Invalid Token
     ...  X-Auth-Token=deadbeef
 
     ${resp} =  GET On Session
-    ...  openbmc  /redfish/v1/SessionService/Sessions  headers=${headers}
+    ...  openbmc  ${REDFISH_SESSION_URI}  headers=${headers}
     ...  expected_status=${HTTP_UNAUTHORIZED}
 
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_UNAUTHORIZED}
@@ -94,11 +94,11 @@ Delete Redfish Session Using Valid Login
     # [{'@odata.id': '/redfish/v1/SessionService/Sessions/bOol3WlCI8'},
     #  {'@odata.id': '/redfish/v1/SessionService/Sessions/Yu3xFqjZr1'}]
     ${resp_list} =  Redfish_Utils.List Request
-    ...  /redfish/v1/SessionService/Sessions
+    ...  ${REDFISH_SESSION_URI}
 
     Redfish.Delete  ${session_info["location"]}
 
-    ${resp} =  Redfish_Utils.List Request  /redfish/v1/SessionService/Sessions
+    ${resp} =  Redfish_Utils.List Request  ${REDFISH_SESSION_URI}
     List Should Not Contain Value  ${resp}  ${session_info["location"]}
 
 
@@ -110,12 +110,12 @@ Redfish Login Via SessionService
     VAR  &{headers} =  Content-Type=application/json
     VAR  ${data} =  {"UserName":"${OPENBMC_USERNAME}", "Password":"${OPENBMC_PASSWORD}"}
 
-    ${resp} =  POST On Session  openbmc  /redfish/v1/SessionService/Sessions  data=${data}  headers=${headers}
+    ${resp} =  POST On Session  openbmc  ${REDFISH_SESSION_URI}  data=${data}  headers=${headers}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_CREATED}
 
     VAR  &{headers} =  Content-Type=application/json
     ...  X-Auth-Token=${resp.headers["X-Auth-Token"]}
-    ${resp} =  DELETE On Session  openbmc  ${REDFISH_SESSION}${/}${resp.json()["Id"]}  headers=${headers}
+    ${resp} =  DELETE On Session  openbmc  ${REDFISH_SESSION_URI}${/}${resp.json()["Id"]}  headers=${headers}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
 

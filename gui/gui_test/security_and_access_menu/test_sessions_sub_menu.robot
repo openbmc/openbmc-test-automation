@@ -210,7 +210,7 @@ Get Session Member And Verify Session Count
     # valid_status_codes    The valid status codes for the session service response.
     # expected_count        The expected session count.
 
-    ${session_resp}=  Redfish.Get Properties  ${REDFISH_SESSION}
+    ${session_resp}=  Redfish.Get Properties  ${REDFISH_SESSION_URI}
     ...  valid_status_codes=[${valid_status_code}]
 
     Should Be Equal As Integers  ${session_resp['Members@odata.count']}  ${expected_count}
