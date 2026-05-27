@@ -424,7 +424,7 @@ Expire And Update New Password Via Redfish
 
     # Change user password.
     Redfish.Patch  /redfish/v1/AccountService/Accounts/${username}
-    ...  body={'Password': '${new_password}'}
+    ...  body={'Password': '${new_password}'}  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
     Redfish.Logout
 
 
