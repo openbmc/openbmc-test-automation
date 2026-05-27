@@ -47,13 +47,12 @@ Redfish Login Using Unsecured HTTP
     [Tags]  Redfish_Login_Using_Unsecured_HTTP
 
     Create Session  openbmc  http://${OPENBMC_HOST}
-    ${data}=  Create Dictionary
-    ...  UserName=${OPENBMC_USERNAME}  Password=${OPENBMC_PASSWORD}
+    VAR  &{data}  UserName=${OPENBMC_USERNAME}  Password=${OPENBMC_PASSWORD}
 
-    ${headers}=  Create Dictionary  Content-Type=application/json
+    VAR  &{headers}  Content-Type=application/json
 
     Run Keyword And Expect Error  *Connection refused*
-    ...  POST On Session  openbmc  /redfish/v1/SessionService/Sessions
+    ...  POST On Session  openbmc  ${REDFISH_SESSION_URI}
     ...  data=${data}  headers=${headers}
 
 
@@ -62,13 +61,12 @@ Redfish Login Using HTTPS Wrong Port 80 Protocol
     [Tags]  Redfish_Login_Using_HTTPS_Wrong_Port_80_Protocol
 
     Create Session  openbmc  https://${OPENBMC_HOST}:80
-    ${data}=  Create Dictionary
-    ...  UserName=${OPENBMC_USERNAME}  Password=${OPENBMC_PASSWORD}
+    VAR  &{data}  UserName=${OPENBMC_USERNAME}  Password=${OPENBMC_PASSWORD}
 
-    ${headers}=  Create Dictionary  Content-Type=application/json
+    VAR  &{headers}  Content-Type=application/json
 
     Run Keyword And Expect Error  ${ERROR_RESPONSE_MSG}
-    ...  POST On Session  openbmc  /redfish/v1/SessionService/Sessions
+    ...  POST On Session  openbmc  ${REDFISH_SESSION_URI}
     ...  data=${data}  headers=${headers}
 
 
@@ -86,8 +84,7 @@ Create Multiple Login Sessions And Verify
     ${saved_session_info}=  Get Redfish Session Info
 
     # Sessions book keeping for cleanup once done.
-    ${session_list}=  Create List
-    Set Test Variable  ${session_list}
+    VAR  @{session_list}  @{EMPTY}  scope=TEST
 
     Repeat Keyword  ${LOGIN_SESSION_COUNT} times  Create New Login Session
 
@@ -136,7 +133,7 @@ Login And Verify HTTP Response Header
     Rprint Vars  header_requirements  fmt=1
 
     Redfish.Login
-    ${resp}=  Redfish.Get  /redfish/v1/SessionService/Sessions
+    ${resp}=  Redfish.Get  ${REDFISH_SESSION_URI}
 
     # The getheaders() method returns the headers as a list of tuples:
     # headers:
