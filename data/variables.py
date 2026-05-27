@@ -187,8 +187,7 @@ ACTIVATION_DIR_PATH = "/etc/activationdata/"
 
 # Redfish variables.
 REDFISH_BASE_URI = "/redfish/v1/"
-REDFISH_SESSION = REDFISH_BASE_URI + "SessionService/Sessions"
-REDFISH_SESSION_URI = "SessionService/Sessions/"
+REDFISH_SESSION_URI = REDFISH_BASE_URI + "SessionService/Sessions"
 REDFISH_SYSTEMS_URI = REDFISH_BASE_URI + "Systems"
 REDFISH_MANAGERS_URI = REDFISH_BASE_URI + "Managers"
 REDFISH_MANAGERS_ID = BuiltIn().get_variable_value(
