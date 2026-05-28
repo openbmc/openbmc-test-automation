@@ -2,6 +2,7 @@
 Documentation    Module to test dcmi get capabilities functionality.
 
 Resource         ../../lib/ipmi_client.robot
+Variables        ../../data/ipmi_raw_cmd_table.py
 
 Test Tags        DCMI_Get_Capabilities
 
@@ -59,3 +60,14 @@ Verify Get DCMI Capabilities
     ELSE
         Should Match Regexp  ${output.strip()}  [1-9]+h
     END
+
+
+Verify Get DCMI Access Attributes With Invalid Data Length
+    [Documentation]  Verify Get DCMI Capabilities Manageability
+    ...    Access Attributes With Invalid Data Length.
+    [Tags]  Verify_Get_DCMI_Access_Attributes_With_Invalid_Data_Length
+    [Template]  Verify Invalid IPMI Command
+
+    # Invalid data length                                          Expected error code
+    ${IPMI_RAW_CMD['dcmi']['Manageability Access Attributes'][0]}  0xc7
+    ${IPMI_RAW_CMD['dcmi']['Manageability Access Attributes'][1]}  0xc7

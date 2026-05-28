@@ -751,4 +751,12 @@ IPMI_RAW_CMD = {
             "0x00 0x06 0x01 0x00",
         ]
     },
+    "dcmi": {
+        "Manageability Access Attributes": [
+            # invalid data length less byte
+            "0x2c 0x01 0xdc",
+            # invalid data length extra byte
+            "0x2c 0x01 0xdc 0x04 0x00",
+        ]
+    },
 }
