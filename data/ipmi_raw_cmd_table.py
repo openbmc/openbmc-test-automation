@@ -632,6 +632,8 @@ IPMI_RAW_CMD = {
         "Reserve SDR Repository": [
             # raw command, expected output(s), comment
             "0x0a 0x22",
+            # invalid data length extra byte
+            "0x00 0x22 0x00",
         ],
         "SDR Repository Info": [
             # raw command.
@@ -749,6 +751,14 @@ IPMI_RAW_CMD = {
             "0x00 0x06",
             # invalid data length extra byte
             "0x00 0x06 0x01 0x00",
+        ]
+    },
+    "dcmi": {
+        "Manageability Access Attributes": [
+            # invalid data length less byte
+            "0x2c 0x01 0xdc",
+            # invalid data length extra byte
+            "0x2c 0x01 0xdc 0x04 0x00",
         ]
     },
 }
