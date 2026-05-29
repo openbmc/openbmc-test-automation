@@ -560,26 +560,30 @@ IPMI_RAW_CMD = {
         "Get_Boot_Options": [
             # raw command, expected output(s), comment
             "0x00 0x09 0x00 0x00 0x00",
+            # invalid data length less byte
+            "0x00 0x09 0x03 0x00",
+            # invalid data length extra byte
             "0x00 0x09 0x03 0x00 0x00 0x00",
-            "Request data length invalid",
         ],
         "Set_Boot_Options": [
             # raw command, expected output(s), comment
             "0x00 0x08 0x00",
+            # invalid data length extra byte
             "0x00 0x08 0x03 0x00 0x00",
-            "Request data length invalid",
         ],
         "Get_Boot_Flag": [
             # raw command, expected output(s), comment
             "0x00 0x09 0x03 0x00 0x00",
+            # invalid data length less byte
+            "0x00 0x09 0x03 0x00",
+            # invalid data length extra byte
             "0x00 0x09 0x03 0x00 0x00 0x00",
-            "Request data length invalid",
         ],
         "Set_Boot_Flag": [
             # raw command, expected output(s), comment
             "0x00 0x08 0x03",
+            # invalid data length extra byte
             "0x00 0x08 0x03 0x00 0x00",
-            "Request data length invalid",
         ],
         "Set_Chassis_Boot_Flag": [
             # raw command, expected output(s), comment

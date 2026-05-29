@@ -249,6 +249,8 @@ Verify BMC Boot Flag With Invalid Data Length
 
     # Invalid data                                                 Expected error code
     ${IPMI_RAW_CMD['system_boot_options']['Get_Boot_Flag'][1]}     0xc7
+    ${IPMI_RAW_CMD['system_boot_options']['Get_Boot_Flag'][2]}     0xc7
+    ${IPMI_RAW_CMD['system_boot_options']['Set_Boot_Flag'][0]}     0xc7
     ${IPMI_RAW_CMD['system_boot_options']['Set_Boot_Flag'][1]}     0xc7
 
 Verify Chassis System Boot Option With Invalid Data Length
@@ -258,6 +260,8 @@ Verify Chassis System Boot Option With Invalid Data Length
 
     # Invalid data                                                    Expected error code
     ${IPMI_RAW_CMD['system_boot_options']['Get_Boot_Options'][1]}     0xc7
+    ${IPMI_RAW_CMD['system_boot_options']['Get_Boot_Options'][2]}     0xc7
+    ${IPMI_RAW_CMD['system_boot_options']['Set_Boot_Options'][0]}     0xc7
     ${IPMI_RAW_CMD['system_boot_options']['Set_Boot_Options'][1]}     0xc7
 
 Verify Chassis System Boot Options Boot Flags Via IPMI
