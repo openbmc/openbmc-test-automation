@@ -12,6 +12,7 @@ Resource        ../../lib/snmp/resource.robot
 Resource        ../../lib/external_intf/vmi_utils.robot
 Resource        ../../lib/bmc_date_and_time_utils.robot
 Resource        ../../lib/bmc_ldap_utils.robot
+Resource        ../../lib/certificate_utils.robot
 
 Library         Collections
 Library         OperatingSystem
@@ -31,11 +32,12 @@ Test Tags       BMC_IPv6_Config
 # -v SERVER_USERNAME:root
 # -v SERVER_PASSWORD:*********
 
-${SERVER_USERNAME}      ${EMPTY}
-${SERVER_PASSWORD}      ${EMPTY}
-${SERVER_IPv6}          ${EMPTY}
-${test_ipv6_addr}       2001:db8:1:1:250:56ff:fe8a:668
-${test_ipv6_addr1}      2001:db8:1:1:250:56ff:fe8a:669
+${SERVER_USERNAME}        ${EMPTY}
+${SERVER_PASSWORD}        ${EMPTY}
+${SERVER_IPv6}            ${EMPTY}
+${test_ipv6_addr}         2001:db8:1:1:250:56ff:fe8a:668
+${test_ipv6_addr1}        2001:db8:1:1:250:56ff:fe8a:669
+${CA_CERTIFICATES_COUNT}  3
 
 *** Test Cases ***
 
@@ -398,6 +400,32 @@ Configure Valid Static IPv6 Address Via IPv6 Address And Verify
     Static       ${1}   ${ipv6_contiguous_zeros}    ${test_prefix_length}  ${ipv6_zero_compressed}
     SLAAC        ${2}   ${ipv6_contiguous_zeros}    ${test_prefix_length}  ${ipv6_zero_compressed}
     Static       ${2}   ${ipv6_contiguous_zeros}    ${test_prefix_length}  ${ipv6_zero_compressed}
+
+
+Install Multiple CA Certificates Via IPv6 And Verify
+    [Documentation]  Install multiple CA certificates by logging from SLAAC/Static IPv6 on eth0/eth1 and verify.
+    [Tags]  Install_Multiple_CA_Certificates_Via_IPv6_And_Verify
+    [Template]  Install Multiple CA Certificates From IPv6 Address
+    [Teardown]  Cleanup All CA Certificates Via IPv6
+
+    # Address_type  channel_number  certificate_count
+    SLAAC           ${1}            ${CA_CERTIFICATES_COUNT}
+    Static          ${1}            ${CA_CERTIFICATES_COUNT}
+    SLAAC           ${2}            ${CA_CERTIFICATES_COUNT}
+    Static          ${2}            ${CA_CERTIFICATES_COUNT}
+
+
+Replace CA Certificate Via IPv6 And Verify
+    [Documentation]  Replace CA certificate by logging from SLAAC/Static IPv6 on eth0/eth1 and verify.
+    [Tags]  Replace_CA_Certificate_Via_IPv6_And_Verify
+    [Template]  Replace CA Certificate From IPv6 Address
+    [Teardown]  Cleanup All CA Certificates Via IPv6
+
+    # Address_type  channel_number
+    SLAAC           ${1}
+    Static          ${1}
+    SLAAC           ${2}
+    Static          ${2}
 
 
 *** Keywords ***
@@ -993,3 +1021,83 @@ Configure IPv6 Address From IPv6 Session
     Configure IPv6 Address On BMC  ${ipv6_addr}  ${prefix_len}  ${ipv6_addr_verified}
     ...  ${channel_number}  Version=IPv6
 
+
+Install Multiple CA Certificates From IPv6 Address
+    [Documentation]  Install multiple CA certificates by logging from IPv6 address and verify.
+    [Arguments]  ${ipv6_address_type}  ${channel_number}  ${cert_count}
+
+    # Description of argument(s):
+    # ipv6_address_type  Type of IPv6 address (SLAAC/Static).
+    # channel_number     Ethernet channel number, 1(eth0) or 2(eth1).
+    # cert_count         Number of certificates to install.
+
+    # Get existing IPv6 address from BMC.
+    @{ipv6_addressorigin_list}  ${ipv6_addr}=
+    ...  Get Address Origin List And Address For Type  ${ipv6_address_type}  ${channel_number}
+
+    # Connect to BMC using IPv6.
+    Connect BMC Using IPv6 Address  ${ipv6_addr}
+    RedfishIPv6.Login
+
+    # Get existing CA certificate count from BMC.
+    ${cert_list}=  Redfish_Utils.Get Member List  /redfish/v1/Managers/${MANAGER_ID}/Truststore/Certificates
+    ${existing_count}=  Get Length  ${cert_list}
+
+    # Install multiple CA certificates.
+    FOR  ${INDEX}  IN RANGE  ${existing_count}  ${cert_count}
+        TRY
+            Install And Verify Certificate Via Redfish  CA  Valid Certificate  ok  ${FALSE}
+        EXCEPT
+            Log  Failed to install certificate at index ${INDEX}  level=ERROR
+            FAIL  Certificate installation failed at index ${INDEX}
+        END
+    END
+
+    # Verify final certificate count matches expected count.
+    ${final_cert_list}=  Redfish_Utils.Get Member List  /redfish/v1/Managers/${MANAGER_ID}/Truststore/Certificates
+    ${final_count}=  Get Length  ${final_cert_list}
+    Should Be Equal As Integers  ${final_count}  ${cert_count}
+    ...  msg=Expected ${cert_count} certificates but found ${final_count}
+
+
+Replace CA Certificate From IPv6 Address
+    [Documentation]  Replace CA certificate by logging from IPv6 address and verify.
+    [Arguments]  ${ipv6_address_type}  ${channel_number}
+
+    # Description of argument(s):
+    # ipv6_address_type  Type of IPv6 address (SLAAC/Static).
+    # channel_number     Ethernet channel number, 1(eth0) or 2(eth1).
+
+    # Get existing IPv6 address from BMC.
+    @{ipv6_addressorigin_list}  ${ipv6_addr}=
+    ...  Get Address Origin List And Address For Type  ${ipv6_address_type}  ${channel_number}
+
+    # Connect to BMC using IPv6.
+    Connect BMC Using IPv6 Address  ${ipv6_addr}
+    RedfishIPv6.Login
+
+    # Get existing CA certificate list and store initial count.
+    ${cert_list}=  Redfish_Utils.Get Member List  /redfish/v1/Managers/${MANAGER_ID}/Truststore/Certificates
+    Should Not Be Empty  ${cert_list}  msg=No CA certificates found to replace
+    ${initial_cert_count}=  Get Length  ${cert_list}
+
+    # Replace CA certificate via Redfish.
+    TRY
+        Replace Certificate Via Redfish  CA  Valid Certificate  ok
+    EXCEPT
+        Log  Failed to replace CA certificate via IPv6  level=ERROR
+        FAIL  Certificate replacement failed
+    END
+
+    # Verify certificate count remains the same after replacement.
+    ${final_cert_list}=  Redfish_Utils.Get Member List  /redfish/v1/Managers/${MANAGER_ID}/Truststore/Certificates
+    ${final_cert_count}=  Get Length  ${final_cert_list}
+    Should Be Equal As Integers  ${final_cert_count}  ${initial_cert_count}
+    ...  msg=Certificate count changed after replacement: expected ${initial_cert_count}, got ${final_cert_count}
+
+
+Cleanup All CA Certificates Via IPv6
+    [Documentation]  Delete all CA certificates and restore one for other tests.
+
+    Delete All CA Certificate Via Redfish
+    Install And Verify Certificate Via Redfish  CA  Valid Certificate  ok  ${FALSE}
