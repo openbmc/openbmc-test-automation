@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5018410_b9c3d843",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-05-29T11:51:44Z",
+      "side": 1,
+      "message": "CA_CERTIFICATES_COUNT",
+      "range": {
+        "startLine": 40,
+        "startChar": 2,
+        "endLine": 40,
+        "endChar": 21
+      },
+      "revId": "cdaa16131b5db5b2e4557d1b63a52e4af242095e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
