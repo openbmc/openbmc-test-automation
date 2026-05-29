@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36e5b24a_315094c2",
+        "filename": "gui/gui_test/security_and_access_menu/test_certificates_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-05-29T06:05:08Z",
+      "side": 1,
+      "message": "MUL_CA_CERTIFICATES is set to 3, but BMC max is 10. Please clarify if this is intentional for test efficiency or should match the actual limit.",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 36
+      },
+      "revId": "1bc9f255ec11d33db9175b2063075f8285984194",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
