@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fa54aec_6213f6a3",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 1031,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-05-29T06:10:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c85b3d6_79fc749d",
+      "range": {
+        "startLine": 1031,
+        "startChar": 13,
+        "endLine": 1031,
+        "endChar": 23
+      },
+      "revId": "27bb871cabefe08cc0933cb8959b207cabab1432",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb4c43fe_d9541a19",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-05-28T17:50:55Z",
       "side": 1,
       "message": "Instead of Set Test Variable try to use VAR syntax.",
+      "range": {
+        "startLine": 1171,
+        "startChar": 13,
+        "endLine": 1171,
+        "endChar": 23
+      },
+      "revId": "27bb871cabefe08cc0933cb8959b207cabab1432",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1984123f_d7f63ff8",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 1171,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-05-29T06:10:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb4c43fe_d9541a19",
       "range": {
         "startLine": 1171,
         "startChar": 13,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2de2df2_e84408bf",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 1176,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-05-29T06:10:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d001140e_bf2ad56f",
+      "range": {
+        "startLine": 1176,
+        "startChar": 13,
+        "endLine": 1176,
+        "endChar": 23
+      },
+      "revId": "27bb871cabefe08cc0933cb8959b207cabab1432",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "186ca643_3ace5fc8",
@@ -83,6 +155,30 @@
       "writtenOn": "2026-05-28T17:50:55Z",
       "side": 1,
       "message": "Instead of Set Test Variable try to use VAR syntax.",
+      "range": {
+        "startLine": 1181,
+        "startChar": 13,
+        "endLine": 1181,
+        "endChar": 23
+      },
+      "revId": "27bb871cabefe08cc0933cb8959b207cabab1432",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b6c540b_434e71ba",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 1181,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-05-29T06:10:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "186ca643_3ace5fc8",
       "range": {
         "startLine": 1181,
         "startChar": 13,
