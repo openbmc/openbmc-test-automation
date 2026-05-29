@@ -8,8 +8,8 @@ Resource       resource.robot
 *** Variables ***
 
 # Default wait sync time for certificate install and restart services.
-${wait_time}    30
-${keybit_length}  2048
+${certificate_wait_time}    30
+${keybit_length}            2048
 
 *** Keywords ***
 
@@ -173,8 +173,8 @@ Delete All CA Certificate Via Redfish
     ${cert_list}=  Redfish_Utils.Get Member List  /redfish/v1/Managers/${MANAGER_ID}/Truststore/Certificates
     FOR  ${cert}  IN  @{cert_list}
       Redfish.Delete  ${cert}  valid_status_codes=[${HTTP_NO_CONTENT}]
-      Log To Console  Wait Time started in seconds ${wait_time}
-      Sleep  ${wait_time}s
+      Log To Console  Wait Time started in seconds ${certificate_wait_time}
+      Sleep  ${certificate_wait_time}s
     END
 
 
@@ -319,8 +319,8 @@ Install And Verify Certificate Via Redfish
 
     # Adding delay after certificate installation.
     # Lesser wait timing causes bmcweb to restart quickly and breaks the web services.
-    Log To Console  Wait Time started in seconds ${wait_time}
-    Sleep  ${wait_time}s
+    Log To Console  Wait Time started in seconds ${certificate_wait_time}
+    Sleep  ${certificate_wait_time}s
 
     ${cert_file_content}=  OperatingSystem.Get File  ${cert_file_path}
     IF  '${expected_status}' == 'ok'
