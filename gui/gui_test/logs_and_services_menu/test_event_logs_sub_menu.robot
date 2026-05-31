@@ -242,6 +242,22 @@ Verify Error And Unauthorized Message Display When ReadOnly User Deletes Error L
     ...  msg=Failed as readonly user was able to delete error log.
 
 
+Verify Error And Unauthorized Message Display When ReadOnly User Resolving Single Error Log
+    [Documentation]  Verify error and unauthorized message displayed when a
+    ...  readonly user resolves single error log.
+    [Tags]  Verify_Error_And_Unauthorized_Message_Display_When_ReadOnly_User_Resolving_Single_Error_Log
+    [Setup]  Create Readonly User And Login To GUI
+    [Teardown]  Run Keywords  Redfish Purge Event Log  AND
+    ...  Delete Readonly User And Logout Current GUI Session
+
+    Navigate To Required Sub Menu  ${xpath_logs_menu}  ${xpath_event_logs_sub_menu}  event-logs
+    Create Error Logs  ${1}
+    Refresh GUI
+
+    # Mark single event log as resolved.
+    Click Element At Coordinates  ${xpath_event_log_resolve}  0  0
+    Verify Error And Unauthorized Message On GUI
+
 *** Keywords ***
 
 Suite Setup Execution
