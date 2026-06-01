@@ -22,6 +22,30 @@
       },
       "revId": "1bc9f255ec11d33db9175b2063075f8285984194",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21294c58_9f2a1c40",
+        "filename": "gui/gui_test/security_and_access_menu/test_certificates_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-06-01T04:40:20Z",
+      "side": 1,
+      "message": "Yes this intentional to reduce the execution time.... this testcase is to verify adding multiple certs not the maximum limit. we can have separate testcase for maximum limit of 10.",
+      "parentUuid": "36e5b24a_315094c2",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 36
+      },
+      "revId": "1bc9f255ec11d33db9175b2063075f8285984194",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
