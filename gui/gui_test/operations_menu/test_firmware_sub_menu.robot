@@ -13,10 +13,15 @@ Test Tags      Firmware_Sub_Menu
 
 ${xpath_firmware_heading}                //h1[text()="Firmware"]
 ${xpath_add_file_button}                 //span[@class='add-file-btn btn btn-secondary']
-# ${xpath_add_file_button_disabled} is Xpath of add file button in host poweron state.
 ${xpath_add_file_button_disabled}        //span[@class='add-file-btn btn disabled btn-secondary']
 ${xpath_start_update_button}             //*[@data-test-id="firmware-button-startUpdate"]
 ${xpath_switch_to_running}               //*[@data-test-id="firmware-button-switchToRunning"]
+${xpath_switch_image_button}             //button[normalize-space()='Switch images']
+${xpath_cancel_button}                   //button[normalize-space()='Cancel']
+${xpath_toast_close_button}              (//button[@aria-label='Close'])[1]
+${xpath_running_image_version}           //div[@class='card-deck']/div[@class='card'][1]//dd
+${xpath_backup_image_version}            //div[@class='card-deck']/div[@class='card'][2]//dd
+
 
 *** Test Cases ***
 
@@ -41,9 +46,9 @@ Verify Existence Of All Sections In Firmware Page
 Verify Existence Of All Buttons In Firmware Page At Host Power Off
     [Documentation]  Verify existence of all buttons in firmware page at host power off.
     [Tags]  Verify_Existence_Of_All_Buttons_In_Firmware_Page_At_Host_Power_Off
+    [Setup]  Run Keywords  Power Off Server  AND  Navigate To Required Sub Menu
+    ...      ${xpath_operations_menu}  ${xpath_firmware_update_sub_menu}  firmware
 
-    Power Off Server
-    Navigate To Required Sub Menu  ${xpath_operations_menu}  ${xpath_firmware_update_sub_menu}  firmware
     Wait Until Page Contains    Update firmware  30s
     Minimize Browser Window
     Page Should Contain Element  ${xpath_add_file_button}
@@ -51,11 +56,11 @@ Verify Existence Of All Buttons In Firmware Page At Host Power Off
 
 
 Verify Existence Of All Sub Sections Under BMC And Server Section At Poweroff State
-    [Documentation]  Verify existence of all sub sections under BMC and server section at poweroff state.
+    [Documentation]  Verify existence of all sub sections under BMC
+    ...              and server section at poweroff state.
     [Tags]  Verify_Existence_Of_All_Sub_Sections_Under_BMC_And_Server_Section_At_Poweroff_State
-
-    Power Off Server
-    Navigate To Required Sub Menu  ${xpath_operations_menu}  ${xpath_firmware_update_sub_menu}  firmware
+    [Setup]  Run Keywords  Power Off Server  AND  Navigate To Required Sub Menu
+    ...      ${xpath_operations_menu}  ${xpath_firmware_update_sub_menu}  firmware
 
     Page Should Contain  Running image
     Page Should Contain  Backup image
@@ -64,14 +69,60 @@ Verify Existence Of All Sub Sections Under BMC And Server Section At Poweroff St
     Element Should Be Visible  ${xpath_switch_to_running}
 
 
+Verify Switch To Running Image With Switch Image Button At Power-Off State
+    [Documentation]  Verify that user is allowed to switching to a running image when
+    ...              the system is in power-off state by clicking the "Switch Image" button
+    [Tags]  Verify_Switch_To_Running_Image_With_Switch_Image_Button_At_PowerOff_State
+    [Setup]  Run Keywords  Power Off Server  AND  Navigate To Required Sub Menu
+    ...      ${xpath_operations_menu}  ${xpath_firmware_update_sub_menu}  firmware
+    [Teardown]  Run Keywords  Click Element  ${xpath_switch_to_running}
+    ...         AND  Perform Firmware Switch And verify
+
+    Verify Switch Image and Cancel Buttons Of Switch To Running Image  ${OPENBMC_USERNAME}  Switch_Image
+
+
+Verify Switch To Running Image With Cancel Button At Power-Off State
+    [Documentation]  Verify that clicking the “Cancel” button minimizes the dialog and
+    ...              prevents switching to a running image at powered‑off state.
+    [Tags]  Verify_Switch_To_Running_Image_With_Cancel_Button_At_PowerOff_State
+    [Setup]  Run Keywords  Power Off Server  AND  Navigate To Required Sub Menu
+    ...      ${xpath_operations_menu}  ${xpath_firmware_update_sub_menu}  firmware
+
+    Verify Switch Image and Cancel Buttons Of Switch To Running Image  ${OPENBMC_USERNAME}  Cancel
+
+
+Verify Switch To Running Image With Switch Image Button At Power-Off State With Read-Only User
+    [Documentation]  Verify that a read-only user is restricted from switching to a running image 
+    ...              when the system is in power-off state by clicking the "Switch Image" button
+    [Tags]  Verify_Switch_To_Running_Image_With_Switch_Image_Button_At_PowerOff_State_With_ReadOnly_User
+    [Setup]  Run Keywords  Power Off Server  AND  Create Readonly User And Login To GUI  AND
+    ...      Navigate To Required Sub Menu  ${xpath_operations_menu}
+    ...      ${xpath_firmware_update_sub_menu}  firmware
+    [Teardown]  Delete Readonly User And Logout Current GUI Session
+
+    Verify Switch Image and Cancel Buttons Of Switch To Running Image   readonly  Switch_Image
+
+
+Verify Switch To Running Image With Cancel Button At Power-Off State With Read-Only User
+    [Documentation]  Verify that clicking the “Cancel” button minimizes the dialog and
+    ...              prevents switching to a running image when a read-only user
+    ...              attempts the action in a powered‑off state.
+    [Tags]  Verify_Switch_To_Running_Image_With_Cancel_Button_At_PowerOff_State_With_ReadOnly_User
+    [Setup]  Run Keywords  Power Off Server  AND  Create Readonly User And Login To GUI
+    ...      AND  Navigate To Required Sub Menu  ${xpath_operations_menu}
+    ...      ${xpath_firmware_update_sub_menu}  firmware
+    [Teardown]  Delete Readonly User And Logout Current GUI Session
+
+    Verify Switch Image and Cancel Buttons Of Switch To Running Image   readonly  Cancel
+
+
 ###  Power On Test Cases  ###
 
 Verify Existence Of All Sub Sections Under BMC And Server Section At Power On State
     [Documentation]  Verify existence of all sub sections under BMC and server section at power on state.
     [Tags]  Verify_Existence_Of_All_Sub_Sections_Under_BMC_And_Server_Section_At_Power_On_State
-
-    Power On Server
-    Navigate To Required Sub Menu  ${xpath_operations_menu}  ${xpath_firmware_update_sub_menu}  firmware
+    [Setup]  Run Keywords  Power On Server  AND  Navigate To Required Sub Menu
+    ...      ${xpath_operations_menu}  ${xpath_firmware_update_sub_menu}  firmware
 
     Page Should Contain  Running image
     Page Should Contain  Backup image
@@ -83,13 +134,22 @@ Verify Existence Of All Sub Sections Under BMC And Server Section At Power On St
 Verify Existence Of All Buttons In Firmware Page At Host Power On
     [Documentation]  Verify existence of all buttons in firmware page at host power on.
     [Tags]  Verify_Existence_Of_All_Buttons_In_Firmware_Page_At_Host_Power_On
+    [Setup]  Run Keywords  Power On Server  AND  Navigate To Required Sub Menu
+    ...      ${xpath_operations_menu}  ${xpath_firmware_update_sub_menu}  firmware
 
-    Power On Server
-    Navigate To Required Sub Menu  ${xpath_operations_menu}  ${xpath_firmware_update_sub_menu}  firmware
     Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
     Minimize Browser Window
-    Page Should Contain Element    ${xpath_add_file_button_disabled}
+    Page Should Contain Element  ${xpath_add_file_button_disabled}
     Element Should Be Disabled  ${xpath_start_update_button}
+
+
+Verify Switch To Running Image At Poweron State
+    [Documentation]  Verify that Switch To Running Image options should be greyed out at poweron state
+    [Tags]  Verify_Switch_To_Running_Image_At_Poweron_State
+    [Setup]  Run Keywords  Power Off Server  AND  Navigate To Required Sub Menu
+    ...      ${xpath_operations_menu}  ${xpath_firmware_update_sub_menu}  firmware
+
+    Element Should Be Disabled  ${xpath_switch_to_running}
 
 
 *** Keywords ***
@@ -102,3 +162,79 @@ Suite Setup Execution
     Click Element  ${xpath_firmware_update_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  firmware
     Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
+
+
+Verify Switch Image and Cancel Buttons Of Switch To Running Image
+    [Documentation]  Verify switch to running image with specified action button.
+    [Arguments]   ${username}  ${button}
+
+    Wait Until Element Is Enabled  ${xpath_switch_to_running}
+    Click Element  ${xpath_switch_to_running}
+    Page Should Contain Element  ${xpath_switch_image_button}
+
+    IF  '${username}' == 'readonly'
+      IF  '${button}' == 'Cancel'
+         Wait And Click Element  ${xpath_cancel_button}
+      ELSE
+         Wait And Click Element  ${xpath_switch_image_button}
+         Verify Error And Unauthorized Message On GUI
+      END
+      Wait Until Page Contains  Firmware
+    ELSE
+        Log  'User is not readonly'
+        IF  '${button}' == 'Cancel'
+           Click Element  ${xpath_cancel_button}
+        ELSE
+           Perform Firmware Switch And Verify
+        END
+        Wait Until Page Contains  Firmware
+        Page Should Contain Element  ${xpath_switch_to_running}
+    END
+
+
+Perform Firmware Switch And Verify
+    [Documentation]  Perform firmware image switch and verify the swap occurred correctly.
+
+    # Capture image versions before switch.
+    ${running_image_before}=  Get Text  ${xpath_running_image_version}
+    ${backup_image_before}=  Get Text  ${xpath_backup_image_version}
+    Log  Running image before switch: ${running_image_before}
+    Log  Backup image before switch: ${backup_image_before}
+
+    # Click switch to running button.
+    Wait Until Page Contains Element  ${xpath_switch_image_button}  timeout=10s
+    Click Element  ${xpath_switch_image_button}
+    Log  Switch image started now
+
+    # Wait for Step 1 of 3 - Firmware switching.
+    Wait Until Page Contains  Step 1 of 3 - Firmware switching  timeout=30s
+    Page Should Contain  Process started. Firmware switching in progress.
+    Click Element  ${xpath_toast_close_button}
+
+    # Wait for Step 2 of 3 - Reboot phase (typically takes ~4-10 seconds).
+    Wait Until Page Contains  Step 2 of 3 - Reboot  timeout=30s
+    Page Should Contain  Firmware switching complete. BMC reboot in progress.
+    Click Element  ${xpath_toast_close_button}
+
+    # Wait for Step 3 of 3 - Complete phase (BMC reboot takes ~3-5 minutes).
+    Wait Until Page Contains  Step 3 of 3 - Complete  timeout=360s
+    Page Should Contain  Firmware switch successful. Click refresh to verify the running and backup images switched.
+    Click Element  ${xpath_toast_close_button}
+
+    # Refresh the GUI to verify the switch
+    Refresh GUI
+    Wait Until Page Contains  Firmware
+
+    # Verify images have been swapped
+    ${running_image_after}=  Get Text  ${xpath_running_image_version}
+    ${backup_image_after}=  Get Text  ${xpath_backup_image_version}
+    Log  Running image after switch: ${running_image_after}
+    Log  Backup image after switch: ${backup_image_after}
+
+    # Verify the swap occurred correctly
+    Should Be Equal  ${running_image_before}  ${backup_image_after}
+    ...  msg=Running image before switch should match backup image after switch
+    Should Be Equal  ${backup_image_before}  ${running_image_after}
+    ...  msg=Backup image before switch should match running image after switch
+
+    Log  Firmware images successfully swapped!
