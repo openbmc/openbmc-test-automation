@@ -16,6 +16,24 @@
       "message": "This will not be persistent on reboot?? need to edit this comment??",
       "revId": "a5bcf567a1f2b98bdaeeade10b50065fbe81b27e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19ec2afd_f6301ba6",
+        "filename": "redfish/managers/test_bmc_network_mac.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2026-06-01T09:13:33Z",
+      "side": 1,
+      "message": "Yes,The configured MAC address will not persist after reboot.\nand need to edit comment",
+      "parentUuid": "e9c7d1ed_01abfe46",
+      "revId": "a5bcf567a1f2b98bdaeeade10b50065fbe81b27e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
