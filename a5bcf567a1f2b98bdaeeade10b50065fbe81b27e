@@ -34,6 +34,24 @@
       "parentUuid": "e9c7d1ed_01abfe46",
       "revId": "a5bcf567a1f2b98bdaeeade10b50065fbe81b27e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b8cc293_d97497d6",
+        "filename": "redfish/managers/test_bmc_network_mac.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2026-06-01T13:30:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19ec2afd_f6301ba6",
+      "revId": "a5bcf567a1f2b98bdaeeade10b50065fbe81b27e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
