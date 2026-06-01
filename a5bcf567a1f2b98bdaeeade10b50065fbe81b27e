@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9c7d1ed_01abfe46",
+        "filename": "redfish/managers/test_bmc_network_mac.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2026-06-01T09:04:47Z",
+      "side": 1,
+      "message": "This will not be persistent on reboot?? need to edit this comment??",
+      "revId": "a5bcf567a1f2b98bdaeeade10b50065fbe81b27e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
