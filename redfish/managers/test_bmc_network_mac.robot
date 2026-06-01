@@ -74,10 +74,10 @@ Configure Valid MAC And Check Persistency
     # Verify whether new MAC is configured on BMC.
     Validate MAC On BMC  ${valid_mac}
 
-    # Reboot BMC and check whether MAC is persistent on BMC and FW_Env.
+    # Reboot BMC and check whether inital MAC is persistent on BMC and FW_Env.
     OBMC Reboot (off)
-    Validate MAC On BMC  ${valid_mac}
-    Verify MAC Address Via FW_Env  ${valid_mac}
+    Validate MAC On BMC  ${initial_mac_address}
+    Verify MAC Address Via FW_Env  ${initial_mac_address}
 
 Configure Invalid MAC And Verify On FW_Env
     [Documentation]  Configure Invalid  MAC via Redfish and verify on FW_Env.
