@@ -265,6 +265,27 @@ Configure Multiple SNMP Managers Via GUI And Verify SNMP Trap
     Create Error Log On BMC And Verify Trap  ${CMD_INTERNAL_FAILURE}  ${SNMP_TRAP_BMC_INTERNAL_FAILURE}
 
 
+Verify Error And Unauthorized Message Display When ReadOnly User Configure SNMP Setting
+    [Documentation]  Verify error and unauthorized message displayed when a
+    ...  readonly user Configure SNMP settings on BMC via GUI.
+    [Tags]  Verify_Error_And_Unauthorized_Message_Display_When_ReadOnly_User_Configure_SNMP_Setting
+    [Setup]  Create Readonly User And Login To GUI
+    [Teardown]  Run Keywords  Redfish Purge Event Log  AND
+    ...  Delete Readonly User And Logout Current GUI Session
+
+    Navigate To SNMP Alerts Page
+
+    # Configure SNMP settings as readonly user.
+
+    Wait And Click Element  ${xpath_add_destination}
+    Wait Until Page Contains Element  ${xpath_snmp_alert_destination_heading}
+    Input Text  ${xpath_ip_address_input_button}  ${SNMP_MGR1_IP}
+    Wait Until Keyword Succeeds  30 sec  5 sec  Get Value  ${xpath_ip_address_input_button}
+    Input Text  ${xpath_port_optional_input_button}  ${SNMP_DEFAULT_PORT}
+    Click Element  ${xpath_snmp_add_destination_button}
+    Verify Error And Unauthorized Message On GUI
+
+
 *** Keywords ***
 
 Suite Setup Execution
