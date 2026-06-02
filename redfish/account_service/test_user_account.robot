@@ -25,7 +25,7 @@ Verify AccountService Available
     [Documentation]  Verify Redfish account service is available.
     [Tags]  Verify_AccountService_Available
 
-    ${resp}=  Redfish_utils.Get Attribute  /redfish/v1/AccountService  ServiceEnabled
+    ${resp}=  Redfish_utils.Get Attribute  ${REDFISH_ACCOUNTS_SERVICE_URI}  ServiceEnabled
     Should Be Equal As Strings  ${resp}  ${True}
 
 
@@ -35,8 +35,8 @@ Verify Redfish Admin And ReadOnly Users Persistence After Reboot
     [Setup]  Run Keywords  Redfish.Login  AND
     ...  Redfish Create User  admin_user  TestPwd123  Administrator  ${True}
     ...  AND  Redfish Create User  readonly_user  TestPwd123  ReadOnly  ${True}
-    [Teardown]  Run Keywords  Redfish.Delete  /redfish/v1/AccountService/Accounts/admin_user
-    ...  AND  Redfish.Delete  /redfish/v1/AccountService/Accounts/readonly_user
+    [Teardown]  Run Keywords  Redfish.Delete  ${REDFISH_ACCOUNTS_URI}admin_user
+    ...  AND  Redfish.Delete  ${REDFISH_ACCOUNTS_URI}readonly_user
     ...  AND  Test Teardown Execution
 
     # Reboot BMC.
@@ -52,7 +52,7 @@ Verify Redfish Operator User Persistence After Reboot
     [Tags]  Verify_Redfish_Operator_User_Persistence_After_Reboot
     [Setup]  Run Keywords  Redfish.Login  AND
     ...  Redfish Create User  operator_user  TestPwd123  Operator  ${True}
-    [Teardown]  Run Keywords  Redfish.Delete  /redfish/v1/AccountService/Accounts/operator_user
+    [Teardown]  Run Keywords  Redfish.Delete  ${REDFISH_ACCOUNTS_URI}operator_user
     ...  AND  Test Teardown Execution
 
     # Reboot BMC.
@@ -182,9 +182,10 @@ Verify User Creation With Invalid Role Id
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
 
     # Create specified user.
-    ${payload}=  Create Dictionary
-    ...  UserName=test_user  Password=TestPwd123  RoleId=wrongroleid  Enabled=${True}
-    Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{payload}
+    VAR  &{payload}  UserName=test_user  Password=TestPwd123  RoleId=wrongroleid
+    ...  Enabled=${True}
+
+    Redfish.Post  ${REDFISH_ACCOUNTS_URI}  body=&{payload}
     ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
 
 
@@ -195,12 +196,13 @@ Verify Error Upon Creating Same Users With Different Privileges
     Redfish Create User  test_user  TestPwd123  Administrator  ${True}
 
     # Create specified user.
-    ${payload}=  Create Dictionary
-    ...  UserName=test_user  Password=TestPwd123  RoleId=ReadOnly  Enabled=${True}
-    Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{payload}
+    VAR  &{payload}  UserName=test_user  Password=TestPwd123  RoleId=ReadOnly
+    ...  Enabled=${True}
+
+    Redfish.Post  ${REDFISH_ACCOUNTS_URI}  body=&{payload}
     ...  valid_status_codes=[${HTTP_BAD_REQUEST}, ${HTTP_CONFLICT}]
 
-    Redfish.Delete  /redfish/v1/AccountService/Accounts/test_user
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}test_user
 
 
 Verify Modifying User Attributes
@@ -212,17 +214,17 @@ Verify Modifying User Attributes
     Redfish Create User  readonly_user  TestPwd123  ReadOnly        ${True}
 
     # Make sure the new user account does not already exist.
-    Redfish.Delete  /redfish/v1/AccountService/Accounts/newadmin_user
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}newadmin_user
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
 
     # Update admin_user username using Redfish.
-    ${payload}=  Create Dictionary  UserName=newadmin_user
-    Redfish.Patch  /redfish/v1/AccountService/Accounts/admin_user  body=&{payload}
+    VAR  &{payload}  UserName=newadmin_user
+    Redfish.Patch  ${REDFISH_ACCOUNTS_URI}admin_user  body=&{payload}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
     # Update readonly_user role using Redfish.
-    ${payload}=  Create Dictionary  RoleId=Administrator
-    Redfish.Patch  /redfish/v1/AccountService/Accounts/readonly_user  body=&{payload}
+    VAR  &{payload}  RoleId=Administrator
+    Redfish.Patch  ${REDFISH_ACCOUNTS_URI}readonly_user  body=&{payload}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
     # Verify users after updating
@@ -230,8 +232,8 @@ Verify Modifying User Attributes
     Redfish Verify User  readonly_user  TestPwd123     Administrator   ${True}
 
     # Delete created users.
-    Redfish.Delete  /redfish/v1/AccountService/Accounts/newadmin_user
-    Redfish.Delete  /redfish/v1/AccountService/Accounts/readonly_user
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}newadmin_user
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}readonly_user
 
 
 Verify Modifying Operator User Attributes
@@ -239,12 +241,12 @@ Verify Modifying Operator User Attributes
     [Tags]  Verify_Modifying_Operator_User_Attributes
     [Setup]  Run Keywords  Redfish.Login  AND
     ...  Redfish Create User  operator_user  TestPwd123  Operator  ${True}
-    [Teardown]  Run Keywords  Redfish.Delete  /redfish/v1/AccountService/Accounts/operator_user
+    [Teardown]  Run Keywords  Redfish.Delete  ${REDFISH_ACCOUNTS_URI}operator_user
     ...  AND  Test Teardown Execution
 
     # Update operator_user password using Redfish.
-    ${payload}=  Create Dictionary  Password=NewTestPwd123
-    Redfish.Patch  /redfish/v1/AccountService/Accounts/operator_user  body=&{payload}
+    VAR  &{payload}  Password=NewTestPwd123
+    Redfish.Patch  ${REDFISH_ACCOUNTS_URI}operator_user  body=&{payload}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
     # Verify users after updating
@@ -257,8 +259,9 @@ Verify User Account Locked
 
     Redfish Create User  admin_user  TestPwd123  Administrator   ${True}
 
-    ${payload}=  Create Dictionary  AccountLockoutThreshold=${account_lockout_threshold}
+    VAR  &{payload}  AccountLockoutThreshold=${account_lockout_threshold} 
     ...  AccountLockoutDuration=${account_lockout_duration}
+
     Redfish.Patch  ${REDFISH_ACCOUNTS_SERVICE_URI}  body=${payload}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
@@ -283,7 +286,7 @@ Verify User Account Locked
 
     Redfish.Login
 
-    Redfish.Delete  /redfish/v1/AccountService/Accounts/admin_user
+    Redfish.Delete  ${REDFISH_ACCOUNTS_SERVICE_URI}admin_user
 
 
 Verify User Account Unlock
@@ -292,12 +295,11 @@ Verify User Account Unlock
     [Teardown]  Run Keywords  SSHLibrary.Close All Connections
     ...  AND  Redfish.Logout
     ...  AND  Redfish.Login
-    ...  AND  Redfish.Delete  /redfish/v1/AccountService/Accounts/test_user
+    ...  AND  Redfish.Delete  ${REDFISH_ACCOUNTS_SERVICE_URI}test_user
 
     Redfish Create User  test_user  TestPwd123  Administrator  ${True}
 
-    ${payload}=  Create Dictionary
-    ...  AccountLockoutThreshold=${account_lockout_threshold}
+    VAR  &{payload}  AccountLockoutThreshold=${account_lockout_threshold}
     ...  AccountLockoutDuration=${account_lockout_duration}
     Redfish.Patch  ${REDFISH_ACCOUNTS_SERVICE_URI}  body=${payload}
     ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
@@ -318,7 +320,7 @@ Verify User Account Unlock
     Run Keyword And Expect Error  InvalidCredentialsError*
     ...  Redfish.Login  test_user  TestPwd123
 
-    ${payload}=  Create Dictionary  Locked=${FALSE}
+    VAR  &{payload}  Locked=${FALSE}
 
     # Manually unlock the account before lockout threshold expires
     Redfish.Login
@@ -346,7 +348,7 @@ Verify Admin User Privilege
     Redfish.Login  admin_user  TestPwd123
 
     # Change password of 'readonly' user with admin user.
-    Redfish.Patch  /redfish/v1/AccountService/Accounts/readonly_user  body={'Password': 'NewTestPwd123'}
+    Redfish.Patch  ${REDFISH_ACCOUNTS_URI}readonly_user  body={'Password': 'NewTestPwd123'}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
     # Verify modified user.
@@ -354,8 +356,8 @@ Verify Admin User Privilege
 
     # Note: Delete user would work here because a root login is
     # performed as part of "Redfish Verify User" keyword's teardown.
-    Redfish.Delete  /redfish/v1/AccountService/Accounts/admin_user
-    Redfish.Delete  /redfish/v1/AccountService/Accounts/readonly_user
+    Redfish.Delete  ${REDFISH_ACCOUNTS_SERVICE_URI}admin_user
+    Redfish.Delete  ${REDFISH_ACCOUNTS_SERVICE_URI}readonly_user
 
 
 Verify Operator User Role Change Using Admin Privilege User
@@ -372,14 +374,14 @@ Verify Operator User Role Change Using Admin Privilege User
     Redfish.Login  admin_user  TestPwd123
 
     # Modify Role ID of Operator user.
-    Redfish.Patch  /redfish/v1/AccountService/Accounts/operator_user  body={'RoleId': 'Administrator'}
+    Redfish.Patch  ${REDFISH_ACCOUNTS_URI}operator_user  body={'RoleId': 'Administrator'}
     ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
 
     # Verify modified user.
     Redfish Verify User  operator_user  TestPwd123  Administrator  ${True}
 
-    Redfish.Delete  /redfish/v1/AccountService/Accounts/admin_user
-    Redfish.Delete  /redfish/v1/AccountService/Accounts/operator_user
+    Redfish.Delete  ${REDFISH_ACCOUNTS_SERVICE_URI}admin_user
+    Redfish.Delete  ${REDFISH_ACCOUNTS_SERVICE_URI}operator_user
 
 
 Verify Operator User Privilege
@@ -397,15 +399,15 @@ Verify Operator User Privilege
     Run Keyword And Expect Error  ValueError*  Redfish BMC Reset Operation
 
     # Attempt to change password of admin user with operator user.
-    Redfish.Patch  /redfish/v1/AccountService/Accounts/admin_user  body={'Password': 'NewTestPwd123'}
+    Redfish.Patch  ${REDFISH_ACCOUNTS_URI}admin_user  body={'Password': 'NewTestPwd123'}
     ...  valid_status_codes=[${HTTP_FORBIDDEN}]
 
     Redfish.Logout
 
     Redfish.Login
 
-    Redfish.Delete  /redfish/v1/AccountService/Accounts/admin_user
-    Redfish.Delete  /redfish/v1/AccountService/Accounts/operator_user
+    Redfish.Delete  ${REDFISH_ACCOUNTS_SERVICE_URI}admin_user
+    Redfish.Delete  ${REDFISH_ACCOUNTS_SERVICE_URI}operator_user
 
 
 Verify ReadOnly User Privilege
@@ -453,12 +455,12 @@ Verify Standard User Roles Defined By Redfish
     [Tags]  Verify_Standard_User_Roles_Defined_By_Redfish
 
     ${member_list}=  Redfish_Utils.Get Member List
-    ...  /redfish/v1/AccountService/Roles
+    ...  ${REDFISH_ACCOUNTS_SERVICE_ROLES_URI}
 
-    @{roles}=  Create List
-    ...  /redfish/v1/AccountService/Roles/Administrator
-    ...  /redfish/v1/AccountService/Roles/Operator
-    ...  /redfish/v1/AccountService/Roles/ReadOnly
+    VAR  @{roles}  ${REDFISH_ACCOUNTS_SERVICE_ROLES_URI}/Administrator
+    ...  ${REDFISH_ACCOUNTS_SERVICE_ROLES_URI}/Operator
+    ...  ${REDFISH_ACCOUNTS_SERVICE_ROLES_URI}/ReadOnly
+
 
     List Should Contain Sub List  ${member_list}  ${roles}
 
@@ -469,20 +471,20 @@ Verify Standard User Roles Defined By Redfish
     # | Operator | Login, ConfigureComponents, ConfigureSelf |
     # | ReadOnly | Login, ConfigureSelf |
 
-    @{admin}=  Create List  Login  ConfigureManager  ConfigureUsers  ConfigureComponents  ConfigureSelf
-    @{operator}=  Create List  Login  ConfigureComponents  ConfigureSelf
-    @{readOnly}=  Create List  Login  ConfigureSelf
+    VAR  @{admin}  Login  ConfigureManager  ConfigureUsers  ConfigureComponents  ConfigureSelf
+    VAR  @{operator}  Login  ConfigureComponents  ConfigureSelf
+    VAR  @{readOnly}  Login  ConfigureSelf
 
-    ${roles_dict}=  Create Dictionary  admin_privileges=${admin}  operator_privileges=${operator}
+    VAR  &{roles_dict}  admin_privileges=${admin}  operator_privileges=${operator}
     ...  readOnly_privileges=${readOnly}
 
-    ${resp}=  redfish.Get  /redfish/v1/AccountService/Roles/Administrator
+    ${resp}=  redfish.Get  ${REDFISH_ACCOUNTS_SERVICE_ROLES_URI}/Administrator
     List Should Contain Sub List  ${resp.dict['AssignedPrivileges']}  ${roles_dict['admin_privileges']}
 
-    ${resp}=  redfish.Get  /redfish/v1/AccountService/Roles/Operator
+    ${resp}=  redfish.Get  ${REDFISH_ACCOUNTS_SERVICE_ROLES_URI}/Operator
     List Should Contain Sub List  ${resp.dict['AssignedPrivileges']}  ${roles_dict['operator_privileges']}
 
-    ${resp}=  redfish.Get  /redfish/v1/AccountService/Roles/ReadOnly
+    ${resp}=  redfish.Get  ${REDFISH_ACCOUNTS_SERVICE_ROLES_URI}/ReadOnly
     List Should Contain Sub List  ${resp.dict['AssignedPrivileges']}  ${roles_dict['readOnly_privileges']}
 
 
@@ -490,7 +492,7 @@ Verify Error While Deleting Root User
     [Documentation]  Verify error while deleting root user.
     [Tags]  Verify_Error_While_Deleting_Root_User
 
-    Redfish.Delete  /redfish/v1/AccountService/Accounts/root  valid_status_codes=[${HTTP_FORBIDDEN}]
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}root  valid_status_codes=[${HTTP_FORBIDDEN}]
 
 
 Verify SSH Login Access With Admin User
@@ -504,7 +506,7 @@ Verify SSH Login Access With Admin User
     Create Admin User And Verify SSH Login
 
     Redfish.Login
-    Redfish.Delete  /redfish/v1/AccountService/Accounts/new_admin
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}new_admin
 
 Verify SSH Login Is Revoked For Deleted User
     [Documentation]  Verify SSH login access is revoked for deleted User.
@@ -517,7 +519,7 @@ Verify SSH Login Is Revoked For Deleted User
     Redfish.Login
 
     # Delete the admin user.
-    Redfish.Delete  /redfish/v1/AccountService/Accounts/new_admin
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}new_admin
     ...  valid_status_codes=[${HTTP_OK}]
 
     # Attempt SSH login with Deleted user.
@@ -619,24 +621,26 @@ Verify Account Lockout With Invalid Configuration
     [Documentation]  Verify Account Lockout configuration with invalid values.
     [Tags]  Verify_Account_Lockout_With_Invalid_Configuration
 
-    @{invalid_values_list}=  Create List  -1  abc  3.5  ${EMPTY}
+    VAR  @{invalid_values_list}  -1  abc  3.5  ${EMPTY}
 
     FOR  ${invalid_value}  IN  @{invalid_values_list}
-        ${payload}=  Create Dictionary  AccountLockoutThreshold=${invalid_value}
+        VAR  &{payload}  AccountLockoutThreshold=${invalid_value}
         Redfish.Patch  ${REDFISH_ACCOUNTS_SERVICE_URI}  body=${payload}
         ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
 
-        ${payload}=  Create Dictionary  AccountLockoutDuration=${invalid_value}
+        VAR  &{payload}  AccountLockoutDuration=${invalid_value}
         Redfish.Patch  ${REDFISH_ACCOUNTS_SERVICE_URI}  body=${payload}
         ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
 
-        ${payload}=  Create Dictionary  AccountLockoutThreshold=${account_lockout_threshold}
+        VAR  &{payload}  AccountLockoutThreshold=${account_lockout_threshold}
         ...  AccountLockoutDuration=${invalid_value}
+
         Redfish.Patch  ${REDFISH_ACCOUNTS_SERVICE_URI}  body=${payload}
         ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
 
-        ${payload}=  Create Dictionary  AccountLockoutThreshold=${invalid_value}
+        VAR  &{payload}  AccountLockoutThreshold=${invalid_value}
         ...  AccountLockoutDuration=${account_lockout_duration}
+
         Redfish.Patch  ${REDFISH_ACCOUNTS_SERVICE_URI}  body=${payload}
         ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
     END
@@ -665,13 +669,13 @@ Redfish Create User
     #                     (e.g. ${True}, ${False}).
 
     # Make sure the user account in question does not already exist.
-    Redfish.Delete  /redfish/v1/AccountService/Accounts/${userName}
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}${username}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
 
     # Create specified user.
-    ${payload}=  Create Dictionary
-    ...  UserName=${username}  Password=${password}  RoleId=${role_id}  Enabled=${enabled}
-    Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{payload}
+    VAR  &{payload}  UserName=${username}  Password=${password}  RoleId=${role_id}  Enabled=${enabled}
+
+    Redfish.Post  ${REDFISH_ACCOUNTS_URI}  body=&{payload}
     ...  valid_status_codes=[${HTTP_CREATED}]
 
     # Resetting faillock count as a workaround for issue
@@ -692,7 +696,7 @@ Redfish Create User
 
     # Validate Role ID of created user.
     ${role_config}=  Redfish_Utils.Get Attribute
-    ...  /redfish/v1/AccountService/Accounts/${username}  RoleId
+    ...  ${REDFISH_ACCOUNTS_URI}${username}  RoleId
     Should Be Equal  ${role_id}  ${role_config}
 
 
@@ -714,7 +718,7 @@ Redfish Verify User
 
     # Validate Role Id of user.
     ${role_config}=  Redfish_Utils.Get Attribute
-    ...  /redfish/v1/AccountService/Accounts/${username}  RoleId
+    ...  ${REDFISH_ACCOUNTS_URI}${username}  RoleId
     Should Be Equal  ${role_id}  ${role_config}
 
 
@@ -767,7 +771,7 @@ Redfish Create And Verify User
     Redfish Verify User  ${username}  ${password}  ${role_id}  ${enabled}
 
     # Delete Specified User
-    Redfish.Delete  /redfish/v1/AccountService/Accounts/${username}
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}${username}
 
 
 Verify Redfish User Login With Wrong Password
@@ -794,7 +798,7 @@ Verify Redfish User Login With Wrong Password
     Redfish.Login
 
     # Delete newly created user.
-    Redfish.Delete  /redfish/v1/AccountService/Accounts/${username}
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}${username}
 
 
 Verify Login With Deleted Redfish User
@@ -812,7 +816,7 @@ Verify Login With Deleted Redfish User
     Redfish Create User  ${username}  ${password}  ${role_id}  ${enabled}
 
     # Delete newly created user.
-    Redfish.Delete  /redfish/v1/AccountService/Accounts/${userName}
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}${username}
 
     Redfish.Logout
 
@@ -846,7 +850,7 @@ Verify Create User Without Enabling
     Redfish.Login
 
     # Delete newly created user.
-    Redfish.Delete  /redfish/v1/AccountService/Accounts/${username}
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}${username}
 
 
 Template For Configure Auth Methods
@@ -891,13 +895,13 @@ Configure AuthMethods
     #                        This will set the value of "XToken" and "BasicAuth"
     #                        property in accountservice uri to TRUE.
 
-    ${openbmc}=  Create Dictionary  AuthMethods=${authmethods}
-    ${oem}=  Create Dictionary  OpenBMC=${openbmc}
-    ${payload}=  Create Dictionary  Oem=${oem}
+    VAR  &{openbmc}  AuthMethods=${authmethods}
+    VAR  &{oem}  OpenBMC=${openbmc}
+    VAR  &{payload}  Oem=${oem}
 
     # Setting authmethod properties using Redfish session based auth
     ${status}=  Run Keyword And Return Status
-    ...  Redfish.Patch  ${REDFISH_BASE_URI}AccountService
+    ...  Redfish.Patch  ${REDFISH_ACCOUNTS_SERVICE_URI}
     ...  body=${payload}  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
 
     # Setting authmethod properties using basic auth in case the former fails
@@ -1002,13 +1006,13 @@ Create User With Unsupported Password Format And Verify
     #                     should not be same.
 
     # Make sure the user account in question does not already exist.
-    Redfish.Delete  /redfish/v1/AccountService/Accounts/${userName}
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}${userName}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
 
     # Create specified user with invalid password format.
-    ${payload}=  Create Dictionary
-    ...  UserName=${username}  Password=${password}  RoleId=${role_id}  Enabled=${True}
-    Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{payload}
+    VAR  &{payload}  UserName=${username}  Password=${password}  RoleId=${role_id}  Enabled=${True}
+
+    Redfish.Post  ${REDFISH_ACCOUNTS_URI}  body=&{payload}
     ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
 
 
@@ -1021,21 +1025,21 @@ Verify History Password For Redfish User
     # role_id             The role ID of the user to be created.
 
     # Make sure the user account in question does not already exist.
-    Redfish.Delete  /redfish/v1/AccountService/Accounts/${user_name}
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}${user_name}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
 
     # Create specified user with valid password.
-    ${payload}=  Create Dictionary
-    ...  UserName=${user_name}  Password=HistUserPwd1  RoleId=${role_id}  Enabled=${True}
-    Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{payload}
+    VAR  &{payload}  UserName=${user_name}  Password=HistUserPwd1  RoleId=${role_id}  Enabled=${True}
+
+    Redfish.Post  ${REDFISH_ACCOUNTS_URI}  body=&{payload}
     ...  valid_status_codes=[${HTTP_CREATED}]
 
     # Change password
-    Redfish.Patch  /redfish/v1/AccountService/Accounts/${user_name}  body={'Password': 'HistUserPwd2'}
+    Redfish.Patch  ${REDFISH_ACCOUNTS_URI}${user_name}  body={'Password': 'HistUserPwd2'}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
     # Try to change password to previous one
-    Redfish.Patch  /redfish/v1/AccountService/Accounts/${user_name}  body={'Password': 'HistUserPwd1'}
+    Redfish.Patch  ${REDFISH_ACCOUNTS_URI}${user_name}  body={'Password': 'HistUserPwd1'}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
     # Verify login.
@@ -1043,7 +1047,7 @@ Verify History Password For Redfish User
     Redfish.Login  ${user_name}  HistUserPwd1
     Redfish.Logout
     Redfish.Login
-    Redfish.Delete  /redfish/v1/AccountService/Accounts/${user_name}
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}${user_name}
 
 
 Verify Minimum Password Length For Redfish User
@@ -1056,26 +1060,25 @@ Verify Minimum Password Length For Redfish User
     # role_id             The role ID of the user to be created.
 
     # Make sure the user account in question does not already exist.
-    Redfish.Delete  /redfish/v1/AccountService/Accounts/${user_name}
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}${user_name}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
 
     # Try to create a user with invalid length password.
-    ${payload}=  Create Dictionary
-    ...  UserName=${user_name}  Password=UserPwd  RoleId=${role_id}  Enabled=${True}
-    Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{payload}
+    VAR  &{payload}  UserName=${user_name}  Password=UserPwd  RoleId=${role_id}  Enabled=${True}
+    Redfish.Post  ${REDFISH_ACCOUNTS_URI}  body=&{payload}
     ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
 
     # Create specified user with valid length password.
     Set To Dictionary  ${payload}  Password  UserPwd1
-    Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{payload}
+    Redfish.Post  ${REDFISH_ACCOUNTS_URI}  body=&{payload}
     ...  valid_status_codes=[${HTTP_CREATED}]
 
     # Try to change to an invalid password.
-    Redfish.Patch  /redfish/v1/AccountService/Accounts/${user_name}  body={'Password': 'UserPwd'}
+    Redfish.Patch  ${REDFISH_ACCOUNTS_URI}${user_name}  body={'Password': 'UserPwd'}
     ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
 
     # Change to a valid password.
-    Redfish.Patch  /redfish/v1/AccountService/Accounts/${user_name}  body={'Password': 'UserPwd1'}
+    Redfish.Patch  ${REDFISH_ACCOUNTS_URI}${user_name}  body={'Password': 'UserPwd1'}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
     # Verify login.
@@ -1083,7 +1086,7 @@ Verify Minimum Password Length For Redfish User
     Redfish.Login  ${user_name}  UserPwd1
     Redfish.Logout
     Redfish.Login
-    Redfish.Delete  /redfish/v1/AccountService/Accounts/${user_name}
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}${user_name}
 
 
 Create Admin User And Verify SSH Login
