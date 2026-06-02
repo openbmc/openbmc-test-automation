@@ -237,18 +237,18 @@ Configure IPv6 Address On BMC
 
     # Verify ip address on CLI.
     IF  '${ipv6_addr2}' != '${None}'
-        Verify IPv6 And PrefixLength  ${ipv6_addr2}  ${prefix_len}
+        Verify IPv6 And PrefixLength  ${ipv6_addr2}  ${prefix_len}  ${channel_number}
     ELSE
-        Verify IPv6 And PrefixLength  ${ipv6_addr1}  ${prefix_len}
+        Verify IPv6 And PrefixLength  ${ipv6_addr1}  ${prefix_len}  ${channel_number}
     END
 
     # Verify if existing static IPv6 addresses still exist.
     FOR  ${ipv6_network_configuration}  IN  @{ipv6_network_configurations}
-      Verify IPv6 On BMC  ${ipv6_network_configuration['Address']}
+      Verify IPv6 On BMC  ${ipv6_network_configuration['Address']}  ${channel_number}
     END
 
     # Verify redfish and CLI data matches.
-    Validate IPv6 Network Config On BMC
+    Validate IPv6 Network Config On BMC  ${channel_number}
 
 
 Delete IPv6 Address
@@ -307,7 +307,7 @@ Delete IPv6 Address
         Should Be True  '${delete_status}' == '${True}'
     END
 
-    Validate IPv6 Network Config On BMC
+    Validate IPv6 Network Config On BMC  ${channel_number}
 
 
 Delete All IPv6 Addresses
@@ -431,17 +431,19 @@ Get IPv6 Network Configuration
 
 Verify IPv6 And PrefixLength
     [Documentation]  Verify IPv6 address and prefix length on BMC.
-    [Arguments]  ${ipv6_addr}  ${prefix_len}
+    [Arguments]  ${ipv6_addr}  ${prefix_len}  ${CHANNEL_NUMBER}=1
+
 
     # Description of the argument(s):
     # ipv6_addr   IPv6 address to be verified.
     # prefix_len  PrefixLength value to be verified.
+    # CHANNEL_NUMBER   Ethernet channel number, 1(eth0) or 2(eth1).
 
     # Catenate IPv6 address and its prefix length.
     ${ipv6_with_prefix}=  Catenate  ${ipv6_addr}/${prefix_len}
 
     # Get IPv6 address details on BMC using IP command.
-    @{ip_data}=  Get BMC IPv6 Info
+    @{ip_data}=  Get BMC IPv6 Info  ${CHANNEL_NUMBER}
 
     # Verify if IPv6 and prefix length is configured on BMC.
 
@@ -452,9 +454,13 @@ Verify IPv6 And PrefixLength
 Validate IPv6 Network Config On BMC
     [Documentation]  Check that IPv6 network info obtained via redfish matches info
     ...              obtained via CLI.
+    [Arguments]  ${CHANNEL_NUMBER}=1
 
-    @{ipv6_network_configurations}=  Get IPv6 Network Configuration
-    ${ipv6_data}=  Get BMC IPv6 Info
+    # Description of the argument(s):
+    # CHANNEL_NUMBER   Ethernet channel number, 1(eth0) or 2(eth1).
+
+    @{ipv6_network_configurations}=  Get IPv6 Network Configuration  ${CHANNEL_NUMBER}
+    ${ipv6_data}=  Get BMC IPv6 Info  ${CHANNEL_NUMBER}
     FOR  ${ipv6_network_configuration}  IN  @{ipv6_network_configurations}
       Should Contain Match  ${ipv6_data}  ${ipv6_network_configuration['Address']}/*
       ...  msg=IPv6 address does not exist.
