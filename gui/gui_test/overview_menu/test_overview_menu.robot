@@ -393,7 +393,7 @@ Verify Dumps Total Count Under Dumps Section
 
 Verify Asset Tag Save Button On Overview Page
     [Documentation]  Verify that asset tag is successfully updated using save action.
-    [Tags]  Verify_Asset_Tag_Save_Button_on_Overview_Page
+    [Tags]  Verify_Asset_Tag_Save_Button_On_Overview_Page
 
     Verify Asset Tag Update On Overview Page    save
 

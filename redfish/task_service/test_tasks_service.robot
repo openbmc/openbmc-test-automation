@@ -189,7 +189,7 @@ Verify Task Service Unsupported Methods
 
     Verify Supported And Unsupported Methods    uri=${REDFISH_TASK_SERVICE_URI}
 
-Verify Unsupported Methods for Tasks URI On Task Service
+Verify Unsupported Methods For Tasks URI On Task Service
     [Documentation]  Verify unsupported methods for Tasks URI on Task service.
     [Tags]  Verify_Unsupported_Methods_For_Tasks_URI_On_Task_Service
 
