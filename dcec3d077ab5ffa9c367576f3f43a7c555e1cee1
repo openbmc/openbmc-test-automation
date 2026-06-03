@@ -16,6 +16,24 @@
       "message": "The commit message vs the code changes are different, can u fix the commit message please",
       "revId": "dcec3d077ab5ffa9c367576f3f43a7c555e1cee1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59e5d7b8_1a36a23a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-06-03T14:23:19Z",
+      "side": 1,
+      "message": "Recommendation commit message\n\nChanges:\n   - VAR used instead of Create List and Dictionary\n   - VAR with scope used instead of Set Test and Suite Variable\n   - Consolidated REDFISH_SESSION variable usage for consistency",
+      "parentUuid": "75a519ed_6642f475",
+      "revId": "dcec3d077ab5ffa9c367576f3f43a7c555e1cee1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
