@@ -180,7 +180,7 @@ Verify View All Sessions For WebUI Session
 Test Redfish Created Session Reflects On GUI
     [Documentation]  Create session via redfish and verify the session
     ...  reflects on gui.
-    [Tags]  Verify_Created_Redfish_Session_Reflects_On_GUI
+    [Tags]  Test_Redfish_Created_Session_Reflects_On_GUI
     [Teardown]  Delete All Redfish Sessions
 
     # Navigate to gui sessions page.
