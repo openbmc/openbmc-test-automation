@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f83b03dc_fba76988",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-06-03T09:08:35Z",
+      "side": 1,
+      "message": "Fix merge conflict or abandon this code if taken care by other commits",
+      "revId": "49c3d679e6524f9563aa9f0e55a78291b44024fb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
