@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66740c1e_b4b76eaa",
+        "filename": "lib/bmc_ipv6_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-06-03T07:04:20Z",
+      "side": 1,
+      "message": "${channel_number}\u003d${CHANNEL_NUMBER}",
+      "range": {
+        "startLine": 434,
+        "startChar": 46,
+        "endLine": 434,
+        "endChar": 65
+      },
+      "revId": "3011b6ff63d6874e08c51b9808fee8f5aed58e37",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b64712c0_c30a0ed1",
+        "filename": "lib/bmc_ipv6_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-06-03T07:04:20Z",
+      "side": 1,
+      "message": "Change to channel_number.",
+      "range": {
+        "startLine": 440,
+        "startChar": 6,
+        "endLine": 440,
+        "endChar": 20
+      },
+      "revId": "3011b6ff63d6874e08c51b9808fee8f5aed58e37",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8db3cf87_6426bda1",
+        "filename": "lib/bmc_ipv6_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-06-03T07:04:20Z",
+      "side": 1,
+      "message": "Change to channel_number in all places.",
+      "range": {
+        "startLine": 446,
+        "startChar": 38,
+        "endLine": 446,
+        "endChar": 52
+      },
+      "revId": "3011b6ff63d6874e08c51b9808fee8f5aed58e37",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4f0c6f9_d964a5b3",
+        "filename": "lib/bmc_ipv6_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-06-03T07:04:20Z",
+      "side": 1,
+      "message": "${channel_number}\u003d${CHANNEL_NUMBER}",
+      "range": {
+        "startLine": 457,
+        "startChar": 17,
+        "endLine": 457,
+        "endChar": 36
+      },
+      "revId": "3011b6ff63d6874e08c51b9808fee8f5aed58e37",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
