@@ -220,9 +220,9 @@ Verify RTAD Toggle Operation On Policies Page
     ...  ${xpath_rtad_toggle}  ${toast_msg}
 
 
-Verify Virutal TPM Toggle Operation On Policies Page
+Verify Virtual TPM Toggle Operation On Policies Page
     [Documentation]  Verify virtual TPM toggle operation on policies page.
-    [Tags]  Verify_Virutal_TPM_Toggle_Operation_On_Policies_Page
+    [Tags]  Verify_Virtual_TPM_Toggle_Operation_On_Policies_Page
     [Teardown]  Set Policy To Initial State Via Redfish BIOS Attribute  ${bios_attr_vtpm}
     ...  ${initial_vtpm_setting}
 

@@ -69,7 +69,7 @@ Verify Existence Of All Sub Sections Under BMC And Server Section At Poweroff St
     Element Should Be Visible  ${xpath_switch_to_running}
 
 
-Verify Switch To Running Image With Switch Image Button At Power-Off State
+Verify Switch To Running Image With Switch Image Button At PowerOff State
     [Documentation]  Verify that user is allowed to switching to a running image when
     ...              the system is in power-off state by clicking the "Switch Image" button
     [Tags]  Verify_Switch_To_Running_Image_With_Switch_Image_Button_At_PowerOff_State
@@ -81,7 +81,7 @@ Verify Switch To Running Image With Switch Image Button At Power-Off State
     Verify Switch Image and Cancel Buttons Of Switch To Running Image  ${OPENBMC_USERNAME}  Switch_Image
 
 
-Verify Switch To Running Image With Cancel Button At Power-Off State
+Verify Switch To Running Image With Cancel Button At PowerOff State
     [Documentation]  Verify that clicking the “Cancel” button minimizes the dialog and
     ...              prevents switching to a running image at powered‑off state.
     [Tags]  Verify_Switch_To_Running_Image_With_Cancel_Button_At_PowerOff_State
@@ -91,7 +91,7 @@ Verify Switch To Running Image With Cancel Button At Power-Off State
     Verify Switch Image and Cancel Buttons Of Switch To Running Image  ${OPENBMC_USERNAME}  Cancel
 
 
-Verify Switch To Running Image With Switch Image Button At Power-Off State With Read-Only User
+Verify Switch To Running Image With Switch Image Button At PowerOff State With ReadOnly User
     [Documentation]  Verify that a read-only user is restricted from switching to a running image
     ...              when the system is in power-off state by clicking the "Switch Image" button
     [Tags]  Verify_Switch_To_Running_Image_With_Switch_Image_Button_At_PowerOff_State_With_ReadOnly_User
@@ -103,7 +103,7 @@ Verify Switch To Running Image With Switch Image Button At Power-Off State With 
     Verify Switch Image and Cancel Buttons Of Switch To Running Image   readonly  Switch_Image
 
 
-Verify Switch To Running Image With Cancel Button At Power-Off State With Read-Only User
+Verify Switch To Running Image With Cancel Button At PowerOff State With ReadOnly User
     [Documentation]  Verify that clicking the “Cancel” button minimizes the dialog and
     ...              prevents switching to a running image when a read-only user
     ...              attempts the action in a powered‑off state.
