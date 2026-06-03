@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e27b1aa4_e915d4af",
+        "filename": "gui/gui_test/operations_menu/test_firmware_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-06-03T09:01:21Z",
+      "side": 1,
+      "message": "Perform Firmware Switch And verify \n\nto\n\nPerform Firmware Switch And Verify",
+      "revId": "f845ed6109391073adcb862c26f411e76e7ec557",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f664d57_bf8632e6",
+        "filename": "gui/gui_test/operations_menu/test_firmware_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-06-03T09:01:21Z",
+      "side": 1,
+      "message": "Fix: Add proper indentation to align with other test case names in the file for [Documentation]",
+      "revId": "f845ed6109391073adcb862c26f411e76e7ec557",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c015181_3aeae7cb",
+        "filename": "gui/gui_test/operations_menu/test_firmware_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-06-03T09:01:21Z",
+      "side": 1,
+      "message": "Critical test logic error - testing wrong power state\nLocation: Lines 146-152 in gui/gui_test/operations_menu/test_firmware_sub_menu.robot\n\nIssue: Test claims to verify power-ON state but setup powers OFF the server and never powers it ON. The test is actually verifying power-OFF behavior, not power-ON as documented and named.\nExpected Behavior: At power-ON state (line 131), the switch button should be DISABLED. At power-OFF state (line 69), the button should be VISIBLE/ENABLED.\nFix: Change setup to Power On Server to actually test power-ON state as intended\nWhy: This is a critical functional test error. The test name, documentation, and tag all indicate power-ON testing, but the implementation tests power-OFF state. This makes the test meaningless and could mask real bugs in power-ON state handling.",
+      "revId": "f845ed6109391073adcb862c26f411e76e7ec557",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
