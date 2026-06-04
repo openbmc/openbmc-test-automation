@@ -140,7 +140,7 @@ Verify Date And Time Change To Browser Offset Time
     # We get an output ${xpath_browser_offset_text} = Browser offset (CST UTC-6).
     # Need to compare "CST UTC-6" text so removing the spaces and other values.
 
-    ${text}=  Set Variable  ${xpath_browser_offset_text.split("(")[1].split(")")[0]}
+    VAR  ${text}  ${xpath_browser_offset_text.split("(")[1].split(")")[0]}
     Navigate To Date And Time Page
     Page Should Contain  ${text}
 

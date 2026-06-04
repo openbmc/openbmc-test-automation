@@ -1242,7 +1242,7 @@ Get Static Default Gateway Property Via Redfish
      [Documentation]  Get Static Default Gateway property value via redfish.
 
      ${active_channel_config}=  Get Active Channel Config
-     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+     VAR  ${ethernet_interface}  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
      ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
      ${ipv6_static_def_gw}=  Get From Dictionary  ${resp.dict}  IPv6StaticDefaultGateways
      RETURN  ${resp.dict["IPv6StaticDefaultGateways"][0]["Address"]}
@@ -1305,7 +1305,7 @@ Get DHCP Property Via Redfish
 
     Sleep  ${NETWORK_TIMEOUT}
     ${active_channel_config}=  Get Active Channel Config
-    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    VAR  ${ethernet_interface}  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
     ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
     RETURN  ${resp.dict["DHCPv4"]["${property}"]}
 
@@ -1485,7 +1485,7 @@ Get Network Interface Details
    # channel_number   Interface Channel Number(eg.eth0 or eth1).
 
    ${active_channel_config}=  Get Active Channel Config
-   ${ethernet_interface}=  Set Variable  ${active_channel_config['${channel_number}']['name']}
+   VAR  ${ethernet_interface}  ${active_channel_config['${channel_number}']['name']}
    ${resp}=  redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
    RETURN  ${resp.dict}
 
@@ -1509,11 +1509,11 @@ Set IPv6 AutoConfig State
 
     Wait Until Element Is Not Visible  ${xpath_overlay}  timeout=60sec
     IF  '${channel_number}' == '1'
-      ${xpath_autoconfig_button}=  Set Variable  ${xpath_eth0_autoconfig_button}
+      VAR  ${xpath_autoconfig_button}  ${xpath_eth0_autoconfig_button}
       Click Element  ${xpath_eth0_interface}
       Set Suite Variable  ${CHANNEL_NUMBER}  1
     ELSE IF  '${channel_number}' == '2'
-      ${xpath_autoconfig_button}=  Set Variable  ${xpath_eth1_autoconfig_button}
+      VAR  ${xpath_autoconfig_button}  ${xpath_eth1_autoconfig_button}
       Click Element  ${xpath_eth1_interface}
       Set Suite Variable  ${CHANNEL_NUMBER}  2
     END
@@ -1595,11 +1595,11 @@ Toggle DHCPv4 State And Verify
 
     Wait Until Element Is Not Visible  ${xpath_overlay}  timeout=60sec
     IF  '${channel_number}' == '1'
-      ${xpath_dhcpv4_button}=  Set Variable  ${xpath_eth0_dhcpv4_button}
+      VAR  ${xpath_dhcpv4_button}  ${xpath_eth0_dhcpv4_button}
       Click Element  ${xpath_eth0_interface}
       Set Suite Variable  ${CHANNEL_NUMBER}  1
     ELSE IF  '${channel_number}' == '2'
-      ${xpath_dhcpv4_button}=  Set Variable  ${xpath_eth1_dhcpv4_button}
+      VAR  ${xpath_dhcpv4_button}  ${xpath_eth1_dhcpv4_button}
       Click Element  ${xpath_eth1_interface}
       Set Suite Variable  ${CHANNEL_NUMBER}  2
     END
@@ -1664,11 +1664,11 @@ Toggle DHCPv6 State And Verify
 
     Wait Until Element Is Not Visible  ${xpath_overlay}  timeout=60sec
     IF  '${channel_number}' == '1'
-      ${xpath_dhcpv6_button}=  Set Variable  ${xpath_eth0_dhcpv6_button}
+      VAR  ${xpath_dhcpv6_button}  ${xpath_eth0_dhcpv6_button}
       Click Element  ${xpath_eth0_interface}
       Set Suite Variable  ${CHANNEL_NUMBER}  1
     ELSE IF  '${channel_number}' == '2'
-      ${xpath_dhcpv6_button}=  Set Variable  ${xpath_eth1_dhcpv6_button}
+      VAR  ${xpath_dhcpv6_button}  ${xpath_eth1_dhcpv6_button}
       Click Element  ${xpath_eth1_interface}
       Set Suite Variable  ${CHANNEL_NUMBER}  2
     END
@@ -1851,7 +1851,7 @@ Get IPv4 Values From Eth1
     [Documentation]  Capturing IPv4 values before DHCP toggle.
 
     ${active_channel_config}=  Get Active Channel Config
-    ${ethernet_interface}=  Set Variable  ${active_channel_config['${2}']['name']}
+    VAR  ${ethernet_interface}  ${active_channel_config['${2}']['name']}
     ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
     @{network_configurations}=  Get From Dictionary  ${resp.dict}  IPv4StaticAddresses
     RETURN  @{network_configurations}
@@ -1926,9 +1926,9 @@ Validate Expected IPv4 And IPv6 Origin
     ${origin}=  Replace String  ${origin}  v6  ${EMPTY}
 
     IF  $type.endswith('v4')
-      ${target_list}=  Set Variable  ${ipv4_list}
+      VAR  ${target_list}  ${ipv4_list}
     ELSE
-      ${target_list}=  Set Variable  ${ipv6_list}
+      VAR  ${target_list}   ${ipv6_list}
     END
 
     Should Contain  ${target_list}  ${origin}

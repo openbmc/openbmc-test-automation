@@ -331,9 +331,9 @@ Set Policy Via GUI
     END
 
     IF  '${policy}' == 'SSH'
-       ${policy_toggle_button}=  Set Variable  ${xpath_bmc_ssh_toggle}
+       VAR  ${policy_toggle_button}  ${xpath_bmc_ssh_toggle}
     ELSE
-       ${policy_toggle_button}=  Set Variable  ${xpath_network_ipmi_toggle}
+       VAR  ${policy_toggle_button}  ${xpath_network_ipmi_toggle}
     END
 
     Wait Until Keyword Succeeds  1 min  30 sec
