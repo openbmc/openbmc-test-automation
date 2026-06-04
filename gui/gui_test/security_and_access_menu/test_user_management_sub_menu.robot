@@ -184,7 +184,7 @@ Test Modifying User Privilege Of Existing User Via GUI
     # Get user privilege role details distinct from the current ones.
     FOR  ${privilege}  IN  @{list_user_privilege}
       IF  '${privilege}' != '${privilege_level}'
-          ${modify_privilege}=  Set Variable  ${privilege}
+          VAR  ${modify_privilege}  ${privilege}
       END
     END
 
@@ -260,7 +260,7 @@ Test Modifying User Password Of Existing User Via GUI
     ${initial_account_status}=  Evaluate  random.choice([True, False])  random
 
     # Initialize the new password for the account.
-    ${new_password}=  Set Variable  Testpassword1
+    VAR  ${new_password}  Testpassword1
 
     # Create new user account.
     Create User And Verify  ${username}  ${privilege_level}  ${initial_account_status}

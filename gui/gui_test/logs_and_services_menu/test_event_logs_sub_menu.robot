@@ -121,7 +121,7 @@ Select And Verify Default UTC Timezone For Events
     # Get date and time from backend.
     ${event_data}=  Get Event Logs
     # Date format: 2023-05-02T04:49:29.149+00:00
-    ${redfish_event_date_time}=  Set Variable  ${event_data[0]["Created"].split('T')}
+    VAR  ${redfish_event_date_time}  ${event_data[0]["Created"].split('T')}
 
     Page Should Contain  ${redfish_event_date_time[0]}
     Page Should Contain  ${redfish_event_date_time[1].split('.')[0]}

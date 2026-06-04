@@ -192,7 +192,7 @@ Test Redfish Created Session Reflects On GUI
     ...  valid_status_codes=[${HTTP_CREATED}]
 
     # Extract the session id.
-    ${session_id}=  Set Variable  ${resp.dict['@odata.id'].split('/')[-1]}
+    VAR  ${session_id}   ${resp.dict['@odata.id'].split('/')[-1]}
 
     # Refresh the sessions page.
     Click Element  ${xpath_refresh_button}
@@ -215,7 +215,7 @@ Get Session Member And Verify Session Count
 
     Should Be Equal As Integers  ${session_resp['Members@odata.count']}  ${expected_count}
 
-    ${session_member}=  Set Variable  ${session_resp['Members'][0]['@odata.id']}
+    VAR  ${session_member}  ${session_resp['Members'][0]['@odata.id']}
 
     Set Test Variable  ${session_member}
 
