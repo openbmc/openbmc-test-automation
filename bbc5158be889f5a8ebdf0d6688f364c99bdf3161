@@ -16,6 +16,24 @@
       "message": "xonfigure  typo please fix it",
       "revId": "bbc5158be889f5a8ebdf0d6688f364c99bdf3161",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c95ce0d_77b35751",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-06-04T09:09:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b993b107_4b22618c",
+      "revId": "bbc5158be889f5a8ebdf0d6688f364c99bdf3161",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
