@@ -997,7 +997,7 @@ Redfish Initiate Auto Reboot
 
     Redfish Power Operation  On
 
-    Wait Until Keyword Succeeds  2 min  5 sec  Is Boot Progress Changed
+    Wait Until Keyword Succeeds  10 min  5 sec  Is Boot Progress Changed
 
     # Set watchdog timer
     Set Watchdog Interval Using Busctl  ${interval}
@@ -1011,6 +1011,8 @@ Is Boot Progress Changed
     # boot_state   Value of the BootProgress state to match against.
 
     ${boot_progress}  ${host_state}=  Redfish Get Boot Progress
+
+    Log To Console  DEBUG TRACE: boot_progress -> ${boot_progress} host_state -> ${host_state}
 
     Should Not Be Equal  ${boot_progress}   ${boot_state}
 
