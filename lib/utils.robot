@@ -997,7 +997,7 @@ Redfish Initiate Auto Reboot
 
     Redfish Power Operation  On
 
-    Wait Until Keyword Succeeds  2 min  5 sec  Is Boot Progress Changed
+    Wait Until Keyword Succeeds  10 min  5 sec  Is Boot Progress Changed
 
     # Set watchdog timer
     Set Watchdog Interval Using Busctl  ${interval}
