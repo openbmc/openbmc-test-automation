@@ -69,6 +69,24 @@
       "parentUuid": "51a6c334_76eb0d6a",
       "revId": "8e301eafcdf59de76184efe07271b876b6f0907d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a0dfcdf_a1e5a08b",
+        "filename": "gui/gui_test/security_and_access_menu/test_sessions_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-06-04T06:53:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c511ba28_aae49807",
+      "revId": "8e301eafcdf59de76184efe07271b876b6f0907d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
