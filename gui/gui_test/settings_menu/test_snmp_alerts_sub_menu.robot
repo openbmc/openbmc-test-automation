@@ -23,6 +23,7 @@ ${xpath_ip_address_input_button}                  //*[@data-test-id='snmpAlerts-
 ${xpath_port_optional_input_button}               //*[@data-test-id='snmpAlerts-input-port']
 ${xpath_snmp_add_destination_button}              //*[text()="Add destination"]
 ${xpath_cancel_button}                            //*[text()='Cancel']
+${xpath_snmp_error_close_button}                  //div[contains(@class,'toast')]//button[@aria-label='Close']
 ${xpath_delete_button}                            //*[@data-test-id='snmpAlerts-button-deleteRow-undefined']
 ${xpath_delete_destination}                       //button[contains(text(),'Delete destination')]
 
@@ -109,7 +110,6 @@ Configure SNMP Settings On BMC With Empty Port Via GUI And Verify
 
 
 Configure Invalid SNMP Settings On BMC Via GUI And Verify
-
     [Documentation]  Configure invalid SNMP settings on BMC via GUI and verify.
     [Tags]  Configure_Invalid_SNMP_Settings_On_BMC_Via_GUI_And_Verify
     [Template]  Configure SNMP Manager On BMC With Invalid Setting Via GUI And Verify
@@ -124,6 +124,19 @@ Configure Invalid SNMP Settings On BMC Via GUI And Verify
     ${alpha_ip}         ${NON_DEFAULT_PORT1}     ${invalid_destination_error}
     ${negative_ip}      ${NON_DEFAULT_PORT1}     ${invalid_destination_error}
     ${less_octet_ip}    ${NON_DEFAULT_PORT1}     ${invalid_destination_error}
+
+
+Configure Invalid FQDN Settings Via GUI And Verify
+    [Documentation]  Configure invalid FQDN in SNMP alerts via GUI and verify.
+    [Tags]  Configure_Invalid_FQDN_Settings_Via_GUI_And_Verify
+    [Template]  Configure SNMP Manager On BMC With Invalid Setting Via GUI And Verify
+
+    # snmp_manager_fqdn              snmp_manager_port        Expected status
+    ${invalid_fqdn_special_chars}    ${SNMP_DEFAULT_PORT}     ${invalid_destination_error}
+    ${invalid_fqdn_double_dot}       ${SNMP_DEFAULT_PORT}     ${invalid_destination_error}
+    ${invalid_fqdn_start_hyphen}     ${SNMP_DEFAULT_PORT}     ${invalid_destination_error}
+    ${invalid_fqdn_too_long}         ${SNMP_DEFAULT_PORT}     ${invalid_destination_error}
+    ${invalid_fqdn_empty_label}      ${SNMP_DEFAULT_PORT}     ${invalid_destination_error}
 
 
 Configure Multiple SNMP Managers On BMC Via GUI And Verify
@@ -420,6 +433,8 @@ Close Add SNMP Alerts Destination Window
        Click Element  ${xpath_cancel_button}
     ELSE IF  '${expected_error}' == '${invalid_ip_error}'
        Click Element  ${xpath_cancel_button}
+    ELSE IF  '${expected_error}' == '${invalid_destination_error}'
+       Click Element  ${xpath_snmp_error_close_button}
     END
 
 
