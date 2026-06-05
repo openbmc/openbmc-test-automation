@@ -116,6 +116,44 @@ Verify Switch To Running Image With Cancel Button At PowerOff State With ReadOnl
     Verify Switch Image and Cancel Buttons Of Switch To Running Image   readonly  Cancel
 
 
+Verify Add File Button Enabled At System Poweroff State
+    [Documentation]  Verify that "Add file" button is enabled when system is at poweroff state.
+    [Tags]  Verify_Add_File_Button_Enabled_At_System_Poweroff_State
+    [Setup]  Run Keywords  Power Off Server  AND  Navigate To Required Sub Menu
+    ...      ${xpath_operations_menu}  ${xpath_firmware_update_sub_menu}  firmware
+
+    Verify Firmware Button State  user_type=admin  button=add_file  expected_state=enabled
+
+
+Verify Start Update Button Enabled At System Poweroff State
+    [Documentation]  Verify that "Start update" button is enabled when system is at poweroff state.
+    [Tags]  Verify_Start_Update_Button_Enabled_At_System_Poweroff_State
+    [Setup]  Run Keywords  Power Off Server  AND  Navigate To Required Sub Menu
+    ...      ${xpath_operations_menu}  ${xpath_firmware_update_sub_menu}  firmware
+
+    Verify Firmware Button State  user_type=admin  button=start_update  expected_state=enabled
+
+
+Verify Add File Button Disabled At System Poweroff State With Readonly User
+    [Documentation]  Verify that "Add file" button is disabled when system is at poweroff state with readonly user.
+    [Tags]  Verify_Add_File_Button_Disabled_At_System_Poweroff_State_With_Readonly_User
+    [Setup]  Run Keywords  Power Off Server  AND  Create Readonly User And Login To GUI  AND
+    ...      Navigate To Required Sub Menu  ${xpath_operations_menu}  ${xpath_firmware_update_sub_menu}  firmware
+    [Teardown]  Delete Readonly User And Logout Current GUI Session
+
+    Verify Firmware Button State  user_type=readonly  button=add_file  expected_state=disabled
+
+
+Verify Start Update Button Disabled At System Poweroff State With Readonly User
+    [Documentation]  Verify that "Start update" button is disabled when system is at poweroff state with readonly user.
+    [Tags]  Verify_Start_Update_Button_Disabled_At_System_Poweroff_State_With_Readonly_User
+    [Setup]  Run Keywords  Power Off Server  AND  Create Readonly User And Login To GUI  AND
+    ...      Navigate To Required Sub Menu  ${xpath_operations_menu}  ${xpath_firmware_update_sub_menu}  firmware
+    [Teardown]  Delete Readonly User And Logout Current GUI Session
+
+    Verify Firmware Button State  user_type=readonly  button=start_update  expected_state=disabled
+
+
 ###  Power On Test Cases  ###
 
 Verify Existence Of All Sub Sections Under BMC And Server Section At Power On State
@@ -150,6 +188,44 @@ Verify Switch To Running Image At Power On State
     ...      ${xpath_operations_menu}  ${xpath_firmware_update_sub_menu}  firmware
 
     Element Should Be Disabled  ${xpath_switch_to_running}
+
+
+Verify Add File Button Disabled At System Poweron State
+    [Documentation]  Verify that "Add file" button is disabled when system is at poweron state.
+    [Tags]  Verify_Add_File_Button_Disabled_At_System_Poweron_State
+    [Setup]  Run Keywords  Power On Server  AND  Navigate To Required Sub Menu
+    ...      ${xpath_operations_menu}  ${xpath_firmware_update_sub_menu}  firmware
+
+    Verify Firmware Button State  user_type=admin  button=add_file  expected_state=disabled
+
+
+Verify Start Update Button Disabled At System Poweron State
+    [Documentation]  Verify that "Start update" button is disabled when system is at poweron state.
+    [Tags]  Verify_Start_Update_Button_Disabled_At_System_Poweron_State
+    [Setup]  Run Keywords  Power On Server  AND  Navigate To Required Sub Menu
+    ...      ${xpath_operations_menu}  ${xpath_firmware_update_sub_menu}  firmware
+
+    Verify Firmware Button State  user_type=admin  button=start_update  expected_state=disabled
+
+
+Verify Add File Button Disabled At System Poweron State With Readonly User
+    [Documentation]  Verify that "Add file" button is disabled when system is at poweron state with readonly user.
+    [Tags]  Verify_Add_File_Button_Disabled_At_System_Poweron_State_With_Readonly_User
+    [Setup]  Run Keywords  Power On Server  AND  Create Readonly User And Login To GUI  AND
+    ...      Navigate To Required Sub Menu  ${xpath_operations_menu}  ${xpath_firmware_update_sub_menu}  firmware
+    [Teardown]  Delete Readonly User And Logout Current GUI Session
+
+    Verify Firmware Button State  user_type=readonly  button=add_file  expected_state=disabled
+
+
+Verify Start Update Button Disabled At System Poweron State With Readonly User
+    [Documentation]  Verify that "Start update" button is disabled when system is at poweron state with readonly user.
+    [Tags]  Verify_Start_Update_Button_Disabled_At_System_Poweron_State_With_Readonly_User
+    [Setup]  Run Keywords  Power On Server  AND  Create Readonly User And Login To GUI  AND
+    ...      Navigate To Required Sub Menu  ${xpath_operations_menu}  ${xpath_firmware_update_sub_menu}  firmware
+    [Teardown]  Delete Readonly User And Logout Current GUI Session
+
+    Verify Firmware Button State  user_type=readonly  button=start_update  expected_state=disabled
 
 
 *** Keywords ***
@@ -243,3 +319,45 @@ Perform Firmware Switch And Verify
     ...  msg=Backup image before switch should match running image after switch
 
     Log  Firmware images successfully swapped!
+
+
+Verify Firmware Button State
+    [Documentation]  Reusable keyword to verify firmware button state based on user type and button.
+    [Arguments]  ${user_type}  ${button}  ${expected_state}
+
+    Description of argument(s):
+    # user_type             User type (admin/readonly)
+    # button                Button to verify (add_file/start_update)
+    # expected_state        Expected button state (enabled/disabled)
+
+    # Check user type first, then button type.
+    IF  '${user_type}' == 'readonly'
+        # For readonly user, both buttons should always be disabled.
+        IF  '${button}' == 'add_file'
+            Wait Until Element Is Visible  ${xpath_add_file_button_disabled}  timeout=10s
+            Page Should Contain Element  ${xpath_add_file_button_disabled}
+            Page Should Not Contain Element  ${xpath_add_file_button}
+        ELSE IF  '${button}' == 'start_update'
+            Element Should Be Disabled  ${xpath_start_update_button}
+        END
+    ELSE
+        # For admin user, check expected state.
+        IF  '${button}' == 'add_file'
+            IF  '${expected_state}' == 'enabled'
+                Wait Until Element Is Visible  ${xpath_add_file_button}  timeout=10s
+                Element Should Be Enabled  ${xpath_add_file_button}
+                Page Should Not Contain Element  ${xpath_add_file_button_disabled}
+            ELSE
+                Wait Until Element Is Visible  ${xpath_add_file_button_disabled}  timeout=10s
+                Page Should Contain Element  ${xpath_add_file_button_disabled}
+                Page Should Not Contain Element  ${xpath_add_file_button}
+            END
+        ELSE IF  '${button}' == 'start_update'
+            IF  '${expected_state}' == 'enabled'
+                Wait Until Element Is Visible  ${xpath_start_update_button}  timeout=10s
+                Element Should Be Enabled  ${xpath_start_update_button}
+            ELSE
+                Element Should Be Disabled  ${xpath_start_update_button}
+            END
+        END
+    END
