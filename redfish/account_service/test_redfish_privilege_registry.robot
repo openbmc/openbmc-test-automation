@@ -231,10 +231,10 @@ Get Redfish Privilege Registry Json URL
 Create And Verify Various Privilege Users
     [Documentation]  Create and verify admin, test, operator, and readonly users.
 
-    Redfish Create User   ${test_user}  ${test_password}  Operator  ${true}
-    Redfish Create User   ${admin_user}  ${admin_password}  Administrator  ${true}
-    Redfish Create User   ${operator_user}  ${operator_password}  Operator  ${true}
-    Redfish Create User   ${readonly_user}  ${readonly_password}  ReadOnly  ${true}
+    Redfish Create User   ${test_user}  ${test_password}  Operator  ${True}
+    Redfish Create User   ${admin_user}  ${admin_password}  Administrator  ${True}
+    Redfish Create User   ${operator_user}  ${operator_password}  Operator  ${True}
+    Redfish Create User   ${readonly_user}  ${readonly_password}  ReadOnly  ${True}
 
     Redfish Verify User   ${test_user}  ${test_password}  Operator
     Redfish Verify User   ${admin_user}  ${admin_password}  Administrator
