@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11ad4a39_27abd559",
+        "filename": "gui/gui_test/operations_menu/test_firmware_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-06-05T09:47:13Z",
+      "side": 1,
+      "message": "Want to know whether the variable is working, during the execution, have faced a failure.\nSo, when I changed the variable as below, it\u0027s worked\n${xpath_add_file_button} \u003d//button[@class\u003d\u0027add-file-btn btn mt-2 btn-secondary\u0027]",
+      "range": {
+        "startLine": 15,
+        "startChar": 65,
+        "endLine": 15,
+        "endChar": 69
+      },
+      "revId": "756afe7540d47e0e3fcd5b5e1ff77960596e2e9d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8be0f389_f15fc00f",
+        "filename": "gui/gui_test/operations_menu/test_firmware_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-06-05T09:47:13Z",
+      "side": 1,
+      "message": "comments need to be end with periods.\nline 332, 334,343",
+      "range": {
+        "startLine": 332,
+        "startChar": 41,
+        "endLine": 332,
+        "endChar": 45
+      },
+      "revId": "756afe7540d47e0e3fcd5b5e1ff77960596e2e9d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
