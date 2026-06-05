@@ -29,6 +29,13 @@ ${negative_port}      ${-12}
 ${empty_port}         ${EMPTY}
 ${alphanumeric_port}  abc123
 
+# Invalid FQDN (Fully Qualified Domain Name) values.
+${invalid_fqdn_special_chars}      snmp@manager!.com
+${invalid_fqdn_double_dot}         snmp..manager.com
+${invalid_fqdn_start_hyphen}       -snmp.manager.com
+${invalid_fqdn_too_long}           aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.example.com
+${invalid_fqdn_empty_label}        snmp..example.com
+
 # User Name Password
 ${SNMP_MGR1_USERNAME}    ${EMPTY}
 ${SNMP_MGR1_PASSWORD}    ${EMPTY}
