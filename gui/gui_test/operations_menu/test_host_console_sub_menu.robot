@@ -8,7 +8,7 @@ Suite Setup     Launch Browser And Login GUI
 Suite Teardown  Close Browser
 Test Setup      Test Setup Execution
 
-Test Tags      Host_Console_Sub_Menu
+Test Tags       Host_Console_Sub_Menu
 
 *** Variables ***
 
@@ -37,6 +37,8 @@ Test Setup Execution
     [Documentation]  Do test case setup tasks.
 
     Click Element  ${xpath_operations_menu}
+    Sleep  1s
     Click Element  ${xpath_host_console_sub_menu}
-    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  host-console
+    Sleep  1s
+    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain URL  @{host_console_location}
     Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
