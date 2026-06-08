@@ -380,6 +380,15 @@ Wait And Click Element
     Wait Until Element Is Visible    ${locator}    timeout=${wait_timeout}
     Click Element    ${locator}
 
+Reload GUI Page
+    [Documentation]  Reload the GUI by navigating to the base URL.
+    ...  Use this as a generic test teardown to reset browser state
+    ...  without navigating through the UI (avoids dependency on specific
+    ...  UI elements being clickable during teardown).
+
+    Go To  ${OPENBMC_GUI_URL}
+    Wait Until Element Is Not Visible  ${xpath_page_loading_progress_bar}  timeout=30s
+
 
 Navigate To Required Sub Menu
     [Documentation]  Navigate to required sub menu from main menu.
