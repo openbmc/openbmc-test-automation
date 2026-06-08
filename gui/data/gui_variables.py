@@ -61,14 +61,23 @@ class gui_variables:
     )
     xpath_firmware_update_sub_menu = "//*[@data-test-id='nav-item-firmware']"
     xpath_reboot_bmc_sub_menu = "//*[@data-test-id='nav-item-reboot-bmc']"
-    xpath_host_console_sub_menu = "//*[@data-test-id='nav-item-host-console']"
     xpath_virtual_media_sub_menu = (
         "//*[@data-test-id='nav-item-virtual-media']"
+    )
+    # Supports both new 'serial-over-lan' (newer webui) and
+    # old 'host-console' (older webui) data-test-id as fallback.
+    xpath_host_console_sub_menu = (
+        "//*[@data-test-id='nav-item-serial-over-lan' or "
+        "@data-test-id='nav-item-host-console']"
     )
     xpath_server_power_operations_sub_menu = (
         "//*[@data-test-id='nav-item-server-power-operations']"
     )
-    xpath_host_console_heading = "//h1[text()='Host console']"
+    # Supports both new 'Serial over LAN (SOL) console' heading (newer webui)
+    # and old 'Host console' heading (older webui) as fallback.
+    xpath_host_console_heading = (
+        "//h1[text()='Serial over LAN (SOL) console' or text()='Host console']"
+    )
     xpath_firmware_heading = "//h1[contains(text(), 'Firmware')]"
     xpath_kvm_sub_menu = "//*[@data-test-id='nav-item-kvm']"
 
