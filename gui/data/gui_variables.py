@@ -23,12 +23,8 @@ class gui_variables:
     # GUI header
     xpath_root_button_menu = "//*[@data-test-id='appHeader-container-user']"
     xpath_profile_settings = "//*[@data-test-id='appHeader-link-profile']"
-    xpath_server_health_header = (
-        "//*[@data-test-id='appHeader-container-health']"
-    )
-    xpath_server_power_header = (
-        "//*[@data-test-id='appHeader-container-power']"
-    )
+    xpath_server_health_header = "//*[@data-test-id='appHeader-container-health']"
+    xpath_server_power_header = "//*[@data-test-id='appHeader-container-power']"
     xpath_refresh_button = "//*[@data-test-id='appHeader-button-refresh']"
 
     # Logs menu
@@ -38,30 +34,21 @@ class gui_variables:
     xpath_event_logs_sub_menu = "//*[@data-test-id='nav-item-event-logs']"
     xpath_event_logs_heading = "//h1[contains(text(), 'Event logs')]"
     xpath_event_search = "//input[@placeholder='Search logs']"
-    xpath_progress_logs_sub_menu = (
-        "//*[@data-test-id='nav-item-post-code-logs']"
-    )
+    xpath_progress_logs_sub_menu = "//*[@data-test-id='nav-item-post-code-logs']"
 
     # Hardware status menu
-    xpath_hardware_status_menu = (
-        "//*[@data-test-id='nav-button-hardware-status']"
-    )
-    xpath_inventory_and_leds_sub_menu = (
-        "//*[@data-test-id='nav-item-inventory']"
-    )
+    xpath_hardware_status_menu = "//*[@data-test-id='nav-button-hardware-status']"
+    xpath_inventory_and_leds_sub_menu = "//*[@data-test-id='nav-item-inventory']"
     xpath_sensor_sub_menu = "//*[@data-test-id='nav-item-sensors']"
-    xpath_inventory_and_leds_heading = (
-        "//h1[contains(text(), 'Inventory and LEDs')]"
-    )
+    xpath_inventory_and_leds_heading = "//h1[contains(text(), 'Inventory and LEDs')]"
 
     # Operations menu
     xpath_operations_menu = "//*[@data-test-id='nav-button-operations']"
-    xpath_factory_reset_sub_menu = (
-        "//*[@data-test-id='nav-item-factory-reset']"
-    )
+    xpath_factory_reset_sub_menu = "//*[@data-test-id='nav-item-factory-reset']"
     xpath_firmware_update_sub_menu = "//*[@data-test-id='nav-item-firmware']"
     xpath_reboot_bmc_sub_menu = "//*[@data-test-id='nav-item-reboot-bmc']"
     xpath_host_console_sub_menu = "//*[@data-test-id='nav-item-host-console']"
+    xpath_virtual_media_sub_menu = "//*[@data-test-id='nav-item-virtual-media']"
     xpath_server_power_operations_sub_menu = (
         "//*[@data-test-id='nav-item-server-power-operations']"
     )
@@ -78,12 +65,8 @@ class gui_variables:
         "//*[@data-test-id='nav-item-power-restore-policy']"
     )
     xpath_static_dns = "//h2[text()='Static DNS']"
-    xpath_dns_servers_toggle = (
-        "//*[@data-test-id='networkSettings-switch-useDns']"
-    )
-    xpath_add_dns_ip_address_button = (
-        "//button[normalize-space()='Add IP address']"
-    )
+    xpath_dns_servers_toggle = "//*[@data-test-id='networkSettings-switch-useDns']"
+    xpath_add_dns_ip_address_button = "//button[normalize-space()='Add IP address']"
     xpath_input_static_dns = "//*[@id='staticDns']"
 
     # Security and access menu
@@ -92,9 +75,7 @@ class gui_variables:
     )
     xpath_sessions_sub_menu = "//*[@data-test-id='nav-item-sessions']"
     xpath_ldap_sub_menu = "//*[@data-test-id='nav-item-ldap']"
-    xpath_user_management_sub_menu = (
-        "//*[@data-test-id='nav-item-user-management']"
-    )
+    xpath_user_management_sub_menu = "//*[@data-test-id='nav-item-user-management']"
     xpath_policies_sub_menu = "//*[@data-test-id='nav-item-policies']"
     xpath_certificates_sub_menu = "//*[@data-test-id='nav-item-certificates']"
 
@@ -113,15 +94,9 @@ class gui_variables:
     )
     xpath_profile_settings_link = "//a[contains(text(),'Profile Settings')]"
     xpath_profile_settings_heading = "//h1[text()='Profile settings']"
-    xpath_browser_offset = (
-        "//*[@data-test-id='profileSettings-radio-browserOffset']"
-    )
-    xpath_browser_offset_textfield = (
-        xpath_browser_offset + "/following-sibling::*"
-    )
-    xpath_input_password = (
-        "//*[@data-test-id='profileSettings-input-newPassword']"
-    )
+    xpath_browser_offset = "//*[@data-test-id='profileSettings-radio-browserOffset']"
+    xpath_browser_offset_textfield = xpath_browser_offset + "/following-sibling::*"
+    xpath_input_password = "//*[@data-test-id='profileSettings-input-newPassword']"
     xpath_input_confirm_password = (
         "//*[@data-test-id='profileSettings-input-confirmPassword']"
     )
@@ -132,9 +107,7 @@ class gui_variables:
     xpath_confirm_bmc_reboot = "//*[@class='btn btn-md btn-primary']"
 
     # Common variables
-    xpath_save_settings_button = (
-        "//button[contains(normalize-space(.),'Save')]"
-    )
+    xpath_save_settings_button = "//button[contains(normalize-space(.),'Save')]"
     xpath_confirm_button = "//button[contains(normalize-space(.),'Confirm')]"
     xpath_cancel_button = "//button[contains(text(),'Cancel')]"
     xpath_add_button = "//div[@class='modal fade show']//button[@type='button'][normalize-space()='Add']"
@@ -146,8 +119,12 @@ class gui_variables:
     xpath_error_popup = (
         "//*[contains(normalize-space(.),'Error')]/following-sibling::button"
     )
-    xpath_unauthorized_popup = "//*[contains(normalize-space(.),'Unauthorized')]/following-sibling::button"
-    xpath_information_message = "//*[contains(text(),'Reload the browser page to get the updated content.')]"
+    xpath_unauthorized_popup = (
+        "//*[contains(normalize-space(.),'Unauthorized')]/following-sibling::button"
+    )
+    xpath_information_message = (
+        "//*[contains(text(),'Reload the browser page to get the updated content.')]"
+    )
 
     # Hyperlink XPaths -  Used for validating hyperlinks
 
