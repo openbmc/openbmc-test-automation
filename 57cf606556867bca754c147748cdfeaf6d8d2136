@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "024f882c_99e5fc3f",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 653,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-06-09T07:40:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d4f5412c_3e7fc352",
+      "revId": "57cf606556867bca754c147748cdfeaf6d8d2136",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "21184e29_049218d6",
@@ -31,6 +49,30 @@
       "writtenOn": "2026-06-09T07:02:23Z",
       "side": 1,
       "message": "please fix. looks like these 2 lines were after line number 649",
+      "range": {
+        "startLine": 688,
+        "startChar": 0,
+        "endLine": 690,
+        "endChar": 17
+      },
+      "revId": "57cf606556867bca754c147748cdfeaf6d8d2136",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fca685e_e7457dff",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 690,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-06-09T07:40:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21184e29_049218d6",
       "range": {
         "startLine": 688,
         "startChar": 0,
