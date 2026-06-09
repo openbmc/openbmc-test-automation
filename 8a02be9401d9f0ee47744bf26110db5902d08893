@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f2f169c_9f850591",
+        "filename": "redfish/account_service/test_user_account.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 1009,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-06-09T05:24:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a511379_1b21bf95",
+      "revId": "8a02be9401d9f0ee47744bf26110db5902d08893",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb3b0778_f39adf3d",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-06-08T13:17:10Z",
       "side": 1,
       "message": "I know its from old code. but update it plase for this keyword \n\n${user_name}   to  ${username} \nUserName  to username\nPassword   to password\n\n so that we use the same naming in this files suite",
+      "revId": "8a02be9401d9f0ee47744bf26110db5902d08893",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81835adb_4e1edd8f",
+        "filename": "redfish/account_service/test_user_account.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 1028,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-06-09T05:24:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb3b0778_f39adf3d",
       "revId": "8a02be9401d9f0ee47744bf26110db5902d08893",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
