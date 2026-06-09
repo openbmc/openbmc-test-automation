@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9f795f3_468b24e4",
+        "filename": "gui/gui_test/operations_menu/test_virtual_media_operations_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-06-09T07:25:26Z",
+      "side": 1,
+      "message": "kindly remove this line, check the following comments",
+      "range": {
+        "startLine": 10,
+        "startChar": 5,
+        "endLine": 10,
+        "endChar": 16
+      },
+      "revId": "0cc8d14cbe5ca6c2feb3a7e1f672fa2bc911229d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0dd4de98_315eb24d",
+        "filename": "gui/gui_test/operations_menu/test_virtual_media_operations_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-06-09T07:25:26Z",
+      "side": 1,
+      "message": "Need to modify as below, we can use existing keywords for these steps.\n\nTest Setup Execution\n    [Documentation]  Perform suite setup operation.\n\n    Launch Browser And Login GUI\n    Navigate To Required Sub Menu  ${xpath_operations_menu}  ${xpath_virtual_media_sub_menu}  virtual-media",
+      "range": {
+        "startLine": 37,
+        "startChar": 5,
+        "endLine": 37,
+        "endChar": 11
+      },
+      "revId": "0cc8d14cbe5ca6c2feb3a7e1f672fa2bc911229d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96cdda1e_44e66626",
+        "filename": "gui/gui_test/operations_menu/test_virtual_media_operations_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-06-09T07:25:26Z",
+      "side": 1,
+      "message": "We can remove this Tear Down, because there is no need for the Reload GUI keyword at the end of these test cases.",
+      "range": {
+        "startLine": 47,
+        "startChar": 5,
+        "endLine": 47,
+        "endChar": 14
+      },
+      "revId": "0cc8d14cbe5ca6c2feb3a7e1f672fa2bc911229d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "644eb1a1_50294014",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-06-09T07:25:26Z",
+      "side": 1,
+      "message": "Actually, the below operation will launch the WebUI again. But there is no need for this operation. you can remove this keyword.",
+      "range": {
+        "startLine": 383,
+        "startChar": 0,
+        "endLine": 383,
+        "endChar": 7
+      },
+      "revId": "0cc8d14cbe5ca6c2feb3a7e1f672fa2bc911229d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
