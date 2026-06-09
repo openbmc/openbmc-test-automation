@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5ed8e6a_f8a81f59",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-06-09T03:07:45Z",
+      "side": 1,
+      "message": "Hi Praful, which company you are representing. The reason I\u0027m asking is we need the CLA approval in place when we plan to merge the code changes from you.\n\nCLA https://drive.google.com/drive/folders/1Ooi0RdTcaOWF1DWFJUAJDdN7tRKde7Nl\n\nLet me know. Thanks",
+      "revId": "bd93a16e32b8dbb348e55a021e7b521e9b2544d6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
