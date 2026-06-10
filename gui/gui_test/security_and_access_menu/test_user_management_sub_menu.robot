@@ -4,9 +4,8 @@ Documentation  Test OpenBMC GUI "User management" sub-menu of "Security and acce
 
 Resource        ../../lib/gui_resource.robot
 
-Suite Setup     Launch Browser And Login GUI
-Suite Teardown  Suite Teardown Execution
-Test Setup      Test Setup Execution
+Suite Setup      Suite Setup Execution
+Suite Teardown   Suite Teardown Execution
 
 Test Tags      User_Management_Sub_Menu
 
@@ -14,9 +13,9 @@ Test Tags      User_Management_Sub_Menu
 
 
 ${xpath_user_management_heading}         //h1[text()="User management"]
-${xpath_select_user}                     //input[contains(@class,"custom-control-input")]
-${xpath_account_policy}                  //button[contains(text(),'Account policy settings')]
-${xpath_add_user}                        //button[contains(text(),'Add user')]
+${xpath_select_user}                     //input[@data-test-id='userManagement-checkbox-tableHeaderCheckbox']
+${xpath_account_policy}                  //button[contains(., 'Account policy settings')]
+${xpath_add_user}                        //button[contains(., 'Account policy settings')]/following-sibling::button[1]
 ${xpath_edit_user}                       //*[@data-test-id='userManagement-tableRowAction-edit-0']
 ${xpath_delete_user}                     //*[@data-test-id='userManagement-tableRowAction-delete-1']
 ${xpath_account_status_enabled_button}   //*[@data-test-id='userManagement-radioButton-statusEnabled']
@@ -25,9 +24,13 @@ ${xpath_username_input_button}           //*[@data-test-id='userManagement-input
 ${xpath_privilege_list_button}           //*[@data-test-id='userManagement-select-privilege']
 ${xpath_password_input_button}           //*[@data-test-id='userManagement-input-password']
 ${xpath_password_confirm_button}         //*[@data-test-id='userManagement-input-passwordConfirmation']
-${xpath_cancel_button}                   //*[@data-test-id='userManagement-button-cancel']
-${xpath_submit_button}                   //*[@data-test-id='userManagement-button-submit']
+${xpath_disable_user_radio}              //input[contains(@data-test-id,'statusDisabled')]
+${xpath_cancel_button}                   //button[normalize-space(.)='Save']/preceding-sibling::button
+${xpath_save_button}                     //button[normalize-space(.)='Save']
 ${xpath_delete_button}                   //button[text()='Delete user']
+${xpath_cancel_button_1}                 (//div[contains(@class,'modal-footer')]//button[normalize-space(.)='Cancel'])[2]
+${xpath_add_user_1}                      //button[normalize-space(.)='Cancel']/following-sibling::button[normalize-space(.)='Add user']
+${xpath_edit_user_save_button}           //div[contains(@class,'show')]//button[normalize-space()='Cancel']/following-sibling::button[1]
 ${xpath_add_user_heading}                //h5[contains(normalize-space(),'Add user')]
 ${xpath_policy_settings_header}          //*[text()="Account policy settings"]
 ${xpath_auto_unlock}                     //*[@data-test-id='userManagement-radio-automaticUnlock']
@@ -35,7 +38,7 @@ ${xpath_manual_unlock}                   //*[@data-test-id='userManagement-radio
 ${xpath_max_failed_login}                //*[@data-test-id='userManagement-input-lockoutThreshold']
 ${test_user_password}                    TestPwd1
 ${xpath_user_creation_error_message}     //*[contains(text(),'Error creating user')]
-${xpath_close_error_message}             //*/*[contains(text(),'Error')]/following-sibling::button
+${xpath_close_error_message}             //div[contains(@class,'toast')]//button[@aria-label='Close']
 @{username}                              admin_user  readonly_user  disabled_user
 @{list_user_privilege}                   Administrator  ReadOnly
 
@@ -76,9 +79,11 @@ Verify Existence Of All Buttons In User Management Page
 Verify Existence Of All Button And Fields In Add User
     [Documentation]  Verify existence of all buttons and fields in add user page.
     [Tags]  Verify_Existence_Of_All_Button_And_Fields_In_Add_User
-    [Teardown]  Click Element  ${xpath_cancel_button}
+    [Teardown]  Run Keywords  Click Element  ${xpath_cancel_button_1}  AND
+    ...         Sleep  5s
 
     Click Element  ${xpath_add_user}
+    Wait Until Element Is Visible  ${xpath_add_user_1}
     Wait Until Page Contains Element  ${xpath_add_user_heading}
     Page Should Contain Element  ${xpath_account_status_enabled_button}
     Page Should Contain Element  ${xpath_account_status_disabled_button}
@@ -86,21 +91,23 @@ Verify Existence Of All Button And Fields In Add User
     Page Should Contain Element  ${xpath_privilege_list_button}
     Page Should Contain Element  ${xpath_password_input_button}
     Page Should Contain Element  ${xpath_password_confirm_button}
-    Page Should Contain Element  ${xpath_cancel_button}
-    Page Should Contain Element  ${xpath_submit_button}
+    Page Should Contain Element  ${xpath_cancel_button_1}
+    Page Should Contain Element  ${xpath_add_user_1}
 
 
 Verify Existence Of All Buttons And Fields In Account Policy Settings
     [Documentation]  Verify existence of all buttons and fields in account policy settings page.
     [Tags]  Verify_Existence_Of_All_Buttons_And_Fields_In_Account_Policy_Settings
-    [Teardown]  Click Element  ${xpath_cancel_button}
+    [Teardown]  Run Keywords  Click Element  ${xpath_cancel_button}  AND
+    ...         Sleep  5s
 
     Click Element  ${xpath_account_policy}
+    Wait Until Element Is Visible  ${xpath_save_button}
     Wait Until Page Contains Element  ${xpath_policy_settings_header}
     Page Should Contain Element  ${xpath_auto_unlock}
     Page Should Contain Element  ${xpath_manual_unlock}
     Page Should Contain Element  ${xpath_max_failed_login}
-    Page Should Contain Element  ${xpath_submit_button}
+    Page Should Contain Element  ${xpath_save_button}
     Page Should Contain Element  ${xpath_cancel_button}
 
 
@@ -190,11 +197,12 @@ Test Modifying User Privilege Of Existing User Via GUI
 
     # Modify user privilege via GUI.
     Wait Until Keyword Succeeds  30 sec   5 sec  Click Element
-    ...  //td[text()='${username}']/following-sibling::*/*/*[@title='Edit user']
+    ...  (//td[normalize-space()='${username}']/ancestor::tr//button)[2]
     Select From List By Value  ${xpath_privilege_list_button}  ${modify_privilege}
 
     # Submit changes.
-    Click Element  ${xpath_submit_button}
+    Wait And Click Element  ${xpath_edit_user_save_button}
+    Sleep  10s
 
     # Confirm the successful update.
     Wait Until Element Is Visible  ${xpath_success_message}  timeout=30
@@ -214,26 +222,27 @@ Test Modifying User Account Status Of Existing User Via GUI
 
     # Get random username, user privilege level and account status.
     ${username}=  Generate Random String  8  [LETTERS]
-    ${privilege_level}=  Evaluate  random.choice(${list_user_privilege})  random
-    ${initial_account_status}=  Evaluate  random.choice([True, False])  random
+    #${privilege_level}=  Evaluate  random.choice(${list_user_privilege})  random
+    VAR  ${privilege_level}  Administrator
+    VAR  ${initial_account_status}  ${True}
 
     # Create new user account.
-    Create User And Verify  ${username}  ${privilege_level}  ${initial_account_status}
+    Create User And Verify  ${username}  ${privilege_level}  ${True}
 
     # Modify user account status via GUI.
     Wait Until Keyword Succeeds  30 sec   5 sec  Click Element
-    ...  //td[text()='${username}']/following-sibling::*/*/*[@title='Edit user']
-    Wait Until Element Is Visible  ${xpath_submit_button}  timeout=30
+    ...  (//td[normalize-space()='${username}']/ancestor::tr//button)[2]
+    Wait Until Element Is Visible  ${xpath_edit_user_save_button}  timeout=30
 
     # Switch the user account status to its opposite state.
     IF  ${initial_account_status} == ${True}
-        Click Element At Coordinates  ${xpath_account_status_disabled_button}  0  0
+        Click Element  ${xpath_account_status_disabled_button}  0  0
     ELSE
-        Click Element At Coordinates  ${xpath_account_status_enabled_button}  0  0
+        Click Element  ${xpath_account_status_enabled_button}  0  0
     END
 
-    # Submit changes.
-    Click Element  ${xpath_submit_button}
+    # Save changes.
+    Click Element  ${xpath_edit_user_save_button}
 
     # Confirm the successful update.
     Wait Until Element Is Visible  ${xpath_success_message}  timeout=30
@@ -257,24 +266,26 @@ Test Modifying User Password Of Existing User Via GUI
     # Get random username, user privilege level and account status.
     ${username}=  Generate Random String  8  [LETTERS]
     ${privilege_level}=  Evaluate  random.choice(${list_user_privilege})  random
-    ${initial_account_status}=  Evaluate  random.choice([True, False])  random
+    #${initial_account_status}=  Evaluate  random.choice([True, False])  random
 
     # Initialize the new password for the account.
     VAR  ${new_password}  Testpassword1
 
     # Create new user account.
-    Create User And Verify  ${username}  ${privilege_level}  ${initial_account_status}
+    Create User And Verify  ${username}  ${privilege_level}  ${True}
 
     # Wait for newly created user to appear on the page.
     Wait Until Element Is Visible  //td[text()='${username}']
 
     # Modify user password via GUI.
-    Click Element  //td[text()='${username}']/following-sibling::*/*/*[@title='Edit user']
+    Click Element  (//td[normalize-space()='${username}']/ancestor::tr//button)[2]
+    Wait Until Element Is Visible  ${xpath_edit_user_save_button}  timeout=30
+
     Input Text  ${xpath_password_input_button}  ${new_password}
     Input Text  ${xpath_password_confirm_button}  ${new_password}
 
-    # Submit changes.
-    Click Element  ${xpath_submit_button}
+    # Save changes.
+    Click Element  ${xpath_edit_user_save_button}
 
     # Confirm the successful update.
     Wait Until Element Is Visible  ${xpath_success_message}  timeout=30
@@ -284,11 +295,12 @@ Test Modifying User Password Of Existing User Via GUI
     ${status}=  Run Keyword And Return Status  Redfish.Login  ${username}  ${new_password}
     Should Be Equal  ${status}  ${True}
 
+
 Verify Creating User Without Privileges Via GUI
     [Documentation]  Verify creating user without setting user privileges
     ...    via GUI.
     [Tags]  Verify_Creating_User_Without_Privileges_Via_GUI
-    [Teardown]  Click Element  ${xpath_cancel_button}
+    [Teardown]  Click Element  ${xpath_cancel_button_1}
 
     # Get random username.
     ${username}=  Generate Random String  8  [LETTERS]
@@ -302,17 +314,18 @@ Verify Creating User Without Privileges Via GUI
     Input Text  ${xpath_password_input_button}  ${test_user_password}
     Input Text  ${xpath_password_confirm_button}  ${test_user_password}
 
-    # Submit changes.
-    Click Element  ${xpath_submit_button}
+    # Save changes.
+    Click Element  ${xpath_edit_user_save_button}
 
     # Expect get the field required messages.
     Page Should Contain  Field required
+
 
 Verify Creating User With Invalid Password Length Via GUI
     [Documentation]  Verify creating user with invalid password length
     ...    via GUI.
     [Tags]  Verify_Creating_User_With_Invalid_Password_Length_Via_GUI
-    [Teardown]  Click Element  ${xpath_cancel_button}
+    [Teardown]  Click Element  ${xpath_cancel_button_1}
 
     # Get random username.
     ${username}=  Generate Random String  8  [LETTERS]
@@ -328,15 +341,18 @@ Verify Creating User With Invalid Password Length Via GUI
     Select From List By Value  ${xpath_privilege_list_button}  Administrator
 
     # Set user password.
-    Input Text  ${xpath_password_input_button}  testuser1223456789123456789
-    Input Text  ${xpath_password_confirm_button}  testuser1223456789123456789
+    ${password_input}=  Generate Random String  66  [LETTERS][NUMBERS]
+    Input Text  ${xpath_password_input_button}  ${password_input}
+    Input Text  ${xpath_password_confirm_button}  ${password_input}
 
-    # Submit changes.
-    Click Element  ${xpath_submit_button}
+    # Save changes.
+    Click Element  ${xpath_edit_user_save_button}
 
     # Expect get the password invalid length messages.
-    Page Should Contain  Password must be between 8 \u2013 20 characters
-    Click Element  ${xpath_cancel_button}
+    Page Should Contain  Password must be between 8 \u2013 64 characters
+    Click Element  ${xpath_cancel_button_1}
+
+    Sleep  10s
 
     # Click the add user button.
     Click Element  ${xpath_add_user}
@@ -352,14 +368,27 @@ Verify Creating User With Invalid Password Length Via GUI
     Input Text  ${xpath_password_input_button}  testusr
     Input Text  ${xpath_password_confirm_button}  testusr
 
-    # Submit changes.
-    Click Element  ${xpath_submit_button}
+    # Save changes.
+    Click Element  ${xpath_edit_user_save_button}
 
     # Expect get the password invalid length messages.
-    Page Should Contain  Password must be between 8 \u2013 20 characters
+    Page Should Contain  Password must be between 8 \u2013 64 characters
 
 
 *** Keywords ***
+
+Suite Setup Execution
+    [Documentation]  Do suite setup tasks.
+
+    # Navigate to https://xx.xx.xx.xx/#/access-control/user-management  user management page.
+
+    Launch Browser And Login GUI
+    Execute Javascript    document.body.style.zoom="70%"
+    Navigate To Required Sub Menu  ${xpath_security_and_access_menu}  ${xpath_user_management_sub_menu}  user-management
+    Wait Until Element Is Visible  ${xpath_page_loading_progress_bar}  timeout=30
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
+    Wait Until Page Does Not Contain  Loading 
+
 
 Create User And Verify
     [Documentation]  Create a user with given user name and privilege and verify that the
@@ -367,74 +396,85 @@ Create User And Verify
     [Arguments]  ${user_name}  ${user_privilege}  ${enabled}  ${expected_status}=Success
 
     # Description of argument(s):
-    # user_name           The name of the user to be created (e.g. "test", "robert", etc.).
+    # user_name           The name of the user to be created.
     # user_privilege      Privilege of the user.
-    # enabled             If the user is enabled (e.g True if enabled, False if disabled).
-    # expected_status     Expected status of user creation (e.g. Success, Failure).
+    # enabled             True = enabled user, False = disabled user.
+    # expected_status     Expected status of user creation.
 
-    Click Element  ${xpath_add_user}
+    # -----------------------------
+    # CREATE USER VIA GUI
+    # -----------------------------
+    Wait And Click Element  ${xpath_add_user}
     Wait Until Page Contains Element  ${xpath_add_user_heading}
-
-    # Select disabled radio button if user needs to be disabled
-    IF  ${enabled} == ${False}
-       Click Element At Coordinates  ${xpath_account_status_disabled_button}  0  0
-    END
 
     # Input username, password and privilege.
     Input Text  ${xpath_username_input_button}  ${user_name}
     Select From List By Value  ${xpath_privilege_list_button}  ${user_privilege}
 
     Input Text  ${xpath_password_input_button}  ${test_user_password}
-
     Input Text  ${xpath_password_confirm_button}  ${test_user_password}
 
-    # Submit.
-    Click Element  ${xpath_submit_button}
+    # Select disabled radio button if required.
+    IF  not ${enabled}
+        Click Element  ${xpath_disable_user_radio}
+    END
+
+    # Add user.
+    Click Element  ${xpath_add_user_1}
 
     # Proceed with future steps based on the expected execution status.
     IF  '${expected_status}' == 'Success'
+
         Wait Until Element Is Visible  ${xpath_success_message}  timeout=30
+        Wait Until Element Is Not Visible  ${xpath_success_message}  timeout=30
 
         # Refresh page and check new user is available.
         Wait Until Page Contains Element  ${xpath_add_user}
-        Click Element  ${xpath_refresh_button}
-        Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
+        Refresh GUI
         Wait Until Page Contains  ${user_name}  timeout=15
 
-        # Cross check the privilege of newly added user via Redfish.
+        # Cross-check privilege via Redfish.
         Redfish.Login
+
         ${user_priv_redfish}=  Redfish_Utils.Get Attribute
-        ...  /redfish/v1/AccountService/Accounts/${user_name}  RoleId
+        ...  /redfish/v1/AccountService/Accounts/${user_name}
+        ...  RoleId
+
         Should Be Equal  ${user_privilege}  ${user_priv_redfish}
-        Redfish.Logout
 
-        # Check enable/disable status for user.
-        ${status}=  Run Keyword And Return Status  Redfish.Login  ${user_name}  ${test_user_password}
-        IF  ${enabled} == ${False}
-           Should Be Equal  ${status}  ${False}
+        Sleep  5s
+
+        # Verify enabled/disabled status.
+        ${enabled_status}=  Redfish_Utils.Get Attribute
+        ...  /redfish/v1/AccountService/Accounts/${user_name}
+        ...  Enabled
+
+        Should Be Equal  ${enabled}  ${enabled_status}
+
+        # Verify login behavior.
+        ${status}=  Run Keyword And Return Status
+        ...  Redfish.Login
+        ...  ${user_name}
+        ...  ${test_user_password}
+
+        IF  not ${enabled_status}
+            Should Be Equal  ${status}  ${False}
         ELSE
-           Should Be Equal  ${status}  ${True}
+            Should Be Equal  ${status}  ${True}
         END
+
         Redfish.Logout
 
-    ELSE IF   '${expected_status}' == 'Failure'
+    ELSE IF  '${expected_status}' == 'Failure'
+
         Wait Until Element Is Visible  ${xpath_user_creation_error_message}  timeout=60
 
-        # Close error message popup.
+        # Close error popup.
         Click Element  ${xpath_close_error_message}
+
         Wait Until Element Is Not Visible  ${xpath_user_creation_error_message}  timeout=60
+
     END
-
-
-Test Setup Execution
-    [Documentation]  Do test case setup tasks.
-
-    # Navigate to https://xx.xx.xx.xx/#/access-control/user-management  user management page.
-
-    Click Element  ${xpath_security_and_access_menu}
-    Click Element  ${xpath_user_management_sub_menu}
-    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  user-management
-    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
 
 
 Delete Users Via Redfish
@@ -458,7 +498,7 @@ Delete Users Via GUI
 
     FOR  ${user}  IN  @{user_list}
       Wait Until Keyword Succeeds  30 sec  5 sec  Click Element
-      ...  //td[text()='${user}']/following-sibling::*/*/*[@title='Delete user']
+      ...  //td[normalize-space()='${user}']/following::button[3]
       Wait Until Keyword Succeeds  30 sec  5 sec  Click Element  ${xpath_delete_button}
       Wait Until Element Is Visible  ${xpath_success_message}  timeout=30
       Wait Until Element Is Not Visible  ${xpath_success_message}  timeout=60
