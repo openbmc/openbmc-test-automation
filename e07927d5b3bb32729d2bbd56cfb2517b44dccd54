@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a78f9e0d_bce65986",
+        "filename": "lib/bmc_ipv6_utils.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 719,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-06-10T07:30:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37e93726_dcaa41b1",
+      "revId": "e07927d5b3bb32729d2bbd56cfb2517b44dccd54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e33fb390_c2a84928",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-06-10T07:00:07Z",
       "side": 1,
       "message": "# Description of argument(s):",
+      "revId": "e07927d5b3bb32729d2bbd56cfb2517b44dccd54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ffa9d5f_0493f7f6",
+        "filename": "lib/bmc_ipv6_utils.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 742,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-06-10T07:30:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e33fb390_c2a84928",
       "revId": "e07927d5b3bb32729d2bbd56cfb2517b44dccd54",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
