@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37e93726_dcaa41b1",
+        "filename": "lib/bmc_ipv6_utils.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 719,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-06-10T07:00:07Z",
+      "side": 1,
+      "message": "[Documentation]  Set DHCPv6 attribute to enabled or disabled.",
+      "revId": "e07927d5b3bb32729d2bbd56cfb2517b44dccd54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e33fb390_c2a84928",
+        "filename": "lib/bmc_ipv6_utils.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 742,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-06-10T07:00:07Z",
+      "side": 1,
+      "message": "# Description of argument(s):",
+      "revId": "e07927d5b3bb32729d2bbd56cfb2517b44dccd54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
