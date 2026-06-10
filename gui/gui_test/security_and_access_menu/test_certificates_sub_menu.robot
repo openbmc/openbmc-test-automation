@@ -216,8 +216,9 @@ Verify Certificate Page With Readonly User
     ...      AND  Navigate To Required Sub Menu  ${xpath_security_and_access_menu}
     ...      ${xpath_certificates_sub_menu}  certificates
     [Teardown]  Delete Readonly User And Logout Current GUI Session
+    
 
-    Page Should Contain  No items available
+    Wait Until Keyword Succeeds  30 sec  5 sec  Page Should Contain  No items available
     Element Should Be Disabled  ${xpath_add_certificate_button}
 
 
