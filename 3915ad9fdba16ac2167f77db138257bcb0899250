@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3ce286e_e7eeca36",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-06-10T08:45:46Z",
+      "side": 1,
+      "message": "Changes done.",
+      "parentUuid": "b102a7f9_ed16336d",
+      "revId": "3915ad9fdba16ac2167f77db138257bcb0899250",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "35646fc8_a1b33187",
@@ -35,6 +53,23 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fde4ccf_6cedbfd3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-06-10T08:45:46Z",
+      "side": 1,
+      "message": "Changes done as per review comments.",
+      "revId": "3915ad9fdba16ac2167f77db138257bcb0899250",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b8868d7a_adec3edf",
@@ -48,6 +83,24 @@
       "writtenOn": "2026-06-10T08:16:41Z",
       "side": 1,
       "message": "[Documentation]  Launch browser, login to GUI, and navigate to Virtual Media page.",
+      "revId": "3915ad9fdba16ac2167f77db138257bcb0899250",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6045587d_706c0a77",
+        "filename": "gui/gui_test/operations_menu/test_virtual_media_operations_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-06-10T08:45:46Z",
+      "side": 1,
+      "message": "Changes done.",
+      "parentUuid": "b8868d7a_adec3edf",
       "revId": "3915ad9fdba16ac2167f77db138257bcb0899250",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
