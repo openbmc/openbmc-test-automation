@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "b102a7f9_ed16336d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-06-10T08:16:41Z",
+      "side": 1,
+      "message": "Typo in commit message title\n\nFix to Media",
+      "revId": "3915ad9fdba16ac2167f77db138257bcb0899250",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "35646fc8_a1b33187",
@@ -14,6 +31,23 @@
       "writtenOn": "2026-06-09T09:22:42Z",
       "side": 1,
       "message": "Changes done as per review comment.",
+      "revId": "3915ad9fdba16ac2167f77db138257bcb0899250",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8868d7a_adec3edf",
+        "filename": "gui/gui_test/operations_menu/test_virtual_media_operations_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-06-10T08:16:41Z",
+      "side": 1,
+      "message": "[Documentation]  Launch browser, login to GUI, and navigate to Virtual Media page.",
       "revId": "3915ad9fdba16ac2167f77db138257bcb0899250",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
