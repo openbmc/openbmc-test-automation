@@ -100,9 +100,9 @@ Verify Browser Offset Timezone Display
 Verify Admin User Password Update In Profile Settings Page
     [Documentation]  Verify admin user can update password in profile settings page.
     [Tags]  Verify_Admin_User_Password_Update_In_Profile_Settings_Page
-    [Setup]  Run Keywords  Create Admin User And Login To GUI   testadmin  Newpass123
+    [Setup]  Run Keywords  Create Admin User And Login To GUI   test_admin  ${OPENBMC_PASSWORD}
     ...  AND  Test Setup Execution
-    [Teardown]  Delete Admin User And Logout Current GUI Session  testadmin
+    [Teardown]  Delete Admin User And Logout Current GUI Session  test_admin
 
     # Input new password value and submit.
     Input Text  ${xpath_input_password}  ${OPENBMC_PASSWORD}
@@ -111,7 +111,7 @@ Verify Admin User Password Update In Profile Settings Page
     Verify Success Message On BMC GUI Page
 
     # Login GUI with new password.
-    Login GUI  testadmin  ${OPENBMC_PASSWORD}
+    Login GUI  test_admin  ${OPENBMC_PASSWORD}
     Wait Until Page Contains Element  ${xpath_logged_usename}  timeout=30s
 
 
