@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1459a69_0225428e",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-06-10T05:16:04Z",
+      "side": 1,
+      "message": "It\u0027s an old code and not your commit as well, But fix this issue by removing the space on line 113.",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 10
+      },
+      "revId": "db746780eaf8dcdc63fc3f408f1945efed34b4fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80536902_2cc5b54d",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-06-10T05:16:04Z",
+      "side": 1,
+      "message": "Kindly change the test case as below,\n\nConfigure Invalid FQDN Settings Via GUI And Verify\n\nAnd kindly change the Documentation as well.",
+      "range": {
+        "startLine": 130,
+        "startChar": 15,
+        "endLine": 130,
+        "endChar": 23
+      },
+      "revId": "db746780eaf8dcdc63fc3f408f1945efed34b4fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
