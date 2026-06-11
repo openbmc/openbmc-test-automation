@@ -1097,11 +1097,7 @@ Launch Browser Login GUI And Navigate To Network Page
     [Documentation]  Launch browser Login GUI and navigate to network page.
 
     Launch Browser And Login GUI
-    Wait Until Keyword Succeeds  1 min  15 sec
-    ...  Click Element  ${xpath_settings_menu}
-    Click Element  ${xpath_network_sub_menu}
-    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  network
-    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
+    Navigate To Required Sub Menu  ${xpath_settings_menu}  ${xpath_network_sub_menu}  network
 
 Configure The Hostname Back And Verify
     [Documentation]  Configure the hostname back.
