@@ -268,10 +268,8 @@ Setup To Power Off And Navigate
 Navigate To Date And Time Page
     [Documentation]  Navigate to the date and time page from main menu.
 
-    Click Element  ${xpath_settings_menu}
-    Click Element  ${xpath_date_time_sub_menu}
-    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  date-time
-    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
+    Launch Browser And Login GUI
+    Navigate To Required Sub Menu  ${xpath_settings_menu}  ${xpath_date_time_sub_menu}  date-time
 
 Set Manual Date And Time Via GUI
     [Documentation]  Set BMC date and time to one month in future via GUI.
