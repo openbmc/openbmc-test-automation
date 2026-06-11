@@ -172,7 +172,5 @@ Suite Setup Execution
     [Documentation]  Do test suite setup tasks.
 
     Launch Browser And Login GUI
-    Click Element  ${xpath_settings_menu}
-    Click Element  ${xpath_factory_reset_sub_menu}
-    Wait Until Keyword Succeeds  30 sec  5 sec  Location Should Contain  factory-reset
-    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
+    Navigate To Required Sub Menu  ${xpath_settings_menu}  ${xpath_factory_reset_sub_menu}  factory-reset
+
