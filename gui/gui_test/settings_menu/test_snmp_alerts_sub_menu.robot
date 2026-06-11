@@ -15,7 +15,7 @@ Test Tags      SNMP_Alerts_Sub_Menu
 *** Variables ***
 
 ${xpath_snmp_alerts_sub_menu}                     //*[@data-test-id='nav-item-snmp-alerts']
-${xpath_snmp_alerts_heading}                      //h1[text()="SNMP alerts"]
+${xpath_snmp_alerts_heading}                      //h1[text()="SNMP Alerts"]
 ${xpath_select_all_snmp}                          //*[@data-test-id='snmpAlerts-checkbox-selectAll']
 ${xpath_add_destination}                          //*[text()=" Add destination"]
 ${xpath_snmp_alert_destination_heading}           //h5[text()='Add SNMP alert destination']
@@ -289,14 +289,10 @@ Verify Error And Unauthorized Message Display When ReadOnly User Configures SNMP
 *** Keywords ***
 
 Suite Setup Execution
-    [Documentation]  Do test case setup tasks.
+    [Documentation]  Launch browser, login GUI and navigate to snmp page.
 
     Launch Browser And Login GUI
-
-    Click Element  ${xpath_settings_menu}
-    Click Element  ${xpath_snmp_alerts_sub_menu}
-    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  snmp-alerts
-    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
+    Navigate To Required Sub Menu  ${xpath_settings_menu}  ${xpath_snmp_alerts_sub_menu}  snmp-alerts
     Redfish.Login
 
 
