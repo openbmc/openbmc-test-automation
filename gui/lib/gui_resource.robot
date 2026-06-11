@@ -20,13 +20,14 @@ ${xpath_confirm}              //button[contains(normalize-space(.),'Confirm')]
 # respectively here.
 ${GUI_BROWSER}               ff
 ${GUI_MODE}                  headless
-
+# Path of virtual media image, change this before test is run
+${VIRTUAL_MEDIA_FILE_PATH}   ${EMPTY}
 
 *** Keywords ***
 
 Open Browser With URL
     [Documentation]  Open browser with specified URL and returns browser id.
-    [Arguments]  ${URL}  ${browser}=ff  ${mode}=${GUI_MODE}
+    [Arguments]  ${URL}  ${browser}=${GUI_BROWSER}  ${mode}=${GUI_MODE}
 
     # Description of argument(s):
     # URL      Openbmc GUI URL to be open
