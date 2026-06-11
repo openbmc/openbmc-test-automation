@@ -15,7 +15,7 @@ Test Tags      SNMP_Alerts_Sub_Menu
 *** Variables ***
 
 ${xpath_snmp_alerts_sub_menu}                     //*[@data-test-id='nav-item-snmp-alerts']
-${xpath_snmp_alerts_heading}                      //h1[text()="SNMP alerts"]
+${xpath_snmp_alerts_heading}                      //h1[text()="SNMP Alerts"]
 ${xpath_select_all_snmp}                          //*[@data-test-id='snmpAlerts-checkbox-selectAll']
 ${xpath_add_destination}                          //*[text()=" Add destination"]
 ${xpath_snmp_alert_destination_heading}           //h5[text()='Add SNMP alert destination']
@@ -27,7 +27,7 @@ ${xpath_snmp_error_close_button}                  //div[contains(@class,'toast')
 ${xpath_delete_button}                            //*[@data-test-id='snmpAlerts-button-deleteRow-undefined']
 ${xpath_delete_destination}                       //button[contains(text(),'Delete destination')]
 
-${snmp_page_heading}                              SNMP alerts
+${snmp_page_heading}                              SNMP Alerts
 ${invalid_port_error}                             Value must be between 0 – 65535
 ${invalid_destination_error}                      Error in adding SNMP alert destination
 ${invalid_ip_error}                               Field required
@@ -302,14 +302,10 @@ Verify Error And Unauthorized Message Display When ReadOnly User Configures SNMP
 *** Keywords ***
 
 Suite Setup Execution
-    [Documentation]  Do test case setup tasks.
+    [Documentation]  Launch browser, login GUI and navigate to snmp page.
 
     Launch Browser And Login GUI
-
-    Click Element  ${xpath_settings_menu}
-    Click Element  ${xpath_snmp_alerts_sub_menu}
-    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  snmp-alerts
-    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
+    Navigate To Required Sub Menu  ${xpath_settings_menu}  ${xpath_snmp_alerts_sub_menu}  snmp-alerts
     Redfish.Login
 
 
@@ -465,9 +461,7 @@ Delete Multiple SNMP Managers With Default Port Via GUI
 Navigate To SNMP Alerts Page
     [Documentation]  Navigate to SNMP alerts page.
 
-    Click Element  ${xpath_settings_menu}
-    Click Element  ${xpath_snmp_alerts_sub_menu}
-    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  snmp-alerts
+    Navigate To Required Sub Menu  ${xpath_settings_menu}  ${xpath_snmp_alerts_sub_menu}  snmp-alerts
 
 
 Generate Error Log On BMC And Verify Trap On Non Default Port
