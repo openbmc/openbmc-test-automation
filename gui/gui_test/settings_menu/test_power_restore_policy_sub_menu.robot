@@ -49,7 +49,5 @@ Verify Existence Of All Buttons In Power Restore Policy Page
 Test Setup Execution
     [Documentation]  Do test case setup tasks.
 
-    Click Element  ${xpath_settings_menu}
-    Click Element  ${xpath_power_restore_policy_sub_menu}
-    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  power-restore-policy
-    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
+    Launch Browser And Login GUI
+    Navigate To Required Sub Menu  ${xpath_settings_menu}  ${xpath_power_restore_policy_sub_menu}  power-restore-policy
