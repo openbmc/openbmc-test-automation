@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6810158_43efcaf2",
+        "filename": "gui/gui_test/operations_menu/test_virtual_media_operations_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-06-11T11:58:09Z",
+      "side": 1,
+      "message": "nit: For beautification. please align with spaces in order\n\n```\n\nDocumentation   Test OpenBMC GUI \"Virtual Media\" sub-menu of \"Operations\".\n\nResource        ../../lib/gui_resource.robot\n\nSuite Setup     Launch Browser And Login GUI\nSuite Teardown  Close All Browsers\nTest Setup      Test Setup Execution\n\nTest Tags       Virtual_Media_Operation_Sub_menu\n```",
+      "range": {
+        "startLine": 3,
+        "startChar": 15,
+        "endLine": 11,
+        "endChar": 28
+      },
+      "revId": "2058905abb394018d536a88313667e0edbf6a2cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
