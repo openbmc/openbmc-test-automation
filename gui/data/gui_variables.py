@@ -68,6 +68,7 @@ class gui_variables:
     xpath_host_console_heading = "//h1[text()='Host console']"
     xpath_firmware_heading = "//h1[contains(text(), 'Firmware')]"
     xpath_kvm_sub_menu = "//*[@data-test-id='nav-item-kvm']"
+    xpath_key_clear_sub_menu = "//*[@data-test-id='nav-item-key-clear']"
 
     # Settings menu
     xpath_settings_menu = "//*[@data-test-id='nav-button-settings']"
