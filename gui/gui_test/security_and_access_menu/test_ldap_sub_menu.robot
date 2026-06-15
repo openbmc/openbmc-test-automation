@@ -28,7 +28,8 @@ ${xpath_add_group_Privilege}            //*[@id="privilege"]
 ${xpath_add_privilege_button}           //button[text()="Add"]
 ${xpath_delete_group_button}            //*[@title="Delete role group"]
 ${xpath_delete_button}                  //button[text()="Delete"]
-
+${xpath_role_group_checkbox}            //tbody/tr[1]//input[@type='checkbox']
+${xpath_delete_selected_button}         //*[@data-test-id='table-button-deleteSelected']
 
 ${incorrect_ip}     1.2.3.4
 ${wrong_ldap_port}  135
@@ -189,6 +190,33 @@ Verify LDAP Login Fails On Wrong LDAP Port
     Should Be Equal  ${resp}  ${False}
     ...  msg=LDAP user was able to login though the wrong port in LDAP URL
 
+
+Verify Delete Button Popup State Based On Role Group Checkbox Selection
+    [Documentation]  Verify delete button popup state when checkbox is selected or not selected.
+    [Tags]  Verify_Delete_Button_Popup_State_Based_On_Role_Group_Checkbox_Selection
+    [Template]  Verify Delete Button State With Checkbox Selection
+    [Setup]  Run Keywords  Login BMC And Navigate To LDAP Page
+    ...  AND  Add Role Group Via GUI  ${GROUP_NAME}  ${GROUP_PRIVILEGE}
+    [Teardown]  Run Keyword And Ignore Error  Delete LDAP Role Group  ${GROUP_NAME}
+
+    # checkbox_selected    expected_button_state
+    ${True}                enabled
+    ${False}               disabled
+
+
+Verify Delete Icon Is Present For Role Group
+    [Documentation]  Verify delete icon is present for the role group in role groups table.
+    [Tags]  Verify_Delete_Icon_Is_Present_For_Role_Group
+    [Setup]  Run Keywords  Login BMC And Navigate To LDAP Page
+    ...  AND  Add Role Group Via GUI  ${GROUP_NAME}  ${GROUP_PRIVILEGE}
+    [Teardown]  Run Keyword And Ignore Error  Delete LDAP Role Group  ${GROUP_NAME}
+
+    # Verify that delete icon is present for the role group.
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
+    Page Should Contain Element  ${xpath_delete_group_button}
+    ...  msg=Delete icon is not present for the role group.
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -342,6 +370,25 @@ Disable LDAP Configuration
     Wait Until Page Contains Element  ${xpath_ldap_heading}
 
 
+Add Role Group Via GUI
+    [Documentation]  Add role group via GUI.
+    [Arguments]  ${group_name}  ${group_privilege}
+    
+    # Description of argument(s):
+    # group_name       The group name of LDAP user.
+    # group_privilege  The group privilege for LDAP user
+    #                  (e.g. "Administrator", "Operator" or "ReadOnly").
+
+    Wait Until Element Is Enabled  ${xpath_add_role_group_button}  timeout=30s
+    Click Element  ${xpath_add_role_group_button}
+    Wait Until Element Is Visible  ${xpath_add_group_name}  timeout=10s
+    Input Text  ${xpath_add_group_name}  ${group_name}
+    Wait Until Element Is Visible  ${xpath_add_group_Privilege}  timeout=10s
+    Select From List By Value  ${xpath_add_group_Privilege}  ${group_privilege}
+    Click Element  ${xpath_add_privilege_button}
+    Wait Until Page Contains  TestGroup  timeout=120s
+
+
 Login BMC And Navigate To LDAP Page
     [Documentation]  Login BMC and navigate to ldap page.
     [Arguments]  ${username}=${OPENBMC_USERNAME}  ${password}=${OPENBMC_PASSWORD}
@@ -386,3 +433,35 @@ Update LDAP User Role And Read Network Configuration Via GUI
 
     ${mac_address}=  Redfish.Get Attribute  ${REDFISH_NW_ETH0_URI}  MACAddress
     Textfield Value Should Be  ${xpath_mac_address_input}  ${mac_address}
+
+
+Verify Delete Button State With Checkbox Selection
+    [Documentation]  Verify delete button state based on checkbox selection.
+    [Arguments]  ${checkbox_selected}  ${expected_button_state}
+
+    # Description of argument(s):
+    # checkbox_selected        Boolean indicating whether to select the checkbox (True/False).
+    # expected_button_state    Expected state of delete button ("enabled" or "disabled").
+
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30s
+
+    IF  ${checkbox_selected}
+        Click Element At Coordinates  ${xpath_role_group_checkbox}  0  0
+        Wait Until Element Is Visible  ${xpath_delete_selected_button}  timeout=10s
+        Element Should Be Enabled  ${xpath_delete_selected_button}
+    ELSE
+        # Ensure checkbox is not selected
+        ${is_selected}=  Run Keyword And Return Status
+        ...  Checkbox Should Be Selected  ${xpath_role_group_checkbox}
+        IF  ${is_selected}
+            Click Element At Coordinates  ${xpath_role_group_checkbox}  0  0
+            Wait Until Element Is Not Visible  ${xpath_delete_selected_button}  timeout=10s
+        END
+        # Verify delete button is disabled or not visible
+        ${button_visible}=  Run Keyword And Return Status
+        ...  Element Should Be Visible  ${xpath_delete_selected_button}
+        IF  ${button_visible}
+            Element Should Be Disabled  ${xpath_delete_selected_button}
+        END
+    END
+
