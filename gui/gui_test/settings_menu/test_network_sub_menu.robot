@@ -95,6 +95,8 @@ ${test_ipv6_gateway}                     2001:db8:3333:4444::1
 ${test_ipv6_gateway_1}                   2001:db8:3333:5555::1
 ${ipv6_multi_block}                      2001:0022:0000:0000:1:2:3:8
 ${ipv6_multi_block_addr}                 2001:22::1:2:3:8
+${ipv6_uncompressed_1hextet}             2001:DB8:0000:1234:8:800:200C:417A
+${ipv6_compressed_1hextet}               2001:db8:0:1234:8:800:200c:417a
 ${ipv4_hexword_addr}                     10.5.5.6:1A:1B:1C:1D:1E:1F
 ${invalid_hexadec_ipv6}                  x:x:x:x:x:x:10.5.5.6
 ${ipv6_multi_short}                      2001::33::111
@@ -304,9 +306,11 @@ Configure And Verify Static IPv6 Address
     [Teardown]  Run Keyword And Ignore Error  Delete All Static IP Addresses  ipv6
     ...  ${ipv6_without_leadingzeroes_addr}  ${ipv6_eliminate_onehextet_zero}
     ...  ${ipv6_multi_block_addr}  ${compressed_ipv6}  ${test_ipv6_addr}  ${ipv4_mapped_ipv6_expected}
+    ...  ${ipv6_compressed_1hextet}
 
     # ipv6                           prefix_length          status         expected_ipv6
     ${ipv6_with_leadingzeroes_addr}  ${test_prefix_length}  Success        ${ipv6_without_leadingzeroes_addr}
+    ${ipv6_uncompressed_1hextet}     ${test_prefix_length}  Success        ${ipv6_compressed_1hextet}
     ${ipv6_onehextet_zero}           ${test_prefix_length}  Success        ${ipv6_eliminate_onehextet_zero}
     ${ipv6_multi_block}              ${test_prefix_length}  Success        ${ipv6_multi_block_addr}
     ${compressed_ipv4}               ${test_prefix_length}  Success        ${compressed_ipv6}
