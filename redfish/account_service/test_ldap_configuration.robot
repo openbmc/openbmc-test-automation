@@ -15,21 +15,22 @@ Test Teardown    Run Keywords  Redfish.Login  AND  FFDC On Test Case Fail
 Test Tags        Ldap_Configuration
 
 *** Variables ***
-${old_ldap_privilege}    Administrator
-&{old_account_service}   &{EMPTY}
-&{old_ldap_config}       &{EMPTY}
-${hostname}              ${EMPTY}
-${test_ip}               10.6.6.6
-${test_mask}             255.255.255.0
-${test_local_user}       test_local_user
-${test_user_password}    TestPwd123
-${LDAP_UNREACHABLE_URI}  ldap://192.0.2.1
-${LOCAL_ADMIN_USER}      ldap_local_admin
-${LOCAL_ADMIN_PASSWORD}  TestPwd123
-${LOCALTESTUSER}         testuser
-${TEST_USER_PASSWORD}    TestPwd123
-${LDAP_TIMEOUT}          1min
-${NEW_PASSWORD}          NewPassword456
+${old_ldap_privilege}     Administrator
+&{old_account_service}    &{EMPTY}
+&{old_ldap_config}        &{EMPTY}
+${hostname}               ${EMPTY}
+${test_ip}                10.6.6.6
+${test_mask}              255.255.255.0
+${test_local_user}        test_local_user
+${local_readonly_user}    local_readonly_user
+${test_user_password}     TestPwd123
+${LDAP_UNREACHABLE_URI}   ldap://192.0.2.1
+${LOCAL_ADMIN_USER}       ldap_local_admin
+${LOCAL_ADMIN_PASSWORD}   TestPwd123
+${LOCALTESTUSER}          testuser
+${TEST_USER_PASSWORD}     TestPwd123
+${LDAP_TIMEOUT}           1min
+${NEW_PASSWORD}           NewPassword456
 
 *** Test Cases ***
 
@@ -726,6 +727,24 @@ Create LDAP Config With Various Port Numbers
     -1                        ${HTTP_BAD_REQUEST}
     ${EMPTY}                  ${HTTP_OK}, ${HTTP_NO_CONTENT}
 
+Verify LDAP User Creates Local User And Local User Changes Privilege
+    [Documentation]  Verify LDAP admin user creates local users with different privileges,
+    ...  then test privilege modification by local admin user (should succeed) and
+    ...  local readonly user (should be forbidden due to insufficient permissions).
+    [Tags]  Verify_LDAP_User_Creates_Local_User_And_Local_User_Changes_Privilege
+    [Setup]  Update LDAP Configuration With LDAP User Role And Group  ${LDAP_TYPE}
+    ...  Administrator  ${GROUP_NAME}
+    [Template]  LDAP User Creates Local User And Privilege Change By Local User
+    # Teardown: FFDC only — session is restored inside FINALLY block.
+    [Teardown]  FFDC On Test Case Fail
+
+    # initial_privilege  changer_type      new_privilege  expected_result
+    Administrator        Local_Admin       ReadOnly       Success
+    ReadOnly             Local_Admin       Administrator  Success
+    Administrator        Local_ReadOnly    ReadOnly       Forbidden
+    ReadOnly             Local_ReadOnly    Administrator  Forbidden
+
+
 *** Keywords ***
 
 Redfish Verify LDAP Login
@@ -1200,3 +1219,69 @@ Create LDAP Config With Port And Verify
     # Attempt to patch with the specified port.
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body=${body}
     ...  valid_status_codes=[${expected_status}]
+
+
+LDAP User Creates Local User And Privilege Change By Local User
+    [Documentation]  LDAP user creates local user and local user attempts privilege change.
+    [Arguments]  ${initial_privilege}  ${changer_type}  ${new_privilege}  ${expected_result}
+
+    # Description of argument(s):
+    # initial_privilege  Initial privilege of the created user (Administrator or ReadOnly).
+    # changer_type       Type of user changing the privilege (Local_Admin or Local_ReadOnly).
+    # new_privilege      New privilege to set (Administrator or ReadOnly).
+    # expected_result    Expected result (Success or Forbidden).
+
+    TRY
+        # Login with LDAP admin user and create local user.
+        Run Keyword And Ignore Error  Redfish.Logout
+        Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+
+        Redfish Create User  ${test_local_user}  ${test_user_password}  ${initial_privilege}  ${True}
+        Verify User Role  ${test_local_user}  ${initial_privilege}
+        Verify User Login And Logout  ${test_local_user}  ${test_user_password}
+
+        # Login with admin and create readonly user if needed.
+        Redfish.Login  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+
+        IF  '${changer_type}' == 'Local_ReadOnly'
+            Run Keyword And Ignore Error  Redfish.Delete  ${REDFISH_ACCOUNTS_URI}${local_readonly_user}
+            ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
+            Redfish Create User  ${local_readonly_user}  ${test_user_password}  ReadOnly  ${True}
+            Run Keyword And Ignore Error  Redfish.Logout
+            Redfish.Login  ${local_readonly_user}  ${test_user_password}
+        END
+
+        # Attempt privilege change and verify result.
+        IF  '${expected_result}' == 'Success'
+            Redfish.Patch  ${REDFISH_ACCOUNTS_URI}${test_local_user}
+            ...  body={'RoleId': '${new_privilege}'}
+            ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+            Run Keyword And Ignore Error  Redfish.Logout
+            Redfish.Login  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+            Verify User Role  ${test_local_user}  ${new_privilege}
+            Verify User Login And Logout  ${test_local_user}  ${test_user_password}
+
+        ELSE IF  '${expected_result}' == 'Forbidden'
+            Redfish.Patch  ${REDFISH_ACCOUNTS_URI}${test_local_user}
+            ...  body={'RoleId': '${new_privilege}'}
+            ...  valid_status_codes=[${HTTP_FORBIDDEN}]
+
+            Run Keyword And Ignore Error  Redfish.Logout
+            Redfish.Login  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+            Verify User Role  ${test_local_user}  ${initial_privilege}
+        END
+
+    FINALLY
+        # Cleanup test users after each template iteration.
+        Run Keyword And Ignore Error  Redfish.Logout
+        Redfish.Login  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+        Run Keyword And Ignore Error  Redfish.Delete  ${REDFISH_ACCOUNTS_URI}${test_local_user}
+        ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
+
+        IF  '${changer_type}' == 'Local_ReadOnly'
+            Run Keyword And Ignore Error  Redfish.Delete  ${REDFISH_ACCOUNTS_URI}${local_readonly_user}
+            ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
+        END
+    END
+
