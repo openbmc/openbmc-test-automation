@@ -250,8 +250,7 @@ Get Payload Activation Status
     ...  ${IPMI_RAW_CMD['Payload']['Get_Payload_Activation_Status'][0]}
 
     @{resp}=  Split String  ${resp}
-
-    ${payload_status}=  Set Variable  ${resp[1]}
+    VAR  ${payload_status}  ${resp[1]}
 
     RETURN  ${payload_status}
 
@@ -404,8 +403,11 @@ Set User Access Payload For Given User
     # 3rd byte represent standard payload enables 1 (SOL).
     # 4th to 6th byte represent standard payload enables 2 and OEM payload 1 & 2 respectively.
 
-    ${operation_mode_value}=  Set Variable If  '${operation_mode}' == 'Enable'
-    ...  0  4
+    IF  '${operation_mode}' == 'Enable'
+        VAR  ${operation_mode_value}  0
+    ELSE
+        VAR  ${operation_mode_value}  4
+    END
     ${set_cmd}=  Catenate  ${IPMI_RAW_CMD['Payload']['Set_User_Access_Payload'][0]}
     ...  ${CHANNEL_NUMBER} 0x${operation_mode_value}${user_id} ${standard_payload_value} 0x00 ${oempayload_value} 0x00
 

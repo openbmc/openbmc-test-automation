@@ -600,7 +600,11 @@ Verify IPMI Command
     # expected_status  Expected status of IPMI command run with the user
     #                  of above password and privilege (i.e. "Passed" or "Failed").
 
-    ${expected_rc}=  Set Variable If  '${expected_status}' == 'Passed'  ${0}  ${1}
+    IF  '${expected_status}' == 'Passed'
+        VAR  ${expected_rc}  ${0}
+    ELSE
+        VAR  ${expected_rc}  ${1}
+    END
     Wait Until Keyword Succeeds  15 sec  5 sec  Run IPMI Standard Command
     ...  sel info ${channel}  expected_rc=${expected_rc}  U=${username}  P=${password}
     ...  L=${privilege}
@@ -638,7 +642,7 @@ Set User Password And Verify
 
     # For password_option 16, passwords with length between 17 and 20 will be truncated.
     # For all other cases, passwords will be retained as it is to verify.
-    ${truncated_password}=  Set Variable  ${password[:${password_option}]}
+    VAR  ${truncated_password}  ${password[:${password_option}]}
     Rprint Vars  truncated_password
     ${status}=  Run Keyword And Return Status  Verify IPMI Username And Password  ${random_username}
     ...  ${truncated_password}
@@ -661,7 +665,9 @@ Check Active Ethernet Channels
     ...  msg= Skips this test case as only one channel was in active.
 
     FOR  ${channel_num}  IN  @{channel_number_list}
-        ${secondary_channel_number}=  Set Variable If  ${channel_num} != ${CHANNEL_NUMBER}  ${channel_num}
+        IF  ${channel_num} != ${CHANNEL_NUMBER}
+            VAR  ${secondary_channel_number}  ${channel_num}
+        END
     END
 
     Set Suite Variable  ${secondary_channel_number}
@@ -683,13 +689,13 @@ Determine Root User Id
     ...  user list ${CHANNEL_NUMBER}
     @{lines}=  Split To Lines  ${resp}
 
-    ${root_userid}=  Set Variable  ${-1}
+    VAR  ${root_userid}  ${-1}
     ${line_count}=  Get Length  ${lines}
     FOR  ${id_index}  IN RANGE  1  ${line_count}
         ${line}=  Get From List  ${lines}  ${id_index}
         ${root_found}=  Get Lines Matching Regexp  ${line}  ${root_pattern}
         IF  '${root_found}' != '${EMPTY}'
-            ${root_userid}=  Set Variable  ${id_index}
+            VAR  ${root_userid}  ${id_index}
             BREAK
         END
     END

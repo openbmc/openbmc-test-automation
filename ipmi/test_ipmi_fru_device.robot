@@ -63,7 +63,7 @@ Verify Get FRU Inventory Area Info
 
     # IPMI read FRU data command.
     ${resp}=  Read FRU Data Via IPMI  ${fru_device_id}  ${read_write_offset}
-    ${bytes_read}=  Set Variable  ${resp.split()[0]}
+    VAR  ${bytes_read}  ${resp.split()[0]}
 
     # IPMI get FRU inventory area info command.
     ${bytes_inventory}=  Get FRU Inventory Area Info
@@ -108,7 +108,7 @@ Verify IPMI Write FRU Data
 
     # Read the FRU data.
     ${resp}=  Read FRU Data Via IPMI  ${fru_device_id}  ${read_write_offset}
-    ${resp_data}=  Set Variable  ${resp.split()[1:]}
+    VAR  ${resp_data}  ${resp.split()[1:]}
 
     # Verify if the data written and read are same.
     Should Be Equal  ${write_data}  ${resp_data}
@@ -132,7 +132,7 @@ Verify IPMI Write FRU Data With BMC Reboot
 
     # Read the FRU data.
     ${resp}=  Read FRU Data Via IPMI  ${fru_device_id}  ${read_write_offset}
-    ${resp_data}=  Set Variable  ${resp.split()[1:]}
+    VAR  ${resp_data}  ${resp.split()[1:]}
 
     # Verify if the data written and read are same.
     Should Be Equal  ${write_data}  ${resp_data}
@@ -176,10 +176,10 @@ Get IPMI FRU Devices Data
     #  },....}
 
     # Gets response from FRU data and split each device.
-    ${output}=  Set Variable  ${ipmi_output.strip("\n")}
+    VAR  ${output}  ${ipmi_output.strip("\n")}
     ${output}=  Split String  ${output}  \n\n
     &{fru}=  Create Dictionary
-    ${num}=  Set Variable  0
+    VAR  ${num}  0
 
     # For each device, identify either Board Serial/Product Serial (whichever is available).
     FOR  ${devices}  IN  @{output}
@@ -191,24 +191,27 @@ Get IPMI FRU Devices Data
         END
         ${frudata}=  Get From List  ${output}  ${num}
 
-        ${serial_str}=  Set Variable If  '${ipmi_fru_board_serial_status}' == 'True'
-        ...  Board Serial  Product Serial
+        IF  '${ipmi_fru_board_serial_status}' == 'True'
+            VAR  ${serial_str}  Board Serial
+        ELSE
+            VAR  ${serial_str}  Product Serial
+        END
 
         ${serial_no}=  Get Lines Containing String  ${frudata}  ${serial_str}
         ${num}=  Evaluate  int(${num}) + 1
         IF  '${serial_no}' == '${EMPTY}'  CONTINUE
 
         # Get each device and split field as key and value and append to a dictionary.
-        ${serial_nos}=  Set Variable  ${serial_no.strip()}
+        VAR  ${serial_nos}  ${serial_no.strip()}
         ${data}=  Split String  ${serial_nos}  :
         ${serial_number}=  Get From List  ${data}  1
         FOR  ${entry}  IN  @{dev}
             ${entry}=  Split String  ${entry}  ${SPACE}:${SPACE}
-            ${entry1}=  Set Variable  ${entry[0].strip()}
-            ${entry2}=  Set Variable  ${entry[1].strip()}
+            VAR  ${entry1}  ${entry[0].strip()}
+            VAR  ${entry2}  ${entry[1].strip()}
             Set To Dictionary  ${tmp}  ${entry1}  ${entry2}
         END
-        ${serial_number}=  Set Variable  ${serial_number.strip()}
+        VAR  ${serial_number}  ${serial_number.strip()}
         # Assign serial number as key for main dictionary and a each device detail as value.
         Set To Dictionary  ${fru}  ${serial_number}  ${tmp}
     END
@@ -256,13 +259,16 @@ Create Dictionary For DBUS URI
     # If matches then, sets the serial number as key and FRU uri as value.
     # ${dbus_dict} defined under variable section.
     FOR  ${ipmi_fru_serial_no}  IN  @{ipmi_fru.keys()}
-        ${serial_str}=  Set Variable If  '${ipmi_fru_board_serial_status}' == 'True'
-        ...  Board Serial  Product Serial
+        IF  '${ipmi_fru_board_serial_status}' == 'True'
+            VAR  ${serial_str}  Board Serial
+        ELSE
+            VAR  ${serial_str}  Product Serial
+        END
 
         ${serial_no}=  Get Lines Containing String  ${frudata}  ${serial_str}
 
         ${serial_no}=  Split String  ${serial_no}  "
-        ${dbus_serial_no}=  Set Variable  ${serial_no[1].strip()}
+        VAR  ${dbus_serial_no}  ${serial_no[1].strip()}
         ${serial_no_status}=  Run Keyword And Return Status  Should Be Equal As Strings
         ...  ${ipmi_fru_serial_no}  ${dbus_serial_no}
 
@@ -302,7 +308,7 @@ Compare IPMI FRU With DBUS
             ${property_name}=  Get From Dictionary  ${ipmi_dbus_name_mapping}  ${subkeys}
             ${dbus_data}=  Get Lines Containing String  ${dbus_resp}  ${property_name}
             IF  '${dbus_data}' == '${EMPTY}'  CONTINUE
-            ${dbus_value}=  Set Variable  ${dbus_data.split('"')[1].strip()}
+            VAR  ${dbus_value}  ${dbus_data.split('"')[1].strip()}
             ${ipmi_response}=  Get From Dictionary  ${ipmi_fru_value}  ${subkeys}
             ${status}=  Run Keyword And Return Status  Should Contain  ${property_name}  DATE
             IF  ${status}
@@ -385,7 +391,7 @@ Get Default FRU Data
     # split the response and identify length of Requested data.
     ${initial_fru_data}=  Read FRU Data Via IPMI  ${fru_device_id}  ${read_write_offset}
     ${initial_fru_list}=  Split String  ${initial_fru_data}
-    ${initial_fru_list}=  Set Variable  ${initial_fru_list[1:]}
+    VAR  ${initial_fru_list}  ${initial_fru_list[1:]}
     ${initial_fru_length}=  Get Length  ${initial_fru_list}
     Set Test Variable  ${initial_fru_data}
     Set Test Variable  ${initial_fru_list}

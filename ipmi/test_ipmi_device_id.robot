@@ -62,7 +62,7 @@ Verify Device ID Response Data Via IPMI
     ...  msg=Device ID cannot be Unspecified
 
     # Verify Device Revision.
-    ${device_rev}=  Set Variable  ${resp[1]}
+    VAR  ${device_rev}  ${resp[1]}
     ${device_rev}=  Convert To Binary  ${device_rev}  base=16
     ${device_rev}=  Zfill Data  ${device_rev}  8
     # Comparing the reserved bits from Device Revision.
@@ -73,13 +73,13 @@ Verify Device ID Response Data Via IPMI
     ${version}=  Get Bmc Major Minor Version  ${os_release['version']}
 
     # Verify Firmware Revision 1.
-    ${firmware_rev1}=  Set Variable  ${version[0]}
+    VAR  ${firmware_rev1}  ${version[0]}
     ${ipmi_rsp_firmware_rev1}=  Convert To Integer  ${resp[2]}  base=16
     Run Keyword And Continue On Failure  Should Be Equal As Integers
     ...  ${ipmi_rsp_firmware_rev1}  ${firmware_rev1}
 
     # Verify Firmware Revision 2.
-    ${firmware_rev2}=  Set Variable  ${version[1]}
+    VAR  ${firmware_rev2}  ${version[1]}
     ${ipmi_rsp_firmware_rev2}=  Convert To Integer  ${resp[3]}  base=16
     Run Keyword And Continue On Failure  Should Be Equal As Integers
     ...  ${ipmi_rsp_firmware_rev2}  ${firmware_rev2}
@@ -88,20 +88,20 @@ Verify Device ID Response Data Via IPMI
     Run Keyword And Continue On Failure  Should Be Equal  ${resp[4]}  02
 
     # Verify Manufacture ID.
-    ${manufacture_id}=  Set Variable  ${resp[6:9]}
+    VAR  ${manufacture_id}  ${resp[6:9]}
     ${manufacture_id}=  Evaluate  "".join(${manufacture_id})
     ${manufacture_data}=  Convert To Binary  ${manufacture_id}  base=16
     # Manufacure ID has Most significant four bits - reserved (0000b)
     Run Keyword And Continue On Failure  Should Be Equal  ${manufacture_data[-5:-1]}  0000
 
     # Verify Product ID.
-    ${product_id}=  Set Variable  ${resp[9:11]}
+    VAR  ${product_id}  ${resp[9:11]}
     ${product_id}=  Evaluate   "".join(${product_id})
     Run Keyword And Continue On Failure  Should Not Be Equal  ${product_id}  0000
     ...  msg=Product ID cannot be Zero
 
     # Get Auxiliary Firmware Revision Information from IPMI response.
-    ${auxiliary_rev_version}=  Set Variable  ${resp[11:]}
+    VAR  ${auxiliary_rev_version}  ${resp[11:]}
     Reverse List  ${auxiliary_rev_version}
     ${auxiliary_rev_version}=  Evaluate  "".join(${auxiliary_rev_version})
     ${auxiliary_rev_version}=  Convert To Integer  ${auxiliary_rev_version}  16
@@ -141,7 +141,7 @@ Get Device Info From BMC
     ${data}=  Convert To List  ${data}
 
     # Fetching dictionary from the response.
-    ${info}=  Set Variable  ${data[0]}
+    VAR  ${info}  ${data[0]}
     ${info}=  Evaluate  dict(${info})
 
     RETURN  ${info}
