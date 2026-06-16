@@ -33,6 +33,24 @@
       "message": "Virtual_Media_Operations",
       "revId": "76a9d962ca213d1fa6a02cb9be8c34f53eb9c287",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1afe17d4_c8584b35",
+        "filename": "gui/gui_test/operations_menu/test_virtual_media_operations_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-06-16T17:56:58Z",
+      "side": 1,
+      "message": "Added Virtual_Media_Operations_Sub_Menu as present in other test file in operations directory.",
+      "parentUuid": "f813f2cf_9677dcce",
+      "revId": "76a9d962ca213d1fa6a02cb9be8c34f53eb9c287",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
