@@ -31,8 +31,8 @@ Verify Get SDR For Maximum Record Via IPMI
     FOR  ${record}  IN RANGE  0  ${record_count}
         # Convert number to hexadecimal record ID.
         ${recordhex}=  Convert To Hex  ${record}  length=4  lowercase=yes
-        ${first_digit}=  Set Variable  ${recordhex}[0:2]
-        ${second_digit}=  Set Variable  ${recordhex}[2:4]
+        VAR  ${first_digit}  ${recordhex}[0:2]
+        VAR  ${second_digit}  ${recordhex}[2:4]
 
         # Get SDR command.
         ${resp}=  Run IPMI Standard Command
@@ -53,8 +53,8 @@ Verify Get SDR For Maximum Record Via IPMI
           # Next record ID in response data.
           ${record_next}=  Evaluate  ${record} + 1
           ${record_next}=  Convert To Hex  ${record_next}  length=4  lowercase=yes
-          ${record_next_msb}=  Set Variable    ${record_next}[0:2]
-          ${record_next_lsb}=  Set Variable    ${record_next}[2:4]
+          VAR  ${record_next_msb}  ${record_next}[0:2]
+          VAR  ${record_next_lsb}  ${record_next}[2:4]
           Should Be Equal  ${get_SDR[0]}  ${record_next_lsb}
           Should Be Equal  ${get_SDR[1]}  ${record_next_msb}
         ELSE
@@ -68,7 +68,7 @@ Verify Get SDR For Maximum Record Via IPMI
         END
 
         # Response Data Count - total records (max - FFh - 255 in decimal).
-        ${response_data}=  Set Variable  ${get_SDR[2:]}
+        VAR  ${response_data}  ${get_SDR[2:]}
         ${length}=  Get Length  ${response_data}
         Should Be True  0<${length}<=255
     END
@@ -223,7 +223,7 @@ Verify Reserve Device SDR Repository For Partial Record
     ...  raw ${IPMI_RAW_CMD['Device_SDR']['Get'][0]} 0x${reserve_id[0]} 0x${reserve_id[1]} 0x00 0x00 0x01 0x0f
     ${resp}=  Split String  ${resp}
     # Record data starts from ${resp[2]}.
-    ${resp}=  Set Variable  ${resp[2:]}
+    VAR  ${resp}  ${resp[2:]}
     ${length}=  Get Length  ${resp}
     Should Be Equal As Integers  ${length}  15
 
@@ -281,8 +281,8 @@ Verify Get Device SDR For Maximum Record Via IPMI
     FOR  ${record}  IN RANGE  0  ${record_count}
         # Convert number to hexadecimal record ID.
         ${recordhex}=  Convert To Hex  ${record}  length=4  lowercase=yes
-        ${first_digit}=  Set Variable    ${recordhex}[0:2]
-        ${second_digit}=  Set Variable    ${recordhex}[2:4]
+        VAR  ${first_digit}  ${recordhex}[0:2]
+        VAR  ${second_digit}  ${recordhex}[2:4]
 
         # Get Device SDR command.
         ${resp}=  Run Inband IPMI Standard Command
@@ -303,8 +303,8 @@ Verify Get Device SDR For Maximum Record Via IPMI
           # Next record ID in response data.
           ${record_next}=  Evaluate  ${record} + 1
           ${record_next}=  Convert To Hex  ${record_next}  length=4  lowercase=yes
-          ${record_next_msb}=  Set Variable    ${record_next}[0:2]
-          ${record_next_lsb}=  Set Variable    ${record_next}[2:4]
+          VAR  ${record_next_msb}  ${record_next}[0:2]
+          var  ${record_next_lsb}  ${record_next}[2:4]
           Should Be Equal  ${get_dev_SDR[0]}  ${record_next_lsb}
           Should Be Equal  ${get_dev_SDR[1]}  ${record_next_msb}
 
@@ -319,7 +319,7 @@ Verify Get Device SDR For Maximum Record Via IPMI
 
         END
         # Response data count - total record ID (max - FFh - 255 in decimal).
-        ${response_data}=  Set Variable  ${get_dev_SDR[2:]}
+        VAR  ${response_data}  ${get_dev_SDR[2:]}
         ${length}=  Get Length  ${response_data}
         Should Be True  0<${length}<=255
     END
@@ -396,7 +396,7 @@ Get Sensor Count From SDR Info
 
     # Get Sensor count from Get Device SDR Info count - bytie 0.
     ${sensor_data}=  Split String  ${sensor_data}
-    ${sensor_count}=  Set Variable  ${sensor_data[0]}
+    VAR  ${sensor_count}  ${sensor_data[0]}
     ${sensor_count}=  Convert To Integer  ${sensor_count}  16
 
     RETURN  ${sensor_count}
@@ -410,7 +410,7 @@ Get SDR Count From SDR Info
 
     # Get SDR count from Get Device SDR Info count - byte 0.
     ${SDR_data}=  Split String  ${SDR_data}
-    ${SDR_count}=  Set Variable  ${SDR_data[0]}
+    VAR  ${SDR_count}  ${SDR_data[0]}
     ${SDR_count}=  Convert To Integer  ${SDR_count}  16
 
     RETURN  ${SDR_count}
@@ -433,7 +433,7 @@ Get Device SDR Timestamp
     Should Be Equal  ${sensor_data[2:]}  ${SDR_data[2:]}
 
     # Convert Bytestamp to Epoch timestamp.
-    ${timestamp}=  Set Variable  ${SDR_data[2:]}
+    VAR  ${timestamp}  ${SDR_data[2:]}
     Reverse List  ${timestamp}
     ${timestamp}=  Evaluate  "".join(${timestamp})
     # Prefixes 0s for expected bytes.

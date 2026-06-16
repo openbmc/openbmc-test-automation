@@ -243,11 +243,11 @@ Set Power Cap Value Via IPMI And Verify Using Redfish
 
     # Get initial power cap value via Redfish.
     ${power_limit_watts}=  Get System Power Cap Limit
-    ${initial_power_value}=  Set Variable  ${power_limit_watts['SetPoint']}
+    VAR  ${initial_power_value}  ${power_limit_watts['SetPoint']}
 
     # Get the allowable min and max power cap value via Redfish.
-    ${min_power_value}=  Set Variable  ${power_limit_watts['AllowableMin']}
-    ${max_power_value}=  Set Variable  ${power_limit_watts['AllowableMax']}
+    VAR  ${min_power_value}  ${power_limit_watts['AllowableMin']}
+    VAR  ${max_power_value}  ${power_limit_watts['AllowableMax']}
 
     # Generate a random power cap value within the allowable range.
     ${random_power_cap}=  Evaluate  random.randint(${min_power_value}, ${max_power_value})  modules=random
@@ -271,20 +271,20 @@ Verify Power Cap Value Via IPMI
     ${power_cap_limit}=  Get System Power Cap Limit
 
     # Get initial power cap value.
-    ${redfish_power_value}=  Set Variable  ${power_cap_limit['SetPoint']}
+    VAR  ${redfish_power_value}  ${power_cap_limit['SetPoint']}
 
     # Update power cap value via Redfish if the initial power cap value is zero.
     IF  ${redfish_power_value} == 0
         # Get the allowable min and max power cap value via Redfish.
-        ${min_power_value}=  Set Variable  ${power_cap_limit['AllowableMin']}
-        ${max_power_value}=  Set Variable  ${power_cap_limit['AllowableMax']}
+        VAR  ${min_power_value}  ${power_cap_limit['AllowableMin']}
+        VAR  ${max_power_value}  ${power_cap_limit['AllowableMax']}
 
         # Generate a random power cap value within the allowable range.
         ${random_power_cap}=  Evaluate  random.randint(${min_power_value}, ${max_power_value})  modules=random
 
         # Set power value via Redfish.
         Set Power Cap Value Via Redfish  ${random_power_cap}
-        ${redfish_power_value}=  Set Variable  ${random_power_cap}
+        VAR  ${redfish_power_value}  ${random_power_cap}
     END
 
     # Get power cap value via IPMI.
