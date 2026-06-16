@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95dec83d_860476e0",
+        "filename": "gui/gui_test/operations_menu/test_key_clear_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-06-16T16:44:38Z",
+      "side": 1,
+      "message": "nit: variables should be lowercase",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 39
+      },
+      "revId": "710ca0a130b9cc2e62cc8304ba242e9edf0d4fc1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "744e4406_d4df39fd",
+        "filename": "gui/gui_test/operations_menu/test_key_clear_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-06-16T16:44:38Z",
+      "side": 1,
+      "message": "missing alignment",
+      "revId": "710ca0a130b9cc2e62cc8304ba242e9edf0d4fc1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
