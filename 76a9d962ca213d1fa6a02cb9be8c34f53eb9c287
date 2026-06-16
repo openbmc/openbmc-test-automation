@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61c19200_7d827860",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-06-16T14:36:05Z",
+      "side": 1,
+      "message": "Looks good to me, 1 minor comment and Im good with this code",
+      "revId": "76a9d962ca213d1fa6a02cb9be8c34f53eb9c287",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f813f2cf_9677dcce",
+        "filename": "gui/gui_test/operations_menu/test_virtual_media_operations_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-06-16T14:36:05Z",
+      "side": 1,
+      "message": "Virtual_Media_Operations",
+      "revId": "76a9d962ca213d1fa6a02cb9be8c34f53eb9c287",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
