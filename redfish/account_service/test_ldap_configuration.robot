@@ -686,6 +686,22 @@ Create LDAP Config With Various Port Numbers
     -1                        ${HTTP_BAD_REQUEST}
     ${EMPTY}                  ${HTTP_OK}, ${HTTP_NO_CONTENT}
 
+Verify LDAP User Creates Local User And Local User Changes Privilege
+    [Documentation]  Verify LDAP admin creates local users and test privilege changes
+    ...  by local admin (success) and local readonly user (forbidden).
+    [Tags]  Verify_LDAP_User_Creates_Local_User_And_Local_User_Changes_Privilege
+    [Setup]  Update LDAP Configuration With LDAP User Role And Group  ${LDAP_TYPE}
+    ...  Administrator  ${GROUP_NAME}
+    [Template]  LDAP User Creates Local User And Privilege Change By Local User
+    [Teardown]  FFDC On Test Case Fail
+
+    # creator_type  initial_privilege  changer_type      new_privilege  expected_result
+    LDAP_Admin      Administrator      Local_Admin       ReadOnly       Success
+    LDAP_Admin      ReadOnly           Local_Admin       Administrator  Success
+    LDAP_Admin      Administrator      Local_ReadOnly    ReadOnly       Forbidden
+    LDAP_Admin      ReadOnly           Local_ReadOnly    Administrator  Forbidden
+
+
 *** Keywords ***
 
 Redfish Verify LDAP Login
@@ -1160,3 +1176,70 @@ Create LDAP Config With Port And Verify
     # Attempt to patch with the specified port.
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body=${body}
     ...  valid_status_codes=[${expected_status}]
+
+
+LDAP User Creates Local User And Privilege Change By Local User
+    [Documentation]  LDAP user creates local user and local user attempts privilege change.
+    [Arguments]  ${creator_type}  ${initial_privilege}  ${changer_type}  ${new_privilege}  ${expected_result}
+
+    # Description of argument(s):
+    # creator_type       Type of user creating the local user (LDAP_Admin).
+    # initial_privilege  Initial privilege of the created user (Administrator or ReadOnly).
+    # changer_type       Type of user changing the privilege (Local_Admin or Local_ReadOnly).
+    # new_privilege      New privilege to set (Administrator or ReadOnly).
+    # expected_result    Expected result (Success or Forbidden).
+
+    TRY
+        # Login with LDAP admin user and create local user.
+        Run Keyword And Ignore Error  Redfish.Logout
+        Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+
+        Redfish Create User  ${test_local_user}  ${test_user_password}  ${initial_privilege}  ${True}
+        Verify User Role  ${test_local_user}  ${initial_privilege}
+        Verify User Login And Logout  ${test_local_user}  ${test_user_password}
+
+        # Login with admin and create readonly user if needed.
+        Redfish.Login  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+
+        IF  '${changer_type}' == 'Local_ReadOnly'
+            Run Keyword And Ignore Error  Redfish.Delete  ${REDFISH_ACCOUNTS_URI}local_readonly_user
+            ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
+            Redfish Create User  local_readonly_user  ${test_user_password}  ReadOnly  ${True}
+            Run Keyword And Ignore Error  Redfish.Logout
+            Redfish.Login  local_readonly_user  ${test_user_password}
+        END
+
+        # Attempt privilege change and verify result.
+        IF  '${expected_result}' == 'Success'
+            Redfish.Patch  ${REDFISH_ACCOUNTS_URI}${test_local_user}
+            ...  body={'RoleId': '${new_privilege}'}
+            ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+            Run Keyword And Ignore Error  Redfish.Logout
+            Redfish.Login  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+            Verify User Role  ${test_local_user}  ${new_privilege}
+            Verify User Login And Logout  ${test_local_user}  ${test_user_password}
+
+        ELSE IF  '${expected_result}' == 'Forbidden'
+            Redfish.Patch  ${REDFISH_ACCOUNTS_URI}${test_local_user}
+            ...  body={'RoleId': '${new_privilege}'}
+            ...  valid_status_codes=[${HTTP_FORBIDDEN}]
+
+            Run Keyword And Ignore Error  Redfish.Logout
+            Redfish.Login  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+            Verify User Role  ${test_local_user}  ${initial_privilege}
+        END
+
+    FINALLY
+        # Cleanup test users after each iteration.
+        Run Keyword And Ignore Error  Redfish.Logout
+        Redfish.Login  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+        Run Keyword And Ignore Error  Redfish.Delete  ${REDFISH_ACCOUNTS_URI}${test_local_user}
+        ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
+
+        IF  '${changer_type}' == 'Local_ReadOnly'
+            Run Keyword And Ignore Error  Redfish.Delete  ${REDFISH_ACCOUNTS_URI}local_readonly_user
+            ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
+        END
+    END
+
