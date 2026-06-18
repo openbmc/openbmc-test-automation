@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d684394_ba44e4d8",
+        "filename": "ipmi/test_ipmi_device_id.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-06-18T06:23:32Z",
+      "side": 1,
+      "message": "Fix the trailing white space at the end",
+      "revId": "662b7e7867e0ccf8fb408f2137871226165db34c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b7e8451_e6d7b3c3",
+        "filename": "ipmi/test_ipmi_device_id.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-06-18T06:23:32Z",
+      "side": 1,
+      "message": "remove the nA  from this.. \n\n\nshould be ${resp[11:]}  and not ${resp[11:]}nA",
+      "revId": "662b7e7867e0ccf8fb408f2137871226165db34c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f809df62_801eed35",
+        "filename": "ipmi/test_ipmi_device_id.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-06-18T06:23:32Z",
+      "side": 1,
+      "message": "${info}\u003d  Set Variable  ${data[0]}\n\nwhy this is removed ?",
+      "revId": "662b7e7867e0ccf8fb408f2137871226165db34c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
