@@ -86,6 +86,24 @@
       "message": "${info}\u003d  Set Variable  ${data[0]}\n\nwhy this is removed ?",
       "revId": "662b7e7867e0ccf8fb408f2137871226165db34c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62e44cbb_f7ba2839",
+        "filename": "ipmi/test_ipmi_device_id.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-06-22T14:05:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f809df62_801eed35",
+      "revId": "662b7e7867e0ccf8fb408f2137871226165db34c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
