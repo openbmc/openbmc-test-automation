@@ -122,6 +122,46 @@
       },
       "revId": "bd93a16e32b8dbb348e55a021e7b521e9b2544d6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "298b2830_f1068056",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-06-22T16:26:26Z",
+      "side": 1,
+      "message": "missing description of argument",
+      "revId": "bd93a16e32b8dbb348e55a021e7b521e9b2544d6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea8f8f94_47a882b8",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-06-22T16:26:26Z",
+      "side": 1,
+      "message": "use two space instead of four space",
+      "range": {
+        "startLine": 392,
+        "startChar": 18,
+        "endLine": 392,
+        "endChar": 21
+      },
+      "revId": "bd93a16e32b8dbb348e55a021e7b521e9b2544d6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
