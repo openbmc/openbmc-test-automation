@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06d67a27_2e352283",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-06-23T08:46:42Z",
+      "side": 1,
+      "message": "Resolved comment from @sridevra@in.ibm.com and @rramyasr@in.ibm.com",
+      "revId": "6883e7b94fb1d5be9c42f478f5cb59feaf240d17",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b62fd619_5435dbd1",
+        "filename": "gui/gui_test/operations_menu/test_host_console_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-06-23T08:46:42Z",
+      "side": 1,
+      "message": "Changes done.",
+      "parentUuid": "a311ed65_43454020",
+      "revId": "bd93a16e32b8dbb348e55a021e7b521e9b2544d6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f374430e_77989012",
         "filename": "gui/gui_test/operations_menu/test_host_console_sub_menu.robot",
         "patchSetId": 1
@@ -177,6 +195,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b23bf9db_5acab713",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-06-23T08:46:42Z",
+      "side": 1,
+      "message": "Changes done.",
+      "parentUuid": "298b2830_f1068056",
+      "revId": "bd93a16e32b8dbb348e55a021e7b521e9b2544d6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ea8f8f94_47a882b8",
         "filename": "gui/lib/gui_resource.robot",
         "patchSetId": 1
@@ -188,6 +224,30 @@
       "writtenOn": "2026-06-22T16:26:26Z",
       "side": 1,
       "message": "use two space instead of four space",
+      "range": {
+        "startLine": 392,
+        "startChar": 18,
+        "endLine": 392,
+        "endChar": 21
+      },
+      "revId": "bd93a16e32b8dbb348e55a021e7b521e9b2544d6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88a603ac_8f9cb0db",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-06-23T08:46:42Z",
+      "side": 1,
+      "message": "Changes done.",
+      "parentUuid": "ea8f8f94_47a882b8",
       "range": {
         "startLine": 392,
         "startChar": 18,
