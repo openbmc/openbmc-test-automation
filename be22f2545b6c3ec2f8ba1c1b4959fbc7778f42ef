@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c15d49e_d32b7c6e",
+        "filename": "gui/gui_test/security_and_access_menu/test_ldap_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-06-23T10:09:31Z",
+      "side": 1,
+      "message": "Comments should end with a period.",
+      "range": {
+        "startLine": 197,
+        "startChar": 91,
+        "endLine": 197,
+        "endChar": 92
+      },
+      "revId": "be22f2545b6c3ec2f8ba1c1b4959fbc7778f42ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34608bb8_25a83d28",
+        "filename": "gui/gui_test/security_and_access_menu/test_ldap_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-06-23T10:09:31Z",
+      "side": 1,
+      "message": "Comments should end with a period.",
+      "range": {
+        "startLine": 397,
+        "startChar": 0,
+        "endLine": 397,
+        "endChar": 46
+      },
+      "revId": "be22f2545b6c3ec2f8ba1c1b4959fbc7778f42ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
