@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0b8f520a_278bf60d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-06-23T09:12:50Z",
+      "side": 1,
+      "message": "Conflict is resolved",
+      "parentUuid": "9230ba1b_923ab873",
+      "revId": "bd93a16e32b8dbb348e55a021e7b521e9b2544d6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a311ed65_43454020",
         "filename": "gui/gui_test/operations_menu/test_host_console_sub_menu.robot",
         "patchSetId": 1
