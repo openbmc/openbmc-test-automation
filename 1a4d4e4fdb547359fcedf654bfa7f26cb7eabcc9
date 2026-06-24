@@ -16,6 +16,24 @@
       "message": "Redfish.Patch  ${REDFISH_ACCOUNTS_SERVICE_URI}  body\u003d${payload}\n\nmissed here ? changing to REDFISH_ACCOUNTS_URI ?",
       "revId": "1a4d4e4fdb547359fcedf654bfa7f26cb7eabcc9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f81e0f38_d0d62d79",
+        "filename": "redfish/account_service/test_user_account.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-06-24T15:18:43Z",
+      "side": 1,
+      "message": "Probably that is correct.. just checking",
+      "parentUuid": "019ea0f8_0d7d772d",
+      "revId": "1a4d4e4fdb547359fcedf654bfa7f26cb7eabcc9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
