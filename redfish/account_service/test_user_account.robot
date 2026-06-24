@@ -286,7 +286,7 @@ Verify User Account Locked
 
     Redfish.Login
 
-    Redfish.Delete  ${REDFISH_ACCOUNTS_SERVICE_URI}admin_user
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}admin_user
 
 
 Verify User Account Unlock
@@ -295,7 +295,7 @@ Verify User Account Unlock
     [Teardown]  Run Keywords  SSHLibrary.Close All Connections
     ...  AND  Redfish.Logout
     ...  AND  Redfish.Login
-    ...  AND  Redfish.Delete  ${REDFISH_ACCOUNTS_SERVICE_URI}test_user
+    ...  AND  Redfish.Delete  ${REDFISH_ACCOUNTS_URI}test_user
 
     Redfish Create User  test_user  TestPwd123  Administrator  ${True}
 
@@ -356,8 +356,8 @@ Verify Admin User Privilege
 
     # Note: Delete user would work here because a root login is
     # performed as part of "Redfish Verify User" keyword's teardown.
-    Redfish.Delete  ${REDFISH_ACCOUNTS_SERVICE_URI}admin_user
-    Redfish.Delete  ${REDFISH_ACCOUNTS_SERVICE_URI}readonly_user
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}admin_user
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}readonly_user
 
 
 Verify Operator User Role Change Using Admin Privilege User
@@ -380,8 +380,8 @@ Verify Operator User Role Change Using Admin Privilege User
     # Verify modified user.
     Redfish Verify User  operator_user  TestPwd123  Administrator  ${True}
 
-    Redfish.Delete  ${REDFISH_ACCOUNTS_SERVICE_URI}admin_user
-    Redfish.Delete  ${REDFISH_ACCOUNTS_SERVICE_URI}operator_user
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}admin_user
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}operator_user
 
 
 Verify Operator User Privilege
@@ -406,8 +406,8 @@ Verify Operator User Privilege
 
     Redfish.Login
 
-    Redfish.Delete  ${REDFISH_ACCOUNTS_SERVICE_URI}admin_user
-    Redfish.Delete  ${REDFISH_ACCOUNTS_SERVICE_URI}operator_user
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}admin_user
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}operator_user
 
 
 Verify ReadOnly User Privilege
