@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f66f8bc9_dfa07bb2",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-06-25T08:43:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4c092b4_14965b99",
+      "revId": "4a84d6d38844ee095e8bc46af7c738c9e6fa56fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "82cf2942_a465ae45",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-06-25T08:37:21Z",
       "side": 1,
       "message": "Fix: Move the explanatory note into the [Documentation] block so it is unmistakably associated with the teardown override:\n```\n[Documentation]  Verify LDAP admin user creates local users with different privileges,\n...  then test privilege modification by local admin user (should succeed) and\n...  local readonly user (should be forbidden due to insufficient permissions).\n...  Note: Teardown uses FFDC only — Redfish session is restored inside the FINALLY\n...  block of the template keyword to guarantee cleanup on every iteration.\n\n```\nWhy: Keeps the intent visible in the canonical documentation field rather than a comment that blends with template data rows, and prevents future maintainers from accidentally re-adding Redfish.Login to the teardown and creating a double-login.",
+      "revId": "4a84d6d38844ee095e8bc46af7c738c9e6fa56fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ed19556_124fe6bd",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 742,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-06-25T08:43:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "82cf2942_a465ae45",
       "revId": "4a84d6d38844ee095e8bc46af7c738c9e6fa56fd",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
