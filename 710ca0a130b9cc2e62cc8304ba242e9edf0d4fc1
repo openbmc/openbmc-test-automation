@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d6d044c_7a6e0bda",
+        "filename": "gui/gui_test/operations_menu/test_key_clear_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-06-25T07:25:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "95dec83d_860476e0",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 39
+      },
+      "revId": "710ca0a130b9cc2e62cc8304ba242e9edf0d4fc1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "744e4406_d4df39fd",
@@ -37,6 +61,24 @@
       "writtenOn": "2026-06-16T16:44:38Z",
       "side": 1,
       "message": "missing alignment",
+      "revId": "710ca0a130b9cc2e62cc8304ba242e9edf0d4fc1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "026cc123_df570331",
+        "filename": "gui/gui_test/operations_menu/test_key_clear_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-06-25T07:25:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "744e4406_d4df39fd",
       "revId": "710ca0a130b9cc2e62cc8304ba242e9edf0d4fc1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
