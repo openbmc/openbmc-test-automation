@@ -34,6 +34,24 @@
       "parentUuid": "019ea0f8_0d7d772d",
       "revId": "1a4d4e4fdb547359fcedf654bfa7f26cb7eabcc9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8a6a944_d4312911",
+        "filename": "redfish/account_service/test_user_account.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-06-25T05:56:29Z",
+      "side": 1,
+      "message": "The fix is required for delete user only\n\nREDFISH_ACCOUNTS_URI - /redfish/v1/AccountService/Accounts/\nREDFISH_ACCOUNTS_SERVICE_URI - /redfish/v1/AccountService/",
+      "parentUuid": "f81e0f38_d0d62d79",
+      "revId": "1a4d4e4fdb547359fcedf654bfa7f26cb7eabcc9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
