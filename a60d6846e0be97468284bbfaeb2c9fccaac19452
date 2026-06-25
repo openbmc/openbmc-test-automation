@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d3f52cb_c3ebcc4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-06-25T09:09:19Z",
+      "side": 1,
+      "message": "Moved test to same suite and removed separate suite.",
+      "revId": "a60d6846e0be97468284bbfaeb2c9fccaac19452",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
