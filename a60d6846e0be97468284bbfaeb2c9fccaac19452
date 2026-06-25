@@ -16,6 +16,40 @@
       "message": "Moved test to same suite and removed separate suite.",
       "revId": "a60d6846e0be97468284bbfaeb2c9fccaac19452",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "587fa85b_7a8bf2b5",
+        "filename": "gui/gui_test/operations_menu/test_virtual_media_operations_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-06-25T12:29:14Z",
+      "side": 1,
+      "message": "Empty default for ${VIRTUAL_MEDIA_FILE_PATH} causes silent test failure\n\nAdd check in the Suite Setup or start of the test to make sure we catch early\n\n```\nShould Not Be Empty  ${VIRTUAL_MEDIA_FILE_PATH}\n    ...  msg\u003dVIRTUAL_MEDIA_FILE_PATH must be set before running this test\n```",
+      "revId": "a60d6846e0be97468284bbfaeb2c9fccaac19452",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb723464_f4ff0378",
+        "filename": "gui/gui_test/operations_menu/test_virtual_media_operations_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-06-25T12:29:14Z",
+      "side": 1,
+      "message": "Two consecutive blank lines appear inside the test case body\n\nremove one line from it",
+      "revId": "a60d6846e0be97468284bbfaeb2c9fccaac19452",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
