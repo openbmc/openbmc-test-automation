@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6eb6f1e9_0352d058",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-06-26T06:16:36Z",
+      "side": 1,
+      "message": "Hi @prafulradadiya101@gmail.com,\n\nThanks for the comments. Actually, the points you have highlighted, is already covered on the steps provided in the code. this is applicable for the comments you have provided in this MR.",
+      "revId": "b9916b557ea50e76a7f78e8223fd1c57e91f2460",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2448efe0_6f12cb2f",
@@ -14,6 +31,30 @@
       "writtenOn": "2026-06-23T09:47:12Z",
       "side": 1,
       "message": "Launch browser, login to GUI, and navigate to Date and time page under settings menu.",
+      "range": {
+        "startLine": 269,
+        "startChar": 21,
+        "endLine": 269,
+        "endChar": 22
+      },
+      "revId": "b9916b557ea50e76a7f78e8223fd1c57e91f2460",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc1f4a48_6c827cd6",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-06-26T06:16:36Z",
+      "side": 1,
+      "message": "Hi @prafulradadiya101@gmail.com,\nThanks for the comments. Actually, the points you have highlighted, is already covered on the steps provided in the code.",
+      "parentUuid": "2448efe0_6f12cb2f",
       "range": {
         "startLine": 269,
         "startChar": 21,
