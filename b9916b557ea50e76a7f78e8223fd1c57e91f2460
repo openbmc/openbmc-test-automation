@@ -65,6 +65,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "546bacbc_72ce9b97",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-06-26T06:19:18Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "bc1f4a48_6c827cd6",
+      "range": {
+        "startLine": 269,
+        "startChar": 21,
+        "endLine": 269,
+        "endChar": 22
+      },
+      "revId": "b9916b557ea50e76a7f78e8223fd1c57e91f2460",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "11bc0ffd_2b79566f",
@@ -78,6 +102,30 @@
       "writtenOn": "2026-06-23T09:47:12Z",
       "side": 1,
       "message": "Launch browser, login to GUI, and navigate to factory reset page under settings menu.",
+      "range": {
+        "startLine": 172,
+        "startChar": 21,
+        "endLine": 172,
+        "endChar": 46
+      },
+      "revId": "b9916b557ea50e76a7f78e8223fd1c57e91f2460",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d1d8315_4693fdcf",
+        "filename": "gui/gui_test/settings_menu/test_factory_reset_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-06-26T06:19:18Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "11bc0ffd_2b79566f",
       "range": {
         "startLine": 172,
         "startChar": 21,
@@ -111,6 +159,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d13f4eb7_52c94f5c",
+        "filename": "gui/gui_test/settings_menu/test_power_restore_policy_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-06-26T06:19:18Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "fd0c3b5f_37291c0e",
+      "range": {
+        "startLine": 50,
+        "startChar": 21,
+        "endLine": 50,
+        "endChar": 46
+      },
+      "revId": "b9916b557ea50e76a7f78e8223fd1c57e91f2460",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "949fcbf7_b97cc00d",
@@ -124,6 +196,30 @@
       "writtenOn": "2026-06-23T09:47:12Z",
       "side": 1,
       "message": "Launch browser, login to GUI, and navigate to SNMP Alerts page under settings menu.",
+      "range": {
+        "startLine": 292,
+        "startChar": 21,
+        "endLine": 292,
+        "endChar": 46
+      },
+      "revId": "b9916b557ea50e76a7f78e8223fd1c57e91f2460",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "044c9e4c_d749a43e",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-06-26T06:19:18Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "949fcbf7_b97cc00d",
       "range": {
         "startLine": 292,
         "startChar": 21,
