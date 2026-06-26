@@ -432,7 +432,7 @@ Verify IPv4 And IPv6 Coexistence And Redfish Access On Eth0
     [Documentation]  Verify co-existence of various IPv4 and IPv6 address configurations on eth0
     ...              and verify Redfish is accessible on configured addresses.
     ...              Tests combinations of Static/DHCPv4 with Static/SLAAC/DHCPv6/LinkLocal IPv6.
-    [Tags]  Verify_IPv4_And_IPv6_Coexistence_And_Redfish_Access
+    [Tags]  Verify_IPv4_And_IPv6_Coexistence_And_Redfish_Access_On_Eth0
     [Setup]  Save Initial Network Configuration
     [Teardown]  Test Teardown Execution
     [Template]  Configure IPv4 IPv6 Combination And Verify Redfish Access
