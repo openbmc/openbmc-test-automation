@@ -91,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3da8c15b_d2bddd21",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-06-29T04:52:31Z",
+      "side": 1,
+      "message": "User keyword performs Launch browser, login to GUI but documentation does not cover it.",
+      "parentUuid": "546bacbc_72ce9b97",
+      "range": {
+        "startLine": 269,
+        "startChar": 21,
+        "endLine": 269,
+        "endChar": 22
+      },
+      "revId": "b9916b557ea50e76a7f78e8223fd1c57e91f2460",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "11bc0ffd_2b79566f",
         "filename": "gui/gui_test/settings_menu/test_factory_reset_sub_menu.robot",
         "patchSetId": 5
