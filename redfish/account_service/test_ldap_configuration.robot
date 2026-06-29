@@ -650,44 +650,15 @@ Verify Local User Management And Operations Continue During LDAP Unreachability
     Redfish.Logout
     Redfish.Login
 
-Verify LDAP ReadOnly User Cannot Change Local User Password
-    [Documentation]  Verify that LDAP ReadOnly user cannot change local user password.
-    ...  Create test user with admin privilege, then attempt to change password
-    ...  using LDAP readonly user and verify the password change must be denied.
-    [Tags]  Verify_LDAP_ReadOnly_User_Cannot_Change_Local_User_Password
-    [Setup]  Run Keywords  Redfish.Login  AND
-    ...  Update LDAP Configuration With LDAP User Role And Group  ${LDAP_TYPE}
-    ...  ReadOnly  ${GROUP_NAME}
-    [Teardown]  Run Keywords  Redfish.Logout  AND  Redfish.Login  AND
-    ...  Cleanup Local User And Restore Session  ${test_local_user}  AND
-    ...  Restore LDAP Privilege  AND  FFDC On Test Case Fail
+Verify LDAP ReadOnly User Cannot Change Local Admin User Password
+    [Documentation]  Verify that LDAP ReadOnly user cannot change password of a local user
+    ...  for Administrator and ReadOnly roles.
+    [Tags]  Verify_LDAP_ReadOnly_User_Cannot_Change_Local_Admin_User_Password
+    [Template]  Verify LDAP ReadOnly User Cannot Change Password Of Local User With Role
 
-    # Create local user with Administrator role.
-    Redfish Create User  ${test_local_user}  ${test_user_password}
-    ...    Administrator  ${True}
-
-    # Verify newly created user can login.
-    Verify User Login And Logout  ${test_local_user}  ${test_user_password}
-
-    # Login with LDAP user having ReadOnly privilege.
-    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
-
-    # Verify password change fails with LDAP ReadOnly user.
-    Redfish.Patch  ${REDFISH_ACCOUNTS_URI}${test_local_user}
-    ...  body={'Password': '${NEW_PASSWORD}'}
-    ...  valid_status_codes=[${HTTP_FORBIDDEN}, ${HTTP_UNAUTHORIZED}]
-
-    # Logout from LDAP ReadOnly user session.
-    Redfish.Logout
-
-    # Verify password was not changed with new password login attempt.
-    ${status}=  Run Keyword And Return Status
-    ...  Redfish.Login  ${test_local_user}  ${NEW_PASSWORD}
-    Should Be Equal  ${status}  ${False}
-    ...  msg=ReadOnly user should not be able to change passwords.
-
-    # Verify that the original password still works.
-    Verify User Login And Logout  ${test_local_user}  ${test_user_password}
+    # local_role         role description
+    Administrator        # Local user with Administrator privilege
+    ReadOnly             # Local user with ReadOnly privilege
 
 Verify Local Admin User Creation When LDAP Is Unreachable
     [Documentation]  Verify local administrator user can be created and used when LDAP is unreachable.
@@ -857,6 +828,50 @@ Cleanup Local User And Restore Session
     Redfish.Login
     Redfish.Delete  ${REDFISH_ACCOUNTS_URI}${username}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
+
+
+Verify LDAP ReadOnly User Cannot Change Password Of Local User With Role
+    [Documentation]  Verify LDAP ReadOnly user cannot change password of a local user
+    ...  created by the service user; covers Administrator and ReadOnly roles.
+    [Arguments]  ${local_role}
+    [Setup]  Run Keywords  Redfish.Login  AND
+    ...  Update LDAP Configuration With LDAP User Role And Group  ${LDAP_TYPE}
+    ...  ReadOnly  ${GROUP_NAME}
+    [Teardown]  Run Keywords  Redfish.Logout  AND  Redfish.Login  AND
+    ...  Cleanup Local User And Restore Session  ${test_local_user}  AND
+    ...  Restore LDAP Privilege  AND  FFDC On Test Case Fail
+
+    # Description of argument(s):
+    # local_role  Role assigned to the local user created by the service user
+    #             (e.g. "Administrator", "ReadOnly").
+
+    # Service user (local admin) creates a local user with the specified role.
+    Redfish Create User  ${test_local_user}  ${test_user_password}
+    ...  ${local_role}  ${True}
+
+    # Verify the newly created user can login with the original password.
+    Verify User Login And Logout  ${test_local_user}  ${test_user_password}
+
+    # Login with LDAP user having ReadOnly privilege.
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+
+    # Verify that the LDAP ReadOnly user cannot change the local user password.
+    Redfish.Patch  ${REDFISH_ACCOUNTS_URI}${test_local_user}
+    ...  body={'Password': '${NEW_PASSWORD}'}
+    ...  valid_status_codes=[${HTTP_FORBIDDEN}, ${HTTP_UNAUTHORIZED}]
+
+    # Logout from LDAP ReadOnly user session.
+    Redfish.Logout
+
+    # Verify the password was NOT changed - new password login must fail.
+    VAR  ${status}  ${False}
+    ${status}=  Run Keyword And Return Status
+    ...  Redfish.Login  ${test_local_user}  ${NEW_PASSWORD}
+    Should Be Equal  ${status}  ${False}
+    ...  msg=LDAP ReadOnly user should not be able to change the local user password.
+
+    # Verify the original password still works.
+    Verify User Login And Logout  ${test_local_user}  ${test_user_password}
 
 
 Disable Other LDAP
