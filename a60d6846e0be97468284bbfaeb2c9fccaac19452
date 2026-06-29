@@ -53,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "731ba9f3_8f18561b",
+        "filename": "gui/gui_test/operations_menu/test_virtual_media_operations_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-06-29T04:03:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4271575d_a6ce0dd5",
+      "revId": "a60d6846e0be97468284bbfaeb2c9fccaac19452",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb723464_f4ff0378",
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "Changes done.",
       "parentUuid": "bb723464_f4ff0378",
+      "revId": "a60d6846e0be97468284bbfaeb2c9fccaac19452",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c5a6f92_ca4025ad",
+        "filename": "gui/gui_test/operations_menu/test_virtual_media_operations_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-06-29T04:03:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42edfc66_74164bb5",
       "revId": "a60d6846e0be97468284bbfaeb2c9fccaac19452",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
