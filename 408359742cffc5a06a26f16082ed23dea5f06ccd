@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f37f4ba7_3142ee1b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-06-29T11:19:03Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1b9025a9_139de1c7",
+      "revId": "408359742cffc5a06a26f16082ed23dea5f06ccd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "565d7989_83795ee4",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-06-25T13:03:32Z",
       "side": 1,
       "message": "TOCTOU (Time-of-Check to Time-of-Use) Race in start_pty_process Alias Registration\n\nThe alias uniqueness check and the actual registration in self._processes are in two separate lock acquisitions. A second call with the same alias arriving between the two with self._lock blocks would pass the uniqueness check and both calls would register, with the second overwriting the first\u0027s child and log_fh without closing them.\n\nSuggestion fix is to Open the file and spawn the process outside the lock (they\u0027re blocking I/O), then perform a second check-and-set inside the final lock acquisition before writing to the dicts\n\n```\nwith self._lock:\n    if alias in self._processes:  # re-check inside lock\n        child.close(force\u003dTrue)\n        log_fh.close()\n        raise RuntimeError(\n            \"A PTY process with alias \u0027{}\u0027 is already running. \"\n            \"Stop it first with \u0027Stop PTY Process\u0027.\".format(alias)\n        )\n    self._processes[alias] \u003d child\n    self._log_handles[alias] \u003d log_fh\n    self._log_paths[alias] \u003d log_file\n```\n\nPrevents silently leaked file handles and orphaned child processes in concurrent suite execution scenarios.",
+      "revId": "408359742cffc5a06a26f16082ed23dea5f06ccd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a92a80aa_8838444e",
+        "filename": "lib/pty_process.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-06-29T11:19:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "565d7989_83795ee4",
       "revId": "408359742cffc5a06a26f16082ed23dea5f06ccd",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -52,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef724cf4_f46d25cc",
+        "filename": "lib/pty_process.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-06-29T11:19:03Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "00dc11dc_680c7fe3",
+      "revId": "408359742cffc5a06a26f16082ed23dea5f06ccd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7491561a_5d8485a2",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-06-25T13:03:32Z",
       "side": 1,
       "message": "Hardcoded Device-Specific HOST_COMMAND_PROMPT\n\nThis variable embeds a specific device hostname (raspberrypi-4f8b). The SSH test asserts Should Contain ${output} ${HOST_COMMAND_PROMPT} in the Verify Standalone SOL output from DCSCM using SBC over SSH test case, which will always fail on any hardware other than this exact RPI unit.\n\nSuggestion fix is to Make HOST_COMMAND_PROMPT an externally supplied variable with a generic default, or widen the assertion to match a broader pattern:\n\n```\n${HOST_COMMAND_PROMPT}       qualcomm@      # matches any qualcomm@\u003chostname\u003e\n```\n\nHardcoded device identifiers are a portability anti-pattern that will cause immediate failures in CI or on any other EVB+RPI configuration",
+      "revId": "408359742cffc5a06a26f16082ed23dea5f06ccd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09fde543_781b995e",
+        "filename": "qcom/sol/test_sol.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-06-29T11:19:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7491561a_5d8485a2",
       "revId": "408359742cffc5a06a26f16082ed23dea5f06ccd",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -86,6 +158,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "09077c1c_4fda822c",
+        "filename": "qcom/sol/test_sol.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-06-29T11:19:03Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "677228de_c89c0dcf",
+      "revId": "408359742cffc5a06a26f16082ed23dea5f06ccd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ba16be68_487f6d47",
@@ -103,6 +193,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb4f13cf_6d8c7757",
+        "filename": "qcom/sol/test_sol.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-06-29T11:19:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba16be68_487f6d47",
+      "revId": "408359742cffc5a06a26f16082ed23dea5f06ccd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2b1d212d_7a3a5fd0",
@@ -116,6 +224,24 @@
       "writtenOn": "2026-06-25T13:03:32Z",
       "side": 1,
       "message": "Either you do it in one place, Test teardown or Suite Teardown for this case thats the first one.. \n\nNext,\n\nThese Terminate Process calls reference handle names (sol_proc, sol_tc06, sol_client1, sol_client2) from Robot Framework\u0027s built-in Process library, but none of the test cases in this suite start processes via Process.Start Process using those handles. All sessions are managed exclusively via the PTY library. These calls are dead code left over from an earlier implementation.\n\nWhat we should do is Remove the four Terminate Process lines from both Suite Teardown Execution and Test Teardown Execution, leaving only Stop All PTY Processes for session cleanup.\n\nDead code adds noise, misleads future maintainers, and could mask a legitimate process leak by absorbing errors silently (Run Keyword And Ignore Error).",
+      "revId": "408359742cffc5a06a26f16082ed23dea5f06ccd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82634322_1dacb682",
+        "filename": "qcom/sol/test_sol.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-06-29T11:19:03Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2b1d212d_7a3a5fd0",
       "revId": "408359742cffc5a06a26f16082ed23dea5f06ccd",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
