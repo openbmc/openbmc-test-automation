@@ -33,10 +33,10 @@ ${ipv6_zero_compressed}          2001:22::1:2:3:8
 
 Get BMC IPv6 Info
     [Documentation]  Get system IPv6 address and prefix length.
-    [Arguments]  ${CHANNEL_NUMBER}=1
+    [Arguments]  ${channel_number}=${CHANNEL_NUMBER}
 
     # Description of argument(s):
-    # CHANNEL_NUMBER   Ethernet channel number, 1(eth0) or 2(eth1).
+    # channel_number   Ethernet channel number, 1(eth0) or 2(eth1).
 
     # Get system IP address and prefix length details using "ip addr"
     # Sample Output of "ip addr":
@@ -47,7 +47,7 @@ Get BMC IPv6 Info
     #     inet6 xxxx::xxxx:xxxx:xxxx:xxxx/64 scope global
 
     ${active_channel_config}=  Get Active Channel Config
-    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${channel_number}']['name']}
     ${cmd_output}  ${stderr}  ${rc}=  BMC Execute Command  /sbin/ip -6 addr show dev ${ethernet_interface}
 
     # Get line having IPv6 address details.
@@ -70,14 +70,14 @@ Get BMC IPv6 Info
 
 Verify IPv6 On BMC
     [Documentation]  Verify IPv6 on BMC.
-    [Arguments]  ${ipv6}  ${CHANNEL_NUMBER}=1
+    [Arguments]  ${ipv6}  ${channel_number}=${CHANNEL_NUMBER}
 
     # Description of argument(s):
     # ipv6             IPv6 address to be verified (e.g. "2001::1234:1234").
-    # CHANNEL_NUMBER   Ethernet channel number, 1(eth0) or 2(eth1).
+    # channel_number   Ethernet channel number, 1(eth0) or 2(eth1).
 
     # Get IPv6 address details on BMC using IP command.
-    @{ip_data}=  Get BMC IPv6 Info  ${CHANNEL_NUMBER}
+    @{ip_data}=  Get BMC IPv6 Info  ${channel_number}
     Should Contain Match  ${ip_data}  ${ipv6}/*
     ...  msg=IPv6 address does not exist.
 
