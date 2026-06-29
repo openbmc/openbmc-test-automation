@@ -16,6 +16,23 @@
       "message": "updated as per the comment.",
       "revId": "1bf222d9de4ef11ca3ce9732f81a43fcfd8b59dc",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7224081_60938075",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-06-29T12:00:34Z",
+      "side": 1,
+      "message": "Rebase to get Fix for CI failure.",
+      "revId": "1bf222d9de4ef11ca3ce9732f81a43fcfd8b59dc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
