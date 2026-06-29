@@ -50,6 +50,24 @@
       "message": "Please rebase.  fixed CI failure https://gerrit.openbmc.org/c/openbmc/openbmc-test-automation/+/91833",
       "revId": "1240ae55a136dbf2c69e397801c15e7a6f6d5424",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1661d059_a2978b72",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-06-29T11:46:55Z",
+      "side": 1,
+      "message": "Thanks.Done",
+      "parentUuid": "0126b472_c4e3d7c1",
+      "revId": "1240ae55a136dbf2c69e397801c15e7a6f6d5424",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
