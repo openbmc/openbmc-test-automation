@@ -60,10 +60,10 @@ Set MAC Address
 
 Get BMC IP Info
     [Documentation]  Get system IP address and prefix length.
-    [Arguments]  ${CHANNEL_NUMBER}=1
+    [Arguments]  ${channel_number}=${CHANNEL_NUMBER}
 
     # Description of argument(s):
-    # CHANNEL_NUMBER   Ethernet channel number, 1(eth0) or 2(eth1).
+    # channel_number   Ethernet channel number, 1(eth0) or 2(eth1).
 
     # Get system IP address and prefix length details using "ip addr"
     # Sample Output of "ip addr":
@@ -72,7 +72,7 @@ Get BMC IP Info
     #     inet xx.xx.xx.xx/24 brd xx.xx.xx.xx scope global eth0
 
     ${active_channel_config}=  Get Active Channel Config
-    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${channel_number}']['name']}
     ${cmd_output}  ${stderr}  ${rc}=  BMC Execute Command
     ...  /sbin/ip addr | grep ${ethernet_interface}
 
@@ -386,14 +386,14 @@ Configure Hostname
 
 Verify IP On BMC
     [Documentation]  Verify IP on BMC.
-    [Arguments]  ${ip}  ${CHANNEL_NUMBER}=1
+    [Arguments]  ${ip}  ${channel_number}=${CHANNEL_NUMBER}
 
     # Description of argument(s):
     # ip               IP address to be verified (e.g. "10.7.7.7").
-    # CHANNEL_NUMBER   Ethernet channel number, 1(eth0) or 2(eth1).
+    # channel_number   Ethernet channel number, 1(eth0) or 2(eth1).
 
     # Get IP address details on BMC using IP command.
-    @{ip_data}=  Get BMC IP Info  ${CHANNEL_NUMBER}
+    @{ip_data}=  Get BMC IP Info  ${channel_number}
     Should Contain Match  ${ip_data}  ${ip}/*
     ...  msg=IP address does not exist.
 
