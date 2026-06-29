@@ -235,7 +235,7 @@ Verify BMC Boot Flag Valid Bit Clearing Via IPMI
 
         # Check Chassis System Boot Options BMC Boot Flag Valid Bit Clearing
         ${resp}=  Run IPMI Command
-        ...  ${IPMI_RAW_CMD['system_boot_options']['Get_Boot_Flag_Valid_Bit_Clearing'][0]}
+        ...  ${IPMI_RAW_CMD['system_boot_options']['Get_Boot_Flag'][0]}
 
         ${resp}=  Strip String  ${resp}
         ${expected_output}=  Catenate  01 03  ${data_hex}
