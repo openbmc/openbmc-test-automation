@@ -89,6 +89,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4283005_95eadb07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-06-29T04:55:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b8f520a_278bf60d",
+      "revId": "bd93a16e32b8dbb348e55a021e7b521e9b2544d6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a311ed65_43454020",
@@ -120,6 +138,24 @@
       "side": 1,
       "message": "Changes done.",
       "parentUuid": "a311ed65_43454020",
+      "revId": "bd93a16e32b8dbb348e55a021e7b521e9b2544d6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64a057d9_13e556f4",
+        "filename": "gui/gui_test/operations_menu/test_host_console_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-06-29T04:55:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b62fd619_5435dbd1",
       "revId": "bd93a16e32b8dbb348e55a021e7b521e9b2544d6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -171,6 +207,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45c63a8a_723fd3d1",
+        "filename": "gui/gui_test/operations_menu/test_host_console_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-06-29T04:55:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16ba8077_d38eb27f",
+      "range": {
+        "startLine": 37,
+        "startChar": 11,
+        "endLine": 37,
+        "endChar": 20
+      },
+      "revId": "bd93a16e32b8dbb348e55a021e7b521e9b2544d6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a75db0b2_e55936fe",
@@ -184,6 +244,30 @@
       "writtenOn": "2026-06-09T09:51:11Z",
       "side": 1,
       "message": "We can remove this Tear Down, because there is no need for the Reload GUI keyword at the end of these test cases.",
+      "range": {
+        "startLine": 48,
+        "startChar": 14,
+        "endLine": 48,
+        "endChar": 23
+      },
+      "revId": "bd93a16e32b8dbb348e55a021e7b521e9b2544d6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d4585fd_ef458959",
+        "filename": "gui/gui_test/operations_menu/test_host_console_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-06-29T04:55:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a75db0b2_e55936fe",
       "range": {
         "startLine": 48,
         "startChar": 14,
@@ -229,6 +313,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7c05031_2e204288",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-06-29T04:55:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b23bf9db_5acab713",
+      "revId": "bd93a16e32b8dbb348e55a021e7b521e9b2544d6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ea8f8f94_47a882b8",
@@ -266,6 +368,30 @@
       "side": 1,
       "message": "Changes done.",
       "parentUuid": "ea8f8f94_47a882b8",
+      "range": {
+        "startLine": 392,
+        "startChar": 18,
+        "endLine": 392,
+        "endChar": 21
+      },
+      "revId": "bd93a16e32b8dbb348e55a021e7b521e9b2544d6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74b83f3c_13c66e87",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-06-29T04:55:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88a603ac_8f9cb0db",
       "range": {
         "startLine": 392,
         "startChar": 18,
