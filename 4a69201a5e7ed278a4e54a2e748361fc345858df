@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "18d1235a_b88c8dcb",
+        "filename": "gui/gui_test/operations_menu/test_key_clear_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-06-29T07:02:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13906705_5cad551d",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 34
+      },
+      "revId": "4a69201a5e7ed278a4e54a2e748361fc345858df",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6f745da3_737abc07",
@@ -54,6 +78,30 @@
       "writtenOn": "2026-06-29T04:43:34Z",
       "side": 1,
       "message": "Perform suite setup operation. Launch Browser, Login GUI and Navigate to key clear sub menu.",
+      "range": {
+        "startLine": 42,
+        "startChar": 21,
+        "endLine": 42,
+        "endChar": 51
+      },
+      "revId": "4a69201a5e7ed278a4e54a2e748361fc345858df",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d55f0979_29e4d364",
+        "filename": "gui/gui_test/operations_menu/test_key_clear_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-06-29T07:02:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f745da3_737abc07",
       "range": {
         "startLine": 42,
         "startChar": 21,
