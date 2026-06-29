@@ -104,6 +104,7 @@ Assign Valid And Invalid Static IPv4 Address To VMI
     a.3.118.94    10.5.20.1     255.255.252.0    ${HTTP_BAD_REQUEST}
     10.5.20       10.5.20.1     255.255.252.0    ${HTTP_BAD_REQUEST}
     10.5.20.-5    10.5.20.1     255.255.252.0    ${HTTP_BAD_REQUEST}
+    10.5.5.6      0.0.0.0       255.255.252.0    ${HTTP_ACCEPTED}
 
 
 Add Multiple IP Addresses On VMI Interface And Verify
