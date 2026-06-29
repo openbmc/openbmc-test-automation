@@ -16,6 +16,52 @@
       "message": "updated as per the comment.",
       "revId": "4a69201a5e7ed278a4e54a2e748361fc345858df",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13906705_5cad551d",
+        "filename": "gui/gui_test/operations_menu/test_key_clear_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-06-29T04:43:34Z",
+      "side": 1,
+      "message": "Please align with spaces in order for beautification.",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 34
+      },
+      "revId": "4a69201a5e7ed278a4e54a2e748361fc345858df",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f745da3_737abc07",
+        "filename": "gui/gui_test/operations_menu/test_key_clear_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-06-29T04:43:34Z",
+      "side": 1,
+      "message": "Perform suite setup operation. Launch Browser, Login GUI and Navigate to key clear sub menu.",
+      "range": {
+        "startLine": 42,
+        "startChar": 21,
+        "endLine": 42,
+        "endChar": 51
+      },
+      "revId": "4a69201a5e7ed278a4e54a2e748361fc345858df",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
