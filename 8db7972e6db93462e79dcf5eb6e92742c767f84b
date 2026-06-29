@@ -39,6 +39,30 @@
       },
       "revId": "8db7972e6db93462e79dcf5eb6e92742c767f84b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf6f1a7d_1c09a29d",
+        "filename": "gui/gui_test/operations_menu/test_virtual_media_operations_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-06-29T11:57:51Z",
+      "side": 1,
+      "message": "Thanks @nandakumarb@ami.com. Changes Done.",
+      "parentUuid": "71566b3a_2c53db86",
+      "range": {
+        "startLine": 75,
+        "startChar": 4,
+        "endLine": 75,
+        "endChar": 11
+      },
+      "revId": "8db7972e6db93462e79dcf5eb6e92742c767f84b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
