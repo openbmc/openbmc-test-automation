@@ -325,7 +325,7 @@ Verify Firmware Button State
     [Documentation]  Reusable keyword to verify firmware button state based on user type and button.
     [Arguments]  ${user_type}  ${button}  ${expected_state}
 
-    Description of argument(s):
+    # Description of argument(s):
     # user_type             User type (admin/readonly)
     # button                Button to verify (add_file/start_update)
     # expected_state        Expected button state (enabled/disabled)
