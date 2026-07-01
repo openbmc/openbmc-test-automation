@@ -15,21 +15,26 @@ Test Teardown    Run Keywords  Redfish.Login  AND  FFDC On Test Case Fail
 Test Tags        Ldap_Configuration
 
 *** Variables ***
-${old_ldap_privilege}    Administrator
-&{old_account_service}   &{EMPTY}
-&{old_ldap_config}       &{EMPTY}
-${hostname}              ${EMPTY}
-${test_ip}               10.6.6.6
-${test_mask}             255.255.255.0
-${test_local_user}       test_local_user
-${test_user_password}    TestPwd123
-${LDAP_UNREACHABLE_URI}  ldap://192.0.2.1
-${LOCAL_ADMIN_USER}      ldap_local_admin
-${LOCAL_ADMIN_PASSWORD}  TestPwd123
-${LOCALTESTUSER}         testuser
-${TEST_USER_PASSWORD}    TestPwd123
-${LDAP_TIMEOUT}          1min
-${NEW_PASSWORD}          NewPassword456
+${old_ldap_privilege}              Administrator
+&{old_account_service}             &{EMPTY}
+&{old_ldap_config}                 &{EMPTY}
+${hostname}                        ${EMPTY}
+${test_ip}                         10.6.6.6
+${test_mask}                       255.255.255.0
+${test_local_user}                 test_local_user
+${local_readonly_user}             local_readonly_user
+${test_user_password}              TestPwd123
+${local_readonly_user_password}    ReadOnly@123
+${ldap_unreachable_uri}            ldap://192.0.2.1
+${ldap_local_admin_user}           ldap_local_admin
+${local_admin_password}            TestPwd123
+${local_admin_user}                local_admin_user
+${local_admin_user_password}       LocalAdmin@123
+${ldap_timeout}                    1min
+${new_password}                    NewPassword456
+# User privileges.
+${privilege_admin}                 Administrator
+${privilege_readonly}              ReadOnly
 
 *** Test Cases ***
 
@@ -40,7 +45,7 @@ Verify LDAP Configuration Created
     Create LDAP Configuration
     # Call 'Get LDAP Configuration' to verify that LDAP configuration exists.
     Get LDAP Configuration  ${LDAP_TYPE}
-    Sleep  ${LDAP_TIMEOUT}
+    Sleep  ${ldap_timeout}
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
     Redfish.Logout
 
@@ -53,7 +58,7 @@ Verify Redfish LDAP Service Disable
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
     ...  body={'${LDAP_TYPE}': {'ServiceEnabled': ${False}}}
     ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
-    Sleep  ${LDAP_TIMEOUT}
+    Sleep  ${ldap_timeout}
     ${resp}=  Run Keyword And Return Status  Redfish.Login  ${LDAP_USER}
     ...  ${LDAP_USER_PASSWORD}
     Should Be Equal  ${resp}  ${False}
@@ -76,7 +81,7 @@ Verify LDAP Login With ServiceEnabled
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
     ...  body={'${LDAP_TYPE}': {'ServiceEnabled': ${True}}}
     ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
-    Sleep  ${LDAP_TIMEOUT}
+    Sleep  ${ldap_timeout}
     # After update, LDAP login.
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
     Redfish.Logout
@@ -89,7 +94,7 @@ Verify LDAP Login With Correct AuthenticationType
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
     ...  body={'${ldap_type}': {'Authentication': {'AuthenticationType':'UsernameAndPassword'}}}
     ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
-    Sleep  ${LDAP_TIMEOUT}
+    Sleep  ${ldap_timeout}
     # After update, LDAP login.
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
     Redfish.Logout
@@ -307,7 +312,7 @@ Verify LDAP BaseDN Update And LDAP Login
     ...   {'BaseDistinguishedNames': ['${LDAP_BASE_DN}']}}}}
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body=${body}
     ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
-    Sleep  ${LDAP_TIMEOUT}
+    Sleep  ${ldap_timeout}
     Redfish Verify LDAP Login
 
 
@@ -321,7 +326,7 @@ Verify LDAP BindDN Update And LDAP Login
     ...  '${LDAP_BIND_DN}'}}}
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body=${body}
     ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
-    Sleep  ${LDAP_TIMEOUT}
+    Sleep  ${ldap_timeout}
     Redfish Verify LDAP Login
 
 
@@ -335,7 +340,7 @@ Verify LDAP BindDN Password Update And LDAP Login
     ...  '${LDAP_BIND_DN_PASSWORD}'}}}
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body=${body}
     ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
-    Sleep  ${LDAP_TIMEOUT}
+    Sleep  ${ldap_timeout}
     Redfish Verify LDAP Login
 
 
@@ -348,7 +353,7 @@ Verify LDAP Type Update And LDAP Login
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
     ...  body={'${LDAP_TYPE}': {'ServiceEnabled': ${True}}}
     ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
-    Sleep  ${LDAP_TIMEOUT}
+    Sleep  ${ldap_timeout}
     Redfish Verify LDAP Login
 
 
@@ -383,7 +388,7 @@ Verify LDAP Login With Invalid Data
     Create LDAP Configuration  ${LDAP_TYPE}  Invalid_LDAP_Server_URI
     ...  Invalid_LDAP_BIND_DN  LDAP_BIND_DN_PASSWORD
     ...  Invalid_LDAP_BASE_DN
-    Sleep  ${LDAP_TIMEOUT}
+    Sleep  ${ldap_timeout}
     Redfish Verify LDAP Login  ${False}
 
 
@@ -397,7 +402,7 @@ Verify LDAP Config Creation Without BASE DN
 
     Create LDAP Configuration  ${LDAP_TYPE}  Invalid_LDAP_Server_URI
     ...  Invalid_LDAP_BIND_DN  LDAP_BIND_DN_PASSWORD  ${EMPTY}
-    Sleep  ${LDAP_TIMEOUT}
+    Sleep  ${ldap_timeout}
     Redfish Verify LDAP Login  ${False}
 
 
@@ -421,7 +426,7 @@ Verify LDAP Login With Invalid BASE DN
 
     Create LDAP Configuration  ${LDAP_TYPE}  ${LDAP_SERVER_URI}
     ...  ${LDAP_BIND_DN}  ${LDAP_BIND_DN_PASSWORD}  Invalid_LDAP_BASE_DN
-    Sleep  ${LDAP_TIMEOUT}
+    Sleep  ${ldap_timeout}
     Redfish Verify LDAP Login  ${False}
 
 
@@ -435,7 +440,7 @@ Verify LDAP Login With Invalid BIND_DN_PASSWORD
 
     Create LDAP Configuration  ${LDAP_TYPE}  ${LDAP_SERVER_URI}
     ...  ${LDAP_BIND_DN}  INVALID_LDAP_BIND_DN_PASSWORD  ${LDAP_BASE_DN}
-    Sleep  ${LDAP_TIMEOUT}
+    Sleep  ${ldap_timeout}
     Redfish Verify LDAP Login  ${False}
 
 
@@ -449,7 +454,7 @@ Verify LDAP Login With Invalid BASE DN And Invalid BIND DN
 
     Create LDAP Configuration  ${LDAP_TYPE}  ${LDAP_SERVER_URI}
     ...  INVALID_LDAP_BIND_DN  ${LDAP_BIND_DN_PASSWORD}  INVALID_LDAP_BASE_DN
-    Sleep  ${LDAP_TIMEOUT}
+    Sleep  ${ldap_timeout}
     Redfish Verify LDAP Login  ${False}
 
 
@@ -474,7 +479,7 @@ Verify LDAP Login With Invalid BIND DN
 
     Create LDAP Configuration  ${LDAP_TYPE}  ${LDAP_SERVER_URI}
     ...  Invalid_LDAP_BIND_DN  ${LDAP_BIND_DN_PASSWORD}  ${LDAP_BASE_DN}
-    Sleep  ${LDAP_TIMEOUT}
+    Sleep  ${ldap_timeout}
     Redfish Verify LDAP Login  ${False}
 
 
@@ -587,12 +592,12 @@ Switch LDAP Type And Verify Login Fails
     Create LDAP Configuration
     ...  ${LDAP_TYPE_1}  ${LDAP_SERVER_URI_1}  ${LDAP_BIND_DN_1}  ${LDAP_BIND_DN_PASSWORD_1}  ${LDAP_BASE_DN_1}
     Redfish.Logout
-    Sleep  ${LDAP_TIMEOUT}
+    Sleep  ${ldap_timeout}
 
     # Check if Login works via Inverse LDAP
     Redfish.Login  ${LDAP_USER_1}  ${LDAP_USER_PASSWORD_1}
     Redfish.Logout
-    Sleep  ${LDAP_TIMEOUT}
+    Sleep  ${ldap_timeout}
 
     # Login using LDAP type must fail
     Redfish Verify LDAP Login  ${False}
@@ -602,47 +607,47 @@ Verify Local User Management And Operations Continue During LDAP Unreachability
     [Documentation]  Verify that local admin can create and manage local users even when LDAP server is unreachable.
     ...  This ensures BMC remains manageable when LDAP authentication is unavailable.
     [Tags]  Verify_Local_User_Management_And_Operations_Continue_During_LDAP_Unreachability
-    [Setup]  Run Keywords  Create LDAP Configuration  ${LDAP_TYPE}  ${LDAP_UNREACHABLE_URI}
+    [Setup]  Run Keywords  Create LDAP Configuration  ${LDAP_TYPE}  ${ldap_unreachable_uri}
     ...  ${LDAP_BIND_DN}  ${LDAP_BIND_DN_PASSWORD}  ${LDAP_BASE_DN}  AND  Sleep  15s
     ...  AND  Verify LDAP Is Unreachable
-    [Teardown]  Run Keywords  Restore LDAP URL  AND  Delete Local User If Exists  ${LOCALTESTUSER}
+    [Teardown]  Run Keywords  Restore LDAP URL  AND  Delete Local User If Exists  ${test_local_user}
     ...  AND  FFDC On Test Case Fail
 
     # Login back with local admin user.
     Redfish.Login
 
     # Try to create a test user with admin privilege using local admin.
-    Redfish Create User  ${LOCALTESTUSER}  ${TEST_USER_PASSWORD}  Administrator  ${True}
+    Redfish Create User  ${test_local_user}  ${test_user_password}  Administrator  ${True}
 
     # Verify the user was created with Administrator privilege.
-    Verify User Role  ${LOCALTESTUSER}  Administrator
+    Verify User Role  ${test_local_user}  Administrator
 
     # Verify login with the newly created admin user.
     Redfish.Logout
-    Redfish.Login  ${LOCALTESTUSER}  ${TEST_USER_PASSWORD}
+    Redfish.Login  ${test_local_user}  ${test_user_password}
     Redfish.Logout
 
     # Login back with local admin to change privilege.
     Redfish.Login
 
     # Change the privilege from Administrator to ReadOnly.
-    Redfish.Patch  ${REDFISH_ACCOUNTS_URI}${LOCALTESTUSER}
+    Redfish.Patch  ${REDFISH_ACCOUNTS_URI}${test_local_user}
     ...  body={'RoleId': 'ReadOnly'}
     ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
 
     # Verify the privilege was changed to ReadOnly
-    Verify User Role  ${LOCALTESTUSER}  ReadOnly
+    Verify User Role  ${test_local_user}  ReadOnly
 
     # Verify login with ReadOnly user and check read operations work.
     Redfish.Logout
-    Redfish.Login  ${LOCALTESTUSER}  ${TEST_USER_PASSWORD}
+    Redfish.Login  ${test_local_user}  ${test_user_password}
 
     # Verify ReadOnly user can read firmware inventory.
     ${resp}=  Redfish.Get  /redfish/v1/UpdateService/FirmwareInventory
     Should Be True  ${resp.dict["Members@odata.count"]} >= ${1}
 
     # Verify ReadOnly user cannot perform write operations.
-    Redfish.Patch  ${REDFISH_ACCOUNTS_URI}${LOCALTESTUSER}
+    Redfish.Patch  ${REDFISH_ACCOUNTS_URI}${test_local_user}
     ...  body={'RoleId': 'ReadOnly'}
     ...  valid_status_codes=[${HTTP_FORBIDDEN}]
 
@@ -674,7 +679,7 @@ Verify LDAP ReadOnly User Cannot Change Local User Password
 
     # Verify password change fails with LDAP ReadOnly user.
     Redfish.Patch  ${REDFISH_ACCOUNTS_URI}${test_local_user}
-    ...  body={'Password': '${NEW_PASSWORD}'}
+    ...  body={'Password': '${new_password}'}
     ...  valid_status_codes=[${HTTP_FORBIDDEN}, ${HTTP_UNAUTHORIZED}]
 
     # Logout from LDAP ReadOnly user session.
@@ -682,7 +687,7 @@ Verify LDAP ReadOnly User Cannot Change Local User Password
 
     # Verify password was not changed with new password login attempt.
     ${status}=  Run Keyword And Return Status
-    ...  Redfish.Login  ${test_local_user}  ${NEW_PASSWORD}
+    ...  Redfish.Login  ${test_local_user}  ${new_password}
     Should Be Equal  ${status}  ${False}
     ...  msg=ReadOnly user should not be able to change passwords.
 
@@ -693,23 +698,23 @@ Verify Local Admin User Creation When LDAP Is Unreachable
     [Documentation]  Verify local administrator user can be created and used when LDAP is unreachable.
     [Tags]  Verify_Local_Admin_User_Creation_When_LDAP_Is_Unreachable
     [Teardown]  Run Keywords  Redfish.Login  AND
-    ...  Run Keyword And Ignore Error  Redfish.Delete  /redfish/v1/AccountService/Accounts/${LOCAL_ADMIN_USER}
+    ...  Run Keyword And Ignore Error  Redfish.Delete  /redfish/v1/AccountService/Accounts/${ldap_local_admin_user}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]  AND
     ...  Run Keyword And Ignore Error  Restore LDAP URL  AND  FFDC On Test Case Fail
 
     # Configure LDAP to use an unreachable server.
-    Create LDAP Configuration  ${LDAP_TYPE}  ${LDAP_UNREACHABLE_URI}
+    Create LDAP Configuration  ${LDAP_TYPE}  ${ldap_unreachable_uri}
     ...  ${LDAP_BIND_DN}  ${LDAP_BIND_DN_PASSWORD}  ${LDAP_BASE_DN}
 
     # Explicitly verify LDAP server is unreachable.
     Verify LDAP Is Unreachable
 
     # Create a local administrator user.
-    Redfish Create User  ${LOCAL_ADMIN_USER}  ${LOCAL_ADMIN_PASSWORD}  Administrator  ${True}  ${True}
+    Redfish Create User  ${ldap_local_admin_user}  ${local_admin_password}  Administrator  ${True}  ${True}
     Redfish.Logout
 
     # Verify the newly created local administrator user is able to log in.
-    Redfish.Login  ${LOCAL_ADMIN_USER}  ${LOCAL_ADMIN_PASSWORD}
+    Redfish.Login  ${ldap_local_admin_user}  ${local_admin_password}
     Redfish.Logout
 
 Create LDAP Config With Various Port Numbers
@@ -725,6 +730,24 @@ Create LDAP Config With Various Port Numbers
     @#$%                      ${HTTP_BAD_REQUEST}
     -1                        ${HTTP_BAD_REQUEST}
     ${EMPTY}                  ${HTTP_OK}, ${HTTP_NO_CONTENT}
+
+Verify LDAP User Creates Local User And Local User Changes Privilege
+    [Documentation]  Verify LDAP admin user creates local users with different privileges,
+    ...  then test privilege modification by local admin user (should succeed) and
+    ...  local readonly user (should be forbidden due to insufficient permissions).
+    ...  Note: Teardown uses FFDC only — Redfish session is restored inside the FINALLY
+    ...  block of the template keyword to guarantee cleanup on every iteration.
+    [Tags]  Verify_LDAP_User_Creates_Local_User_And_Local_User_Changes_Privilege
+    [Setup]  Update LDAP Configuration With LDAP User Role And Group  ${LDAP_TYPE}
+    ...  Administrator  ${GROUP_NAME}
+    [Template]  LDAP User Creates Local User And Privilege Change By Local User
+    [Teardown]  FFDC On Test Case Fail
+
+    # initial_privilege      changer_type      new_privilege          expected_result
+    ${privilege_admin}       Local_Admin       ${privilege_readonly}  Success
+    ${privilege_readonly}    Local_Admin       ${privilege_admin}     Success
+    ${privilege_admin}       Local_ReadOnly    ${privilege_readonly}  Forbidden
+    ${privilege_readonly}    Local_ReadOnly    ${privilege_admin}     Forbidden
 
 *** Keywords ***
 
@@ -871,7 +894,7 @@ Disable Other LDAP
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
     ...  body={'${inverse_ldap_type}': {'ServiceEnabled': ${service_state}}}
     ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
-    Sleep  ${LDAP_TIMEOUT}
+    Sleep  ${ldap_timeout}
 
 
 Config LDAP URL
@@ -885,7 +908,7 @@ Config LDAP URL
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
     ...  body={'${ldap_type}': {'ServiceAddresses': ['${ldap_server_uri}']}}
     ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
-    Sleep  ${LDAP_TIMEOUT}
+    Sleep  ${ldap_timeout}
     # After update, LDAP login.
     ${status}=  Run Keyword And Return Status  Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
     Valid Value  status  [${expected_status}]
@@ -901,7 +924,7 @@ Restore LDAP URL
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
     ...  body={'${ldap_type}': {'ServiceAddresses': ['${LDAP_SERVER_URI}']}}
     ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
-    Sleep  ${LDAP_TIMEOUT}
+    Sleep  ${ldap_timeout}
 
 
 Restore AccountLockout Attributes
@@ -1200,3 +1223,86 @@ Create LDAP Config With Port And Verify
     # Attempt to patch with the specified port.
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body=${body}
     ...  valid_status_codes=[${expected_status}]
+
+
+LDAP User Creates Local User And Privilege Change By Local User
+    [Documentation]  LDAP user creates local user and local user attempts privilege change.
+    [Arguments]  ${initial_privilege}  ${changer_type}  ${new_privilege}  ${expected_result}
+
+    # Description of argument(s):
+    # initial_privilege  Initial privilege of the created user (Administrator or ReadOnly).
+    # changer_type       Type of user changing the privilege (Local_Admin or Local_ReadOnly).
+    # new_privilege      New privilege to set (Administrator or ReadOnly).
+    # expected_result    Expected result (Success or Forbidden).
+
+    TRY
+        # Login with LDAP admin user and ensure clean state before creating users.
+        Run Keyword And Ignore Error  Redfish.Logout
+        Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+
+        # Delete any existing test users from previous runs to ensure isolation.
+        Run Keyword And Ignore Error  Redfish.Delete  ${REDFISH_ACCOUNTS_URI}${test_local_user}
+        ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
+        IF  '${changer_type}' == 'Local_Admin'
+            Run Keyword And Ignore Error  Redfish.Delete  ${REDFISH_ACCOUNTS_URI}${local_admin_user}
+            ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
+        ELSE
+            Run Keyword And Ignore Error  Redfish.Delete  ${REDFISH_ACCOUNTS_URI}${local_readonly_user}
+            ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
+        END
+
+        Redfish Create User  ${test_local_user}  ${test_user_password}  ${initial_privilege}  ${True}
+        Verify User Role  ${test_local_user}  ${initial_privilege}
+        Verify User Login And Logout  ${test_local_user}  ${test_user_password}
+
+        # Login with BMC admin credentials to create the changer user, then switch to it.
+        Redfish.Login  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+
+        IF  '${changer_type}' == 'Local_Admin'
+            Redfish Create User  ${local_admin_user}  ${local_admin_user_password}  ${privilege_admin}  ${True}
+            Run Keyword And Ignore Error  Redfish.Logout
+            Redfish.Login  ${local_admin_user}  ${local_admin_user_password}
+        ELSE
+            Redfish Create User  ${local_readonly_user}  ${local_readonly_user_password}  ${privilege_readonly}  ${True}
+            Run Keyword And Ignore Error  Redfish.Logout
+            Redfish.Login  ${local_readonly_user}  ${local_readonly_user_password}
+        END
+
+        # Attempt privilege change and verify result.
+        IF  '${expected_result}' == 'Success'
+            Redfish.Patch  ${REDFISH_ACCOUNTS_URI}${test_local_user}
+            ...  body={'RoleId': '${new_privilege}'}
+            ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+            Run Keyword And Ignore Error  Redfish.Logout
+            Redfish.Login  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+            Verify User Role  ${test_local_user}  ${new_privilege}
+            Verify User Login And Logout  ${test_local_user}  ${test_user_password}
+
+        ELSE
+            Redfish.Patch  ${REDFISH_ACCOUNTS_URI}${test_local_user}
+            ...  body={'RoleId': '${new_privilege}'}
+            ...  valid_status_codes=[${HTTP_FORBIDDEN}]
+
+            Run Keyword And Ignore Error  Redfish.Logout
+            Redfish.Login  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+            Verify User Role  ${test_local_user}  ${initial_privilege}
+        END
+
+    FINALLY
+        # Cleanup test users after each template iteration.
+        Run Keyword And Ignore Error  Redfish.Logout
+        Run Keyword And Ignore Error  Redfish.Login  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+        Run Keyword And Ignore Error  Redfish.Delete  ${REDFISH_ACCOUNTS_URI}${test_local_user}
+        ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
+
+        IF  '${changer_type}' == 'Local_Admin'
+            Run Keyword And Ignore Error  Redfish.Delete  ${REDFISH_ACCOUNTS_URI}${local_admin_user}
+            ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
+        ELSE
+            Run Keyword And Ignore Error  Redfish.Delete  ${REDFISH_ACCOUNTS_URI}${local_readonly_user}
+            ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
+        END
+    END
+
+
