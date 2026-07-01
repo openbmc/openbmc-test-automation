@@ -13,6 +13,7 @@ Test Tags       Event_Logs_Sub_Menu
 
 *** Variables ***
 
+${generate_error_logs_count}      3
 ${xpath_event_logs_heading}       //h1[text()="Event logs"]
 ${xpath_filter_event}             //button[contains(normalize-space(.),"Filter")]
 ${xpath_event_severity_ok}        //*[@data-test-id="tableFilter-checkbox-OK"]
@@ -164,11 +165,33 @@ Verify Invalid Content Search Logs
     Click Button  ${xpath_clear_search}
 
 
+Verify Valid Content Search Logs
+    [Documentation]  Input valid PEL ID in the search log and verify the results.
+    [Tags]  Verify_Valid_Content_Search_Logs
+    [Setup]  Redfish Purge Event Log
+
+    # Delete the clear log entry, so that we can create a new singleerror log and verify.
+    Click Element  ${xpath_delete_first_row}
+    Wait Until Page Contains Element  ${xpath_confirm_delete}
+    Click Button  ${xpath_confirm_delete}
+
+    BMC Execute Command  ${CMD_INFORMATIONAL_ERROR}
+    Refresh GUI
+    Input Text  ${xpath_event_search}  TestError2
+    Page Should Not Contain  No items match the search query
+    Click Button  ${xpath_clear_search}
+
+
 Verify Resolving Single Error Log In GUI
     [Documentation]   Verify that error log can be resolved via GUI
     ...               and the resolution is reflected in Redfish.
     [Tags]  Verify_Resolving_Single_Error_Log_In_GUI
-    [Setup]  Run Keywords  Redfish.Login  AND  Redfish Purge Event Log
+    [Setup]  Redfish Purge Event Log
+
+    # Delete the clear log entry, so that we can create a new singleerror log and verify.
+    Click Element  ${xpath_delete_first_row}
+    Wait Until Page Contains Element  ${xpath_confirm_delete}
+    Click Button  ${xpath_confirm_delete}
 
     Create Error Logs  ${1}
     Refresh GUI
@@ -200,6 +223,43 @@ Verify Resolving Multiple Error Logs In GUI
     Wait Until Page Does Not Contain Element  Success
     # Verify the event logs status from Redfish after mark as resolved.
     Get And Verify Status Of Resolved Field In Event Logs  ${True}
+
+
+Verify Resolving And Unresolving Multiple Error Logs In GUI
+    [Documentation]   Verify that error log can be resolved and unresolved via GUI
+    ...               and the resolution is reflected in Redfish.
+    [Tags]  Verify_Resolving_And_Unresolving_Multiple_Error_Logs_In_GUI
+    [Setup]  Redfish Purge Event Log
+
+    FOR  ${num}  IN RANGE  ${generate_error_logs_count}
+        BMC Execute Command  ${CMD_INFORMATIONAL_ERROR}
+    END
+    Refresh GUI
+
+    ${number_of_events}=  Get Number Of Event Logs
+
+    Select All Events
+
+    Wait Until Page Contains Element  ${xpath_event_logs_resolve}
+    Click Element  ${xpath_event_logs_resolve}
+
+    Wait Until Page Contains  Successfully resolved ${number_of_events} logs.  timeout=10
+
+    ${number_of_events_before}=  Get Number Of Event Logs
+
+    # Check the pop up message to ensure they are resolved.
+    #Wait Until Page Contains  Successfully resolved ${number_of_events_before} logs.  timeout=10
+    Wait Until Page Does Not Contain Element  Success
+
+    # Verify the event logs status from Redfish after mark as resolved.
+    Get And Verify Status Of Resolved Field In Event Logs  ${True}
+
+    # Change the events to unresolved state.
+    Click Element  ${xpath_unresolved_button}
+
+    # Check the pop up message to ensure they are unresolved.
+    Wait Until Page Contains  Successfully unresolved ${number_of_events} logs.  timeout=10
+    Get And Verify Status Of Resolved Field In Event Logs  ${False}
 
 
 Verify Default Value Of Resolved Field In Error Log
