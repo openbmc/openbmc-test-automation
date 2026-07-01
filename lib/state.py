@@ -1209,11 +1209,11 @@ def wait_for_comm_cycle(start_boot_seconds, quiet=None):
             (expressions_key(), [expr]),
         ]
     )
-    wait_state(match_state, wait_time="20 mins", interval="5 seconds")
+    wait_state(match_state, wait_time="15 mins", interval="5 seconds")
 
     gp.qprint_timen("Verifying that REST/Redfish API interface is working.")
     if not redfish_support_trans_state:
         match_state = DotDict([("rest", "^1$")])
     else:
         match_state = DotDict([("redfish", "^1$")])
-    state = wait_state(match_state, wait_time="5 mins", interval="2 seconds")
+    state = wait_state(match_state, wait_time="10 mins", interval="2 seconds")
