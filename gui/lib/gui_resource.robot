@@ -21,7 +21,8 @@ ${xpath_confirm}              //button[contains(normalize-space(.),'Confirm')]
 # respectively here.
 ${GUI_BROWSER}               ff
 ${GUI_MODE}                  headless
-
+# Path of virtual media image, change this before test is run
+${VIRTUAL_MEDIA_FILE_PATH}   ${EMPTY}
 
 *** Keywords ***
 
