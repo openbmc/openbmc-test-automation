@@ -29,6 +29,7 @@ ${xpath_add_privilege_button}           //button[text()="Add"]
 ${xpath_delete_group_button}            //*[@title="Delete role group"]
 ${xpath_delete_button}                  //button[text()="Delete"]
 ${xpath_role_group_checkbox}            //tbody/tr[1]//input[@type='checkbox']
+${xpath_select_all_checkbox}            //thead//input[@type='checkbox']
 ${xpath_delete_selected_button}         //*[@data-test-id='table-button-deleteSelected']
 
 ${incorrect_ip}     1.2.3.4
@@ -216,6 +217,79 @@ Verify Delete Icon Is Present For Role Group
     Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30s
     Page Should Contain Element  ${xpath_delete_group_button}
     ...  msg=Delete icon is not present for the role group.
+
+
+Verify Display Of Role Groups Section Elements
+    [Documentation]    Verify all UI elements in the Role Groups section are displayed correctly,
+    ...                including section title, column headers, checkboxes, and action buttons.
+    [Tags]    Verify_Display_Of_Role_Groups_Section_Elements
+    [Setup]   Run Keywords  Login BMC And Navigate To LDAP Page
+    ...  AND  Add Role Group Via GUI  ${GROUP_NAME}  ${GROUP_PRIVILEGE}
+    [Teardown]    Run Keyword And Ignore Error  Delete LDAP Role Group  ${GROUP_NAME}
+
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30s
+
+    # Verify "Role Groups" section title is displayed.
+    Page Should Contain  Role groups
+    ...  msg=Role Groups section title is not displayed on LDAP page.
+
+    # Verify "Group name" column header is displayed.
+    Page Should Contain  Group name
+    ...  msg=Group name column header is not displayed in role groups table.
+
+    # Verify "Group privilege" column header is displayed.
+    Page Should Contain  Group privilege
+    ...  msg=Group privilege column header is not displayed in role groups table.
+
+    # Verify the select-all checkbox is present in the role groups table header.
+    Page Should Contain Element  ${xpath_select_all_checkbox}
+    ...  msg=Select all checkbox is not present in role groups table header.
+
+    # Verify "Add role group" button is displayed.
+    Page Should Contain Element  ${xpath_add_role_group_button}
+    ...  msg=Add role group button is not displayed.
+
+    # Verify delete icon is present for the role group.
+    Page Should Contain Element  ${xpath_delete_group_button}
+    ...  msg=Delete icon is not present for the role group.
+
+
+Verify Only Two Privileges Visible In Group Privilege Options
+    [Documentation]    Verify privilege dropdown contains exactly two options (Administrator and ReadOnly)
+    ...                when adding an LDAP role group.
+    [Tags]    Verify_Only_Two_Privileges_Visible_In_Group_Privilege_Options
+    [Setup]    Login BMC And Navigate To LDAP Page
+
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30s
+
+    # Click "Add role group" button to open the add role group dialog.
+    Wait Until Element Is Enabled  ${xpath_add_role_group_button}  timeout=30s
+    Click Element  ${xpath_add_role_group_button}
+
+    # Wait for the group privilege dropdown to be visible.
+    Wait Until Element Is Visible  ${xpath_add_group_privilege}  timeout=10s
+
+    # Get all available privilege options from the dropdown.
+    ${privilege_options}=  Get List Items  ${xpath_add_group_privilege}
+
+    # Filter out placeholder values (empty strings or selection prompts).
+    VAR  @{filtered_options}
+    FOR  ${option}  IN  @{privilege_options}
+        IF  '${option}' != '' and '${option}' != 'Select an option'
+            Append To List  ${filtered_options}  ${option}
+        END
+    END
+
+    # Verify exactly 2 privilege options exist.
+    ${option_count}=  Get Length  ${filtered_options}
+    Should Be Equal As Numbers  ${option_count}  2
+    ...  msg=Expected exactly 2 privilege options, found ${option_count}: ${filtered_options}
+
+    # Verify the specific options are Administrator and ReadOnly.
+    List Should Contain Value  ${filtered_options}  Administrator
+    ...  msg=Administrator privilege option is not available in the dropdown.
+    List Should Contain Value  ${filtered_options}  ReadOnly
+    ...  msg=ReadOnly privilege option is not available in the dropdown.
 
 
 *** Keywords ***
