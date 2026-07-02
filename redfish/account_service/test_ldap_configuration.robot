@@ -726,6 +726,24 @@ Create LDAP Config With Various Port Numbers
     -1                        ${HTTP_BAD_REQUEST}
     ${EMPTY}                  ${HTTP_OK}, ${HTTP_NO_CONTENT}
 
+Verify Local Admin And Service User Create Users And LDAP User Changes Privilege
+    [Documentation]  Verify local admin and service users create users with different privileges
+    ...  (Administrator and ReadOnly), then LDAP admin user changes the privilege
+    ...  (ReadOnly to Administrator and Administrator to ReadOnly).
+    [Tags]  Verify_Local_Admin_And_Service_User_Create_Users_And_LDAP_User_Changes_Privilege
+    [Setup]  Update LDAP Configuration With LDAP User Role And Group  ${LDAP_TYPE}
+    ...  Administrator  ${GROUP_NAME}
+    [Template]  Creator User Creates Local User And LDAP User Changes Privilege
+    [Teardown]  Run Keywords  Cleanup Local User And Restore Session  ${test_local_user}
+    ...  AND  FFDC On Test Case Fail
+
+    # creator_user  creator_password        initial_privilege  new_privilege
+    admin           ${OPENBMC_PASSWORD}     ReadOnly           Administrator
+    admin           ${OPENBMC_PASSWORD}     Administrator      ReadOnly
+    service         ${OPENBMC_PASSWORD}     ReadOnly           Administrator
+    service         ${OPENBMC_PASSWORD}     Administrator      ReadOnly
+
+
 *** Keywords ***
 
 Redfish Verify LDAP Login
@@ -1200,3 +1218,55 @@ Create LDAP Config With Port And Verify
     # Attempt to patch with the specified port.
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body=${body}
     ...  valid_status_codes=[${expected_status}]
+
+
+Creator User Creates Local User And LDAP User Changes Privilege
+    [Documentation]  Creator user (admin or service) logs in and creates a local test user
+    ...  with specified privilege (Administrator or ReadOnly). Then LDAP admin user logs in
+    ...  and changes the test user's privilege. Finally, verify the privilege change was
+    ...  successful and the test user can login with the new privilege.
+    [Arguments]  ${creator_user}  ${creator_password}  ${initial_privilege}  ${new_privilege}
+    [Teardown]  Redfish.Login
+
+    # Description of argument(s):
+    # creator_user        Username of creator (admin or service).
+    # creator_password    Password of creator user.
+    # initial_privilege   Initial privilege of the created user (Administrator or ReadOnly).
+    # new_privilege       New privilege to set by LDAP user (Administrator or ReadOnly).
+
+    # Login with creator user.
+    Redfish.Login  ${creator_user}  ${creator_password}
+
+    # Delete any existing test user from previous runs to ensure isolation.
+    Run Keyword And Ignore Error  Redfish.Delete  ${REDFISH_ACCOUNTS_URI}${test_local_user}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
+
+    # Create test user with initial privilege.
+    Redfish Create User  ${test_local_user}  ${test_user_password}  ${initial_privilege}  ${True}
+
+    # Verify user was created with correct initial privilege.
+    Verify User Role  ${test_local_user}  ${initial_privilege}
+
+    # Verify newly created user can login successfully.
+    Verify User Login And Logout  ${test_local_user}  ${test_user_password}
+
+    # Login with LDAP admin user to change privilege.
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+
+    # Change privilege from initial to new privilege using LDAP user.
+    Redfish.Patch  ${REDFISH_ACCOUNTS_URI}${test_local_user}
+    ...  body={'RoleId': '${new_privilege}'}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+    # Logout from LDAP user.
+    Redfish.Logout
+
+    # Login back with default credentials to verify changes.
+    Redfish.Login
+
+    # Verify privilege was changed successfully.
+    Verify User Role  ${test_local_user}  ${new_privilege}
+
+    # Verify user can login with new privilege.
+    Verify User Login And Logout  ${test_local_user}  ${test_user_password}
+
