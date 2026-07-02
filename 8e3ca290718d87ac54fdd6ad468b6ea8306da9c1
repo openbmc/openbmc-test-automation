@@ -16,6 +16,29 @@
       "message": "Awaiting comments from others.. once I see another +1 on it, we will merge this changes.. Thanks",
       "revId": "8e3ca290718d87ac54fdd6ad468b6ea8306da9c1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c3abdc5_665a2ae5",
+        "filename": "oem/qcom/sol/test_sol.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-07-02T05:31:18Z",
+      "side": 1,
+      "message": "you can provide this EVB+RPI details on Documentation.\nremove this from Tag detail.\nkindly update all the test cases in this suite.",
+      "range": {
+        "startLine": 44,
+        "startChar": 73,
+        "endLine": 44,
+        "endChar": 76
+      },
+      "revId": "8e3ca290718d87ac54fdd6ad468b6ea8306da9c1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
