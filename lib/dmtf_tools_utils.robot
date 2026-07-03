@@ -23,6 +23,7 @@ Download DMTF Tool
     ${cmd_buf}=  Catenate  rm -rf ${rsv_dir_path} ;
     ...  git clone --branch ${branch_name} ${rsv_github_url} ${rsv_dir_path}
     ${rc}  ${output}=  Shell Cmd  ${cmd_buf}
+    ${rc}  ${output}=  Shell Cmd  pip3 install -r ${rsv_dir_path}${/}requirements.txt
 
 
 Run DMTF Tool
