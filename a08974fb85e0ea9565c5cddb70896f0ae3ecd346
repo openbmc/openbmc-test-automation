@@ -16,6 +16,23 @@
       "message": "We will not need this as per discussion. But lets wait for information before closing this",
       "revId": "a08974fb85e0ea9565c5cddb70896f0ae3ecd346",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b1d3eff_c03164dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000401
+      },
+      "writtenOn": "2026-07-03T08:25:00Z",
+      "side": 1,
+      "message": "405 Method Not Allowed will be sent as redfish response on trying to PATCH a \"readonly\" bios attribute.",
+      "revId": "a08974fb85e0ea9565c5cddb70896f0ae3ecd346",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
