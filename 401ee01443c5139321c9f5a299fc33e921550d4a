@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09caf17f_d9616d96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-06T06:30:01Z",
+      "side": 1,
+      "message": "https://gerrit.openbmc.org/c/openbmc/openbmc-test-automation/+/91988",
+      "revId": "401ee01443c5139321c9f5a299fc33e921550d4a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
