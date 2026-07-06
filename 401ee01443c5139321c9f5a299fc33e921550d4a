@@ -16,6 +16,103 @@
       "message": "https://gerrit.openbmc.org/c/openbmc/openbmc-test-automation/+/91988",
       "revId": "401ee01443c5139321c9f5a299fc33e921550d4a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b55a0802_1cb5a37b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000504
+      },
+      "writtenOn": "2026-07-06T08:44:41Z",
+      "side": 1,
+      "message": "Hi,\nPlease find the following comments.",
+      "revId": "401ee01443c5139321c9f5a299fc33e921550d4a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1973e72_e08e2c53",
+        "filename": "gui/gui_test/operations_menu/test_firmware_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1000504
+      },
+      "writtenOn": "2026-07-06T08:44:41Z",
+      "side": 1,
+      "message": "tar -xf",
+      "range": {
+        "startLine": 302,
+        "startChar": 0,
+        "endLine": 302,
+        "endChar": 6
+      },
+      "revId": "401ee01443c5139321c9f5a299fc33e921550d4a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87858c10_fe50c79a",
+        "filename": "gui/gui_test/operations_menu/test_firmware_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1000504
+      },
+      "writtenOn": "2026-07-06T08:44:41Z",
+      "side": 1,
+      "message": "can we create a list of entities to be verified and run loop verification one after the other.",
+      "revId": "401ee01443c5139321c9f5a299fc33e921550d4a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2746f5e1_dc50a6c1",
+        "filename": "gui/gui_test/operations_menu/test_firmware_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1000504
+      },
+      "writtenOn": "2026-07-06T08:44:41Z",
+      "side": 1,
+      "message": "can we please club the following two functions into a single function with appropriate blocks:\nVerify BMC Running Firmate version\nVerify BMC Backup Firmware version",
+      "range": {
+        "startLine": 347,
+        "startChar": 0,
+        "endLine": 347,
+        "endChar": 6
+      },
+      "revId": "401ee01443c5139321c9f5a299fc33e921550d4a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66d2cbd8_cfbfaf5d",
+        "filename": "gui/gui_test/operations_menu/test_firmware_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1000504
+      },
+      "writtenOn": "2026-07-06T08:44:41Z",
+      "side": 1,
+      "message": "Can we please create a separate function for all the image version verification\u0027s:\n - GUI\n - BIOS etc...\nAnd which is followed by validation.",
+      "revId": "401ee01443c5139321c9f5a299fc33e921550d4a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
