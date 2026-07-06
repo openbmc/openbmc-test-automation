@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91353009_55e4a9a8",
+        "filename": "gui/gui_test/logs_and_services_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-06T07:29:29Z",
+      "side": 1,
+      "message": "```\n${xpath_unresolved_button} already exists at line 35 with the XPath //button[contains(normalize-space(.),\"Unresolve\")].\n```\n\n Replace ${xpath_event_logs_unresolve} in the new test case with the existing ${xpath_unresolved_button} and remove the duplicate variable declaration.",
+      "revId": "c7ad1fc9942527cb86aa45377f8cb8e5653f1721",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a8e6f8d_f6095bd7",
+        "filename": "gui/gui_test/logs_and_services_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-06T07:29:29Z",
+      "side": 1,
+      "message": "Verify Valid Content Search Logs (capitalise \"Valid\")",
+      "revId": "c7ad1fc9942527cb86aa45377f8cb8e5653f1721",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4c12797_7b728ca9",
+        "filename": "gui/gui_test/logs_and_services_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-06T07:29:29Z",
+      "side": 1,
+      "message": "```\nVerify valid Content Search Logs\n    [Documentation]  Input valid PEL ID in the search log and verify the results.\n    [Tags]  Verify_Valid_Content_Search_Logs\n    [Setup]  Run Keywords  Redfish.Login  AND  Redfish Purge Event Log\n    [Teardown]  Redfish.Logout\n```\nConsistent with Verify Resolving Single Error Log In GUI and other tests in this suite that create and verify event log state — each test should start from a known clean state. Without isolation, the test cannot reliably fail when the search feature is broken if residual logs happen to match the query.",
+      "revId": "c7ad1fc9942527cb86aa45377f8cb8e5653f1721",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5584eca9_e7588110",
+        "filename": "gui/gui_test/logs_and_services_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-06T07:29:29Z",
+      "side": 1,
+      "message": "```\n[Setup]     Run Keywords  Redfish.Login  AND  Redfish Purge Event Log\n[Teardown]  Redfish.Logout\n```\n\nConsistent session lifecycle management prevents test interference and follows the established pattern across the entire suite.",
+      "revId": "c7ad1fc9942527cb86aa45377f8cb8e5653f1721",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02dca878_40254712",
+        "filename": "gui/gui_test/logs_and_services_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-06T07:29:29Z",
+      "side": 1,
+      "message": "```\nClick Element  ${xpath_event_logs_resolve}   \u003c--- after this line , add the bellow\n\nWait Until Page Contains  Successfully resolved ${number_of_events} logs.  timeout\u003d10\n```\n\nThe test could pass for the wrong count if Redfish has already updated by the time Get Number Of Event Logs is called post-resolve.",
+      "revId": "c7ad1fc9942527cb86aa45377f8cb8e5653f1721",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
