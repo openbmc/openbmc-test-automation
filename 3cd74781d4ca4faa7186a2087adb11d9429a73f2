@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10e774b7_6d3d976d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2026-07-06T06:14:52Z",
+      "side": 1,
+      "message": ":red_circle: Verdict: Request Changes\n1 High · 2 Medium · 2 Low severity issues\n\nWhat the change does\nRefactors Verify LDAP ReadOnly User Cannot Change Local User Password from an inline test to a [Template]-based pattern, adding a second data row to cover the ReadOnly target user role in addition to Administrator. A new keyword Verify LDAP ReadOnly User Cannot Change Password Of Local User With Role handles the full flow.\n\nKey findings\n:red_circle: High — CI Build Failure Unresolved (Blocking)\nOpenBMC CI returned Verified−1 on both PS1 and PS2. George Keishing\u0027s \"please fix CI failure\" thread is marked resolved in Gerrit, but Jenkins build #138825 still shows a failure. This must be investigated and a PS3 uploaded before the change can merge.\n:large_yellow_circle: Medium — Redundant VAR initialization at line 867\n\nVAR  ${status}  ${False}           ← dead code, overwritten immediately\n${status}\u003d  Run Keyword And Return Status\n...  Redfish.Login  ${test_local_user}  ${NEW_PASSWORD}\n\n\nRun Keyword And Return Status always sets ${status} unconditionally — the VAR line has no effect and misleads readers. Just remove it.\n:large_yellow_circle: Medium — Broken keyword documentation at lines 834–835\n\"created by user covers Administrator and ReadOnly roles\" is grammatically incorrect. Should read: \"Verify that an LDAP ReadOnly user cannot change the password of a local user, for both Administrator and ReadOnly target roles.\"\n:large_green_circle: Low — Two minor documentation clarity improvements (test case [Documentation] and template data table header comment).",
+      "revId": "3cd74781d4ca4faa7186a2087adb11d9429a73f2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
