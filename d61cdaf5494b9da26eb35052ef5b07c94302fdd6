@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2988f8d4_f10348e3",
+        "filename": "lib/dmtf_tools_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-06T07:44:20Z",
+      "side": 1,
+      "message": "Remove this. not needed, it is assimed the requirement.txt is the pre-requisite of the project",
+      "revId": "d61cdaf5494b9da26eb35052ef5b07c94302fdd6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d949beb_93dc1417",
+        "filename": "redfish/dmtf_tools/Redfish_Interop_Validator.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-06T07:44:20Z",
+      "side": 1,
+      "message": "The URLs reference the master branch of an external repository. If the upstream files are updated or moved in a future commit, the downloaded profiles may differ from v1.1.0 without any indication, silently changing test behavior. usually main and master is used in community, \n\nwhat you can do it, \n```\n${ocp_branch_name}     master\n```\n\nPin to a specific branch; update intentionally in the URL\n```\nhttps://raw.githubusercontent.com/opencomputeproject/HWMgmt-OCP-Profiles/${ocp_branch_name}/OCPBaselineHardwareManagement.v1_1_0.json\n\nhttps://raw.githubusercontent.com/opencomputeproject/HWMgmt-OCP-Profiles/${ocp_branch_name}/Server/OCPServerHardwareManagement.v1_1_0.json\n```",
+      "revId": "d61cdaf5494b9da26eb35052ef5b07c94302fdd6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cef040b7_c5aaf971",
+        "filename": "redfish/dmtf_tools/Redfish_Interop_Validator.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-06T07:44:20Z",
+      "side": 1,
+      "message": "```\nTest BMC Redfish Using Redfish Interop Validator-OCP Hardware Management Profiles v1_1_0\n```\n\nupdate the test case nane amd Tag\n\nThe abbreviated name is harder to parse at a glance and does not follow the project\u0027s convention of full descriptive test names.",
+      "revId": "d61cdaf5494b9da26eb35052ef5b07c94302fdd6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f5f8ac0_212bd725",
+        "filename": "redfish/dmtf_tools/Redfish_Interop_Validator.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-06T07:44:20Z",
+      "side": 1,
+      "message": "remove one new line from this",
+      "revId": "d61cdaf5494b9da26eb35052ef5b07c94302fdd6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4c6af33_7eb8f9f2",
+        "filename": "redfish/dmtf_tools/Redfish_Interop_Validator.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-06T07:44:20Z",
+      "side": 1,
+      "message": "Capture and validate the return code:\n```\n${rc}  ${output}\u003d  Shell Cmd  wget -q -O ${ocp_baseline_profile_path} ${ocp_baseline_profile_url}\nShould Be Equal As Integers  ${rc}  0  Failed to download OCP baseline profile: ${output}\n${rc}  ${output}\u003d  Shell Cmd  wget -q -O ${ocp_server_profile_path} ${ocp_server_profile_url}\nShould Be Equal As Integers  ${rc}  0  Failed to download OCP server profile: ${output}\n```\n\nExplicit failure at the download step surfaces the root cause immediately rather than propagating a silent error.",
+      "revId": "d61cdaf5494b9da26eb35052ef5b07c94302fdd6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
