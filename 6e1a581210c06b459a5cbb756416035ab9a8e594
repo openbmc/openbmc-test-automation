@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "505711d0_b80582bd",
+        "filename": "gui/gui_test/settings_menu/test_power_restore_policy_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-07-06T15:04:47Z",
+      "side": 1,
+      "message": "nit: one line space",
+      "revId": "6e1a581210c06b459a5cbb756416035ab9a8e594",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4949482b_397dd9a2",
+        "filename": "gui/gui_test/settings_menu/test_power_restore_policy_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-07-06T15:04:47Z",
+      "side": 1,
+      "message": "missing desc of args",
+      "revId": "6e1a581210c06b459a5cbb756416035ab9a8e594",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
