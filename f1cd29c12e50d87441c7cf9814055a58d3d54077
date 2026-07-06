@@ -69,6 +69,24 @@
       "parentUuid": "e4a20001_71e7de43",
       "revId": "f1cd29c12e50d87441c7cf9814055a58d3d54077",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc41036c_e31cb986",
+        "filename": "gui/gui_test/settings_menu/test_power_restore_policy_sub_menu.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-07-06T17:43:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7914994f_9e849b4c",
+      "revId": "f1cd29c12e50d87441c7cf9814055a58d3d54077",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
