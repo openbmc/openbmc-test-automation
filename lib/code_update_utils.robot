@@ -805,3 +805,21 @@ Redfish Update Firmware
     Redfish.Login
     Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
     Verify Get ApplyTime  ${apply_time}
+
+
+Upload Multipart Image To BMC
+    [Documentation]  Upload firmware image to BMC via multipart/form-data POST request.
+    ...              Required for the update-multipart endpoint which expects
+    ...              UpdateParameters (JSON) and UpdateFile (binary) as multipart fields.
+    [Arguments]  ${uri}  ${image_file_path}  ${target}
+
+    # Description of argument(s):
+    # uri               The URI path for the multipart upload endpoint
+    #                   (e.g. "/redfish/v1/UpdateService/update-multipart").
+    # image_file_path   The path to the firmware image tarball.
+    # target            The target firmware inventory URI
+    #                   (e.g. "/redfish/v1/UpdateService/FirmwareInventory/bios_active").
+
+    ${resp}=  code_update_utils.Upload Multipart Image To BMC Impl
+    ...  ${uri}  ${image_file_path}  ${target}
+    RETURN  ${resp}
