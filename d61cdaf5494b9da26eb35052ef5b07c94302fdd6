@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b8a4782_3fddfb1c",
+        "filename": "lib/dmtf_tools_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-07-07T06:18:45Z",
+      "side": 1,
+      "message": "Added missing dependency package in requirements_optional.txt as mentioned in README and removed installing of requirements.txt from cloned DMTF repo. As Optional packages but required for redfish/dmtf_tools/",
+      "parentUuid": "2988f8d4_f10348e3",
+      "revId": "d61cdaf5494b9da26eb35052ef5b07c94302fdd6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2d949beb_93dc1417",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-07-06T07:44:20Z",
       "side": 1,
       "message": "The URLs reference the master branch of an external repository. If the upstream files are updated or moved in a future commit, the downloaded profiles may differ from v1.1.0 without any indication, silently changing test behavior. usually main and master is used in community, \n\nwhat you can do it, \n```\n${ocp_branch_name}     master\n```\n\nPin to a specific branch; update intentionally in the URL\n```\nhttps://raw.githubusercontent.com/opencomputeproject/HWMgmt-OCP-Profiles/${ocp_branch_name}/OCPBaselineHardwareManagement.v1_1_0.json\n\nhttps://raw.githubusercontent.com/opencomputeproject/HWMgmt-OCP-Profiles/${ocp_branch_name}/Server/OCPServerHardwareManagement.v1_1_0.json\n```",
+      "revId": "d61cdaf5494b9da26eb35052ef5b07c94302fdd6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c73f383c_a83e3f80",
+        "filename": "redfish/dmtf_tools/Redfish_Interop_Validator.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-07-07T06:18:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d949beb_93dc1417",
       "revId": "d61cdaf5494b9da26eb35052ef5b07c94302fdd6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -52,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9aa004f_afd1214c",
+        "filename": "redfish/dmtf_tools/Redfish_Interop_Validator.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-07-07T06:18:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cef040b7_c5aaf971",
+      "revId": "d61cdaf5494b9da26eb35052ef5b07c94302fdd6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f5f8ac0_212bd725",
@@ -69,6 +123,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1620ac2a_cebc213f",
+        "filename": "redfish/dmtf_tools/Redfish_Interop_Validator.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-07-07T06:18:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f5f8ac0_212bd725",
+      "revId": "d61cdaf5494b9da26eb35052ef5b07c94302fdd6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a4c6af33_7eb8f9f2",
@@ -82,6 +154,24 @@
       "writtenOn": "2026-07-06T07:44:20Z",
       "side": 1,
       "message": "Capture and validate the return code:\n```\n${rc}  ${output}\u003d  Shell Cmd  wget -q -O ${ocp_baseline_profile_path} ${ocp_baseline_profile_url}\nShould Be Equal As Integers  ${rc}  0  Failed to download OCP baseline profile: ${output}\n${rc}  ${output}\u003d  Shell Cmd  wget -q -O ${ocp_server_profile_path} ${ocp_server_profile_url}\nShould Be Equal As Integers  ${rc}  0  Failed to download OCP server profile: ${output}\n```\n\nExplicit failure at the download step surfaces the root cause immediately rather than propagating a silent error.",
+      "revId": "d61cdaf5494b9da26eb35052ef5b07c94302fdd6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2c9cceb_23a43552",
+        "filename": "redfish/dmtf_tools/Redfish_Interop_Validator.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-07-07T06:18:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4c6af33_7eb8f9f2",
       "revId": "d61cdaf5494b9da26eb35052ef5b07c94302fdd6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
