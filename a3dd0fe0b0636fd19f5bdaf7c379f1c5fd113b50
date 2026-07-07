@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be1b4335_9cc58e9b",
+        "filename": "gui/gui_test/settings_menu/test_power_restore_policy_sub_menu.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-07-07T04:39:29Z",
+      "side": 1,
+      "message": "combine all the testcase which has similar setup and use template based approach",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 88
+      },
+      "revId": "a3dd0fe0b0636fd19f5bdaf7c379f1c5fd113b50",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1085a54e_ba0134e2",
+        "filename": "gui/gui_test/settings_menu/test_power_restore_policy_sub_menu.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-07-07T04:39:29Z",
+      "side": 1,
+      "message": "move this testcase to begin to have a nice flow just before this test",
+      "range": {
+        "startLine": 87,
+        "startChar": 1,
+        "endLine": 93,
+        "endChar": 66
+      },
+      "revId": "a3dd0fe0b0636fd19f5bdaf7c379f1c5fd113b50",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11fd5267_f3da4e56",
+        "filename": "gui/gui_test/settings_menu/test_power_restore_policy_sub_menu.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-07-07T04:39:29Z",
+      "side": 1,
+      "message": "Use template based approach and combine all the testcases of readonly to single case that has same setup and same tear down",
+      "range": {
+        "startLine": 114,
+        "startChar": 0,
+        "endLine": 138,
+        "endChar": 83
+      },
+      "revId": "a3dd0fe0b0636fd19f5bdaf7c379f1c5fd113b50",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
