@@ -64,12 +64,6 @@ FFDC_BMC_FILE = {
         "BMC_list_service.txt": (
             "systemctl list-jobs >/tmp/BMC_list_service.txt 2>&1"
         ),
-        "BMC_obmc_console.txt": (
-            "cat /var/log/obmc-console.log >/tmp/BMC_obmc_console.txt 2>&1"
-        ),
-        "BMC_obmc_console1.txt": (
-            "cat /var/log/obmc-console1.log >/tmp/BMC_obmc_console1.txt 2>&1"
-        ),
         "vpd-inventory.txt": "vpd-tool -i >/tmp/vpd-inventory.txt 2>&1",
         "PEL_logs_list.json": "peltool -l >/tmp/PEL_logs_list.json 2>&1",
         "PEL_logs_complete_list.json": (
@@ -273,6 +267,7 @@ FFDC_METHOD_CALL = {
         "Start ffdc cleanup": "BMC FFDC Cleanup",
         "FFDC Generic Report": "BMC FFDC Manifest",
         "BMC Specific Files": "BMC FFDC Files",
+        "BMC Console Logs": "Collect BMC Console Logs",
         "Get Request FFDC": "BMC FFDC Get Requests",
         "Get Redfish Request FFDC": "BMC FFDC Get Redfish Requests",
         "OS FFDC": "OS FFDC Files",

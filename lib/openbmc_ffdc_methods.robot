@@ -243,6 +243,33 @@ Create File And Write Data
     RETURN  ${ffdc_file_list}
 
 
+Collect BMC Console Logs
+    [Documentation]  Collect all /var/log/obmc-console.* log files from the
+    ...              BMC and return a list of the locally saved file paths.
+
+    @{ffdc_file_list}=  Create List
+
+    # Get the list of console log files directly from /var/log/.
+    ${stdout}  ${stderr}  ${rc}=  BMC Execute Command  ls /var/log/obmc-console*  ignore_err=${1}
+    IF  '${rc}' != '${0}'  RETURN  ${ffdc_file_list}
+
+    @{remote_files}=  Split String  ${stdout}
+
+    scp.Open Connection
+    ...  ${OPENBMC_HOST}  username=${OPENBMC_USERNAME}  password=${OPENBMC_PASSWORD}  port=${SSH_PORT}
+
+    FOR  ${remote_file}  IN  @{remote_files}
+      ${ffdc_file_path}=  Catenate  ${LOG_PREFIX}${remote_file.removeprefix("/var/log/")}
+      ${status}=  Run Keyword And Return Status  scp.Get File  ${remote_file}  ${ffdc_file_path}
+      IF  '${status}' == '${False}'  CONTINUE
+      Append To List  ${ffdc_file_list}  ${ffdc_file_path}
+    END
+
+    scp.Close Connection
+
+    RETURN  ${ffdc_file_list}
+
+
 # Method : Log Test Case Status                                #
 #          Creates test result history footprint for reference #
 

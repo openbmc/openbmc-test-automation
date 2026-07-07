@@ -4,6 +4,7 @@ r"""
 See class prolog below for details.
 """
 
+import glob
 import importlib
 import json
 import logging
@@ -1045,11 +1046,27 @@ class ffdc_collector:
                 targ_dir_path + targ_file_prefix + filename.split("/")[-1]
             )
 
-            # If source file name contains wild card, copy filename as is.
+            # If source file name contains wild card, copy files into the
+            # target directory, then rename each landed file to add the
+            # ffdc_prefix so it matches every other collected file.
             if "*" in source_file_path:
                 scp_result = self.ssh_remoteclient.scp_file_from_remote(
                     source_file_path, self.ffdc_dir_path
                 )
+                if scp_result:
+                    glob_pattern = self.ffdc_dir_path + os.path.basename(
+                        source_file_path
+                    )
+                    for landed in glob.glob(glob_pattern):
+                        landed_name = os.path.basename(landed)
+                        if not landed_name.startswith(targ_file_prefix):
+                            os.rename(
+                                landed,
+                                os.path.join(
+                                    self.ffdc_dir_path,
+                                    targ_file_prefix + landed_name,
+                                ),
+                            )
             else:
                 scp_result = self.ssh_remoteclient.scp_file_from_remote(
                     source_file_path, targ_file_path
