@@ -122,7 +122,7 @@ Suite Setup Execution
     Redfish.Login
     Redfish Power On  stack_mode=skip
 
-    VAR  ${metric_definitions_list}  Redfish_Utils.Get Member List  ${metric_definition_base_uri}
+    VAR  @{metric_definitions_list}  Redfish_Utils.Get Member List  ${metric_definition_base_uri}
     ...  scope=SUITE
     # Create a dictionary of ordinary english naming and actual naming of
     # telemetry definition.
