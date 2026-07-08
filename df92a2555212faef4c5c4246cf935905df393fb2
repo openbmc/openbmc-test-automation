@@ -16,6 +16,23 @@
       "message": "updated as per the comment.",
       "revId": "df92a2555212faef4c5c4246cf935905df393fb2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61150b85_f923def7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-07-08T07:17:07Z",
+      "side": 1,
+      "message": "Hi @gkeishin@gmail.com, Can you kindly review this MR.",
+      "revId": "df92a2555212faef4c5c4246cf935905df393fb2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
