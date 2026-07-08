@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "90614cc3_2873d9d1",
+        "filename": "gui/gui_test/logs_and_services_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-07-08T06:46:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91353009_55e4a9a8",
+      "revId": "c7ad1fc9942527cb86aa45377f8cb8e5653f1721",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a8e6f8d_f6095bd7",
@@ -54,6 +72,42 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1f38079a_d32573d1",
+        "filename": "gui/gui_test/logs_and_services_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-07-08T06:46:55Z",
+      "side": 1,
+      "message": "Hi George, have added \"Redfish Purge Event Log\" keyword in setup.\nBut for Redfish.Login and Redfish.Logout it is already added in Suite Setup Execution and Suite Teardown Execution.\nEven after execution of \"Redfish Purge Event Log\", A single clear log will be generated, so we need to delete that particular log as well. Hence added new lines to delete it.",
+      "parentUuid": "b4c12797_7b728ca9",
+      "revId": "c7ad1fc9942527cb86aa45377f8cb8e5653f1721",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72753b78_ed22d1b0",
+        "filename": "gui/gui_test/logs_and_services_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-07-08T06:46:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a8e6f8d_f6095bd7",
+      "revId": "c7ad1fc9942527cb86aa45377f8cb8e5653f1721",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5584eca9_e7588110",
         "filename": "gui/gui_test/logs_and_services_menu/test_event_logs_sub_menu.robot",
         "patchSetId": 1
@@ -71,6 +125,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "237d79f1_5a6c1076",
+        "filename": "gui/gui_test/logs_and_services_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-07-08T06:46:55Z",
+      "side": 1,
+      "message": "Updated the test case, removed the Redfish.Login",
+      "parentUuid": "5584eca9_e7588110",
+      "revId": "c7ad1fc9942527cb86aa45377f8cb8e5653f1721",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "02dca878_40254712",
         "filename": "gui/gui_test/logs_and_services_menu/test_event_logs_sub_menu.robot",
         "patchSetId": 1
@@ -82,6 +154,24 @@
       "writtenOn": "2026-07-06T07:29:29Z",
       "side": 1,
       "message": "```\nClick Element  ${xpath_event_logs_resolve}   \u003c--- after this line , add the bellow\n\nWait Until Page Contains  Successfully resolved ${number_of_events} logs.  timeout\u003d10\n```\n\nThe test could pass for the wrong count if Redfish has already updated by the time Get Number Of Event Logs is called post-resolve.",
+      "revId": "c7ad1fc9942527cb86aa45377f8cb8e5653f1721",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "849d7a89_768151f4",
+        "filename": "gui/gui_test/logs_and_services_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-07-08T06:46:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02dca878_40254712",
       "revId": "c7ad1fc9942527cb86aa45377f8cb8e5653f1721",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
