@@ -16,6 +16,108 @@
       "message": "Looks good to me",
       "revId": "959de1acb04bcfed978321345e0a868543f14c35",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1c13e7b_cf1b1a46",
+        "filename": "gui/gui_test/operations_menu/test_firmware_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-09T17:09:09Z",
+      "side": 1,
+      "message": "You dont need to do like that.. simplified it\n\n```\n# Test Parameters:\n#   IMAGE_FILE_PATH         Path to the BMC firmware package file.\n#   HOST_IMAGE_FILE_PATH    Path to the BIOS single image/Multi/Partial package file.\n```",
+      "revId": "959de1acb04bcfed978321345e0a868543f14c35",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "891ca1a9_2ee757f0",
+        "filename": "gui/gui_test/operations_menu/test_firmware_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-09T17:09:09Z",
+      "side": 1,
+      "message": "Hardcoded /tmp/fw_verify path in Verify Valid Signed BMC Firmware\n\nConsider using a parameterized or uniquely-named temp directory, e.g. ${FW_VERIFY_DIR} declared in \n\n```\n*** Variables ***\n${FW_VERIFY_DIR}    /tmp/fw_verify \n```\n\nA variable also improves readability.",
+      "revId": "959de1acb04bcfed978321345e0a868543f14c35",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac474226_9e6f45d3",
+        "filename": "gui/gui_test/operations_menu/test_firmware_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-09T17:09:09Z",
+      "side": 1,
+      "message": "```\nVAR  @{images}\n...  MANIFEST\n...  image-kernel\n...  image-rofs\n...  image-u-boot\n...  image-rwfs\n```\n\nDeprecated keywords generate warnings in RF 7.0+ and will be removed in a future version. The repository already uses modern RF syntax (IF/ELSE/END, RETURN) elsewhere, so consistency requires VAR here too.",
+      "revId": "959de1acb04bcfed978321345e0a868543f14c35",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39258278_5e10ba31",
+        "filename": "gui/gui_test/operations_menu/test_firmware_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-09T17:09:09Z",
+      "side": 1,
+      "message": "Verify BMC Backup Firmware Version has no teardown but shares state with Verify BMC Running Firmware Version\n \nAdd [Teardown] Test Teardown Execution to both Verify BMC Running Firmware Version and Verify BMC Backup Firmware Version.\n\nMissing teardown means failed tests do not collect FFDC, making debugging harder. The pattern is already established by other test cases in this same file.",
+      "revId": "959de1acb04bcfed978321345e0a868543f14c35",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e375250c_d487c031",
+        "filename": "gui/gui_test/operations_menu/test_firmware_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-09T17:09:09Z",
+      "side": 1,
+      "message": "```\nVAR  ${version}  ${inv_data.dict.get(\u0027Version\u0027, \u0027\u0027)}\nVAR  ${name}  ${inv_data.dict.get(\u0027Name\u0027, \u0027\u0027)}\n```\n\n Deprecated keywords generate warnings in RF 7.0+ and will be removed in a future version. The repository already uses modern RF syntax (IF/ELSE/END, RETURN) elsewhere, so consistency requires VAR here too.",
+      "revId": "959de1acb04bcfed978321345e0a868543f14c35",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c5e677d_d6a9c70b",
+        "filename": "gui/gui_test/operations_menu/test_firmware_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-09T17:09:09Z",
+      "side": 1,
+      "message": "Remove 1 extra new line from it",
+      "revId": "959de1acb04bcfed978321345e0a868543f14c35",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
