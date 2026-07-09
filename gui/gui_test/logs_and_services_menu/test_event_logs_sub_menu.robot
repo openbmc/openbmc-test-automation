@@ -13,6 +13,7 @@ Test Tags       Event_Logs_Sub_Menu
 
 *** Variables ***
 
+${create_error_logs_for_viewall}  41
 ${xpath_event_logs_heading}       //h1[text()="Event logs"]
 ${xpath_filter_event}             //button[contains(normalize-space(.),"Filter")]
 ${xpath_event_severity_ok}        //*[@data-test-id="tableFilter-checkbox-OK"]
@@ -37,6 +38,9 @@ ${xpath_clear_search}             //button[@title="Clear search input"]
 ${xpath_event_log_resolve}        //*[@name="switch"]
 ${xpath_event_logs_resolve}       //button[contains(normalize-space(.),'Resolve')]
 ${xpath_event_log_data}           //td[contains(normalize-space(.)),'Critical']/following-sibling::td[3]
+${view_page_button}               //*[@id='pagination-items-per-page']
+${page_selection}                 //select[@id="pagination-items-per-page"]
+${log_table_popup}                //*[@class='toolbar-content']
 
 
 *** Test Cases ***
@@ -257,6 +261,51 @@ Verify Error And Unauthorized Message Display When ReadOnly User Resolving Singl
     # Mark single event log as resolved.
     Click Element At Coordinates  ${xpath_event_log_resolve}  0  0
     Verify Error And Unauthorized Message On GUI
+
+
+Verify Event Log Entries Match Between GUI And Redfish API
+    [Documentation]  Verify view all logs in event Logs Page and verify the webui entries are same as the redfish api entries.
+    [Tags]  Verify_Event_Log_Entries_Match_Between_GUI_And_Redfish_API
+    [Setup]  Redfish Purge Event Log
+
+    # Delete the clear log entry, so that we can create a new singleerror log and verify.
+    Click Element  ${xpath_delete_first_row}
+    Wait Until Page Contains Element  ${xpath_confirm_delete}
+    Click Button  ${xpath_confirm_delete}
+
+    FOR  ${num}  IN RANGE  ${create_error_logs_for_viewall}
+        BMC Execute Command  ${CMD_INFORMATIONAL_ERROR}
+    END
+    Refresh GUI
+    ${number_of_events}=  Get Number Of Event Logs
+
+    # Click item per page dropdown and select view all option.
+    Click Element  ${view_page_button}
+
+    # Select view all option from the dropdown.
+    Select From List By Label  ${page_selection}  view all
+    Sleep  5s
+
+    Select All Events
+
+    # Wait until the event logs table popup is displayed.
+    Wait Until Page Contains Element  ${log_table_popup}
+
+    # Get the selected count text from the toolbar.
+    ${selected_count_text}=  Get Text  ${log_table_popup}
+
+    # Extract the selected error count from the text.
+    ${selected_logs}=  Fetch From Left  ${selected_count_text}  ${SPACE}
+    ${selected_logs}=  Convert To Integer  ${selected_logs}
+
+    # Verify the selected error count is equal to the total webui error logs.
+    Should Be Equal As Integers  ${selected_logs}  ${create_error_logs_for_viewall}
+
+    ${members}=  Redfish.Get Attribute  ${EVENT_LOG_URI}Entries  Members@odata.count
+
+    # Verify the selected error count is equal to the total redfish api error logs.
+    Should Be Equal As Integers  ${selected_logs}  ${members}
+
 
 *** Keywords ***
 
