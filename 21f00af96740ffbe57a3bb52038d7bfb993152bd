@@ -16,6 +16,23 @@
       "message": "updated as per the comment.",
       "revId": "21f00af96740ffbe57a3bb52038d7bfb993152bd",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70096874_ef884510",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-09T16:45:04Z",
+      "side": 1,
+      "message": "Sridevi / Praful all good with the latest changes ?",
+      "revId": "21f00af96740ffbe57a3bb52038d7bfb993152bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
