@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d990194_3cfeae68",
+        "filename": "gui/gui_test/settings_menu/test_power_restore_policy_sub_menu.robot",
+        "patchSetId": 17
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-07-10T09:56:25Z",
+      "side": 1,
+      "message": "Create common Test setup for \"Readonly User\" specific test and use it accordingly.",
+      "range": {
+        "startLine": 102,
+        "startChar": 13,
+        "endLine": 105,
+        "endChar": 73
+      },
+      "revId": "ecb7ff4a8eb0706ad4f023ef83fb1f955c622b93",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07623573_9cfd3598",
+        "filename": "gui/gui_test/settings_menu/test_power_restore_policy_sub_menu.robot",
+        "patchSetId": 17
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-07-10T09:56:25Z",
+      "side": 1,
+      "message": "Create common Test setup for \"Readonly User\" specific test and use it accordingly.",
+      "range": {
+        "startLine": 117,
+        "startChar": 14,
+        "endLine": 120,
+        "endChar": 73
+      },
+      "revId": "ecb7ff4a8eb0706ad4f023ef83fb1f955c622b93",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdd85b92_a1ad479a",
+        "filename": "gui/gui_test/settings_menu/test_power_restore_policy_sub_menu.robot",
+        "patchSetId": 17
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-07-10T09:56:25Z",
+      "side": 1,
+      "message": "Update documentation as per action taken by Suite Setup Execution.",
+      "range": {
+        "startLine": 130,
+        "startChar": 21,
+        "endLine": 130,
+        "endChar": 45
+      },
+      "revId": "ecb7ff4a8eb0706ad4f023ef83fb1f955c622b93",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28973948_684a972e",
+        "filename": "gui/gui_test/settings_menu/test_power_restore_policy_sub_menu.robot",
+        "patchSetId": 17
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-07-10T09:56:25Z",
+      "side": 1,
+      "message": "You can use as below.\nNavigate To Required Sub Menu  ${xpath_settings_menu}  ${xpath_power_restore_policy_sub_menu}  power-restore-policy",
+      "range": {
+        "startLine": 133,
+        "startChar": 0,
+        "endLine": 135,
+        "endChar": 94
+      },
+      "revId": "ecb7ff4a8eb0706ad4f023ef83fb1f955c622b93",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
