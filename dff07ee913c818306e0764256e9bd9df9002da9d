@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72a251f5_b2697f64",
+        "filename": "gui/gui_test/settings_menu/test_power_restore_policy_sub_menu.robot",
+        "patchSetId": 19
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-07-10T14:11:46Z",
+      "side": 1,
+      "message": "Previously Both test had different(Manual and Normal) Mode setting Now both has Normal. You can user argument to set Mode as per test case in test setup.",
+      "range": {
+        "startLine": 139,
+        "startChar": 31,
+        "endLine": 139,
+        "endChar": 37
+      },
+      "revId": "dff07ee913c818306e0764256e9bd9df9002da9d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
