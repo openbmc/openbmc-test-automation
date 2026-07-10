@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c36d9c68_4f0544bc",
+        "filename": "gui/gui_test/operations_menu/test_firmware_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-07-10T09:01:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1c13e7b_cf1b1a46",
+      "revId": "959de1acb04bcfed978321345e0a868543f14c35",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "891ca1a9_2ee757f0",
@@ -48,6 +66,24 @@
       "writtenOn": "2026-07-09T17:09:09Z",
       "side": 1,
       "message": "Hardcoded /tmp/fw_verify path in Verify Valid Signed BMC Firmware\n\nConsider using a parameterized or uniquely-named temp directory, e.g. ${FW_VERIFY_DIR} declared in \n\n```\n*** Variables ***\n${FW_VERIFY_DIR}    /tmp/fw_verify \n```\n\nA variable also improves readability.",
+      "revId": "959de1acb04bcfed978321345e0a868543f14c35",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24721e60_7ad4330b",
+        "filename": "gui/gui_test/operations_menu/test_firmware_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-07-10T09:01:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "891ca1a9_2ee757f0",
       "revId": "959de1acb04bcfed978321345e0a868543f14c35",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -69,6 +105,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ca84f91_faa9a46e",
+        "filename": "gui/gui_test/operations_menu/test_firmware_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-07-10T09:01:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac474226_9e6f45d3",
+      "revId": "959de1acb04bcfed978321345e0a868543f14c35",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "39258278_5e10ba31",
@@ -82,6 +136,24 @@
       "writtenOn": "2026-07-09T17:09:09Z",
       "side": 1,
       "message": "Verify BMC Backup Firmware Version has no teardown but shares state with Verify BMC Running Firmware Version\n \nAdd [Teardown] Test Teardown Execution to both Verify BMC Running Firmware Version and Verify BMC Backup Firmware Version.\n\nMissing teardown means failed tests do not collect FFDC, making debugging harder. The pattern is already established by other test cases in this same file.",
+      "revId": "959de1acb04bcfed978321345e0a868543f14c35",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99685bf9_8ca688ee",
+        "filename": "gui/gui_test/operations_menu/test_firmware_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-07-10T09:01:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39258278_5e10ba31",
       "revId": "959de1acb04bcfed978321345e0a868543f14c35",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -103,6 +175,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7aec0b3_82b8db14",
+        "filename": "gui/gui_test/operations_menu/test_firmware_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-07-10T09:01:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e375250c_d487c031",
+      "revId": "959de1acb04bcfed978321345e0a868543f14c35",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c5e677d_d6a9c70b",
@@ -116,6 +206,24 @@
       "writtenOn": "2026-07-09T17:09:09Z",
       "side": 1,
       "message": "Remove 1 extra new line from it",
+      "revId": "959de1acb04bcfed978321345e0a868543f14c35",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27ca368c_863f4fff",
+        "filename": "gui/gui_test/operations_menu/test_firmware_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-07-10T09:01:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c5e677d_d6a9c70b",
       "revId": "959de1acb04bcfed978321345e0a868543f14c35",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
