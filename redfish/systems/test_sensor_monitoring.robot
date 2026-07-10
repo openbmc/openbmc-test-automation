@@ -17,6 +17,13 @@ Test Tags        Sensor_Monitoring
 ${OPENBMC_CONN_METHOD}  ssh
 ${IPMI_COMMAND}         Inband
 
+# Optional filters for Verify Redfish Sensor Collection.
+# Set on the CLI with -v to further scope the run, e.g.:
+#   -v RESOURCE_PATH_FILTER:Sensors
+#   -v RESOURCE_TYPE_FILTER:Fan_Tach
+${RESOURCE_PATH_FILTER}   Sensors
+${RESOURCE_TYPE_FILTER}       ${EMPTY}
+
 *** Test Cases ***
 
 Verify Sensor Monitoring
@@ -74,6 +81,83 @@ Verify Sensor Monitoring
     ...  msg=Test fail, invalid sensors are ${error_msg}.
 
 
+Verify Sensor Monitoring Per Collection
+    [Documentation]  For every endpoint and resource type defined for CHASSIS_ID
+    ...              in redfish_sensor_info_map, verify that each expected resource:
+    ...                1. Is present in the Redfish collection.
+    ...                2. Has Status.Health == OK.
+    ...                3. Has Status.State == Enabled.
+    ...                4. Has a non-null Reading.
+    ...              The Redfish sub-path is set via RESOURCE_PATH_FILTER (default: Sensors).
+    ...              Resource-type lists are driven entirely by the model variable file.
+    ...              Use the CLI filters to scope the run:
+    ...                RESOURCE_PATH_FILTER - Redfish sub-path to GET (e.g. Sensors)
+    ...                RESOURCE_TYPE_FILTER - limit to one resource type
+    ...              Chassis is always scoped to CHASSIS_ID.
+    [Tags]  Verify_Sensor_Monitoring_Per_Collection
+
+    VAR  ${model_map}  ${redfish_sensor_info_map['${OPENBMC_MODEL}']}
+
+    # Skip gracefully when the model does not define any chassis entries.
+    ${has_resources}=  Evaluate  len($model_map) > 0
+    Skip If  not ${has_resources}
+    ...  No chassis resources defined for ${OPENBMC_MODEL}; skipping.
+
+    # Counter to detect vacuous passes caused by filters that match nothing.
+    VAR  ${resources_checked}  ${0}
+
+    Log  Verifying chassis: ${CHASSIS_ID} path: ${RESOURCE_PATH_FILTER}
+
+    # GET the collection at the specified sub-path.
+    ${resp}=  Redfish.Get  /redfish/v1/Chassis/${CHASSIS_ID}/${RESOURCE_PATH_FILTER}
+    ...  valid_status_codes=[${HTTP_OK}]
+
+    # Extract all resource names present in the collection.
+    ${present_names}=  Get Sensor Names From Members List  ${resp.dict['Members']}
+
+    Log  Resources found: ${present_names}
+
+    # Iterate over every resource type defined for this chassis.
+    FOR  ${resource_type}  IN  @{model_map}
+
+        # Skip any resource type that does not match the required filter.
+        # When RESOURCE_TYPE_FILTER is empty, all types are validated.
+        IF  '${RESOURCE_TYPE_FILTER}' != '${EMPTY}' and '${resource_type}' != '${RESOURCE_TYPE_FILTER}'
+            CONTINUE
+        END
+
+        VAR  ${expected_list}  ${model_map['${resource_type}']}
+
+        FOR  ${resource_name}  IN  @{expected_list}
+            ${exist}=  Evaluate  ${resource_name} in ${present_names}
+            IF  not ${exist}
+                # Resource missing from collection — record and skip status check.
+                Append To List  ${INVALID_SENSORS}  ${resource_name}
+            ELSE
+                # Resource present — validate Health, State, and Reading.
+                Check Sensor Status And Reading Via Sensor Name
+                ...  ${resource_name}  ${RESOURCE_PATH_FILTER}
+            END
+            ${resources_checked}=  Evaluate  ${resources_checked} + 1
+        END
+    END
+
+    # Fail if no resources were validated — prevents silent passes when filters
+    # are misconfigured or match nothing in the map.
+    IF  ${resources_checked} == 0
+        Fail  No resources were validated. Verify filter values:
+        ...   CHASSIS_ID=${CHASSIS_ID},
+        ...   RESOURCE_PATH_FILTER=${RESOURCE_PATH_FILTER},
+        ...   RESOURCE_TYPE_FILTER=${RESOURCE_TYPE_FILTER}
+    END
+
+    Rprint Vars  INVALID_SENSORS
+
+    ${error_msg}=  Evaluate  ", ".join(${INVALID_SENSORS})
+    Should Be Empty  ${INVALID_SENSORS}
+    ...  msg=Test fail, invalid resources are ${error_msg}.
+
+
 *** Keywords ***
 
 Test Teardown Execution
@@ -91,6 +175,8 @@ Test Setup Execution
 
 Required Parameters For Sensor Monitoring
     [Documentation]  Check if required parameters are provided via command line.
+    ...              Also loads the model-specific variable file so that
+    ...              ${redfish_sensor_info_map} is available to all tests.
 
     Should Not Be Empty   ${OS_HOST}
     Should Not Be Empty   ${OS_USERNAME}
@@ -147,12 +233,14 @@ Get Sensors Name List From Redfish
 
 Check Sensor Status And Reading Via Sensor Name
     [Documentation]  Check Sensor Status And Reading Via Sensor Name.
-    [Arguments]  ${sensor_name}
+    [Arguments]  ${sensor_name}  ${sub_path}=Sensors
     # Description of arguments:
-    # sensor_name    Sensor that should be present.
+    # sensor_name    Resource name to validate.
+    # sub_path       Redfish sub-path under the chassis (e.g. Sensors,
+    #                PowerSubsystem/Regulators). Defaults to Sensors.
 
     ${resp}=  Redfish.Get
-    ...  /redfish/v1/Chassis/${CHASSIS_ID}/Sensors/${sensor_name}
+    ...  /redfish/v1/Chassis/${CHASSIS_ID}/${sub_path}/${sensor_name}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
 
     Run Keyword And Return If  '${resp.status}' == '${HTTP_NOT_FOUND}'
@@ -189,6 +277,24 @@ Check Sensor Status And Reading Via Sensor Info
             Append To List  ${INVALID_SENSORS}  ${sensor_info['MemberId']}
         END
     END
+
+
+Get Sensor Names From Members List
+    [Documentation]  Extract resource names from a Redfish collection Members list.
+    [Arguments]  ${members_list}
+    # Description of arguments:
+    # members_list  The 'Members' list from any Redfish collection response.
+    #               Each entry is a dict with an '@odata.id' key, e.g.:
+    #               { "@odata.id": "/redfish/v1/Chassis/${CHASSIS_ID}/Sensors/Fan_0" }
+    # Returns a list of resource name strings (last path segment of each @odata.id).
+
+    @{sensor_names}=  Create List
+    FOR  ${member}  IN  @{members_list}
+        ${sensor_name}=  Evaluate  '${member['@odata.id']}'.split('/')[-1]
+        Append To List  ${sensor_names}  ${sensor_name}
+    END
+
+    RETURN  ${sensor_names}
 
 
 Check Sensors Present
@@ -229,3 +335,4 @@ Check Sensors Present
            Append To List  ${INVALID_SENSORS}  ${sensor_name}
         END
     END
+
