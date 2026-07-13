@@ -16,6 +16,80 @@
       "message": "Vinay/ Sushil, please check this code",
       "revId": "59f7ee0e34bfb03b9a37622819fa68a0e024232c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6886a215_16fd6f33",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000504
+      },
+      "writtenOn": "2026-07-13T09:59:53Z",
+      "side": 1,
+      "message": "Comments",
+      "revId": "59f7ee0e34bfb03b9a37622819fa68a0e024232c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa05ab74_37df41c7",
+        "filename": "lib/code_update_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1000504
+      },
+      "writtenOn": "2026-07-13T09:59:53Z",
+      "side": 1,
+      "message": "lets make it upload_multipart_image_to_bmc instead of upload_multipart_image_to_bmc_impl",
+      "revId": "59f7ee0e34bfb03b9a37622819fa68a0e024232c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa75ba48_a24bb86c",
+        "filename": "lib/code_update_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 821,
+      "author": {
+        "id": 1000504
+      },
+      "writtenOn": "2026-07-13T09:59:53Z",
+      "side": 1,
+      "message": "i hope its just the target, please check",
+      "revId": "59f7ee0e34bfb03b9a37622819fa68a0e024232c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "430e0ec9_97d79ac8",
+        "filename": "redfish/extended/redfish_bmc_code_update.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1000504
+      },
+      "writtenOn": "2026-07-13T09:59:53Z",
+      "side": 1,
+      "message": "create a separate keyword/routine for the verification of the firmware versions and call it where ever needed",
+      "range": {
+        "startLine": 342,
+        "startChar": 1,
+        "endLine": 353,
+        "endChar": 74
+      },
+      "revId": "59f7ee0e34bfb03b9a37622819fa68a0e024232c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
