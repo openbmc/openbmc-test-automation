@@ -50,6 +50,24 @@
       "message": "Copy-paste error in OCP server profile download error message\n\nThe second Should Be Equal As Integers assertion (for the server profile download) uses the message \"Failed to download OCP baseline profile: ${output}\" — identical to the first assertion on line 81. When this assertion fails, the error output will say \"baseline\" when it was actually the \"server\" profile that failed to download, making it harder to diagnose failures.\n\n\n\n```\n\n${rc}  ${output}\u003d  Shell Cmd  wget -q -O ${ocp_server_profile_path} ${ocp_server_profile_url}\nShould Be Equal As Integers  ${rc}  0  Failed to download OCP server profile: ${output}\n\n```\n\nAccurate failure messages are important for test debugging, especially in CI where logs are the primary diagnostic tool.",
       "revId": "072a7af06589593c0213fbcd2c28a7b0dcb3c711",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa91b26d_f4602eec",
+        "filename": "redfish/dmtf_tools/Redfish_Interop_Validator.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-07-13T08:37:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "908f5c52_c3f1a745",
+      "revId": "072a7af06589593c0213fbcd2c28a7b0dcb3c711",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
