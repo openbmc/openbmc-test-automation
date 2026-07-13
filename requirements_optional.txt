@@ -4,4 +4,5 @@ pyasn1==0.6.3
 pyasn1_modules==0.4.1
 sseclient-py==1.8.0
 urllib3>=2.5.0
-
+redfish_utilities>=3.4.8
+openpyxl>=3.1.3
