@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a857f49_7ccf68ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-13T17:30:20Z",
+      "side": 1,
+      "message": "Praful/ Nanda , all good here ?",
+      "revId": "8c45e07369bd9264d61ea8cc2f67c2a290cdfbe1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
