@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff833b0f_06b1a73a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-13T17:31:32Z",
+      "side": 1,
+      "message": "Prasanth/ Swetha allgood here ?",
+      "revId": "ac639b4fd5f78ebc50310081d1a5a64d280eed41",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
