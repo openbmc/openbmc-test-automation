@@ -34,6 +34,74 @@
       "parentUuid": "728cb4ee_e98daf73",
       "revId": "d2cbd6a32978a937c750a526e365ee3a74290a80",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af6745af_d2adaa2a",
+        "filename": "gui/gui_test/logs_and_services_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-13T08:59:13Z",
+      "side": 1,
+      "message": "Fragile Post-Purge \"Clear Log Entry\" Delete\n\n```\n[Setup]  Run Keywords  Redfish Purge Event Log  AND  Refresh GUI\n\n# Wait until the \"clear log\" entry is visible before attempting deletion,\n# or use Redfish Purge Event Log a second time to clear the purge-generated entry.\n\nWait Until Element Is Visible  ${xpath_delete_first_row}  timeout\u003d15\nClick Element  ${xpath_delete_first_row}\nWait Until Page Contains Element  ${xpath_confirm_delete}\nClick Button  ${xpath_confirm_delete}\n# Wait for deletion to complete before proceeding.\nWait Until Element Is Not Visible  ${xpath_confirm_delete}  timeout\u003d10\n\n```\n\nAfter Redfish Purge Event Log, the BMC generates a new \"Log cleared\" event entry. The test then immediately tries to click ${xpath_delete_first_row} — but if the GUI has not refreshed yet, or if the purge-generated entry has not appeared in the GUI, the click will fail on a missing element. There is no guard (Wait Until Element Is Visible) before the click. In testing environments with slower BMC response times this is a common source of intermittent failure. Additionally, if the linked webui-vue bug (issue #142) causes \"view all\" pagination to not work, the preceding delete could compound the failure in unpredictable ways.",
+      "revId": "d2cbd6a32978a937c750a526e365ee3a74290a80",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49886249_751655e7",
+        "filename": "gui/gui_test/logs_and_services_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-13T08:59:13Z",
+      "side": 1,
+      "message": "Typo\n```\n# Delete the clear log entry, so that we can create a new single error log and verify.\n```",
+      "revId": "d2cbd6a32978a937c750a526e365ee3a74290a80",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92bbecb6_4b631e7a",
+        "filename": "gui/gui_test/logs_and_services_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-13T08:59:13Z",
+      "side": 1,
+      "message": "Remove this line entirely — the value is never read after assignment\n\nThe variable is assigned on line 280 but never referenced again. If the original intent was to assert the post-creation count matches expectations, the assertion must be added; otherwise the line must be removed.\n\nor if its for line 302 this is required ?  check the comment for 302",
+      "revId": "d2cbd6a32978a937c750a526e365ee3a74290a80",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "590a4d5b_93c4caa1",
+        "filename": "gui/gui_test/logs_and_services_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-13T08:59:13Z",
+      "side": 1,
+      "message": "This assertion checks that the GUI selected count equals ${create_error_logs_for_viewall} (41). However, the test setup includes a step to delete a residual \"clear log\" entry, meaning the actual post-creation log count is only 41 if exactly one purge-generated entry was deleted. If the delete failed silently, or if the BMC generated more than one entry during purge, the count will be 42+ and the assertion will fail for the wrong reason. The cleaner design is to verify GUI count \u003d\u003d Redfish count only (which is the true intent of the test).\n\n\n```\n${members}\u003d  Redfish.Get Attribute  ${EVENT_LOG_URI}Entries  Members@odata.count\n\n# Verify GUI selected count matches the Redfish API count (single authoritative assertion).\nShould Be Equal As Integers  ${selected_logs}  ${members}\n```\nor if your intent was from line number 280 ?\n```\n ${number_of_events}\u003d  Get Number Of Event Logs\n```\n\n\nThe test\u0027s documented purpose is \"verify webui entries are same as the redfish api entries.\" The redundant intermediate assertion against the hardcoded 41 introduces a brittle dependency on exact setup state. The Redfish count is the authoritative source of truth; the GUI count should match it.",
+      "revId": "d2cbd6a32978a937c750a526e365ee3a74290a80",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
