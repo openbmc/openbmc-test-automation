@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49e96dfa_c0753d92",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-13T08:36:43Z",
+      "side": 1,
+      "message": "Vinay/ Sushil, please check this code",
+      "revId": "59f7ee0e34bfb03b9a37622819fa68a0e024232c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
