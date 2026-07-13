@@ -16,6 +16,57 @@
       "message": "Addressed all the comments received so far.",
       "revId": "82b61dd4e89794a7198981fc6cb8f841261555b7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7868098a_71ef5c3a",
+        "filename": "gui/gui_test/operations_menu/test_firmware_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-13T08:35:45Z",
+      "side": 1,
+      "message": "Verify Existence Of All Sections In Firmware Page BIOS check is unconditional on current UI\n\nThe comment says BIOS is optional (config-dependent), but the code asserts it unconditionally with Page Should Contain BIOS. This will fail on current-UI systems without BIOS firmware support.\n\n```\nELSE\n    Page Should Contain  BMC\n    # BIOS section is present only on systems with Host firmware support.\n    ${has_bios}\u003d  Run Keyword And Return Status  Page Should Contain  BIOS\n    Log  BIOS section present: ${has_bios}\n```\n\nAligns the code with the stated intent in the documentation comment, preventing false failures on BMC-only systems.",
+      "revId": "82b61dd4e89794a7198981fc6cb8f841261555b7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05e56d67_3cc603f4",
+        "filename": "gui/gui_test/operations_menu/test_firmware_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-13T08:35:45Z",
+      "side": 1,
+      "message": "Run And Return Rc is deprecated — use Run Process or ${rc} ${out}\u003d Run And Return Rc And Output\n\nRun And Return Rc is a deprecated OperatingSystem library keyword. The modern replacement is Run Process (from the Process library) which provides return code, stdout, and stderr.\n\n```\n${result}\u003d  Run Process  tar  -xf  ${IMAGE_FILE_PATH}  -C  ${fw_verify_dir}/\nShould Be Equal As Integers  ${result.rc}  0\n...  msg\u003dFailed to extract firmware tar: ${IMAGE_FILE_PATH}\n```\n\nRun And Return Rc and Run are OperatingSystem library keywords that have been superseded by the Process library in Robot Framework. Using the modern API avoids deprecation warnings and is more portable",
+      "revId": "82b61dd4e89794a7198981fc6cb8f841261555b7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d84cda4c_d6a8e1e5",
+        "filename": "gui/gui_test/operations_menu/test_firmware_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-13T08:35:45Z",
+      "side": 1,
+      "message": "Run keyword used for openssl — replace with Run Process\n\nRun (OperatingSystem library) is deprecated in favour of Run Process (Process library). Additionally, passing the entire command as a single space-separated string is fragile when paths contain spaces.\n\n\n```\n${result}\u003d  Run Process\n...  openssl  dgst  -sha256  -verify  ${fw_verify_dir}/publickey\n...  -signature  ${fw_verify_dir}/${image}.sig  ${fw_verify_dir}/${image}\nShould Contain  ${result.stdout}  Verified OK\n...  msg\u003d${image} signature verification failed: ${result.stdout}\n```\n\nRun Process with individual arguments is immune to shell word-splitting on paths with spaces and captures both stdout and stderr for better diagnostics.",
+      "revId": "82b61dd4e89794a7198981fc6cb8f841261555b7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
