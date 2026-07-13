@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7701c0c_c1751840",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-13T08:14:40Z",
+      "side": 1,
+      "message": "Suite Setup Execution already calls Launch Browser And Login GUI once per suite. Adding it again in the Test Setup opens a new browser session before every test case, while the previous session remains open and unmanaged. Suite Teardown only closes the last session via Close Browser, leaving all intermediate sessions orphaned as runaway browser processes.\n\n\nI dont think you will need this  Launch Browser And Login GUI\n\nhere, unless we need for reason and if needed also we need clean closure of browsers so that there are no orphaned as runaway browser processes",
+      "revId": "a86ae6ec08ce6d90e5be513f0c540a6e9fab7a9c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f2b653b_6ac2e9bf",
+        "filename": "gui/gui_test/settings_menu/test_power_restore_policy_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-13T08:14:40Z",
+      "side": 1,
+      "message": "Similar comment from pregious comment \n\nTest Setup Execution is the Test Setup for this suite (Test Setup Test Setup Execution). The Suite Setup is Launch Browser And Login GUI (runs once per suite). Adding Launch Browser And Login GUI to the Test Setup repeats the browser launch before every test case, creating orphaned browser sessions. Suite Teardown Close Browser only closes the final session",
+      "revId": "a86ae6ec08ce6d90e5be513f0c540a6e9fab7a9c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0874cdd_7dc53954",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-13T08:14:40Z",
+      "side": 1,
+      "message": "${snmp_page_heading} Case Mismatch Breaks SNMP Heading Assertions\n\n\nFix Required:\n\nIn the same file, also update ${snmp_page_heading} (currently not part of this changes):\n```\n${snmp_page_heading}                              SNMP Alerts\n```\n\nThis diff updates ${xpath_snmp_alerts_heading} from //h1[text()\u003d\"SNMP alerts\"] to //h1[text()\u003d\"SNMP Alerts\"] (capital A in \"Alerts\"), but the companion variable ${snmp_page_heading} elsewhere in the file still holds SNMP alerts (lowercase a). Refresh GUI And Verify Element Value in gui_resource.robot does:\n\n```\n${element_value}\u003d  Get Text  ${element}    # Returns \"SNMP Alerts\" (capital A from the XPath-located element)\nShould Contain  ${element_value}  ${expected_value}  # Should Contain \"SNMP Alerts\" \"SNMP alerts\" → FAILS\n\n```\n\nRF Should Contain is case-sensitive — \"SNMP Alerts\" does not contain the substring \"SNMP alerts\". This causes deterministic failures in the teardown of Verify Existence Of All Fields In Add Destination and in Delete All SNMP Managers Via GUI. Both call sites pass ${snmp_page_heading} as the expected value to Refresh GUI And Verify Element Value.",
+      "revId": "a86ae6ec08ce6d90e5be513f0c540a6e9fab7a9c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2552dd34_2ed81b55",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-13T08:14:40Z",
+      "side": 1,
+      "message": "```\nNavigate To SNMP Alerts Page\n    [Documentation]  Navigate to SNMP alerts page.\n\n    Navigate To Required Sub Menu  ${xpath_settings_menu}  ${xpath_snmp_alerts_sub_menu}  snmp-alerts\n```\n\nNavigate To SNMP Alerts Page Keyword Uses Old Navigation Pattern\n\nprobably update this also. Navigate To Required Sub Menu also handles the case where the sub-menu is already visible (avoiding a redundant main menu click) and waits for the page loading indicator to disappear — robustness improvements the current keyword lacks.",
+      "revId": "a86ae6ec08ce6d90e5be513f0c540a6e9fab7a9c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
