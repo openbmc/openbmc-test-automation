@@ -106,6 +106,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5170ef6_2611ccf0",
+        "filename": "gui/gui_test/logs_and_services_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-13T08:37:51Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1f38079a_d32573d1",
+      "revId": "c7ad1fc9942527cb86aa45377f8cb8e5653f1721",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5584eca9_e7588110",
@@ -137,6 +155,24 @@
       "side": 1,
       "message": "Updated the test case, removed the Redfish.Login",
       "parentUuid": "5584eca9_e7588110",
+      "revId": "c7ad1fc9942527cb86aa45377f8cb8e5653f1721",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e652666_45ca7f43",
+        "filename": "gui/gui_test/logs_and_services_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-13T08:37:51Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "237d79f1_5a6c1076",
       "revId": "c7ad1fc9942527cb86aa45377f8cb8e5653f1721",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
