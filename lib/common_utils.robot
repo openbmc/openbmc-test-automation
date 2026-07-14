@@ -70,9 +70,12 @@ Check BMC Performance
 
 Get BMC System Model
     [Documentation]  Get the BMC model from the device tree and return it.
+    ...  Note: device tree strings are null-terminated at the kernel level.
+    ...  The tr command strips the trailing null byte before returning the value,
+    ...  preventing "ValueError: embedded null byte" in downstream Python regex operations.
 
     ${bmc_model}  ${stderr}  ${rc}=  BMC Execute Command
-    ...  cat ${devicetree_base} | cut -d " " -f 1  return_stderr=True
+    ...  cat ${devicetree_base} | cut -d " " -f 1 | tr -d '\\000'  return_stderr=True
     ...  test_mode=0
     Should Be Empty  ${stderr}
     Should Not Be Empty  ${bmc_model}  msg=BMC model is empty.
