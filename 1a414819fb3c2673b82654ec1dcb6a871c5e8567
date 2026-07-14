@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aba4291f_b27de181",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 907,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-07-14T05:48:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b7e56d4_a41aa824",
+      "range": {
+        "startLine": 907,
+        "startChar": 30,
+        "endLine": 907,
+        "endChar": 42
+      },
+      "revId": "1a414819fb3c2673b82654ec1dcb6a871c5e8567",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "613494cd_11bee2eb",
@@ -54,6 +78,30 @@
       "writtenOn": "2026-07-14T05:07:09Z",
       "side": 1,
       "message": "please change ${NEW_PASSWORD} \u003e\u003e ${new_password} few variable names are changed to lower case.",
+      "range": {
+        "startLine": 915,
+        "startChar": 46,
+        "endLine": 915,
+        "endChar": 58
+      },
+      "revId": "1a414819fb3c2673b82654ec1dcb6a871c5e8567",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c227684_2c599fcf",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 915,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-07-14T05:48:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "613494cd_11bee2eb",
       "range": {
         "startLine": 915,
         "startChar": 46,
