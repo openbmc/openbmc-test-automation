@@ -1398,11 +1398,17 @@ class ffdc_collector:
             sys.exit(-1)
 
         # This to mask the password from displaying on the console.
+        # Strip null bytes from password values before building the regex.
+        # Device tree strings and corrupted env files can introduce \x00 which
+        # causes re.sub() to raise "ValueError: embedded null byte".
         mask_dict = self.env_dict.copy()
         for k, v in mask_dict.items():
             if k.lower().find("password") != -1:
+                clean_v = v.replace("\x00", "")
+                if not clean_v:
+                    continue
                 hidden_text = []
-                hidden_text.append(v)
+                hidden_text.append(clean_v)
                 password_regex = (
                     "(" + "|".join([re.escape(x) for x in hidden_text]) + ")"
                 )
