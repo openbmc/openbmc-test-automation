@@ -71,6 +71,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c012b75e_52b38f2b",
+        "filename": "gui/gui_test/logs_and_services_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-07-14T11:05:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "398dea6d_330166a4",
+      "revId": "d2cbd6a32978a937c750a526e365ee3a74290a80",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "49886249_751655e7",
@@ -141,6 +159,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84ab6fa2_cc2bf620",
+        "filename": "gui/gui_test/logs_and_services_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-07-14T11:05:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "220477c3_68466c84",
+      "revId": "d2cbd6a32978a937c750a526e365ee3a74290a80",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "590a4d5b_93c4caa1",
@@ -172,6 +208,24 @@
       "side": 1,
       "message": "Thanks for pointing it out. \nAgreed — the hardcoded assertion against ${create_error_logs_for_viewall} was brittle and redundant. I\u0027ve removed it and now only verify that the GUI selected count matches the Redfish Members@odata.count. This makes the Redfish API the single source of truth, which is the actual intent of the test.",
       "parentUuid": "590a4d5b_93c4caa1",
+      "revId": "d2cbd6a32978a937c750a526e365ee3a74290a80",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e9a6797_701544c3",
+        "filename": "gui/gui_test/logs_and_services_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-07-14T11:05:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45a0cd0d_e677a1b2",
       "revId": "d2cbd6a32978a937c750a526e365ee3a74290a80",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
