@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "398dea6d_330166a4",
+        "filename": "gui/gui_test/logs_and_services_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-07-14T11:04:59Z",
+      "side": 1,
+      "message": "As per the comment have updated the script and added the wait time",
+      "parentUuid": "af6745af_d2adaa2a",
+      "revId": "d2cbd6a32978a937c750a526e365ee3a74290a80",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "49886249_751655e7",
         "filename": "gui/gui_test/logs_and_services_menu/test_event_logs_sub_menu.robot",
         "patchSetId": 1
@@ -66,6 +84,24 @@
       "writtenOn": "2026-07-13T08:59:13Z",
       "side": 1,
       "message": "Typo\n```\n# Delete the clear log entry, so that we can create a new single error log and verify.\n```",
+      "revId": "d2cbd6a32978a937c750a526e365ee3a74290a80",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fccc6d3e_e6954a78",
+        "filename": "gui/gui_test/logs_and_services_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-07-14T11:04:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49886249_751655e7",
       "revId": "d2cbd6a32978a937c750a526e365ee3a74290a80",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -89,6 +125,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "220477c3_68466c84",
+        "filename": "gui/gui_test/logs_and_services_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-07-14T11:04:59Z",
+      "side": 1,
+      "message": "Yes correct George, It\u0027s not needed. removed the line from the test case.",
+      "parentUuid": "92bbecb6_4b631e7a",
+      "revId": "d2cbd6a32978a937c750a526e365ee3a74290a80",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "590a4d5b_93c4caa1",
         "filename": "gui/gui_test/logs_and_services_menu/test_event_logs_sub_menu.robot",
         "patchSetId": 1
@@ -100,6 +154,24 @@
       "writtenOn": "2026-07-13T08:59:13Z",
       "side": 1,
       "message": "This assertion checks that the GUI selected count equals ${create_error_logs_for_viewall} (41). However, the test setup includes a step to delete a residual \"clear log\" entry, meaning the actual post-creation log count is only 41 if exactly one purge-generated entry was deleted. If the delete failed silently, or if the BMC generated more than one entry during purge, the count will be 42+ and the assertion will fail for the wrong reason. The cleaner design is to verify GUI count \u003d\u003d Redfish count only (which is the true intent of the test).\n\n\n```\n${members}\u003d  Redfish.Get Attribute  ${EVENT_LOG_URI}Entries  Members@odata.count\n\n# Verify GUI selected count matches the Redfish API count (single authoritative assertion).\nShould Be Equal As Integers  ${selected_logs}  ${members}\n```\nor if your intent was from line number 280 ?\n```\n ${number_of_events}\u003d  Get Number Of Event Logs\n```\n\n\nThe test\u0027s documented purpose is \"verify webui entries are same as the redfish api entries.\" The redundant intermediate assertion against the hardcoded 41 introduces a brittle dependency on exact setup state. The Redfish count is the authoritative source of truth; the GUI count should match it.",
+      "revId": "d2cbd6a32978a937c750a526e365ee3a74290a80",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45a0cd0d_e677a1b2",
+        "filename": "gui/gui_test/logs_and_services_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-07-14T11:04:59Z",
+      "side": 1,
+      "message": "Thanks for pointing it out. \nAgreed — the hardcoded assertion against ${create_error_logs_for_viewall} was brittle and redundant. I\u0027ve removed it and now only verify that the GUI selected count matches the Redfish Members@odata.count. This makes the Redfish API the single source of truth, which is the actual intent of the test.",
+      "parentUuid": "590a4d5b_93c4caa1",
       "revId": "d2cbd6a32978a937c750a526e365ee3a74290a80",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
