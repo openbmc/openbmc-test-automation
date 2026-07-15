@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9313ca5_825791ac",
+        "filename": "redfish/systems/test_sensor_monitoring.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-15T03:52:25Z",
+      "side": 1,
+      "message": "Set Variable for scalar assignment is deprecated since RF 7.0 in favour of the VAR syntax. The same pattern appears on lines 107 and 128 in the new test case.\n\n```\nVAR  ${model_map}  ${redfish_sensor_info_map[\u0027${OPENBMC_MODEL}\u0027]}\n```\nSet Variable will eventually be removed. Using VAR is consistent with RF 7.0+ style and avoids future deprecation warnings.",
+      "revId": "74a2459f1ff2792ea979fe9fc81c2f440a12e7af",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68569b89_db51f7b6",
+        "filename": "redfish/systems/test_sensor_monitoring.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-15T03:52:25Z",
+      "side": 1,
+      "message": "Continue For Loop If is deprecated since Robot Framework 5.0. The rest of the file already uses native IF/ELSE/END blocks. Using the deprecated keyword is inconsistent and will generate runtime deprecation warnings.\n\n```\nIF  \u0027${RESOURCE_TYPE_FILTER}\u0027 !\u003d \u0027${EMPTY}\u0027 and \u0027${resource_type}\u0027 !\u003d \u0027${RESOURCE_TYPE_FILTER}\u0027\n    CONTINUE\nEND\n```\n\nRF 5.0 introduced native IF blocks and CONTINUE to replace the old keyword-based control flow. Deprecated keywords will be removed in a future RF release.",
+      "revId": "74a2459f1ff2792ea979fe9fc81c2f440a12e7af",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "369f4581_2d1d7473",
+        "filename": "redfish/systems/test_sensor_monitoring.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-15T03:52:25Z",
+      "side": 1,
+      "message": "Fix the VAR syntax as per the Line 99 comment here as well",
+      "revId": "74a2459f1ff2792ea979fe9fc81c2f440a12e7af",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99c30bef_634d9d93",
+        "filename": "redfish/systems/test_sensor_monitoring.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-15T03:52:25Z",
+      "side": 1,
+      "message": "IF \u0027${exist}\u0027 \u003d\u003d \u0027${False}\u0027 — fragile boolean comparison\n\n${exist} is assigned from Evaluate ${resource_name} in ${present_names}, which returns a Python bool. Comparing \u0027${exist}\u0027 (string-interpolated) to \u0027${False}\u0027 (string \"False\") works in practice because RF serialises False as \"False\", but it is non-idiomatic and fragile. A more idiomatic and explicit check is:\n\n```\nIF  not ${exist}\n```\n\nThe not ${exist} form directly evaluates the boolean without string coercion, is easier to read, and is consistent with the existing Skip If not ${has_resources} pattern already used in the same test case (line 103).",
+      "revId": "74a2459f1ff2792ea979fe9fc81c2f440a12e7af",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
