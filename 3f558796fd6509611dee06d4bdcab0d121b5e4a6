@@ -16,6 +16,74 @@
       "message": "Resolved all the comments.",
       "revId": "3f558796fd6509611dee06d4bdcab0d121b5e4a6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4e072e3_a5f753a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-15T07:32:46Z",
+      "side": 1,
+      "message": "Few more comments, else overall looks good",
+      "revId": "3f558796fd6509611dee06d4bdcab0d121b5e4a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8afe440b_cbcd0947",
+        "filename": "gui/gui_test/operations_menu/test_firmware_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-15T07:32:46Z",
+      "side": 1,
+      "message": "If the test fails before Create Directory ${fw_verify_dir} (e.g. OperatingSystem.File Should Exist raises an error on line 284), the teardown will attempt to remove a directory that does not exist. Robot Framework\u0027s Remove Directory raises Directory \u0027${FW_VERIFY_DIR}\u0027 does not exist in that case, causing a secondary teardown failure.\n\n\nUse a conditional remove:\n```\n[Teardown]  Run Keyword And Ignore Error  Remove Directory  ${FW_VERIFY_DIR}  recursive\u003dTrue\n```\nOr use OperatingSystem.Directory Should Not Exist guard before Remove, or add ignore_if_missing\u003dTrue when RF supports it.\n\nTeardown failures obscure the real failure reason and make test result analysis harder.",
+      "revId": "3f558796fd6509611dee06d4bdcab0d121b5e4a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c418af0_17e3479b",
+        "filename": "gui/gui_test/operations_menu/test_firmware_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-15T07:32:46Z",
+      "side": 1,
+      "message": "Verify BMC Backup Firmware Version calls Get BMC Firmware Version backup and immediately passes the result to Verify Version On GUI ${backup_version}. If the FirmwareInventory contains no backup BMC entry, ${backup_version} will be ${EMPTY}. Wait Until Keyword Succeeds 1 min 5 sec Page Should Contain ${EMPTY} will likely pass vacuously (empty string is always \"contained\") or produce a misleading pass. The test would report success even when the backup version is genuinely absent.\n\nAdd a guard in Get BMC Firmware Version or in the calling test:\n\n```\n# In Get BMC Firmware Version, replace the final RETURN with:\nFail  msg\u003dNo backup BMC firmware version found in FirmwareInventory\n\n# OR in Verify BMC Backup Firmware Version, add after Get BMC Firmware Version:\nShould Not Be Empty  ${backup_version}\n...  msg\u003dNo backup BMC firmware version found — cannot verify GUI display\n```\n\nA test that passes when the feature under test is absent provides false confidence. The backup version verification test must fail loudly when no backup entry exists.",
+      "revId": "3f558796fd6509611dee06d4bdcab0d121b5e4a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ae5a6b0_5a2cf6ef",
+        "filename": "gui/gui_test/operations_menu/test_firmware_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-15T07:32:46Z",
+      "side": 1,
+      "message": "If the \"Update started\" toast auto-dismisses within the 10-second close window, Wait Until Element Is Visible ${xpath_update_started_toast_close} will time out and the keyword will fail spuriously. The same pattern applies to the \"Verify update\" toast close sequence (line 566).\n\nI would recommend to use Run Keyword And Ignore Error or a conditional close for the toast close step, or verify the toast auto-dismiss timeout is longer than 10 seconds in the target WebUI:\n\n```\n# Close only if still visible (guard against auto-dismiss)\n${toast_visible}\u003d  Run Keyword And Return Status\n...  Element Should Be Visible  ${xpath_update_started_toast_close}\nIF  ${toast_visible}\n    Click Element  ${xpath_update_started_toast_close}\n    Wait Until Element Is Not Visible  ${xpath_update_started_toast}  timeout\u003d10s\nEND\n```\n\nHard-coding a 10-second visibility wait for a close button that may have auto-dismissed causes spurious test failures unrelated to the firmware update itself. This is a flakiness source.",
+      "revId": "3f558796fd6509611dee06d4bdcab0d121b5e4a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
