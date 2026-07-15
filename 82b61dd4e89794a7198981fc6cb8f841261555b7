@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb4e070f_d5691de3",
+        "filename": "gui/gui_test/operations_menu/test_firmware_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-07-15T05:53:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7868098a_71ef5c3a",
+      "revId": "82b61dd4e89794a7198981fc6cb8f841261555b7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05e56d67_3cc603f4",
@@ -52,6 +70,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ed73b05_5d594733",
+        "filename": "gui/gui_test/operations_menu/test_firmware_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-07-15T05:53:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05e56d67_3cc603f4",
+      "revId": "82b61dd4e89794a7198981fc6cb8f841261555b7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d84cda4c_d6a8e1e5",
@@ -65,6 +101,24 @@
       "writtenOn": "2026-07-13T08:35:45Z",
       "side": 1,
       "message": "Run keyword used for openssl — replace with Run Process\n\nRun (OperatingSystem library) is deprecated in favour of Run Process (Process library). Additionally, passing the entire command as a single space-separated string is fragile when paths contain spaces.\n\n\n```\n${result}\u003d  Run Process\n...  openssl  dgst  -sha256  -verify  ${fw_verify_dir}/publickey\n...  -signature  ${fw_verify_dir}/${image}.sig  ${fw_verify_dir}/${image}\nShould Contain  ${result.stdout}  Verified OK\n...  msg\u003d${image} signature verification failed: ${result.stdout}\n```\n\nRun Process with individual arguments is immune to shell word-splitting on paths with spaces and captures both stdout and stderr for better diagnostics.",
+      "revId": "82b61dd4e89794a7198981fc6cb8f841261555b7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e91b02bb_57297f01",
+        "filename": "gui/gui_test/operations_menu/test_firmware_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-07-15T05:53:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d84cda4c_d6a8e1e5",
       "revId": "82b61dd4e89794a7198981fc6cb8f841261555b7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
