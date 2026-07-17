@@ -16,6 +16,24 @@
       "message": "Please remove this as we already have it on line 428.",
       "revId": "992d545ede186ed22759e0c40fd4f9eafeafd819",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25e5f0e3_d7ad93ab",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-07-17T11:59:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93f79a8f_28078ef9",
+      "revId": "992d545ede186ed22759e0c40fd4f9eafeafd819",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
