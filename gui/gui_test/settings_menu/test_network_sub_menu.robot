@@ -980,6 +980,20 @@ Configure Eth0 In Static Eth1 In DHCPv4 And Verify Adding Static IPv6 On Both In
     Configure Static IPv6 On Both Interfaces
 
 
+Configure Eth0 Eth1 In Staticv4 And Verify Configuring Staticv6 DHCPv6 On Eth0
+    [Documentation]  Setup both eth0&eth1 in staticv4 and verify adding staticv6 & enabling dhcpv6 on eth0.
+    [Tags]  Configure_Eth0_Eth1_In_Staticv4_And_Verify_Configuring_Staticv6_DHCPv6_On_Eth0
+    [Setup]  Run Keywords  Add Static IP Address And Verify  ${test_ipv4_addr}
+    ...      ${test_subnet_mask}  ${default_gateway}  Success
+    ...      AND  Assign Static IP Address On Eth1
+    [Teardown]  Run Keywords
+    ...  Run Keyword And Ignore Error  Toggle DHCPv6 State And Verify  Disabled  1
+    ...  AND  Run Keyword And Ignore Error  Delete IP Address And Verify  ipv6  ${test_ipv6_addr_2}
+
+    Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr_2}  ${test_prefix_length}  Success
+    Toggle DHCPv6 State And Verify  Enabled  1
+
+
 Delete IPv4 Address On Eth1 Via IPv6 And Verify
    [Documentation]  Delete IPv4 Address on eth1 via IPv6 GUI and verify.
    [Tags]  Delete_IPv4_Address_On_Eth1_Via_IPv6_And_Verify
@@ -1078,6 +1092,37 @@ Verify BMC Connection Remains Intact When One IPv6 Address Goes Down
     # Delete first IPv6 address and verify BMC connection remains intact.
     Delete IPv6 Address And Verify BMC Connection
     ...  ${test_ipv6_addr}  ${test_ipv6_addr_1}
+
+
+Configure Staticv6 On Eth1 Then Verify Enable DHCPv4 And Check Staticv6 Configuration Remains Intact
+    [Documentation]  Configure static IPv6 on eth1, enable DHCPv4 on eth1, and verify
+    ...  the IPv6 configuration remains unchanged.
+    [Tags]  Configure_Staticv6_On_Eth1_Then_Verify_Enable_DHCPv4_And_Check_Staticv6_Configuration_Remains_Intact
+    [Setup]  Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr_2}
+    ...      ${test_prefix_length}  Success  None  2
+    [Teardown]  Run Keyword And Ignore Error
+    ...         Delete IP Address And Verify  ipv6  ${test_ipv6_addr_2}  2
+
+    # Capture IPv6 addresses on eth1 before enabling DHCPv4.
+    Set Suite Variable  ${CHANNEL_NUMBER}  2
+    @{ipv6_address_origin_list_before}  ${staticv6_addr}=
+    ...  Get Address Origin List And Address For Type  Static  2
+    Should Contain  ${ipv6_address_origin_list_before}  Static
+    Should Not Be Empty  ${staticv6_addr}  msg=Static IPv6 address is not present before DHCPv4 toggle.
+
+    # Enable DHCPv4 on eth1.
+    Toggle DHCPv4 State And Verify  Enabled  2
+
+    # Capture IPv6 addresses on eth1 after enabling DHCPv4.
+    Set Suite Variable  ${CHANNEL_NUMBER}  2
+    @{ipv6_address_origin_list_after}  ${staticv6_addr_after}=
+    ...  Get Address Origin List And Address For Type  Static  2
+
+    # Verify IPv6 configuration remains intact.
+    Lists Should Be Equal  ${ipv6_address_origin_list_before}  ${ipv6_address_origin_list_after}
+    ...  ignore_order=True
+    Should Be Equal  ${staticv6_addr}  ${staticv6_addr_after}
+    ...  msg=Static IPv6 address changed after enabling DHCPv4 on eth1.
 
 
 *** Keywords ***
