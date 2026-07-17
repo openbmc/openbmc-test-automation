@@ -39,6 +39,48 @@
       },
       "revId": "96f880033dfef6f5f594d303b504b8c247653326",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5e1b54a_86a44a59",
+        "filename": "gui/gui_test/logs_and_services_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-07-17T11:03:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07937b40_769f2ee9",
+      "range": {
+        "startLine": 16,
+        "startChar": 2,
+        "endLine": 16,
+        "endChar": 31
+      },
+      "revId": "96f880033dfef6f5f594d303b504b8c247653326",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be898a87_f003f88f",
+        "filename": "gui/gui_test/logs_and_services_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-07-17T11:03:22Z",
+      "side": 1,
+      "message": "have removed the specific defined value and update to generate the random error logs more than 40.\nIn GUI-\u003e Event Logs -\u003e Items per page -\u003e It have 10,20,30,40 and viewall options. So to generate more than 40. I have updated to generate more than 40.",
+      "parentUuid": "f2c90520_3831838f",
+      "revId": "96f880033dfef6f5f594d303b504b8c247653326",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
