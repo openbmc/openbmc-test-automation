@@ -149,7 +149,7 @@ class gui_variables:
         "//button[contains(normalize-space(.),'Save')]"
     )
     xpath_confirm_button = "//button[contains(normalize-space(.),'Confirm')]"
-    xpath_cancel_button = "//button[contains(text(),'Cancel')]"
+    xpath_cancel_button = "//div[contains(@class,'modal fade show')]//button[text()='Cancel']"
     xpath_add_button = "//div[@class='modal fade show']//button[@type='button'][normalize-space()='Add']"
     xpath_close_information_message = "//button[@class='btn-close']"
     xpath_page_loading_progress_bar = "//div[@aria-label='Loading Progress']"
