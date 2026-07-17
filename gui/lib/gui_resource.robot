@@ -245,7 +245,7 @@ Power Off Server
         Log To Console    Server is already powered Off.
     ELSE
         Navigate To Server Power Page
-        Wait And Click Element  ${xpath_power_shutdown}
+        Wait And Click Element  ${xpath_power_shutdown}    60sec
         Click Button  ${xpath_confirm}
         Verify And Close Information Message Via GUI
         Reload Page And Check Power Status  ${xpath_power_poweron}
@@ -420,7 +420,12 @@ Navigate To Required Sub Menu
     END
     Wait And Click Element  ${xpath_sub_menu}  wait_timeout=60s
     Location Should Contain  ${sub_menu_text}
+
+    IF  '${sub_menu_text}' == 'policies'
+       Wait Until Element Is Visible   ${xpath_page_loading_progress_bar}  timeout=1min
+    END
     Wait Until Element Is Not Visible  ${xpath_page_loading_progress_bar}  timeout=1min
+
 
 Open Link In New Tab
     [Documentation]  Open link in a new tab and check if it success
