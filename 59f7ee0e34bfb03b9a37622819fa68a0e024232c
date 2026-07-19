@@ -52,6 +52,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f17fb73d_21468437",
+        "filename": "lib/code_update_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-07-19T07:54:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa05ab74_37df41c7",
+      "revId": "59f7ee0e34bfb03b9a37622819fa68a0e024232c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa75ba48_a24bb86c",
@@ -69,6 +87,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3652f09_02b44205",
+        "filename": "lib/code_update_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 821,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-07-19T07:54:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa75ba48_a24bb86c",
+      "revId": "59f7ee0e34bfb03b9a37622819fa68a0e024232c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "430e0ec9_97d79ac8",
@@ -82,6 +118,30 @@
       "writtenOn": "2026-07-13T09:59:53Z",
       "side": 1,
       "message": "create a separate keyword/routine for the verification of the firmware versions and call it where ever needed",
+      "range": {
+        "startLine": 342,
+        "startChar": 1,
+        "endLine": 353,
+        "endChar": 74
+      },
+      "revId": "59f7ee0e34bfb03b9a37622819fa68a0e024232c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "866167ab_0e270594",
+        "filename": "redfish/extended/redfish_bmc_code_update.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-07-19T07:54:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "430e0ec9_97d79ac8",
       "range": {
         "startLine": 342,
         "startChar": 1,
