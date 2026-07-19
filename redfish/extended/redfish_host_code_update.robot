@@ -2,7 +2,7 @@
 Documentation            Update the BMC code on a target BMC via Redifsh.
 
 # Test Parameters:
-# IMAGE_FILE_PATH        The path to the BMC image file.
+# HOST_IMAGE_FILE_PATH        The path to the BMC image file.
 #
 # Firmware update states:
 #     Enabled            Image is installed and either functional or active.
@@ -31,13 +31,18 @@ Test Timeout             30 minutes
 
 Test Tags                Host_Code_Update
 
+*** Variables ***
+
+# Overwrite BIOS firmware or not if same bios version is already present.
+${FORCE_UPDATE}    ${0}
+
 *** Test Cases ***
 
 Redfish Host Code Update
     [Documentation]  Update the firmware image.
     [Tags]  Redfish_Host_Code_Update
 
-    ${image_version}=  Get Version Tar  ${IMAGE_FILE_PATH}
+    ${image_version}=  Get Version Tar  ${HOST_IMAGE_FILE_PATH}
     Rprint Vars  image_version
 
     ${sw_inv}=  Get Functional Firmware  Host image
@@ -59,6 +64,14 @@ Redfish Host Code Update
     Redfish Update Firmware
 
 
+Redfish Host Firmware Update Multipart
+    [Documentation]  Update the Host (BIOS) firmware using update-multipart.
+    [Tags]  Redfish_Host_Firmware_Update_Multipart
+
+    Valid File Path  HOST_IMAGE_FILE_PATH
+    Redfish Host Firmware Update Multipart  ${HOST_IMAGE_FILE_PATH}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -69,19 +82,73 @@ Suite Setup Execution
     Run Keyword And Ignore Error  Redfish Delete All BMC Dumps
     Run Keyword And Ignore Error  Redfish Purge Event Log
     # Checking for file existence.
-    Valid File Path  IMAGE_FILE_PATH
+    Valid File Path  HOST_IMAGE_FILE_PATH
 
 
 Redfish Update Firmware
-    [Documentation]  Update the BMC firmware via redfish interface.
+    [Documentation]  Update the Host firmware via redfish interface.
 
     Redfish.Login
     ${post_code_update_actions}=  Get Post Boot Action
     Rprint Vars  post_code_update_actions
     Run Keyword And Ignore Error  Set ApplyTime  policy=OnReset
     Redfish Upload Image And Check Progress State
-    ${tar_version}=  Get Version Tar  ${IMAGE_FILE_PATH}
+    ${tar_version}=  Get Version Tar  ${HOST_IMAGE_FILE_PATH}
     ${image_info}=  Get Software Inventory State By Version  ${tar_version}
     Run Key  ${post_code_update_actions['${image_info["image_type"]}']['OnReset']}
     Redfish.Login
     Redfish Verify Host Version  ${IMAGE_FILE_PATH}
+
+
+Redfish Host Firmware Update Multipart
+    [Documentation]  Perform Host firmware update via update-multipart API.
+    [Arguments]  ${image_path}
+
+    ${version_match}=  Compare Current Version And Image Version  ${image_path}  host
+    IF  not ${FORCE_UPDATE} and ${version_match}
+      Pass Execution    The existing BIOS firmware is already active and FORCE UPDATE is ${FORCE_UPDATE}.
+    END
+    Print Timen  Uploading ${image_path} via update-multipart (target: host)...
+
+    # The update-multipart endpoint returns a Task object with the task Id.
+    ${upload_resp}=  Update Multipart Image To BMC  ${image_path}  host
+
+    # Validate the upload response contains a task.
+    Should Not Be Empty  ${upload_resp}
+    ...  msg=No task response returned from firmware upload.
+    ${task_id}=  Evaluate  $upload_resp.get('Id') or $upload_resp.get('@odata.id', '').split('/')[-1]
+    Should Not Be Empty  ${task_id}
+    ...  msg=Could not determine task ID from upload response.
+    Print Timen  Host firmware update task started: ${task_id}
+
+    Wait Until Keyword Succeeds  10 min  5 sec
+    ...  Verify Host Update Task Completed  ${task_id}
+    Print Timen  Task ${task_id} completed successfully.
+
+    ${bios_ver_new}=  Redfish Get Host Version
+    Print Timen  Updated HOST firmware version: ${bios_ver_new}
+
+    Redfish Verify Host Version  ${image_path}
+
+
+Verify Host Update Task Completed
+    [Documentation]  Poll GET /redfish/v1/TaskService/Tasks/<id> and verify
+    ...              TaskState=Completed and TaskStatus=OK.
+    ...              Fails immediately if task ends in an error state
+    ...              (Cancelled, Killed, or Exception).
+    [Arguments]  ${task_id}
+
+    ${task_resp}=  Redfish.Get  /redfish/v1/TaskService/Tasks/${task_id}
+    ${task_state}=  Set Variable  ${task_resp.dict['TaskState']}
+    ${task_status}=  Set Variable  ${task_resp.dict['TaskStatus']}
+
+    Log To Console  Task ${task_id}: State=${task_state}, Status=${task_status}
+
+    # Fail immediately if task ended in a terminal error state.
+    Run Keyword If  '${task_state}' in ['Cancelled', 'Killed', 'Exception']
+    ...  Fail  Task ${task_id} ended with error state: ${task_state} / ${task_status}
+
+    Should Be Equal  ${task_state}  Completed
+    ...  msg=Task ${task_id} not yet completed: state=${task_state}
+    Should Be Equal  ${task_status}  OK
+    ...  msg=Task ${task_id} completed with error status: ${task_status}

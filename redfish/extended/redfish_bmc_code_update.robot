@@ -82,6 +82,34 @@ Redfish BMC Code Update
     Redfish Update Firmware
 
 
+Redfish BMC Firmware Update Multipart
+    [Documentation]  Update the BMC firmware using the update-multipart API.
+    [Tags]  Redfish_BMC_Firmware_Update_Single_Image_Package
+
+    Valid File Path  IMAGE_FILE_PATH
+    Redfish BMC Firmware Update Multipart  ${IMAGE_FILE_PATH}
+
+
+Redfish BMC Firmware Update
+    [Documentation]  Update the BMC firmware using the update API.
+    [Tags]  Redfish_BMC_Firmware_Update
+
+    Valid File Path  IMAGE_FILE_PATH
+        ${version_match}=  Compare Current Version And Image Version  ${IMAGE_FILE_PATH}  bmc
+    IF  not ${FORCE_UPDATE} and ${version_match}
+        Pass Execution    The existing BMC firmware is already active and FORCE UPDATE is ${FORCE_UPDATE}.
+    END
+    Print Timen  Uploading ${IMAGE_FILE_PATH} to bmc...
+    Redfish Update Firmware Using Update
+    Print Timen  Waiting for BMC to come back up (up to 600s)...
+    Wait Until Keyword Succeeds  10 min  10 sec  Redfish.Login
+    ${bmc_ver_new}=  Redfish Get BMC Version
+    Print Timen  Updated BMC firmware version: ${bmc_ver_new}
+
+    # Verify new BMC firmware version matches uploaded image.
+    Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
+
+
 Redfish BMC Code Update Running And Backup Image With Same Firmware
     [Documentation]  Perform the firmware update with same image back to back, so that
     ...              the running (functional Image) and backup image (alternate image)
@@ -305,3 +333,79 @@ Redfish Update Firmware
     Run Key  ${post_code_update_actions['${image_info["image_type"]}']['OnReset']}
     Redfish.Login
     Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
+
+Redfish BMC Firmware Update Multipart
+    [Documentation]  Perform BMC firmware update via update-multipart API.
+    [Arguments]  ${image_path}
+
+    ${version_match}=  Compare Current Version And Image Version  ${image_path}  bmc
+    IF  not ${FORCE_UPDATE} and ${version_match}
+        Pass Execution    The existing BMC firmware is already active and FORCE UPDATE is ${FORCE_UPDATE}.
+    END
+    Print Timen  Uploading ${image_path} via update-multipart (target: bmc)...
+
+    # Upload and get task ID directly from the 202 response.
+    ${upload_resp}=  Update Multipart Image To BMC  ${image_path}  bmc
+
+    # Validate the upload response contains a task.
+    Should Not Be Empty  ${upload_resp}
+    ...  msg=No task response returned from BMC firmware upload.
+    ${task_id}=  Evaluate  $upload_resp.get('Id') or $upload_resp.get('@odata.id', '').split('/')[-1]
+    Should Not Be Empty  ${task_id}
+    ...  msg=Could not determine task ID from upload response.
+    Print Timen  BMC firmware update task started: ${task_id}
+
+    Wait Until Keyword Succeeds  10 min  5 sec
+    ...  Verify BMC Update Task Completed  ${task_id}
+    Print Timen  Task ${task_id} completed successfully.
+
+    # Graceful restart BMC to apply the new firmware.
+    Print Timen  Sending graceful restart to BMC...
+    Redfish.Post
+    ...  /redfish/v1/Managers/${MANAGER_ID}/Actions/Manager.Reset
+    ...  body={'ResetType': 'GracefulRestart'}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}, ${HTTP_ACCEPTED}]
+
+    # Wait for BMC to come back up (up to 5 minutes).
+    Print Timen  Waiting for BMC to come back up (up to 5 min)...
+    Wait Until Keyword Succeeds  5 min  5 sec  Redfish.Login
+
+    ${bmc_ver_new}=  Redfish Get BMC Version
+    Print Timen  Updated BMC firmware version: ${bmc_ver_new}
+
+    # Verify new BMC firmware version matches uploaded image.
+    Redfish Verify BMC Version  ${image_path}
+
+
+Verify BMC Update Task Completed
+    [Documentation]  Poll GET /redfish/v1/TaskService/Tasks/<id> and verify
+    ...              TaskState=Completed and TaskStatus=OK.
+    ...              Fails immediately if task ends in an error state
+    ...              (Cancelled, Killed, or Exception).
+    [Arguments]  ${task_id}
+
+    # Description of argument(s):
+    # task_id   The task ID from the TaskService created by the firmware upload.
+
+    ${task_resp}=  Redfish.Get  /redfish/v1/TaskService/Tasks/${task_id}
+    ${task_state}=  Set Variable  ${task_resp.dict['TaskState']}
+    ${task_status}=  Set Variable  ${task_resp.dict['TaskStatus']}
+
+    Log To Console  Task ${task_id}: State=${task_state}, Status=${task_status}
+
+    # Fail immediately if task ended in a terminal error state.
+    Run Keyword If  '${task_state}' in ['Cancelled', 'Killed', 'Exception']
+    ...  Fail  Task ${task_id} ended with error state: ${task_state} / ${task_status}
+
+    Should Be Equal  ${task_state}  Completed
+    ...  msg=Task ${task_id} not yet completed: state=${task_state}
+    Should Be Equal  ${task_status}  OK
+    ...  msg=Task ${task_id} completed with error status: ${task_status}
+
+
+Redfish Update Firmware Using Update
+    [Documentation]  Perform BMC firmware update with update API.
+
+    Print Timen  Uploading ${IMAGE_FILE_PATH} via update
+    ${resp}=  Redfish Upload Image  /redfish/v1/UpdateService/update  ${IMAGE_FILE_PATH}
+    log    ${resp}

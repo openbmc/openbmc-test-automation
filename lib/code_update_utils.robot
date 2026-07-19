@@ -805,3 +805,58 @@ Redfish Update Firmware
     Redfish.Login
     Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
     Verify Get ApplyTime  ${apply_time}
+
+
+Update Multipart Image To BMC
+    [Documentation]  Update firmware image to BMC via multipart/form-data POST request.
+    ...              Required for the update-multipart endpoint which expects
+    ...              UpdateParameters (JSON) and UpdateFile (binary) as multipart fields.
+    [Arguments]  ${image_file_path}  ${image_type}
+
+    # Description of argument(s):
+    # image_file_path   The path to the firmware image tarball.
+    # image_type        The type of firmware image being uploade
+    #                   (e.g. bmc,host)
+
+    # The URI path for the multipart upload endpoint
+    VAR  ${uri}  /redfish/v1/UpdateService/update-multipart
+    # Set target firmware inventory URI
+    IF  '${image_type}' == 'bmc'
+      VAR  ${target}  /redfish/v1/UpdateService/FirmwareInventory/bmc
+    ELSE IF  '${image_type}' == 'host'
+      VAR  ${target}  /redfish/v1/UpdateService/FirmwareInventory/bios_active
+    ELSE
+      Fail  Unsupported image type: ${image_type}
+    END
+    ${resp}=  code_update_utils.Upload Multipart Image To BMC
+    ...  ${uri}  ${image_file_path}  ${target}
+    RETURN  ${resp}
+
+Compare Current Version And Image Version
+    [Documentation]  Compare the currently active firmware version on the target with the version in the image file.
+    [Arguments]  ${image_file}  ${target}
+
+    # Description of argument(s):
+    # image_file        The path to the firmware image tarball.
+    # target            The firmware target to compare against
+    #                   (e.g. bmc, host).
+
+    # Get current firmware version before update.
+    IF  '${target}' == 'bmc'
+      ${current_verion}=  Redfish Get BMC Version
+    ELSE IF  '${target}' == 'host'
+      ${current_verion}=  Redfish Get Host Version
+    ELSE
+      Fail  Unsupported target: ${target}
+    END
+    Print Timen  Current ${target} firmware version: ${current_verion}
+
+    # Get target version from the tar file MANIFEST.
+    ${image_version}=  code_update_utils.Get Version Tar  ${image_file}
+    Print Timen  Current ${target} firmware version from image file: ${image_version}
+
+    IF  '${current_verion}' == '${image_version}'
+      RETURN  ${TRUE}
+    ELSE
+      RETURN  ${FALSE}
+    END
