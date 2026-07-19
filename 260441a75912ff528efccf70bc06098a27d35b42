@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d0e1dd8_4a4c4a02",
+        "filename": "gui/gui_test/logs_and_services_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-07-19T15:59:12Z",
+      "side": 1,
+      "message": "Seems to be typo error for ${create_error_logs_for_viewall}. It should be ${create_error_logs_for_view_all}.",
+      "range": {
+        "startLine": 344,
+        "startChar": 27,
+        "endLine": 344,
+        "endChar": 59
+      },
+      "revId": "260441a75912ff528efccf70bc06098a27d35b42",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
