@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d97750a_b151756f",
+        "filename": "ipmi/test_ipmi_sol.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-20T14:28:17Z",
+      "side": 1,
+      "message": "```\nVAR  ${log_file}  ${SOL_SESSION_LOG}_${TS}.log\n```\n\nRobot Framework 7.0 introduced the VAR keyword as the unified replacement for Set Variable, Set Test Variable, Set Suite Variable, and Set Global Variable. Continuing to use Set Variable produces deprecation warnings\n\nSet Variable is getting deprecated since Robot Framework 7.0\n\nLocation: Lines 327, 449, 494, 522, 554, 555 in ipmi/test_ipmi_sol.robot",
+      "revId": "47da11dc2e74929e9b7a9f6fa2940fbba715feec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "170337b3_acd87c4f",
+        "filename": "ipmi/test_ipmi_sol.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-20T14:28:17Z",
+      "side": 1,
+      "message": "```\n${result}\u003d    Run Process    ${deactivate_cmd}    shell\u003dTrue\n# Use ${result.rc} and ${result.stdout} directly wherever ${rc} and ${deactivate_output} were used:\nShould Be Equal As Integers    ${result.rc}    ${0}\nLog    ${result.stdout}\n\n```\n\nThe Process library is the supported API for running external commands; Run And Return RC And Output is a legacy OperatingSystem keyword. Run And Return RC And Output is superseded by the Process library\n\nLocation: Lines 507, 529, 540, 563, 574, 587, 710 in ipmi/test_ipmi_sol.robot",
+      "revId": "47da11dc2e74929e9b7a9f6fa2940fbba715feec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0fa48af_a512e112",
+        "filename": "lib/pty_process.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-20T14:28:17Z",
+      "side": 1,
+      "message": "```\nlogger.warning(\n    \"[PtyProcessLib] Error sending SIGCONT to \u0027{}\u0027: {}\".format(alias, exc)\n)\n```\nlogger.warn() is deprecated in Robot Framework\u0027s logger API\nUsing the deprecated warn() alias produces a deprecation warning at runtime. All 6 logger.warn() calls in the file should be updated to logger.warning().\n\nLocation: Lines 142, 155, 194, 411, 514, 545 in lib/pty_process.py (6 occurrences across stop_pty_process, stop_all_pty_processes, get_pty_process_log, resume_pty_process, and stop_sol_pty_session)",
+      "revId": "47da11dc2e74929e9b7a9f6fa2940fbba715feec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
