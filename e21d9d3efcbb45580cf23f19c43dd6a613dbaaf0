@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3dd0713a_ee3bbca8",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 1097,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-07-20T14:37:13Z",
+      "side": 1,
+      "message": "Rename with test case name with \u003c\u003d 80 char",
+      "range": {
+        "startLine": 1097,
+        "startChar": 1,
+        "endLine": 1097,
+        "endChar": 100
+      },
+      "revId": "e21d9d3efcbb45580cf23f19c43dd6a613dbaaf0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebc38a41_f4e5a9ae",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 1100,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-07-20T14:37:13Z",
+      "side": 1,
+      "message": "replace with test case name \u003c\u003d80 char",
+      "range": {
+        "startLine": 1100,
+        "startChar": 4,
+        "endLine": 1100,
+        "endChar": 112
+      },
+      "revId": "e21d9d3efcbb45580cf23f19c43dd6a613dbaaf0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
