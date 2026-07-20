@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "399e9180_eb0a18e7",
+        "filename": "redfish/extended/redfish_bmc_code_update.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-20T14:50:31Z",
+      "side": 1,
+      "message": "```\nVAR  ${task_state}  ${task_resp.dict[\u0027TaskState\u0027]}\nVAR  ${task_status}  ${task_resp.dict[\u0027TaskStatus\u0027]}\n```\n\nVAR is the modern RF 7.0 syntax",
+      "revId": "714181e186858df39034d4e06ec3264432620e71",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b986384_bbf33aa0",
+        "filename": "redfish/extended/redfish_bmc_code_update.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-20T14:50:31Z",
+      "side": 1,
+      "message": "```\nIF  \u0027${task_state}\u0027 in [\u0027Cancelled\u0027, \u0027Killed\u0027, \u0027Exception\u0027]\n    Fail  Task ${task_id} ended with error state: ${task_state} / ${task_status}\nEND\n```\n\nRun Keyword If is deprecated since Robot Framework 5.*. Use native IF/ELSE/END blocks instead. Produces deprecation warnings at runtime.",
+      "revId": "714181e186858df39034d4e06ec3264432620e71",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e881e06_7996d51d",
+        "filename": "redfish/extended/redfish_bmc_code_update.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-20T14:50:31Z",
+      "side": 1,
+      "message": "Log ${resp}",
+      "revId": "714181e186858df39034d4e06ec3264432620e71",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a63d45b6_64158af3",
+        "filename": "redfish/extended/redfish_host_code_update.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-20T14:50:31Z",
+      "side": 1,
+      "message": "Stale ${IMAGE_FILE_PATH} reference in Redfish Update Firmware keyword ??\n\nis this what you are trying to do ? \n\n```\nRedfish Verify Host Version  ${HOST_IMAGE_FILE_PATH}\n```\n\nThe entire redfish_host_code_update.robot file was migrated to use ${HOST_IMAGE_FILE_PATH} (visible in the change description, Suite Setup Execution, Redfish Host Code Update test case, and Redfish Update Firmware keyword body). However, line 100 still references the old variable ${IMAGE_FILE_PATH}, which will be ${EMPTY} at runtime and cause incorrect version verification (or a silent false-positive pass if the BMC already has no image at that path).",
+      "revId": "714181e186858df39034d4e06ec3264432620e71",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
