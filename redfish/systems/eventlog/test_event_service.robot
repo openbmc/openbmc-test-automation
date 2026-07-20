@@ -108,7 +108,7 @@ Verify Event Service Enable And Disable Methods
     FOR  ${state}  IN  @{Service_state}
         # Patch operation to update service enabled state.
         VAR  &{payload}  ServiceEnabled=${state}
-        Redfish.Patch  ${REDFISH_EVENT_SERVICE_URI}  body=${payload}  valid_status_codes=[${HTTP_OK}]
+        Redfish.Patch  ${REDFISH_EVENT_SERVICE_URI}  body=${payload}  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
         # Check service enabled state changed.
         ${resp}=  Redfish.Get Properties  ${REDFISH_EVENT_SERVICE_URI}  valid_status_codes=[${HTTP_OK}]
