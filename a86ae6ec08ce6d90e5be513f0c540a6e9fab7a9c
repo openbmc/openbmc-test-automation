@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcc028e2_849ea008",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-07-20T07:51:29Z",
+      "side": 1,
+      "message": "Yes George, updated as per the comment.",
+      "parentUuid": "c7701c0c_c1751840",
+      "revId": "a86ae6ec08ce6d90e5be513f0c540a6e9fab7a9c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f2b653b_6ac2e9bf",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-07-13T08:14:40Z",
       "side": 1,
       "message": "Similar comment from pregious comment \n\nTest Setup Execution is the Test Setup for this suite (Test Setup Test Setup Execution). The Suite Setup is Launch Browser And Login GUI (runs once per suite). Adding Launch Browser And Login GUI to the Test Setup repeats the browser launch before every test case, creating orphaned browser sessions. Suite Teardown Close Browser only closes the final session",
+      "revId": "a86ae6ec08ce6d90e5be513f0c540a6e9fab7a9c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d63a4cc6_982d2ea8",
+        "filename": "gui/gui_test/settings_menu/test_power_restore_policy_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-07-20T07:51:29Z",
+      "side": 1,
+      "message": "Changes are reverted back for this file. This script updates are already done by some PR owners on their new commits.",
+      "parentUuid": "2f2b653b_6ac2e9bf",
       "revId": "a86ae6ec08ce6d90e5be513f0c540a6e9fab7a9c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -52,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c907f658_a8ecd43c",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-07-20T07:51:29Z",
+      "side": 1,
+      "message": "updated as per the comment.",
+      "parentUuid": "c0874cdd_7dc53954",
+      "revId": "a86ae6ec08ce6d90e5be513f0c540a6e9fab7a9c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2552dd34_2ed81b55",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-07-13T08:14:40Z",
       "side": 1,
       "message": "```\nNavigate To SNMP Alerts Page\n    [Documentation]  Navigate to SNMP alerts page.\n\n    Navigate To Required Sub Menu  ${xpath_settings_menu}  ${xpath_snmp_alerts_sub_menu}  snmp-alerts\n```\n\nNavigate To SNMP Alerts Page Keyword Uses Old Navigation Pattern\n\nprobably update this also. Navigate To Required Sub Menu also handles the case where the sub-menu is already visible (avoiding a redundant main menu click) and waits for the page loading indicator to disappear — robustness improvements the current keyword lacks.",
+      "revId": "a86ae6ec08ce6d90e5be513f0c540a6e9fab7a9c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02e61e25_6c1e2ab0",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-07-20T07:51:29Z",
+      "side": 1,
+      "message": "updated as per the comment.",
+      "parentUuid": "2552dd34_2ed81b55",
       "revId": "a86ae6ec08ce6d90e5be513f0c540a6e9fab7a9c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
