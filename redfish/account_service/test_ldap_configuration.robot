@@ -766,6 +766,92 @@ Verify Local Admin And Service User Create Users And LDAP User Changes Privilege
     service         ${OPENBMC_PASSWORD}     ReadOnly           Administrator
     service         ${OPENBMC_PASSWORD}     Administrator      ReadOnly
 
+Verify Privilege Change Via Unreachable LDAP Falls Back To Local Admin
+    [Documentation]  Create test user with admin privilege from local admin user, attempt to
+    ...  change privilege from Admin to ReadOnly using LDAP user. Since LDAP is not reachable,
+    ...  expect an error, then change the privilege via local admin user and verify.
+    [Tags]  Verify_Privilege_Change_Via_Unreachable_LDAP_Falls_Back_To_Local_Admin
+    [Teardown]  Run Keywords  Redfish.Login  AND  Create LDAP Configuration  AND
+    ...  Delete Local User If Exists  ${test_local_user}  AND
+    ...  FFDC On Test Case Fail
+
+    # Delete any existing test user from previous runs to ensure isolation.
+    Run Keyword And Ignore Error  Redfish.Delete  ${REDFISH_ACCOUNTS_URI}${test_local_user}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
+
+    # Login as local admin and create test user with Administrator privilege.
+    Redfish Create User  ${test_local_user}  ${test_user_password}  Administrator  ${True}
+
+    # Verify the user was created with Administrator privilege.
+    Verify User Role  ${test_local_user}  Administrator
+
+    # Verify newly created admin user can login.
+    Verify User Login And Logout  ${test_local_user}  ${test_user_password}
+
+    # Restore admin session before reconfiguring LDAP.
+    Redfish.Login
+
+    # Reconfigure LDAP to use an unreachable server to simulate LDAP unreachability.
+    Create LDAP Configuration  ${LDAP_TYPE}  ${ldap_unreachable_uri}
+    ...  ${LDAP_BIND_DN}  ${LDAP_BIND_DN_PASSWORD}  ${LDAP_BASE_DN}
+
+    # Verify LDAP server is now unreachable.
+    Verify LDAP Is Unreachable
+
+    # Fallback: change privilege from Administrator to ReadOnly using local admin.
+    Redfish.Patch  ${REDFISH_ACCOUNTS_URI}${test_local_user}
+    ...  body={'RoleId': '${privilege_readonly}'}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+    # Verify the privilege was successfully changed to ReadOnly.
+    Verify User Role  ${test_local_user}  ${privilege_readonly}
+
+    # Verify test user can login with ReadOnly privilege.
+    Verify User Login And Logout  ${test_local_user}  ${test_user_password}
+
+Verify Local User Created By LDAP Admin Disabled By Local Admin And Enabled By Service User
+    [Documentation]  Create local user from LDAP admin user, disable the user using local admin
+    ...  user and then enable via service user and verify.
+    [Tags]  Verify_Local_User_Created_By_LDAP_Admin_Disabled_By_Local_Admin_And_Enabled_By_Service_User
+    [Setup]  Update LDAP Configuration With LDAP User Role And Group  ${LDAP_TYPE}
+    ...  Administrator  ${GROUP_NAME}
+    [Teardown]  Run Keywords  Redfish.Login  AND
+    ...  Cleanup Local User And Restore Session  ${test_local_user}  AND
+    ...  Restore LDAP Privilege  AND  FFDC On Test Case Fail
+
+    # Login with LDAP admin user and delete any existing test user from previous runs.
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    Run Keyword And Ignore Error  Redfish.Delete  ${REDFISH_ACCOUNTS_URI}${test_local_user}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
+
+    # Create a local test user with ReadOnly privilege.
+    Redfish Create User  ${test_local_user}  ${test_user_password}  ReadOnly  ${True}
+
+    # Verify newly created user can login.
+    Verify User Login And Logout  ${test_local_user}  ${test_user_password}
+
+    # Login with local admin and disable the test user account.
+    Redfish.Login  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+    Set User Account Enabled State  ${test_local_user}  ${False}
+
+    # Verify user account is in disabled state.
+    Verify User Account Enabled State  ${test_local_user}  ${False}
+    ...  msg=User account was not disabled by local admin.
+
+    # Verify disabled user cannot login.
+    Verify User Cannot Login  ${test_local_user}  ${test_user_password}
+
+    # Login with service user and enable the test user account.
+    Redfish.Login  service  ${OPENBMC_PASSWORD}
+    Set User Account Enabled State  ${test_local_user}  ${True}
+
+    # Verify user account is in enabled state.
+    Verify User Account Enabled State  ${test_local_user}  ${True}
+    ...  msg=User account was not enabled by service user.
+
+    # Verify re-enabled user can login successfully.
+    Verify User Login And Logout  ${test_local_user}  ${test_user_password}
+
 *** Keywords ***
 
 Redfish Verify LDAP Login
