@@ -41,7 +41,7 @@ Test Tags        IPMI_SEL_Time
 *** Variables ***
 
 ${NETWORK_RESTART_TIME}   5s
-@{time_difference_list}  +8760:153:25  -87600:453:120  +175200:40:15  -43800:10:05  +20:35:12  -8760:00:00
+@{time_difference_list}  +8760:153:25  -876:453:120  +175200:40:15  -43800:10:05  +20:35:12  -8760:00:00
 
 # Based on 13th byte of add SEL entry command as per IPMI spec
 # event_dir and event_type variable value needs to be given.
@@ -366,6 +366,16 @@ Verify Multiple Set SEL Time With Multiple Add SEL Entry
       ${sel_time}  ${set_sel_time}=  Identify SEL Time  ${time_difference_list[${i}]}
 
       # Set SEL Time via IPMI command.
+      #
+      # systemd's "timedated: Send error when time set is past build date time" [1]
+      # commit forbids setting time past the systemd build date. The build date
+      # is usually the date of the last git commit (see the logic around the
+      # `time_epoch = get_option('time-epoch')` line in meson.build)
+      #
+      # So if you encounter the test failing here, most probably the second
+      # element of the `@{time_difference_list}` array should be reduced
+      #
+      # [1]: https://github.com/systemd/systemd/commit/6a12c90ca39b45087a84c7faa014f24cd6dc330c
       Set SEL Time Via IPMI  ${sel_time}
 
       # Clear the SEL.
