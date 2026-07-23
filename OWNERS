@@ -36,6 +36,7 @@ owners:
 
 reviewers:
 - sridevra@in.ibm.com
+- nandakumarb@ami.com
 
 matchers:
 
@@ -46,3 +47,6 @@ openbmc:
 - name: Sridevi Ramesh
   email: sridevra@in.ibm.com
   discord: srideviramesh
+- name: Nandakumar Babu
+  email: nandakumarb@ami.com
+  discord: Nandakumar.B
