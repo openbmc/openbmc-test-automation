@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ebc5271_979fbe8f",
+        "filename": "lib/code_update_utils.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 825,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-07-23T07:44:33Z",
+      "side": 1,
+      "message": "we can define this Variables on variable.py and used across globally,\n\nREDFISH_UPDATE_SERVICE_URI \u003d REDFISH_BASE_URI + \"UpdateService/\"\nREDFISH_FIRMWARE_INVENTORY_URI \u003d REDFISH_UPDATE_SERVICE_URI + \"FirmwareInventory\"",
+      "range": {
+        "startLine": 825,
+        "startChar": 22,
+        "endLine": 825,
+        "endChar": 48
+      },
+      "revId": "8690373c5ff5fe3f0929d6c443c461f787a063a9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9f2e209_3cbd8996",
+        "filename": "redfish/extended/redfish_bmc_code_update.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-07-23T07:44:33Z",
+      "side": 1,
+      "message": "we can define this variable (${REDFISH_TASK_URI) globally on the variable.py and use it across the robot files.\n\nFor \"UpdateService\", defined as below,\nREDFISH_UPDATE_SERVICE_URI \u003d REDFISH_BASE_URI + \"UpdateService/\"\nAnd do these changes on the applicable test cases on this file.",
+      "range": {
+        "startLine": 44,
+        "startChar": 2,
+        "endLine": 44,
+        "endChar": 18
+      },
+      "revId": "8690373c5ff5fe3f0929d6c443c461f787a063a9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23207936_82dfbb66",
+        "filename": "redfish/extended/redfish_bmc_code_update.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-07-23T07:44:33Z",
+      "side": 1,
+      "message": "use global variables instead of providing the full URL\u0027s.",
+      "range": {
+        "startLine": 409,
+        "startChar": 48,
+        "endLine": 409,
+        "endChar": 61
+      },
+      "revId": "8690373c5ff5fe3f0929d6c443c461f787a063a9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0a793d3_cb6e6d49",
+        "filename": "redfish/extended/redfish_host_code_update.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-07-23T07:44:33Z",
+      "side": 1,
+      "message": "remove this variable declaration and defined globally on variable.py",
+      "range": {
+        "startLine": 38,
+        "startChar": 2,
+        "endLine": 38,
+        "endChar": 18
+      },
+      "revId": "8690373c5ff5fe3f0929d6c443c461f787a063a9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
