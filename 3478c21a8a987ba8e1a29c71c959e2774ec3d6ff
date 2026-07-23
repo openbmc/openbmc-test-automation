@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fbe622e_ae596923",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 992,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-07-23T08:39:21Z",
+      "side": 1,
+      "message": "Delete ${test_ipv4_addr} also at the end of the test case\ninclude in teardown",
+      "range": {
+        "startLine": 992,
+        "startChar": 44,
+        "endLine": 992,
+        "endChar": 99
+      },
+      "revId": "3478c21a8a987ba8e1a29c71c959e2774ec3d6ff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
