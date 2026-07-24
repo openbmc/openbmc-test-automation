@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "07c96be8_0eefdca9",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 781,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-07-24T05:55:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17be3553_d1c65973",
+      "revId": "362a3701d4103e99376e8448052786927302d940",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e3252f98_ad1dc0d4",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-07-24T02:55:37Z",
       "side": 1,
       "message": "Administrator --\u003e ${privilege_admin}",
+      "revId": "362a3701d4103e99376e8448052786927302d940",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4bcf88d_cfa78c34",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 784,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-07-24T05:55:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3252f98_ad1dc0d4",
       "revId": "362a3701d4103e99376e8448052786927302d940",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -52,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "09302177_7d834d51",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 815,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-07-24T05:55:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5863a125_23f07d97",
+      "revId": "362a3701d4103e99376e8448052786927302d940",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b7ffb97b_73292b28",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-07-24T02:55:37Z",
       "side": 1,
       "message": "ReadOnly --\u003e ${privilege_readonly}",
+      "revId": "362a3701d4103e99376e8448052786927302d940",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6888c23b_bf54d812",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 822,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-07-24T05:55:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7ffb97b_73292b28",
       "revId": "362a3701d4103e99376e8448052786927302d940",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
