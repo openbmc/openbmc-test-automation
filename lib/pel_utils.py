@@ -29,7 +29,11 @@ class PeltoolException(Exception):
 
 
 def peltool(
-    option_string, peltool_extension=None, parse_json=True, **bsu_options
+    option_string,
+    peltool_extension=None,
+    parse_json=True,
+    openbmc_host=None,
+    **bsu_options,
 ):
     r"""
     Run peltool on the BMC with the caller's option string and return the result.
@@ -57,12 +61,16 @@ def peltool(
                                     Default: None.
     parse_json                      Indicates that the raw JSON data should
                                     parsed into a list of dictionaries.
+    openbmc_host                    The BMC host to run the peltool command on.
+                                    If None, the global ${OPENBMC_HOST} is used.
     bsu_options                     Options to be passed directly to
                                     bmc_execute_command. See its prolog for
                                     details.
     """
 
     bsu_options = fa.args_to_objects(bsu_options)
+    if openbmc_host is not None:
+        bsu_options["openbmc_host"] = openbmc_host
     peltool_cmd = "peltool"
     if peltool_extension:
         peltool_cmd = peltool_cmd + peltool_extension
