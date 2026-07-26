@@ -562,7 +562,7 @@ Get All Task
     #                 (e.g. Running, Completed). If the actual state matches
     #                 any of the states named in this argument, this keyword passes.
 
-    ${task_list}=  Redfish.Get Members List  /redfish/v1/TaskService/Tasks
+    ${task_list}=  Redfish.Get Members List  ${REDFISH_TASKS_URI}
     ${num_records}=  Get Length  ${task_list}
     IF  ${num_records} == ${0}  RETURN  ${EMPTY
 
@@ -642,9 +642,9 @@ Check Task Progress State
     #                  any of the states named in this argument, this keyword passes.
 
     FOR  ${task_ins}  IN  @{task_inv_dict.items()}
-      ${task_state}=  Redfish.Get Attribute  /redfish/v1/TaskService/Tasks/${task_ins}[0]  TaskState
-      ${task_status}=  Redfish.Get Attribute  /redfish/v1/TaskService/Tasks/${task_ins}[0]  TaskStatus
-      ${task_payload}=  Redfish.Get Attribute  /redfish/v1/TaskService/Tasks/${task_ins}[0]  Payload
+      ${task_state}=  Redfish.Get Attribute  ${REDFISH_TASKS_URI}/${task_ins}[0]  TaskState
+      ${task_status}=  Redfish.Get Attribute  ${REDFISH_TASKS_URI}/${task_ins}[0]  TaskStatus
+      ${task_payload}=  Redfish.Get Attribute  ${REDFISH_TASKS_URI}/${task_ins}[0]  Payload
 
       Rprint Vars  task_state
       Rprint Vars  task_status
@@ -664,7 +664,7 @@ Get Image Id
     #                (e.g. "Disabled", "Disabled, Updating"). If the actual state matches
     #                any of the states named in this argument, this keyword passes.
 
-    ${sw_member_list}=  Redfish.Get Members List  /redfish/v1/UpdateService/FirmwareInventory
+    ${sw_member_list}=  Redfish.Get Members List  ${REDFISH_FIRMWARE_INVENTORY_URI}
 
     FOR  ${sw_member}  IN  @{sw_member_list}
       ${status}=  Redfish.Get Attribute  ${sw_member}  Status
@@ -689,7 +689,7 @@ Get Image Update Progress State
     #              "HealthRollup": "OK",
     #              "State": "Enabled"
     #            },
-    ${status}=  Redfish.Get Attribute  /redfish/v1/UpdateService/FirmwareInventory/${image_id}  Status
+    ${status}=  Redfish.Get Attribute  ${REDFISH_FIRMWARE_INVENTORY_URI}/${image_id}  Status
     Rprint Vars  status
 
     RETURN  ${status["State"]}
@@ -704,7 +704,7 @@ Get Firmware Image Version
 
     # Example of a version returned by this keyword:
     # 2.8.0-dev-19-g6d5764b33
-    ${version}=  Redfish.Get Attribute  /redfish/v1/UpdateService/FirmwareInventory/${image_id}  Version
+    ${version}=  Redfish.Get Attribute  ${REDFISH_FIRMWARE_INVENTORY_URI}/${image_id}  Version
     Rprint Vars  version
 
     RETURN  ${version}
@@ -805,3 +805,56 @@ Redfish Update Firmware
     Redfish.Login
     Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
     Verify Get ApplyTime  ${apply_time}
+
+
+Update Multipart Image To BMC
+    [Documentation]  Update firmware image to BMC via multipart/form-data POST request.
+    ...              Required for the update-multipart endpoint which expects
+    ...              UpdateParameters (JSON) and UpdateFile (binary) as multipart fields.
+    [Arguments]  ${image_file_path}  ${image_type}
+
+    # Description of argument(s):
+    # image_file_path   The path to the firmware image tarball.
+    # image_type        The type of firmware image being uploade
+    #                   (e.g. bmc,host)
+
+    # Set target firmware inventory URI
+    IF  '${image_type}' == 'bmc'
+      VAR  ${target}  ${REDFISH_FIRMWARE_INVENTORY_URI}/bmc
+    ELSE IF  '${image_type}' == 'host'
+      VAR  ${target}  ${REDFISH_FIRMWARE_INVENTORY_URI}/bios_active
+    ELSE
+      Fail  Unsupported image type: ${image_type}
+    END
+    ${resp}=  code_update_utils.Upload Multipart Image To BMC
+    ...  ${REDFISH_UPDATE_MULTIPART_URI}  ${image_file_path}  ${target}
+    RETURN  ${resp}
+
+Compare Current Version And Image Version
+    [Documentation]  Compare the currently active firmware version on the target with the version in the image file.
+    [Arguments]  ${image_file}  ${target}
+
+    # Description of argument(s):
+    # image_file        The path to the firmware image tarball.
+    # target            The firmware target to compare against
+    #                   (e.g. bmc, host).
+
+    # Get current firmware version before update.
+    IF  '${target}' == 'bmc'
+      ${current_verion}=  Redfish Get BMC Version
+    ELSE IF  '${target}' == 'host'
+      ${current_verion}=  Redfish Get Host Version
+    ELSE
+      Fail  Unsupported target: ${target}
+    END
+    Print Timen  Current ${target} firmware version: ${current_verion}
+
+    # Get target version from the tar file MANIFEST.
+    ${image_version}=  code_update_utils.Get Version Tar  ${image_file}
+    Print Timen  Current ${target} firmware version from image file: ${image_version}
+
+    IF  '${current_verion}' == '${image_version}'
+      RETURN  ${TRUE}
+    ELSE
+      RETURN  ${FALSE}
+    END
