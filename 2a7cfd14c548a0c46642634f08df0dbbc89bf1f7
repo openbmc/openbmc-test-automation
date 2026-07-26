@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7b79d8c1_0808cc0b",
+        "filename": "gui/gui_test/operations_menu/test_firmware_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-07-26T17:38:26Z",
+      "side": 1,
+      "message": "Already have check in test case for respective parameter at start of test as below.\n# For \"Verify BMC Firmware Update\"\nOperatingSystem.File Should Exist  ${IMAGE_FILE_PATH}  msg\u003dFirmware package not found: ${IMAGE_FILE_PATH}\n# For \"Verify Host Firmware Update\"\nOperatingSystem.File Should Exist  ${HOST_IMAGE_FILE_PATH}  msg\u003dFirmware package not found: ${HOST_IMAGE_FILE_PATH}",
+      "parentUuid": "179fd2a1_6200e8ee",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 0
+      },
+      "revId": "2a7cfd14c548a0c46642634f08df0dbbc89bf1f7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f950456c_394c4a28",
         "filename": "gui/gui_test/operations_menu/test_firmware_sub_menu.robot",
         "patchSetId": 6
@@ -71,6 +95,24 @@
       "writtenOn": "2026-07-25T05:59:44Z",
       "side": 1,
       "message": "incorrect Tags",
+      "revId": "2a7cfd14c548a0c46642634f08df0dbbc89bf1f7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4620524c_ae8878f3",
+        "filename": "gui/gui_test/operations_menu/test_firmware_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-07-26T17:38:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f950456c_394c4a28",
       "revId": "2a7cfd14c548a0c46642634f08df0dbbc89bf1f7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
