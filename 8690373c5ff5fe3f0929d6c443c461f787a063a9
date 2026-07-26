@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "708cd60a_98df4bb2",
+        "filename": "lib/code_update_utils.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 825,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-07-26T17:19:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebc5271_979fbe8f",
+      "range": {
+        "startLine": 825,
+        "startChar": 22,
+        "endLine": 825,
+        "endChar": 48
+      },
+      "revId": "8690373c5ff5fe3f0929d6c443c461f787a063a9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d9f2e209_3cbd8996",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-07-23T07:44:33Z",
       "side": 1,
       "message": "we can define this variable (${REDFISH_TASK_URI) globally on the variable.py and use it across the robot files.\n\nFor \"UpdateService\", defined as below,\nREDFISH_UPDATE_SERVICE_URI \u003d REDFISH_BASE_URI + \"UpdateService/\"\nAnd do these changes on the applicable test cases on this file.",
+      "range": {
+        "startLine": 44,
+        "startChar": 2,
+        "endLine": 44,
+        "endChar": 18
+      },
+      "revId": "8690373c5ff5fe3f0929d6c443c461f787a063a9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6763266a_986b1f27",
+        "filename": "redfish/extended/redfish_bmc_code_update.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-07-26T17:19:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9f2e209_3cbd8996",
       "range": {
         "startLine": 44,
         "startChar": 2,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5bc0916_720a6ff7",
+        "filename": "redfish/extended/redfish_bmc_code_update.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-07-26T17:19:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23207936_82dfbb66",
+      "range": {
+        "startLine": 409,
+        "startChar": 48,
+        "endLine": 409,
+        "endChar": 61
+      },
+      "revId": "8690373c5ff5fe3f0929d6c443c461f787a063a9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b0a793d3_cb6e6d49",
@@ -83,6 +155,30 @@
       "writtenOn": "2026-07-23T07:44:33Z",
       "side": 1,
       "message": "remove this variable declaration and defined globally on variable.py",
+      "range": {
+        "startLine": 38,
+        "startChar": 2,
+        "endLine": 38,
+        "endChar": 18
+      },
+      "revId": "8690373c5ff5fe3f0929d6c443c461f787a063a9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f741828e_fade3f90",
+        "filename": "redfish/extended/redfish_host_code_update.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-07-26T17:19:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0a793d3_cb6e6d49",
       "range": {
         "startLine": 38,
         "startChar": 2,
