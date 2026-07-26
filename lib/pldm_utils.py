@@ -15,7 +15,7 @@ import var_funcs as vf
 from robot.api import logger
 
 
-def pldmtool(option_string, **bsu_options):
+def pldmtool(option_string, openbmc_host=None, **bsu_options):
     r"""
     Run pldmtool on the BMC with the caller's option string and return the result.
 
@@ -36,6 +36,8 @@ def pldmtool(option_string, **bsu_options):
     parse_results         Parse the pldmtool results and return a dictionary
                           rather than the raw
                           pldmtool output.
+    openbmc_host          The BMC host to run the pldmtool command on.
+                          If None, the global ${OPENBMC_HOST} is used.
     bsu_options           Options to be passed directly to bmc_execute_command.
                           See its prolog for details.
     """
@@ -43,6 +45,8 @@ def pldmtool(option_string, **bsu_options):
     # This allows callers to specify arguments in python style
     # (e.g. print_out=1 vs. print_out=${1}).
     bsu_options = fa.args_to_objects(bsu_options)
+    if openbmc_host is not None:
+        bsu_options["openbmc_host"] = openbmc_host
 
     stdout, stderr, rc = bsu.bmc_execute_command(
         "pldmtool " + option_string, **bsu_options, ignore_err=1
