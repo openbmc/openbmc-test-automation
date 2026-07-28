@@ -2,7 +2,7 @@
 Documentation            Update the BMC code on a target BMC via Redifsh.
 
 # Test Parameters:
-# IMAGE_FILE_PATH        The path to the BMC image file.
+# HOST_IMAGE_FILE_PATH        The path to the BMC image file.
 #
 # Firmware update states:
 #     Enabled            Image is installed and either functional or active.
@@ -31,13 +31,18 @@ Test Timeout             30 minutes
 
 Test Tags                Host_Code_Update
 
+*** Variables ***
+
+# Overwrite BIOS firmware or not if same bios version is already present.
+${FORCE_UPDATE}        ${0}
+
 *** Test Cases ***
 
 Redfish Host Code Update
     [Documentation]  Update the firmware image.
     [Tags]  Redfish_Host_Code_Update
 
-    ${image_version}=  Get Version Tar  ${IMAGE_FILE_PATH}
+    ${image_version}=  Get Version Tar  ${HOST_IMAGE_FILE_PATH}
     Rprint Vars  image_version
 
     ${sw_inv}=  Get Functional Firmware  Host image
@@ -59,6 +64,14 @@ Redfish Host Code Update
     Redfish Update Firmware
 
 
+Redfish Host Firmware Update Multipart
+    [Documentation]  Update the Host (BIOS) firmware using update-multipart.
+    [Tags]  Redfish_Host_Firmware_Update_Multipart
+
+    Valid File Path  HOST_IMAGE_FILE_PATH
+    Redfish Firmware Update Multipart  ${HOST_IMAGE_FILE_PATH}  host
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -69,19 +82,19 @@ Suite Setup Execution
     Run Keyword And Ignore Error  Redfish Delete All BMC Dumps
     Run Keyword And Ignore Error  Redfish Purge Event Log
     # Checking for file existence.
-    Valid File Path  IMAGE_FILE_PATH
+    Valid File Path  HOST_IMAGE_FILE_PATH
 
 
 Redfish Update Firmware
-    [Documentation]  Update the BMC firmware via redfish interface.
+    [Documentation]  Update the Host firmware via redfish interface.
 
     Redfish.Login
     ${post_code_update_actions}=  Get Post Boot Action
     Rprint Vars  post_code_update_actions
     Run Keyword And Ignore Error  Set ApplyTime  policy=OnReset
     Redfish Upload Image And Check Progress State
-    ${tar_version}=  Get Version Tar  ${IMAGE_FILE_PATH}
+    ${tar_version}=  Get Version Tar  ${HOST_IMAGE_FILE_PATH}
     ${image_info}=  Get Software Inventory State By Version  ${tar_version}
     Run Key  ${post_code_update_actions['${image_info["image_type"]}']['OnReset']}
     Redfish.Login
-    Redfish Verify Host Version  ${IMAGE_FILE_PATH}
+    Redfish Verify Host Version  ${HOST_IMAGE_FILE_PATH}
