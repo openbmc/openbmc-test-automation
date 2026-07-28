@@ -21,6 +21,7 @@ def bmc_execute_command(
     test_mode=None,
     time_out=None,
     openbmc_host=None,
+    ssh_port=None,
 ):
     r"""
     Run the given command in an BMC SSH session and return the stdout, stderr and the return code.
@@ -44,18 +45,21 @@ def bmc_execute_command(
                                     This defaults to the global test_mode value.
     time_out                        The amount of time to allow for the execution of cmd_buf.  A value of
                                     None means that there is no limit to how long the command may take.
-    openbmc_host                    If this is None, global open BMC host is used else user defined
+    openbmc_host                    If this is None, global ${OPENBMC_HOST} is used else user defined
                                     open BMC host is used.
+    ssh_port                        If this is None, global ${SSH_PORT} is used else user defined
+                                    SSH port is used.
     """
-
-    # Get global BMC variable values.
-    ssh_port = BuiltIn().get_variable_value("${SSH_PORT}", default="22")
 
     # Get global open BMC host if user defined openbmc_host is not provided.
     if not openbmc_host:
         openbmc_host = BuiltIn().get_variable_value(
             "${OPENBMC_HOST}", default=""
         )
+
+    # Get global SSH port if user defined ssh_port is not provided.
+    if ssh_port is None:
+        ssh_port = BuiltIn().get_variable_value("${SSH_PORT}", default="22")
 
     openbmc_username = BuiltIn().get_variable_value(
         "${OPENBMC_USERNAME}", default=""
