@@ -16,6 +16,52 @@
       "message": "Updated as per comments from @nandakumarb@ami.com",
       "revId": "f16ec65f704c8b87d373852a8a9a0567aa9418a8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c00d824_c4e69699",
+        "filename": "redfish/extended/redfish_bmc_code_update.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-07-28T06:47:23Z",
+      "side": 1,
+      "message": "following comments were missed to provide,\nWe can simplify and update them as below:\n\n\"Poll the Task ID and verify both TaskState and TaskStatus.\nFail immediately if the task ends in an error state(Cancelled, Killed, or Exception).\"\n\nThis covers the validation of both TaskState and TaskStatus without hardcoding specific success values in the Documentation.\n\n\nAnd I can see the same keyword definitions is replicated in \"Verify Host Update Task Completed\" keyword as well. \nonly the keyword name is different. So, you can define this keyword on resource file and use across the robot files.",
+      "range": {
+        "startLine": 377,
+        "startChar": 21,
+        "endLine": 380,
+        "endChar": 55
+      },
+      "revId": "f16ec65f704c8b87d373852a8a9a0567aa9418a8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "181427b0_dfe2b47e",
+        "filename": "redfish/extended/redfish_host_code_update.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-07-28T06:47:23Z",
+      "side": 1,
+      "message": "need to remove this keyword, kindly refer the comments on /redfish_bmc_code_update.robot",
+      "range": {
+        "startLine": 134,
+        "startChar": 0,
+        "endLine": 134,
+        "endChar": 33
+      },
+      "revId": "f16ec65f704c8b87d373852a8a9a0567aa9418a8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
