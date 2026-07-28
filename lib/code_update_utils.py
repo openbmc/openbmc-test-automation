@@ -5,12 +5,15 @@ This module provides utilities for code updates.
 """
 
 import collections
+import json
 import os
 import re
 import sys
 import tarfile
 import time
 
+import requests
+import urllib3
 from robot.libraries.BuiltIn import BuiltIn
 
 robot_pgm_dir_path = os.path.dirname(__file__) + os.sep
@@ -333,3 +336,58 @@ def verify_image_not_in_bmc_uploads_dir(image_version, timeout=3):
             bsu.bmc_execute_command("rm -rf " + image_dir)
             BuiltIn().fail("Found invalid BMC Image: " + image_dir)
         time.sleep(30)
+
+
+def upload_multipart_image_to_bmc(uri, image_file_path, target, timeout=240):
+    r"""
+    Upload firmware image to BMC via multipart/form-data POST request.
+    Required for the update-multipart endpoint which expects
+    UpdateParameters (JSON) and UpdateFile (binary) as multipart fields.
+
+    Description of argument(s):
+    uri               The URI path for the multipart upload endpoint
+                      (e.g. "/redfish/v1/UpdateService/update-multipart").
+    image_file_path   The path to the firmware image tarball.
+    target            The target firmware inventory URI
+                      (e.g. "/redfish/v1/UpdateService/FirmwareInventory/bios_active").
+    timeout           Timeout in seconds for the upload request.
+    """
+
+    urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+    openbmc_host = BuiltIn().get_variable_value("${OPENBMC_HOST}")
+    https_port = BuiltIn().get_variable_value("${HTTPS_PORT}", "443")
+
+    # Get auth token from the Redfish library instance (imported as alias "Redfish").
+    redfish_lib = BuiltIn().get_library_instance("redfish")
+    session_key = redfish_lib.get_session_key()
+
+    url = "https://{}:{}{}".format(openbmc_host, https_port, uri)
+    update_params = json.dumps({"Targets": [target]})
+    file_name = os.path.basename(image_file_path)
+
+    with open(image_file_path, "rb") as f:
+        image_data = f.read()
+
+    files = [
+        ("UpdateParameters", (None, update_params, "application/json")),
+        ("UpdateFile", (file_name, image_data, "application/octet-stream")),
+    ]
+
+    headers = {
+        "X-Auth-Token": session_key,
+        "Accept": "application/json",
+    }
+
+    response = requests.post(
+        url,
+        files=files,
+        headers=headers,
+        verify=False,
+        timeout=timeout,
+    )
+
+    if response.status_code not in [200, 202]:
+        response.raise_for_status()
+
+    return response.json()

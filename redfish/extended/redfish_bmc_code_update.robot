@@ -33,16 +33,12 @@ Test Tags                Bmc_Code_Update
 
 *** Variables ***
 
-${FORCE_UPDATE}             ${0}
-${LOOP_COUNT}               ${2}
-${DELETE_ERRLOGS}           ${1}
+${FORCE_UPDATE}               ${0}
+${LOOP_COUNT}                 ${2}
+${DELETE_ERRLOGS}             ${1}
 # Refer: https://github.com/open-power/guard
-${DELETE_OLD_GUARD_FILE}    ${0}
-
-${ACTIVATION_WAIT_TIMEOUT}     8 min
-
-# New code update path.
-${REDFISH_UPDATE_URI}    /redfish/v1/UpdateService/update
+${DELETE_OLD_GUARD_FILE}      ${0}
+${ACTIVATION_WAIT_TIMEOUT}    8 min
 
 *** Test Cases ***
 
@@ -80,6 +76,34 @@ Redfish BMC Code Update
     Print Timen  Performing firmware update ${image_version}.
 
     Redfish Update Firmware
+
+
+Redfish BMC Firmware Update Multipart
+    [Documentation]  Update the BMC firmware using the update-multipart API.
+    [Tags]  Redfish_BMC_Firmware_Update_Single_Image_Package
+
+    Valid File Path  IMAGE_FILE_PATH
+    Redfish Firmware Update Multipart  ${IMAGE_FILE_PATH}  bmc
+
+
+Redfish BMC Firmware Update
+    [Documentation]  Update the BMC firmware using the update API.
+    [Tags]  Redfish_BMC_Firmware_Update
+
+    Valid File Path  IMAGE_FILE_PATH
+        ${version_match}=  Compare Current Version And Image Version  ${IMAGE_FILE_PATH}  bmc
+    IF  not ${FORCE_UPDATE} and ${version_match}
+        Pass Execution    The existing BMC firmware is already active and FORCE UPDATE is ${FORCE_UPDATE}.
+    END
+    Print Timen  Uploading ${IMAGE_FILE_PATH} to bmc...
+    Redfish Update Firmware Using Update
+    Print Timen  Waiting for BMC to come back up (up to 600s)...
+    Wait Until Keyword Succeeds  10 min  10 sec  Redfish.Login
+    ${bmc_ver_new}=  Redfish Get BMC Version
+    Print Timen  Updated BMC firmware version: ${bmc_ver_new}
+
+    # Verify new BMC firmware version matches uploaded image.
+    Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
 
 
 Redfish BMC Code Update Running And Backup Image With Same Firmware
@@ -139,7 +163,7 @@ Suite Setup Execution
     # Check and set the update path.
     # Old - /redfish/v1/UpdateService/
     # New - /redfish/v1/UpdateService/update
-    ${resp}=  Redfish.Get  /redfish/v1/UpdateService/update
+    ${resp}=  Redfish.Get  ${REDFISH_UPDATE_URI}
     ...  valid_status_codes=[${HTTP_OK},${HTTP_NOT_FOUND},${HTTP_METHOD_NOT_ALLOWED}]
 
     # If the method is not found, set update URI to old method.
@@ -279,7 +303,7 @@ Redfish Update Firmware
     Run Keyword And Ignore Error  Set ApplyTime  policy=OnReset
 
     # Python module:  get_member_list(resource_path)
-    ${before_inv_list}=  redfish_utils.Get Member List  /redfish/v1/UpdateService/FirmwareInventory
+    ${before_inv_list}=  redfish_utils.Get Member List  ${REDFISH_FIRMWARE_INVENTORY_URI}
     Log To Console   Current images on the BMC before upload: ${before_inv_list}
 
     Print Timen  Start uploading image to BMC.
@@ -287,7 +311,7 @@ Redfish Update Firmware
     Print Timen  Completed image upload to BMC.
 
     # Python module:  get_member_list(resource_path)
-    ${after_inv_list}=  redfish_utils.Get Member List  /redfish/v1/UpdateService/FirmwareInventory
+    ${after_inv_list}=  redfish_utils.Get Member List  ${REDFISH_FIRMWARE_INVENTORY_URI}
     Log To Console  Current images on the BMC after upload: ${after_inv_list}
 
     ${image_id}=  Evaluate  set(${after_inv_list}) - set(${before_inv_list})
@@ -305,3 +329,11 @@ Redfish Update Firmware
     Run Key  ${post_code_update_actions['${image_info["image_type"]}']['OnReset']}
     Redfish.Login
     Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
+
+
+Redfish Update Firmware Using Update
+    [Documentation]  Perform BMC firmware update with update API.
+
+    Print Timen  Uploading ${IMAGE_FILE_PATH} via update
+    ${resp}=  Redfish Upload Image  ${REDFISH_UPDATE_URI}  ${IMAGE_FILE_PATH}
+    Log  ${resp}
