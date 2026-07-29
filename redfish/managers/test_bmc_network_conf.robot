@@ -5,6 +5,7 @@ Documentation  Network interface configuration and verification
 Library        Collections
 Resource       ../../lib/bmc_redfish_resource.robot
 Resource       ../../lib/bmc_network_utils.robot
+Resource       ../../lib/bmc_ipv6_utils.robot
 Resource       ../../lib/openbmc_ffdc.robot
 Library        ../../lib/bmc_network_utils.py
 
@@ -721,6 +722,43 @@ Verify NameServers Includes StaticNameServers After Configuration
     ...  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  NameServers
     List Should Contain Sub List  ${updated_nameservers}  ${static_name_servers}
     ...  msg=NameServers does not include configured StaticNameServers.
+
+
+Verify IPv4 And IPv6 Addresses Remain Intact After Adding DNS Server
+    [Documentation]  Add a static DNS server IP and verify that all existing
+    ...  IPv4 and IPv6 addresses and their origins on the interface remain
+    ...  unchanged.
+    [Tags]  Verify_IPv4_And_IPv6_Addresses_Remain_Intact_After_Adding_DNS_Server
+    [Setup]  DNS Test Setup Execution
+    [Teardown]  Run Keywords
+    ...  Configure Static Name Servers  AND  Test Teardown Execution
+
+    # Record IPv4 and IPv6 address lists and their origins before the DNS change.
+    ${ipv4_origin_before}  ${ipv4_addr_before}=
+    ...  Get Address Origin List And IPv4 or IPv6 Address  IPv4Addresses
+
+    ${ipv6_origin_before}  ${ipv6_addr_before}=
+    ...  Get Address Origin List And IPv4 or IPv6 Address  IPv6Addresses
+
+    # Add DNS server IP via StaticNameServers.
+    Configure Static Name Servers  ${static_name_servers}
+
+    # Re-fetch the same lists after the DNS change.
+    ${ipv4_origin_after}  ${ipv4_addr_after}=
+    ...  Get Address Origin List And IPv4 or IPv6 Address  IPv4Addresses
+
+    ${ipv6_origin_after}  ${ipv6_addr_after}=
+    ...  Get Address Origin List And IPv4 or IPv6 Address  IPv6Addresses
+
+    # Verify IPv4 and IPv6 addresses and origins remain intact after DNS change.
+    Lists Should Be Equal  ${ipv4_addr_before}  ${ipv4_addr_after}
+    ...  msg=IPv4 addresses not intact after adding DNS server.  ignore_order=True
+    Lists Should Be Equal  ${ipv4_origin_before}  ${ipv4_origin_after}
+    ...  msg=IPv4 address origins not intact after adding DNS server.  ignore_order=True
+    Lists Should Be Equal  ${ipv6_addr_before}  ${ipv6_addr_after}
+    ...  msg=IPv6 addresses not intact after adding DNS server.  ignore_order=True
+    Lists Should Be Equal  ${ipv6_origin_before}  ${ipv6_origin_after}
+    ...  msg=IPv6 address origins not intact after adding DNS server.  ignore_order=True
 
 
 *** Keywords ***
