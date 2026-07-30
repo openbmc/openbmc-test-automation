@@ -80,7 +80,7 @@ Redfish BMC Code Update
 
 Redfish BMC Firmware Update Multipart
     [Documentation]  Update the BMC firmware using the update-multipart API.
-    [Tags]  Redfish_BMC_Firmware_Update_Single_Image_Package
+    [Tags]  Redfish_BMC_Firmware_Update_Multipart
 
     Valid File Path  IMAGE_FILE_PATH
     Redfish Firmware Update Multipart  ${IMAGE_FILE_PATH}  bmc
