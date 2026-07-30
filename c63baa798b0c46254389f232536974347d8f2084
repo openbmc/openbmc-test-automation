@@ -16,6 +16,23 @@
       "message": "Looks good to me",
       "revId": "c63baa798b0c46254389f232536974347d8f2084",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f972f473_64cfefbf",
+        "filename": "lib/bmc_ssh_utils.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-07-30T11:19:18Z",
+      "side": 1,
+      "message": "This change is low risk for the current repository. The only thing worth flagging is the implementation/commit-message mismatch around None vs falsy values at if not ssh_port:. \n\nIf you want strict signature semantics, that line should use is None; otherwise the repository-wide impact remains non-breaking.\n\nif not ssh_port: treats all falsy values as “missing”:\n```\nNone\n\"\"\n0\nFalse\n```\nif ssh_port is None: treats only None as “missing”.\nSo if the commit says “When ssh_port is None, use ${SSH_PORT}”, then the precise implementation should be:\n\n```\nif ssh_port is None:\n    ssh_port \u003d BuiltIn().get_variable_value(\"${SSH_PORT}\", default\u003d\"22\")\n```",
+      "revId": "c63baa798b0c46254389f232536974347d8f2084",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
