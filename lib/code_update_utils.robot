@@ -211,44 +211,124 @@ Redfish Verify Host Version
 
 
 Upload And Activate Image
-    [Documentation]  Upload an image to the BMC and activate it with REST.
+    [Documentation]  Upload a firmware image tarball to the BMC via REST and
+    ...  activate it.  REST reads use timeout=30s throughout to tolerate
+    ...  bmcweb stalls during flash writes.  If any REST read fails, the
+    ...  keyword falls back to a direct busctl SSH call to retrieve the
+    ...  Activation or RequestedActivation property.  The RequestedActivation
+    ...  write is attempted first via busctl; REST PUT is used only if
+    ...  busctl fails.  Priority verification retries for up to 2 minutes
+    ...  (30-second intervals) to allow the software manager time to
+    ...  propagate the priority after activation completes.
     [Arguments]  ${image_file_path}  ${wait}=${1}  ${skip_if_active}=false
 
     # Description of argument(s):
     # image_file_path     The path to the image tarball to upload and activate.
     # wait                Indicates that this keyword should wait for host or
-    #                     BMC activation is completed.
-    # skip_if_active      If set to true, will skip the code update if this
-    #                     image is already on the BMC.
+    #                     BMC activation to complete before returning.
+    # skip_if_active      If set to true, skip the update when the image is
+    #                     already active on the BMC and set its priority to 0.
 
     OperatingSystem.File Should Exist  ${image_file_path}
     ${image_version}=  Get Version Tar  ${image_file_path}
 
     ${image_data}=  OperatingSystem.Get Binary File  ${image_file_path}
 
-    Wait Until Keyword Succeeds  3 times  120 sec
-    ...   Upload Image To BMC  /upload/image  timeout=${90}  data=${image_data}
+    Log To Console  Host code upload started: ${image_file_path}
+    # Allow 180s per attempt (large PNOR images can be slow over the network);
+    # retry up to 3 times with 180s between attempts.
+    # NOTE: per-attempt upload timeout raised 90->180s and between-attempt wait
+    # raised 120->180s to accommodate slow PNOR image transfers over the network.
+    Wait Until Keyword Succeeds  3 times  180 sec
+    ...   Upload Image To BMC  /upload/image  timeout=${180}  data=${image_data}
+    Log To Console  Host code upload completed: ${image_file_path}
+
+    Log To Console  Host code verify image started: ${image_version}
     ${ret}  ${version_id}=  Verify Image Upload  ${image_version}
     Should Be True  ${ret}
+    Log To Console  Host code verify image completed: ${version_id}
 
     # Verify the image is 'READY' to be activated or if it's already active,
     # set priority to 0 and reboot the BMC.
-    ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}
-    ${activation}=  Set Variable  ${software_state}[Activation]
+    # Select the correct D-Bus service for the image type being activated.
+    # Get Image Purpose reads the MANIFEST already uploaded to the BMC under
+    # IMAGE_UPLOAD_DIR_PATH (<version_id>/MANIFEST), not the local tarball.
+    # Host firmware objects are registered under Host.Updater;
+    # BMC firmware objects are registered under BMC.Updater.
+    ${image_purpose}=  Get Image Purpose  ${IMAGE_UPLOAD_DIR_PATH}${version_id}/MANIFEST
+    IF  '${image_purpose}' == '${VERSION_PURPOSE_HOST}'
+        VAR  ${_svc}  org.open_power.Software.Host.Updater
+    ELSE
+        VAR  ${_svc}  xyz.openbmc_project.Software.BMC.Updater
+    END
+    VAR  ${_obj}    ${SOFTWARE_VERSION_URI}${version_id}
+    VAR  ${_iface}  xyz.openbmc_project.Software.Activation
+    Open Connection And Log In
+
+    Log To Console  Host code activation state check started: ${version_id}
+    ${status}  ${software_state}=  Run Keyword And Ignore Error
+    ...  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}  timeout=${30}
+    IF  '${status}' == 'PASS'
+        VAR  ${activation}  ${software_state}[Activation]
+    ELSE
+        ${activation_cmd}=  Catenate
+        ...  busctl get-property  ${_svc}  ${_obj}
+        ...  ${_iface}  Activation | cut -d '"' -f 2
+        ${activation}  ${stderr}  ${rc}=  BMC Execute Command  ${activation_cmd}  ignore_err=${1}
+        Should Be Equal As Integers  ${rc}  ${0}
+        Should Be Empty  ${stderr}
+    END
 
     IF  '${skip_if_active}' == 'true' and '${activation}' == '${ACTIVE}'
+        Log To Console  Host code activation state check completed: ${activation}
         Set Host Software Property  ${SOFTWARE_VERSION_URI}${version_id}  Priority  ${0}
         RETURN
     END
 
-    Should Be Equal As Strings  ${software_state}[Activation]  ${READY}
+    Should Be Equal As Strings  ${activation}  ${READY}
+    Log To Console  Host code activation state check completed: ${activation}
 
     # Request the image to be activated.
+    Log To Console  Host code activation started: ${version_id}
     ${args}=  Create Dictionary  data=${REQUESTED_ACTIVE}
-    Write Attribute  ${SOFTWARE_VERSION_URI}${version_id}
-    ...  RequestedActivation  data=${args}
-    ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}
-    Should Be Equal As Strings  ${software_state}[RequestedActivation]
+    ${requested_activation_cmd}=  Catenate
+    ...  busctl set-property  ${_svc}  ${_obj}
+    ...  ${_iface}  RequestedActivation s  ${REQUESTED_ACTIVE}
+    # Run the busctl set-property exactly once via Run Keyword And Ignore Error;
+    # unpack the result rather than re-executing the command in the IF branch.
+    ${busctl_status}  ${busctl_result}=  Run Keyword And Ignore Error
+    ...  BMC Execute Command  ${requested_activation_cmd}  ignore_err=${1}
+    IF  '${busctl_status}' == 'PASS'
+        VAR  ${output}  ${busctl_result}[0]
+        VAR  ${stderr}  ${busctl_result}[1]
+        VAR  ${rc}      ${busctl_result}[2]
+        Should Be Equal As Integers  ${rc}  ${0}
+        Should Be Empty  ${stderr}
+        Log To Console  Host code activation request completed via busctl: ${version_id}
+    ELSE
+        ${uri}=  Add Trailing Slash  ${SOFTWARE_VERSION_URI}${version_id}
+        ${base_uri}=  Catenate  SEPARATOR=  ${DBUS_PREFIX}  ${uri}
+        ${resp}=  Openbmc Put Request  ${base_uri}attr/RequestedActivation
+        ...  timeout=${30}  data=${args}
+        Log To Console  Host code activation request response: status=${resp.status_code}
+        Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    END
+    Log To Console  Host code activation request completed: ${version_id}
+
+    ${status}  ${software_state}=  Run Keyword And Ignore Error
+    ...  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}  timeout=${30}
+    IF  '${status}' == 'PASS'
+        VAR  ${requested_activation}  ${software_state}[RequestedActivation]
+    ELSE
+        ${requested_activation_cmd}=  Catenate
+        ...  busctl get-property  ${_svc}  ${_obj}
+        ...  ${_iface}  RequestedActivation | cut -d '"' -f 2
+        ${requested_activation}  ${stderr}  ${rc}=  BMC Execute Command  ${requested_activation_cmd}  ignore_err=${1}
+        Should Be Equal As Integers  ${rc}  ${0}
+        Should Be Empty  ${stderr}
+    END
+    Log To Console  Host code requested activation state: ${requested_activation}
+    Should Be Equal As Strings  ${requested_activation}
     ...  ${REQUESTED_ACTIVE}
 
     # Does caller want to wait for activation to complete?
@@ -256,12 +336,26 @@ Upload And Activate Image
 
     # Verify code update was successful and Activation state is Active.
     Wait For Activation State Change  ${version_id}  ${ACTIVATING}
-    ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}
-    Should Be Equal As Strings  ${software_state}[Activation]  ${ACTIVE}
+    ${status}  ${software_state}=  Run Keyword And Ignore Error
+    ...  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}  timeout=${30}
+    IF  '${status}' == 'PASS'
+        VAR  ${activation}  ${software_state}[Activation]
+    ELSE
+        ${activation_cmd}=  Catenate
+        ...  busctl get-property  ${_svc}  ${_obj}
+        ...  ${_iface}  Activation | cut -d '"' -f 2
+        ${activation}  ${stderr}  ${rc}=  BMC Execute Command  ${activation_cmd}  ignore_err=${1}
+        Should Be Equal As Integers  ${rc}  ${0}
+        Should Be Empty  ${stderr}
+    END
+    Should Be Equal As Strings  ${activation}  ${ACTIVE}
+    Log To Console  Host code activation completed: ${version_id}
 
     # Uploaded and activated image should have priority set to 0. Due to timing
     # contention, it may take up to 10 seconds to complete updating priority.
-    Wait Until Keyword Succeeds  10 sec  5 sec
+    # Outer window (2 min) and retry interval (30 sec) match the Read Attribute
+    # timeout=30 set inside Check Software Object Attribute.
+    Wait Until Keyword Succeeds  2 min  30 sec
     ...  Check Software Object Attribute  ${version_id}  Priority  ${0}
 
     RETURN  ${version_id}
@@ -499,17 +593,64 @@ Get List Of Images
 
 
 Check Software Object Attribute
-    [Documentation]  Get the software property of a given object and verify.
+    [Documentation]  Read a software object attribute via REST and verify its
+    ...  value.  The REST read uses timeout=30s to tolerate bmcweb stalls.
+    ...  If the REST read fails, the attribute is retrieved directly via a
+    ...  busctl SSH call.  For the Priority attribute (D-Bus type byte, 'y'),
+    ...  busctl returns a plain integer string which is converted to an
+    ...  integer before comparison to avoid a Python 3 str==int mismatch.
+    ...  For string-typed attributes (Activation, RequestedActivation) the
+    ...  quoted value is extracted with cut.
     [Arguments]  ${image_object}  ${sw_attribute}  ${value}
 
     # Description of argument(s):
-    # image_object  Image software object name.
-    # sw_attribute  Software attribute name.
-    #               (e.g. "Activation", "Priority", "RequestedActivation" etc).
-    # value         Software attribute value to compare.
+    # image_object  Image software object name (the hash ID portion only,
+    #               e.g. "3022106e").
+    # sw_attribute  Software attribute name to read and verify.
+    #               (e.g. "Activation", "Priority", "RequestedActivation").
+    # value         Expected attribute value to compare against.
 
-    ${data}=  Read Attribute
-    ...  ${SOFTWARE_VERSION_URI}${image_object}  ${sw_attribute}
+    ${status}  ${data}=  Run Keyword And Ignore Error
+    ...  Read Attribute  ${SOFTWARE_VERSION_URI}${image_object}  ${sw_attribute}  timeout=${30}
+    IF  '${status}' != 'PASS'
+        Open Connection And Log In
+        # Try Host.Updater first; if it returns rc != 0, fall back to BMC.Updater.
+        # This mirrors the dual-service pattern in wait_for_activation_state_change
+        # and correctly handles both Host and BMC firmware image types.
+        VAR  ${_obj}  ${SOFTWARE_VERSION_URI}${image_object}
+        IF  '${sw_attribute}' == 'Priority'
+            VAR  ${dbus_iface}  xyz.openbmc_project.Software.RedundancyPriority
+            ${attribute_cmd}=  Catenate
+            ...  busctl get-property  org.open_power.Software.Host.Updater  ${_obj}
+            ...  ${dbus_iface}  ${sw_attribute} | awk '{print $2}'
+        ELSE
+            VAR  ${dbus_iface}  xyz.openbmc_project.Software.Activation
+            ${attribute_cmd}=  Catenate
+            ...  busctl get-property  org.open_power.Software.Host.Updater  ${_obj}
+            ...  ${dbus_iface}  ${sw_attribute} | cut -d '"' -f 2
+        END
+        ${data}  ${stderr}  ${rc}=  BMC Execute Command  ${attribute_cmd}  ignore_err=${1}
+        IF  ${rc} != ${0}
+            # Host.Updater did not own the object; retry with BMC.Updater.
+            IF  '${sw_attribute}' == 'Priority'
+                ${attribute_cmd}=  Catenate
+                ...  busctl get-property  xyz.openbmc_project.Software.BMC.Updater  ${_obj}
+                ...  ${dbus_iface}  ${sw_attribute} | awk '{print $2}'
+            ELSE
+                ${attribute_cmd}=  Catenate
+                ...  busctl get-property  xyz.openbmc_project.Software.BMC.Updater  ${_obj}
+                ...  ${dbus_iface}  ${sw_attribute} | cut -d '"' -f 2
+            END
+            ${data}  ${stderr}  ${rc}=  BMC Execute Command  ${attribute_cmd}  ignore_err=${1}
+        END
+        Should Be Equal As Integers  ${rc}  ${0}
+        Should Be Empty  ${stderr}
+        IF  '${sw_attribute}' == 'Priority'
+            # busctl returns a plain integer string (e.g. "0"); convert so the
+            # integer comparison below works correctly on the busctl fallback path.
+            ${data}=  Convert To Integer  ${data}
+        END
+    END
 
     Should Be True  ${data} == ${value}
     ...  msg=Given attribute value ${data} mismatch ${value}.
