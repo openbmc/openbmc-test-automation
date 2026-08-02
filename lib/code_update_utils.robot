@@ -211,43 +211,63 @@ Redfish Verify Host Version
 
 
 Upload And Activate Image
-    [Documentation]  Upload an image to the BMC and activate it with REST.
+    [Documentation]  Upload a firmware image tarball to the BMC via REST and
+    ...  activate it.  REST reads use timeout=30s throughout to tolerate
+    ...  bmcweb stalls during flash writes.  Priority verification retries
+    ...  for up to 2 minutes (30-second intervals) to allow the software
+    ...  manager time to propagate the priority after activation completes.
     [Arguments]  ${image_file_path}  ${wait}=${1}  ${skip_if_active}=false
 
     # Description of argument(s):
     # image_file_path     The path to the image tarball to upload and activate.
     # wait                Indicates that this keyword should wait for host or
-    #                     BMC activation is completed.
-    # skip_if_active      If set to true, will skip the code update if this
-    #                     image is already on the BMC.
+    #                     BMC activation to complete before returning.
+    # skip_if_active      If set to true, skip the update when the image is
+    #                     already active on the BMC and set its priority to 0.
 
     OperatingSystem.File Should Exist  ${image_file_path}
     ${image_version}=  Get Version Tar  ${image_file_path}
 
     ${image_data}=  OperatingSystem.Get Binary File  ${image_file_path}
 
-    Wait Until Keyword Succeeds  3 times  120 sec
-    ...   Upload Image To BMC  /upload/image  timeout=${90}  data=${image_data}
+    Log To Console  Host code upload started: ${image_file_path}
+    # Allow 180s per attempt (large PNOR images can be slow over the network);
+    # retry up to 3 times with 180s between attempts.
+    # NOTE: per-attempt upload timeout raised 90->180s and between-attempt wait
+    # raised 120->180s to accommodate slow PNOR image transfers over the network.
+    Wait Until Keyword Succeeds  3 times  180 sec
+    ...   Upload Image To BMC  /upload/image  timeout=${180}  data=${image_data}
+    Log To Console  Host code upload completed: ${image_file_path}
+
+    Log To Console  Host code verify image started: ${image_version}
     ${ret}  ${version_id}=  Verify Image Upload  ${image_version}
     Should Be True  ${ret}
+    Log To Console  Host code verify image completed: ${version_id}
 
     # Verify the image is 'READY' to be activated or if it's already active,
     # set priority to 0 and reboot the BMC.
-    ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}
+    Log To Console  Host code activation state check started: ${version_id}
+    ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}  timeout=${30}
     ${activation}=  Set Variable  ${software_state}[Activation]
 
     IF  '${skip_if_active}' == 'true' and '${activation}' == '${ACTIVE}'
+        Log To Console  Host code activation state check completed: ${activation}
         Set Host Software Property  ${SOFTWARE_VERSION_URI}${version_id}  Priority  ${0}
         RETURN
     END
 
-    Should Be Equal As Strings  ${software_state}[Activation]  ${READY}
+    Should Be Equal As Strings  ${activation}  ${READY}
+    Log To Console  Host code activation state check completed: ${activation}
 
     # Request the image to be activated.
+    Log To Console  Host code activation started: ${version_id}
     ${args}=  Create Dictionary  data=${REQUESTED_ACTIVE}
     Write Attribute  ${SOFTWARE_VERSION_URI}${version_id}
     ...  RequestedActivation  data=${args}
-    ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}
+    Log To Console  Host code activation request completed: ${version_id}
+
+    ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}  timeout=${30}
+    Log To Console  Host code requested activation state: ${software_state}[RequestedActivation]
     Should Be Equal As Strings  ${software_state}[RequestedActivation]
     ...  ${REQUESTED_ACTIVE}
 
@@ -256,12 +276,15 @@ Upload And Activate Image
 
     # Verify code update was successful and Activation state is Active.
     Wait For Activation State Change  ${version_id}  ${ACTIVATING}
-    ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}
+    ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}  timeout=${30}
     Should Be Equal As Strings  ${software_state}[Activation]  ${ACTIVE}
+    Log To Console  Host code activation completed: ${version_id}
 
     # Uploaded and activated image should have priority set to 0. Due to timing
     # contention, it may take up to 10 seconds to complete updating priority.
-    Wait Until Keyword Succeeds  10 sec  5 sec
+    # Outer window (2 min) and retry interval (30 sec) match the Read Attribute
+    # timeout=30 set inside Check Software Object Attribute.
+    Wait Until Keyword Succeeds  2 min  30 sec
     ...  Check Software Object Attribute  ${version_id}  Priority  ${0}
 
     RETURN  ${version_id}
@@ -509,7 +532,7 @@ Check Software Object Attribute
     # value         Software attribute value to compare.
 
     ${data}=  Read Attribute
-    ...  ${SOFTWARE_VERSION_URI}${image_object}  ${sw_attribute}
+    ...  ${SOFTWARE_VERSION_URI}${image_object}  ${sw_attribute}  timeout=${30}
 
     Should Be True  ${data} == ${value}
     ...  msg=Given attribute value ${data} mismatch ${value}.
