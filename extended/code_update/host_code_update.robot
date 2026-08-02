@@ -57,6 +57,11 @@ REST Host Code Update
     Upload And Activate Image  ${IMAGE_FILE_PATH}
     ...  skip_if_active=${SKIP_UPDATE_IF_ACTIVE}
     OBMC Reboot (off)
+    # Re-establish the REST session after the BMC reboot.  The reboot
+    # invalidates the previous auth token, so teardown keywords that call
+    # OpenBMC REST endpoints (e.g. Check Error And Collect FFDC) would
+    # receive 401 Unauthorized and fail with a JSONDecodeError.
+    Initialize OpenBMC  force_login=${True}
 
 
 Post Update Boot To OS
