@@ -207,7 +207,13 @@ BMC Web Login Request
 
 
 Post Login Request
-    [Documentation]  Do REST login request.
+    [Documentation]  Perform the legacy REST /login POST and establish the
+    ...  'openbmc' session.  The initial POST uses max_retries=3 to handle
+    ...  transient network hiccups on login.  After a successful login the
+    ...  session is immediately recreated with max_retries=0 so that
+    ...  subsequent GET/PUT/DELETE requests time out and propagate the error
+    ...  to the caller's own retry loop rather than being silently retried
+    ...  by the HTTP library, which would multiply the effective timeout.
     [Arguments]  ${timeout}=20  ${quiet}=${1}
     ...  ${rest_username}=${OPENBMC_USERNAME}
     ...  ${rest_password}=${OPENBMC_PASSWORD}
@@ -218,6 +224,11 @@ Post Login Request
     # rest_username  The REST username.
     # rest_password  The REST password.
 
+    # max_retries=3 is intentional here for the login POST only.
+    # After login succeeds the session is recreated with max_retries=0 so that
+    # subsequent GET requests are not silently retried on read timeouts —
+    # those retries multiply the per-request timeout and prevent the caller's
+    # own retry loop from running.
     Create Session  openbmc  ${AUTH_URI}  timeout=${timeout}  max_retries=3
 
     ${headers}=  Create Dictionary  Content-Type=application/json
@@ -228,6 +239,10 @@ Post Login Request
 
     Should Be Equal  ${status}  PASS  msg=${resp}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
+    # Reset the session without retries so GET/PUT/DELETE calls fail fast and
+    # let the caller decide whether to retry.
+    Create Session  openbmc  ${AUTH_URI}  timeout=${timeout}  max_retries=0
 
 
 Log Out OpenBMC
@@ -282,7 +297,12 @@ Logging
 
 
 Read Attribute
-    [Documentation]  Retrieve attribute value from URI and return result.
+    [Documentation]  Retrieve a single D-Bus attribute value from the REST
+    ...  interface and return it.  The URI and attribute name, HTTP status
+    ...  code, and elapsed wall-clock time are logged to the console on
+    ...  every call to aid timeout diagnosis.  Callers that need to survive
+    ...  a REST failure should wrap this keyword with Run Keyword And Ignore
+    ...  Error and pass an explicit timeout (e.g. timeout=${30}).
     # Example result data for the attribute 'FieldModeEnabled' in
     # "/xyz/openbmc_project/software/attr/" :
     # 0
@@ -293,16 +313,22 @@ Read Attribute
     # uri               URI of the object that the attribute lives on
     #                   (e.g. '/xyz/openbmc_project/software/').
     # attr              Name of the attribute (e.g. 'FieldModeEnabled').
-    # timeout           Timeout for the REST call.
+    # timeout           Timeout in seconds for the REST call.  Callers
+    #                   polling during activation should pass timeout=${30}.
     # quiet             If enabled, turns off logging to console.
     # expected_value    If this argument is not empty, the retrieved value
-    #                   must match this value.
+    #                   must match this value or the keyword fails.
 
     # Make sure uri ends with slash.
     ${uri}=  Add Trailing Slash  ${uri}
 
+    Log To Console  Read Attribute: URI=${uri}attr/${attr} timeout=${timeout}
+    ${start_time}=  Get Current Date  result_format=epoch
     ${resp}=  OpenBMC Get Request  ${uri}attr/${attr}  timeout=${timeout}
     ...  quiet=${quiet}
+    ${end_time}=  Get Current Date  result_format=epoch
+    ${elapsed}=  Evaluate  round(${end_time} - ${start_time}, 2)
+    Log To Console  Read Attribute: status=${resp.status_code} elapsed=${elapsed}s
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     IF  '${expected_value}' != '${EMPTY}'
         Should Be Equal As Strings  ${expected_value}  ${resp.json()["data"]}
@@ -348,7 +374,12 @@ Write Attribute
     Should Be Equal  ${value}  ${expected_value}
 
 Read Properties
-    [Documentation]  Read data part of the URI object and return result.
+    [Documentation]  Read all properties from a REST URI and return the data
+    ...  payload as a dictionary or list.  The URI, HTTP status code, and
+    ...  elapsed wall-clock time are logged to the console on every call to
+    ...  aid timeout diagnosis.  Callers that need to survive a REST failure
+    ...  should wrap this keyword with Run Keyword And Ignore Error and pass
+    ...  an explicit timeout (e.g. timeout=${30}).
     # Example result data:
     # [u'/xyz/openbmc_project/software/cf7bf9d5',
     #  u'/xyz/openbmc_project/software/5ecb8b2c',
@@ -359,10 +390,16 @@ Read Properties
     # Description of argument(s):
     # uri               URI of the object
     #                   (e.g. '/xyz/openbmc_project/software/').
-    # timeout           Timeout for the REST call.
+    # timeout           Timeout in seconds for the REST call.  Callers
+    #                   polling during activation should pass timeout=${30}.
     # quiet             If enabled, turns off logging to console.
 
+    Log To Console  Read Properties: URI=${uri} timeout=${timeout}
+    ${start_time}=  Get Current Date  result_format=epoch
     ${resp}=  OpenBMC Get Request  ${uri}  timeout=${timeout}  quiet=${quiet}
+    ${end_time}=  Get Current Date  result_format=epoch
+    ${elapsed}=  Evaluate  round(${end_time} - ${start_time}, 2)
+    Log To Console  Read Properties: status=${resp.status_code} elapsed=${elapsed}s
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
     RETURN  ${resp.json()["data"]}
