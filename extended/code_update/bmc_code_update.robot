@@ -92,6 +92,9 @@ REST BMC Code Update
     Upload And Activate Image  ${IMAGE_FILE_PATH}
     ...  skip_if_active=${SKIP_UPDATE_IF_ACTIVE}
     OBMC Reboot (off)
+    # Re-establish the REST session invalidated by the BMC reboot before
+    # making any REST calls (Verify Running BMC Image uses OpenBMC Get Request).
+    Initialize OpenBMC  force_login=${True}
     Verify Running BMC Image  ${IMAGE_FILE_PATH}
     BMC Execute Command  cd /etc ; cat host.conf hosts hostname  print_out=1
 
@@ -223,6 +226,8 @@ Test Certificate Persistency After BMC Code Update
     Upload And Activate Image  ${IMAGE_FILE_PATH}
     ...  skip_if_active=${SKIP_UPDATE_IF_ACTIVE}
     OBMC Reboot (off)
+    # Re-establish the REST session invalidated by the BMC reboot.
+    Initialize OpenBMC  force_login=${True}
     Verify Running BMC Image  ${IMAGE_FILE_PATH}
 
     Redfish.Login
