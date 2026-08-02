@@ -123,6 +123,11 @@ def wait_for_activation_state_change(version_id, initial_state):
     Wait for the current activation state of ${version_id} to
     change from the state provided by the calling function.
 
+    REST reads use a 30-second socket timeout.  Consecutive read failures
+    are tolerated up to read_fail_threshold (3) before the test is failed.
+    The polling loop runs up to 60 iterations with a 10-second sleep between
+    each successful read and a 30-second sleep after every failed read.
+
     Description of argument(s):
     version_id                      The version ID whose state change we are
                                     waiting for.
@@ -130,31 +135,48 @@ def wait_for_activation_state_change(version_id, initial_state):
     """
 
     keyword.run_key_u("Open Connection And Log In")
+    BuiltIn().log_to_console(
+        f"wait_for_activation_state_change start: version_id={version_id} initial_state={initial_state}"
+    )
     retry = 0
     num_read_errors = 0
-    read_fail_threshold = 1
+    current_state = initial_state
+    read_fail_threshold = 3
     while retry < 60:
         status, software_state = keyword.run_key(
-            "Read Properties  " + var.SOFTWARE_VERSION_URI + str(version_id),
+            "Read Properties  "
+            + var.SOFTWARE_VERSION_URI
+            + str(version_id)
+            + "  timeout=30",
             ignore=1,
         )
         if status == "FAIL":
+            BuiltIn().log_to_console(
+                f"wait_for_activation_state_change REST read failed (error {num_read_errors + 1}/{read_fail_threshold}): {version_id}"
+            )
             num_read_errors += 1
             if num_read_errors > read_fail_threshold:
                 message = "Read errors exceeds threshold:\n " + gp.sprint_vars(
                     num_read_errors, read_fail_threshold
                 )
                 BuiltIn().fail(message)
-            time.sleep(10)
+            time.sleep(30)
             continue
+        else:
+            current_state = (software_state)["Activation"]
 
-        current_state = (software_state)["Activation"]
         if initial_state == current_state:
             time.sleep(10)
             retry += 1
             num_read_errors = 0
         else:
+            BuiltIn().log_to_console(
+                f"wait_for_activation_state_change end: version_id={version_id} current_state={current_state}"
+            )
             return
+    BuiltIn().log_to_console(
+        f"wait_for_activation_state_change end: version_id={version_id} current_state={current_state}"
+    )
     return
 
 
@@ -222,17 +244,25 @@ def get_image_version(file_path):
 
 def get_image_purpose(file_path):
     r"""
-    Read the file for a purpose object.
+    Read the purpose field from an image MANIFEST file on the BMC.
+
+    Executes 'cat <file_path> | grep "purpose="' over SSH and returns the
+    value portion of the matching line.  Progress is logged to the console
+    at entry and exit to aid timing analysis.
 
     Description of argument(s):
-    file_path                       The path to a file that holds the image
-                                    purpose.
+    file_path                       The path to the MANIFEST file that holds
+                                    the image purpose
+                                    (e.g. "/tmp/images/<id>/MANIFEST").
     """
 
+    BuiltIn().log_to_console(f"get_image_purpose start: {file_path}")
     stdout, stderr, rc = bsu.bmc_execute_command(
         "cat " + file_path + ' | grep "purpose="', ignore_err=1
     )
-    return stdout.split("=")[-1]
+    purpose = stdout.split("=")[-1]
+    BuiltIn().log_to_console(f"get_image_purpose end: {purpose}")
+    return purpose
 
 
 def get_image_path(image_version):
@@ -264,17 +294,23 @@ def get_image_path(image_version):
 
 def verify_image_upload(image_version, timeout=3):
     r"""
-    Verify the image was uploaded correctly and that it created
-    a valid d-bus object. If the first check for the image
-    fails, try again until we reach the timeout.
+    Verify the image was uploaded correctly and that it created a valid
+    d-bus object with an Activation state of READY, ACTIVE, or INVALID.
+
+    The check is attempted up to (timeout * 2) times with a 30-second sleep
+    between iterations.  On each iteration the Activation attribute is read
+    via REST (timeout=30s, errors ignored).  If the REST read fails the loop
+    sleeps 30s and retries.
 
     Description of argument(s):
-    image_version                   The version from the image's manifest file
-                                    (e.g. "v2.2-253-g00050f1").
-    timeout                         How long, in minutes, to keep trying to
-                                    find the image on the BMC. Default is 3 minutes.
+    image_version                   The version string from the image's
+                                    MANIFEST file (e.g. "v2.2-253-g00050f1").
+    timeout                         How long, in minutes, to keep retrying.
+                                    Each minute covers 2 iterations at 30s
+                                    sleep.  Default is 3 minutes (6 attempts).
     """
 
+    BuiltIn().log_to_console(f"verify_image_upload start: {image_version}")
     image_path = get_image_path(image_version)
     image_version_id = image_path.split("/")[-2]
 
@@ -284,27 +320,45 @@ def verify_image_upload(image_version, timeout=3):
         image_purpose == var.VERSION_PURPOSE_BMC
         or image_purpose == var.VERSION_PURPOSE_HOST
     ):
+        # D-Bus object path matches the REST URI for phosphor-version-software-manager.
         uri = var.SOFTWARE_VERSION_URI + image_version_id
         ret_values = ""
-        for itr in range(timeout * 2):
+        for _ in range(timeout * 2):
             status, ret_values = keyword.run_key(
-                "Read Attribute  " + uri + "  Activation"
+                "Read Attribute  " + uri + "  Activation  timeout=30",
+                ignore=1,
             )
+
+            if status != "PASS":
+                BuiltIn().log_to_console(
+                    f"verify_image_upload REST read failed, retrying: {image_version_id}"
+                )
+                time.sleep(30)
+                continue
 
             if (
                 (ret_values == var.READY)
                 or (ret_values == var.INVALID)
                 or (ret_values == var.ACTIVE)
             ):
+                BuiltIn().log_to_console(
+                    f"verify_image_upload end: {image_version_id} activation={ret_values}"
+                )
                 return True, image_version_id
             else:
                 time.sleep(30)
 
         # If we exit the for loop, the timeout has been reached
         gp.print_var(ret_values)
+        BuiltIn().log_to_console(
+            f"verify_image_upload end: failed activation={ret_values}"
+        )
         return False, None
     else:
         gp.print_var(image_purpose)
+        BuiltIn().log_to_console(
+            f"verify_image_upload end: invalid purpose={image_purpose}"
+        )
         return False, None
 
 
