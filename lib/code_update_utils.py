@@ -130,31 +130,68 @@ def wait_for_activation_state_change(version_id, initial_state):
     """
 
     keyword.run_key_u("Open Connection And Log In")
+    BuiltIn().log_to_console(
+        f"wait_for_activation_state_change start: version_id={version_id} initial_state={initial_state}"
+    )
     retry = 0
     num_read_errors = 0
-    read_fail_threshold = 1
+    current_state = initial_state
+    read_fail_threshold = 3
     while retry < 60:
         status, software_state = keyword.run_key(
-            "Read Properties  " + var.SOFTWARE_VERSION_URI + str(version_id),
+            "Read Properties  "
+            + var.SOFTWARE_VERSION_URI
+            + str(version_id)
+            + "  timeout=30",
             ignore=1,
         )
         if status == "FAIL":
-            num_read_errors += 1
-            if num_read_errors > read_fail_threshold:
-                message = "Read errors exceeds threshold:\n " + gp.sprint_vars(
-                    num_read_errors, read_fail_threshold
+            BuiltIn().log_to_console(
+                f"wait_for_activation_state_change REST read failed, falling back to busctl: {version_id}"
+            )
+            obj_path = var.SOFTWARE_VERSION_URI + str(version_id)
+            activation = ""
+            for service in (
+                "org.open_power.Software.Host.Updater",
+                "xyz.openbmc_project.Software.BMC.Updater",
+            ):
+                activation, stderr, rc = bsu.bmc_execute_command(
+                    "busctl get-property "
+                    + service
+                    + " "
+                    + obj_path
+                    + " xyz.openbmc_project.Software.Activation Activation"
+                    + " | cut -d '\"' -f 2",
+                    ignore_err=1,
                 )
-                BuiltIn().fail(message)
-            time.sleep(10)
-            continue
+                if rc == 0 and stderr == "":
+                    break
+            if rc == 0 and stderr == "":
+                current_state = activation.strip()
+            else:
+                num_read_errors += 1
+                if num_read_errors > read_fail_threshold:
+                    message = "Read errors exceeds threshold:\n " + gp.sprint_vars(
+                        num_read_errors, read_fail_threshold
+                    )
+                    BuiltIn().fail(message)
+                time.sleep(30)
+                continue
+        else:
+            current_state = (software_state)["Activation"]
 
-        current_state = (software_state)["Activation"]
         if initial_state == current_state:
             time.sleep(10)
             retry += 1
             num_read_errors = 0
         else:
+            BuiltIn().log_to_console(
+                f"wait_for_activation_state_change end: version_id={version_id} current_state={current_state}"
+            )
             return
+    BuiltIn().log_to_console(
+        f"wait_for_activation_state_change end: version_id={version_id} current_state={current_state}"
+    )
     return
 
 
@@ -229,10 +266,13 @@ def get_image_purpose(file_path):
                                     purpose.
     """
 
+    BuiltIn().log_to_console(f"get_image_purpose start: {file_path}")
     stdout, stderr, rc = bsu.bmc_execute_command(
         "cat " + file_path + ' | grep "purpose="', ignore_err=1
     )
-    return stdout.split("=")[-1]
+    purpose = stdout.split("=")[-1]
+    BuiltIn().log_to_console(f"get_image_purpose end: {purpose}")
+    return purpose
 
 
 def get_image_path(image_version):
@@ -275,6 +315,7 @@ def verify_image_upload(image_version, timeout=3):
                                     find the image on the BMC. Default is 3 minutes.
     """
 
+    BuiltIn().log_to_console(f"verify_image_upload start: {image_version}")
     image_path = get_image_path(image_version)
     image_version_id = image_path.split("/")[-2]
 
@@ -288,23 +329,55 @@ def verify_image_upload(image_version, timeout=3):
         ret_values = ""
         for itr in range(timeout * 2):
             status, ret_values = keyword.run_key(
-                "Read Attribute  " + uri + "  Activation"
+                "Read Attribute  " + uri + "  Activation  timeout=30",
+                ignore=1,
             )
+
+            if status != "PASS":
+                BuiltIn().log_to_console(
+                    f"verify_image_upload REST read failed, falling back to busctl: {image_version_id}"
+                )
+                if image_purpose == var.VERSION_PURPOSE_HOST:
+                    busctl_service = "org.open_power.Software.Host.Updater"
+                else:
+                    busctl_service = "xyz.openbmc_project.Software.BMC.Updater"
+                ret_values, stderr, rc = bsu.bmc_execute_command(
+                    "busctl get-property "
+                    + busctl_service
+                    + " "
+                    + uri
+                    + " xyz.openbmc_project.Software.Activation Activation"
+                    + " | cut -d '\"' -f 2",
+                    ignore_err=1,
+                )
+                if rc != 0 or stderr != "":
+                    time.sleep(30)
+                    continue
+                ret_values = ret_values.strip()
 
             if (
                 (ret_values == var.READY)
                 or (ret_values == var.INVALID)
                 or (ret_values == var.ACTIVE)
             ):
+                BuiltIn().log_to_console(
+                    f"verify_image_upload end: {image_version_id} activation={ret_values}"
+                )
                 return True, image_version_id
             else:
                 time.sleep(30)
 
         # If we exit the for loop, the timeout has been reached
         gp.print_var(ret_values)
+        BuiltIn().log_to_console(
+            f"verify_image_upload end: failed activation={ret_values}"
+        )
         return False, None
     else:
         gp.print_var(image_purpose)
+        BuiltIn().log_to_console(
+            f"verify_image_upload end: invalid purpose={image_purpose}"
+        )
         return False, None
 
 

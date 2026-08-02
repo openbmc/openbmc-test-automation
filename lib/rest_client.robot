@@ -218,6 +218,11 @@ Post Login Request
     # rest_username  The REST username.
     # rest_password  The REST password.
 
+    # max_retries=3 is intentional here for the login POST only.
+    # After login succeeds the session is recreated with max_retries=0 so that
+    # subsequent GET requests are not silently retried on read timeouts —
+    # those retries multiply the per-request timeout and prevent the caller's
+    # own retry loop from running.
     Create Session  openbmc  ${AUTH_URI}  timeout=${timeout}  max_retries=3
 
     ${headers}=  Create Dictionary  Content-Type=application/json
@@ -228,6 +233,10 @@ Post Login Request
 
     Should Be Equal  ${status}  PASS  msg=${resp}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
+    # Reset the session without retries so GET/PUT/DELETE calls fail fast and
+    # let the caller decide whether to retry.
+    Create Session  openbmc  ${AUTH_URI}  timeout=${timeout}  max_retries=0
 
 
 Log Out OpenBMC
@@ -301,8 +310,13 @@ Read Attribute
     # Make sure uri ends with slash.
     ${uri}=  Add Trailing Slash  ${uri}
 
+    Log To Console  Read Attribute: URI=${uri}attr/${attr} timeout=${timeout}
+    ${start_time}=  Get Current Date  result_format=epoch
     ${resp}=  OpenBMC Get Request  ${uri}attr/${attr}  timeout=${timeout}
     ...  quiet=${quiet}
+    ${end_time}=  Get Current Date  result_format=epoch
+    ${elapsed}=  Evaluate  round(${end_time} - ${start_time}, 2)
+    Log To Console  Read Attribute: status=${resp.status_code} elapsed=${elapsed}s
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     IF  '${expected_value}' != '${EMPTY}'
         Should Be Equal As Strings  ${expected_value}  ${resp.json()["data"]}
@@ -362,7 +376,12 @@ Read Properties
     # timeout           Timeout for the REST call.
     # quiet             If enabled, turns off logging to console.
 
+    Log To Console  Read Properties: URI=${uri} timeout=${timeout}
+    ${start_time}=  Get Current Date  result_format=epoch
     ${resp}=  OpenBMC Get Request  ${uri}  timeout=${timeout}  quiet=${quiet}
+    ${end_time}=  Get Current Date  result_format=epoch
+    ${elapsed}=  Evaluate  round(${end_time} - ${start_time}, 2)
+    Log To Console  Read Properties: status=${resp.status_code} elapsed=${elapsed}s
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
     RETURN  ${resp.json()["data"]}
