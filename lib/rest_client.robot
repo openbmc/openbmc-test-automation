@@ -2,6 +2,7 @@
 Documentation     Generic REST client keywords collection.
 
 Library           Collections
+Library           DateTime
 Library           OperatingSystem
 Library           String
 Library           RequestsLibrary
@@ -53,9 +54,19 @@ OpenBMC Get Request
     IF  '${quiet}' == '${0}'
         Log Request  method=Get  base_uri=${base_uri}  args=&{kwargs}
     END
-    ${resp}=  GET On Session  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}  expected_status=any
+    # If the session alias was in memory but the BMC-side session had expired,
+    # GET On Session raises "Non-existing index or alias 'openbmc'".  Catch it,
+    # force a fresh login, and retry once so callers (including FFDC) are
+    # not blocked by a stale session after a long operation (e.g. image upload).
+    ${status}  ${resp}=  Run Keyword And Ignore Error
+    ...  GET On Session  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}  expected_status=any
+    IF  '${status}' != 'PASS'
+        Initialize OpenBMC  ${timeout}  quiet=${quiet}  force_login=${True}
+        ${headers}=  Create Dictionary  X-Auth-Token=${XAUTH_TOKEN}  Accept=application/json
+        Set To Dictionary  ${kwargs}  headers  ${headers}
+        ${resp}=  GET On Session  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}  expected_status=any
+    END
     IF  '${quiet}' == '${0}'  Log Response  ${resp}
-    Delete All Sessions
     RETURN    ${resp}
 
 OpenBMC Post Request
@@ -84,7 +95,6 @@ OpenBMC Post Request
     END
     ${ret}=  POST On Session  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
     IF  '${quiet}' == '${0}'  Log Response  ${ret}
-    Delete All Sessions
     RETURN    ${ret}
 
 OpenBMC Put Request
@@ -107,7 +117,6 @@ OpenBMC Put Request
     Log Request  method=Put  base_uri=${base_uri}  args=&{kwargs}
     ${resp}=  PUT On Session  openbmc  ${base_uri}  json=${kwargs["data"]}  headers=${headers}
     Log Response    ${resp}
-    Delete All Sessions
     RETURN    ${resp}
 
 OpenBMC Delete Request
@@ -135,20 +144,37 @@ OpenBMC Delete Request
     END
     ${ret}=  DELETE On Session  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
     IF  '${quiet}' == '${0}'  Log Response    ${ret}
-    Delete All Sessions
     RETURN    ${ret}
 
 Initialize OpenBMC
     [Documentation]  Establish auth token and session alias for OpenBMC operations.
+    ...  Skips re-login when a valid session already exists (XAUTH_TOKEN is set
+    ...  and the session alias is present) to avoid redundant login round-trips
+    ...  on every REST call.  Pass force_login=${True} to override and re-login
+    ...  unconditionally (e.g. after a session expiry or 401 response).
     [Arguments]  ${timeout}=20  ${quiet}=${1}
     ...  ${rest_username}=${OPENBMC_USERNAME}
     ...  ${rest_password}=${OPENBMC_PASSWORD}
+    ...  ${force_login}=${False}
 
     # Description of argument(s):
     # timeout        REST login attempt time out.
     # quiet          Suppress console log if set.
     # rest_username  The REST username.
     # rest_password  The REST password.
+    # force_login    Re-authenticate even when a session already exists.
+
+    # Skip the login waterfall when we already have an authenticated session.
+    # This avoids two ECONNREFUSED round-trips to dead bmcweb on every GET/PUT
+    # on legacy REST-only BMCs (e.g. Witherspoon with no bmcweb running).
+    # We also check that the session alias still exists: callers that call
+    # Delete All Sessions (e.g. to switch users) will have an empty alias
+    # even though XAUTH_TOKEN is still set from the previous login, so we
+    # must re-login in that case.
+    ${_session_alive}=  Run Keyword And Return Status  Session Exists  openbmc
+    IF  '${XAUTH_TOKEN}' != '${EMPTY}' and ${_session_alive} and not ${force_login}
+        RETURN
+    END
 
     # Always ensure 'openbmc' alias exists (some callers assume it).
     Create Session  openbmc  ${AUTH_URI}  timeout=${timeout}
@@ -207,7 +233,10 @@ BMC Web Login Request
 
 
 Post Login Request
-    [Documentation]  Do REST login request.
+    [Documentation]  Perform the legacy REST /login POST and establish the
+    ...  'openbmc' session.  Uses max_retries=0 so that subsequent
+    ...  GET/PUT/DELETE requests fail fast and let the caller's retry loop
+    ...  run rather than being silently retried by the HTTP library.
     [Arguments]  ${timeout}=20  ${quiet}=${1}
     ...  ${rest_username}=${OPENBMC_USERNAME}
     ...  ${rest_password}=${OPENBMC_PASSWORD}
@@ -218,7 +247,10 @@ Post Login Request
     # rest_username  The REST username.
     # rest_password  The REST password.
 
-    Create Session  openbmc  ${AUTH_URI}  timeout=${timeout}  max_retries=3
+    # max_retries=0: the caller (Wait Until Keyword Succeeds in Initialize
+    # OpenBMC) provides the retry loop, so the HTTP library must not silently
+    # swallow failures and retry internally — that would multiply timeouts.
+    Create Session  openbmc  ${AUTH_URI}  timeout=${timeout}  max_retries=0
 
     ${headers}=  Create Dictionary  Content-Type=application/json
     @{credentials}=  Create List  ${rest_username}  ${rest_password}
@@ -228,6 +260,12 @@ Post Login Request
 
     Should Be Equal  ${status}  PASS  msg=${resp}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
+    # Legacy REST /login does not return a token in the response body;
+    # authentication is carried by the session cookie.  Set a non-empty
+    # sentinel so the Initialize OpenBMC guard can detect that login has
+    # already succeeded and skip the login waterfall on subsequent calls.
+    Set Global Variable  ${XAUTH_TOKEN}  legacy
 
 
 Log Out OpenBMC
@@ -282,7 +320,12 @@ Logging
 
 
 Read Attribute
-    [Documentation]  Retrieve attribute value from URI and return result.
+    [Documentation]  Retrieve a single D-Bus attribute value from the REST
+    ...  interface and return it.  The URI and attribute name, HTTP status
+    ...  code, and elapsed wall-clock time are logged to the console on
+    ...  every call to aid timeout diagnosis.  Callers that need to survive
+    ...  a REST failure should wrap this keyword with Run Keyword And Ignore
+    ...  Error and pass an explicit timeout (e.g. timeout=${30}).
     # Example result data for the attribute 'FieldModeEnabled' in
     # "/xyz/openbmc_project/software/attr/" :
     # 0
@@ -293,16 +336,26 @@ Read Attribute
     # uri               URI of the object that the attribute lives on
     #                   (e.g. '/xyz/openbmc_project/software/').
     # attr              Name of the attribute (e.g. 'FieldModeEnabled').
-    # timeout           Timeout for the REST call.
+    # timeout           Timeout in seconds for the REST call.  Callers
+    #                   polling during activation should pass timeout=${30}.
     # quiet             If enabled, turns off logging to console.
     # expected_value    If this argument is not empty, the retrieved value
-    #                   must match this value.
+    #                   must match this value or the keyword fails.
 
     # Make sure uri ends with slash.
     ${uri}=  Add Trailing Slash  ${uri}
 
+    IF  not ${quiet}
+        Log To Console  Read Attribute: URI=${uri}attr/${attr} timeout=${timeout}
+    END
+    ${start_time}=  Get Current Date  result_format=epoch
     ${resp}=  OpenBMC Get Request  ${uri}attr/${attr}  timeout=${timeout}
     ...  quiet=${quiet}
+    ${end_time}=  Get Current Date  result_format=epoch
+    ${elapsed}=  Evaluate  round(${end_time} - ${start_time}, 2)
+    IF  not ${quiet}
+        Log To Console  Read Attribute: status=${resp.status_code} elapsed=${elapsed}s
+    END
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     IF  '${expected_value}' != '${EMPTY}'
         Should Be Equal As Strings  ${expected_value}  ${resp.json()["data"]}
@@ -348,7 +401,12 @@ Write Attribute
     Should Be Equal  ${value}  ${expected_value}
 
 Read Properties
-    [Documentation]  Read data part of the URI object and return result.
+    [Documentation]  Read all properties from a REST URI and return the data
+    ...  payload as a dictionary or list.  The URI, HTTP status code, and
+    ...  elapsed wall-clock time are logged to the console on every call to
+    ...  aid timeout diagnosis.  Callers that need to survive a REST failure
+    ...  should wrap this keyword with Run Keyword And Ignore Error and pass
+    ...  an explicit timeout (e.g. timeout=${30}).
     # Example result data:
     # [u'/xyz/openbmc_project/software/cf7bf9d5',
     #  u'/xyz/openbmc_project/software/5ecb8b2c',
@@ -359,10 +417,20 @@ Read Properties
     # Description of argument(s):
     # uri               URI of the object
     #                   (e.g. '/xyz/openbmc_project/software/').
-    # timeout           Timeout for the REST call.
+    # timeout           Timeout in seconds for the REST call.  Callers
+    #                   polling during activation should pass timeout=${30}.
     # quiet             If enabled, turns off logging to console.
 
+    IF  not ${quiet}
+        Log To Console  Read Properties: URI=${uri} timeout=${timeout}
+    END
+    ${start_time}=  Get Current Date  result_format=epoch
     ${resp}=  OpenBMC Get Request  ${uri}  timeout=${timeout}  quiet=${quiet}
+    ${end_time}=  Get Current Date  result_format=epoch
+    ${elapsed}=  Evaluate  round(${end_time} - ${start_time}, 2)
+    IF  not ${quiet}
+        Log To Console  Read Properties: status=${resp.status_code} elapsed=${elapsed}s
+    END
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
     RETURN  ${resp.json()["data"]}
