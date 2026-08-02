@@ -132,10 +132,13 @@ def wait_for_activation_state_change(version_id, initial_state):
     keyword.run_key_u("Open Connection And Log In")
     retry = 0
     num_read_errors = 0
-    read_fail_threshold = 1
+    read_fail_threshold = 3
     while retry < 60:
         status, software_state = keyword.run_key(
-            "Read Properties  " + var.SOFTWARE_VERSION_URI + str(version_id),
+            "Read Properties  "
+            + var.SOFTWARE_VERSION_URI
+            + str(version_id)
+            + "  timeout=30",
             ignore=1,
         )
         if status == "FAIL":
@@ -145,7 +148,7 @@ def wait_for_activation_state_change(version_id, initial_state):
                     num_read_errors, read_fail_threshold
                 )
                 BuiltIn().fail(message)
-            time.sleep(10)
+            time.sleep(30)
             continue
 
         current_state = (software_state)["Activation"]
@@ -288,8 +291,13 @@ def verify_image_upload(image_version, timeout=3):
         ret_values = ""
         for itr in range(timeout * 2):
             status, ret_values = keyword.run_key(
-                "Read Attribute  " + uri + "  Activation"
+                "Read Attribute  " + uri + "  Activation  timeout=30",
+                ignore=1,
             )
+
+            if status != "PASS":
+                time.sleep(30)
+                continue
 
             if (
                 (ret_values == var.READY)

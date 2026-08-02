@@ -234,6 +234,7 @@ Upload And Activate Image
     # Verify the image is 'READY' to be activated or if it's already active,
     # set priority to 0 and reboot the BMC.
     ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}
+    ...  timeout=${30}
     ${activation}=  Set Variable  ${software_state}[Activation]
 
     IF  '${skip_if_active}' == 'true' and '${activation}' == '${ACTIVE}'
@@ -248,6 +249,7 @@ Upload And Activate Image
     Write Attribute  ${SOFTWARE_VERSION_URI}${version_id}
     ...  RequestedActivation  data=${args}
     ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}
+    ...  timeout=${30}
     Should Be Equal As Strings  ${software_state}[RequestedActivation]
     ...  ${REQUESTED_ACTIVE}
 
@@ -257,11 +259,14 @@ Upload And Activate Image
     # Verify code update was successful and Activation state is Active.
     Wait For Activation State Change  ${version_id}  ${ACTIVATING}
     ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}
+    ...  timeout=${30}
     Should Be Equal As Strings  ${software_state}[Activation]  ${ACTIVE}
 
     # Uploaded and activated image should have priority set to 0. Due to timing
     # contention, it may take up to 10 seconds to complete updating priority.
-    Wait Until Keyword Succeeds  10 sec  5 sec
+    # Outer window (2 min) and retry interval (30 sec) match the Read Attribute
+    # timeout=30 set inside Check Software Object Attribute.
+    Wait Until Keyword Succeeds  2 min  30 sec
     ...  Check Software Object Attribute  ${version_id}  Priority  ${0}
 
     RETURN  ${version_id}
@@ -509,7 +514,7 @@ Check Software Object Attribute
     # value         Software attribute value to compare.
 
     ${data}=  Read Attribute
-    ...  ${SOFTWARE_VERSION_URI}${image_object}  ${sw_attribute}
+    ...  ${SOFTWARE_VERSION_URI}${image_object}  ${sw_attribute}  timeout=${30}
 
     Should Be True  ${data} == ${value}
     ...  msg=Given attribute value ${data} mismatch ${value}.
