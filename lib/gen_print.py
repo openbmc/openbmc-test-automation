@@ -1394,7 +1394,10 @@ def sprint_func_line(stack_frame, style=None, max_width=160):
             ):
                 if len(arg_value) == 0:
                     continue
-                args_list.append(repr(", ".join(arg_value)))
+                # Coerce elements to str: *args may hold non-str items
+                # (e.g. bytes), and str.join() raises TypeError on a
+                # bytes sequence.
+                args_list.append(repr(", ".join(map(str, arg_value))))
             elif (
                 style == func_line_style_short
                 and arg_name == "kwargs"
