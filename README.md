@@ -27,7 +27,7 @@
 - Remote Logging via Rsyslog
 - LDAP (Lightweight Directory Access Protocol)
 - Certificate
-- Local User Management(Redfish/IPMI)
+- Local User Management (Redfish/IPMI)
 - DateTime
 - Event Logging
 - PLDM (Platform Level Data Model) via pldmtool
