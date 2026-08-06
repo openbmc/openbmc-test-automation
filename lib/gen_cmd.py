@@ -382,6 +382,33 @@ def shell_cmd(
         if fork:
             return sub_proc
 
+        # Initialise output buffers and return code before the communicate()
+        # call so they are always bound regardless of which path is taken.
+        #
+        # Background: when time_out is set, a SIGALRM handler
+        # (shell_cmd_timed_out) kills the subprocess process group when the
+        # alarm fires.  That causes communicate() to raise IOError (EINTR /
+        # BrokenPipeError — both are OSError subclasses, caught as IOError on
+        # Python 3 where IOError is OSError).  The except block then silences
+        # the exception, leaving stdout_buf, stderr_buf, and shell_rc unbound.
+        # Every code path below the try/except dereferences all three, so the
+        # next reference would crash with UnboundLocalError.
+        #
+        # Chosen sentinel values:
+        #   stdout_buf / stderr_buf = "" — same type (str) as communicate()
+        #     returns with universal_newlines=True; accurate because the
+        #     killed process produced no collectible output.
+        #   shell_rc = -1 — communicate() sets sub_proc.returncode as a side
+        #     effect; if it is interrupted, returncode stays None.  Returning
+        #     None to callers that check "rc == 0" is safe but surprising.
+        #     -1 is unambiguous: the command did not complete normally.
+        #     The normal (non-timeout) path overwrites shell_rc immediately
+        #     after communicate() via sub_proc.returncode, so this default
+        #     is only visible when a timeout actually fires.
+        stdout_buf = ""
+        stderr_buf = ""
+        shell_rc = -1
+
         if time_out:
             command_timed_out = False
             # Designate a SIGALRM handling function and set alarm.
@@ -402,7 +429,15 @@ def shell_cmd(
             if return_stderr:
                 func_out_buf += stderr_buf
             func_out_buf += stdout_buf
-        shell_rc = sub_proc.returncode
+        # Overwrite the -1 sentinel with the real exit status.  When
+        # communicate() was interrupted (timeout path), returncode is None
+        # because the Popen object never got to record it; the -1 sentinel
+        # set above is retained in that case.
+        shell_rc = (
+            sub_proc.returncode
+            if sub_proc.returncode is not None
+            else shell_rc
+        )
         if shell_rc in valid_rcs:
             # Check output for text indicating there is an error.
             if error_regexes and re.match("|".join(error_regexes), stdout_buf):
