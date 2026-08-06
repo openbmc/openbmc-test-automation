@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65fb0ae7_d380930e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-08-06T07:09:25Z",
+      "side": 1,
+      "message": "The fix safely wraps a single str.join() call with map(str, ...) and is a no-op for all-str callers and a crash-preventer for non-str *args . Good fix and I think with zero risk of regression.",
+      "revId": "7facc81a05debc63a98af8e63006dc7eeefac6d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
