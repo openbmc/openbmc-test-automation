@@ -1,0 +1,22 @@
+{
+  "comments": [
+    {
+      "robotId": "code-review-ai-issue-1",
+      "robotRunId": "review-1",
+      "key": {
+        "uuid": "fa876564_2c606701",
+        "filename": "gui/gui_test/operations_menu/test_kvm_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-08-07T15:29:10Z",
+      "side": 1,
+      "message": "**Issue #1 (Medium Severity — SHOULD FIX)**: `Create KVM Session` keyword does not close the browser it opens\n\n**Issue**: The `[Documentation]` explicitly states \"Close the secondary browser session after validation\", yet the keyword body contains no `Close Browser` call. In `Verify KVM Multiple Sessions` this keyword is called four times, leaving four extra browser instances open throughout the test. The teardown `Close All Browsers` recovers, but the accumulation of open browsers may cause resource pressure.\n\n**Fix**:\n```robot\n    Wait Until Element Is Visible  ${status}  timeout\u003d${element_wait_timeout}\n    Page Should Not Contain  Error\n    Close Browser\n```\n\n**Why**: The docstring documents the intended behaviour; the implementation must match it.",
+      "revId": "281341d210657bb203152e6ffb574237277aee20",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
