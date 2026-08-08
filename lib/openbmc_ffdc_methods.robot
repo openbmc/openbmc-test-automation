@@ -5,7 +5,6 @@ Documentation      Methods to execute commands on BMC and collect
 Library                Collections
 Library                OperatingSystem
 Library                String
-Library                SSHLibrary
 Resource               openbmc_ffdc_utils.robot
 Resource               rest_client.robot
 Resource               utils.robot
