@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "26beb870_d64877ad",
+        "filename": "gui/gui_test/operations_menu/test_kvm_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-08-10T07:00:13Z",
+      "side": 1,
+      "message": "remove the existing lines and add the keyword : Verify KVM Is Connected And Elements Are Visible. \nThis keyword covers the test case requirements.",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 60
+      },
+      "revId": "537df035825f88bc5bd48c540041e6345e19aada",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "66f36ddb_bfa08138",
         "filename": "gui/gui_test/operations_menu/test_kvm_sub_menu.robot",
         "patchSetId": 3
@@ -43,6 +66,23 @@
         "endLine": 82,
         "endChar": 6
       },
+      "revId": "537df035825f88bc5bd48c540041e6345e19aada",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3bd20f4_0d1b60a4",
+        "filename": "gui/gui_test/operations_menu/test_kvm_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-08-10T07:00:13Z",
+      "side": 1,
+      "message": "Add additional space between the test cases.",
       "revId": "537df035825f88bc5bd48c540041e6345e19aada",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
