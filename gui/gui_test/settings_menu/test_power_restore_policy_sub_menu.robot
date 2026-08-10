@@ -3,6 +3,7 @@
 Documentation  Test OpenBMC GUI "Power restore policy" sub-menu of "Settings" menu.
 
 Resource        ../../lib/gui_resource.robot
+Resource        ../../../lib/bios_attr_utils.robot
 
 Suite Setup      Suite Setup Execution
 Suite Teardown   Run Keywords  Set Server Operating Mode  Normal  AND  Close Browser

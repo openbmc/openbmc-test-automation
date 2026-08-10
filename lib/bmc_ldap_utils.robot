@@ -1,6 +1,8 @@
 *** Settings ***
 Documentation  This module provides general keywords for LDAP.
 
+Resource         bmc_redfish_resource.robot
+
 *** Keywords ***
 
 Get LDAP Configuration Using Redfish
