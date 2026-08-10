@@ -16,6 +16,23 @@
       "message": "We will merge once this commit is merged https://gerrit.openbmc.org/c/openbmc/bmcweb/+/90333\n\nTentative approval for now. Thanks",
       "revId": "4608b2d9fee7cafd462bbaa28e4a01463376a444",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3aca755c_a7252202",
+        "filename": "redfish/account_service/test_user_account.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-08-10T10:01:35Z",
+      "side": 1,
+      "message": "Duplicate-Import Warnings (1):\n  ⚠  [robot_dryrun]\n       Declared in  : account_service/test_user_account.robot  (line 9)\n       Triggered by : suite \u0027Test User Account\u0027\n       Library      : SSHLibrary\n       Detail       : Already imported with different arguments — this import is ignored.\n       💡 Fix       : Consolidate all \u0027SSHLibrary\u0027 imports to use the same arguments, or remove the duplicate from account_service/test_user_account.robot.\n\n\nDelete the redundant Library SSHLibrary line from redfish/account_service/test_user_account.robot.\n\nThe library continues to be available through connection_client.robot, so keywords like SSHLibrary.Open Connection and SSHLibrary.Login used throughout the suite are unaffected.\n\n\nThis is as part of the warning and circular import fix exercise for any new changes we make to make OpenBMC test code base better. Thanks \n\nPlease do the needfull",
+      "revId": "4608b2d9fee7cafd462bbaa28e4a01463376a444",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
