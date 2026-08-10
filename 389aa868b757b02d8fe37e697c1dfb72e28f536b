@@ -16,6 +16,23 @@
       "message": "Addressed review comments.",
       "revId": "389aa868b757b02d8fe37e697c1dfb72e28f536b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f81b4588_7d6eccd6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-08-10T04:29:33Z",
+      "side": 1,
+      "message": "Nanda/Ramya please check",
+      "revId": "389aa868b757b02d8fe37e697c1dfb72e28f536b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
