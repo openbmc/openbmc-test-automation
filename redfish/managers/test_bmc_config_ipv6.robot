@@ -13,6 +13,7 @@ Resource        ../../lib/external_intf/vmi_utils.robot
 Resource        ../../lib/bmc_date_and_time_utils.robot
 Resource        ../../lib/bmc_ldap_utils.robot
 Resource        ../../lib/certificate_utils.robot
+Resource        ../../lib/bmc_redfish_ipv6_resource.robot
 
 Library         Collections
 Library         OperatingSystem
@@ -550,17 +551,6 @@ Set SSH Protocol Using IPv6 Session And Verify
     ${resp}=  RedfishIPv6.Get  ${REDFISH_NW_PROTOCOL_URI}
     Should Be Equal As Strings  ${resp.dict['SSH']['ProtocolEnabled']}  ${enable_value}
     ...  msg=Protocol states are not matching.
-
-
-Connect BMC Using IPv6 Address
-    [Documentation]  Import bmc_redfish library with IPv6 configuration.
-    [Arguments]  ${OPENBMC_HOST_IPv6}
-
-    # Description of argument(s):
-    # OPENBMC_HOST_IPv6  IPv6 address of the BMC.
-
-    Import Library  ${CURDIR}/../../lib/bmc_redfish.py  https://[${OPENBMC_HOST_IPv6}]:${HTTPS_PORT}
-    ...             ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}  AS  RedfishIPv6
 
 
 Get IPv6 Address And Verify Connectivity
