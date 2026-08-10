@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b171579d_5bbbeb28",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-08-10T09:57:05Z",
+      "side": 1,
+      "message": "We will merge once this commit is merged https://gerrit.openbmc.org/c/openbmc/bmcweb/+/90333\n\nTentative approval for now. Thanks",
+      "revId": "4608b2d9fee7cafd462bbaa28e4a01463376a444",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
