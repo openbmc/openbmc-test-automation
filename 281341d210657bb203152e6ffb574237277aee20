@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "020faeba_a70d84aa",
+        "filename": "gui/gui_test/operations_menu/test_kvm_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-08-10T04:12:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "036dc043_ba4ccb34",
+      "revId": "281341d210657bb203152e6ffb574237277aee20",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "86eec550_7588c7ed",
@@ -48,6 +66,24 @@
       "writtenOn": "2026-08-07T15:53:16Z",
       "side": 1,
       "message": "The comment says \"sessions 2-4 connect successfully and session 5 is rejected\".  This is correct — but the loop variable name ${browser_count} reads as a count (1-indexed), whereas it is actually a loop index. \n\nA clearer variable name and/or an inline explanation would reduce reviewer confusion.\n\nRename the variable and clarify the comment:\n```\n# Session 1 is already established in setup.\n# Open sessions 2-4 (${session_num} 1-3 → Connected) and session 5 (${session_num} 4 → Disconnected/rejected).\nFOR  ${session_num}  IN RANGE  1  5\n    IF  ${session_num} \u003c 4\n        Create KVM Session  status\u003d${xpath_kvm_status_connected}\n    ELSE\n        Create KVM Session  status\u003d${xpath_kvm_status_disconnected}\n    END\nEND\n```\nImproves readability and reduces the chance of a future off-by-one mistake.",
+      "revId": "281341d210657bb203152e6ffb574237277aee20",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4173abd_da5eaa4b",
+        "filename": "gui/gui_test/operations_menu/test_kvm_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-08-10T04:12:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86eec550_7588c7ed",
       "revId": "281341d210657bb203152e6ffb574237277aee20",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -69,6 +105,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3e0de5b_87651edc",
+        "filename": "gui/gui_test/operations_menu/test_kvm_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-08-10T04:12:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9244eecf_a8d60156",
+      "revId": "281341d210657bb203152e6ffb574237277aee20",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e7769a2e_4474b84d",
@@ -82,6 +136,24 @@
       "writtenOn": "2026-08-07T15:53:16Z",
       "side": 1,
       "message": "Remove exta char at the end",
+      "revId": "281341d210657bb203152e6ffb574237277aee20",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39bf8b0a_521d038d",
+        "filename": "gui/gui_test/operations_menu/test_kvm_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-08-10T04:12:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7769a2e_4474b84d",
       "revId": "281341d210657bb203152e6ffb574237277aee20",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
