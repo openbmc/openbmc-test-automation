@@ -3,7 +3,7 @@ Documentation  This is a resource file containing user-defined keywords for new 
 
 Library        XvfbRobot
 Library        SeleniumLibrary
-Library        SSHLibrary  30 Seconds
+Library        SSHLibrary  timeout=30 seconds
 Resource       ../../lib/state_manager.robot
 Variables      ../data/gui_variables.py
 
