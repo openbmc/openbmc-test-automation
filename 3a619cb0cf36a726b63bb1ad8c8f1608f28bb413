@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9290368a_e560cd7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-08-10T11:03:30Z",
+      "side": 1,
+      "message": "address all comments from @nandakumarb@ami.com",
+      "revId": "3a619cb0cf36a726b63bb1ad8c8f1608f28bb413",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
