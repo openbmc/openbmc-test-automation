@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66f36ddb_bfa08138",
+        "filename": "gui/gui_test/operations_menu/test_kvm_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-08-10T06:14:35Z",
+      "side": 1,
+      "message": "Kindly remove \"[Setup] Test Setup Execution\", as the same process is already covered by the Suite Setup.\n\nAlso, the Suite Teardown already handles Close All Browsers; therefore, please remove \"[Teardown] Close Browser\".\n\nThis comment is applicable to all newly added test cases in the robot file.",
+      "range": {
+        "startLine": 73,
+        "startChar": 5,
+        "endLine": 73,
+        "endChar": 10
+      },
+      "revId": "537df035825f88bc5bd48c540041e6345e19aada",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed3b540b_8c289745",
+        "filename": "gui/gui_test/operations_menu/test_kvm_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-08-10T06:14:35Z",
+      "side": 1,
+      "message": "Suite Setup Execution and Test Setup Execution perform the same actions. Kindly remove Test Setup Execution from the file, as it is already covered by the Suite Setup.",
+      "range": {
+        "startLine": 455,
+        "startChar": 0,
+        "endLine": 455,
+        "endChar": 5
+      },
+      "revId": "537df035825f88bc5bd48c540041e6345e19aada",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
