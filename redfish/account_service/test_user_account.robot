@@ -492,7 +492,7 @@ Verify Error While Deleting Root User
     [Documentation]  Verify error while deleting root user.
     [Tags]  Verify_Error_While_Deleting_Root_User
 
-    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}root  valid_status_codes=[${HTTP_FORBIDDEN}]
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}root  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
 
 
 Verify SSH Login Access With Admin User
