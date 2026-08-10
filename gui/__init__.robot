@@ -3,6 +3,7 @@ Documentation  Main initialization file for the test cases contained in this
 ...            directory and setting up the test environment variables.
 
 Resource          lib/resource.robot
+Resource          ../lib/rest_client.robot
 Library           lib/utils_get_version.py
 Suite Setup       Initializing Setup
 Suite Teardown    Init Teardown Steps
