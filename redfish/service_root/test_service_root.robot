@@ -132,6 +132,8 @@ Verify Redfish Unresponsive URL paths
 Verify Service Root Unsupported Methods
     [Documentation]  Verify Unsupported methods of service root
     [Tags]  Verify_Service_Root_Unsupported_Methods
+    [Setup]  Redfish.Login
+    [Teardown]  Redfish.Logout
 
     Verify Supported And Unsupported Methods  uri=${REDFISH_BASE_URI}
 
