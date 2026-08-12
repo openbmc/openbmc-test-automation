@@ -25,7 +25,8 @@ ${xpath_snmp_add_destination_button}              //*[text()="Add destination"]
 ${xpath_cancel_button}                            //*[text()='Cancel']
 ${xpath_snmp_error_close_button}                  //div[contains(@class,'toast')]//button[@aria-label='Close']
 ${xpath_delete_button}                            //*[@data-test-id='snmpAlerts-button-deleteRow-undefined']
-${xpath_delete_destination}                       //button[contains(text(),'Delete destination')]
+${xpath_delete_destination}                       //div[contains(@class,'modal') and contains(@class,'show')]//button[contains(.,'Delete destination')]
+${xpath_snmp_row_delete_button}                   //tbody/tr[.//td[normalize-space(.)='IP_PLACEHOLDER'] and .//td[normalize-space(.)='PORT_PLACEHOLDER']]//button[@title='Delete destination']
 
 ${snmp_page_heading}                              SNMP alerts
 ${invalid_port_error}                             Value must be between 0 – 65535
@@ -278,6 +279,19 @@ Configure Multiple SNMP Managers Via GUI And Verify SNMP Trap
     Create Error Log On BMC And Verify Trap  ${CMD_INTERNAL_FAILURE}  ${SNMP_TRAP_BMC_INTERNAL_FAILURE}
 
 
+Delete SNMP Managers Via GUI And Generate Error On BMC
+    [Documentation]  Configure SNMP manager on BMC via GUI, delete the SNMP manager via GUI
+    ...  and generate error on BMC. Verify that no SNMP trap is received since the
+    ...  manager was deleted before the error was generated.
+    [Tags]  Delete_SNMP_Managers_Via_GUI_And_Generate_Error_On_BMC
+    [Teardown]  Run Keywords
+    ...  Run Keyword And Ignore Error  Delete SNMP Manager Via Redfish
+    ...      ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
+    ...  AND  Run Keyword And Ignore Error  SSHLibrary.Execute Command  sudo killall snmptrapd
+
+    Configure SNMP Delete Via GUI And Verify No Trap  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
+
+
 Verify Error And Unauthorized Message Display When ReadOnly User Configures SNMP Setting
     [Documentation]  Verify error and unauthorized message displayed when a
     ...  readonly user configures SNMP setting on BMC GUI.
@@ -447,6 +461,74 @@ Set DNS Server IP
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  network
 
     Add DNS Servers And Verify  ${dns_server}
+
+
+Configure SNMP Delete Via GUI And Verify No Trap
+    [Documentation]  Configure an SNMP manager via GUI, delete it via GUI, then start the
+    ...  SNMP listener, generate an error log on the BMC, and verify that no trap is received.
+    [Arguments]  ${snmp_ip}  ${snmp_port}
+
+    # Description of argument(s):
+    # snmp_ip    SNMP manager IP address.
+    # snmp_port  SNMP manager port.
+
+    # Configure SNMP manager via GUI and verify it appears in the table.
+    Configure SNMP Manager Via GUI  ${snmp_ip}  ${snmp_port}
+    Wait Until Page Contains  ${snmp_ip}  timeout=45s
+    Verify SNMP Manager Configured On BMC  ${snmp_ip}  ${snmp_port}
+
+    # Delete the SNMP manager via GUI.
+    Delete SNMP Manager Via GUI  ${snmp_ip}  ${snmp_port}
+
+    # Verify the SNMP manager is no longer present on BMC after GUI deletion.
+    ${status}=  Run Keyword And Return Status
+    ...  Verify SNMP Manager Configured On BMC  ${snmp_ip}  ${snmp_port}
+    Should Be Equal  ${status}  ${False}
+    ...  msg=SNMP manager was not deleted from BMC after GUI deletion.
+
+    # Start SNMP trap listener on the manager host.
+    Start SNMP Manager
+
+    # Flush any buffered output already in the SSH channel before generating the
+    # error log, so stale traps from earlier activity do not pollute the assertion.
+    SSHLibrary.Switch Connection  snmp_server
+    Read  delay=2s
+
+    # Generate error log on BMC after SNMP manager deletion.
+    BMC Execute Command  ${CMD_INTERNAL_FAILURE}  ignore_err=1
+
+    # BMC Execute Command switches the active SSH connection to the BMC host.
+    # Re-switch back to snmp_server to read the trap listener output.
+    SSHLibrary.Switch Connection  snmp_server
+    ${SNMP_LISTEN_OUT}=  Read  delay=2s
+
+    # Stop SNMP manager process.
+    SSHLibrary.Execute Command  sudo killall snmptrapd
+
+    # Verify no trap was received since the SNMP manager was deleted before error generation.
+    Should Not Contain  ${SNMP_LISTEN_OUT}  SNMPv2-MIB::snmpTrapOID.0
+    ...  msg=SNMP trap was unexpectedly received after deleting the SNMP manager.
+
+
+Delete SNMP Manager Via GUI
+    [Documentation]  Delete a specific SNMP manager row via GUI by matching its IP and port.
+    [Arguments]  ${snmp_ip}  ${snmp_port}
+
+    # Description of argument(s):
+    # snmp_ip    SNMP manager IP address to delete.
+    # snmp_port  SNMP manager port.
+
+    ${xpath_snmp_row_delete}=  Replace String  ${xpath_snmp_row_delete_button}
+    ...  IP_PLACEHOLDER  ${snmp_ip}
+    ${xpath_snmp_row_delete}=  Replace String  ${xpath_snmp_row_delete}
+    ...  PORT_PLACEHOLDER  ${snmp_port}
+    Wait Until Page Contains Element  ${xpath_snmp_row_delete}  timeout=30s
+    Click Element  ${xpath_snmp_row_delete}
+    Wait Until Page Contains  Delete SNMP alert destination  timeout=30s
+    Click Element  ${xpath_delete_destination}
+    Wait Until Page Contains  Successfully deleted SNMP alert destination  timeout=45s
+    Wait Until Keyword Succeeds  30 sec  10 sec  Refresh GUI And Verify Element Value
+    ...  ${xpath_snmp_alerts_heading}  ${snmp_page_heading}
 
 
 Delete Multiple SNMP Managers With Default Port Via GUI
