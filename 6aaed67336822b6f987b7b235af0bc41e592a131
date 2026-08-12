@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b4ee97a_6557b135",
+        "filename": "test_lists/QEMU_CI",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-08-12T20:08:10Z",
+      "side": 1,
+      "message": "Thank you for catching this. Its renamed to \n\nVerify_Redfish_Update_Service_Enabled\n\nplease update with this commit. Thanks",
+      "revId": "6aaed67336822b6f987b7b235af0bc41e592a131",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
