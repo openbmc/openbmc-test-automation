@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfd51d59_57d24c0b",
+        "filename": "gui/gui_test/operations_menu/test_kvm_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-08-12T07:02:25Z",
+      "side": 1,
+      "message": "Contains(normalize-space(), \u0027Connected\u0027) is a substring match. The string \"Disconnected\" contains the substring \"Connected\", so this XPath selector will also match elements showing a \"Disconnected\" status. Any assertion using this XPath to confirm KVM is connected could pass even when KVM is actually disconnected.\n\nright ? is this something we can fix ?",
+      "revId": "185863ddb4a3a5d820b25d15deb31d36c34ae116",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d1ff31a_6235bc24",
+        "filename": "gui/gui_test/operations_menu/test_kvm_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-08-12T07:02:25Z",
+      "side": 1,
+      "message": "\"Roll Base Access Control\" is a typo for \"Role-Based Access Control\" (RBAC). The same typo appears in the keyword name KVM Role Base Access Control Test Teardown (line 386) — \"Role Base\" should be \"Role-Based\".\n\n```\n# Password used by KVM Role-Based Access Control test users.\n```",
+      "revId": "185863ddb4a3a5d820b25d15deb31d36c34ae116",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "632bdc2a_87b4f0b8",
+        "filename": "gui/gui_test/operations_menu/test_kvm_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-08-12T07:02:25Z",
+      "side": 1,
+      "message": "${session_num} is only set inside the FOR ${session_num} IN RANGE 2 6 loop body. If Verify KVM Is Connected And Elements Are Visible (the first assertion, before the loop) fails, the FOR loop never executes, and ${session_num} is never defined. The teardown then calls Close Sessions ${session_num} with an undefined variable, which raises a second error and masks the original failure.\n\nFix:\n```\nVerify KVM Multiple Sessions\n    [Tags]  Verify_KVM_Multiple_Sessions\n    [Teardown]  Close Sessions  5\n```\n\nOr use a constant that matches the IN RANGE 2 6 upper bound:\n```\n    [Teardown]  Close Sessions  ${5}\n```\n\nAlternatively, initialise the variable before the loop:\n```\n    VAR  ${session_num}  1\n    FOR  ${session_num}  IN RANGE  2  6\n        ...\n    END\n    [Teardown]  Close Sessions  ${session_num}\n```",
+      "revId": "185863ddb4a3a5d820b25d15deb31d36c34ae116",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5543523f_cc7b6f0f",
+        "filename": "gui/gui_test/operations_menu/test_kvm_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-08-12T07:02:25Z",
+      "side": 1,
+      "message": "The error\u003d message says \"when backend service is stopped\" but this assertion runs after systemctl start obmc-ikvm.service — the service was just started, not stopped. The comment on the line above is also incorrect (says \"Disconnected\" but the assertion waits for Connected).\n\n```\n    # Verify KVM shows Connected status after service restart.\n    Wait Until Element Is Visible  ${xpath_kvm_status_connected}\n    ...  timeout\u003d${element_wait_timeout}\n    ...  error\u003dKVM should show Connected after backend service is restarted\n```\n\nMisleading error messages in test assertions waste debugging time when failures occur.",
+      "revId": "185863ddb4a3a5d820b25d15deb31d36c34ae116",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82c32b2a_1b95c892",
+        "filename": "gui/gui_test/operations_menu/test_kvm_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-08-12T07:02:25Z",
+      "side": 1,
+      "message": "The keyword documentation states \"Close the secondary browser session after validation\", but there is no Close Browser call in the keyword body. This leaks browser sessions. The calling test Verify KVM Multiple Sessions passes ${session_num} to Close Sessions in its teardown, which closes browsers by index — but if any iteration of Create KVM Session fails (e.g., at Wait Until Element Is Visible), the browser is not closed on failure.\n\nEither remove the misleading claim from the documentation, or add a [Teardown] Close Browser to close it on failure:\n\nCreate KVM Session\n    [Arguments]  ${status}\u003d${xpath_kvm_status_connected}\n    [Teardown]  Run Keyword If Test Failed  Close Browser\n    Open Browser With URL  ${OPENBMC_GUI_URL}\n    Login And Navigate To KVM\n    Wait Until Element Is Visible  ${status}  timeout\u003d${element_wait_timeout}\n    Page Should Not Contain  Error",
+      "revId": "185863ddb4a3a5d820b25d15deb31d36c34ae116",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
