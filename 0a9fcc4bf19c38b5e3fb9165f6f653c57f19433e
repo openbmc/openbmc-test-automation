@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90e83d91_23aa4543",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-08-12T20:09:46Z",
+      "side": 1,
+      "message": "Remind me when the https://gerrit.openbmc.org/c/openbmc/bmcweb/+/90333 bmcweb gets merged and we can plan to merge it after sometime till it gets into the builds.",
+      "revId": "0a9fcc4bf19c38b5e3fb9165f6f653c57f19433e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
