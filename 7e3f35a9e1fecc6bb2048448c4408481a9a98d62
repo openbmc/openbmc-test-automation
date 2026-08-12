@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "218dd9fe_5f1f4390",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-08-12T20:20:50Z",
+      "side": 1,
+      "message": "Dave is currently testing all the legacy firmware update and Power operations and others in his environment. Awaiting his result.\n\nSo far it looked good but we dont want to end up break old Legacy REST changes.",
+      "revId": "7e3f35a9e1fecc6bb2048448c4408481a9a98d62",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
