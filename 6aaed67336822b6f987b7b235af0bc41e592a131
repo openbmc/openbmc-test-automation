@@ -16,6 +16,24 @@
       "message": "Thank you for catching this. Its renamed to \n\nVerify_Redfish_Update_Service_Enabled\n\nplease update with this commit. Thanks",
       "revId": "6aaed67336822b6f987b7b235af0bc41e592a131",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09d31c34_a0e2bf71",
+        "filename": "test_lists/QEMU_CI",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1003105
+      },
+      "writtenOn": "2026-08-12T23:19:30Z",
+      "side": 1,
+      "message": "Thanks for the review, George! \nThat rename (5236ec54) is the one the first paragraph of the commit message cites — the include was added three months after the rename, so it has never matched anything.\n\nI did test the re-point first (re-verified today on a fresh boot):\non a bletchley QEMU image the test fails in its Test Setup before the body runs. \"Redfish Power Off\" enters the boot-test framework, whose Auto_reboot/cp_setup plug-in PATCHes /redfish/v1/Systems/system (\"Boot\"/\"AutomaticRetryConfig\") and gets HTTP 500, so OBMC Boot Test aborts with \"Plug-in setup failed.\" — the same failure the two SoftwareInventory includes already in QEMU_CI show on my setup.\n\nbletchley is the only target I can test, though. If the QEMU target CI runs this list against can execute this suite\u0027s setup, re-pointing is strictly better than dropping (it restores UpdateService coverage) and I\u0027ll gladly update the change to do that. Which QEMU target does CI use for this list?",
+      "parentUuid": "1b4ee97a_6557b135",
+      "revId": "6aaed67336822b6f987b7b235af0bc41e592a131",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
