@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "264c7686_74016fca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-08-12T05:36:55Z",
+      "side": 1,
+      "message": "#(CDT) 2026/08/11 15:17:10.960631 -    1.504927 - Issuing: Set Auto Reboot Setting  ${0}\nURI:https://xx.xx.xx.xx:/xyz/openbmc_project/control/host0/auto_reboot/attr/AutoReboot, method:Put, args:{\u0027data\u0027: {\u0027data\u0027: 0}}\n\n#(CDT) 2026/08/11 15:17:14.060693 -    3.100062 - Finished running robot.\n\nrobot_runtime:                                    4.631896\n\n| FAIL |\nHTTPError: 401 Client Error: Unauthorized for url: https://xx.xx.xx.xx/xyz/openbmc_project/control/host0/auto_reboot/attr/AutoReboot\n\n\nDave found a bug with this changes, now fixed for REST Legacy path",
+      "revId": "49af16be29fde2f51b79401eeffbd5c46718a886",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
