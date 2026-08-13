@@ -17,10 +17,11 @@ Verify Get PLDM Types
     [Tags]  Verify_Get_PLDM_Types
 
     ${pldm_output}=  Pldmtool  base GetPLDMTypes
-    ${count}=  Get Length  ${pldm_output}
+    ${pldm_types}=  Get PLDM List From Response  ${pldm_output}
+    ${count}=  Get Length  ${pldm_types}
     ${cmd_list}=  Create List
     FOR  ${i}  IN RANGE  ${count}
-      ${cmd}=  Catenate  ${pldm_output}[${i}][PLDM Type Code](${pldm_output}[${i}][PLDM Type])
+      ${cmd}=  Catenate  ${pldm_types}[${i}][PLDM Type Code](${pldm_types}[${i}][PLDM Type])
       Append To List  ${cmd_list}  ${cmd}
     END
     Valid List  cmd_list  required_values=${PLDM_SUPPORTED_TYPES}
@@ -64,7 +65,10 @@ Verify Get PLDM Version For OEM
     [Documentation]  Verify supported PLDM version for oem-ibm type.
     [Tags]  Verify_Get_PLDM_Version_For_OEM
 
-    ${pldm_cmd}=  Evaluate  $CMD_GETPLDMVERSION % 'oem-ibm'
+    Skip If    not any("${PLDM_TYPE_OEM['STRING']}" in e for e in $PLDM_SUPPORTED_TYPES)
+    ...    PLDM type ${PLDM_TYPE_OEM['STRING']} not supported on this platform.
+
+    ${pldm_cmd}=  Evaluate  $CMD_GETPLDMVERSION % '${PLDM_TYPE_OEM['STRING']}'
     ${pldm_output}=  Pldmtool  ${pldm_cmd}
     Valid Value  pldm_output['Response']  ['${VERSION_OEM['STRING']}']
 
@@ -88,11 +92,11 @@ Verify GetPLDMCommands
 
     # pldm_type    # expected_pldm_cmds
 
-    '0'            ${PLDM_BASE_CMDS}
-    '2'            ${PLDM_PLATFORM_CMDS}
-    '3'            ${PLDM_BIOS_CMDS}
-    '4'            ${PLDM_FRU_CMDS}
-    '63'           ${PLDM_OEM_CMDS}
+    0              ${PLDM_BASE_CMDS}
+    2              ${PLDM_PLATFORM_CMDS}
+    3              ${PLDM_BIOS_CMDS}
+    4              ${PLDM_FRU_CMDS}
+    63             ${PLDM_OEM_CMDS}
 
 
 Verify Verbose Flag For PLDM Subsystem Commands
@@ -154,19 +158,43 @@ Verify GetPLDMCommands For PLDM Type
     [Arguments]  ${pldm_type}  ${expected_pldm_cmds}
 
     # Description of argument(s):
-    # pldm_type             pldm type (e.g. '0', '2', '3', '4', '63').
-    #                      '0' -> base, '2' -> platform, '3' -> 'bios', '4' -> 'fru'
-    #                      '63' -> oem-ibm.
+    # pldm_type             pldm type (e.g. 0, 2, 3, 4, 63).
+    #                      0 -> base, 2 -> platform, 3 -> bios, 4 -> fru
+    #                      63 -> oem-ibm.
     # expected_pldm_cmds    expected pldm commands for given pldm type.
 
     # Example output:
     # Supported Commands : 2(GetTID) 3(GetPLDMVersion) 4(GetPLDMTypes) 5(GetPLDMCommands)
 
+    Skip If    not any('${pldm_type}' == e.split('(')[0] for e in $PLDM_SUPPORTED_TYPES)
+    ...    PLDM type ${pldm_type} not supported on this platform.
+
     ${pldm_output}=  Pldmtool  base GetPLDMCommands -t ${pldm_type}
-    ${count}=  Get Length  ${pldm_output}
+    ${pldm_commands}=  Get PLDM List From Response  ${pldm_output}
+    ${count}=  Get Length  ${pldm_commands}
     ${cmd_list}=  Create List
     FOR  ${i}  IN RANGE  ${count}
-      ${cmd}=  Catenate  ${pldm_output}[${i}][PLDM Command Code](${pldm_output}[${i}][PLDM Command])
+      ${cmd}=  Catenate  ${pldm_commands}[${i}][PLDM Command Code](${pldm_commands}[${i}][PLDM Command])
       Append To List  ${cmd_list}  ${cmd}
     END
     Valid List  cmd_list  required_values=${expected_pldm_cmds}
+
+
+Get PLDM List From Response
+    [Documentation]  Normalize a pldmtool response (list or dict-wrapped
+    ...              list) to a plain list of entries. Returns an empty list
+    ...              for unexpected response types (e.g. SSH error strings).
+    [Arguments]  ${response}
+
+    # Description of argument(s):
+    # response    pldmtool response; either a plain list of entry dicts or a
+    #             dict whose first list-valued key contains the entries
+    #             (e.g. {'PLDMTypes': [{'PLDM Type Code': 0, 'PLDM Type': 'base'}, ...]}).
+
+    # Example output:
+    # Input  (dict form) : {'PLDMTypes': [{'PLDM Type Code': 0, 'PLDM Type': 'base'}, ...]}
+    # Return (list form) : [{'PLDM Type Code': 0, 'PLDM Type': 'base'}, ...]
+
+    # Return response if list, extract first list value if dict, else return [].
+    ${entries}=  Evaluate  $response if isinstance($response, list) else (next((v for v in $response.values() if isinstance(v, list)), []) if isinstance($response, dict) else [])
+    RETURN  ${entries}
