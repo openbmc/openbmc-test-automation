@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4d03928_ba68bb86",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1002684
+      },
+      "writtenOn": "2026-08-13T04:44:24Z",
+      "side": 1,
+      "message": "Please keep default port number. ${snmp_port}\u003d161 or 162 whichever we use.",
+      "revId": "73cb0cb3d9c7934a061e57988e018d03bf1aea31",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20fa9eb5_2a44402d",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1002684
+      },
+      "writtenOn": "2026-08-13T04:44:24Z",
+      "side": 1,
+      "message": "Please provide with example. \nIf it supports both IPv4 and IPv6, please specify.",
+      "revId": "73cb0cb3d9c7934a061e57988e018d03bf1aea31",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf89d897_f2853abd",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1002684
+      },
+      "writtenOn": "2026-08-13T04:44:24Z",
+      "side": 1,
+      "message": "Please store into Variable sections --\u003e Delete SNMP alert destination",
+      "revId": "73cb0cb3d9c7934a061e57988e018d03bf1aea31",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b2ea7f0_04406ac0",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1002684
+      },
+      "writtenOn": "2026-08-13T04:44:24Z",
+      "side": 1,
+      "message": "Please store into Variable sections --\u003e Successfully deleted SNMP alert destination",
+      "revId": "73cb0cb3d9c7934a061e57988e018d03bf1aea31",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
