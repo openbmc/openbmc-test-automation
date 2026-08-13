@@ -34,6 +34,24 @@
       "parentUuid": "1b4ee97a_6557b135",
       "revId": "6aaed67336822b6f987b7b235af0bc41e592a131",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36d5d2b1_2f260495",
+        "filename": "test_lists/QEMU_CI",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1003105
+      },
+      "writtenOn": "2026-08-13T19:49:21Z",
+      "side": 1,
+      "message": "Follow-up with the root cause, for the record — re-verified on another fresh boot of a stock bletchley image (3.1.0-dev-739-gba9070d60b, QEMU bletchley-bmc):\n\nThe 500 is not a local artifact. It reproduces with plain curl, no Robot framework involved: PATCH /redfish/v1/Systems/system {\"Boot\":{\"AutomaticRetryConfig\":\"RetryAttempts\"}} returns 500, and bmcweb\u0027s own journal shows the failing step: \"D-Bus error setting Redfish Property Boot/AutomaticRetryConfig ec\u003dInvalid request descriptor [generic:53]\".\n\nRoot cause: bletchley is a multi-host platform. Settings publishes /xyz/openbmc_project/control/host1..host6/auto_reboot — there is no host0 — while the single-host Systems route resolves index 0 (setAutomaticRetry() in current bmcweb systems.hpp builds \"/xyz/openbmc_project/control/host\u003cindex\u003e/auto_reboot\"). Control check: the identical D-Bus write against host1\u0027s object succeeds (busctl set-property, rc 0); the same read on host0 returns \"Unknown object\".\n\nSo on a bletchley QEMU target, the boot-test framework\u0027s Auto_reboot plug-in can never finish cp_setup, and a re-pointed include would fail in Test Setup on any stock bletchley image, independent of my local setup. My question above stands: if the QEMU target that CI runs this list against can execute this suite\u0027s setup, I will gladly re-point instead of dropping — which machine does CI use?",
+      "parentUuid": "09d31c34_a0e2bf71",
+      "revId": "6aaed67336822b6f987b7b235af0bc41e592a131",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
