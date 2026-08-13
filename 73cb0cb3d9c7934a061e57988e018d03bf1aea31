@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "468a9b4c_a9ed5d3a",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-08-13T05:48:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4d03928_ba68bb86",
+      "revId": "73cb0cb3d9c7934a061e57988e018d03bf1aea31",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "20fa9eb5_2a44402d",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-08-13T04:44:24Z",
       "side": 1,
       "message": "Please provide with example. \nIf it supports both IPv4 and IPv6, please specify.",
+      "revId": "73cb0cb3d9c7934a061e57988e018d03bf1aea31",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90852a90_139b61de",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-08-13T05:48:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "20fa9eb5_2a44402d",
       "revId": "73cb0cb3d9c7934a061e57988e018d03bf1aea31",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -52,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd736c70_9a5ca20d",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-08-13T05:48:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf89d897_f2853abd",
+      "revId": "73cb0cb3d9c7934a061e57988e018d03bf1aea31",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8b2ea7f0_04406ac0",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-08-13T04:44:24Z",
       "side": 1,
       "message": "Please store into Variable sections --\u003e Successfully deleted SNMP alert destination",
+      "revId": "73cb0cb3d9c7934a061e57988e018d03bf1aea31",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19f53430_bbfe66e0",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-08-13T05:48:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b2ea7f0_04406ac0",
       "revId": "73cb0cb3d9c7934a061e57988e018d03bf1aea31",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
