@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ea2ab8c_d5f3fdd5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 25
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-08-13T03:44:43Z",
+      "side": 1,
+      "message": "Dave reported partial success in couple old REST levels but there are legacy REST + Redfish where it is reported failure.  Fixed it as well.\n\nWill wait for Dave for further test run coverage.",
+      "revId": "17e85313a14b120e8bb6c38e62e216384ce370be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
