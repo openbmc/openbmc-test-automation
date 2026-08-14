@@ -7,6 +7,7 @@ Resource         ../../lib/utils.robot
 Resource         ../../lib/openbmc_ffdc.robot
 Resource         ../../lib/bmc_network_utils.robot
 Resource         ../../lib/bmc_ldap_utils.robot
+Resource         ../../lib/certificate_utils.robot
 
 Suite Setup      Suite Setup Execution
 Suite Teardown   LDAP Suite Teardown Execution
@@ -36,6 +37,9 @@ ${new_password}                    NewPassword456
 # User privileges.
 ${privilege_admin}                 Administrator
 ${privilege_readonly}              ReadOnly
+# Certificate file paths for secure LDAP (ldaps://). Leave empty for non-secure LDAP.
+${LDAP_CA_FILE}                    ${EMPTY}
+${LDAP_CLIENT_CERT_FILE}           ${EMPTY}
 
 *** Test Cases ***
 
@@ -1064,12 +1068,25 @@ Suite Setup Execution
     Valid Value  LDAP_BASE_DN
 
     Redfish.Login
+    # For secure LDAP (ldaps://), upload certificates so the BMC can verify
+    # the LDAP server's TLS certificate on login.
+    ${is_secure}=  Run Keyword And Return Status
+    ...  Should Start With  ${LDAP_SERVER_URI}  ldaps://
+    IF  ${is_secure}
+        Upload LDAP Certificates If Provided
+    END
     # Call 'Get LDAP Configuration' to verify that LDAP configuration exists.
     Get LDAP Configuration  ${LDAP_TYPE}
     Set Suite Variable  ${old_ldap_privilege}
     Disable Other LDAP
     Create LDAP Configuration
     ${hostname}=  Redfish.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  HostName
+    # Verify LDAP user can login after certificates and LDAP config are in place.
+    ${login_status}=  Run Keyword And Return Status
+    ...  Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    IF  not ${login_status}
+        Fatal Error  Cannot proceed: LDAP user login failed.
+    END
 
 LDAP Suite Teardown Execution
     [Documentation]  Restore ldap configuration, delete unused redfish session.
