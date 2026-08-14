@@ -518,6 +518,7 @@ Verify Delete Button State With Checkbox Selection
         # Verify delete button is not visible when no checkbox is selected.
         Element Should Not Be Visible  ${xpath_delete_selected_button}
         ...  msg=Delete button should not be visible when no checkbox is selected
+    END
 
 
 Validate Group Privilege Options
