@@ -1,6 +1,9 @@
 *** Settings ***
 Documentation  This module provides general keywords for LDAP.
 
+Library        OperatingSystem
+Resource       certificate_utils.robot
+
 *** Keywords ***
 
 Get LDAP Configuration Using Redfish
@@ -113,3 +116,41 @@ Update LDAP Configuration With LDAP User Role And Group
 
     # Provide adequate time for LDAP daemon to restart after the update.
     Sleep  15s
+
+
+Upload LDAP Certificates If Provided
+    [Documentation]  Upload CA and client certificates to BMC for secure LDAP (ldaps://).
+    ...  Skips upload if LDAP_CA_FILE or LDAP_CLIENT_CERT_FILE variables are empty.
+
+    # Upload CA certificate (multiple CA certs are allowed, skip if same cert already present).
+    IF  '${LDAP_CA_FILE}' != '${EMPTY}'
+        ${bytes}=  OperatingSystem.Get Binary File  ${LDAP_CA_FILE}
+        ${file_data}=  Decode Bytes To String  ${bytes}  UTF-8
+        ${members}=  Redfish_Utils.Get Member List  ${REDFISH_CA_CERTIFICATE_URI}
+        ${ca_exists}=  Set Variable  ${False}
+        FOR  ${member}  IN  @{members}
+            ${bmc_cert}=  redfish_utils.Get Attribute  ${member}  CertificateString
+            ${match}=  Run Keyword And Return Status  Should Contain  ${file_data}  ${bmc_cert}
+            IF  ${match}
+                ${ca_exists}=  Set Variable  ${True}
+            END
+        END
+        IF  not ${ca_exists}
+            Install Certificate File On BMC  ${REDFISH_CA_CERTIFICATE_URI}  ok  data=${file_data}
+            Log  CA certificate uploaded from: ${LDAP_CA_FILE}
+        ELSE
+            Log  CA certificate already installed on BMC, skipping upload.
+        END
+    END
+
+    # Upload LDAP client certificate (only one is allowed — delete existing before upload).
+    IF  '${LDAP_CLIENT_CERT_FILE}' != '${EMPTY}'
+        ${bytes}=  OperatingSystem.Get Binary File  ${LDAP_CLIENT_CERT_FILE}
+        ${file_data}=  Decode Bytes To String  ${bytes}  UTF-8
+        ${members}=  Redfish_Utils.Get Member List  ${REDFISH_LDAP_CERTIFICATE_URI}
+        FOR  ${member}  IN  @{members}
+            Redfish.Delete  ${member}  valid_status_codes=[${HTTP_NO_CONTENT}]
+        END
+        Install Certificate File On BMC  ${REDFISH_LDAP_CERTIFICATE_URI}  ok  data=${file_data}
+        Log  LDAP client certificate uploaded from: ${LDAP_CLIENT_CERT_FILE}
+    END
