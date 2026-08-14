@@ -16,6 +16,23 @@
       "message": "Dave reported partial success in couple old REST levels but there are legacy REST + Redfish where it is reported failure.  Fixed it as well.\n\nWill wait for Dave for further test run coverage.",
       "revId": "17e85313a14b120e8bb6c38e62e216384ce370be",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "299b804e_6d89c2fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 25
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-08-14T03:22:06Z",
+      "side": 1,
+      "message": "Almost there. .Dave reported now the code update are working accross all REST, REST + Redfish and Redfish drivers supported. \n\nThere is a failure around post code update when trying to grab the error log, debugging",
+      "revId": "17e85313a14b120e8bb6c38e62e216384ce370be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
