@@ -18,6 +18,42 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7845e914_fbe6e581",
+        "filename": "gui/gui_test/operations_menu/test_kvm_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-08-14T18:53:12Z",
+      "side": 1,
+      "message": "XPath string comparisons are case-sensitive. In this specific case, Connected is not a substring of Disconnected, so contains(normalize-space(), \u0027Connected\u0027) would not match contains(normalize-space(), \u0027Disconnected\u0027).",
+      "parentUuid": "dfd51d59_57d24c0b",
+      "revId": "185863ddb4a3a5d820b25d15deb31d36c34ae116",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a21fc56_e4ace9af",
+        "filename": "gui/gui_test/operations_menu/test_kvm_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-08-14T18:53:12Z",
+      "side": 1,
+      "message": "XPath string comparisons are case-sensitive. In this specific case, Connected is not a substring of Disconnected, so contains(normalize-space(), \u0027Connected\u0027) would not match Contains(normalize-space(), \u0027Disconnected\u0027).",
+      "parentUuid": "dfd51d59_57d24c0b",
+      "revId": "185863ddb4a3a5d820b25d15deb31d36c34ae116",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d1ff31a_6235bc24",
@@ -31,6 +67,24 @@
       "writtenOn": "2026-08-12T07:02:25Z",
       "side": 1,
       "message": "\"Roll Base Access Control\" is a typo for \"Role-Based Access Control\" (RBAC). The same typo appears in the keyword name KVM Role Base Access Control Test Teardown (line 386) — \"Role Base\" should be \"Role-Based\".\n\n```\n# Password used by KVM Role-Based Access Control test users.\n```",
+      "revId": "185863ddb4a3a5d820b25d15deb31d36c34ae116",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97e4dd4e_26c7ce1a",
+        "filename": "gui/gui_test/operations_menu/test_kvm_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-08-14T18:53:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d1ff31a_6235bc24",
       "revId": "185863ddb4a3a5d820b25d15deb31d36c34ae116",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -52,6 +106,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "398f3fc9_7e23fd53",
+        "filename": "gui/gui_test/operations_menu/test_kvm_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-08-14T18:53:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "632bdc2a_87b4f0b8",
+      "revId": "185863ddb4a3a5d820b25d15deb31d36c34ae116",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5543523f_cc7b6f0f",
@@ -69,6 +141,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6f0310e_94a0a2c1",
+        "filename": "gui/gui_test/operations_menu/test_kvm_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-08-14T18:53:12Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "5543523f_cc7b6f0f",
+      "revId": "185863ddb4a3a5d820b25d15deb31d36c34ae116",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "82c32b2a_1b95c892",
@@ -82,6 +172,24 @@
       "writtenOn": "2026-08-12T07:02:25Z",
       "side": 1,
       "message": "The keyword documentation states \"Close the secondary browser session after validation\", but there is no Close Browser call in the keyword body. This leaks browser sessions. The calling test Verify KVM Multiple Sessions passes ${session_num} to Close Sessions in its teardown, which closes browsers by index — but if any iteration of Create KVM Session fails (e.g., at Wait Until Element Is Visible), the browser is not closed on failure.\n\nEither remove the misleading claim from the documentation, or add a [Teardown] Close Browser to close it on failure:\n\nCreate KVM Session\n    [Arguments]  ${status}\u003d${xpath_kvm_status_connected}\n    [Teardown]  Run Keyword If Test Failed  Close Browser\n    Open Browser With URL  ${OPENBMC_GUI_URL}\n    Login And Navigate To KVM\n    Wait Until Element Is Visible  ${status}  timeout\u003d${element_wait_timeout}\n    Page Should Not Contain  Error",
+      "revId": "185863ddb4a3a5d820b25d15deb31d36c34ae116",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "446f7c06_ffd5436d",
+        "filename": "gui/gui_test/operations_menu/test_kvm_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-08-14T18:53:12Z",
+      "side": 1,
+      "message": "Updated documentation as we want to create multiple session to check limit in test case.",
+      "parentUuid": "82c32b2a_1b95c892",
       "revId": "185863ddb4a3a5d820b25d15deb31d36c34ae116",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
