@@ -91,7 +91,9 @@ def peltool(
 
 
 def get_pel_data_from_bmc(
-    include_hidden_pels=False, include_informational_pels=False
+    include_hidden_pels=False,
+    include_informational_pels=False,
+    openbmc_host=None,
 ):
     r"""
     Returns PEL data from BMC else throws exception.
@@ -101,6 +103,8 @@ def get_pel_data_from_bmc(
                                   Set True to get hidden PELs else False.
     include_informational_pels    True/False (default: False).
                                   Set True to get informational PELs else False.
+    openbmc_host                  The BMC host to run the peltool command on.
+                                  If None, the global ${OPENBMC_HOST} is used.
     """
     try:
         pel_cmd = " -l"
@@ -108,7 +112,7 @@ def get_pel_data_from_bmc(
             pel_cmd = pel_cmd + " -h"
         if include_informational_pels:
             pel_cmd = pel_cmd + " -f"
-        pel_data = peltool(pel_cmd)
+        pel_data = peltool(pel_cmd, openbmc_host=openbmc_host)
         if not pel_data:
             print("No PEL data present in BMC ...")
     except Exception as exception:
@@ -118,13 +122,17 @@ def get_pel_data_from_bmc(
     return pel_data
 
 
-def verify_no_pel_exists_on_bmc():
+def verify_no_pel_exists_on_bmc(openbmc_host=None):
     r"""
     Verify that no PEL exists in BMC. Raise an exception if it does.
+
+    Description of arguments:
+    openbmc_host                  The BMC host to run the peltool command on.
+                                  If None, the global ${OPENBMC_HOST} is used.
     """
 
     try:
-        pel_data = get_pel_data_from_bmc()
+        pel_data = get_pel_data_from_bmc(openbmc_host=openbmc_host)
 
         if len(pel_data) == 0:
             return True
@@ -208,7 +216,9 @@ def compare_pel_and_redfish_event_log(pel_record, event_record):
         ) from exception
 
 
-def fetch_all_pel_ids_for_src(src_id, severity, include_hidden_pels=False):
+def fetch_all_pel_ids_for_src(
+    src_id, severity, include_hidden_pels=False, openbmc_host=None
+):
     r"""
     Fetch all PEL IDs for the input SRC ID based on the severity type
     in the list format.
@@ -219,11 +229,15 @@ def fetch_all_pel_ids_for_src(src_id, severity, include_hidden_pels=False):
                                              "Recovered Error").
     include_hidden_pels   True/False (default: False).
                           Set True to get hidden PELs else False.
+    openbmc_host          The BMC host to run the peltool command on.
+                          If None, the global ${OPENBMC_HOST} is used.
     """
 
     try:
         src_pel_ids = []
-        pel_data = get_pel_data_from_bmc(include_hidden_pels)
+        pel_data = get_pel_data_from_bmc(
+            include_hidden_pels, openbmc_host=openbmc_host
+        )
         pel_id_list = pel_data.keys()
         for pel_id in pel_id_list:
             # Check if required SRC ID with severity is present
@@ -242,16 +256,20 @@ def fetch_all_pel_ids_for_src(src_id, severity, include_hidden_pels=False):
     return src_pel_ids
 
 
-def fetch_all_src(include_hidden_pels=False):
+def fetch_all_src(include_hidden_pels=False, openbmc_host=None):
     r"""
     Fetch all SRC IDs from peltool in the list format.
 
     include_hidden_pels       True/False (default: False).
                               Set True to get hidden PELs else False.
+    openbmc_host              The BMC host to run the peltool command on.
+                              If None, the global ${OPENBMC_HOST} is used.
     """
     try:
         src_id = []
-        pel_data = get_pel_data_from_bmc(include_hidden_pels)
+        pel_data = get_pel_data_from_bmc(
+            include_hidden_pels, openbmc_host=openbmc_host
+        )
         if pel_data:
             pel_id_list = pel_data.keys()
             for pel_id in pel_id_list:
@@ -265,7 +283,9 @@ def fetch_all_src(include_hidden_pels=False):
 
 
 def check_for_unexpected_src(
-    unexpected_src_list=None, include_hidden_pels=False
+    unexpected_src_list=None,
+    include_hidden_pels=False,
+    openbmc_host=None,
 ):
     r"""
     From the given unexpected SRC list, check if any unexpected SRC created
@@ -277,12 +297,16 @@ def check_for_unexpected_src(
 
     include_hidden_pels       True/False (default: False).
                               Set True to get hidden PELs else False.
+    openbmc_host              The BMC host to run the peltool command on.
+                              If None, the global ${OPENBMC_HOST} is used.
     """
     try:
         unexpected_src_count = 0
         if not unexpected_src_list:
             print("Unexpected SRC list is empty.")
-        src_data = fetch_all_src(include_hidden_pels)
+        src_data = fetch_all_src(
+            include_hidden_pels, openbmc_host=openbmc_host
+        )
         for src in unexpected_src_list:
             if src in src_data:
                 print("Found an unexpected SRC : " + src)
@@ -297,16 +321,18 @@ def check_for_unexpected_src(
     return unexpected_src_count
 
 
-def filter_unexpected_srcs(expected_srcs=None):
+def filter_unexpected_srcs(expected_srcs=None, openbmc_host=None):
     r"""
     Return list of SRCs found in BMC after filtering expected SRCs.
     If expected_srcs is None then all SRCs found in system are returned.
 
     Description of arguments:
     expected_srcs       List of expected SRCs. E.g. ["BBXXYYYY", "AAXXYYYY"].
+    openbmc_host        The BMC host to run the peltool command on.
+                        If None, the global ${OPENBMC_HOST} is used.
     """
 
-    temp_srcs_found = fetch_all_src()
+    temp_srcs_found = fetch_all_src(openbmc_host=openbmc_host)
 
     if not expected_srcs:
         expected_srcs = []
@@ -320,15 +346,17 @@ def filter_unexpected_srcs(expected_srcs=None):
     return list(set(srcs_found) - set(expected_srcs))
 
 
-def get_bmc_event_log_id_for_pel(pel_id):
+def get_bmc_event_log_id_for_pel(pel_id, openbmc_host=None):
     r"""
     Return BMC event log ID for the given PEL ID.
 
     Description of arguments:
-    pel_id       PEL ID. E.g. 0x50000021.
+    pel_id                PEL ID. E.g. 0x50000021.
+    openbmc_host          The BMC host to run the peltool command on.
+                          If None, the global ${OPENBMC_HOST} is used.
     """
 
-    pel_data = peltool("-i " + pel_id)
+    pel_data = peltool("-i " + pel_id, openbmc_host=openbmc_host)
     print(pel_data)
     bmc_id_for_pel = pel_data["Private Header"]["BMC Event Log Id"]
     return bmc_id_for_pel
@@ -338,6 +366,7 @@ def get_latest_pels(
     number_of_pels=1,
     include_hidden_pels=False,
     include_informational_pels=False,
+    openbmc_host=None,
 ):
     r"""
     Return latest PEL IDs.
@@ -348,6 +377,8 @@ def get_latest_pels(
                                  Set True to get hidden PELs else False.
     include_informational_pels   True/False (default: False).
                                  Set True to get informational PELs else False.
+    openbmc_host                 The BMC host to run the peltool command on.
+                                 If None, the global ${OPENBMC_HOST} is used.
     """
 
     pel_cmd = " -lr"
@@ -355,13 +386,16 @@ def get_latest_pels(
         pel_cmd = pel_cmd + " -h"
     if include_informational_pels:
         pel_cmd = pel_cmd + " -f"
-    pel_data = peltool(pel_cmd)
+    pel_data = peltool(pel_cmd, openbmc_host=openbmc_host)
     pel_ids = list(pel_data.keys())
     return pel_ids[:number_of_pels]
 
 
 def fetch_all_pel_ids_based_on_error_message(
-    error_msg, include_hidden_pels=False, include_informational_pels=False
+    error_msg,
+    include_hidden_pels=False,
+    include_informational_pels=False,
+    openbmc_host=None,
 ):
     r"""
     Fetch all PEL IDs based on the input error message and return
@@ -372,13 +406,17 @@ def fetch_all_pel_ids_based_on_error_message(
     include_hidden_pels           True/False (default: False).
                                   Set True to get hidden PELs else False.
     include_informational_pels    True/False (default: False).
-                                  Set True to get informational PELs else False
+                                  Set True to get informational PELs else False.
+    openbmc_host                  The BMC host to run the peltool command on.
+                                  If None, the global ${OPENBMC_HOST} is used.
     """
 
     try:
         err_pel_ids = []
         pel_data = get_pel_data_from_bmc(
-            include_hidden_pels, include_informational_pels
+            include_hidden_pels,
+            include_informational_pels,
+            openbmc_host=openbmc_host,
         )
         pel_id_list = pel_data.keys()
         for pel_id in pel_id_list:
@@ -398,7 +436,7 @@ def fetch_all_pel_ids_based_on_error_message(
 
 
 def check_if_pel_transmitted_to_host(
-    pel_id, expected_pel_trans_state_to_host="Acked"
+    pel_id, expected_pel_trans_state_to_host="Acked", openbmc_host=None
 ):
     r"""
     Return True if PEL is transmitted to Host else False.
@@ -407,10 +445,12 @@ def check_if_pel_transmitted_to_host(
     pel_id                              PEL ID. E.g. 0x50000021.
     expected_pel_trans_state_to_host    Expected host transmission state for the PEL data.
                                         Default is "Acked".
+    openbmc_host                        The BMC host to run the peltool command on.
+                                        If None, the global ${OPENBMC_HOST} is used.
     """
 
     try:
-        pel_data = peltool("-i " + pel_id)
+        pel_data = peltool("-i " + pel_id, openbmc_host=openbmc_host)
         print(pel_data)
         host_state = pel_data["User Header"]["Host Transmission"]
         if host_state != expected_pel_trans_state_to_host:
