@@ -3,7 +3,6 @@ Documentation        Test to discover the BMC. Before running suit,
 ...                  check BMC and Avahi browse machine should be in same subnet.
 
 Variables            ../../data/variables.py
-Library              SSHLibrary
 Library              ../../lib/external_intf/management_console_utils.py
 Library              ../../lib/gen_robot_print.py
 Library              ../../lib/gen_print.py

@@ -6,7 +6,6 @@ Resource         ../../lib/bmc_redfish_utils.robot
 Resource         ../../lib/common_utils.robot
 Library          ../../lib/gen_robot_valid.py
 Library          ../../lib/bmc_ssh_utils.py
-Library          SSHLibrary
 
 *** Variables ***
 
