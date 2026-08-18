@@ -16,6 +16,24 @@
       "message": "Description is missing. Please update for all args.",
       "revId": "cbe34ec384fd0245554bf86777bd0841debe59b7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9914a78_c79663ff",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-08-18T12:56:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "752fedf4_0b918031",
+      "revId": "cbe34ec384fd0245554bf86777bd0841debe59b7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
