@@ -284,6 +284,7 @@ FFDC_METHOD_CALL = {
             + " file_enum_name=redfish_FIRMWARE_list.txt"
         ),
         "Redfish OEM Log": "Enumerate Redfish OEM Resources",
+        "Host FW Running Files": "Collect Host FW Running File Names",
         "End ffdc cleanup": "BMC FFDC Cleanup",
         "Cleanup sessions": "Delete All Redfish Sessions",
     },
