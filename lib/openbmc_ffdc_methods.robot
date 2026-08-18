@@ -590,6 +590,29 @@ SCP Dump Files
     RETURN  ${ffdc_file_list}
 
 
+Collect Host FW Running File Names
+    [Documentation]  List all file names (including symlinks) under
+    ...              /usr/local/share/hostfw/running/ on the BMC and write
+    ...              the listing to a local FFDC file.  The actual firmware
+    ...              files are NOT copied; only the file-name listing is
+    ...              recorded.  Returns a list containing the path of the
+    ...              generated log file.
+
+    @{ffdc_file_list}=  Create List
+
+    ${stdout}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  ls -la /usr/local/share/hostfw/running/  ignore_err=${1}
+    IF  '${rc}' != '${0}'  RETURN  ${ffdc_file_list}
+
+    ${logpath}=  Catenate  SEPARATOR=${EMPTY}
+    ...  ${LOG_PREFIX}  hostfw_running_files.txt
+    Create File  ${logpath}
+    Write Data To File  ${stdout}${\n}  ${logpath}
+    Append To List  ${ffdc_file_list}  ${logpath}
+
+    RETURN  ${ffdc_file_list}
+
+
 Collect PEL Log
     [Documentation]  Collect PEL files from from BMC.
 
