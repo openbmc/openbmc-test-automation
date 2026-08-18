@@ -466,3 +466,16 @@ Open Link In New Tab
         END
 
     END
+
+
+Wait Until Element Enabled With Page Refresh
+    [Documentation]  Refresh GUI in a loop until the element is enabled or retries are exhausted.
+    [Arguments]  ${locator}  ${retry_count}=20  ${retry_interval}=15s
+
+    FOR  ${i}  IN RANGE  ${retry_count}
+        ${enabled}=  Run Keyword And Return Status  Element Should Be Enabled  ${locator}
+        Return From Keyword If  ${enabled}
+        Refresh GUI
+        Sleep  ${retry_interval}
+    END
+    Element Should Be Enabled  ${locator}
