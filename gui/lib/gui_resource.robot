@@ -466,3 +466,21 @@ Open Link In New Tab
         END
 
     END
+
+
+Wait Until Element Enabled With Page Refresh
+    [Documentation]  Refresh GUI in a loop until the element is enabled or retries are exhausted.
+    [Arguments]  ${locator}  ${retry_count}=20  ${retry_interval}=15s
+
+    # Description of argument(s):
+    # locator          The XPath or locator string of the element to check.
+    # retry_count      The maximum number of refresh attempts before failing (default: 20).
+    # retry_interval    The wait time between each refresh attempt (default: 15s).
+
+    FOR  ${i}  IN RANGE  ${retry_count}
+        ${enabled}=  Run Keyword And Return Status  Element Should Be Enabled  ${locator}
+        Return From Keyword If  ${enabled}
+        Refresh GUI
+        Sleep  ${retry_interval}
+    END
+    Element Should Be Enabled  ${locator}
