@@ -61,6 +61,18 @@ Get SNMP Manager List
     RETURN  ${snmp_mgr_list}
 
 
+Delete All SNMP Managers
+    [Documentation]  Delete all SNMP managers currently configured on BMC.
+
+    ${snmp_mgr_list}=  Get SNMP Manager List
+    FOR  ${snmp_mgr}  IN  @{snmp_mgr_list}
+        ${ip_port}=  Fetch From Right  ${snmp_mgr}  snmp://
+        ${snmp_ip}=  Fetch From Left   ${ip_port}  :
+        ${snmp_port}=  Fetch From Right  ${ip_port}  :
+        Delete SNMP Manager Via Redfish  ${snmp_ip}  ${snmp_port}
+    END
+
+
 Configure SNMP Manager Via Redfish
     [Documentation]  Configure SNMP manager on BMC via Redfish.
     [Arguments]  ${snmp_mgr_ip}  ${snmp_port}  ${valid_status_codes}=${HTTP_CREATED}
