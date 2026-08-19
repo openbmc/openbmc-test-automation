@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48e94351_5e12086d",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-08-19T08:52:24Z",
+      "side": 1,
+      "message": "**Issue #1 (🟡 Medium Severity (SHOULD FIX))**: Deprecated `Return From Keyword If` keyword\n\n**Issue**: `Return From Keyword If` was deprecated in Robot Framework 5.0. The project is expected to run on RF 5+ and should use the modern `IF / RETURN` syntax.\n-\n\n**Fix**:\n```robotframework\n        IF  ${enabled}    RETURN\n  ```\n\n**Why**: Deprecated keywords may emit deprecation warnings in test logs and will be removed in a future RF major version, causing test infrastructure failures.",
+      "revId": "4bfd7bf8865de5ec97a13b8d71d7214d38c05f78",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
