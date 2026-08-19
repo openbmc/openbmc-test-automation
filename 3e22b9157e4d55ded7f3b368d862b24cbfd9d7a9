@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "098aaf17_6588f996",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-08-19T08:43:15Z",
+      "side": 1,
+      "message": "```\n🟡 Medium Severity (SHOULD FIX)\nIssue #1: check_for_unexpected_src and filter_unexpected_srcs not updated — inconsistent multi-host support\nLocation: Functions check_for_unexpected_src and filter_unexpected_srcs in lib/pel_utils.py (not modified by this change)\nIssue: check_for_unexpected_src calls fetch_all_src(include_hidden_pels) without an openbmc_host argument, and filter_unexpected_srcs calls fetch_all_src() similarly. Neither function exposes an openbmc_host parameter. The pattern established by every other public function in this file is that callers can specify a host; these two functions silently ignore that possibility, making multi-host usage inconsistent — callers cannot reliably target a specific BMC via these functions.\nFix:\ndef check_for_unexpected_src(\n    unexpected_src_list\u003dNone, include_hidden_pels\u003dFalse, openbmc_host\u003dNone\n):\n    r\"\"\"\n    ...existing docstring...\n    openbmc_host       The BMC host to run the peltool command on.\n                       If None, the global ${OPENBMC_HOST} is used.\n    \"\"\"\n    try:\n        ...\n        src_data \u003d fetch_all_src(include_hidden_pels, openbmc_host\u003dopenbmc_host)\n        ...\n\ndef filter_unexpected_srcs(expected_srcs\u003dNone, openbmc_host\u003dNone):\n    r\"\"\"\n    ...existing docstring...\n    openbmc_host       The BMC host to run the peltool command on.\n                       If None, the global ${OPENBMC_HOST} is used.\n    \"\"\"\n    temp_srcs_found \u003d fetch_all_src(openbmc_host\u003dopenbmc_host)\n    ...\nWhy: The commit message states \"support targeting a specific OpenBMC host\" — but two of the ten PEL utility functions that ultimately call peltool are left without this support. Any callers using check_for_unexpected_src or filter_unexpected_srcs in a multi-host scenario will silently fall back to the global host, giving misleading results.\n\n\n🟢 Low Severity (NICE TO FIX)\nIssue #2: fetch_all_pel_ids_for_src — include_hidden_pels passed positionally; consider keyword-only for clarity\nLocation: Line 238 in lib/pel_utils.py\nCurrent Code:\npel_data \u003d get_pel_data_from_bmc(\n    include_hidden_pels, openbmc_host\u003dopenbmc_host\n)\nIssue: include_hidden_pels is forwarded positionally while openbmc_host is forwarded by keyword. fetch_all_src (line 270) uses the same pattern. The mixed style is not wrong, but it slightly reduces readability and is inconsistent with fetch_all_pel_ids_based_on_error_message (line 408) which passes all three arguments — two positional, one keyword — in a longer call. Prefer all-keyword for the multi-host call sites to make intent unambiguous.\nFix:\npel_data \u003d get_pel_data_from_bmc(\n    include_hidden_pels\u003dinclude_hidden_pels, openbmc_host\u003dopenbmc_host\n)\nWhy: Using keyword arguments throughout makes the forwarding chain explicit and self-documenting, which matters in a frequently-referenced utility library.\n```",
+      "revId": "3e22b9157e4d55ded7f3b368d862b24cbfd9d7a9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
