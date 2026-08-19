@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ade6f259_69b24cf0",
+        "filename": "pldm/test_pldm_base.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-08-19T05:48:24Z",
+      "side": 1,
+      "message": "```\npldm/test_pldm_base.robot — data-table (lines 95–99):\n\n-    \u00270\u0027    ${PLDM_BASE_CMDS}\n-    \u00272\u0027    ${PLDM_PLATFORM_CMDS}\n-    \u00273\u0027    ${PLDM_BIOS_CMDS}\n-    \u00274\u0027    ${PLDM_FRU_CMDS}\n-    \u002763\u0027   ${PLDM_OEM_CMDS}\n+    0      ${PLDM_BASE_CMDS}\n+    2      ${PLDM_PLATFORM_CMDS}\n+    3      ${PLDM_BIOS_CMDS}\n+    4      ${PLDM_FRU_CMDS}\n+    63     ${PLDM_OEM_CMDS}\n```\n\npldm/test_pldm_base.robot — Skip If guard (line 169):\n\n```\n-    Skip If    not any(${pldm_type} in e for e in $PLDM_SUPPORTED_TYPES)\n+    Skip If    not any($pldm_type \u003d\u003d e.split(\u0027(\u0027)[0] for e in $PLDM_SUPPORTED_TYPES)\n...    PLDM type ${pldm_type} not supported on this platform.\n```\n\n\nWith pldm_type \u003d 0 (plain string), $pldm_type \u003d\u003d e.split(\u0027(\u0027)[0] becomes \"0\" \u003d\u003d \"0\" — an exact equality check against the numeric prefix of each PLDM_SUPPORTED_TYPES entry. The ${pldm_type} in the message string is intentionally kept with ${} (RF interpolation) as it is display-only and not part of the Python expression.\n\nEliminates the mixed interpolation style, replaces fragile substring matching with an exact prefix equality check (so 0 can never match 10(base)), and prevents the latent TypeError if the keyword is ever called with an integer — all in six lines of change with no logic added.",
+      "revId": "83d18b15899d911dc72041d2151ae72e62d687eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fb6b42a_64249ca0",
+        "filename": "pldm/test_pldm_base.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-08-19T05:48:24Z",
+      "side": 1,
+      "message": "Add an explicit type guard:\n\n```\n${entries}\u003d  Evaluate\n...  $response if isinstance($response, list) else (next((v for v in $response.values() if isinstance(v, list)), []) if isinstance($response, dict) else [])\nRETURN  ${entries}\n```\n\nThen callers can rely on always receiving a list (possibly empty). Add a note in [Documentation] that an empty list is returned for unexpected response types.\n\npldm_utils.py:pldmtool() can return a plain string on SSH error or JSON parse failure. Receiving that string silently as \"a list\" would produce confusing test failures.",
+      "revId": "83d18b15899d911dc72041d2151ae72e62d687eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
