@@ -86,6 +86,8 @@ BMC:
               /tmp/DEVTREE"
             - "/usr/bin/vpd-tool -i > /tmp/vpd-inventory.txt"
             - "cat /sys/kernel/tracing/trace > /tmp/kernel_sys_trace.txt"
+            - "ls -la /usr/local/share/hostfw/running/ >
+              /tmp/hostfw_running_files.txt 2>&1"
         FILES:
             - "/tmp/BMC_flash_side.txt"
             - "/tmp/BMC_hwmon.txt"
@@ -113,6 +115,7 @@ BMC:
             - "/tmp/DEVTREE"
             - "/tmp/vpd-inventory.txt"
             - "/tmp/kernel_sys_trace.txt"
+            - "/tmp/hostfw_running_files.txt"
         PROTOCOL:
             - "SSH"
 
