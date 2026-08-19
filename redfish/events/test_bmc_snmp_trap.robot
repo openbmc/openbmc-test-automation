@@ -285,6 +285,46 @@ Configure Multiple SNMP Managers On BMC And Check Trap On BMC Reboot
     ...  ${CMD_INTERNAL_FAILURE}  ${SNMP_TRAP_BMC_INTERNAL_FAILURE}
 
 
+Delete Non Existing SNMP Manager From BMC
+    [Documentation]  Verify that deleting a non-existing SNMP manager via Redfish returns HTTP 404.
+    [Tags]  Delete_Non_Existing_SNMP_Manager_From_BMC
+    # No SNMP state is created by this test; suite-level teardown (FFDC On Test Case Fail) is sufficient.
+
+    # Delete all existing SNMP managers to ensure clean state.
+    Delete All SNMP Managers
+
+    # Attempt to delete a non-existing SNMP manager and expect HTTP 404.
+    Redfish.Delete  ${subscription_uri}/non_existing_snmp_manager  valid_status_codes=[${HTTP_NOT_FOUND}]
+
+
+Generate Error On BMC When SNMP Manager Is Not Configured
+    [Documentation]  Verify that generating an error log on BMC when no SNMP manager is configured
+    ...              results in no SNMP trap being sent to the listener.
+    [Tags]  Generate_Error_On_BMC_When_SNMP_Manager_Is_Not_Configured
+    [Teardown]  Run Keywords
+    ...  Run Keyword And Ignore Error  SSHLibrary.Switch Connection  snmp_server  AND
+    ...  Run Keyword And Ignore Error  SSHLibrary.Execute Command  sudo killall snmptrapd
+
+    # Delete all existing SNMP managers to ensure none is configured on BMC.
+    Delete All SNMP Managers
+
+    # Start SNMP listener on the remote host to capture any incoming traps.
+    Start SNMP Manager
+
+    # Generate an error log on BMC.
+    BMC Execute Command  ${CMD_INTERNAL_FAILURE}
+
+    # Read listener output and stop snmptrapd.
+    SSHLibrary.Switch Connection  snmp_server
+    Sleep  5s  # 5 s covers observed BMC trap-dispatch latency; increase if spurious traps are missed.
+    ${snmp_listen_out}=  Read  delay=1s
+    SSHLibrary.Execute Command  sudo killall snmptrapd
+
+    # Verify no SNMP trap was sent to the listener.
+    Should Not Contain  ${snmp_listen_out}  ${SNMP_TRAP_BMC_INTERNAL_FAILURE}
+    ...  msg=BMC sent an SNMP trap even though no SNMP manager was configured.
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -339,3 +379,19 @@ Generate Error And Verify System Up Time
     Should Be Equal As Integers  ${bmc_uptime_in_minutes}  ${sysuptime_in_minutes}
 
     RETURN  ${sysuptime_in_minutes}
+
+
+Delete All SNMP Managers
+    [Documentation]  Delete all SNMP managers currently configured on BMC.
+    ...              No-op if no managers are configured.
+
+    ${snmp_mgr_list}=  Get SNMP Manager List
+    FOR  ${snmp_mgr}  IN  @{snmp_mgr_list}
+        # IPv4-only: Fetch From Left splits on the first colon; IPv6 addresses
+        # are not supported here, consistent with lib/snmp/resource.robot scope.
+        ${ip_port}=  Fetch From Right  ${snmp_mgr}  snmp://
+        ${snmp_ip}=  Fetch From Left   ${ip_port}  :
+        ${snmp_port}=  Fetch From Right  ${ip_port}  :
+        Delete SNMP Manager Via Redfish  ${snmp_ip}  ${snmp_port}
+    END
+
