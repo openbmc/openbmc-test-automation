@@ -285,6 +285,41 @@ Configure Multiple SNMP Managers On BMC And Check Trap On BMC Reboot
     ...  ${CMD_INTERNAL_FAILURE}  ${SNMP_TRAP_BMC_INTERNAL_FAILURE}
 
 
+Delete Non-Existing SNMP Manager From BMC
+    [Documentation]  Verify on eth0 that deleting a non-existing SNMP manager via Redfish returns HTTP 404.
+    [Tags]  Delete_Non_Existing_SNMP_Manager_From_BMC
+
+    # Delete all existing SNMP managers to ensure clean state.
+    Delete All SNMP Managers
+
+    # Attempt to delete a non-existing SNMP manager and expect HTTP 404.
+    Redfish.Delete  ${subscription_uri}/snmp1  valid_status_codes=[${HTTP_NOT_FOUND}]
+
+
+Generate Error On BMC When SNMP Manager Is Not Configured
+    [Documentation]  Verify on eth0 that generating an error log on BMC when no SNMP manager is configured
+    ...              results in no SNMP trap being sent to the listener.
+    [Tags]  Generate_Error_On_BMC_When_SNMP_Manager_Is_Not_Configured
+
+    # Delete all existing SNMP managers to ensure none is configured on BMC.
+    Delete All SNMP Managers
+
+    # Start SNMP listener on the remote host to capture any incoming traps.
+    Start SNMP Manager
+
+    # Generate an error log on BMC.
+    BMC Execute Command  ${CMD_INTERNAL_FAILURE}
+
+    # Read listener output and stop snmptrapd.
+    SSHLibrary.Switch Connection  snmp_server
+    ${snmp_listen_out}=  Read  delay=1s
+    SSHLibrary.Execute Command  sudo killall snmptrapd
+
+    # Verify no SNMP trap was sent to the listener.
+    Should Not Contain  ${snmp_listen_out}  ${SNMP_TRAP_BMC_INTERNAL_FAILURE}
+    ...  msg=BMC sent an SNMP trap even though no SNMP manager was configured.
+
+
 *** Keywords ***
 
 Suite Setup Execution
