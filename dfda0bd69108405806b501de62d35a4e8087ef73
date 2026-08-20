@@ -22,6 +22,30 @@
       },
       "revId": "dfda0bd69108405806b501de62d35a4e8087ef73",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a052bc66_c27fe179",
+        "filename": "lib/bmc_ldap_utils.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-08-20T05:27:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d247fb1e_bde87c6a",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 147,
+        "endChar": 16
+      },
+      "revId": "dfda0bd69108405806b501de62d35a4e8087ef73",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
