@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a5a4dc5_2c2d0c17",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-08-20T05:13:36Z",
+      "side": 1,
+      "message": "**Issue #4 (🟢 Low Severity (NICE TO FIX))**: `${xpath_snmp_row_delete_button}` token substitution uses bare strings as sentinels\n\n**Issue**: `SNMP_IP` and `SNMP_PORT` are plain text sentinels embedded in the XPath string. If a real SNMP IP address ever begins with the literal substring `SNMP_IP` (unlikely but syntactically possible), or if the template variable is used without substitution, the XPath will silently match no element and produce a confusing `Element not found` error rather than an obvious template-expansion error.\n-\n\n**Fix**:\n```robot\n  # SNMP_IP and SNMP_PORT are token placeholders; use Replace String before passing to Selenium.\n  ${xpath_snmp_row_delete_button}   //tbody/tr[.//td[normalize-space(.)\u003d\u0027SNMP_IP\u0027] and .//td[normalize-space(.)\u003d\u0027SNMP_PORT\u0027]]//button[@title\u003d\u0027Delete destination\u0027]\n  ```\n\n**Why**: Documents the substitution contract for future maintainers and prevents accidental direct use of the variable without token replacement.",
+      "revId": "b0cb629d73d11351cfc203cd7d964a61ef98dea9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d8bf1e6_0721bbb0",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-08-20T05:13:36Z",
+      "side": 1,
+      "message": "**Issue #2 (🟡 Medium Severity (SHOULD FIX))**: Test case tag uses plural \"Managers\" — inconsistency with single-manager scope\n\n**Issue**: The test configures and deletes a single SNMP manager (`${SNMP_MGR1_IP}`). The plural tag name (`Managers`) implies multiple managers are deleted, which is misleading and inconsistent with the actual scope.\n-\n\n**Fix**:\n```robot\n      [Tags]  Delete_SNMP_Manager_Via_GUI_And_Generate_Error_On_BMC\n  ```\n\n**Why**: Tag names are used for targeted test execution and CI filtering; an inaccurate name causes confusion and reduces discoverability.",
+      "revId": "b0cb629d73d11351cfc203cd7d964a61ef98dea9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ed89586_4e2fec52",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-08-20T05:13:36Z",
+      "side": 1,
+      "message": "**Issue #1 (🟡 Medium Severity (SHOULD FIX))**: `Verify SNMP Manager Configured On BMC` used for negative assertion — inverted logic risk\n\n**Issue**: `Verify SNMP Manager Configured On BMC` is designed as a positive assertion (it calls `List Should Contain Value` and fails if the manager is absent). Wrapping it with `Run Keyword And Return Status` to invert the result is functional, but if the underlying keyword changes its internal implementation (e.g. raises a different exception type or returns before the assertion), the `${status}` capture can silently return `${True}` for reasons unrelated to the manager being present. The established repo pattern for negative SNMP checks uses a dedicated keyword rather than inverting a positive one.\n-\n\n**Fix**:\n```robot\n      @{snmp_mgr_list}\u003d  Get SNMP Manager List\n      ${snmp_ip_port}\u003d  Catenate  ${snmp_ip}:${snmp_port}\n      List Should Not Contain Value  ${snmp_mgr_list}  snmp://${snmp_ip_port}\n      ...  msg\u003dSNMP manager was not deleted from BMC after GUI deletion.\n  ```\n\n**Why**: The current approach is fragile under keyword refactoring and masks the actual assertion logic. A direct `List Should Not Contain Value` call is unambiguous and aligns with the existing positive-check pattern.",
+      "revId": "b0cb629d73d11351cfc203cd7d964a61ef98dea9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07305de6_c370f252",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-08-20T05:13:36Z",
+      "side": 1,
+      "message": "**Issue #3 (🟢 Low Severity (NICE TO FIX))**: `Read  delay\u003d5s` (flush) not strictly necessary before the first `Switch Connection`\n\n**Issue**: The flush occurs immediately after `Start SNMP Manager`, which backgrounds `snmptrapd` with `SSHLibrary.Write`. Any output buffered at this point would be startup noise from `snmptrapd` itself, not a prior trap. A `delay\u003d5s` flush here is safe but adds 5 s of wall-clock time without a documented race condition it is guarding against. The existing repo pattern does not flush before generating the error log.\n-\n\n**Fix**:\n```robot\n      SSHLibrary.Switch Connection  snmp_server\n      Read  delay\u003d1s    # Discard snmptrapd startup noise before triggering error log.\n  ```\n\n**Why**: Consistency with `delay\u003d1s` used in `Create Error Log On BMC And Verify Trap` and `Create Error On BMC And Verify Trap On Non Default Port`; reduces total test execution time by 4 s per run.",
+      "revId": "b0cb629d73d11351cfc203cd7d964a61ef98dea9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
