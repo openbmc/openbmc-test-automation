@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc712e76_73972b42",
+        "filename": "redfish/events/test_bmc_snmp_trap.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-08-20T08:04:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4e87577_c3ef8834",
+      "revId": "b8d4b9e15184d0c548ff4aa4dc06df314cad0d03",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "18b00ccb_83b01609",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-08-20T04:26:00Z",
       "side": 1,
       "message": "**Issue #2 (🟡 Medium Severity (SHOULD FIX))**: SSH connection from `Start SNMP Manager` is not closed on test failure\n\n**Issue**: `Start SNMP Manager` opens an SSH connection aliased `snmp_server`. The test explicitly calls `SSHLibrary.Execute Command  sudo killall snmptrapd` (line 316) and reads output (line 315) only in the happy path. If `BMC Execute Command` (line 311) or an assertion before it raises an exception, `snmptrapd` is left running on the remote host and the SSH connection is left open. The suite-level `FFDC On Test Case Fail` teardown does not close this SSH connection.\n-\n\n**Fix**:\n```robot\n  Generate Error On BMC When SNMP Manager Is Not Configured\n      [Documentation]  Verify that generating an error log on BMC when no SNMP manager is configured\n      ...              results in no SNMP trap being sent to the listener.\n      [Tags]  Generate_Error_On_BMC_When_SNMP_Manager_Is_Not_Configured\n      [Teardown]  Run Keywords\n      ...  SSHLibrary.Switch Connection  snmp_server  AND\n      ...  SSHLibrary.Execute Command  sudo killall snmptrapd\n  ```\n\n**Why**: Leaving `snmptrapd` running between test cases can cause subsequent tests that start a new listener to receive stale trap packets from a prior BMC error, producing false failures.",
+      "revId": "b8d4b9e15184d0c548ff4aa4dc06df314cad0d03",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74e7d607_408c8bee",
+        "filename": "redfish/events/test_bmc_snmp_trap.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-08-20T08:04:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18b00ccb_83b01609",
       "revId": "b8d4b9e15184d0c548ff4aa4dc06df314cad0d03",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
