@@ -86,6 +86,24 @@
       "message": "**Issue #3 (🟢 Low Severity (NICE TO FIX))**: `Delete All SNMP Managers` keyword lacks `[Documentation]` argument descriptions\n\n**Issue**: The keyword has no arguments, so no argument block is strictly needed. However, the keyword silently does nothing when no SNMP managers are configured (empty list → loop does not execute). This edge case is not documented, which may confuse future maintainers who wonder if a \"no managers configured\" state will cause a failure.\n-\n\n**Fix**:\n```robot\n  [Documentation]  Delete all SNMP managers currently configured on BMC.\n  ...              No-op if no managers are configured.\n  ```\n\n**Why**: Explicit documentation of the no-op behavior prevents maintainers from adding unnecessary guard checks.",
       "revId": "b8d4b9e15184d0c548ff4aa4dc06df314cad0d03",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc9562a4_ef1a87e5",
+        "filename": "redfish/events/test_bmc_snmp_trap.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-08-20T08:05:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c804d7e_92527ce9",
+      "revId": "b8d4b9e15184d0c548ff4aa4dc06df314cad0d03",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
