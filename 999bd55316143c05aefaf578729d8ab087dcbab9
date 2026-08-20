@@ -16,6 +16,29 @@
       "message": "Unconditional 15-second Sleep after rejected PATCH\n\nLocation: Line 94 in lib/bmc_ldap_utils.robot (pre-existing, surfaced by this change)\n\nSuggestion:\n```\n    IF  ${valid_status_codes} \u003d\u003d [${HTTP_OK},${HTTP_NO_CONTENT}]\n        Sleep  15s\n    END\n```\n\nThe sleep exists to allow the LDAP daemon time to restart after a successful configuration update. When a caller expects an error response (HTTP_BAD_REQUEST), the BMC rejects the PATCH without applying any change, so no daemon restart occurs and the 15-second sleep is pure overhead. The condition shown is illustrative; a boolean apply_sleep flag would also work.",
       "revId": "999bd55316143c05aefaf578729d8ab087dcbab9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15468d01_1945957e",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1002670
+      },
+      "writtenOn": "2026-08-20T14:54:24Z",
+      "side": 1,
+      "message": "The existing test Verify LDAP Login With Invalid BASE DN in the same file already demonstrates this approach — it keeps LDAP_SERVER_URI, LDAP_BIND_DN and LDAP_BIND_DN_PASSWORD valid, and only changes the BASE DN. Keeping the other parameters valid would make the test more focused and easier to read, and I\u0027d suggest applying the same here.",
+      "range": {
+        "startLine": 404,
+        "startChar": 45,
+        "endLine": 405,
+        "endChar": 52
+      },
+      "revId": "999bd55316143c05aefaf578729d8ab087dcbab9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
