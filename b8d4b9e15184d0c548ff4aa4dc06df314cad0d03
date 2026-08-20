@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4e87577_c3ef8834",
+        "filename": "redfish/events/test_bmc_snmp_trap.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-08-20T04:26:00Z",
+      "side": 1,
+      "message": "**Issue #1 (🟡 Medium Severity (SHOULD FIX))**: Hardcoded `snmp1` URI suffix is a brittle assumption\n\n**Issue**: After `Delete All SNMP Managers` empties the subscription list, the test attempts to delete `/redfish/v1/EventService/Subscriptions/snmp1`. The assumption is that `snmp1` will never exist after a full deletion. This is generally true since all managers are deleted, but it relies on knowing that `snmp1` is a valid subscription ID format that the BMC would assign. On a freshly started BMC the ID counter may have advanced past `snmp1` (e.g., `snmp10`, `snmp11`); while the test still gets a 404, the brittle ID makes the test harder to understand and may break on firmware that uses different ID schemes.\n-\n\n**Fix**:\n```robot\n  Redfish.Delete  ${subscription_uri}/non_existing_snmp_manager  valid_status_codes\u003d[${HTTP_NOT_FOUND}]\n  ```\n\n**Why**: An explicitly invalid URI removes the ambiguity about ID assignment and makes the test self-documenting. This pattern is also less likely to fail on firmware with different subscription ID naming.",
+      "revId": "b8d4b9e15184d0c548ff4aa4dc06df314cad0d03",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18b00ccb_83b01609",
+        "filename": "redfish/events/test_bmc_snmp_trap.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-08-20T04:26:00Z",
+      "side": 1,
+      "message": "**Issue #2 (🟡 Medium Severity (SHOULD FIX))**: SSH connection from `Start SNMP Manager` is not closed on test failure\n\n**Issue**: `Start SNMP Manager` opens an SSH connection aliased `snmp_server`. The test explicitly calls `SSHLibrary.Execute Command  sudo killall snmptrapd` (line 316) and reads output (line 315) only in the happy path. If `BMC Execute Command` (line 311) or an assertion before it raises an exception, `snmptrapd` is left running on the remote host and the SSH connection is left open. The suite-level `FFDC On Test Case Fail` teardown does not close this SSH connection.\n-\n\n**Fix**:\n```robot\n  Generate Error On BMC When SNMP Manager Is Not Configured\n      [Documentation]  Verify that generating an error log on BMC when no SNMP manager is configured\n      ...              results in no SNMP trap being sent to the listener.\n      [Tags]  Generate_Error_On_BMC_When_SNMP_Manager_Is_Not_Configured\n      [Teardown]  Run Keywords\n      ...  SSHLibrary.Switch Connection  snmp_server  AND\n      ...  SSHLibrary.Execute Command  sudo killall snmptrapd\n  ```\n\n**Why**: Leaving `snmptrapd` running between test cases can cause subsequent tests that start a new listener to receive stale trap packets from a prior BMC error, producing false failures.",
+      "revId": "b8d4b9e15184d0c548ff4aa4dc06df314cad0d03",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c804d7e_92527ce9",
+        "filename": "redfish/events/test_bmc_snmp_trap.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-08-20T04:26:00Z",
+      "side": 1,
+      "message": "**Issue #3 (🟢 Low Severity (NICE TO FIX))**: `Delete All SNMP Managers` keyword lacks `[Documentation]` argument descriptions\n\n**Issue**: The keyword has no arguments, so no argument block is strictly needed. However, the keyword silently does nothing when no SNMP managers are configured (empty list → loop does not execute). This edge case is not documented, which may confuse future maintainers who wonder if a \"no managers configured\" state will cause a failure.\n-\n\n**Fix**:\n```robot\n  [Documentation]  Delete all SNMP managers currently configured on BMC.\n  ...              No-op if no managers are configured.\n  ```\n\n**Why**: Explicit documentation of the no-op behavior prevents maintainers from adding unnecessary guard checks.",
+      "revId": "b8d4b9e15184d0c548ff4aa4dc06df314cad0d03",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
