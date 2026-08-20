@@ -393,18 +393,42 @@ Verify LDAP Login With Invalid Data
     Redfish Verify LDAP Login  ${False}
 
 
-Verify LDAP Config Creation Without BASE DN
-    [Documentation]  Verify that LDAP login with LDAP configuration
-    ...  created without BASE_DN fails.
-    [Tags]  Verify_LDAP_Config_Creation_Without_BASE_DN
-    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
-    ...  Redfish.Login  AND
+Verify LDAP Config Update Rejected Empty BASE DN
+    [Documentation]  Verify that LDAP configuration update with an empty
+    ...  BASE_DN is rejected by the BMC.
+    [Tags]  Verify_LDAP_Config_Update_Rejected_Empty_BASE_DN
+    [Teardown]  Run Keywords  Redfish.Login  AND
+    ...  FFDC On Test Case Fail  AND
     ...  Create LDAP Configuration
 
-    Create LDAP Configuration  ${LDAP_TYPE}  Invalid_LDAP_Server_URI
-    ...  Invalid_LDAP_BIND_DN  LDAP_BIND_DN_PASSWORD  ${EMPTY}
-    Sleep  ${ldap_timeout}
-    Redfish Verify LDAP Login  ${False}
+    Create LDAP Configuration  ${LDAP_TYPE}  ${LDAP_SERVER_URI}
+    ...  ${LDAP_BIND_DN}  ${LDAP_BIND_DN_PASSWORD}  ${EMPTY}  IPv4
+    ...  [${HTTP_BAD_REQUEST}]
+
+
+Verify LDAP Config Update Reject Empty List BASE DN
+    [Documentation]  Verify that LDAP configuration update with an empty
+    ...  List BASE_DN is rejected by the BMC.
+    [Tags]  Verify_LDAP_Config_Update_Reject_Empty_List_BASE_DN
+    [Teardown]  Run Keywords  Redfish.Login  AND
+    ...  FFDC On Test Case Fail  AND
+    ...  Create LDAP Configuration
+
+    ${payload}=  Catenate  {'${LDAP_TYPE}':
+    ...  {'ServiceEnabled': ${True},
+    ...   'ServiceAddresses': ['${LDAP_SERVER_URI}'],
+    ...   'Authentication':
+    ...       {'AuthenticationType': 'UsernameAndPassword',
+    ...        'Username':'${LDAP_BIND_DN}',
+    ...        'Password': '${LDAP_BIND_DN_PASSWORD}'},
+    ...   'LDAPService':
+    ...       {'SearchSettings':
+    ...           {'BaseDistinguishedNames': []}}}}
+
+    ${resp}=  Redfish.Patch  ${REDFISH_ACCOUNTS_SERVICE_URI}  body=${payload}
+    ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
+    Should Contain  ${resp.text}  PropertyValueNotInList
+    Should Contain  ${resp.text}  BaseDistinguishedNames
 
 
 Verify LDAP Authentication Without Password

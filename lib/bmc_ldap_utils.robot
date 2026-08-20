@@ -65,6 +65,7 @@ Create LDAP Configuration
     [Arguments]  ${ldap_type}=${LDAP_TYPE}  ${ldap_server_uri}=${LDAP_SERVER_URI}
     ...  ${ldap_bind_dn}=${LDAP_BIND_DN}  ${ldap_bind_dn_password}=${LDAP_BIND_DN_PASSWORD}
     ...  ${ldap_base_dn}=${LDAP_BASE_DN}  ${version}=IPv4
+    ...  ${valid_status_codes}=[${HTTP_OK},${HTTP_NO_CONTENT}]
 
     # Description of argument(s):
     # ldap_type              The LDAP type ("ActiveDirectory" or "LDAP").
@@ -73,6 +74,7 @@ Create LDAP Configuration
     # ldap_bind_dn_password  The LDAP bind distinguished name password.
     # ldap_base_dn           The LDAP base distinguished name.
     # version                IP version to use for configuration ("IPv4" or "IPv6").
+    # valid_status_codes     Expected HTTP status code(s) for the configuration PATCH.
 
     ${body}=  Catenate  {'${ldap_type}':
     ...  {'ServiceEnabled': ${True},
@@ -87,9 +89,14 @@ Create LDAP Configuration
 
     ${patch}=  Set Variable If  '${version}' == 'IPv4'  Redfish.Patch  RedfishIPv6.Patch
 
-    Run Keyword  ${patch}  ${REDFISH_BASE_URI}AccountService  body=${body}  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
+    Run Keyword  ${patch}  ${REDFISH_BASE_URI}AccountService  body=${body}  valid_status_codes=${valid_status_codes}
 
-    Sleep  15s
+    ${expect_success}=  Run Keyword And Return Status
+    ...  Should Contain Any  ${valid_status_codes}  ${HTTP_OK}  ${HTTP_NO_CONTENT}
+
+    IF  ${expect_success}
+        Sleep  15s
+    END
 
 
 Update LDAP Configuration With LDAP User Role And Group
