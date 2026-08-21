@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1092a6ee_355eb26c",
+        "filename": "redfish/events/test_bmc_snmp_trap.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-08-21T13:32:39Z",
+      "side": 1,
+      "message": "**Issue #3 (🟢 Low Severity (NICE TO FIX))**: `Delete Non Existing SNMP Manager From BMC` has no teardown comment\n\n**Issue**: The test creates no SNMP managers, so no SNMP-specific cleanup is needed and the suite-level `Test Teardown  FFDC On Test Case Fail` is sufficient. The absence of a per-test `[Teardown]` is correct. However, there is no comment documenting this intent, which may leave future maintainers wondering whether the teardown was accidentally omitted.\n-\n\n**Fix**:\n```robot\n  # No SNMP state is created by this test; suite-level teardown (FFDC On Test Case Fail) is sufficient.\n  Delete All SNMP Managers\n  ```\n\n**Why**: Documents intent without introducing a redundant `[Teardown]` entry. Readers immediately understand the omission is deliberate.",
+      "revId": "fb8e0c030a197400cae77e5fa2d838b5627ed95c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89cda440_3fd23d2b",
+        "filename": "redfish/events/test_bmc_snmp_trap.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-08-21T13:32:39Z",
+      "side": 1,
+      "message": "**Issue #2 (🟡 Medium Severity (SHOULD FIX))**: Hard-coded `Sleep 5s` with no justification comment\n\n**Issue**: The 5-second sleep precedes the `Read` call and is the sole mechanism for waiting for trap output. Other negative tests in this suite that test missing trap dispatches do not rely on a hard-coded sleep — they either do not start the listener at all or use the existing `delay` mechanism. The sleep value is undocumented (no inline comment explains why 5 s is sufficient/safe), making it fragile: too short on slow environments, too long in CI.\n-\n\n**Fix**:\n```robot\n  Sleep  5s  # Allow time for any spurious SNMP trap to arrive before asserting absence.\n  ```\n\n**Why**: Undocumented sleeps are a maintenance risk and a common source of flaky tests. Adding the comment is the minimal fix; replacing with `Read  delay\u003d5s` is the preferred solution.",
+      "revId": "fb8e0c030a197400cae77e5fa2d838b5627ed95c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1766b2ac_7d9e9808",
+        "filename": "redfish/events/test_bmc_snmp_trap.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-08-21T13:32:39Z",
+      "side": 1,
+      "message": "**Issue #1 (🟡 Medium Severity (SHOULD FIX))**: `SSHLibrary.Read` called without `delay` argument — may return empty buffer\n\n**Issue**: All other usages of `SSHLibrary.Read` in the repository (e.g., `Create Error On BMC And Verify Trap`, `Create Error On BMC And Verify Trap On Non Default Port`) pass `delay\u003d1s` to allow the SSH channel to accumulate output before reading. Without `delay`, `Read` returns immediately on whatever is in the buffer, which may be empty or incomplete if the BMC has not yet dispatched (or been suppressed from dispatching) the event. Even though the test wants to assert no trap was received, a race can produce a false-positive pass when `delay` is missing: the buffer appears empty because we read before any potential trap arrived, not because none was sent.\n-\n\n**Fix**:\n```robot\n  ${snmp_listen_out}\u003d  Read  delay\u003d1s\n  ```\n\n**Why**: Consistent with existing library patterns; ensures the read waits long enough for any stray trap to appear before asserting absence. This makes the test trustworthy as a negative assertion.",
+      "revId": "fb8e0c030a197400cae77e5fa2d838b5627ed95c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
