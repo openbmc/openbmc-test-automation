@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f1f8bc1_04b25bd5",
+        "filename": "redfish/events/test_bmc_snmp_trap.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-08-21T20:27:00Z",
+      "side": 1,
+      "message": "**Issue #2 (🟢 Low Severity (NICE TO FIX))**: Fixed `Sleep 5s` for absence assertion has no duration justification\n\n**Issue**: The comment explains *why* to sleep but not *why 5 seconds* is the right duration. Future maintainers have no basis for increasing or decreasing the value if flakiness is observed.\n-\n\n**Fix**:\n```robot\n  Sleep  5s  # 5 s covers observed BMC trap-dispatch latency; increase if spurious traps are missed.\n  ```\n\n**Why**: Provides a maintenance anchor for the magic number without requiring a code change.",
+      "revId": "abbb1602e6a7c815d88d0cf819a1d36703a1400c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "670f7ab6_34748349",
+        "filename": "redfish/events/test_bmc_snmp_trap.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-08-21T20:27:00Z",
+      "side": 1,
+      "message": "**Issue #1 (🟡 Medium Severity (SHOULD FIX))**: `Delete All SNMP Managers` — IPv4-only parsing assumption is undocumented\n\n**Issue**: `Fetch From Left  ${ip_port}  :` splits on the first colon. For IPv4 (`10.6.6.6:162`) this correctly yields the IP. For an IPv6 literal (`[::1]:162`) it would yield `[` and produce a silently incorrect `Delete SNMP Manager Via Redfish` call. The limitation is undocumented, making it a maintenance hazard if IPv6 variables are ever added to `lib/snmp/resource.robot`.\n-\n\n**Fix**:\n```robot\n  # IPv4-only: Fetch From Left splits on the first colon; IPv6 addresses\n  # are not supported here, consistent with lib/snmp/resource.robot scope.\n  ${ip_port}\u003d  Fetch From Right  ${snmp_mgr}  snmp://\n  ${snmp_ip}\u003d  Fetch From Left   ${ip_port}  :\n  ${snmp_port}\u003d  Fetch From Right  ${ip_port}  :\n  ```\n\n**Why**: Makes the constraint visible to future contributors and prevents silent misbehaviour if IPv6 test variables are added later.",
+      "revId": "abbb1602e6a7c815d88d0cf819a1d36703a1400c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
