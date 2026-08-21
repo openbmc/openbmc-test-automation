@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a94466d5_d0f0d7b5",
+        "filename": "lib/gen_robot_ssh.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-08-21T07:35:47Z",
+      "side": 1,
+      "message": "Unconditional close_all_connections() closes connections for all hosts, not just the current call, defeating connection reuse\n\n```\n# Close only the connection that was just used, instead of tearing\n# down every open connection (SSHLibrary\u0027s built-in close_connection()\n# operates on the currently active/switched-to connection only).\nsshlib.close_connection()\n```\n\nexecute_ssh_command is designed around a connection-caching model: find_connection searches existing SSHLibrary connections and reuses them via switch_connection to avoid repeated TCP/SSH handshakes and re-logins. Calling sshlib.close_all_connections() unconditionally at the end of every successful call closes every open connection — including connections to hosts that were not even touched by this call (e.g. a suite holding a concurrent BMC connection and an OS-host connection). This means:\n\nAny subsequent execute_ssh_command call, even to the same host, must reconnect and re-login from scratch, adding a full SSH handshake + login on every single command instead of only when actually switching hosts.\n\nMulti-host test flows that interleave commands between two or more hosts lose the connection for the host not currently in use, forcing a full reconnect the next time it is addressed — this is a functional regression for any test relying on the connection-reuse design already built into this file (find_connection, switch_connection).\n\nThe reported problem (stale connection object left behind for a different host) can be solved by closing only the connection that has become stale (or only when the target host actually changes), rather than closing all connections indiscriminately.",
+      "revId": "476c8b43b31e8d91856553f29e482d3547eca691",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
