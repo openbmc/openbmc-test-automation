@@ -90,7 +90,7 @@ Verify KVM WebSocket Unauthorized Access Is Rejected
     ...  KVM WebSocket endpoint should reject browser request without session cookie with 401
 
 
-Verify KVM Role Based Access Control
+Verify KVM Role Based Access Control Via Web UI
     [Documentation]  Verify KVM access control for all user roles via Web UI only.
     ...  Logs in as each role through the browser and checks the KVM page state:
     ...  - Administrator : Connected status, canvas rendered, Ctrl+Alt+Delete visible
