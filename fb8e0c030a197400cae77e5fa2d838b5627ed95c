@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e692dbc1_cd9db21e",
+        "filename": "redfish/events/test_bmc_snmp_trap.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-08-21T15:07:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1092a6ee_355eb26c",
+      "revId": "fb8e0c030a197400cae77e5fa2d838b5627ed95c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "89cda440_3fd23d2b",
@@ -35,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1abd4a40_21f016b6",
+        "filename": "redfish/events/test_bmc_snmp_trap.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-08-21T15:07:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "89cda440_3fd23d2b",
+      "revId": "fb8e0c030a197400cae77e5fa2d838b5627ed95c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1766b2ac_7d9e9808",
@@ -48,6 +84,24 @@
       "writtenOn": "2026-08-21T13:32:39Z",
       "side": 1,
       "message": "**Issue #1 (🟡 Medium Severity (SHOULD FIX))**: `SSHLibrary.Read` called without `delay` argument — may return empty buffer\n\n**Issue**: All other usages of `SSHLibrary.Read` in the repository (e.g., `Create Error On BMC And Verify Trap`, `Create Error On BMC And Verify Trap On Non Default Port`) pass `delay\u003d1s` to allow the SSH channel to accumulate output before reading. Without `delay`, `Read` returns immediately on whatever is in the buffer, which may be empty or incomplete if the BMC has not yet dispatched (or been suppressed from dispatching) the event. Even though the test wants to assert no trap was received, a race can produce a false-positive pass when `delay` is missing: the buffer appears empty because we read before any potential trap arrived, not because none was sent.\n-\n\n**Fix**:\n```robot\n  ${snmp_listen_out}\u003d  Read  delay\u003d1s\n  ```\n\n**Why**: Consistent with existing library patterns; ensures the read waits long enough for any stray trap to appear before asserting absence. This makes the test trustworthy as a negative assertion.",
+      "revId": "fb8e0c030a197400cae77e5fa2d838b5627ed95c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9080b161_c7ebcfc2",
+        "filename": "redfish/events/test_bmc_snmp_trap.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-08-21T15:07:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1766b2ac_7d9e9808",
       "revId": "fb8e0c030a197400cae77e5fa2d838b5627ed95c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
