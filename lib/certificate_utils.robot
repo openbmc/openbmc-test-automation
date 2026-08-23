@@ -368,3 +368,51 @@ Modify BMC Date
     Wait Until Keyword Succeeds  30 sec  10 sec
     ...  Redfish.Patch  ${REDFISH_BASE_URI}Managers/${MANAGER_ID}  body={'DateTime': '${new_time_format}'}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+
+Generate CSR Via Redfish
+    [Documentation]  Generate CSR using Redfish.
+    [Arguments]  ${cert_type}  ${key_pair_algorithm}  ${key_bit_length}  ${key_curv_id}  ${expected_status}
+
+    # Description of argument(s):
+    # cert_type           Certificate type ("Server" or "Client").
+    # key_pair_algorithm  CSR key pair algorithm ("EC" or "RSA")
+    # key_bit_length      CSR key bit length ("2048").
+    # key_curv_id         CSR key curv id ("prime256v1" or "secp521r1" or "secp384r1").
+    # expected_status     Expected status of certificate replace Redfish
+    #                     request ("ok" or "error").
+
+    IF  '${cert_type}' == 'Server'
+        VAR  ${certificate_uri}  ${REDFISH_HTTPS_CERTIFICATE_URI}/
+    ELSE IF  '${cert_type}' == 'Client'
+        VAR  ${certificate_uri}  ${REDFISH_LDAP_CERTIFICATE_URI}/
+    ELSE
+        VAR  ${certificate_uri}  None
+    END
+
+    ${certificate_dict}=  Create Dictionary  @odata.id=${certificate_uri}
+    ${payload}=  Create Dictionary  City=Austin  CertificateCollection=${certificate_dict}
+    ...  CommonName=${OPENBMC_HOST}  Country=US  Organization=xyz
+    ...  OrganizationalUnit=ISL  State=AU  KeyBitLength=${key_bit_length}
+    ...  KeyPairAlgorithm=${key_pair_algorithm}  KeyCurveId=${key_curv_id}
+
+    # Remove not applicable field for CSR generation.
+    IF  '${key_pair_algorithm}' == 'EC'
+        Remove From Dictionary  ${payload}  KeyBitLength
+    ELSE IF  '${key_pair_algorithm}' == 'RSA'
+        Remove From Dictionary  ${payload}  KeyCurveId
+    END
+
+    IF  '${expected_status}' == 'ok'
+        ${expected_resp}=    Evaluate    [${HTTP_OK}]
+    ELSE IF  '${expected_status}' == 'error'
+        ${expected_resp}=  Evaluate  [${HTTP_INTERNAL_SERVER_ERROR}, ${HTTP_BAD_REQUEST}]
+    ELSE
+        ${expected_resp}=  Evaluate  []
+    END
+
+    ${resp}=  redfish.Post  /redfish/v1/CertificateService/Actions/CertificateService.GenerateCSR
+    ...  body=${payload}  valid_status_codes=${expected_resp}
+
+    # Delay added between two CSR generation request.
+    Sleep  5s
