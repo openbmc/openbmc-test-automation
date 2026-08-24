@@ -33,6 +33,24 @@
       "message": "even when in non secure mode.. user can upload certificates.",
       "revId": "05cec56d6bb12fe1131598929d8d6b60e9264393",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "833782ed_ab6f89ae",
+        "filename": "lib/bmc_ldap_utils.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-08-24T08:51:17Z",
+      "side": 1,
+      "message": "Yes, Redfish allows certificate uploads regardless of ldap or ldaps URI scheme. The guard at line 133 (IF not ${is_secure} RETURN) is checking that. \n\nOn OpenBMC, when a CA certificate and an LDAP client certificate are both present, the BMC automatically treats the connection as ldaps://.",
+      "parentUuid": "0f2897cb_7833990a",
+      "revId": "05cec56d6bb12fe1131598929d8d6b60e9264393",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
