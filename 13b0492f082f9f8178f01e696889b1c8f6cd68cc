@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0c0a8ab_599ed196",
+        "filename": "redfish/events/test_bmc_snmp_trap.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2026-08-24T07:47:42Z",
+      "side": 1,
+      "message": "this test case does not seem to be meanigful.\nbetter configure SNMP then delete it and then expect traps are not coming after deleting..",
+      "revId": "13b0492f082f9f8178f01e696889b1c8f6cd68cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
