@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb6b646a_59bee5e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2026-08-24T07:58:27Z",
+      "side": 1,
+      "message": "Can you clarify two things:\n\nWhat happens if we don’t add this code? What functionality, scenario, or requirement will be impacted?\nWhat specific benefit do we get by adding this code? What problem does it solve or what additional coverage/capability does it provide?",
+      "revId": "05cec56d6bb12fe1131598929d8d6b60e9264393",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f2897cb_7833990a",
+        "filename": "lib/bmc_ldap_utils.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2026-08-24T07:58:27Z",
+      "side": 1,
+      "message": "even when in non secure mode.. user can upload certificates.",
+      "revId": "05cec56d6bb12fe1131598929d8d6b60e9264393",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
