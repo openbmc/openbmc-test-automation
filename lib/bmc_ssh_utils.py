@@ -80,7 +80,7 @@ def bmc_execute_command(
     open_connection_args = {
         "host": openbmc_host,
         "alias": "bmc_connection",
-        "timeout": "25.0",
+        "timeout": "60.0",
         "prompt": "# ",
         "port": ssh_port,
     }
