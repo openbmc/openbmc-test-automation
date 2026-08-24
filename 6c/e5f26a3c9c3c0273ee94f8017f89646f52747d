@@ -1,0 +1,10 @@
+Code-Review+2: George Keishing <gkeishin@gmail.com>
+Verified+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Code-Review+1: Nandakumar B <nandakumarb@ami.com>
+Code-Review+1: Abhijith Naik <Abhijith.Naik@ibm.com>
+Submitted-by: George Keishing <gkeishin@gmail.com>
+Submitted-at: Mon, 24 Aug 2026 04:55:45 +0000
+Reviewed-on: https://gerrit.openbmc.org/c/openbmc/openbmc-test-automation/+/93465
+Comments-Total: 15
+Project: openbmc/openbmc-test-automation
+Branch: refs/heads/master
