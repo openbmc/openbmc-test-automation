@@ -75,6 +75,10 @@ class SSHRemoteclient:
                 timeout=60,
                 look_for_keys=False,
             )
+            # Send keepalive packets every 30 seconds so the BMC SSH daemon
+            # does not drop the idle session while protocol checks (e.g.
+            # ipmitool) are blocking the main thread.
+            self.sshclient.get_transport().set_keepalive(30)
 
         except (
             BadHostKeyException,

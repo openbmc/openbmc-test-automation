@@ -56,13 +56,16 @@ BMC:
               >/tmp/BMC_flash_side.txt"
             - "grep -r . /sys/class/hwmon/* >/tmp/BMC_hwmon.txt"
             - "top -n 1 -b >/tmp/BMC_proc_list.txt"
-            - "ls -Al /proc/*/fd/ >/tmp/BMC_proc_fd_active_list.txt"
-            - "journalctl -o short-precise >/tmp/BMC_journalctl.txt"
-            - "journalctl -o json-pretty >/tmp/BMC_journalctl_pretty.json"
+            - { "ls -Al /proc/*/fd/ >/tmp/BMC_proc_fd_active_list.txt": 600 }
+            - { "journalctl -o short-precise >/tmp/BMC_journalctl.txt": 600 }
+            - {
+                  "journalctl -o json-pretty >/tmp/BMC_journalctl_pretty.json":
+                      600,
+              }
             - "dmesg >/tmp/BMC_dmesg.txt"
             - "cat /proc/cpuinfo >/tmp/BMC_procinfo.txt"
             - "cat /proc/meminfo >/tmp/BMC_meminfo.txt"
-            - "systemctl status --all >/tmp/BMC_systemd.txt"
+            - { "systemctl status --all >/tmp/BMC_systemd.txt": 600 }
             - "systemctl list-units --failed >/tmp/BMC_failed_service.txt"
             - "systemctl list-jobs >/tmp/BMC_list_service.txt"
             - "peltool -l >/tmp/PEL_logs_list.json"

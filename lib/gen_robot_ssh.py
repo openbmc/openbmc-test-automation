@@ -95,7 +95,10 @@ def find_connection(open_connection_args={}):
         connection_dict = dict(
             (key, str(value)) for key, value in connection._config.items()
         )
-        if dict(connection_dict, **open_connection_args) == connection_dict:
+        # Stringify search args so types match the str-converted connection_dict
+        # (e.g. port may arrive as int from Robot variables).
+        str_search_args = {k: str(v) for k, v in open_connection_args.items()}
+        if dict(connection_dict, **str_search_args) == connection_dict:
             return connection
 
     return False
