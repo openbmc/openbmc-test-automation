@@ -538,12 +538,12 @@ Configure IP Address Via Different User Roles And Verify
 
     [Template]  Update LDAP User Role And Configure IP Address
     # Verify LDAP user with Administrator privilege is able to configure IP address.
-    ${LDAP_TYPE}  Administrator    ${GROUP_NAME}  [${HTTP_OK},${HTTP_NO_CONTENT}]
+    ${LDAP_TYPE}  Administrator    ${GROUP_NAME}  ${HTTP_OK}
 
     # Verify LDAP user with ReadOnly privilege is forbidden to configure IP address.
     ${LDAP_TYPE}  ReadOnly         ${GROUP_NAME}  ${HTTP_FORBIDDEN}
 
-    # Verify LDAP user with Operator privilege is able to configure IP address.
+    # Verify LDAP user with Operator privilege is forbidden to configure IP address.
     ${LDAP_TYPE}  Operator         ${GROUP_NAME}  ${HTTP_FORBIDDEN}
 
 
@@ -1216,7 +1216,7 @@ Update LDAP User Role And Host Poweron
 
 Update LDAP User Role And Configure IP Address
     [Documentation]  Update LDAP user role and configure IP address.
-    [Arguments]  ${ldap_type}  ${group_privilege}  ${group_name}  ${valid_status_code}=[${HTTP_OK,${HTTP_NO_CONTENT}]
+    [Arguments]  ${ldap_type}  ${group_privilege}  ${group_name}  ${valid_status_code}=${HTTP_OK}
     [Teardown]  Run Keywords  Redfish.Logout  AND  Redfish.Login  AND  Delete IP Address  ${test_ip}
 
     # Description of argument(s):
