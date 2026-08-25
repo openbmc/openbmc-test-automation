@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f34a165_e4da8be9",
+        "filename": "lib/bmc_ldap_utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1002670
+      },
+      "writtenOn": "2026-08-25T03:25:12Z",
+      "side": 1,
+      "message": "The proposed condition works for the current default case, but could we make it more robust by checking whether `valid_status_codes` contains a successful status code instead of requiring the exact `[${HTTP_OK},${HTTP_NO_CONTENT}]` list?\n\nFor example, `Create LDAP Configuration` defaults to:\n\n```robotframework\n...  ${valid_status_codes}\u003d[${HTTP_OK},${HTTP_NO_CONTENT}]\n```\n\nbut callers may also use `[${HTTP_NO_CONTENT}]` for a successful update, for example:\n\n```robotframework\nCreate LDAP Configuration    valid_status_codes\u003d[${HTTP_NO_CONTENT}]\n```\n\nIn this case, the LDAP service may still need the 15-second restart wait.Therefore, the condition could be changed to:\n\n```robotframework\n${update_should_succeed}\u003d  Run Keyword And Return Status\n...  Should Contain Any  ${valid_status_codes}\n...  ${HTTP_OK}  ${HTTP_NO_CONTENT}\n\nIF  ${update_should_succeed}\n    Sleep  15s\nEND\n```",
+      "range": {
+        "startLine": 94,
+        "startChar": 29,
+        "endLine": 94,
+        "endChar": 33
+      },
+      "revId": "1378958c94f67109e5f6f9cc18c644cc35f9741a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
