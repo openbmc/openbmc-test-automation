@@ -16,6 +16,24 @@
       "message": "The setup removes the existing LDAP client certificate(s) before uploading LDAP_CLIENT_CERT_FILE, but the teardown does not restore them. Since the original client certificate is removed rather than preserved alongside the test certificate, could we restore the original certificate during teardown to avoid leaving the BMC in a modified state?",
       "revId": "c449e627e423a27583f6d469367ac2853f105cab",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "666dd41b_b7622ac0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-08-25T05:47:48Z",
+      "side": 1,
+      "message": "Only one LDAP client certificate can exist at a time on the BMC and must be replaced when a new one is uploaded, so restoring the original during teardown is not needed as the BMC does not require the pre-existing certificate for normal operation.",
+      "parentUuid": "7015655d_c9c250c2",
+      "revId": "c449e627e423a27583f6d469367ac2853f105cab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
