@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a88e2827_01d3eb7b",
+        "filename": "redfish/events/test_bmc_snmp_trap.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2026-08-26T05:20:56Z",
+      "side": 1,
+      "message": "Run SNMP manager only once \u0026 kill it only once.",
+      "revId": "c03c7228c81c8eff5357fee18c9b4e2b8937b813",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
