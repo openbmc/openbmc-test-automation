@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "24c9f713_89ccf32d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-08-26T06:14:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b5b411d_11496268",
+      "range": {
+        "startLine": 7,
+        "startChar": 12,
+        "endLine": 7,
+        "endChar": 15
+      },
+      "revId": "1378958c94f67109e5f6f9cc18c644cc35f9741a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f34a165_e4da8be9",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-08-25T03:25:12Z",
       "side": 1,
       "message": "The proposed condition works for the current default case, but could we make it more robust by checking whether `valid_status_codes` contains a successful status code instead of requiring the exact `[${HTTP_OK},${HTTP_NO_CONTENT}]` list?\n\nFor example, `Create LDAP Configuration` defaults to:\n\n```robotframework\n...  ${valid_status_codes}\u003d[${HTTP_OK},${HTTP_NO_CONTENT}]\n```\n\nbut callers may also use `[${HTTP_NO_CONTENT}]` for a successful update, for example:\n\n```robotframework\nCreate LDAP Configuration    valid_status_codes\u003d[${HTTP_NO_CONTENT}]\n```\n\nIn this case, the LDAP service may still need the 15-second restart wait.Therefore, the condition could be changed to:\n\n```robotframework\n${update_should_succeed}\u003d  Run Keyword And Return Status\n...  Should Contain Any  ${valid_status_codes}\n...  ${HTTP_OK}  ${HTTP_NO_CONTENT}\n\nIF  ${update_should_succeed}\n    Sleep  15s\nEND\n```",
+      "range": {
+        "startLine": 94,
+        "startChar": 29,
+        "endLine": 94,
+        "endChar": 33
+      },
+      "revId": "1378958c94f67109e5f6f9cc18c644cc35f9741a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68d0f0f4_ebf2ff4a",
+        "filename": "lib/bmc_ldap_utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-08-26T06:14:06Z",
+      "side": 1,
+      "message": "thanks for the inputs. updated the script.",
+      "parentUuid": "8f34a165_e4da8be9",
       "range": {
         "startLine": 94,
         "startChar": 29,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ed683691_ca77e46f",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-08-26T06:14:06Z",
+      "side": 1,
+      "message": "Good catch @spotthur@in.ibm.com,\n\nActually, we need to order the Teardown like below,\n\n[Teardown] Run Keywords Redfish.Login AND\n... FFDC On Test Case Fail  AND\n... Create LDAP Configuration\n\nWe call FFDC On Test Case Fail before Create LDAP Configuration because FFDC only captures a live snapshot of current system state (logs, dumps, Redfish/AccountService data) — it can\u0027t retroactively capture what state existed at failure time.\n\nFor this test, we intentionally leave an invalid LDAP config in place to verify failure behavior. If we restore the config (Create LDAP Configuration) before running FFDC, and the test then fails unexpectedly, FFDC would collect logs from the already-restored/healthy state — not the actual invalid config that caused the failure. That makes the FFDC bundle useless for root-causing.\n\nSo the order should be: login (ensure valid session) → FFDC (diagnose actual failure state) → restore config (cleanup for next test).",
+      "parentUuid": "ecd3f836_55095805",
+      "range": {
+        "startLine": 413,
+        "startChar": 16,
+        "endLine": 415,
+        "endChar": 34
+      },
+      "revId": "1378958c94f67109e5f6f9cc18c644cc35f9741a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "007c556c_edf6f3d8",
         "filename": "redfish/account_service/test_ldap_configuration.robot",
         "patchSetId": 4
@@ -83,6 +155,30 @@
       "writtenOn": "2026-08-25T12:44:21Z",
       "side": 1,
       "message": "use Create Dictionary as it makes it easier to debug the json.",
+      "range": {
+        "startLine": 417,
+        "startChar": 17,
+        "endLine": 417,
+        "endChar": 25
+      },
+      "revId": "1378958c94f67109e5f6f9cc18c644cc35f9741a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7c9d49e_0d85764e",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-08-26T06:14:06Z",
+      "side": 1,
+      "message": "Thanks for the suggestion. For the default keyword, \"Create LDAP Configuration,\" Catenate is used to create the payload. Therefore, I followed the same pattern to maintain consistency.",
+      "parentUuid": "007c556c_edf6f3d8",
       "range": {
         "startLine": 417,
         "startChar": 17,
