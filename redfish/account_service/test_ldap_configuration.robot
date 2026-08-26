@@ -382,8 +382,8 @@ Verify LDAP Login With Invalid Data
     [Documentation]  Verify that LDAP login with Invalid LDAP data and
     ...  right LDAP user fails.
     [Tags]  Verify_LDAP_Login_With_Invalid_Data
-    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
-    ...  Redfish.Login  AND
+    [Teardown]  Run Keywords  Redfish.Login  AND
+    ...  FFDC On Test Case Fail  AND
     ...  Create LDAP Configuration
 
     Create LDAP Configuration  ${LDAP_TYPE}  Invalid_LDAP_Server_URI
@@ -421,8 +421,8 @@ Verify LDAP Login With Invalid BASE DN
     [Documentation]  Verify that LDAP login with invalid BASE_DN and
     ...  valid LDAP user fails.
     [Tags]  Verify_LDAP_Login_With_Invalid_BASE_DN
-    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
-    ...  Redfish.Login  AND
+    [Teardown]  Run Keywords  Redfish.Login  AND
+    ...  FFDC On Test Case Fail  AND
     ...  Create LDAP Configuration
 
     Create LDAP Configuration  ${LDAP_TYPE}  ${LDAP_SERVER_URI}
@@ -435,8 +435,8 @@ Verify LDAP Login With Invalid BIND_DN_PASSWORD
     [Documentation]  Verify that LDAP login with invalid BIND_DN_PASSWORD and
     ...  valid LDAP user fails.
     [Tags]  Verify_LDAP_Login_With_Invalid_BIND_DN_PASSWORD
-    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
-    ...  Redfish.Login  AND
+    [Teardown]  Run Keywords  Redfish.Login  AND
+    ...  FFDC On Test Case Fail  AND
     ...  Create LDAP Configuration
 
     Create LDAP Configuration  ${LDAP_TYPE}  ${LDAP_SERVER_URI}
@@ -449,8 +449,8 @@ Verify LDAP Login With Invalid BASE DN And Invalid BIND DN
     [Documentation]  Verify that LDAP login with invalid BASE_DN and invalid
     ...  BIND_DN and valid LDAP user fails.
     [Tags]  Verify_LDAP_Login_With_Invalid_BASE_DN_And_Invalid_BIND_DN
-    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
-    ...  Redfish.Login  AND
+    [Teardown]  Run Keywords  Redfish.Login  AND
+    ...  FFDC On Test Case Fail  AND
     ...  Create LDAP Configuration
 
     Create LDAP Configuration  ${LDAP_TYPE}  ${LDAP_SERVER_URI}
@@ -474,8 +474,8 @@ Verify LDAP Login With Invalid BIND DN
     [Documentation]  Verify that LDAP login with invalid BIND_DN and
     ...  valid LDAP user fails.
     [Tags]  Verify_LDAP_Login_With_Invalid_BIND_DN
-    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
-    ...  Redfish.Login  AND
+    [Teardown]  Run Keywords  Redfish.Login  AND
+    ...  FFDC On Test Case Fail  AND
     ...  Create LDAP Configuration
 
     Create LDAP Configuration  ${LDAP_TYPE}  ${LDAP_SERVER_URI}
