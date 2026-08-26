@@ -84,6 +84,8 @@ ${xpath_eth0_ipv4_default_gateway}       //h2[contains(text(),'IPv4')]//followin
 ${xpath_overlay}                         //div[contains(@style, 'opacity')]
 ${xpath_bmc_ssh_toggle}                  //*[@data-test-id='policies-toggle-bmcShell']/following-sibling::label
 ${dns_server}                            10.10.10.10
+${dns_server_2}                          10.10.10.20
+${dns_server_3}                          10.10.10.30
 ${test_ipv4_addr}                        10.7.7.7
 ${test_ipv4_gateway}                     10.7.7.1
 ${test_ipv4_addr_1}                      10.7.7.8
@@ -247,6 +249,19 @@ Configure And Verify DNS Server Via GUI
     ...  Configure Static Name Servers
 
     Add DNS Servers And Verify  ${dns_server}
+
+
+Configure And Verify Multiple DNS Servers Via GUI
+    [Documentation]  Login to GUI Network page, add multiple DNS server IPs
+    ...  and verify that the page and BMC reflect all configured server IPs.
+    [Tags]  Configure_And_Verify_Multiple_DNS_Servers_Via_GUI
+    [Setup]  DNS Test Setup Execution
+    [Teardown]  Run Keywords  Delete Static Name Servers  AND
+    ...  Configure Static Name Servers
+
+    Add DNS Servers And Verify  ${dns_server}
+    Add DNS Servers And Verify  ${dns_server_2}
+    Add DNS Servers And Verify  ${dns_server_3}
 
 
 Configure Static IPv4 Netmask Via GUI And Verify
