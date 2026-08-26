@@ -69,6 +69,23 @@
       "parentUuid": "666dd41b_b7622ac0",
       "revId": "c449e627e423a27583f6d469367ac2853f105cab",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8ab32c7_5ee964fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2026-08-26T05:18:04Z",
+      "side": 1,
+      "message": "Can you clarify two things:\n\nWhat happens if we don’t add this code? What functionality, scenario, or requirement will be impacted?\n\nWhat specific benefit do we get by adding this code? What problem does it solve or what additional coverage/capability does it provide?",
+      "revId": "c449e627e423a27583f6d469367ac2853f105cab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
