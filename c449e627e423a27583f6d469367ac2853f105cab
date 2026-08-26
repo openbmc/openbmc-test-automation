@@ -86,6 +86,24 @@
       "message": "Can you clarify two things:\n\nWhat happens if we don’t add this code? What functionality, scenario, or requirement will be impacted?\n\nWhat specific benefit do we get by adding this code? What problem does it solve or what additional coverage/capability does it provide?",
       "revId": "c449e627e423a27583f6d469367ac2853f105cab",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f23c00e9_760f4412",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-08-26T06:16:23Z",
+      "side": 1,
+      "message": "- The whole suite will not run if the Redfish login fails\n- For secure LDAP, Added LDAP_CA_FILE and LDAP_CLIENT_CERT_FILE variables to include the certificates",
+      "parentUuid": "b8ab32c7_5ee964fd",
+      "revId": "c449e627e423a27583f6d469367ac2853f105cab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
