@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9922153a_2c174ba9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003105
+      },
+      "writtenOn": "2026-08-31T09:38:35Z",
+      "side": 1,
+      "message": "Thanks George and Sridevi for the review. On the CLA: I\u0027m contributing as an individual (no company), so it\u0027s the ICLA — I signed v1.0 and emailed it to manager@lfprojects.org on 2026-08-04 (subject \"OpenBMC Individual CLA - Chung-Wei Lan\"), but haven\u0027t received any acknowledgement, and I don\u0027t see my name in the individuals folder you linked. I\u0027m forwarding the original email to LF today to follow up and will report back here once it\u0027s processed. If there\u0027s a better contact for ICLA processing, I\u0027d appreciate a pointer.",
+      "parentUuid": "4338bc9e_462ea9f1",
+      "revId": "6aaed67336822b6f987b7b235af0bc41e592a131",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1b4ee97a_6557b135",
