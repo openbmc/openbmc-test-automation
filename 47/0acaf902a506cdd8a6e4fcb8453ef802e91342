@@ -1,0 +1,11 @@
+Verified+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Code-Review+1: Sweta Potthuri <spotthur@in.ibm.com>
+Code-Review+1: Sridevi Ramesh <sridevra@in.ibm.com>
+Code-Review+1: Kaiyu Fang <fangkaiyu1783@phytium.com.cn>
+Code-Review+2: George Keishing <gkeishin@gmail.com>
+Submitted-by: George Keishing <gkeishin@gmail.com>
+Submitted-at: Mon, 31 Aug 2026 08:19:38 +0000
+Reviewed-on: https://gerrit.openbmc.org/c/openbmc/openbmc-test-automation/+/93932
+Comments-Total: 1
+Project: openbmc/openbmc-test-automation
+Branch: refs/heads/master
