@@ -122,6 +122,24 @@
       "parentUuid": "36d5d2b1_2f260495",
       "revId": "6aaed67336822b6f987b7b235af0bc41e592a131",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b0ad300_cd373154",
+        "filename": "test_lists/QEMU_CI",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1003105
+      },
+      "writtenOn": "2026-08-31T09:57:13Z",
+      "side": 1,
+      "message": "Thanks — keeping the change as a drop, then. Happy to re-point if a CI target that can run this suite\u0027s setup turns up.",
+      "parentUuid": "9e2e703f_2c53aa55",
+      "revId": "6aaed67336822b6f987b7b235af0bc41e592a131",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
