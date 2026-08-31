@@ -1126,6 +1126,18 @@ Configure Staticv6 On Eth1 Enable DHCPv4 Verify Staticv6 Persists
     Should Be Equal  ${staticv6_addr}  ${staticv6_addr_after}
     ...  msg=Static IPv6 address changed after enabling DHCPv4 on eth1.
 
+Verify Error While Adding Empty Host Name On BMC Page
+    [Documentation]  Verify that submitting an empty hostname on the Network settings page
+    ...  triggers a "Field required" validation error.
+    [Tags]  Verify_Error_While_Adding_Empty_Host_Name_On_BMC_Page
+    [Teardown]  Cancel And Verify Network Heading
+
+    Click Element  ${xpath_hostname}
+    Wait Until Page Contains  Edit hostname  timeout=1min
+    Page Should Contain Textfield  ${xpath_hostname_input}
+    Clear Element Text  ${xpath_hostname_input}
+    Click Button  ${xpath_save_button}
+    Page Should Contain  Field required
 
 *** Keywords ***
 
