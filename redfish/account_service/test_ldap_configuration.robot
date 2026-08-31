@@ -685,6 +685,7 @@ Verify LDAP ReadOnly User Cannot Change Local User Password
     ...  for both Administrator and ReadOnly target roles.
     [Tags]  Verify_LDAP_ReadOnly_User_Cannot_Change_Local_User_Password
     [Template]  Verify LDAP ReadOnly User Cannot Change Password Of Local User With Role
+    [Teardown]  FFDC On Test Case Fail
 
     # local_role
 
@@ -984,7 +985,7 @@ Verify LDAP ReadOnly User Cannot Change Password Of Local User With Role
     ...  ReadOnly  ${GROUP_NAME}
     [Teardown]  Run Keywords  Run Keyword And Ignore Error  Redfish.Logout  AND  Redfish.Login  AND
     ...  Cleanup Local User And Restore Session  ${test_local_user}  AND
-    ...  Restore LDAP Privilege  AND  FFDC On Test Case Fail
+    ...  Restore LDAP Privilege
 
     # Description of argument(s):
     # local_role  Role assigned to the local user created by the service user
