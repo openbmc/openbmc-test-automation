@@ -15,7 +15,7 @@ import gen_print as gp
 from robot.libraries.BuiltIn import BuiltIn
 
 
-def rvalidate_plug_ins(plug_in_dir_paths, quiet=1):
+def rvalidate_plug_ins(plug_in_dir_paths, quiet=1, mch_class="obmc"):
     r"""
     Call the external validate_plug_ins.py program which validates the plug-in dir paths given to it.  Return
     a list containing a normalized path for each plug-in selected.
@@ -24,9 +24,17 @@ def rvalidate_plug_ins(plug_in_dir_paths, quiet=1):
     plug_in_dir_paths               A colon-separated list of plug-in directory paths.
     quiet                           If quiet is set to 1, this function will NOT write status messages to
                                     stdout.
+    mch_class                       The class of machine being tested (e.g. "obmc", "rbmc").  Passed to
+                                    validate_plug_ins.py so the correct integrated plug-ins are selected.
     """
 
-    cmd_buf = 'validate_plug_ins.py "' + plug_in_dir_paths + '"'
+    cmd_buf = (
+        "validate_plug_ins.py --mch_class="
+        + mch_class
+        + ' "'
+        + plug_in_dir_paths
+        + '"'
+    )
     rc, out_buf = gc.shell_cmd(cmd_buf, print_output=0)
     if rc != 0:
         BuiltIn().fail(
@@ -54,6 +62,7 @@ def rprocess_plug_in_packages(
     quiet=None,
     debug=None,
     return_history=False,
+    mch_class="obmc",
 ):
     r"""
     Call the external process_plug_in_packages.py to process the plug-in packages.  Return the following:
@@ -86,8 +95,8 @@ def rprocess_plug_in_packages(
                                     that a given error log entry was found in an "ignore" list and is
                                     therefore to be ignored.  That being the case, no other "check_errl" call
                                     point program would need to be called.
-    release_type                    The type of release being tested (e.g. "obmc", "op", "fips").  This
-                                    influences which integrated plug-ins are selected.
+    release_type                    The type of release being tested (e.g. "obmc", "op", "fips").  No longer
+                                    used directly by this function — see mch_class below.
     quiet                           If quiet is set to 1, this function will NOT write status messages to
                                     stdout.  This will default to the global quiet program parm or to 0.
     debug                           If this parameter is set to 1, this function will print additional debug
@@ -98,6 +107,10 @@ def rprocess_plug_in_packages(
 
     history:
       history[0]:                   #(CDT) 2018/10/30 12:25:49 - Running OBMC_Sample/cp_post_stack
+    mch_class                       The class of machine being tested (e.g. "obmc", "rbmc").  Passed to
+                                    process_plug_in_packages.py so plug-in support is validated against the
+                                    correct supports_<mch_class> file.  Replaces release_type for this
+                                    purpose.
     """
 
     rc = 0
@@ -141,6 +154,8 @@ def rprocess_plug_in_packages(
         + str(stop_on_plug_in_failure)
         + " --stop_on_non_zero_rc="
         + str(stop_on_non_zero_rc)
+        + " --mch_class="
+        + mch_class
         + " "
         + plug_in_dir_paths
     )
