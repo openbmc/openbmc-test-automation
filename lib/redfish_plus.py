@@ -135,7 +135,7 @@ class redfish_plus(HttpClient):
         try:
             response = func(*args, **kwargs)
         except Exception as e:
-            error_response = type(e).__name__ + " from redfish_plus class"
+            error_response = type(e).__name__ + ": " + str(e)
             BuiltIn().log_to_console(error_response)
             return
 
