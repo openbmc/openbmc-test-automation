@@ -581,10 +581,10 @@ Delete IP Address Via Different User Roles And Verify
     ${LDAP_TYPE}  Administrator    ${GROUP_NAME}  [${HTTP_OK},${HTTP_NO_CONTENT}]
 
     # Verify LDAP user with ReadOnly privilege is forbidden to delete IP address.
-    ${LDAP_TYPE}  ReadOnly         ${GROUP_NAME}  ${HTTP_FORBIDDEN}
+    ${LDAP_TYPE}  ReadOnly         ${GROUP_NAME}  [${HTTP_FORBIDDEN}]
 
     # Verify LDAP user with Operator privilege is able to delete IP address.
-    ${LDAP_TYPE}  Operator         ${GROUP_NAME}  ${HTTP_FORBIDDEN}
+    ${LDAP_TYPE}  Operator         ${GROUP_NAME}  [${HTTP_FORBIDDEN}]
 
 
 Read Network Configuration Via Different User Roles And Verify
@@ -1264,7 +1264,7 @@ Update LDAP User Role And Configure IP Address
 
 Update LDAP User Role And Delete IP Address
     [Documentation]  Update LDAP user role and delete IP address.
-    [Arguments]  ${ldap_type}  ${group_privilege}  ${group_name}  ${valid_status_code}=[${HTTP_OK,${HTTP_NO_CONTENT}]
+    [Arguments]  ${ldap_type}  ${group_privilege}  ${group_name}  ${valid_status_code}=[${HTTP_OK},${HTTP_NO_CONTENT}]
     [Teardown]  Run Keywords  Redfish.Logout  AND  Redfish.Login  AND  Delete IP Address  ${test_ip}
 
     # Description of argument(s):
