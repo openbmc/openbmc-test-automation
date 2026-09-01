@@ -16,6 +16,24 @@
       "message": "Your name is not listed in CLA for open source contribution for OpenBMC . Please get your approval https://drive.google.com/drive/folders/1Ooi0RdTcaOWF1DWFJUAJDdN7tRKde7Nl  and is needed for code merge",
       "revId": "e3289442964a48ab9bf6baff300ff210611903b9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c8f0210_f61202b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2026-09-01T17:09:14Z",
+      "side": 1,
+      "message": "Added Lakshmi to the CCLA",
+      "parentUuid": "1d78b7ee_aad30c41",
+      "revId": "e3289442964a48ab9bf6baff300ff210611903b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
