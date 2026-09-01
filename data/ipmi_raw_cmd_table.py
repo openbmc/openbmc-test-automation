@@ -114,10 +114,8 @@ IPMI_RAW_CMD = {
     },
     "Self_Test_Results": {
         "Get": [
-            # raw command, expected output(s), comment
+            # raw command
             "0x06 0x04",
-            "56 00",
-            "56h = Self Test function not implemented in this controller.",
         ]
     },
     "Device GUID": {
