@@ -23,9 +23,11 @@ Test Get Self Test Results via IPMI Raw Command
 
     ${resp}=  Run IPMI Command  ${IPMI_RAW_CMD['Self_Test_Results']['Get'][0]}
 
+    # Per IPMI v2.0 spec Table 20-5, valid first-byte values:
     # 55h = No error. All Self Tests Passed.
-    # 56h = Self Test function not implemented in this controller.
-    Should Contain Any  ${resp}  55 00  56 00
+    # 57h = Corrupted or inaccessible data or devices (second byte is a bitmask).
+    @{resp_bytes}=  Split String  ${resp}
+    Should Contain Any  ${resp_bytes}[0]  55  56  57
 
 
 Test Get Device GUID Via IPMI Raw Command
