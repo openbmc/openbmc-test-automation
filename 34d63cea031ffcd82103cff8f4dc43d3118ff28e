@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb5602e4_a39b4b65",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 613,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-09-01T16:44:55Z",
+      "side": 1,
+      "message": "Clear the white spaces here",
+      "range": {
+        "startLine": 613,
+        "startChar": 0,
+        "endLine": 613,
+        "endChar": 4
+      },
+      "revId": "34d63cea031ffcd82103cff8f4dc43d3118ff28e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b45cc6d9_d4252c22",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-09-01T16:44:55Z",
+      "side": 1,
+      "message": "Misleading inline comment for Operator privilege row\n\nIssue: The comment says the Operator user is \"able to delete IP address\", but the corresponding template data row at line 587 passes [${HTTP_FORBIDDEN}] as the expected status code, meaning the test expects the delete to be denied. This is a copy-paste error from the Administrator row comment. The mismatch will confuse anyone reading the test and could mask a real privilege regression (an incorrect pass when Operator should be allowed to delete).\n\nFix:\n```\n    # Verify LDAP user with Operator privilege is forbidden to delete IP address.\n```\n\nWhy: Accurate comments are critical in RBAC/privilege tests. A mismatched comment creates ambiguity about the intended access-control policy and makes regression failures harder to diagnose.",
+      "revId": "34d63cea031ffcd82103cff8f4dc43d3118ff28e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0578b26_ed69fef9",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 1267,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-09-01T16:44:55Z",
+      "side": 1,
+      "message": "${HTTP_ACCEPTED}",
+      "range": {
+        "startLine": 1267,
+        "startChar": 100,
+        "endLine": 1267,
+        "endChar": 115
+      },
+      "revId": "34d63cea031ffcd82103cff8f4dc43d3118ff28e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
