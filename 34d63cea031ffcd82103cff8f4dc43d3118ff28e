@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "65441a56_07d688bf",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 613,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-09-01T17:05:31Z",
+      "side": 1,
+      "message": "Already Done.",
+      "parentUuid": "fb5602e4_a39b4b65",
+      "range": {
+        "startLine": 613,
+        "startChar": 0,
+        "endLine": 613,
+        "endChar": 4
+      },
+      "revId": "34d63cea031ffcd82103cff8f4dc43d3118ff28e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b45cc6d9_d4252c22",
@@ -41,6 +65,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1ac75d9_bdd2f613",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-09-01T17:05:31Z",
+      "side": 1,
+      "message": "Already Done.",
+      "parentUuid": "b45cc6d9_d4252c22",
+      "revId": "34d63cea031ffcd82103cff8f4dc43d3118ff28e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f0578b26_ed69fef9",
@@ -54,6 +96,30 @@
       "writtenOn": "2026-09-01T16:44:55Z",
       "side": 1,
       "message": "${HTTP_ACCEPTED}",
+      "range": {
+        "startLine": 1267,
+        "startChar": 100,
+        "endLine": 1267,
+        "endChar": 115
+      },
+      "revId": "34d63cea031ffcd82103cff8f4dc43d3118ff28e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30064f9c_369391cb",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 1267,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-09-01T17:05:31Z",
+      "side": 1,
+      "message": "Hi @gkeishin@gmail.com,\nActually, I believe the arguments were overlooked. The $ is present above, and {HTTP_ACCEPTED} is present below.",
+      "parentUuid": "f0578b26_ed69fef9",
       "range": {
         "startLine": 1267,
         "startChar": 100,

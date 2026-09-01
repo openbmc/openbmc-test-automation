@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a61d4472_6c20fcf5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-09-01T17:05:31Z",
+      "side": 1,
+      "message": "Hi @gkeishin@gmail.com,\n\nThanks for the review.\n\nThe comments you provided are valid. However, I had already fixed both issues and pushed the updates. I believe those changes were included in the patch set that I submitted during the review process.",
+      "revId": "fa4f8d0f3a17a91e29d00634c2faea533e083dfc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
