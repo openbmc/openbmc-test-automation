@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "853b4e5c_1c704170",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 1128,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-09-01T06:04:06Z",
+      "side": 1,
+      "message": "Leave 2 lines before and after the testcase",
+      "revId": "5c9ce19ad2b298a271d9db21e8e68a5111200974",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc5be31c_c8377dd6",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 1140,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-09-01T06:04:06Z",
+      "side": 1,
+      "message": "it verifies that \"Field required\" exists somewhere on the page,rather than confirming that the hostname field specifically shows that validation error.\n\nCheck if there is a locator for the Field required error message.\nThen try: \nElement Should Contain  ${xpath_hostname_error}  Field required",
+      "revId": "5c9ce19ad2b298a271d9db21e8e68a5111200974",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
