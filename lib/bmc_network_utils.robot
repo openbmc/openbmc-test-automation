@@ -597,7 +597,7 @@ Delete IP Address
     ${active_channel_config}=  Get Active Channel Config
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
 
-    IF  '${Version}' == 'IPv4'
+    IF  '${version}' == 'IPv4'
         Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
         ...  valid_status_codes=${valid_status_codes}
     ELSE
@@ -610,7 +610,12 @@ Delete IP Address
     Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
 
     ${delete_status}=  Run Keyword And Return Status  Verify IP On BMC  ${ip}
-    IF  '${valid_status_codes}' == '[${HTTP_OK},${HTTP_ACCEPTED},${HTTP_NO_CONTENT}]'
+
+    ${expect_delete_success}=  Run Keyword And Return Status
+    ...  Should Contain Any  ${valid_status_codes}
+    ...  ${HTTP_OK}  ${HTTP_ACCEPTED}  ${HTTP_NO_CONTENT}
+
+    IF  ${expect_delete_success}
         Should Be True  '${delete_status}' == '${False}'
     ELSE
         Should Be True  '${delete_status}' == '${True}'
