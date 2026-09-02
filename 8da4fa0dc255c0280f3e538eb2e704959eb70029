@@ -34,6 +34,24 @@
       "parentUuid": "dddca45c_6cd7f32a",
       "revId": "8da4fa0dc255c0280f3e538eb2e704959eb70029",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32d63322_f001ef83",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2026-09-02T13:54:58Z",
+      "side": 1,
+      "message": "I don\u0027t think there\u0027s a lot of return on investing too much in IPMI testing as the future is Redfish. So I\u0027m good with just doing this basic validation that \"something\" valid is returned by all systemss",
+      "parentUuid": "74117080_e16f445a",
+      "revId": "8da4fa0dc255c0280f3e538eb2e704959eb70029",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
