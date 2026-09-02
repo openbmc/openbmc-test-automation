@@ -134,7 +134,7 @@ Suite Setup Execution
 
 
 Readonly User Test Setup
-    [Documentation] Do this test setup for Readonly user scenarios.
+    [Documentation]  Do this test setup for Readonly user scenarios.
     [Arguments]  ${mode}
 
     Set Server Operating Mode  ${mode}
