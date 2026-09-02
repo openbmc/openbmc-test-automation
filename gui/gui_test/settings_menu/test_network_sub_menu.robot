@@ -264,6 +264,28 @@ Configure And Verify Multiple DNS Servers Via GUI
     Add DNS Servers And Verify  ${dns_server_3}
 
 
+Verify Error While Configuring String Value For DNS Server Via GUI
+    [Documentation]  Enter a string value (aa.bb.cc.dd) as DNS server IP via GUI and
+    ...  verify that an "Invalid format" error is displayed.
+    [Tags]  Verify_Error_While_Configuring_String_Value_For_DNS_Server_Via_GUI
+    [Setup]  DNS Test Setup Execution
+    [Teardown]  Run Keywords  Delete Static Name Servers  AND
+    ...  Configure Static Name Servers
+
+    Add DNS Servers And Verify  ${string_ip}  Invalid format
+
+
+Verify Error While Adding Empty DNS Server IP Address
+    [Documentation]  Submit an empty value as DNS server IP via GUI and verify
+    ...  that a "Field required" error is displayed.
+    [Tags]  Verify_Error_While_Adding_Empty_DNS_Server_IP_Address
+    [Setup]  DNS Test Setup Execution
+    [Teardown]  Run Keywords  Delete Static Name Servers  AND
+    ...  Configure Static Name Servers
+
+    Add DNS Servers And Verify  ${EMPTY}  Field required
+
+
 Configure Static IPv4 Netmask Via GUI And Verify
     [Documentation]  Login to GUI Network page, configure static IPv4 netmask and verify.
     [Tags]  Configure_Static_IPv4_Netmask_Via_GUI_And_Verify
