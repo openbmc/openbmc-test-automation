@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "42c66fe0_5a83900f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1003095
+      },
+      "writtenOn": "2026-09-02T06:02:10Z",
+      "side": 1,
+      "message": "Updated the commit message",
+      "parentUuid": "79292f6b_1c8f1618",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 0
+      },
+      "revId": "afc88fa42c2bf671d2766272429159e821e126b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b40fdec6_42190d7a",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-09-01T17:10:35Z",
       "side": 1,
       "message": "please use your full name here and not a username \n\nhttps://github.com/openbmc/docs/blob/56d3b94b77a3f7af9a3ca534ed062157fe12be75/CONTRIBUTING.md?plain\u003d1#L248",
+      "range": {
+        "startLine": 18,
+        "startChar": 15,
+        "endLine": 18,
+        "endChar": 29
+      },
+      "revId": "afc88fa42c2bf671d2766272429159e821e126b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21952b63_48f16f6c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1003095
+      },
+      "writtenOn": "2026-09-02T06:02:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b40fdec6_42190d7a",
       "range": {
         "startLine": 18,
         "startChar": 15,
