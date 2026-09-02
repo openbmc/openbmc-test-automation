@@ -30,6 +30,7 @@ ${xpath_add_static_ipv6_addr_btn_eth1}   (//*[@data-test-id="add-static-ipv6"])[
 ${xpath_add_static_def_gateway_button}   //*[@data-test-id="add-static-default-gateway"]
 ${xpath_hostname}                        //*[@title="Edit hostname"]
 ${xpath_hostname_input}                  //*[@id="hostname"]
+${xpath_hostname_error}                  //*[@id="hostname"]/following-sibling::*[contains(@class,'invalid-feedback')]
 ${xpath_input_ip_address}                //input[@id='ipAddress' and not(ancestor::*[contains(@style,'display: none')])]
 ${xpath_input_gateway}                   //*[@id="gateway"]
 ${xpath_input_subnetmask}                //*[@id="subnetMask"]
@@ -1140,6 +1141,19 @@ Configure Staticv6 On Eth1 Enable DHCPv4 Verify Staticv6 Persists
     ...  ignore_order=True
     Should Be Equal  ${staticv6_addr}  ${staticv6_addr_after}
     ...  msg=Static IPv6 address changed after enabling DHCPv4 on eth1.
+
+
+Verify Error While Adding Empty Host Name On BMC Page
+    [Documentation]  Verify that submitting an empty hostname on the Network settings page
+    ...  triggers a "Field required" validation error.
+    [Tags]  Verify_Error_While_Adding_Empty_Host_Name_On_BMC_Page
+    [Teardown]  Cancel And Verify Network Heading
+
+    Click Element  ${xpath_hostname}
+    Wait Until Page Contains  Edit hostname  timeout=1min
+    Clear Element Text  ${xpath_hostname_input}
+    Click Button  ${xpath_save_button}
+    Element Should Contain  ${xpath_hostname_error}  Field required
 
 
 *** Keywords ***
