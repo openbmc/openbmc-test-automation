@@ -3,6 +3,7 @@ Documentation  Utility for SNMP configurations via Redfish.
 
 Resource             ../../lib/utils.robot
 Resource             ../../lib/connection_client.robot
+Resource             ../../lib/bmc_redfish_ipv6_resource.robot
 Library              ../../lib/gen_misc.py
 Library              ../../lib/utils.py
 

@@ -206,6 +206,7 @@ Add DNS Servers And Verify
     # expected_status      Expected status while adding DNS server address
     #                      (e.g. Invalid format / Field required).
 
+    Wait Until Element Is Not Visible  ${xpath_page_loading_progress_bar}  timeout=60s
     Wait Until Page Contains Element  ${xpath_add_dns_ip_address_button}  timeout=15sec
 
     Click Button  ${xpath_add_dns_ip_address_button}
@@ -213,6 +214,8 @@ Add DNS Servers And Verify
     Click Button  ${xpath_add_button}
     IF  '${expected_status}' != 'Valid format'
         Page Should Contain  ${expected_status}
+        Click Button  ${xpath_cancel_button}
+        Wait Until Page Does Not Contain Element  ${xpath_cancel_button}
         RETURN
     END
 
