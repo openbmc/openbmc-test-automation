@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5b5a6c0_d8c50a01",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003105
+      },
+      "writtenOn": "2026-09-02T14:17:33Z",
+      "side": 1,
+      "message": "Patch Set 2 changes the commit message only: codespell (en-GB to en-US) flagged \"behaviour\" on line 25. The diff is identical to PS1, and CI is now green on PS2. Thanks for processing the ICLA. George, since the −1 on Aug 31 was for the CLA listing, could you take another look now that the account is approved and CI has passed?",
+      "revId": "a3c6fdb6435ce34e05042a61145ecdf1556c6528",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
