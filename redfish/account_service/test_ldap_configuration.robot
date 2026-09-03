@@ -761,11 +761,9 @@ Verify Local Admin And Service User Create Users And LDAP User Changes Privilege
     [Teardown]  Run Keywords  Cleanup Local User And Restore Session  ${test_local_user}
     ...  AND  FFDC On Test Case Fail
 
-    # creator_user  creator_password        initial_privilege  new_privilege
-    admin           ${OPENBMC_PASSWORD}     ReadOnly           Administrator
-    admin           ${OPENBMC_PASSWORD}     Administrator      ReadOnly
-    service         ${OPENBMC_PASSWORD}     ReadOnly           Administrator
-    service         ${OPENBMC_PASSWORD}     Administrator      ReadOnly
+    # creator_user          creator_password     initial_privilege  new_privilege
+    ${OPENBMC_USERNAME}     ${OPENBMC_PASSWORD}  ReadOnly           Administrator
+    ${OPENBMC_USERNAME}     ${OPENBMC_PASSWORD}  Administrator      ReadOnly
 
 Verify Privilege Change By Local Admin When LDAP Is Unreachable
     [Documentation]  Verify that a local admin can change a user's privilege even when LDAP is
