@@ -750,22 +750,21 @@ Verify LDAP User Creates Local User And Local User Changes Privilege
     ${privilege_admin}     Local_ReadOnly  ${privilege_readonly}  Forbidden
     ${privilege_readonly}  Local_ReadOnly  ${privilege_admin}     Forbidden
 
-Verify Local Admin And Service User Create Users And LDAP User Changes Privilege
-    [Documentation]  Verify local admin and service users create users with different privileges
+Verify Local Administrator Creates Users And LDAP User Changes Privilege
+    [Documentation]  Verify local administrator user creates users with different privileges
     ...  (Administrator and ReadOnly), then LDAP admin user changes the privilege
     ...  (ReadOnly to Administrator and Administrator to ReadOnly).
-    [Tags]  Verify_Local_Admin_And_Service_User_Create_Users_And_LDAP_User_Changes_Privilege
+    [Tags]  Verify_Local_Administrator_Creates_Users_And_LDAP_User_Changes_Privilege
     [Setup]  Update LDAP Configuration With LDAP User Role And Group  ${LDAP_TYPE}
     ...  Administrator  ${GROUP_NAME}
     [Template]  Creator User Creates Local User And LDAP User Changes Privilege
     [Teardown]  Run Keywords  Cleanup Local User And Restore Session  ${test_local_user}
     ...  AND  FFDC On Test Case Fail
 
-    # creator_user  creator_password        initial_privilege  new_privilege
-    admin           ${OPENBMC_PASSWORD}     ReadOnly           Administrator
-    admin           ${OPENBMC_PASSWORD}     Administrator      ReadOnly
-    service         ${OPENBMC_PASSWORD}     ReadOnly           Administrator
-    service         ${OPENBMC_PASSWORD}     Administrator      ReadOnly
+    # Creator must be a local user with Administrator role.
+    # creator_user          creator_password     initial_privilege  new_privilege
+    ${OPENBMC_USERNAME}     ${OPENBMC_PASSWORD}  ReadOnly           Administrator
+    ${OPENBMC_USERNAME}     ${OPENBMC_PASSWORD}  Administrator      ReadOnly
 
 Verify Privilege Change By Local Admin When LDAP Is Unreachable
     [Documentation]  Verify that a local admin can change a user's privilege even when LDAP is
@@ -1466,7 +1465,7 @@ Creator User Creates Local User And LDAP User Changes Privilege
     [Teardown]  Redfish.Login
 
     # Description of argument(s):
-    # creator_user        Username of creator (admin or service).
+    # creator_user        Username of a local user with Administrator role.
     # creator_password    Password of creator user.
     # initial_privilege   Initial privilege of the created user (Administrator or ReadOnly).
     # new_privilege       New privilege to set by LDAP user (Administrator or ReadOnly).
