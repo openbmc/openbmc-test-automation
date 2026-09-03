@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91099c3d_90b43e42",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 764,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-09-03T18:05:03Z",
+      "side": 1,
+      "message": "f the service input is removed from Create User, then the test case names, tag names, documentation, template argument comments, and any other related content should also be updated accordingly.",
+      "range": {
+        "startLine": 764,
+        "startChar": 4,
+        "endLine": 764,
+        "endChar": 6
+      },
+      "revId": "73b26d22ebefdd9b6509ccbab584a118a042c5a1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
