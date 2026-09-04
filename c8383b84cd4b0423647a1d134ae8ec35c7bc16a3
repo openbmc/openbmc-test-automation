@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7c250ae7_5d12ca46",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-09-04T16:47:02Z",
+      "side": 1,
+      "message": "Yes, this is a negative scenario which needs to be tested\n\nThe positive case for valid URL schemes is already covered by Verify LDAP Login With Correct LDAP URL in the same file.",
+      "parentUuid": "e99d8220_efe3a31a",
+      "range": {
+        "startLine": 140,
+        "startChar": 21,
+        "endLine": 140,
+        "endChar": 50
+      },
+      "revId": "c8383b84cd4b0423647a1d134ae8ec35c7bc16a3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "250d7bb3_8bff5408",
         "filename": "redfish/account_service/test_ldap_configuration.robot",
         "patchSetId": 1
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "825a54ae_ae51e510",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-09-04T16:47:02Z",
+      "side": 1,
+      "message": "Fixed. The LDAP login/logout verification steps have been removed to align with the existing test pattern. The HTTP 400 Bad Request is sufficient.",
+      "parentUuid": "250d7bb3_8bff5408",
+      "range": {
+        "startLine": 145,
+        "startChar": 45,
+        "endLine": 145,
+        "endChar": 61
+      },
+      "revId": "c8383b84cd4b0423647a1d134ae8ec35c7bc16a3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c455ba30_9966a4bc",
         "filename": "redfish/account_service/test_ldap_configuration.robot",
         "patchSetId": 1
@@ -60,6 +108,30 @@
       "writtenOn": "2026-09-04T09:52:46Z",
       "side": 1,
       "message": "why is this login and logout is required",
+      "range": {
+        "startLine": 152,
+        "startChar": 4,
+        "endLine": 154,
+        "endChar": 0
+      },
+      "revId": "c8383b84cd4b0423647a1d134ae8ec35c7bc16a3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f404bfb6_4e70b61c",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-09-04T16:47:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c455ba30_9966a4bc",
       "range": {
         "startLine": 152,
         "startChar": 4,
