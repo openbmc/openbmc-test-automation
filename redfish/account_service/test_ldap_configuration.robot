@@ -129,6 +129,22 @@ Verify LDAP Config Update With Incorrect LDAP URL
 
     Config LDAP URL  ldap://1.2.3.4/  ${FALSE}
 
+
+Verify LDAP Config Update With Invalid URL Scheme
+    [Documentation]  Verify that configuring a secure LDAP connection with
+    ...  an invalid URL scheme "ldapt://" is rejected by the BMC.
+    [Tags]  Verify_LDAP_Config_Update_With_Invalid_URL_Scheme
+    [Teardown]  Run Keywords  Restore LDAP URL  AND
+    ...  FFDC On Test Case Fail
+
+    # Attempt to set an invalid "ldapt://" scheme.
+    ${host}=  Evaluate  '${LDAP_SERVER_URI}'.split('//')[-1]
+    VAR  ${invalid_uri}  ldapt://${host}
+    VAR  ${body}  {'${LDAP_TYPE}': {'ServiceAddresses': ['${invalid_uri}']}}
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService
+    ...  body=${body}  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
+
 Verify LDAP Configuration Exist
     [Documentation]  Verify that LDAP configuration is available.
     [Tags]  Verify_LDAP_Configuration_Exist
