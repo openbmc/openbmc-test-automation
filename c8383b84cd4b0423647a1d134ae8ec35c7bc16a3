@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e99d8220_efe3a31a",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1002670
+      },
+      "writtenOn": "2026-09-04T09:39:10Z",
+      "side": 1,
+      "message": "Why is `ldapt://` chosen specifically here?\n\nIf the purpose of this test is to verify that an invalid URL scheme is rejected, could this be parameterized with a template for different invalid schemes? Unless `ldapt://` is intended to cover a specific bug or regression, it seems to be just one example of an invalid scheme.\n\nShould we also consider adding a positive test for valid URL schemes? Perhaps we could use a template such as `Verify LDAP Config Update With Different URL Schemes`, where valid schemes are expected to return `204`/`200`, while invalid schemes are expected to return `400`.",
+      "range": {
+        "startLine": 140,
+        "startChar": 21,
+        "endLine": 140,
+        "endChar": 50
+      },
+      "revId": "c8383b84cd4b0423647a1d134ae8ec35c7bc16a3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "250d7bb3_8bff5408",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1002670
+      },
+      "writtenOn": "2026-09-04T09:39:10Z",
+      "side": 1,
+      "message": "Could we follow the pattern of the existing negative LDAP configuration tests for rejected updates?\n\nFor example, `Verify LDAP Config Update Reject Empty List BASE DN` directly validates the `400 Bad Request` response and the relevant error details. For this test, the response already indicates that the `PropertyValueIncorrect` error was returned.",
+      "range": {
+        "startLine": 145,
+        "startChar": 45,
+        "endLine": 145,
+        "endChar": 61
+      },
+      "revId": "c8383b84cd4b0423647a1d134ae8ec35c7bc16a3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
