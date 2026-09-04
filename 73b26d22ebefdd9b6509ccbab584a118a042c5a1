@@ -22,6 +22,30 @@
       },
       "revId": "73b26d22ebefdd9b6509ccbab584a118a042c5a1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2840e10_37909c43",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 764,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-09-04T06:23:44Z",
+      "side": 1,
+      "message": "The test name, tag, and documentation intentionally retain the reference to \"admin and service\" because those are still the expected runtime values for ${OPENBMC_USERNAME} — the caller passes admin or service (or any equivalent on their BMC) via the variable when running the suite. The change only removes the hardcoded literals from the data rows; the test intent and the roles being tested remain the same.\nThe template keyword comment (# creator_user Username of creator (admin or service)) similarly remains valid as it describes the kind of value expected at runtime, not a literal string in the file.",
+      "parentUuid": "91099c3d_90b43e42",
+      "range": {
+        "startLine": 764,
+        "startChar": 4,
+        "endLine": 764,
+        "endChar": 6
+      },
+      "revId": "73b26d22ebefdd9b6509ccbab584a118a042c5a1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
