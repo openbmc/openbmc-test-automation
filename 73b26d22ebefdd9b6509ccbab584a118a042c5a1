@@ -46,6 +46,30 @@
       },
       "revId": "73b26d22ebefdd9b6509ccbab584a118a042c5a1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0613cfb9_bc188fa5",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 764,
+      "author": {
+        "id": 1002670
+      },
+      "writtenOn": "2026-09-04T08:13:14Z",
+      "side": 1,
+      "message": "I think the remaining point is the assumption about `admin` and `service`.\n\nThe purpose of this change is not only to remove the hardcoded usernames, but to make the test independent of any pre-configured users. The test requires a local user with the Administrator role; it does not require the username to be `admin` or `service`.\n\nTherefore, I believe the test name, tag, documentation, and related comments should also describe the actual requirement — a local Administrator — rather than continuing to refer to `admin` and `service`.\n\nThis is also consistent with Nandakumar\u0027s comment that these related contents should be updated when the `service` input is removed.",
+      "parentUuid": "a2840e10_37909c43",
+      "range": {
+        "startLine": 764,
+        "startChar": 4,
+        "endLine": 764,
+        "endChar": 6
+      },
+      "revId": "73b26d22ebefdd9b6509ccbab584a118a042c5a1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
