@@ -33,6 +33,23 @@
       "message": "Once Andrew see ICLA in place and approves this.. I m good to merge it.",
       "revId": "a3c6fdb6435ce34e05042a61145ecdf1556c6528",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "515962f5_8108be22",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003105
+      },
+      "writtenOn": "2026-09-05T08:35:09Z",
+      "side": 1,
+      "message": "Thanks George. The ICLA is now in place: Andrew uploaded it on Sep 2 to the Individuals folder you linked on Aug 31 (Chung-Wei-Lan.OpenBMC.ICLA.pdf), and confirmed by email the same day that my account was added to the approved CI list, which is what let CI run on PS2 (Verified +1 above). Andrew, when you have a moment, could you confirm here so George can proceed? Thanks both.",
+      "revId": "a3c6fdb6435ce34e05042a61145ecdf1556c6528",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
