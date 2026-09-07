@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bd452292_a8f59d4e",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1002670
+      },
+      "writtenOn": "2026-09-07T08:05:21Z",
+      "side": 1,
+      "message": "I agree that `ldapt://` is a valid negative case. However, similar to `Create LDAP Config With Various Port Numbers`, could we use a template to test multiple URL schemes here as well? \n\nFor example, we could cover several representative unsupported schemes with the expected `400` status. This would give us broader coverage of the URL scheme validation with only a small amount of additional test data and no significant maintenance overhead.\n\nThis also keeps the test consistent with the existing template-based approach used for other LDAP input validation cases.",
+      "parentUuid": "7c250ae7_5d12ca46",
+      "range": {
+        "startLine": 140,
+        "startChar": 21,
+        "endLine": 140,
+        "endChar": 50
+      },
+      "revId": "c8383b84cd4b0423647a1d134ae8ec35c7bc16a3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "250d7bb3_8bff5408",
         "filename": "redfish/account_service/test_ldap_configuration.robot",
         "patchSetId": 1
