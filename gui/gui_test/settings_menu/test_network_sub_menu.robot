@@ -1156,6 +1156,26 @@ Verify Error While Adding Empty Host Name On BMC Page
     Element Should Contain  ${xpath_hostname_error}  Field required
 
 
+Configure Eth0 Static Eth1 DHCPv4 Add Static IPv6 On Both
+    [Documentation]  Verify eth0 is in static IPv4 mode, ensure eth1 has DHCPv4 enabled,
+    ...  add a static IPv6 address on both eth0 and eth1, and verify the addresses
+    ...  are configured on the BMC. Also verify IPv4 settings are intact after IPv6 addition.
+    [Tags]  Configure_Eth0_Static_Eth1_DHCPv4_Add_Static_IPv6_On_Both
+    [Setup]  Configure Eth0 Static Eth1 DHCPv4 Setup
+    [Teardown]  Configure Eth0 Static Eth1 DHCPv4 Teardown
+    
+    Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr}  ${test_prefix_length}  Success  None  1
+    Verify IPv6 On BMC  ${test_ipv6_addr}  1
+
+    Navigate To Network Page
+    Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr_1}  ${test_prefix_length}  Success  None  2
+    Verify IPv6 On BMC  ${test_ipv6_addr_1}  2
+
+    Verify Functionality Of IPv4 Address  Static  1
+    Click Element  ${xpath_eth1_interface}
+    Verify Functionality Of IPv4 Address  DHCP  2
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -2318,3 +2338,47 @@ Verify IPv6 Not Present On BMC
     ${status}=  Run Keyword And Return Status  Verify IPv6 On BMC  ${ipv6_address}
     Should Be Equal  ${status}  ${False}
     ...  msg=IPv6 address ${ipv6_address} still exists on BMC.
+
+
+Configure Eth0 Static Eth1 DHCPv4 Setup
+    [Documentation]  Verify eth0 is in static IPv4 mode, capture eth1 DHCPv4 state,
+    ...  then ensure DHCPv4 is enabled on eth1 and navigate to the Network page.
+
+    Verify Functionality Of IPv4 Address    Static    1
+    ${eth1_dhcpv4_was_enabled}=    Get IPv4 DHCP Enabled Status    ${2}
+    Set Test Variable    ${eth1_dhcpv4_was_enabled}
+    Enable DHCPv4 On Eth1 Via Redfish And Refresh GUI
+
+
+Configure Eth0 Static Eth1 DHCPv4 Teardown
+    [Documentation]  Restore BMC state after Configure Eth0 Static Eth1 DHCPv4 Add Static IPv6 On Both.
+    ...  Deletes test IPv6 addresses, restores eth1 DHCPv4 state, and restores eth1 static IPv4.
+
+    Run Keyword And Ignore Error  Delete IP Address And Verify  ipv6  ${test_ipv6_addr}  1
+    Run Keyword And Ignore Error  Delete IP Address And Verify  ipv6  ${test_ipv6_addr_1}  2
+    Navigate To Network Page
+    Run Keyword If  not ${eth1_dhcpv4_was_enabled}
+    ...  Set DHCPEnabled To Enable Or Disable  ${False}  eth1
+    VAR  ${CHANNEL_NUMBER}  2  scope=SUITE
+    FOR  ${ip}  IN  @{ipv4_eth1}
+        Add IP Address  ${ip['Address']}  ${ip['SubnetMask']}  ${ip['Gateway']}
+    END
+    VAR  ${CHANNEL_NUMBER}  1  scope=SUITE
+
+
+Enable DHCPv4 On Eth1 Via Redfish And Refresh GUI
+    [Documentation]  Ensure DHCPv4 is enabled on eth1 via Redfish PATCH (only if currently
+    ...  disabled), wait for the network to stabilise, then navigate back to the GUI
+    ...  Network page.
+
+    ${already_enabled}=  Get IPv4 DHCP Enabled Status  ${2}
+    IF  not ${already_enabled}
+        ${active_channel_config}=  Get Active Channel Config
+        ${eth1_interface}=  Set Variable  ${active_channel_config['2']['name']}
+        Set DHCPEnabled To Enable Or Disable  ${True}  ${eth1_interface}
+        # Allow time for the network stack to apply the DHCP lease before pinging.
+        Sleep  ${NETWORK_TIMEOUT}s
+        Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
+    END
+    Navigate To Network Page
+
