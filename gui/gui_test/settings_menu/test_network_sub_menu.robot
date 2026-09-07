@@ -1156,6 +1156,32 @@ Verify Error While Adding Empty Host Name On BMC Page
     Element Should Contain  ${xpath_hostname_error}  Field required
 
 
+Configure Eth0 Static Eth1 DHCPv4 Add Static IPv6 On Both
+    [Documentation]  Verify eth0 is in static IPv4 mode, ensure eth1 has DHCPv4 enabled,
+    ...  add a static IPv6 address on both eth0 and eth1, and verify the addresses
+    ...  are configured on the BMC.
+    [Tags]  Configure_Eth0_Static_Eth1_DHCPv4_Add_Static_IPv6_On_Both
+    [Setup]  Run Keywords  Navigate To Network Page
+    ...      AND  Verify Functionality Of IPv4 Address  Static  1
+    ...      AND  Enable DHCPv4 On Eth1 Via Redfish And Refresh GUI
+    [Teardown]  Run Keywords
+    ...  Run Keyword And Ignore Error  Delete IP Address And Verify  ipv6  ${test_ipv6_addr}  1
+    ...  AND  Run Keyword And Ignore Error  Delete IP Address And Verify  ipv6  ${test_ipv6_addr_1}  2
+    ...  AND  Navigate To Network Page
+    ...  AND  Run Keyword And Ignore Error  Assign Static IP Address On Eth1
+
+    Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr}  ${test_prefix_length}  Success  None  1
+    Verify IPv6 On BMC  ${test_ipv6_addr}  1
+
+    Navigate To Network Page
+    Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr_1}  ${test_prefix_length}  Success  None  2
+    Verify IPv6 On BMC  ${test_ipv6_addr_1}  2
+
+    Verify Functionality Of IPv4 Address  Static  1
+    Click Element  ${xpath_eth1_interface}
+    Verify Functionality Of IPv4 Address  DHCP  2
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -2318,3 +2344,18 @@ Verify IPv6 Not Present On BMC
     ${status}=  Run Keyword And Return Status  Verify IPv6 On BMC  ${ipv6_address}
     Should Be Equal  ${status}  ${False}
     ...  msg=IPv6 address ${ipv6_address} still exists on BMC.
+
+
+Enable DHCPv4 On Eth1 Via Redfish And Refresh GUI
+    [Documentation]  Ensure DHCPv4 is enabled on eth1 via Redfish PATCH (only if currently
+    ...  disabled), navigate back to the GUI Network page.
+
+    ${already_enabled}=  Get IPv4 DHCP Enabled Status  ${2}
+    IF  not ${already_enabled}
+        ${active_channel_config}=  Get Active Channel Config
+        ${eth1_interface}=  Set Variable  ${active_channel_config['2']['name']}
+        Set DHCPEnabled To Enable Or Disable  ${True}  ${eth1_interface}
+        Sleep  ${NETWORK_TIMEOUT}s
+        Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
+    END
+    Navigate To Network Page
