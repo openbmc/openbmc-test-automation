@@ -281,6 +281,37 @@ Configure Multiple SNMP Managers Via GUI And Verify SNMP Trap
     Create Error Log On BMC And Verify Trap  ${CMD_INTERNAL_FAILURE}  ${SNMP_TRAP_BMC_INTERNAL_FAILURE}
 
 
+Verify SNMP SysUpTime
+    [Documentation]  Configure SNMP manager via GUI, generate an error on BMC,
+    ...  capture the SNMP trap, and verify that the SysUpTime field in the trap
+    ...  matches the current BMC system uptime.
+    [Tags]  Verify_SNMP_SysUpTime
+
+    Generate Error Via GUI And Verify System Up Time
+
+
+Verify SNMP SysUpTime On BMC Reboot
+    [Documentation]  Reboot BMC via GUI to reset the system uptime counter, then
+    ...  configure SNMP manager via GUI, generate an error on BMC, capture the
+    ...  SNMP trap, and verify that the SysUpTime reported in the trap is <= 2 minutes
+    ...  (i.e. the counter was reset by the reboot).
+    [Tags]  Verify_SNMP_SysUpTime_On_BMC_Reboot
+
+    # Reboot BMC via GUI to reset the system uptime counter.
+    Reboot BMC via GUI
+    Reload Page
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=60
+    Navigate To SNMP Alerts Page
+
+    # Re-establish the BMC SSH connection that was dropped during the reboot.
+    Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+
+    ${uptime}=  Generate Error Via GUI And Verify System Up Time
+
+    # Confirm the uptime counter was reset: value must be <= 2 minutes post-reboot.
+    Should Be True  ${uptime} <= 2  msg=SNMP SysUpTime is not reset after BMC reboot
+
+
 Delete SNMP Manager Via GUI And Generate Error On BMC
     [Documentation]  Configure SNMP manager on BMC via GUI, delete the SNMP manager via GUI
     ...  and generate error on BMC. Verify that no SNMP trap is received since the
@@ -693,3 +724,62 @@ Start Multiple SNMP Managers On Specific Port
     # The execution of the SNMP_TRAPD_CMD is necessary to cause SNMP to begin
     # listening to SNMP messages.
     SSHLibrary.Write  ${SNMP_TRAPD_CMD} ${SNMP_MGR2_IP}:${NON_DEFAULT_PORT1} &
+
+
+Generate Error Via GUI And Verify System Up Time
+    [Documentation]  Configure SNMP manager via GUI, generate an error on BMC, capture the
+    ...  SNMP trap, extract SysUpTime from the trap, and verify it matches the BMC uptime.
+    [Teardown]  Delete SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
+
+    # Read the current BMC uptime before generating the error so the value
+    # is captured at the same moment the trap will be triggered.
+    # /proc/uptime format: "<total_seconds> <idle_seconds>"
+    # Example: "8055.79 15032.86"
+    ${cmd_output}  ${stderr}  ${rc}=  BMC Execute Command  cat /proc/uptime
+    @{uptime_values}=  Split String  ${cmd_output}
+    ${bmc_uptime_in_minutes}=  Evaluate  int(${uptime_values}[0])/60
+
+    # Configure SNMP manager via GUI so the trap path exercises the GUI code path.
+    Configure SNMP Manager Via GUI  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
+    Wait Until Page Contains  ${SNMP_MGR1_IP}  timeout=45s
+
+    # Start the SNMP listener on the remote manager host.
+    Start SNMP Manager
+
+    # Generate an error log on the BMC to trigger the SNMP trap.
+    BMC Execute Command  ${CMD_INTERNAL_FAILURE}
+
+    SSHLibrary.Switch Connection  snmp_server
+    ${snmp_listen_output}=  Read  delay=1s
+
+    # Stop SNMP manager process.
+    SSHLibrary.Execute Command  sudo killall snmptrapd
+
+    # Parse the raw trap output into individual tab-separated fields.
+    # Sample SNMP trap:
+    # DISMAN-EVENT-MIB::sysUpTimeInstance = Timeticks: (252367) 0:42:03.67\t
+    # SNMPv2-MIB::snmpTrapOID.0 = OID: SNMPv2-SMI::enterprises.49871.1.0.0.1\t...
+    ${trap_lines}=  Split To Lines  ${snmp_listen_output}
+    ${trap_info}=  Get From List  ${trap_lines}  -1
+    ${snmp_trap}=  Split String  ${trap_info}  \t
+
+    # Verify all mandatory trap fields are present and correct.
+    Verify SNMP Trap  ${snmp_trap}  ${SNMP_TRAP_BMC_INTERNAL_FAILURE}
+
+    # Extract SysUpTime (Timeticks) from trap field 0.
+    # Field 0 example: "DISMAN-EVENT-MIB::sysUpTimeInstance = Timeticks: (252367) 0:42:03.67"
+    # Split on "=" yields: ["DISMAN-EVENT-MIB::sysUpTimeInstance ", " Timeticks: (252367) 0:42:03.67"]
+    @{sysuptime_parts}=  Split String  ${snmp_trap}[0]  =
+
+    # The raw timeticks value sits between "(" and ")" in the right-hand side.
+    ${timeticks_raw}=  Fetch From Right  ${sysuptime_parts}[1]  (
+    ${timeticks_value}=  Fetch From Left  ${timeticks_raw}  )
+
+    # SNMP SysUpTime is reported in centiseconds (hundredths of a second).
+    # Divide by 6000 to convert to minutes (100 centiseconds/second × 60 seconds/minute).
+    ${snmp_sysuptime_in_minutes}=  Evaluate  int(${timeticks_value})/6000
+
+    Should Be Equal As Integers  ${bmc_uptime_in_minutes}  ${snmp_sysuptime_in_minutes}
+    ...  msg=SNMP SysUpTime does not match BMC system uptime.
+
+    RETURN  ${snmp_sysuptime_in_minutes}
