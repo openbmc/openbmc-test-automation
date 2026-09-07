@@ -324,6 +324,8 @@ Configure And Verify Invalid Static IP Address
     ${hex_ip}            ${test_subnet_mask}  ${default_gateway}    Invalid format
     ${spl_char_ip}       ${test_subnet_mask}  ${default_gateway}    Invalid format
     ${test_ipv4_addr}    ${test_subnet_mask}  ${incomplete_df_gw}   Invalid format
+    ${EMPTY}             ${test_subnet_mask}  ${default_gateway}    Field required
+    ${test_ipv4_addr}    ${EMPTY}             ${default_gateway}    Field required
 
 
 Configure And Verify Multiple Static IPv6 Address
@@ -1237,8 +1239,8 @@ Add Static IP Address And Verify
     IF  '${expected_status}' == 'Success'
         Wait Until Page Contains  ${ip_address}  timeout=40sec
         Wait Until Keyword Succeeds  5x  5s  Validate Network Config On BMC
-    ELSE IF  '${expected_status}' == 'Invalid format'
-        Page Should Contain  Invalid format
+    ELSE IF  '${expected_status}' in ['Invalid format', 'Field required']
+        Page Should Contain  ${expected_status}
         Click Button  ${xpath_cancel_button}
         Wait Until Page Does Not Contain Element  ${xpath_cancel_button}
     ELSE
