@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "00a6cb61_32fa9215",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-09-07T08:55:40Z",
+      "side": 1,
+      "message": "@fangkaiyu1783@phytium.com.cn The challenge with using a template here is that constructing the URI with a different scheme requires stripping the existing scheme from ${LDAP_SERVER_URI}and then prepending the test scheme — this can\u0027t be passed as a simple parameter like the port value in Create LDAP Config With Various Port Numbers. The port template works because appending :${port_value} to the base URI is straightforward.",
+      "parentUuid": "bd452292_a8f59d4e",
+      "range": {
+        "startLine": 140,
+        "startChar": 21,
+        "endLine": 140,
+        "endChar": 50
+      },
+      "revId": "c8383b84cd4b0423647a1d134ae8ec35c7bc16a3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "250d7bb3_8bff5408",
         "filename": "redfish/account_service/test_ldap_configuration.robot",
         "patchSetId": 1
