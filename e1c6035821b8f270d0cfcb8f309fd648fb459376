@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0870aab2_a4593785",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-09-07T11:27:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e56548d_7d552123",
+      "revId": "e1c6035821b8f270d0cfcb8f309fd648fb459376",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0854507b_df6b5a7f",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-09-07T10:13:10Z",
       "side": 1,
       "message": "Instead of writing a separate testcase can you try adding in existing testcase with template.\n\nConfigure Static IPv4 Netmask Via GUI And Verify - add in this testcase",
+      "revId": "e1c6035821b8f270d0cfcb8f309fd648fb459376",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb56322f_4ec41c4e",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-09-07T11:27:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0854507b_df6b5a7f",
       "revId": "e1c6035821b8f270d0cfcb8f309fd648fb459376",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
