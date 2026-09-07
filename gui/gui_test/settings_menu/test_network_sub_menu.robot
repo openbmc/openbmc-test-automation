@@ -325,6 +325,24 @@ Configure And Verify Invalid Static IP Address
     ${test_ipv4_addr}    ${test_subnet_mask}  ${incomplete_df_gw}   Invalid format
 
 
+Verify Error While Adding Empty IP Address
+    [Documentation]  Login to GUI Network page, attempt to add a static IPv4 address
+    ...  with an empty IP address field and verify "Field required" error is shown.
+    [Tags]  Verify_Error_While_Adding_Empty_IP_Address
+
+    Add Static IP Address And Verify  ${EMPTY}  ${test_subnet_mask}  ${default_gateway}
+    ...  Field required
+
+
+Verify Error While Adding Empty Netmask Address
+    [Documentation]  Login to GUI Network page, attempt to add a static IPv4 address
+    ...  with an empty Netmask field and verify "Field required" error is shown.
+    [Tags]  Verify_Error_While_Adding_Empty_Netmask_Address
+
+    Add Static IP Address And Verify  ${test_ipv4_addr}  ${EMPTY}  ${default_gateway}
+    ...  Field required
+
+
 Configure And Verify Multiple Static IPv6 Address
     [Documentation]  Login to GUI Network page, configure multiple static IPv6 address and verify.
     [Tags]  Configure_And_Verify_Multiple_Static_IPv6_Address
@@ -1225,6 +1243,10 @@ Add Static IP Address And Verify
         Wait Until Keyword Succeeds  5x  5s  Validate Network Config On BMC
     ELSE IF  '${expected_status}' == 'Invalid format'
         Page Should Contain  Invalid format
+        Click Button  ${xpath_cancel_button}
+        Wait Until Page Does Not Contain Element  ${xpath_cancel_button}
+    ELSE IF  '${expected_status}' == 'Field required'
+        Page Should Contain  Field required
         Click Button  ${xpath_cancel_button}
         Wait Until Page Does Not Contain Element  ${xpath_cancel_button}
     ELSE
