@@ -315,6 +315,39 @@ Verify Error And Unauthorized Message Display When ReadOnly User Configures SNMP
     Verify Error And Unauthorized Message On GUI
 
 
+Configure Multiple SNMP Managers Via GUI Reboot BMC And Verify Trap
+    [Documentation]  Configure multiple SNMP managers on BMC via GUI, reboot BMC,
+    ...  navigate back to SNMP alerts page, and verify that SNMP traps are received
+    ...  on all configured managers after the reboot.
+    [Tags]  Configure_Multiple_SNMP_Managers_Via_GUI_Reboot_BMC_And_Verify_Trap
+    [Teardown]  Run Keywords  Delete SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
+    ...  AND  Delete SNMP Manager Via Redfish  ${SNMP_MGR2_IP}  ${NON_DEFAULT_PORT1}
+
+    # Configure two SNMP managers via GUI and confirm they appear in the table.
+    Configure SNMP Manager Via GUI  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
+    Wait Until Page Contains  ${SNMP_MGR1_IP}  timeout=45s
+
+    Configure SNMP Manager Via GUI  ${SNMP_MGR2_IP}  ${NON_DEFAULT_PORT1}
+    Wait Until Page Contains  ${SNMP_MGR2_IP}  timeout=45s
+
+    # Reboot BMC and wait for GUI to become available again, then navigate back to SNMP page.
+    Reboot BMC via GUI
+    Reload Page
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=60
+    Navigate To SNMP Alerts Page
+
+    # Confirm both SNMP managers persist after the reboot.
+    Verify SNMP Manager Configured On BMC  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
+    Verify SNMP Manager Configured On BMC  ${SNMP_MGR2_IP}  ${NON_DEFAULT_PORT1}
+
+    # Re-establish the BMC SSH connection that was dropped during the reboot.
+    Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+
+    # Start both SNMP listeners, generate an error on BMC, and verify the trap is
+    # received on each configured manager.
+    Create Error Log On BMC And Verify Trap  ${CMD_INTERNAL_FAILURE}  ${SNMP_TRAP_BMC_INTERNAL_FAILURE}
+
+
 *** Keywords ***
 
 Suite Setup Execution
