@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6526f00e_fe107dbf",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-09-08T06:13:45Z",
+      "side": 1,
+      "message": "As per our test case naming convention, each word should start with a capital letter. Consider renaming the test case to:\n\nVerify LDAP Config Update With Invalid URL Scheme",
+      "range": {
+        "startLine": 133,
+        "startChar": 0,
+        "endLine": 133,
+        "endChar": 55
+      },
+      "revId": "114cfff783df8caf8843175196b806aa7b8efd55",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
