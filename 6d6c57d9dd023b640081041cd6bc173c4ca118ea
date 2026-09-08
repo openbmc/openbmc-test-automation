@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e96d7de_e5616b75",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 1159,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-09-08T11:57:40Z",
+      "side": 1,
+      "message": "suggestion to change the test case name as below,\n\nConfigure Eth0 With Static IPv4 And Eth1 With DHCPv4 Finally Add Static IPv6 On Both Interfaces",
+      "range": {
+        "startLine": 1159,
+        "startChar": 0,
+        "endLine": 1159,
+        "endChar": 57
+      },
+      "revId": "6d6c57d9dd023b640081041cd6bc173c4ca118ea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba097cfd_2483568e",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 2346,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-09-08T11:57:40Z",
+      "side": 1,
+      "message": "Use 2 spaces for separation for line 2346,2347,2348",
+      "range": {
+        "startLine": 2346,
+        "startChar": 0,
+        "endLine": 2346,
+        "endChar": 4
+      },
+      "revId": "6d6c57d9dd023b640081041cd6bc173c4ca118ea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f713125_0380df76",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 2387,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-09-08T11:57:40Z",
+      "side": 1,
+      "message": "remove this space",
+      "range": {
+        "startLine": 2387,
+        "startChar": 0,
+        "endLine": 2387,
+        "endChar": 4
+      },
+      "revId": "6d6c57d9dd023b640081041cd6bc173c4ca118ea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
