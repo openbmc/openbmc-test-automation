@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "57f6c8d8_d07849c1",
+        "filename": "oem/ast2600evb_rpi/inband/test_inband.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-09-08T10:57:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6bc499c_e66f1559",
+      "revId": "811bdf8fa9081b4f2b90948db43020d27102c2b1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "640eee35_d4d4fea3",
@@ -48,6 +66,24 @@
       "writtenOn": "2026-09-07T16:18:58Z",
       "side": 1,
       "message": "oem/ast2600evb_rpi/resource.robot\n\nrename this file to \n\noem/ast2600evb_rpi/resource.resource\n\nhttps://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#resource-files\n\ngoing forward we need to use .resource extension for all supporting libraries or keyword for robot. \n\nand .robot extension for test suites .",
+      "revId": "811bdf8fa9081b4f2b90948db43020d27102c2b1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d92de023_20c37030",
+        "filename": "oem/ast2600evb_rpi/resource.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-09-08T10:57:57Z",
+      "side": 1,
+      "message": "Changes done. Will take care now onwards.",
+      "parentUuid": "640eee35_d4d4fea3",
       "revId": "811bdf8fa9081b4f2b90948db43020d27102c2b1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -69,6 +105,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "977656dd_3654fdd5",
+        "filename": "oem/ast2600evb_rpi/resource.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-09-08T10:57:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dcb25c28_445f3fa4",
+      "revId": "811bdf8fa9081b4f2b90948db43020d27102c2b1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7185f3cf_5254bb09",
@@ -82,6 +136,24 @@
       "writtenOn": "2026-09-07T16:18:58Z",
       "side": 1,
       "message": "Remove this whole block of code commented if not needed.",
+      "revId": "811bdf8fa9081b4f2b90948db43020d27102c2b1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "074a2e07_a1161026",
+        "filename": "oem/ast2600evb_rpi/resource.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-09-08T10:57:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7185f3cf_5254bb09",
       "revId": "811bdf8fa9081b4f2b90948db43020d27102c2b1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -103,6 +175,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b083916d_38dfeb5e",
+        "filename": "oem/ast2600evb_rpi/resource.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-09-08T10:57:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "09a15f8f_f1e6ae18",
+      "revId": "811bdf8fa9081b4f2b90948db43020d27102c2b1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "32db6fc6_2196ef4e",
@@ -116,6 +206,24 @@
       "writtenOn": "2026-09-07T16:18:58Z",
       "side": 1,
       "message": "${members}\u003d  redfish_utils.Get Member List  /redfish/v1/AccountService/Accounts\n\nlib/bmc_redfish_resource.robot imports the library as Library bmc_redfish_utils.py AS redfish_utils (lowercase). \n\nRobot Framework library prefix matching is case-sensitive for imported aliases; calling Redfish_Utils.Get Member List will fail with No keyword with name \u0027Redfish_Utils.Get Member List\u0027 found.",
+      "revId": "811bdf8fa9081b4f2b90948db43020d27102c2b1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fb9e757_626d4b42",
+        "filename": "oem/ast2600evb_rpi/resource.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-09-08T10:57:57Z",
+      "side": 1,
+      "message": "It is not case sensitive as i see it was working for me. However i have changed it as per actual name \"redfish_utils\" to avoid confusion.",
+      "parentUuid": "32db6fc6_2196ef4e",
       "revId": "811bdf8fa9081b4f2b90948db43020d27102c2b1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
