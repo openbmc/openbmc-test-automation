@@ -761,6 +761,17 @@ Verify IPv4 And IPv6 Addresses Remain Intact After Adding DNS Server
     ...  msg=IPv6 address origins not intact after adding DNS server.  ignore_order=True
 
 
+Configure Out Of Range IP For DNS Server
+    [Documentation]  Configure out-of-range IP address on eth0 for DNS server and
+    ...  expect an error.
+    [Tags]  Configure_Out_Of_Range_IP_For_DNS_Server
+    [Setup]  DNS Test Setup Execution
+    [Teardown]  Run Keywords
+    ...  Configure Static Name Servers  AND  Test Teardown Execution
+
+    Configure Static Name Servers  ${out_of_range_ip}  ${HTTP_BAD_REQUEST}
+
+
 *** Keywords ***
 
 Test Setup Execution
