@@ -451,6 +451,30 @@ Verify IPv4 And IPv6 Coexistence And Redfish Access On Eth0
     DHCPv4       LinkLocal     ${EMPTY}
 
 
+Configure Eth0 With Static IPv4 And Eth1 With DHCPv4 Finally Add Static IPv6 On Both Interfaces
+    [Documentation]  Verify eth0 has static IPv4 and eth1 has DHCPv4 (enabling it if
+    ...  not already). Add a static IPv6 address on both eth0 and eth1, verify the
+    ...  IPv6 origins are present. Confirm IPv4 state is intact after IPv6 addition.
+    ...  Teardown restores eth1 to its original state.
+    [Tags]  Configure_Eth0_With_Static_IPv4_And_Eth1_With_DHCPv4_Finally_Add_Static_IPv6_On_Both_Interfaces
+    [Setup]  Setup Eth0 Static Eth1 DHCPv4
+    [Teardown]  Teardown Eth0 Static Eth1 DHCPv4
+
+    # Add static IPv6 on eth0 and eth1.
+    Configure IPv6 Address On BMC
+    ...  ${test_ipv6_addr}  ${test_prefix_length}  ${None}  ${1}
+    Configure IPv6 Address On BMC
+    ...  ${test_ipv6_addr1}  ${test_prefix_length}  ${None}  ${2}
+
+    # Assert Static IPv6 origin exists on both interfaces.
+    Get Address Origin List And Address For Type  Static  ${1}
+    Get Address Origin List And Address For Type  Static  ${2}
+
+    # Confirm IPv4 state is intact on both interfaces after IPv6 addition.
+    Verify Static IPv4 Functionality  ${1}
+    Verify DHCPv4 Functionality On Eth1
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -1326,4 +1350,48 @@ Restore Network Configuration And Cleanup
         Run Keyword And Return Status  Delete IPv6 Address  ${test_ipv6_addr}
     END
 
+
+Setup Eth0 Static Eth1 DHCPv4
+    [Documentation]  Verify eth0 has static IPv4 (fail fast if not). Snapshot eth1's
+    ...  DHCPv4 flag and static IPv4 entries for teardown, then enable DHCPv4 on
+    ...  eth1 if it is not already on.
+
+    VAR  ${eth1_dhcp_original}  ${True}  scope=TEST
+    VAR  @{eth1_static_ipv4_original}  scope=TEST
+
+    Verify Static IPv4 Functionality  ${1}
+
+    ${eth1_dhcp_original}=  Get IPv4 DHCP Enabled Status  ${2}
+    VAR  ${eth1_dhcp_original}  ${eth1_dhcp_original}  scope=TEST
+    @{eth1_static_ipv4_original}=  Get Network Configuration  ${2}
+    VAR  @{eth1_static_ipv4_original}  @{eth1_static_ipv4_original}  scope=TEST
+
+    IF  not ${eth1_dhcp_original}
+        Set DHCPEnabled To Enable Or Disable  True  eth1
+        Sleep  ${NETWORK_TIMEOUT}s
+        Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
+    END
+
+
+Teardown Eth0 Static Eth1 DHCPv4
+    [Documentation]  Remove the test IPv6 addresses, then restore eth1 to exactly
+    ...  the DHCPv4 state and static IPv4 addresses that existed before setup ran.
+    ...  Calls Test Teardown Execution (FFDC + logout) unconditionally last.
+
+    # Clean up test IPv6 addresses - ignore errors if the test failed before adding them.
+    Run Keyword And Ignore Error  Delete IPv6 Address  ${test_ipv6_addr}  ${1}
+    Run Keyword And Ignore Error  Delete IPv6 Address  ${test_ipv6_addr1}  ${2}
+
+    # Restore eth1 only when setup actually changed it.
+    IF  not ${eth1_dhcp_original}
+        ${active_channel_config}=  Get Active Channel Config
+        Set DHCPEnabled To Enable Or Disable  False  ${active_channel_config['2']['name']}
+        FOR  ${ip_entry}  IN  @{eth1_static_ipv4_original}
+            VAR  ${CHANNEL_NUMBER}  ${2}  scope=TEST
+            Add IP Address  ${ip_entry['Address']}  ${ip_entry['SubnetMask']}
+            ...  ${ip_entry['Gateway']}
+        END
+    END
+
+    Test Teardown Execution
 
