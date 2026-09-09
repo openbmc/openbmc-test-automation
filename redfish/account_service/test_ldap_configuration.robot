@@ -22,7 +22,7 @@ ${hostname}                        ${EMPTY}
 ${test_ip}                         10.6.6.6
 ${test_mask}                       255.255.255.0
 ${test_local_user}                 test_local_user
-${local_readonly_user}             local_readonly_user
+${local_readonly_user}             local_read_user
 ${test_user_password}              TestPwd123
 ${local_readonly_user_password}    ReadOnly@123
 ${ldap_unreachable_uri}            ldap://192.0.2.1
