@@ -22,6 +22,30 @@
       },
       "revId": "114cfff783df8caf8843175196b806aa7b8efd55",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbb5a3ca_ec44ecae",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-09-09T11:07:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6526f00e_fe107dbf",
+      "range": {
+        "startLine": 133,
+        "startChar": 0,
+        "endLine": 133,
+        "endChar": 55
+      },
+      "revId": "114cfff783df8caf8843175196b806aa7b8efd55",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
