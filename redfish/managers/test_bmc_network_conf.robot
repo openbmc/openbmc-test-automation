@@ -761,6 +761,17 @@ Verify IPv4 And IPv6 Addresses Remain Intact After Adding DNS Server
     ...  msg=IPv6 address origins not intact after adding DNS server.  ignore_order=True
 
 
+Verify Static DNS Rejects Out Of Range IP Address
+    [Documentation]  Configure out-of-range IP address as a static DNS
+    ...  server on eth0 via Redfish and expect HTTP 400 Bad Request.
+    [Tags]  Verify_Static_DNS_Rejects_Out_Of_Range_IP_Address
+    [Setup]  DNS Test Setup Execution
+    [Teardown]  Run Keywords
+    ...  Configure Static Name Servers  AND  Test Teardown Execution
+
+    Configure Static Name Servers  ${out_of_range_ip}  ${HTTP_BAD_REQUEST}
+
+
 *** Keywords ***
 
 Test Setup Execution
