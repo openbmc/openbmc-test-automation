@@ -772,6 +772,24 @@ Verify Static DNS Rejects Out Of Range IP Address
     Configure Static Name Servers  ${out_of_range_ip}  ${HTTP_BAD_REQUEST}
 
 
+Verify IPv4 Link Local Absent When Static Or DHCP Configured
+    [Documentation]  Verify IPv4 link-local is not present when Static or DHCP IPv4 is configured.
+    [Tags]  Verify_IPv4_Link_Local_Absent_When_Static_Or_DHCP_Configured
+    [Setup]  Add IP Address  ${test_ipv4_addr}  ${test_subnet_mask}  ${test_gateway}
+    [Teardown]  Run Keywords
+    ...  Delete IP Address  ${test_ipv4_addr}  AND  Test Teardown Execution
+
+    @{ipv4_origin_list}  ${_}=
+    ...  Get Address Origin List And IPv4 or IPv6 Address  IPv4Addresses
+    ${ipv4_origin_list}=  Combine Lists  @{ipv4_origin_list}
+
+    Should Contain Any  ${ipv4_origin_list}  Static  DHCP
+    ...  msg=Interface must have Static or DHCP IPv4 configured.
+
+    Should Not Contain  ${ipv4_origin_list}  IPv4LinkLocal
+    ...  msg=IPv4 link-local must not be present when Static or DHCP is configured.
+
+
 *** Keywords ***
 
 Test Setup Execution
