@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fadb26ec_f5bd7c3d",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 764,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-09-10T06:49:30Z",
+      "side": 1,
+      "message": "Suggested:\nVerify Static DNS Rejects Out Of Range IP Address",
+      "range": {
+        "startLine": 764,
+        "startChar": 0,
+        "endLine": 764,
+        "endChar": 40
+      },
+      "revId": "af65f93fae3e5d6f743f5d074a1f66670bb123ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
