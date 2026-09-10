@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2c555ea9_2ecf56aa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-09-10T06:53:27Z",
+      "side": 1,
+      "message": "Suggested:\nVerify that configuring an out-of-range IP as a static DNS server on eth0 via Redfish is rejected with HTTP 400 Bad Request.",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 36
+      },
+      "revId": "af65f93fae3e5d6f743f5d074a1f66670bb123ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fadb26ec_f5bd7c3d",
         "filename": "redfish/managers/test_bmc_network_conf.robot",
         "patchSetId": 2
