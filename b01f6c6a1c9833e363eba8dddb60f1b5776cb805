@@ -16,6 +16,24 @@
       "message": "🟡\nRead-only test silently skips on blank systems Medium\nThe test reads the current interface state and skips via Skip If if no Static/DHCP address is present. It never configures an address itself. On a freshly provisioned or CI-only BMC with no pre-existing address, the test always skips — providing zero coverage with no visible failure. A self-contained [Setup] / [Teardown] that configures and removes a static address would make the test unconditionally executable.\n🟢\nEmpty IPv4Addresses edge case not explicitly documented Low\nIf the interface returns zero IPv4Addresses entries, the skip guard correctly handles it (no Static/DHCP → skip). However, the [Documentation] does not mention this, which may confuse future readers who wonder whether the Should Not Contain assertion is safe on an empty list.\n🟢\n[Documentation] does not mention read-only / precondition nature Low\nThe docstring says \"Verify IPv4 link-local is not present when Static or DHCP IPv4 is configured\" but does not clarify that the test requires the system to already have such a configuration. Adding a note like \"Requires an existing Static or DHCP IPv4 address on the interface; otherwise the test is skipped.\" would aid triage of unexpected SKIP results in CI.",
       "revId": "b01f6c6a1c9833e363eba8dddb60f1b5776cb805",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3df9679_06c33e4f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003095
+      },
+      "writtenOn": "2026-09-11T06:13:55Z",
+      "side": 1,
+      "message": "Issues 1 --\u003e Added setup and teardown specific to this test case.\nIssue 2 \u0026 3 --\u003e Since adding setup section eliminates the skip condition did not add to documentation",
+      "parentUuid": "35daaf6c_7b53cb5e",
+      "revId": "b01f6c6a1c9833e363eba8dddb60f1b5776cb805",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
