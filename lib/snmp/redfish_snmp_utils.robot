@@ -327,11 +327,15 @@ Start SNMP Manager On Specific Port
 
 Generate Error On BMC And Verify Trap
     [Documentation]  Generate error on BMC and verify if trap is sent.
-    [Arguments]  ${event_log}=${CMD_INTERNAL_FAILURE}  ${expected_error}=${SNMP_TRAP_BMC_INTERNAL_FAILURE}
+    [Arguments]  ${event_log}=${CMD_INTERNAL_FAILURE}
+    ...  ${expected_error}=${SNMP_TRAP_BMC_INTERNAL_FAILURE}
+    ...  ${snmp_mgr_ip}=${SNMP_MGR1_IP}  ${snmp_port}=${SNMP_DEFAULT_PORT}
 
     # Description of argument(s):
     # event_log       Event logs to be created.
     # expected_error  Expected error on SNMP.
+    # snmp_mgr_ip     SNMP manager IP address or FQDN.
+    # snmp_port       Network port where SNMP manager is listening.
 
     Start SNMP Manager
 
@@ -341,7 +345,7 @@ Generate Error On BMC And Verify Trap
     SSHLibrary.Switch Connection  snmp_server
     ${SNMP_LISTEN_OUT}=  Read  delay=1s
 
-    Delete SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
+    Delete SNMP Manager Via Redfish  ${snmp_mgr_ip}  ${snmp_port}
 
     # Stop SNMP manager process.
     SSHLibrary.Execute Command  sudo killall snmptrapd
