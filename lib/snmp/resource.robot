@@ -11,6 +11,8 @@ Documentation    SNMP required variables resource file.
 ${SNMP_MGR1_IP}       10.6.6.6
 ${SNMP_MGR2_IP}       10.6.6.7
 ${SNMP_MGR3_IP}       10.6.6.8
+# SNMP manager FQDN. Pass via -v SNMP_FQDN:<fqdn> e.g. snmp-manager.example.com
+${SNMP_FQDN}          ${EMPTY}
 ${out_of_range_ip}    10.6.6.256
 ${alpha_ip}           xx.xx.xx.xx
 ${less_octet_ip}      10.
