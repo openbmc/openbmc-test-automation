@@ -285,15 +285,30 @@ Verify Eth1 DHCPv4 Functionality From IPv6 In Presence Of Static IPv6
     SLAAC           ${2}
 
 
-Configure SNMP IPv4 Via IPv6 And Verify
-    [Documentation]  Configure SNMP with IPv4 address via IPv6 and verify it works.
-    [Tags]  Configure_SNMP_IPv4_Via_IPv6_And_Verify
-    [Template]  Configure SNMP Manager Via IPv6 And Verify
+Configure SNMP IPv4 Manager Via IPv6 And Verify
+    [Documentation]  Configure an SNMP manager using an IPv4 address
+    ...    while accessing the BMC through static IPv6 or SLAAC, and verify that
+    ...    the SNMP trap is sent successfully.
+    [Tags]  Configure_SNMP_IPv4_Manager_Via_IPv6_And_Verify
+    [Template]  Configure And Verify SNMP Manager Via IPv6
 
-    # Address_type  channel_number
-    Static          ${1}
-    Static          ${2}
-    SLAAC           ${1}
+    # snmp_manager        ipv6_address_type  channel_number
+    ${SNMP_MGR1_IP}       Static             ${1}
+    ${SNMP_MGR1_IP}       Static             ${2}
+    ${SNMP_MGR1_IP}       SLAAC              ${1}
+
+
+Configure SNMP FQDN Manager Via IPv6 And Verify
+    [Documentation]  Configure an SNMP manager using FQDN
+    ...    while accessing the BMC through static IPv6 or SLAAC, and verify that
+    ...    the SNMP trap is sent successfully.
+    [Tags]  Configure_SNMP_FQDN_Manager_Via_IPv6_And_Verify
+    [Setup]  Valid Value  SNMP_FQDN
+    [Template]  Configure And Verify SNMP Manager Via IPv6
+
+    # snmp_manager        ipv6_address_type  channel_number
+    ${SNMP_FQDN}          Static             ${1}
+    ${SNMP_FQDN}          SLAAC              ${1}
 
 
 Configure Invalid Static IPv6 From IPv6 And Verify
@@ -866,38 +881,41 @@ Verify Eth1 DHCPv4 Functionality In Presence Of IPv6 Address
     Verify DHCPv4 Functionality On Eth1
 
 
-Configure SNMP Manager Via IPv6 And Verify
-    [Documentation]  Configure SNMP manager with IPv4 address on BMC via IPv6 and verify it works.
-    [Arguments]  ${ipv6_address_type}  ${channel_number}
+Configure And Verify SNMP Manager Via IPv6
+    [Documentation]  Configure SNMP manager on BMC via IPv6 using the given manager address
+    ...    (IPv4 address or FQDN) and verify that the SNMP trap is sent successfully.
+    [Arguments]  ${snmp_manager}  ${ipv6_address_type}  ${channel_number}
     [Teardown]  Run Keywords
-    ...  Delete SNMP Manager Via Redfish  ${SNMP_MGR_IP}  ${SNMP_DEFAULT_PORT}
+    ...  Delete SNMP Manager Via Redfish  ${snmp_manager}  ${SNMP_DEFAULT_PORT}
     ...  AND  Test Teardown Execution
 
-    # Description of argument(s):
-    # ipv6_address_type   Type of IPv6 address(slaac/static).
-    # channel_number      Ethernet channel number, 1(eth0) or 2(eth1).
+    # Description of argument(s):
+    # snmp_manager        SNMP manager address: IPv4 address or FQDN.
+    # ipv6_address_type   Type of IPv6 address to connect with (Static/SLAAC).
+    # channel_number      Ethernet channel number, 1(eth0) or 2(eth1).
 
-    # Get IPv6 address for the specified type and channel.
+    # Get the IPv6 address for the specified type and channel.
     @{ipv6_addressorigin_list}  ${ipv6_addr}=
     ...  Get Address Origin List And Address For Type  ${ipv6_address_type}  ${channel_number}
 
-    # Connect to BMC using IPv6 address and configure SNMP manager with IPv4 address via IPv6 session.
+    # Connect to BMC using the IPv6 address.
     Connect BMC Using IPv6 Address  ${ipv6_addr}
     RedfishIPv6.Login
 
-    Configure SNMP Manager Via Redfish  ${SNMP_MGR_IP}  ${SNMP_DEFAULT_PORT}  ${HTTP_CREATED}
+    # Configure SNMP manager on BMC via the IPv6 session.
+    Configure SNMP Manager Via Redfish  ${snmp_manager}  ${SNMP_DEFAULT_PORT}  ${HTTP_CREATED}
 
-    # Verify SNMP manager is configured on BMC.
-    Verify SNMP Manager Configured On BMC  ${SNMP_MGR_IP}  ${SNMP_DEFAULT_PORT}
+    # Verify SNMP manager is configured on BMC.
+    Verify SNMP Manager Configured On BMC  ${snmp_manager}  ${SNMP_DEFAULT_PORT}
 
-    # Verify SNMP functionality by generating an error and checking trap.
+    # Verify SNMP functionality by generating an error and checking the trap.
     Start SNMP Manager
     Generate Error On BMC And Verify Trap  ${CMD_INTERNAL_FAILURE}
-    ...  ${SNMP_TRAP_BMC_INTERNAL_FAILURE}
+    ...  ${SNMP_TRAP_BMC_INTERNAL_FAILURE}  ${snmp_manager}  ${SNMP_DEFAULT_PORT}
 
     # Stop SNMP manager process.
-    SSHLibrary.Switch Connection  snmp_server
-    SSHLibrary.Execute Command  sudo killall snmptrapd
+    SSHLibrary.Switch Connection  snmp_server
+    SSHLibrary.Execute Command  sudo killall snmptrapd
 
 
 Configure Invalid Static IPv6 From IPv6 Address And Verify
