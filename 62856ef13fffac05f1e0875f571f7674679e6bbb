@@ -75,6 +75,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "97792e3b_33d4f711",
+        "filename": "oem/ast2600evb_rpi/inband/test_inband.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-09-12T03:00:31Z",
+      "side": 1,
+      "message": "Added at data\\oem\\ast2600evb_rpi\\ipmi_raw_cmd_table.py",
+      "parentUuid": "062579d3_7475d87c",
+      "range": {
+        "startLine": 57,
+        "startChar": 48,
+        "endLine": 57,
+        "endChar": 67
+      },
+      "revId": "62856ef13fffac05f1e0875f571f7674679e6bbb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "97e463bf_d7f5b939",
@@ -88,6 +112,30 @@
       "writtenOn": "2026-09-11T06:52:54Z",
       "side": 1,
       "message": "we can define the raw commands on ipmi_raw_cmd_table.py\nline 157,146",
+      "range": {
+        "startLine": 146,
+        "startChar": 51,
+        "endLine": 146,
+        "endChar": 70
+      },
+      "revId": "62856ef13fffac05f1e0875f571f7674679e6bbb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57979660_2bfc35f8",
+        "filename": "oem/ast2600evb_rpi/inband/test_inband.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-09-12T03:00:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97e463bf_d7f5b939",
       "range": {
         "startLine": 146,
         "startChar": 51,
@@ -121,6 +169,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e71a966d_fe04e7f7",
+        "filename": "oem/ast2600evb_rpi/inband/test_inband.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-09-12T03:00:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c250cc49_09a00480",
+      "range": {
+        "startLine": 227,
+        "startChar": 0,
+        "endLine": 227,
+        "endChar": 58
+      },
+      "revId": "62856ef13fffac05f1e0875f571f7674679e6bbb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "baca8422_14d0ece1",
@@ -134,6 +206,30 @@
       "writtenOn": "2026-09-11T06:52:54Z",
       "side": 1,
       "message": "better avoid parentheses () in test case names,\n\nfor example, we can use like below,\nVerify Bootstrap Account Deletion After BMC Graceful Restart",
+      "range": {
+        "startLine": 238,
+        "startChar": 0,
+        "endLine": 239,
+        "endChar": 61
+      },
+      "revId": "62856ef13fffac05f1e0875f571f7674679e6bbb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d615216_d16a8c26",
+        "filename": "oem/ast2600evb_rpi/inband/test_inband.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-09-12T03:00:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "baca8422_14d0ece1",
       "range": {
         "startLine": 238,
         "startChar": 0,
@@ -167,6 +263,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1d480fc_33688e37",
+        "filename": "oem/ast2600evb_rpi/inband/test_inband.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-09-12T03:00:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "490d9b5f_82a28c83",
+      "range": {
+        "startLine": 370,
+        "startChar": 50,
+        "endLine": 370,
+        "endChar": 52
+      },
+      "revId": "62856ef13fffac05f1e0875f571f7674679e6bbb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a82f8dff_ed588c37",
@@ -180,6 +300,30 @@
       "writtenOn": "2026-09-11T06:52:54Z",
       "side": 1,
       "message": "Kindly update to capital letter- RHI",
+      "range": {
+        "startLine": 56,
+        "startChar": 44,
+        "endLine": 56,
+        "endChar": 47
+      },
+      "revId": "62856ef13fffac05f1e0875f571f7674679e6bbb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "498f33ae_d0b4b736",
+        "filename": "oem/ast2600evb_rpi/resource.resource",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-09-12T03:00:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a82f8dff_ed588c37",
       "range": {
         "startLine": 56,
         "startChar": 44,
@@ -213,6 +357,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "543d7aae_98a6ce36",
+        "filename": "oem/ast2600evb_rpi/resource.resource",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-09-12T03:00:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69d1020c_5c159bd1",
+      "range": {
+        "startLine": 64,
+        "startChar": 27,
+        "endLine": 64,
+        "endChar": 51
+      },
+      "revId": "62856ef13fffac05f1e0875f571f7674679e6bbb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "298a3184_b946aaf7",
@@ -226,6 +394,30 @@
       "writtenOn": "2026-09-11T06:52:54Z",
       "side": 1,
       "message": "space need to provide between Credential Bootstrapping",
+      "range": {
+        "startLine": 78,
+        "startChar": 12,
+        "endLine": 78,
+        "endChar": 36
+      },
+      "revId": "62856ef13fffac05f1e0875f571f7674679e6bbb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a71b84ea_27c540e8",
+        "filename": "oem/ast2600evb_rpi/resource.resource",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-09-12T03:00:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "298a3184_b946aaf7",
       "range": {
         "startLine": 78,
         "startChar": 12,
@@ -259,6 +451,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e9202cf_f5f7cdf1",
+        "filename": "oem/ast2600evb_rpi/resource.resource",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-09-12T03:00:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3ff0ccd_7a3e8526",
+      "range": {
+        "startLine": 79,
+        "startChar": 3,
+        "endLine": 79,
+        "endChar": 29
+      },
+      "revId": "62856ef13fffac05f1e0875f571f7674679e6bbb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8aa2495f_58361559",
@@ -272,6 +488,30 @@
       "writtenOn": "2026-09-11T06:52:54Z",
       "side": 1,
       "message": "Kindly replace with below,\nVAR \u0026{payload} CredentialBootstrapping\u003d${cb}",
+      "range": {
+        "startLine": 86,
+        "startChar": 4,
+        "endLine": 86,
+        "endChar": 65
+      },
+      "revId": "62856ef13fffac05f1e0875f571f7674679e6bbb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54b36683_f51a1e6a",
+        "filename": "oem/ast2600evb_rpi/resource.resource",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-09-12T03:00:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8aa2495f_58361559",
       "range": {
         "startLine": 86,
         "startChar": 4,
@@ -305,6 +545,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ce80fb4_228a2478",
+        "filename": "oem/ast2600evb_rpi/resource.resource",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-09-12T03:00:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46852d23_48825964",
+      "range": {
+        "startLine": 102,
+        "startChar": 4,
+        "endLine": 102,
+        "endChar": 58
+      },
+      "revId": "62856ef13fffac05f1e0875f571f7674679e6bbb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb5d7409_5c5c5769",
@@ -318,6 +582,30 @@
       "writtenOn": "2026-09-11T06:52:54Z",
       "side": 1,
       "message": "Kindly replace with below,\nVAR  \u0026{payload}  ResetType\u003dGracefulRestart",
+      "range": {
+        "startLine": 111,
+        "startChar": 6,
+        "endLine": 111,
+        "endChar": 13
+      },
+      "revId": "62856ef13fffac05f1e0875f571f7674679e6bbb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6dbb3843_93aea2ce",
+        "filename": "oem/ast2600evb_rpi/resource.resource",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-09-12T03:00:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb5d7409_5c5c5769",
       "range": {
         "startLine": 111,
         "startChar": 6,
@@ -351,6 +639,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf88be0a_ffa195e7",
+        "filename": "oem/ast2600evb_rpi/resource.resource",
+        "patchSetId": 2
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-09-12T03:00:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cdc70bbe_3f0eef63",
+      "range": {
+        "startLine": 276,
+        "startChar": 59,
+        "endLine": 276,
+        "endChar": 78
+      },
+      "revId": "62856ef13fffac05f1e0875f571f7674679e6bbb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "037edd00_08378781",
@@ -364,6 +676,30 @@
       "writtenOn": "2026-09-11T06:52:54Z",
       "side": 1,
       "message": "Replace /redfish/v1/AccountService/Accounts with ${REDFISH_ACCOUNTS_URI}",
+      "range": {
+        "startLine": 301,
+        "startChar": 48,
+        "endLine": 301,
+        "endChar": 83
+      },
+      "revId": "62856ef13fffac05f1e0875f571f7674679e6bbb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e70b15ec_3fb217be",
+        "filename": "oem/ast2600evb_rpi/resource.resource",
+        "patchSetId": 2
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-09-12T03:00:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "037edd00_08378781",
       "range": {
         "startLine": 301,
         "startChar": 48,
