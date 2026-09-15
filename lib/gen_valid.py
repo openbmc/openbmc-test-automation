@@ -6,13 +6,19 @@ This module provides validation functions like valid_value(), valid_integer(), e
 
 import datetime
 import os
+import re
 
 import func_args as fa
 import gen_cmd as gc
 import gen_print as gp
+import jsonschema 
+import requests
 
 exit_on_error = False
 
+# Matches e.g. "#Bios.v1_2_4.Bios" -> ("Bios", "v1_2_4").
+ODATA_TYPE_REGEX = re.compile(r"^#(\w+)\.(v\d+_\d+_\d+)\.\w+$")
+DMTF_SCHEMA_STORE_URL = "https://redfish.dmtf.org/schemas/v1/"
 
 def set_exit_on_error(value):
     r"""
@@ -734,6 +740,67 @@ def valid_length(var_value, min_length=None, max_length=None, var_name=None):
     return process_error_message(error_message)
 
 
+def valid_dmtf_schema(var_value, odata_type=None, var_name=None):
+    r"""
+    The variable value is valid if it conforms to its published DMTF Redfish JSON Schema, resolved from its
+    own "@odata.type" field (e.g. "#Bios.v1_2_4.Bios") and fetched from the public DMTF schema store.
+
+    Description of argument(s):
+    var_value                       The Redfish resource dictionary to validate (e.g. the dictionary
+                                    returned by Redfish.Get Properties).
+    odata_type                      Override for the "@odata.type" value used to resolve the schema.
+                                    Defaults to var_value's own "@odata.type" field.
+    """
+
+    error_message = ""
+    resolved_odata_type = odata_type or var_value.get("@odata.type")
+    if not resolved_odata_type:
+        var_name = get_var_name(var_name)
+        error_message += "The following variable is invalid because it has no"
+        error_message += ' "@odata.type" field to resolve a DMTF schema:\n'
+        error_message += gp.sprint_varx(var_name, var_value, gp.blank())
+        return process_error_message(error_message)
+
+    match = ODATA_TYPE_REGEX.match(resolved_odata_type)
+    if not match:
+        var_name = get_var_name(var_name)
+        error_message += "The following variable is invalid because its"
+        error_message += ' "@odata.type" value is not in the expected'
+        error_message += " '#<Schema>.<vX_Y_Z>.<Schema>' format:\n"
+        error_message += gp.sprint_varx(var_name, var_value, gp.blank())
+        error_message += "\n"
+        error_message += gp.sprint_var(resolved_odata_type)
+        return process_error_message(error_message)
+    schema_name, schema_version = match.groups()
+
+    schema_url = DMTF_SCHEMA_STORE_URL + schema_name + "." + schema_version + ".json"
+    response = requests.get(schema_url, timeout=30)
+    if response.status_code != 200:
+        var_name = get_var_name(var_name)
+        error_message += "The following variable is invalid because its DMTF"
+        error_message += " schema could not be fetched:\n"
+        error_message += gp.sprint_varx(var_name, var_value, gp.blank())
+        error_message += "\n"
+        error_message += gp.sprint_vars(schema_url, response.status_code)
+        return process_error_message(error_message)
+    schema = response.json()
+
+    schema_def = schema["definitions"][schema_name]
+    resolver = jsonschema.RefResolver.from_schema(schema)
+    validator = jsonschema.Draft4Validator(schema_def, resolver=resolver)
+    schema_errors = [error.message for error in validator.iter_errors(var_value)]
+
+    if schema_errors:
+        var_name = get_var_name(var_name)
+        error_message += "The following variable is invalid because it does not"
+        error_message += " conform to its DMTF JSON Schema:\n"
+        error_message += gp.sprint_varx(var_name, var_value, gp.blank())
+        error_message += "\n"
+        error_message += gp.sprint_var(schema_errors)
+
+    return process_error_message(error_message)
+
+
 # Modify selected function docstrings by adding headers/footers.
 
 func_names = [
@@ -750,6 +817,7 @@ func_names = [
     "valid_length",
     "valid_float",
     "valid_date_time",
+    "valid_dmtf_schema",
 ]
 
 raw_doc_strings = {}
