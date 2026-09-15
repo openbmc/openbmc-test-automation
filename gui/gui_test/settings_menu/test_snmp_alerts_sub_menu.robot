@@ -384,6 +384,12 @@ Configure Multiple SNMP Managers Via GUI Reboot BMC And Verify Trap
 Suite Setup Execution
     [Documentation]  Launch browser, login GUI and navigate to snmp page.
 
+    # Strip brackets from OPENBMC_HOST only when it is a bracketed IPv6 address.
+    IF  $OPENBMC_HOST.startswith('[') and $OPENBMC_HOST.endswith(']')
+        ${OPENBMC_HOST}=  Evaluate  $OPENBMC_HOST[1:-1]
+        Set Suite Variable  ${OPENBMC_HOST}
+    END
+
     Launch Browser And Login GUI
     Navigate To Required Sub Menu  ${xpath_settings_menu}  ${xpath_snmp_alerts_sub_menu}  snmp-alerts
     Redfish.Login
