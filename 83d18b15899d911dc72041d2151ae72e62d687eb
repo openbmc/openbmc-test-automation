@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "be9a3583_59d98cda",
+        "filename": "pldm/test_pldm_base.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1003055
+      },
+      "writtenOn": "2026-09-15T17:40:51Z",
+      "side": 1,
+      "message": "Added this change with a minor change. Since bare `$variable` syntax fails inside a generator expression (`any(... for e in ...)`) because Python\u0027s generator creates a nested scope where Robot Framework cannot resolve the keyword-argument variable",
+      "parentUuid": "ade6f259_69b24cf0",
+      "revId": "83d18b15899d911dc72041d2151ae72e62d687eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6fb6b42a_64249ca0",
         "filename": "pldm/test_pldm_base.robot",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2026-08-19T05:48:24Z",
       "side": 1,
       "message": "Add an explicit type guard:\n\n```\n${entries}\u003d  Evaluate\n...  $response if isinstance($response, list) else (next((v for v in $response.values() if isinstance(v, list)), []) if isinstance($response, dict) else [])\nRETURN  ${entries}\n```\n\nThen callers can rely on always receiving a list (possibly empty). Add a note in [Documentation] that an empty list is returned for unexpected response types.\n\npldm_utils.py:pldmtool() can return a plain string on SSH error or JSON parse failure. Receiving that string silently as \"a list\" would produce confusing test failures.",
+      "revId": "83d18b15899d911dc72041d2151ae72e62d687eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0f83937_287ee381",
+        "filename": "pldm/test_pldm_base.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1003055
+      },
+      "writtenOn": "2026-09-15T17:40:51Z",
+      "side": 1,
+      "message": "Added this change. Thanks.",
+      "parentUuid": "6fb6b42a_64249ca0",
       "revId": "83d18b15899d911dc72041d2151ae72e62d687eb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
