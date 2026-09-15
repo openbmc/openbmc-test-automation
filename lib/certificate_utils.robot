@@ -16,36 +16,62 @@ ${keybit_length}            2048
 
 Install Certificate File On BMC
     [Documentation]  Install certificate file in BMC using POST operation.
-    [Arguments]  ${uri}  ${status}=ok  &{kwargs}
+    [Arguments]  ${uri}  ${status}=ok  ${version}=IPv4  &{kwargs}
+    [Teardown]  Delete All Sessions
 
     # Description of argument(s):
     # uri         URI for installing certificate file via Redfish
     #             e.g. "/redfish/v1/AccountService/LDAP/Certificates".
     # status      Expected status of certificate installation via Redfish
     #             e.g. error, ok.
+    # version     IP version to use for the POST request (IPv4 or IPv6).
+    #             Defaults to IPv4 for backward compatibility.
     # kwargs      A dictionary of keys/values to be passed directly to
     #             POST Request.
 
-    Initialize OpenBMC
+    IF  '${version}' == 'IPv4'
+        Initialize OpenBMC
 
-    ${headers}=  Create Dictionary  Content-Type=application/octet-stream
-    ...  X-Auth-Token=${XAUTH_TOKEN}
-    Set To Dictionary  ${kwargs}  headers  ${headers}
+        ${headers}=  Create Dictionary  Content-Type=application/octet-stream
+        ...  X-Auth-Token=${XAUTH_TOKEN}
+        Set To Dictionary  ${kwargs}  headers  ${headers}
 
-    ${resp}=  POST On Session  openbmc  ${uri}  &{kwargs}  expected_status=any
-    IF  '${resp.status_code}' == '${HTTP_OK}'
-       ${cert_id}=  Set Variable  ${resp.json()["Id"]}
+        ${resp}=  POST On Session  openbmc  ${uri}  &{kwargs}  expected_status=any
+        IF  '${resp.status_code}' == '${HTTP_OK}'
+            VAR  ${cert_id}  ${resp.json()["Id"]}
+        ELSE
+            VAR  ${cert_id}  -1
+        END
+
+        IF  '${status}' == 'ok'
+            Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+        ELSE IF  '${status}' == 'error'
+            Should Be Equal As Strings  ${resp.status_code}  ${HTTP_INTERNAL_SERVER_ERROR}
+        END
+
     ELSE
-       ${cert_id}=  Set Variable  -1
+        ${session_key}  ${session_location}=  RedfishIPv6.Get Session Info
+        ${headers}=  Create Dictionary  Content-Type=application/octet-stream
+        ...  X-Auth-Token=${session_key}
+        Set To Dictionary  ${kwargs}  headers  ${headers}
+        ${ipv6_base_url}=  RedfishIPv6.Get Base Url
+        Create Session  openbmc_ipv6  ${ipv6_base_url}  verify=${False}
+        VAR  ${cert_id}  -1
+        TRY
+            ${resp}=  POST On Session  openbmc_ipv6  ${uri}  &{kwargs}  expected_status=any
+        EXCEPT  AS  ${err}
+            Fail  IPv6 POST to ${uri} failed: ${err}
+        END
+        IF  '${resp.status_code}' == '${HTTP_CREATED}' or '${resp.status_code}' == '${HTTP_OK}'
+            VAR  ${cert_id}  ${resp.json()["Id"]}
+        END
+        IF  '${status}' == 'ok'
+            Should Be True
+            ...  '${resp.status_code}' == '${HTTP_OK}' or '${resp.status_code}' == '${HTTP_CREATED}'
+        ELSE IF  '${status}' == 'error'
+            Should Be Equal As Strings  ${resp.status_code}  ${HTTP_INTERNAL_SERVER_ERROR}
+        END
     END
-
-    IF  '${status}' == 'ok'
-        Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
-    ELSE IF  '${status}' == 'error'
-        Should Be Equal As Strings  ${resp.status_code}  ${HTTP_INTERNAL_SERVER_ERROR}
-    END
-
-    Delete All Sessions
 
     RETURN  ${cert_id}
 
@@ -200,11 +226,8 @@ Delete Certificate Via BMC CLI
        ${certificate_uri}=  Set Variable  None
     END
 
-    ${file_status}  ${stderr}  ${rc}=  BMC Execute Command
-    ...  [ -f ${certificate_file_path} ] && echo "Found" || echo "Not Found"
-
-    IF  "${file_status}" != "Found"  RETURN
-    BMC Execute Command  rm ${certificate_file_path}
+    
+    BMC Execute Command  rm -f ${certificate_file_path}
     BMC Execute Command  systemctl restart ${certificate_service}
     BMC Execute Command  systemctl daemon-reload
     Wait Until Keyword Succeeds  1 min  10 sec  Redfish.Get  ${certificate_uri}/1
