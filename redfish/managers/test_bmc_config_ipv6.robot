@@ -39,6 +39,8 @@ ${SERVER_IPv6}            ${EMPTY}
 ${test_ipv6_addr}         2001:db8:1:1:250:56ff:fe8a:668
 ${test_ipv6_addr1}        2001:db8:1:1:250:56ff:fe8a:669
 ${CA_CERTIFICATES_COUNT}  3
+${LDAP_CLIENT_CERT_FILE}          ${EMPTY}
+${LDAP_CLIENT_CERT_FILE_REPLACE}  ${EMPTY}
 
 *** Test Cases ***
 
@@ -421,6 +423,32 @@ Replace CA Certificate Via IPv6 And Verify
     [Tags]  Replace_CA_Certificate_Via_IPv6_And_Verify
     [Template]  Replace CA Certificate From IPv6 Address
     [Teardown]  Cleanup All CA Certificates Via IPv6
+
+    # Address_type  channel_number
+    SLAAC           ${1}
+    Static          ${1}
+    SLAAC           ${2}
+    Static          ${2}
+
+
+Install LDAP Certificate Via IPv6 And Verify
+    [Documentation]  Install LDAP (client) certificate by logging from SLAAC/Static IPv6 on eth0/eth1 and verify.
+    [Tags]  Install_LDAP_Certificate_Via_IPv6_And_Verify
+    [Template]  Install LDAP Certificate From IPv6 Address
+    [Teardown]  Delete Certificate Via BMC CLI  Client
+
+    # Address_type  channel_number
+    SLAAC           ${1}
+    Static          ${1}
+    SLAAC           ${2}
+    Static          ${2}
+
+
+Replace LDAP Certificate Via IPv6 And Verify
+    [Documentation]  Replace LDAP (client) certificate by logging from SLAAC/Static IPv6 on eth0/eth1 and verify.
+    [Tags]  Replace_LDAP_Certificate_Via_IPv6_And_Verify
+    [Template]  Replace LDAP Certificate From IPv6 Address
+    [Teardown]  Delete Certificate Via BMC CLI  Client
 
     # Address_type  channel_number
     SLAAC           ${1}
@@ -1090,7 +1118,7 @@ Replace CA Certificate From IPv6 Address
 
     # Get existing CA certificate list and store initial count.
     ${cert_list}=  Redfish_Utils.Get Member List  /redfish/v1/Managers/${MANAGER_ID}/Truststore/Certificates
-    Should Not Be Empty  ${cert_list}  msg=No CA certificates found to replace
+    Should Not Be Empty  ${cert_list}
     ${initial_cert_count}=  Get Length  ${cert_list}
 
     # Replace CA certificate via Redfish.
@@ -1113,6 +1141,108 @@ Cleanup All CA Certificates Via IPv6
 
     Delete All CA Certificate Via Redfish
     Install And Verify Certificate Via Redfish  CA  Valid Certificate  ok  ${FALSE}
+
+
+Install LDAP Certificate From IPv6 Address
+    [Documentation]  Install LDAP (client) certificate by logging from SLAAC/Static IPv6 address and verify.
+    [Arguments]  ${ipv6_address_type}  ${channel_number}
+
+    # Description of argument(s):
+    # ${ipv6_address_type}  Type of IPv6 address (SLAAC/Static).
+    # ${channel_number}     Ethernet channel number, 1(eth0) or 2(eth1).
+ 
+    # Get IPv6 address for the specified type and channel.
+    @{ipv6_addressorigin_list}  ${ipv6_addr}=
+    ...  Get Address Origin List And Address For Type  ${ipv6_address_type}  ${channel_number}
+
+    # Connect to BMC using IPv6 and establish Redfish session.
+    Connect BMC Using IPv6 Address  ${ipv6_addr}
+    RedfishIPv6.Login
+
+    # Only one LDAP client certificate is allowed - delete any existing before install.
+    Delete Certificate Via BMC CLI  Client
+ 
+    # Read certificate file provided by the user.
+    ${bytes}=  OperatingSystem.Get Binary File  ${LDAP_CLIENT_CERT_FILE}
+    ${file_data}=  Decode Bytes To String  ${bytes}  UTF-8
+
+    # Install LDAP certificate via Redfish over IPv6 session.
+    ${cert_id}=  Install Certificate File On BMC  ${REDFISH_LDAP_CERTIFICATE_URI}  ok  data=${file_data}
+    Logging  Installed LDAP certificate id: ${cert_id}
+
+    Sleep  30s
+
+    # Verify the installed certificate content matches what was uploaded.
+    ${cert_file_content}=  OperatingSystem.Get File  ${LDAP_CLIENT_CERT_FILE}
+    ${bmc_cert_content}=  redfish_utils.Get Attribute
+    ...  ${REDFISH_LDAP_CERTIFICATE_URI}/${cert_id}  CertificateString
+    Should Contain  ${cert_file_content}  ${bmc_cert_content}
+    ...  msg=LDAP certificate content mismatch after install via ${ipv6_address_type} IPv6
+
+
+Replace LDAP Certificate From IPv6 Address
+    [Documentation]  Replace LDAP (client) certificate by logging from SLAAC/Static IPv6 address and verify.
+    ...  Installs LDAP_CLIENT_CERT_FILE first, then replaces it with LDAP_CLIENT_CERT_FILE_REPLACE.
+    ...  No delete is performed - uses CertificateService.ReplaceCertificate for in-place swap.
+    [Arguments]  ${ipv6_address_type}  ${channel_number}
+
+    # Description of argument(s):
+    # ${ipv6_address_type}  Type of IPv6 address (SLAAC/Static).
+    # ${channel_number}     Ethernet channel number, 1(eth0) or 2(eth1).
+
+    # Fail early if either certificate file path is not provided.
+    Should Not Be Empty  ${LDAP_CLIENT_CERT_FILE}
+    Should Not Be Empty  ${LDAP_CLIENT_CERT_FILE_REPLACE}
+
+    # Get IPv6 address for the specified type and channel.
+    @{ipv6_addressorigin_list}  ${ipv6_addr}=
+    ...  Get Address Origin List And Address For Type  ${ipv6_address_type}  ${channel_number}
+
+    # Connect to BMC using IPv6 and establish Redfish session.
+    Connect BMC Using IPv6 Address  ${ipv6_addr}
+    RedfishIPv6.Login
+
+    # Ensure clean state - only one LDAP certificate is allowed at a time.
+    Delete Certificate Via BMC CLI  Client
+
+    # Read and install the first (original) LDAP certificate.
+    ${bytes}=  OperatingSystem.Get Binary File  ${LDAP_CLIENT_CERT_FILE}
+    ${cert_id}=  Install Certificate File On BMC  ${REDFISH_LDAP_CERTIFICATE_URI}  ok  data=${file_data}
+
+    Logging  Installed original LDAP certificate id: ${cert_id}
+
+    Sleep  30s
+
+    # Read the replacement certificate file provided by the user.
+    ${replace_bytes}=  OperatingSystem.Get Binary File  ${LDAP_CLIENT_CERT_FILE_REPLACE}
+    ${replace_file_data}=  Decode Bytes To String  ${replace_bytes}  UTF-8
+
+    # Build ReplaceCertificate payload targeting the existing LDAP certificate URI.
+    # No delete is needed - ReplaceCertificate swaps the cert in-place.
+    VAR  ${certificate_uri}  ${REDFISH_LDAP_CERTIFICATE_URI}/${cert_id}
+    VAR  &{certificate_dict}  @odata.id=${certificate_uri}
+    VAR  &{payload}  CertificateString=${replace_file_data}
+    ...  CertificateType=PEM  CertificateUri=${certificate_dict}
+
+    # POST to ReplaceCertificate action over the IPv6 Redfish session.
+    RedfishIPv6.Post
+    ...  /redfish/v1/CertificateService/Actions/CertificateService.ReplaceCertificate
+    ...  body=${payload}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+    Sleep  30s
+
+    # Verify the BMC now holds the replacement certificate content.
+    ${replace_file_content}=  OperatingSystem.Get File  ${LDAP_CLIENT_CERT_FILE_REPLACE}
+    ${bmc_cert_content}=  redfish_utils.Get Attribute  ${certificate_uri}  CertificateString
+    Should Contain  ${replace_file_content}  ${bmc_cert_content}
+    ...  msg=BMC LDAP certificate was not replaced with new cert via ${ipv6_address_type} IPv6
+
+    # Verify count is still 1 - replace must not add a new certificate entry.
+    ${cert_list}=  Redfish_Utils.Get Member List  ${REDFISH_LDAP_CERTIFICATE_URI}
+    ${cert_count}=  Get Length  ${cert_list}
+    Should Be Equal As Integers  ${cert_count}  ${1}
+    ...  msg=Expected 1 LDAP certificate after replace via ${ipv6_address_type} IPv6
 
 
 Configure IPv4 IPv6 Combination And Verify Redfish Access
