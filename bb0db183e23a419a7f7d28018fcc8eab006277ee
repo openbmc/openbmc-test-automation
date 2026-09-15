@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4600ceb0_1e9d332a",
+        "filename": "oem/ast2600evb_rpi/inband/test_inband.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-09-15T03:30:38Z",
+      "side": 1,
+      "message": "**Issue #1 (🔴 High Severity (MUST FIX))**: Incorrect Kernel Config Assertion in `Ssif Subsystems`\n\n**Issue**: Incorrect Kernel Config Assertion in `Ssif Subsystems`\n\n**Why**: The test executes `cat /proc/config.gz | zcat | grep SSIF` which outputs only lines containing \"SSIF\", then asserts the presence of `CONFIG_NET_PTP_CLASSIFY\u003dy`. That string has nothing to do with SSIF and would never appear in SSIF-filtered output — the assertion either always fails (correct) or the command actually returns more output than expected. The line immediately below already checks `CONFIG_SSIF_IPMI_BMC\u003dy` (line 28), so this duplicate path is either dead code or a copy/paste error. Remove line 27 or replace it with a meaningful SSIF config assertion.",
+      "revId": "bb0db183e23a419a7f7d28018fcc8eab006277ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "833c93c8_e201c467",
+        "filename": "oem/ast2600evb_rpi/inband/test_inband.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-09-15T03:30:38Z",
+      "side": 1,
+      "message": "**Issue #4 (🟢 Low Severity (NICE TO FIX))**: `Configure Ethernet Over Usb` Does Not Verify BMC-side USB IP\n\n**Issue**: The documentation says \"Verify Ethernet over IP is already configured in BMC\", but the test only configures and verifies the host-side `usb0` interface. No BMC-side check is performed.\n\n**Fix**:\nAdd an SSH command to the BMC to confirm `usb0` has an IP address, or update the documentation to accurately state what is actually tested (host-side only).\n\n**Why**: Misleading documentation degrades test confidence and makes failure diagnosis harder.",
+      "revId": "bb0db183e23a419a7f7d28018fcc8eab006277ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35ec6fe6_3fbb9865",
+        "filename": "oem/ast2600evb_rpi/inband/test_inband.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-09-15T03:30:38Z",
+      "side": 1,
+      "message": "**Issue #3 (🟡 Medium Severity (SHOULD FIX))**: Hard-coded `Sleep  5s` Tunnel Wait with No Observable Condition\n\n**Issue**: This sleep is inserted before the `curl` tunnel-verification step but no inline comment explains why a 5-second fixed delay is necessary instead of polling.\n\n**Fix**:\n```robot\n    # Wait for the SSH tunnel process to bind the local port before sending traffic.\n    # No direct observable condition is available; 5 s is sufficient for ssh to establish the tunnel.\n    Sleep  5s\n```\n\n```robot\n    Wait Until Keyword Succeeds  15s  1s\n    ...  Run Process  curl  -k  https://127.0.0.1:18443/redfish/v1\n```\n\n**Why**: Unexplained hard-coded sleeps can mask race conditions and slow down the test unnecessarily in fast environments. If the delay cannot be eliminated, an inline comment explaining why is mandatory per project convention.",
+      "revId": "bb0db183e23a419a7f7d28018fcc8eab006277ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7c140b4_5400af2d",
+        "filename": "oem/ast2600evb_rpi/inband/test_inband.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-09-15T03:30:38Z",
+      "side": 1,
+      "message": "**Issue #2 (🔴 High Severity (MUST FIX))**: Missing `[Documentation]` and `[Tags]` on `Redfish Api Access Over Usb Ethernet Ip`\n\n**Issue**: Missing `[Documentation]` and `[Tags]` on `Redfish Api Access Over Usb Ethernet Ip`\n\n**Why**: This is the only test case in the suite missing both `[Documentation]` and `[Tags]`. Without a tag it cannot be selectively executed or excluded at runtime and breaks the consistent `EVB_RPI + per-test` tagging strategy of the rest of the suite.",
+      "revId": "bb0db183e23a419a7f7d28018fcc8eab006277ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df98bee0_b328f890",
+        "filename": "oem/ast2600evb_rpi/resource.resource",
+        "patchSetId": 7
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-09-15T03:30:38Z",
+      "side": 1,
+      "message": "**Issue #5 (🟢 Low Severity (NICE TO FIX))**: `Verify Bootstrap Account Deleted` Uses String Conversion for Membership Check\n\n**Issue**: Converting the Members list to a string and doing a substring search is fragile — if a future username happens to be a substring of an existing URI path, the check could produce a false positive or false negative. Iterating the Members list and checking `@odata.id` directly is more robust.\n\n**Fix**:\n```robot\n${uris}\u003d  Evaluate  [m[\u0027@odata.id\u0027] for m in $resp.dict[\u0027Members\u0027]]\nShould Not Contain  ${uris}  /redfish/v1/AccountService/Accounts/${BOOTSTRAP_USERNAME}\n```\n\n**Why**: Defensive test assertions are more reliable than string-contains checks on serialised data structures.",
+      "revId": "bb0db183e23a419a7f7d28018fcc8eab006277ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
