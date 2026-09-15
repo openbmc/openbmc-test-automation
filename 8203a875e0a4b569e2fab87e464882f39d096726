@@ -16,6 +16,57 @@
       "message": "I think, you should hold pushing more files changes for now, else you ll get more comments..",
       "revId": "8203a875e0a4b569e2fab87e464882f39d096726",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc4c64a4_60294372",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-09-15T14:52:53Z",
+      "side": 1,
+      "message": "Looking good.. just couple more minor recommendation, see if u can fix those or make sense to do that.",
+      "revId": "8203a875e0a4b569e2fab87e464882f39d096726",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c28a4c2_e3a18dee",
+        "filename": "oem/ast2600evb_rpi/gui/test_usb_ethernet_webui.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-09-15T14:52:53Z",
+      "side": 1,
+      "message": "Use sshpass -e with the SSHPASS environment variable, or supply the password via stdin:\n```\n    VAR  ${cmd}\n    ...  SSHPASS\u003d\u0027${HOST_PASSWORD}\u0027 sshpass -e ssh -N -L 18443:${BMC_USB_ETH_IP}:443 -o StrictHostKeyChecking\u003dno -o UserKnownHostsFile\u003d/dev/null ${HOST_USERNAME}@${HOST_IP}\n```\n\nCredentials in process arguments are visible to other processes and may be captured in logs.",
+      "revId": "8203a875e0a4b569e2fab87e464882f39d096726",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df251f10_f1c85ce7",
+        "filename": "oem/ast2600evb_rpi/redfish/host_interface/test_host_interface.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-09-15T14:52:53Z",
+      "side": 1,
+      "message": "```\n    ${output}  ${rc}\u003d  Execute Command\n    ...  sudo ipmitool raw ${IPMI_RAW_CMD}[ssif_certificate_fingerprint][Get][0]\n    ...  return_stdout\u003dTrue  return_rc\u003dTrue\n    Should Be Equal As Integers  ${rc}  1\n    ...  msg\u003dExpected ipmitool to fail (rc\u003d1) when bootstrapping is disabled, got rc\u003d${rc}\n    Should Be Empty  ${output}  CredentialBootstrapping is not disabled\n```\n\nWithout the return-code check the test cannot distinguish \"IPMI returned nothing because bootstrapping is disabled\" from \"IPMI command failed for an unrelated reason (SSIF path down, command timeout, network error)\".",
+      "revId": "8203a875e0a4b569e2fab87e464882f39d096726",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
