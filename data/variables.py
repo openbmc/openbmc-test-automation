@@ -229,6 +229,10 @@ REDFISH_CA_CERTIFICATE = (
     "Managers/" + REDFISH_MANAGERS_ID + "/Truststore/Certificates"
 )
 REDFISH_CA_CERTIFICATE_URI = REDFISH_BASE_URI + REDFISH_CA_CERTIFICATE
+REDFISH_REPLACE_CERTIFICATE_URI = (
+    REDFISH_BASE_URI +
+    "CertificateService/Actions/CertificateService.ReplaceCertificate"
+)
 REDFISH_CHASSIS_ID = BuiltIn().get_variable_value(
     "${CHASSIS_ID}", default="chassis"
 )
