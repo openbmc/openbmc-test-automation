@@ -188,3 +188,6 @@ ${CLIENT_PASSWORD}         ${EMPTY}
 
 # Task Service related variables.
 ${TASK_JSON_FILE_PATH}   data/task_state.json
+
+# running against an EVB bring-up board
+${PLATFORM_IS_EVB}                 ${0}
