@@ -296,6 +296,7 @@ DUMP_URI = SYSTEM_BASE_URI + "LogServices/Dump/"
 
 BIOS_ATTR_URI = SYSTEM_BASE_URI + "Bios"
 BIOS_ATTR_SETTINGS_URI = BIOS_ATTR_URI + "/Settings"
+BIOS_ATTR_REGISTRY_URI = BIOS_ATTR_URI + "/BiosAttributeRegistry"
 
 # Task variables.
 REDFISH_TASK_SERVICE_URI = REDFISH_BASE_URI + "TaskService/"
