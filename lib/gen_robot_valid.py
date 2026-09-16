@@ -236,6 +236,14 @@ def valid_length(var_name, *args, **kwargs):
     process_error_message(error_message)
 
 
+def valid_dmtf_schema(var_name, *args, **kwargs):
+    var_value, args, kwargs = valid_init(var_name, *args, **kwargs)
+    error_message = gv.valid_dmtf_schema(
+        var_value, *args, var_name=var_name, **kwargs
+    )
+    process_error_message(error_message)
+    
+
 # Modify the validation function docstrings by calling customize_doc_string for each function in the
 # func_names list.
 func_names = [
@@ -252,6 +260,7 @@ func_names = [
     "valid_length",
     "valid_float",
     "valid_date_time",
+    "valid_dmtf_schema",
 ]
 
 for func_name in func_names:
