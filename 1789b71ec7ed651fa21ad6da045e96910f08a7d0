@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eea4f347_a0fb5924",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002670
+      },
+      "writtenOn": "2026-09-16T08:14:57Z",
+      "side": 1,
+      "message": "Commit message is inconsistent with the actual test coverage. The new cases cover both SLAAC and Static IPv6 on eth0/eth1, but the commit message only mentions Static IPv6. Please update the commit message accordingly.",
+      "revId": "1789b71ec7ed651fa21ad6da045e96910f08a7d0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
