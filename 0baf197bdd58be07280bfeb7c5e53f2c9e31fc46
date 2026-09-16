@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ad5c64c_fc819abf",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 1398,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2026-09-16T05:04:38Z",
+      "side": 1,
+      "message": "Observations / Issues 🔍\n1. Missing Wait For Host To Ping after Set DHCPEnabled To Enable Or Disable False in teardown\nIn Setup, after enabling DHCP on eth1, there is correctly:\n\nWait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}\n\nBut in Teardown, after disabling DHCP and re-adding static IPs on eth1, no such wait is performed. A network reconfiguration in teardown without a connectivity wait can leave the BMC in a transitional state and cause the next test to fail spuriously.\n\n2. VAR ${CHANNEL_NUMBER} ${2} scope\u003dTEST side-effect in teardown\nThe teardown sets CHANNEL_NUMBER to ${2} inside the FOR loop to make Add IP Address target eth1, then resets it to ${1} afterwards. This is fragile — it relies on Add IP Address reading CHANNEL_NUMBER from test scope implicitly, and the reset-to-${1} at the end is a silent assumption about what downstream keywords expect. A cleaner approach would be to pass the channel as an argument to Add IP Address if the keyword supports it, or at minimum add a comment explaining the scoping trick.\n\n3. No verification of IPv6 addresses after Configure IPv6 Address On BMC\nThe test calls Get Address Origin List And Address For Type Static but this only checks that some static origin entry exists; it does not explicitly assert that ${test_ipv6_addr} / ${test_ipv6_addr1} are actually present in the list. If those keywords already do full address matching internally (which may be the case given the existing suite), this is fine — but worth confirming against the keyword definition.\n\n4. Setup Eth0 Static Eth1 DHCPv4 double-assigns eth1_dhcp_original\nVAR  ${eth1_dhcp_original}  ${True}  scope\u003dTEST   # initialise\n...\n${eth1_dhcp_original}\u003d  Get IPv4 DHCP Enabled Status  ${2}\nVAR  ${eth1_dhcp_original}  ${eth1_dhcp_original}  scope\u003dTEST   # re-assign\n\nThe initial VAR ... ${True} on line 1 is immediately overwritten. It is unnecessary and slightly misleading — if Get IPv4 DHCP Enabled Status throws, the default ${True} would prevent teardown from attempting restoration. Either remove the initialiser or document the intent of the default.\n\n5. Commit message \"Tested\" line is minimal\nTested: Ran the individual robot test case on BMC system to verify. passes CI but gives reviewers no detail on the platform/system used. OpenBMC convention expects at least a pass/fail summary line (e.g. \"All assertions passed on \u003cplatform\u003e\"). Low severity, but worth noting.\n\nVerdict\nThe logic is sound and the patch does what it claims. The two most actionable items before +2 are:\n\nAdd Wait For Host To Ping in the teardown after re-disabling DHCP (matches the setup pattern and prevents flaky follow-on tests).\nClarify or remove the redundant VAR ${eth1_dhcp_original} ${True} initialiser in Setup — either drop it, or if it is intentional as a safe default, add a comment explaining why ${True} is the right fallback.\nThe rest are minor style/robustness observations. Overall a well-structured addition to the IPv6 test suite.",
+      "range": {
+        "startLine": 1376,
+        "startChar": 0,
+        "endLine": 1398,
+        "endChar": 27
+      },
+      "revId": "0baf197bdd58be07280bfeb7c5e53f2c9e31fc46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
