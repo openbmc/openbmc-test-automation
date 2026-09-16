@@ -134,105 +134,85 @@ def customize_doc_string(doc_string):
 
 def valid_type(var_name, *args, **kwargs):
     var_value, args, kwargs = valid_init(var_name, *args, **kwargs)
-    error_message = gv.valid_type(
-        var_value, *args, var_name=var_name, **kwargs
-    )
+    error_message = gv.valid_type(var_value, *args, var_name=var_name, **kwargs)
     process_error_message(error_message)
 
 
 def valid_value(var_name, *args, **kwargs):
     var_value, args, kwargs = valid_init(var_name, *args, **kwargs)
-    error_message = gv.valid_value(
-        var_value, *args, var_name=var_name, **kwargs
-    )
+    error_message = gv.valid_value(var_value, *args, var_name=var_name, **kwargs)
     process_error_message(error_message)
 
 
 def valid_range(var_name, *args, **kwargs):
     var_value, args, kwargs = valid_init(var_name, *args, **kwargs)
-    error_message = gv.valid_range(
-        var_value, *args, var_name=var_name, **kwargs
-    )
+    error_message = gv.valid_range(var_value, *args, var_name=var_name, **kwargs)
     process_error_message(error_message)
 
 
 def valid_integer(var_name, *args, **kwargs):
     var_value, args, kwargs = valid_init(var_name, *args, **kwargs)
-    error_message = gv.valid_integer(
-        var_value, *args, var_name=var_name, **kwargs
-    )
+    error_message = gv.valid_integer(var_value, *args, var_name=var_name, **kwargs)
     process_error_message(error_message)
 
 
 def valid_float(var_name, *args, **kwargs):
     var_value, args, kwargs = valid_init(var_name, *args, **kwargs)
-    error_message = gv.valid_float(
-        var_value, *args, var_name=var_name, **kwargs
-    )
+    error_message = gv.valid_float(var_value, *args, var_name=var_name, **kwargs)
     process_error_message(error_message)
 
 
 def valid_date_time(var_name, *args, **kwargs):
     var_value, args, kwargs = valid_init(var_name, *args, **kwargs)
-    error_message = gv.valid_date_time(
-        var_value, *args, var_name=var_name, **kwargs
-    )
+    error_message = gv.valid_date_time(var_value, *args, var_name=var_name, **kwargs)
     process_error_message(error_message)
 
 
 def valid_dir_path(var_name, *args, **kwargs):
     var_value, args, kwargs = valid_init(var_name, *args, **kwargs)
-    error_message = gv.valid_dir_path(
-        var_value, *args, var_name=var_name, **kwargs
-    )
+    error_message = gv.valid_dir_path(var_value, *args, var_name=var_name, **kwargs)
     process_error_message(error_message)
 
 
 def valid_file_path(var_name, *args, **kwargs):
     var_value, args, kwargs = valid_init(var_name, *args, **kwargs)
-    error_message = gv.valid_file_path(
-        var_value, *args, var_name=var_name, **kwargs
-    )
+    error_message = gv.valid_file_path(var_value, *args, var_name=var_name, **kwargs)
     process_error_message(error_message)
 
 
 def valid_path(var_name, *args, **kwargs):
     var_value, args, kwargs = valid_init(var_name, *args, **kwargs)
-    error_message = gv.valid_path(
-        var_value, *args, var_name=var_name, **kwargs
-    )
+    error_message = gv.valid_path(var_value, *args, var_name=var_name, **kwargs)
     process_error_message(error_message)
 
 
 def valid_list(var_name, *args, **kwargs):
     var_value, args, kwargs = valid_init(var_name, *args, **kwargs)
-    error_message = gv.valid_list(
-        var_value, *args, var_name=var_name, **kwargs
-    )
+    error_message = gv.valid_list(var_value, *args, var_name=var_name, **kwargs)
     process_error_message(error_message)
 
 
 def valid_dict(var_name, *args, **kwargs):
     var_value, args, kwargs = valid_init(var_name, *args, **kwargs)
-    error_message = gv.valid_dict(
-        var_value, *args, var_name=var_name, **kwargs
-    )
+    error_message = gv.valid_dict(var_value, *args, var_name=var_name, **kwargs)
     process_error_message(error_message)
 
 
 def valid_program(var_name, *args, **kwargs):
     var_value, args, kwargs = valid_init(var_name, *args, **kwargs)
-    error_message = gv.valid_program(
-        var_value, *args, var_name=var_name, **kwargs
-    )
+    error_message = gv.valid_program(var_value, *args, var_name=var_name, **kwargs)
     process_error_message(error_message)
 
 
 def valid_length(var_name, *args, **kwargs):
     var_value, args, kwargs = valid_init(var_name, *args, **kwargs)
-    error_message = gv.valid_length(
-        var_value, *args, var_name=var_name, **kwargs
-    )
+    error_message = gv.valid_length(var_value, *args, var_name=var_name, **kwargs)
+    process_error_message(error_message)
+
+
+def valid_dmtf_schema(var_name, *args, **kwargs):
+    var_value, args, kwargs = valid_init(var_name, *args, **kwargs)
+    error_message = gv.valid_dmtf_schema(var_value, *args, var_name=var_name, **kwargs)
     process_error_message(error_message)
 
 
@@ -252,6 +232,7 @@ func_names = [
     "valid_length",
     "valid_float",
     "valid_date_time",
+    "valid_dmtf_schema",
 ]
 
 for func_name in func_names:
