@@ -17,6 +17,7 @@ Library  JSONLibrary
 Resource   ../../lib/bmc_redfish_resource.robot
 Resource   ../../lib/common_utils.robot
 Resource   ../../gui/lib/gui_resource.robot
+Variables  ../../data/variables.py
 Variables  ../../data/ipmi_raw_cmd_table.py
 
 *** Variables ***
