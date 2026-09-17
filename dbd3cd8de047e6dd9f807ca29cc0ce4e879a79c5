@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "28ff0988_19f66477",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-09-17T06:23:57Z",
+      "side": 1,
+      "message": "Guard this , if V4 continue as usual, else do the thing and set.  We should not assume it. know for sure and then do the operation else leave it untouched..",
+      "revId": "dbd3cd8de047e6dd9f807ca29cc0ce4e879a79c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f476cab9_9d7a3dcc",
         "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
         "patchSetId": 2
