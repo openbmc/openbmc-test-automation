@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0105d961_1a3578cd",
+        "filename": "lib/certificate_utils.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2026-09-17T05:49:46Z",
+      "side": 1,
+      "message": "2. Install Certificate File On BMC — IPv6 branch captures cert_id only on HTTP_CREATED or HTTP_OK, but cert_id is unset on other status codes before Delete All Sessions is called (lib/certificate_utils.robot)\n\nIn the IPv6 ELSE branch, Delete All Sessions is called before the cert_id IF/ELSE block is resolved for the status \u003d\u003d \u0027ok\u0027 assertion. If the status check fails mid-way, the session is already deleted, which is fine — but cert_id is set to -1 only inside a nested IF. If the compiler evaluates both conditions as false (e.g. neither HTTP_CREATED nor HTTP_OK), cert_id is never set, yet it is RETURN\u0027d. This will cause a variable-not-set runtime error. The IPv4 branch handles this safely; the IPv6 branch should mirror it exactly.",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 51,
+        "endChar": 27
+      },
+      "revId": "7325b1fe810717b5c47ec5d999974d151142c0cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42b4759d_685ab666",
+        "filename": "lib/certificate_utils.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2026-09-17T05:49:46Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 227,
+        "startChar": 0,
+        "endLine": 227,
+        "endChar": 4
+      },
+      "revId": "7325b1fe810717b5c47ec5d999974d151142c0cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0dbd9fe3_0b627f50",
+        "filename": "lib/certificate_utils.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2026-09-17T05:49:46Z",
+      "side": 1,
+      "message": "🔴 Critical / Must-fix\n1. Delete Certificate Via BMC CLI — existence-check logic broken (lib/certificate_utils.robot, diff lines ~224–234)\n\nThe patch comments out the file-existence check:\n\n#${file_status}  ${stderr}  ${rc}\u003d  BMC Execute Command\n#...  [ -f ${certificate_file_path} ] \u0026\u0026 echo \"Found\" || echo \"Not Found\"\n#IF  \"${file_status}\" !\u003d \"Found\"  RETURN\nBMC Execute Command  rm ${certificate_file_path}\n\nThis removes the guard that prevents rm from running when no certificate exists. Now rm will be executed unconditionally. If the file is absent, rm will error and the keyword will fail where it previously returned cleanly. This is a regression that affects every caller of Delete Certificate Via BMC CLI, not just the IPv6 paths. The commented-out code should be restored or replaced with a proper fix — not left as dead comments.",
+      "range": {
+        "startLine": 228,
+        "startChar": 1,
+        "endLine": 231,
+        "endChar": 44
+      },
+      "revId": "7325b1fe810717b5c47ec5d999974d151142c0cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fff804dd_9bd4eb59",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2026-09-17T05:49:46Z",
+      "side": 1,
+      "message": "5. Commented-out [Teardown] in both new test cases\n\n#[Teardown]  Delete Certificate Via BMC CLI  Client\n\nBoth new test cases have a teardown commented out. Without teardown, a LDAP certificate installed during a test run will persist on the BMC if the test fails mid-way, polluting subsequent runs. Either restore the teardown or document explicitly why it is intentionally omitted.",
+      "range": {
+        "startLine": 438,
+        "startChar": 0,
+        "endLine": 438,
+        "endChar": 55
+      },
+      "revId": "7325b1fe810717b5c47ec5d999974d151142c0cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1871197c_10d8be99",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 1177,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2026-09-17T05:49:46Z",
+      "side": 1,
+      "message": "6. Hardcoded Sleep 30s used twice without explanation\n\nTwo Sleep 30s calls appear in both new keywords with no comment. This is a test-smell — if 30s is a known BMC service restart settle time, it should use the existing ${certificate_wait_time} variable (already defined as 30 in certificate_utils.robot) via a Wait Until Keyword Succeeds pattern. Unconditional sleeps make the test brittle and slow.",
+      "range": {
+        "startLine": 1177,
+        "startChar": 3,
+        "endLine": 1177,
+        "endChar": 14
+      },
+      "revId": "7325b1fe810717b5c47ec5d999974d151142c0cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2439fc18_8fb91810",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 1185,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2026-09-17T05:49:46Z",
+      "side": 1,
+      "message": "7. Install LDAP Certificate From IPv6 Address — missing RedfishIPv6.Logout on failure path\n\nRedfishIPv6.Login is called, but the keyword has no [Teardown] to guarantee RedfishIPv6.Logout runs even when the keyword fails. If an assertion fails mid-keyword the IPv6 session is leaked. The same pattern is used by other keywords in the file (e.g. the CA cert keywords) that do have teardowns — this should be consistent.",
+      "range": {
+        "startLine": 1185,
+        "startChar": 3,
+        "endLine": 1185,
+        "endChar": 22
+      },
+      "revId": "7325b1fe810717b5c47ec5d999974d151142c0cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96b319a0_6b8ac0e6",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 1218,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2026-09-17T05:49:46Z",
+      "side": 1,
+      "message": "4. Wrong keyword: Logging vs Log (redfish/managers/test_bmc_config_ipv6.robot, Replace LDAP Certificate From IPv6 Address)\n\nLogging  Installed original LDAP certificate id: ${cert_id}\n\nLogging is not a standard Robot Framework keyword — the correct built-in is Log. Logging will cause a No keyword with name \u0027Logging\u0027 found runtime failure. (The Install LDAP Certificate From IPv6 Address keyword correctly uses Log.)",
+      "range": {
+        "startLine": 1218,
+        "startChar": 4,
+        "endLine": 1218,
+        "endChar": 63
+      },
+      "revId": "7325b1fe810717b5c47ec5d999974d151142c0cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
