@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d611107_36f025c4",
+        "filename": "lib/certificate_utils.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-09-17T15:27:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0105d961_1a3578cd",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 51,
+        "endChar": 27
+      },
+      "revId": "7325b1fe810717b5c47ec5d999974d151142c0cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "42b4759d_685ab666",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-09-17T05:49:46Z",
       "side": 1,
       "message": "remove",
+      "range": {
+        "startLine": 227,
+        "startChar": 0,
+        "endLine": 227,
+        "endChar": 4
+      },
+      "revId": "7325b1fe810717b5c47ec5d999974d151142c0cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcb7dc42_384a8b7b",
+        "filename": "lib/certificate_utils.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-09-17T15:27:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42b4759d_685ab666",
       "range": {
         "startLine": 227,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4ba0294_5e6be755",
+        "filename": "lib/certificate_utils.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-09-17T15:27:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0dbd9fe3_0b627f50",
+      "range": {
+        "startLine": 228,
+        "startChar": 1,
+        "endLine": 231,
+        "endChar": 44
+      },
+      "revId": "7325b1fe810717b5c47ec5d999974d151142c0cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fff804dd_9bd4eb59",
@@ -83,6 +155,30 @@
       "writtenOn": "2026-09-17T05:49:46Z",
       "side": 1,
       "message": "5. Commented-out [Teardown] in both new test cases\n\n#[Teardown]  Delete Certificate Via BMC CLI  Client\n\nBoth new test cases have a teardown commented out. Without teardown, a LDAP certificate installed during a test run will persist on the BMC if the test fails mid-way, polluting subsequent runs. Either restore the teardown or document explicitly why it is intentionally omitted.",
+      "range": {
+        "startLine": 438,
+        "startChar": 0,
+        "endLine": 438,
+        "endChar": 55
+      },
+      "revId": "7325b1fe810717b5c47ec5d999974d151142c0cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff2a1e78_27643715",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-09-17T15:27:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fff804dd_9bd4eb59",
       "range": {
         "startLine": 438,
         "startChar": 0,
@@ -139,6 +235,54 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad066f2f_afbf243d",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 1177,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-09-17T15:27:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1871197c_10d8be99",
+      "range": {
+        "startLine": 1177,
+        "startChar": 3,
+        "endLine": 1177,
+        "endChar": 14
+      },
+      "revId": "7325b1fe810717b5c47ec5d999974d151142c0cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7de739d_88a30c47",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 1177,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-09-17T15:27:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b13ef62f_da9b88fd",
+      "range": {
+        "startLine": 1177,
+        "startChar": 4,
+        "endLine": 1177,
+        "endChar": 11
+      },
+      "revId": "7325b1fe810717b5c47ec5d999974d151142c0cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2439fc18_8fb91810",
@@ -152,6 +296,30 @@
       "writtenOn": "2026-09-17T05:49:46Z",
       "side": 1,
       "message": "7. Install LDAP Certificate From IPv6 Address — missing RedfishIPv6.Logout on failure path\n\nRedfishIPv6.Login is called, but the keyword has no [Teardown] to guarantee RedfishIPv6.Logout runs even when the keyword fails. If an assertion fails mid-keyword the IPv6 session is leaked. The same pattern is used by other keywords in the file (e.g. the CA cert keywords) that do have teardowns — this should be consistent.",
+      "range": {
+        "startLine": 1185,
+        "startChar": 3,
+        "endLine": 1185,
+        "endChar": 22
+      },
+      "revId": "7325b1fe810717b5c47ec5d999974d151142c0cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8695d4d_7de4330e",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 1185,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-09-17T15:27:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2439fc18_8fb91810",
       "range": {
         "startLine": 1185,
         "startChar": 3,
@@ -185,6 +353,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b213bc1_43c2d412",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 1218,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-09-17T15:27:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "96b319a0_6b8ac0e6",
+      "range": {
+        "startLine": 1218,
+        "startChar": 4,
+        "endLine": 1218,
+        "endChar": 63
+      },
+      "revId": "7325b1fe810717b5c47ec5d999974d151142c0cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb7750d7_69ff43ad",
@@ -198,6 +390,30 @@
       "writtenOn": "2026-09-17T05:51:09Z",
       "side": 1,
       "message": "we can define this keyword in variable.py\nable to see same URL is used in multiple files, hence we can define this.",
+      "range": {
+        "startLine": 1235,
+        "startChar": 3,
+        "endLine": 1235,
+        "endChar": 85
+      },
+      "revId": "7325b1fe810717b5c47ec5d999974d151142c0cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81bf2766_b6ae5128",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 1235,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-09-17T15:27:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb7750d7_69ff43ad",
       "range": {
         "startLine": 1235,
         "startChar": 3,
