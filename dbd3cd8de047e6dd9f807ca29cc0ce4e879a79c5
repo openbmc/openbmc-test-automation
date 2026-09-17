@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a7181a0_ed5b46f4",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-09-17T06:53:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28ff0988_19f66477",
+      "revId": "dbd3cd8de047e6dd9f807ca29cc0ce4e879a79c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f476cab9_9d7a3dcc",
