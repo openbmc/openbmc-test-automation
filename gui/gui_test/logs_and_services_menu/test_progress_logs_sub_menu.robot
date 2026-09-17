@@ -12,10 +12,11 @@ Test Tags      Progress_Logs_Sub_Menu
 
 *** Variables ***
 
-${xpath_progress_logs_heading}   //h1[text()="Progress logs"]
-${xpath_search_logs_input}       //*[contains(@id,"searchInput")]
-${xpath_from_date_input}         (//input[@class='dp-input'])[1]
-${xpath_to_date_input}           (//input[@class='dp-input'])[2]
+${xpath_progress_logs_heading}           //h1[text()="Progress logs"]
+${xpath_search_logs_input}               //*[contains(@id,"searchInput")]
+${xpath_from_date_input}                 (//input[@class='dp-input'])[1]
+${xpath_to_date_input}                   (//input[@class='dp-input'])[2]
+${xpath_view_realtime_button}            //button[contains(normalize-space(.),"View progress codes in real time")]
 
 
 *** Test Cases ***
@@ -51,11 +52,19 @@ Verify Existence Of All Fields In Progress Logs Page
     [Tags]  Verify_Existence_Of_All_Fields_In_Progress_Logs_Page
     [Template]  Page Should Contain
 
-    # Expected parameters.
+    # Expected column headers visible in the progress code table.
     Created
     Time stamp offset
     Boot count
     Code
+
+
+Verify View Progress Codes In Real Time Button Exists
+    [Documentation]  Verify that the "View progress codes in real time" button
+    ...  is present on the Progress Logs page.
+    [Tags]  Verify_View_Progress_Codes_In_Real_Time_Button_Exists
+
+    Page Should Contain Element  ${xpath_view_realtime_button}  limit=1
 
 
 *** Keywords ***
@@ -64,4 +73,4 @@ Suite Setup Execution
     [Documentation]  Do suite setup tasks.
 
     Launch Browser And Login GUI
-    Navigate To Required Sub Menu  ${xpath_logs_menu}  ${xpath_progress_logs_sub_menu}   post-code-logs
+    Navigate To Required Sub Menu  ${xpath_logs_menu}  ${xpath_progress_logs_sub_menu}  post-code-logs
