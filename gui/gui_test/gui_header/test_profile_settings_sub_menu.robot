@@ -115,6 +115,17 @@ Verify Admin User Password Update In Profile Settings Page
     Wait Until Page Contains Element  ${xpath_logged_usename}  timeout=30s
 
 
+Verify Service User Password Update In Profile Settings Page
+    [Documentation]  Verify service user does not have access to change password in profile settings page.
+    [Tags]  Verify_Service_User_Password_Update_In_Profile_Settings_Page
+    [Setup]  Run Keywords  Login GUI  service  ${OPENBMC_PASSWORD}  AND  Test Setup Execution
+    [Teardown]  Logout GUI
+
+    # Service user should not see the password input fields.
+    Page Should Not Contain Element  ${xpath_input_password}
+    Page Should Not Contain Element  ${xpath_input_confirm_password}
+
+
 *** Keywords ***
 
 Test Setup Execution
