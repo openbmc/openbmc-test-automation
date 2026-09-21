@@ -78,6 +78,20 @@ Verify Existence Of All Input Boxes In Event Logs Page
     Page Should Contain Element  ${xpath_event_from_date}  limit=1
     Page Should Contain Element  ${xpath_event_to_date}  limit=1
 
+
+Verify Existence Of All Fields In Event Logs Page
+    [Documentation]  Verify existence of all required fields in Event Logs page.
+    [Tags]  Verify_Existence_Of_All_Fields_In_Event_Logs_Page
+    [Template]  Page Should Contain
+
+    # Expected field headers.
+    ID
+    Severity
+    Date
+    Description
+    Status
+
+
 Select Single Error Log And Delete
     [Documentation]  Select single error log and delete it.
     [Tags]  Select_Single_Error_Log_And_Delete
