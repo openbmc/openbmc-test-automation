@@ -4,6 +4,8 @@ Documentation  Test OpenBMC GUI "LDAP" sub-menu of "Security and access".
 
 Resource        ../../lib/gui_resource.robot
 Resource        ../../../lib/bmc_ldap_utils.robot
+Resource        ../../../lib/bmc_ipv6_utils.robot
+Resource        ../../../lib/bmc_redfish_ipv6_resource.robot
 
 Suite Setup     Suite Setup Execution
 Suite Teardown  Close Browser
@@ -268,6 +270,21 @@ Verify All Privileges Visible In Group Privilege Options
     Wait Until Element Is Visible  ${xpath_add_group_privilege}  timeout=10s
 
     Validate Group Privilege Options
+
+
+Configure LDAP Server Via IPv6 And Verify It Works
+    [Documentation]  Configure LDAP server via Static or SLAAC IPv6 address
+    ...  and verify it works.
+    [Tags]  Configure_LDAP_Server_Via_IPv6_And_Verify_It_Works
+    [Setup]  Snapshot LDAP Configuration
+    [Template]  Configure LDAP Server Via IPv6 GUI And Verify
+    [Teardown]  Restore Original LDAP Configuration
+
+    # ipv6_address_type    ldap_mode
+    Static                 nonsecure
+    Static                 secure
+    SLAAC                  nonsecure
+    SLAAC                  secure
 
 
 *** Keywords ***
@@ -567,3 +584,100 @@ Validate Group Privilege Options
             Fail  Unexpected privilege '${option}' found in dropdown. Only Administrator, ReadOnly, Operator, and No Access are allowed.
         END
     END
+
+
+Configure LDAP Server Via IPv6 GUI And Verify
+    [Documentation]  Configure LDAP server via Static or SLAAC IPv6 and verify it works.
+    [Arguments]  ${ipv6_address_type}  ${ldap_mode}
+    [Teardown]  Reset IPv6 Test State
+
+    # Description of argument(s):
+    # ipv6_address_type  Type of IPv6 address to configure (Static or SLAAC).
+    # ldap_mode          LDAP connection mode (nonsecure or secure/TLS).
+
+    Redfish.Login
+    @{_}  ${ipv6_addr}=  Get Address Origin List And Address For Type  ${ipv6_address_type}
+    ${result}=  Run Process  ping6  -c  4  -W  2  ${ipv6_addr}  timeout=15s  on_timeout=kill
+    Should Be Equal As Integers  ${result.rc}  0  msg=${ipv6_address_type} IPv6 ${ipv6_addr} is unreachable.
+
+    VAR  ${OPENBMC_GUI_URL}  https://[${ipv6_addr}]:${HTTPS_PORT}  scope=TEST
+    Login BMC And Navigate To LDAP Page
+    Set Selenium Timeout  30s
+    Create LDAP Configuration  ${LDAP_SERVER_URI}  ${LDAP_TYPE}
+    ...  ${LDAP_BIND_DN}  ${LDAP_BIND_DN_PASSWORD}  ${LDAP_BASE_DN}  ${ldap_mode}
+    Set Selenium Timeout  5s
+    Add Role Group Via GUI  ${GROUP_NAME}  ${GROUP_PRIVILEGE}
+
+    ${ldap_cfg}=  Redfish.Get Attribute  ${REDFISH_BASE_URI}AccountService  ${LDAP_TYPE}
+    Should Be True  ${ldap_cfg['ServiceEnabled']}  msg=LDAP ServiceEnabled is False after saving config.
+
+    Wait Until Keyword Succeeds  30s  5s  Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    Redfish.Logout
+
+
+Snapshot LDAP Configuration
+    [Documentation]  Capture writable LDAP and ActiveDirectory fields before test, then disable both.
+    # Bind DN password is write-only; restore PATCH omits it.
+    ${account_svc}=  Redfish.Get Properties  ${REDFISH_BASE_URI}AccountService
+
+    FOR  ${type}  IN  LDAP  ActiveDirectory
+        VAR  ${c}  ${account_svc['${type}']}
+        VAR  &{auth}
+        ...  AuthenticationType=${c['Authentication']['AuthenticationType']}
+        ...  Username=${c['Authentication']['Username']}
+        VAR  &{snap}
+        ...  ServiceEnabled=${c['ServiceEnabled']}
+        ...  ServiceAddresses=${c['ServiceAddresses']}
+        ...  Authentication=${auth}
+        ...  LDAPService=${c['LDAPService']}
+        ...  RemoteRoleMapping=${c['RemoteRoleMapping']}
+        VAR  ${${type}_orig}  ${snap}  scope=TEST
+    END
+
+    # Turn off whatever is configured on BMC so test starts from a clean disabled state.
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService
+    ...  body={'LDAP': {'ServiceEnabled': ${False}}}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService
+    ...  body={'ActiveDirectory': {'ServiceEnabled': ${False}}}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+    Redfish.Logout
+
+
+Reset IPv6 Test State
+    [Documentation]  Teardown: reset GUI URL, delete added role group, disable LDAP on BMC so next iteration starts clean.
+    VAR  ${OPENBMC_GUI_URL}  https://${OPENBMC_HOST}:${HTTPS_PORT}  scope=TEST
+    Redfish.Login
+    Run Keyword And Ignore Error  Delete LDAP Role Group  ${GROUP_NAME}
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body={'${LDAP_TYPE}': {'ServiceEnabled': ${False}}}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+    Redfish.Logout
+
+
+Restore Original LDAP Configuration
+    [Documentation]  Restore LDAP and ActiveDirectory to pre-test state (disabled type first).
+    # Restore disabled type first to avoid both services being enabled simultaneously.
+    IF  ${LDAP_orig['ServiceEnabled']}
+        VAR  ${first}   ActiveDirectory
+        VAR  ${second}  LDAP
+    ELSE
+        VAR  ${first}   LDAP
+        VAR  ${second}  ActiveDirectory
+    END
+
+    Redfish.Login
+    ${status1}  ${msg1}=  Run Keyword And Ignore Error
+    ...  Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body={'${first}': ${${first}_orig}}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+    IF  '${status1}' == 'FAIL'
+        Log  WARNING: Failed to restore ${first} LDAP config: ${msg1}  WARN
+    END
+
+    ${status2}  ${msg2}=  Run Keyword And Ignore Error
+    ...  Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body={'${second}': ${${second}_orig}}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+    IF  '${status2}' == 'FAIL'
+        Log  WARNING: Failed to restore ${second} LDAP config: ${msg2}  WARN
+    END
+    Redfish.Logout
+
