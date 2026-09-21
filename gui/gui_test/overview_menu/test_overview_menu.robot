@@ -405,6 +405,15 @@ Verify Asset Tag Cancel Button On Overview Page
     Verify Asset Tag Update On Overview Page    cancel
 
 
+Verify System And Status Information On Overview Page
+    [Documentation]  Verify System information and Status information text
+    ...  are present on the overview page.
+    [Tags]  Verify_System_And_Status_Information
+
+    Page Should Contain  System information
+    Page Should Contain  Status information
+
+
 ###  Power Off Test Cases  ###
 
 Verify BMC Information At Host Power Off State
