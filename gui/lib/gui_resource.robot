@@ -23,6 +23,7 @@ ${GUI_BROWSER}               ff
 ${GUI_MODE}                  headless
 # Path of virtual media image, change this before test is run
 ${VIRTUAL_MEDIA_FILE_PATH}   ${EMPTY}
+${readonly_user_pwd}         0penBmc123
 
 *** Keywords ***
 
@@ -357,8 +358,8 @@ Create Readonly User And Login To GUI
     # Created readonly_user via redfish and login BMC GUI with readonly
     # user to perform test.
     Redfish.Login
-    Redfish Create User  readonly_user  ${OPENBMC_PASSWORD}  ReadOnly  ${True}
-    Login GUI  readonly_user  ${OPENBMC_PASSWORD}
+    Redfish Create User  readonly_user  ${readonly_user_pwd}  ReadOnly  ${True}
+    Login GUI  readonly_user  ${readonly_user_pwd}
 
 
 Delete Readonly User And Logout Current GUI Session
