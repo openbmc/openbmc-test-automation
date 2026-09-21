@@ -14,10 +14,10 @@ ${xpath_factory_reset_heading}           //h1[text()="Factory reset"]
 ${xpath_reset_button}                    //button[@data-test-id='factoryReset-button-submit']
 ${xpath_reset_server_radio_button}       //*[@data-test-id='factoryReset-radio-resetBios']
 ${xpath_reset_bmc_server_radio_button}   //*[@data-test-id='factoryReset-radio-resetToDefaults']
-${xpath_cancel_button}                   //button[normalize-space()='Cancel']
-${xpath_reset_server_settings}           //button[normalize-space()='Reset server settings']
-# ${xpath_reset_server_and_bmc_settings} to confirm reset server and bmc factory reset.
-${xpath_reset_bmc_andserver_settings}    //button[normalize-space()='Reset BMC and server settings']
+${xpath_cancel_button}                   //button[@data-test-id='factoryReset-button-cancel']
+${xpath_reset_server_settings}           //button[@data-test-id='factoryReset-button-confirm']
+${xpath_reset_bmc_and_server_settings}   //button[normalize-space()='Reset BMC and server settings']
+${xpath_close_button}                    //button[@aria-label='Close']
 
 *** Test Cases ***
 
@@ -50,7 +50,7 @@ Verify Existence Of All Radio Buttons In Factory Reset Page
      [Setup]  Power Off Server
 
      # Navigate to factory reset page.
-     Navigate To Required Sub Menu  ${xpath_settings_menu}  ${xpath_factory_reset_sub_menu}  factory-reset
+     Navigate To Required Sub Menu  ${xpath_operations_menu}  ${xpath_factory_reset_sub_menu}  factory-reset
 
      Page Should Contain Element  ${xpath_reset_server_radio_button}
      Page Should Contain Element  ${xpath_reset_bmc_server_radio_button}
@@ -65,17 +65,11 @@ Verify Reset Server Settings Only Option With Readonly User When Host Off State
      [Teardown]  Delete Readonly User And Logout Current GUI Session
 
      # Navigate to factory reset page.
-     Navigate To Required Sub Menu  ${xpath_settings_menu}  ${xpath_factory_reset_sub_menu}  factory-reset
+     Navigate To Required Sub Menu  ${xpath_operations_menu}  ${xpath_factory_reset_sub_menu}  factory-reset
 
-     # Perform reset server setting option with readonly user.
-     Click Element  ${xpath_reset_button}
-     Wait And Click Element  ${xpath_reset_server_settings}
-
-     Sleep  10
      # Verify error and unautorized messages on GUI.
-     Verify Error And Unauthorized Message On GUI
-     # Add sleep to error and unauthorized message to close.
-     Sleep  10
+     Verify Error And Unauthorized Message On Factory Reset GUI Page  ${xpath_reset_server_settings}
+     ...  ${xpath_server_failure_message}
 
 
 Verify Reset Server Settings Only Option Followed By Cancel Operation With Readonly User
@@ -87,7 +81,7 @@ Verify Reset Server Settings Only Option Followed By Cancel Operation With Reado
      [Teardown]  Delete Readonly User And Logout Current GUI Session
 
      # Navigate to factory reset page.
-     Navigate To Required Sub Menu  ${xpath_settings_menu}  ${xpath_factory_reset_sub_menu}  factory-reset
+     Navigate To Required Sub Menu  ${xpath_operations_menu}  ${xpath_factory_reset_sub_menu}  factory-reset
 
      # Perform Cancel operation.
      Click Element  ${xpath_reset_button}
@@ -105,16 +99,15 @@ Verify Reset BMC And Server Settings Option With Readonly User When Host Off Sta
      [Teardown]  Delete Readonly User And Logout Current GUI Session
 
      # Navigate to factory reset page.
-     Navigate To Required Sub Menu  ${xpath_settings_menu}  ${xpath_factory_reset_sub_menu}  factory-reset
+     Navigate To Required Sub Menu  ${xpath_operations_menu}  ${xpath_factory_reset_sub_menu}  factory-reset
 
      # Perform reset server setting option with readonly user.
      Click Element At Coordinates  ${xpath_reset_bmc_server_radio_button}  0  0
-     Wait And Click Element  ${xpath_reset_button}
-     Click Element  ${xpath_reset_bmc_and_server_settings}
 
      # Verify error and unautorized messages on GUI.
-     Verify Error And Unauthorized Message On GUI
-     Sleep  10
+     Verify Error And Unauthorized Message On Factory Reset GUI Page  ${xpath_reset_bmc_and_server_settings}
+     ...    ${xpath_bmc_server_failure_message}
+
 
 
 Verify Reset BMC And Server Settings Option Followed By Cancel Operation With Readonly User
@@ -126,14 +119,14 @@ Verify Reset BMC And Server Settings Option Followed By Cancel Operation With Re
      [Teardown]  Delete Readonly User And Logout Current GUI Session
 
      # Navigate to factory reset page.
-     Navigate To Required Sub Menu  ${xpath_settings_menu}  ${xpath_factory_reset_sub_menu}  factory-reset
+     Navigate To Required Sub Menu  ${xpath_operations_menu}  ${xpath_factory_reset_sub_menu}  factory-reset
 
      # Perform Cancel operation.
      Click Element At Coordinates  ${xpath_reset_server_radio_button}  0  0
      Wait And Click Element  ${xpath_reset_button}
-     Click Element  ${xpath_cancel_button}
+     Wait And Click Element  ${xpath_cancel_button}
 
-     Page Should Not Contain  ${xpath_cancel_button}
+     Wait Until Element Is Not Visible  ${xpath_cancel_button}  timeout=10
 
 
 ### Power On Test Cases ###
@@ -144,7 +137,7 @@ Verify Information Message On F-reset Page When System At Power On State
      [Setup]  Power Off Server
 
      # Navigate to factory reset page.
-     Navigate To Required Sub Menu  ${xpath_settings_menu}  ${xpath_factory_reset_sub_menu}  factory-reset
+     Navigate To Required Sub Menu  ${xpath_operations_menu}  ${xpath_factory_reset_sub_menu}  factory-reset
 
      Page Should Contain  System must be powered off to reset
 
@@ -156,7 +149,7 @@ Verify Factory Reset And Reset Options Should Be Disabled At Host On State
      [Setup]  Power On Server
 
      # Navigate to factory reset page.
-     Navigate To Required Sub Menu  ${xpath_settings_menu}  ${xpath_factory_reset_sub_menu}  factory-reset
+     Navigate To Required Sub Menu  ${xpath_operations_menu}  ${xpath_factory_reset_sub_menu}  factory-reset
 
      # Factory Reset buttons.
      Element Should Be Disabled  ${xpath_reset_server_radio_button}
@@ -168,9 +161,31 @@ Verify Factory Reset And Reset Options Should Be Disabled At Host On State
 
 *** Keywords ***
 
+Verify Error And Unauthorized Message On Factory Reset GUI Page
+    [Documentation]  Verify error and unauthorized message on factory reset GUI page.
+    [arguments]  ${reset_option}  ${failure_msg}
+    # Description of argument(s):
+    # ${reset_option}    Reset option to be clicked.
+    # ${failure_msg}     Failure message to be verified.
+
+    Wait And Click Element  ${xpath_reset_button}
+    Wait Until Page Contains Element  ${reset_option}  timeout=10s
+
+    Wait Until Keyword Succeeds  10s  2s
+    ...  Run Keywords  Click Element  ${reset_option}
+    ...  AND  Wait Until Element Is Visible  ${failure_msg}  timeout=3s
+
+    Page Should Contain Element  ${failure_msg}
+    Page Should Contain Element  ${xpath_unauthorized_message}
+    Page Should Contain Element  ${xpath_unauthorized_information_message}
+
+    # Click on close button to close the error and unauthorized messages.
+    Click Element  ${xpath_close_button}
+    Click Element  ${xpath_close_button}
+
 Suite Setup Execution
     [Documentation]  Launch browser, login GUI and navigate to factory reset page.
 
     Launch Browser And Login GUI
-    Navigate To Required Sub Menu  ${xpath_settings_menu}  ${xpath_factory_reset_sub_menu}  factory-reset
+    Navigate To Required Sub Menu  ${xpath_operations_menu}  ${xpath_factory_reset_sub_menu}  factory-reset
 

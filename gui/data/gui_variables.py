@@ -164,6 +164,19 @@ class gui_variables:
     xpath_unauthorized_popup = "//*[contains(normalize-space(.),'Unauthorized')]/following-sibling::button"
     xpath_information_message = "//*[contains(text(),'Reload the browser page to get the updated content.')]"
 
+    # Pop up error variables
+    xpath_unauthorized_message = (
+        "//span[contains(normalize-space(.),'Unauthorized')]"
+    )
+    xpath_unauthorized_information_message = (
+        "//span[contains(normalize-space(.),"
+        "'The attempted action is not accessible from the logged in "
+        "account. Contact your system administrator to check your "
+        "privilege role.')]"
+    )
+    xpath_server_failure_message = "//span[contains(normalize-space(.),'Factory reset of server settings failed.')]"
+    xpath_bmc_server_failure_message = "//span[contains(normalize-space(.),'Factory reset of BMC and server settings failed.')]"
+
     # Hyperlink XPaths -  Used for validating hyperlinks
 
     # Overview Page
