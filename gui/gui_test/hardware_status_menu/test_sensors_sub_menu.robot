@@ -122,15 +122,53 @@ Verify Filter By Severity Button OK
     Element Should Not Contain  ${xpath_selected_severity}  Critical
 
 
+Verify Combination Of Filter Sensors With OK And Warning Severity
+    [Documentation]  Verify sensor search combined with OK and Warning severity filter.
+    ...  Ambient sensors are OK, so results are expected with this combination.
+    [Tags]  Verify_Combination_Of_Filter_Sensors_With_OK_And_Warning_Severity
+    [Teardown]  Clean Up Filter And Search
+
+    VAR  @{filters}  ${xpath_filter_ok}  ${xpath_filter_warning}
+    Verify Filter And Search Combination  ${filters}  ${False}
+
+
+Verify Combination Of Filter Sensors With OK And Critical Severity
+    [Documentation]  Verify sensor search combined with OK and Critical severity filter.
+    ...  Ambient sensors are OK, so results are expected with this combination.
+    [Tags]  Verify_Combination_Of_Filter_Sensors_With_OK_And_Critical_Severity
+    [Teardown]  Clean Up Filter And Search
+
+    VAR  @{filters}  ${xpath_filter_ok}  ${xpath_filter_critical}
+    Verify Filter And Search Combination  ${filters}  ${False}
+
+
+Verify Combination Of Filter Sensors With Warning And Critical Severity
+    [Documentation]  Verify sensor search combined with Warning and Critical severity filter.
+    ...  Ambient sensors are OK, so no results expected with Warning+Critical only.
+    [Tags]  Verify_Combination_Of_Filter_Sensors_With_Warning_And_Critical_Severity
+    [Teardown]  Clean Up Filter And Search
+
+    VAR  @{filters}  ${xpath_filter_warning}  ${xpath_filter_critical}
+    Verify Filter And Search Combination  ${filters}  ${True}
+
+
+Verify Combination Of Filter Sensors With OK Warning And Critical Severity
+    [Documentation]  Verify sensor search combined with OK, Warning and Critical severity filters.
+    ...  Ambient sensors are OK, so results are expected with all severities selected.
+    [Tags]  Verify_Combination_Of_Filter_Sensors_With_OK_Warning_And_Critical_Severity
+    [Teardown]  Clean Up Filter And Search
+
+    VAR  @{filters}  ${xpath_filter_ok}  ${xpath_filter_warning}  ${xpath_filter_critical}
+    Verify Filter And Search Combination  ${filters}  ${False}
+
+
 *** Keywords ***
 
 Suite Setup Execution
     [Documentation]  Do suite setup tasks.
 
     Launch Browser And Login GUI
-    Click Element  ${xpath_hardware_status_menu}
-    Click Element  ${xpath_sensor_sub_menu}
-    Wait Until Keyword Succeeds  30 sec  5 sec  Location Should Contain  sensors
+    Navigate To Required Sub Menu  ${xpath_hardware_status_menu}  ${xpath_sensor_sub_menu}  sensors
 
     # Added delay for sensor page to load completely by waiting for disapperance of progress bar.
     Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=15min
@@ -141,3 +179,60 @@ Clean Up Filter Values
 
     Click Element  ${xpath_sensors_filter}
     Click Element  ${xpath_filter_clear_all}
+
+
+Verify Filter And Search Combination
+    [Documentation]  Apply given severity filters and a search term, then verify results.
+    ...  Pass expect_no_results=${True} when the filter combination yields no matching sensors.
+    [Arguments]  ${severity_filters}  ${expect_no_results}=${False}
+
+    # Description of argument(s):
+    # severity_filters    List of severity filter xpaths to apply.
+    # expect_no_results   Set to ${True} when severity combination yields no matching search results.
+
+    # Close filter panel first if it is already open from a previous test.
+    ${filter_open}=  Run Keyword And Return Status
+    ...  Element Should Be Visible  ${xpath_filter_ok}
+    IF  ${filter_open}
+        Click Element  ${xpath_sensors_filter}
+    END
+
+    # Re-open filter panel cleanly and clear any leftover selections.
+    Wait Until Page Contains Element  ${xpath_sensors_filter}  timeout=15s
+    Click Element  ${xpath_sensors_filter}
+    Wait Until Element Is Visible  ${xpath_filter_clear_all}  timeout=5s
+    Click Element  ${xpath_filter_clear_all}
+
+    # Select each requested severity checkbox.
+    FOR  ${filter}  IN  @{severity_filters}
+        Wait Until Element Is Visible  ${filter}  timeout=5s
+        Click Element  ${filter}
+    END
+
+    # Close filter panel.
+    Click Element  ${xpath_sensors_filter}
+
+    # Verify at least one severity badge is shown.
+    Element Should Be Visible  ${xpath_selected_severity}
+
+    # Apply search term on top of severity filter and verify expected outcome.
+    Wait Until Page Contains Element  ${xpath_sensors_search}  timeout=10s
+    Input Text  ${xpath_sensors_search}  ambi
+    IF  ${expect_no_results}
+        Wait Until Page Contains  No items match the search query  timeout=30s
+    ELSE
+        Wait Until Page Contains  Ambient  timeout=120s
+        Page Should Not Contain  No items match the search query
+    END
+
+
+Clean Up Filter And Search
+    [Documentation]  Clear search input and all severity filters after test execution.
+
+    # Clear search input only if the clear button is present.
+    ${search_clear_present}=  Run Keyword And Return Status
+    ...  Page Should Contain Element  ${xpath_clear_search_input}
+    IF  ${search_clear_present}
+        Click Element  ${xpath_clear_search_input}
+    END
+    Clean Up Filter Values
