@@ -78,6 +78,7 @@ Verify Existence Of All Input Boxes In Event Logs Page
     Page Should Contain Element  ${xpath_event_from_date}  limit=1
     Page Should Contain Element  ${xpath_event_to_date}  limit=1
 
+
 Select Single Error Log And Delete
     [Documentation]  Select single error log and delete it.
     [Tags]  Select_Single_Error_Log_And_Delete
