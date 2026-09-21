@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58ad0006_5c1b4ad1",
+        "filename": "lib/certificate_utils.robot",
+        "patchSetId": 15
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-09-21T09:03:29Z",
+      "side": 1,
+      "message": "remove space",
+      "range": {
+        "startLine": 229,
+        "startChar": 0,
+        "endLine": 229,
+        "endChar": 4
+      },
+      "revId": "c6f971aff8d519002b5657f45c77c05f9d7b85bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
