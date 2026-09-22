@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8496a17d_6ff6cbf8",
+        "filename": "gui/gui_test/hardware_status_menu/test_sensors_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-09-22T05:32:59Z",
+      "side": 1,
+      "message": "Kindly use VAR instead of Create List.\napplicable for line nos: 131,141,151,161\nVAR @{filters} ${xpath_filter_ok} ${xpath_filter_warning}",
+      "range": {
+        "startLine": 131,
+        "startChar": 4,
+        "endLine": 131,
+        "endChar": 5
+      },
+      "revId": "b0d76361d942719db2402701d1ab6e113e99d0bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
