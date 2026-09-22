@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23d2246a_1eabcb5a",
+        "filename": "gui/gui_test/hardware_status_menu/test_sensors_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-09-22T07:05:10Z",
+      "side": 1,
+      "message": "Remove the extra space above, line no 145.",
+      "range": {
+        "startLine": 146,
+        "startChar": 0,
+        "endLine": 146,
+        "endChar": 7
+      },
+      "revId": "cac174b4a45b034b5979e54dcd94ce3ab02c9b82",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
