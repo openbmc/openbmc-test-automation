@@ -38,6 +38,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "764e97ea_2a8213a4",
+        "filename": "gui/gui_test/resource_management_menu/test_resource_management_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-09-22T06:59:18Z",
+      "side": 1,
+      "message": "can u generate a random number between the range and that u can give as input",
+      "revId": "d938fc81e315d729d39d9503bf20b4abb9f14ee1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "57d2265d_be7e1a30",
         "filename": "gui/gui_test/resource_management_menu/test_resource_management_menu.robot",
         "patchSetId": 1
