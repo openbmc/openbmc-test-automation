@@ -5,6 +5,7 @@ Documentation   Test BMC DHCP multiple network interface functionalities.
 Resource        ../../lib/resource.robot
 Resource        ../../lib/common_utils.robot
 Resource        ../../lib/bmc_network_utils.robot
+Resource        ../../lib/bmc_ipv6_utils.robot
 Resource        ../../lib/openbmc_ffdc.robot
 
 # User input BMC IP for the eth1.
@@ -22,7 +23,7 @@ Test Tags       Multiple_Interfaces_DHCP_Eth0
 *** Variables ***
 
 # Use eth1 as BMC address since eth0 DHCP will be modified during tests.
-${OPENBMC_HOST}    ${OPENBMC_HOST_ETH1}
+${OPENBMC_HOST}         ${OPENBMC_HOST_ETH1}
 
 
 *** Test Cases ***
@@ -75,6 +76,38 @@ Verify Eth0 Link Local Address Behavior On DHCP Toggle
     ...  Get Address Origin List And IPv4 or IPv6 Address Via Eth1  IPv4Addresses  ${1}
     ${ipv4_addressorigin_list}=  Combine Lists  @{ipv4_addressorigin_list}
     Should Not Contain  ${ipv4_addressorigin_list}  IPv4LinkLocal
+
+
+Verify Eth0 DHCP Disable Assigns Link Local Before Static IP
+    [Documentation]  Switch eth0 from DHCP to static mode. BMC must obtain a
+    ...  link-local address before a static IP is configured.
+    [Tags]  Verify_Eth0_DHCP_Disable_Assigns_Link_Local_Before_Static_IP
+    [Teardown]  Run Keywords
+    ...  Run Keyword And Ignore Error  Delete IP Address  ${test_ipv4_addr}  AND
+    ...  Set DHCPEnabled To Enable Or Disable  ${True}  ${ethernet_interface}  AND
+    ...  Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
+
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    Set Test Variable  ${ethernet_interface}
+
+    ${eth0_dhcp_status}=  Get IPv4 DHCP Enabled Status  ${CHANNEL_NUMBER}
+    Should Be Equal  ${eth0_dhcp_status}  ${True}
+    ...  msg=${ethernet_interface} is expected to be in DHCP mode but it is not.
+
+    Verify Static IPv4 Functionality  ${SECONDARY_CHANNEL_NUMBER}
+
+    Set DHCPEnabled To Enable Or Disable  ${False}  ${ethernet_interface}
+    Sleep  ${NETWORK_TIMEOUT}s
+
+    ${origin_list}  ${addr_list}=  Wait Until Keyword Succeeds  60s  5s
+    ...  Get Address Origin List And IPv4 or IPv6 Address  IPv4Addresses  ${CHANNEL_NUMBER}
+    Should Contain  ${origin_list}  IPv4LinkLocal
+    ...  msg=No IPv4LinkLocal address found on eth0 after disabling DHCP.
+
+    Add IP Address  ${test_ipv4_addr}  ${test_subnet_mask}  0.0.0.0
+
+    Verify IP On BMC  ${test_ipv4_addr}  ${CHANNEL_NUMBER}
 
 
 *** Keywords ***
