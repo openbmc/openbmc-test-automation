@@ -16,6 +16,29 @@
       "message": "Have you considered adding  `Test Setup    Navigate To Factory Reset Page` instead of calling `Navigate To Required Sub Menu  ${xpath_settings_menu}  ${xpath_factory_reset_sub_menu}  factory-reset` in each test case?\n\nThe existing `gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot` already follows this pattern. This avoids repeating the same navigation call in every test case and makes future changes, such as the menu path or arguments, a single-point update.\n\nFor example, in `test_factory_reset_sub_menu.robot`, you could add:\n\n```robot\n*** Settings ***\n...\nTest Setup    Navigate To Factory Reset Page\n```\n\nFor test cases that override the default setup, such as those that need `Power Off Server`, you can include the navigation in the `[Setup]` using `Run Keywords`:\n\n```robot\n[Setup]  Run Keywords  Power Off Server  AND  Navigate To Factory Reset Page\n```",
       "revId": "1f113f425bdc938c71039e3c210362b42a21095d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fccef3a_e004b7f7",
+        "filename": "gui/gui_test/operations_menu/test_factory_reset_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1002670
+      },
+      "writtenOn": "2026-09-22T10:40:39Z",
+      "side": 1,
+      "message": "The existing text-based locators still work on the current webui-vue master.\nCould you clarify why they were replaced with data-test-id locators?If the reason is that data-test-id is considered more stable and reliable, then the locators should also reflect that both reset options use the same confirmation modal, and therefore the same Cancel/Confirm buttons:\n\n```robot\n${xpath_reset_cancel_button}    //button[@data-test-id\u003d\u0027factoryReset-button-cancel\u0027]\n${xpath_reset_confirm_button}   //button[@data-test-id\u003d\u0027factoryReset-button-confirm\u0027]\n```",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 99
+      },
+      "revId": "1f113f425bdc938c71039e3c210362b42a21095d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
