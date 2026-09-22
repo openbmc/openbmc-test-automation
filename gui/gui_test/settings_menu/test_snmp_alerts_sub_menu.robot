@@ -33,6 +33,8 @@ ${invalid_port_error}                             Value must be between 0 – 65
 ${invalid_destination_error}                      Error in adding SNMP alert destination
 ${invalid_ip_error}                               Field required
 ${dns_server}                                     10.10.10.10
+# Valid DNS server IP for FQDN resolution. Pass via -v VALID_DNS:<ip> e.g. 192.168.1.1
+${VALID_DNS}                                      ${EMPTY}
 ${snmp_delete_confirm_msg}                        Delete SNMP alert destination
 ${snmp_delete_success_msg}                        Successfully deleted SNMP alert destination
 
@@ -140,6 +142,26 @@ Configure Invalid FQDN Settings Via GUI And Verify
     ${invalid_fqdn_start_hyphen}     ${SNMP_DEFAULT_PORT}     ${invalid_destination_error}
     ${invalid_fqdn_too_long}         ${SNMP_DEFAULT_PORT}     ${invalid_destination_error}
     ${invalid_fqdn_empty_label}      ${SNMP_DEFAULT_PORT}     ${invalid_destination_error}
+
+
+Configure Valid FQDN Settings Via GUI And Verify
+    [Documentation]  Configure SNMP manager using an FQDN (Fully Qualified Domain Name)
+    ...  via GUI and verify it is stored on BMC via Redfish.
+    ...  Pre-requisite: A valid DNS server must be configured so the BMC can resolve
+    ...  the FQDN. Pass values at runtime: -v SNMP_FQDN:<fqdn> -v VALID_DNS:<dns_ip>
+    [Tags]  Configure_Valid_FQDN_Settings_Via_GUI_And_Verify
+    [Setup]  Set DNS Server IP  ${VALID_DNS}
+    [Teardown]  Delete SNMP Manager Via Redfish  ${SNMP_FQDN}  ${SNMP_DEFAULT_PORT}
+
+    # Navigate to SNMP alerts page (expands Settings menu and scrolls item into view).
+    Navigate To Required Sub Menu  ${xpath_settings_menu}  ${xpath_snmp_alerts_sub_menu}  snmp-alerts
+
+    # Configure SNMP manager using the FQDN passed via command line.
+    Configure SNMP Manager Via GUI  ${SNMP_FQDN}  ${SNMP_DEFAULT_PORT}
+    Wait Until Page Contains  ${SNMP_FQDN}  timeout=45s
+
+    # Verify FQDN-based SNMP manager is stored on BMC via Redfish.
+    Verify SNMP Manager Configured On BMC  ${SNMP_FQDN}  ${SNMP_DEFAULT_PORT}
 
 
 Configure Multiple SNMP Managers On BMC Via GUI And Verify
@@ -522,13 +544,18 @@ Close Add SNMP Alerts Destination Window
 
 Set DNS Server IP
     [Documentation]  Add static DNS IP.
+    [Arguments]  ${dns_ip}=${dns_server}
+
+    # Description of argument(s):
+    # dns_ip  DNS server IP to configure. Defaults to ${dns_server}.
+    #         Pass a valid DNS IP via -v VALID_DNS:<ip> when FQDN resolution is required.
 
     Wait Until Page Contains Element  ${xpath_settings_menu}  timeout=30s
     Click Element  ${xpath_settings_menu}
     Click Element  ${xpath_network_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  network
 
-    Add DNS Servers And Verify  ${dns_server}
+    Add DNS Servers And Verify  ${dns_ip}
 
 
 Configure SNMP Delete Via GUI And Verify No Trap
