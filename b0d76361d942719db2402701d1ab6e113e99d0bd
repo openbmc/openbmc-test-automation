@@ -22,6 +22,30 @@
       },
       "revId": "b0d76361d942719db2402701d1ab6e113e99d0bd",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48270dbe_c5dc13d1",
+        "filename": "gui/gui_test/hardware_status_menu/test_sensors_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-09-22T06:38:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8496a17d_6ff6cbf8",
+      "range": {
+        "startLine": 131,
+        "startChar": 4,
+        "endLine": 131,
+        "endChar": 5
+      },
+      "revId": "b0d76361d942719db2402701d1ab6e113e99d0bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
