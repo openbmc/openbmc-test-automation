@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e449f9d_2f6a3b60",
+        "filename": "gui/gui_test/hardware_status_menu/test_sensors_sub_menu.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1002684
+      },
+      "writtenOn": "2026-09-22T09:11:09Z",
+      "side": 1,
+      "message": "Please try to use  - Wait and Click Element Keyword",
+      "revId": "25ec238518a8f2287b478b0d517af2680428dc44",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e87ddefc_3bf2c4be",
+        "filename": "gui/gui_test/hardware_status_menu/test_sensors_sub_menu.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1002684
+      },
+      "writtenOn": "2026-09-22T09:11:09Z",
+      "side": 1,
+      "message": "Please try to use  - Wait and Click Element Keyword",
+      "revId": "25ec238518a8f2287b478b0d517af2680428dc44",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41d65275_4b7d827d",
+        "filename": "gui/gui_test/hardware_status_menu/test_sensors_sub_menu.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1002684
+      },
+      "writtenOn": "2026-09-22T09:11:09Z",
+      "side": 1,
+      "message": "Please try to use  - Wait and Click Element Keyword",
+      "revId": "25ec238518a8f2287b478b0d517af2680428dc44",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4278daa2_3fcf20cc",
+        "filename": "gui/gui_test/hardware_status_menu/test_sensors_sub_menu.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1002684
+      },
+      "writtenOn": "2026-09-22T09:11:09Z",
+      "side": 1,
+      "message": "Please try to use  - Wait and Click Element Keyword",
+      "revId": "25ec238518a8f2287b478b0d517af2680428dc44",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc7cfbee_c2bd82f1",
+        "filename": "gui/gui_test/hardware_status_menu/test_sensors_sub_menu.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1002684
+      },
+      "writtenOn": "2026-09-22T09:11:09Z",
+      "side": 1,
+      "message": "Please try to use  - Wait and Click Element Keyword",
+      "revId": "25ec238518a8f2287b478b0d517af2680428dc44",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78193241_8353d777",
+        "filename": "gui/gui_test/hardware_status_menu/test_sensors_sub_menu.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1002684
+      },
+      "writtenOn": "2026-09-22T09:11:09Z",
+      "side": 1,
+      "message": "Please try to use  - Wait and Click Element Keyword",
+      "revId": "25ec238518a8f2287b478b0d517af2680428dc44",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
