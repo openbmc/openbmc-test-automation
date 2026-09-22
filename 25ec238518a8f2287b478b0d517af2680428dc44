@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bba8c1a7_d338f7a1",
+        "filename": "gui/gui_test/hardware_status_menu/test_sensors_sub_menu.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-09-22T15:54:31Z",
+      "side": 1,
+      "message": "${filter_open}\u003d  Run Keyword And Return Status\n    ...  Element Should Be Visible  ${xpath_filter_ok}\n    IF  ${filter_open}\n        Wait And Click Element  ${xpath_sensors_filter}\n    END",
+      "parentUuid": "4e449f9d_2f6a3b60",
+      "revId": "25ec238518a8f2287b478b0d517af2680428dc44",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e87ddefc_3bf2c4be",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-09-22T09:11:09Z",
       "side": 1,
       "message": "Please try to use  - Wait and Click Element Keyword",
+      "revId": "25ec238518a8f2287b478b0d517af2680428dc44",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd58c43e_66e681c3",
+        "filename": "gui/gui_test/hardware_status_menu/test_sensors_sub_menu.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-09-22T15:54:31Z",
+      "side": 1,
+      "message": "# Re-open filter panel cleanly and clear any leftover selections.\n    Wait And Click Element  ${xpath_sensors_filter}  wait_timeout\u003d5s\n    Wait And Click Element  ${xpath_filter_clear_all}  wait_timeout\u003d5s",
+      "parentUuid": "e87ddefc_3bf2c4be",
       "revId": "25ec238518a8f2287b478b0d517af2680428dc44",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -52,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c2aa084_9508b9a2",
+        "filename": "gui/gui_test/hardware_status_menu/test_sensors_sub_menu.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-09-22T15:54:31Z",
+      "side": 1,
+      "message": "# Select each requested severity checkbox.\n    FOR  ${filter}  IN  @{severity_filters}\n        Wait And Click Element  ${filter}  wait_timeout\u003d5s\n    END",
+      "parentUuid": "41d65275_4b7d827d",
+      "revId": "25ec238518a8f2287b478b0d517af2680428dc44",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4278daa2_3fcf20cc",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-09-22T09:11:09Z",
       "side": 1,
       "message": "Please try to use  - Wait and Click Element Keyword",
+      "revId": "25ec238518a8f2287b478b0d517af2680428dc44",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28c2cc13_a0025fbb",
+        "filename": "gui/gui_test/hardware_status_menu/test_sensors_sub_menu.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-09-22T15:54:31Z",
+      "side": 1,
+      "message": ". #Select each requested severity checkbox.\n    FOR  ${filter}  IN  @{severity_filters}\n        Wait And Click Element  ${filter}  wait_timeout\u003d5s\n    END",
+      "parentUuid": "4278daa2_3fcf20cc",
       "revId": "25ec238518a8f2287b478b0d517af2680428dc44",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -86,6 +158,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee8cc36d_8eb15a56",
+        "filename": "gui/gui_test/hardware_status_menu/test_sensors_sub_menu.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-09-22T15:54:31Z",
+      "side": 1,
+      "message": ".# Close filter panel.\n    Wait And Click Element  ${xpath_sensors_filter}",
+      "parentUuid": "cc7cfbee_c2bd82f1",
+      "revId": "25ec238518a8f2287b478b0d517af2680428dc44",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "78193241_8353d777",
@@ -99,6 +189,24 @@
       "writtenOn": "2026-09-22T09:11:09Z",
       "side": 1,
       "message": "Please try to use  - Wait and Click Element Keyword",
+      "revId": "25ec238518a8f2287b478b0d517af2680428dc44",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a1adf14_8ce227e9",
+        "filename": "gui/gui_test/hardware_status_menu/test_sensors_sub_menu.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-09-22T15:54:31Z",
+      "side": 1,
+      "message": "IF  ${search_clear_present}\n        Wait And Click Element  ${xpath_clear_search_input\n    END",
+      "parentUuid": "78193241_8353d777",
       "revId": "25ec238518a8f2287b478b0d517af2680428dc44",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
