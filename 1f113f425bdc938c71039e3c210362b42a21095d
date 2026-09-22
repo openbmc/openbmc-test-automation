@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ffa25b5_77657e1d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002670
+      },
+      "writtenOn": "2026-09-22T06:34:57Z",
+      "side": 1,
+      "message": "Have you considered adding  `Test Setup    Navigate To Factory Reset Page` instead of calling `Navigate To Required Sub Menu  ${xpath_settings_menu}  ${xpath_factory_reset_sub_menu}  factory-reset` in each test case?\n\nThe existing `gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot` already follows this pattern. This avoids repeating the same navigation call in every test case and makes future changes, such as the menu path or arguments, a single-point update.\n\nFor example, in `test_factory_reset_sub_menu.robot`, you could add:\n\n```robot\n*** Settings ***\n...\nTest Setup    Navigate To Factory Reset Page\n```\n\nFor test cases that override the default setup, such as those that need `Power Off Server`, you can include the navigation in the `[Setup]` using `Run Keywords`:\n\n```robot\n[Setup]  Run Keywords  Power Off Server  AND  Navigate To Factory Reset Page\n```",
+      "revId": "1f113f425bdc938c71039e3c210362b42a21095d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
