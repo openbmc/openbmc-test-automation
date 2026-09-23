@@ -489,3 +489,17 @@ Wait Until Element Enabled With Page Refresh
         Sleep  ${retry_interval}
     END
     Element Should Be Enabled  ${locator}
+
+
+Wait And Input Text
+    [Documentation]  Wait until element is visible and enabled, then input text.
+    [Arguments]  ${locator}  ${text}  ${wait_timeout}=30s
+
+    # Description of argument(s):
+    # locator        xpath of the element.
+    # text           text to input.
+    # wait_timeout   timeout for the locator to become visible and enabled.
+
+    Wait Until Element Is Visible  ${locator}  timeout=${wait_timeout}
+    Wait Until Element Is Enabled  ${locator}  timeout=${wait_timeout}
+    Input Text  ${locator}  ${text}
