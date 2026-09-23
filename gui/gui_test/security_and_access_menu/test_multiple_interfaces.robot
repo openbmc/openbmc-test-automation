@@ -3,6 +3,7 @@ Documentation   Test BMC multiple network interface functionalities via GUI.
 
 Resource        ../../lib/gui_resource.robot
 Resource        ../../../lib/resource.robot
+Resource        ../../../lib/bmc_network_utils.robot
 Resource        ../../../lib/certificate_utils.robot
 
 Suite Setup     Suite Setup Execution
@@ -22,6 +23,8 @@ ${xpath_certificate_type}      //*[@id="certificate-type"]
 ${xpath_upload_file}           //*[@id="certificate-file"]
 ${xpath_load_certificate}      //button[text()=' Add ']
 ${xpath_close_poup}            //*[@class="close ml-auto mb-1"]
+${xpath_delete_dns_server}     //*[@title="Delete DNS address"]
+${test_dns_server}             10.10.10.10
 
 *** Test Cases ***
 
@@ -39,6 +42,33 @@ Verify BMC GUI Is Accessible Via Both Network Interfaces
     Run Keywords  Login GUI  AND  Logout GUI
     Switch Browser  tab2
     Run Keywords  Login GUI  AND  Logout GUI
+
+
+Verify Data Update On Eth0 GUI Is Synchronized To Eth1 GUI Instance
+    [Documentation]  Open concurrent GUI sessions via eth0 and eth1 on different subnets.
+    ...              Configure a Static DNS server via eth0 GUI session and verify that the
+    ...              update is synchronized and visible in the eth1 GUI session.
+    [Tags]  Verify_Data_Update_On_Eth0_GUI_Is_Synchronized_To_Eth1_GUI_Instance
+    [Setup]  DNS Test Setup Execution
+    [Teardown]  Run Keywords  Configure Static Name Servers  AND  Close All Browsers
+
+    # Open GUI session on eth0, log in and navigate to Network sub-menu.
+    Start Virtual Display
+    Launch Browser Login GUI And Navigate To Network Page  ${bmc_url}  alias=eth0_session
+
+    # Open GUI session on eth1, log in and navigate to Network sub-menu.
+    Launch Browser Login GUI And Navigate To Network Page  ${bmc_url_1}  alias=eth1_session
+
+    # Switch to eth0 session and add Static DNS Server.
+    Switch Browser  eth0_session
+    Add DNS Servers And Verify  ${test_dns_server}
+
+    # Switch to eth1 session, refresh GUI and verify DNS server addition is synchronized.
+    Switch Browser  eth1_session
+    Refresh GUI
+    Wait Until Page Contains Element  ${xpath_add_dns_ip_address_button}  timeout=30s
+    Page Should Contain  ${test_dns_server}
+    Page Should Contain Element  ${xpath_delete_dns_server}
 
 
 Load Certificates Via Eth1 IP Address And Verify
@@ -61,6 +91,20 @@ Suite Setup Execution
     # Check both interfaces are configured and reachable.
     Ping Host  ${OPENBMC_HOST}
     Ping Host  ${OPENBMC_HOST_ETH1}
+
+
+Launch Browser Login GUI And Navigate To Network Page
+    [Documentation]  Launch browser with URL and alias, login GUI and navigate to Network page.
+    [Arguments]  ${url}  ${alias}
+
+    # Description of argument(s):
+    # url    OpenBMC GUI URL to be opened.
+    # alias  Browser session alias (e.g. eth0_session or eth1_session).
+
+    Open Browser  ${url}  alias=${alias}
+    Set Window Size  1920  1080
+    Login GUI  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+    Navigate To Required Sub Menu  ${xpath_settings_menu}  ${xpath_network_sub_menu}  network
 
 
 Load Certificates On BMC Via GUI
