@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a59ac12f_5adfdf60",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp_eth0.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-09-23T08:36:57Z",
+      "side": 1,
+      "message": "Nit: ${test_ipv4_addr} and ${test_subnet_mask} are already defined in the imported lib/bmc_ipv6_utils.robot with identical values. The redeclarations on lines 27–28 are redundant and can be removed.",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 37
+      },
+      "revId": "2eb98a288d3d52172fb5f2675cb8d8c863e92fee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
