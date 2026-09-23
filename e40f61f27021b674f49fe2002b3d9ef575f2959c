@@ -16,6 +16,23 @@
       "message": "Nanda all good ?",
       "revId": "e40f61f27021b674f49fe2002b3d9ef575f2959c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c074f039_5d54aaac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-09-23T11:30:35Z",
+      "side": 1,
+      "message": "Yes @gkeishin@gmail.com, good to Merge.",
+      "revId": "e40f61f27021b674f49fe2002b3d9ef575f2959c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
