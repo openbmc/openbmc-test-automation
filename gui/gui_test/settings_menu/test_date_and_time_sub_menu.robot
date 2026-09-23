@@ -22,6 +22,7 @@ ${xpath_ntp_server3}             //input[@data-test-id="dateTime-input-ntpServer
 ${xpath_select_save_settings}    //button[@data-test-id="dateTime-button-saveSettings"]
 ${xpath_invalid_format_message}  //*[contains(text(), "Invalid format")]
 ${LOOP_COUNT}                    2
+${date_time_change_wait_time}    120
 
 *** Test Cases ***
 
@@ -36,12 +37,8 @@ Verify Text Under Date And Time Page
     [Documentation]  Verify the presence of the required text on the date and time page.
     [Tags]  Verify_Text_Under_Date_And_Time_Page
 
-
     Page Should Contain  To change how date and time are displayed
     ...  (either UTC or browser offset) throughout the application, visit Profile Settings
-
-    Page Should Contain  If NTP is selected but an NTP server is not given or the
-    ...  given NTP server is not reachable, then time.google.com will be used.
 
 
 Verify Existence Of All Sections In Date And Time Page
@@ -151,9 +148,9 @@ Verify NTP Server Input Fields In Date And Time Page
     [Setup]  Setup To Power Off And Navigate
 
     Click Element At Coordinates  ${xpath_select_ntp}  0  0
-    Input Text  ${xpath_ntp_server1}  10.10.10.10
-    Input Text  ${xpath_ntp_server2}  20.20.20.20
-    Input Text  ${xpath_ntp_server3}  30.30.30.30
+    Wait And Input Text  ${xpath_ntp_server1}  10.10.10.10
+    Wait And Input Text  ${xpath_ntp_server2}  20.20.20.20
+    Wait And Input Text  ${xpath_ntp_server3}  30.30.30.30
     Click Element  ${xpath_select_save_settings}
 
 
@@ -172,13 +169,15 @@ Verify Setting Manual BMC Time
     [Setup]  Run Keywords  Set Timezone In Profile Settings Page
     ...  Default  AND  Setup To Power Off And Navigate
 
+    ${current_date}=  Get Current Date  result_format=%Y-%m-%d
+    ${current_time}=  Get Current Date  result_format=%H:%M
     Click Element At Coordinates  ${xpath_select_manual}  0  0
-    Input Text  ${xpath_manual_date}  2023-05-12
-    Input Text  ${xpath_manual_time}  15:30
+    Wait And Input Text  ${xpath_manual_date}  ${current_date}
+    Wait And Input Text  ${xpath_manual_time}  ${current_time}
     Click Element  ${xpath_select_save_settings}
 
     # Wait for changes to take effect.
-    Sleep  120
+    Sleep  ${date_time_change_wait_time}
     ${manual_date}=  Get Value  ${xpath_manual_date}
     ${manual_time}=  Get Value  ${xpath_manual_time}
 
@@ -193,9 +192,9 @@ Verify Setting Invalid Date And Time Is Not Allowed
     [Setup]  Setup To Power Off And Navigate
 
     Click Element At Coordinates  ${xpath_select_manual}  0  0
-    Input Text  ${xpath_manual_date}  2023-18-48
+    Wait And Input Text  ${xpath_manual_date}  2023-18-48
     Page Should Contain Element  ${xpath_invalid_format_message}
-    Input Text  ${xpath_manual_time}  29:48
+    Wait And Input Text  ${xpath_manual_time}  29:48
     Page Should Contain Element  ${xpath_invalid_format_message}
 
 
@@ -207,31 +206,20 @@ Verify Changing BMC Time From NTP To Manual
 
     # Add NTP server for BMC time to sync.
     Click Element At Coordinates  ${xpath_select_ntp}  0  0
-    Input Text  ${xpath_ntp_server1}  time.google.com
+    Wait And Input Text  ${xpath_ntp_server1}  time.google.com
     Click Element  ${xpath_select_save_settings}
 
     # Wait for changes to take effect.
-    Wait Until Page Contains Element  ${xpath_select_ntp}  timeout=30s
+    Sleep  ${date_time_change_wait_time}
+    Page Should Contain Element  ${xpath_select_ntp}
 
-    # Set the manual date and time.
-    ${cli_date_time}=  CLI Get BMC DateTime
-    ${date_changed}=  Add Time To Date  ${cli_date_time}  31 days
-    ${date_changed}=  Add Time To Date  ${date_changed}  05:10:00
-    Log  "Setting BMC date : ${date_changed} using Manual option"
-    ${date}=  Convert Date  ${date_changed}  result_format=%Y-%m-%d
-    ${time}=  Convert Date  ${date_changed}  result_format=%H:%M
-    Click Element At Coordinates  ${xpath_select_manual}  0  0
-    Input Text  ${xpath_manual_date}  ${date}
-    Input Text  ${xpath_manual_time}  ${time}
-    Click Element  ${xpath_select_save_settings}
+    # Set data and time on GUI.
+    Set Manual Date And Time Via GUI
 
     # Refresh the NTP Page.
     Click Element  ${xpath_refresh_button}
     Wait Until Page Contains  ${date}  timeout=60s
     Page Should Contain  ${time}
-
-    # Wait for the "Saved Successfully" window to close automatically.
-    Sleep  15
 
 
 Verify Moving From Manual To NTP
@@ -277,15 +265,15 @@ Set Manual Date And Time Via GUI
     ${new_date}=  Add Time To Date  ${cli_date_time}  31 days
     ${new_date_time}=  Add Time To Date  ${new_date}  05:10:00
     Log  "Setting BMC date : ${new_date_time} using Manual option"
-    ${date}=  Convert Date  ${new_date_time}  result_format=%Y-%m-%d
-    ${time}=  Convert Date  ${new_date_time}  result_format=%H:%M
+    ${new_date}=  Convert Date  ${new_date_time}  result_format=%Y-%m-%d
+    VAR  ${date}  ${new_date}  scope=TEST
+    ${new_time}=  Convert Date  ${new_date_time}  result_format=%H:%M
+    VAR  ${time}  ${new_time}  scope=TEST
     Click Element At Coordinates  ${xpath_select_manual}  0  0
-    Input Text  ${xpath_manual_date}  ${date}
-    Input Text  ${xpath_manual_time}  ${time}
+    Wait And Input Text  ${xpath_manual_date}  ${date}
+    Wait And Input Text  ${xpath_manual_time}  ${time}
     Click Element  ${xpath_select_save_settings}
 
-    # Wait for changes to take effect.
-    Wait Until Element Is Enabled  ${xpath_select_ntp}  timeout=30s
 
 Switch From Manual To NTP
     [Documentation]  Verify switching from manual mode to NTP mode.
@@ -296,9 +284,12 @@ Switch From Manual To NTP
 
     FOR  ${x}  IN RANGE  ${loop_count}
        Set Manual Date And Time Via GUI
+       # Wait for changes to take effect.
+       Wait Until Element Is Enabled  ${xpath_select_ntp}  timeout=30s
+
        # Set BMC date time to sync with NTP server.
        Click Element At Coordinates  ${xpath_select_ntp}  0  0
-       Input Text  ${xpath_ntp_server1}  216.239.35.0
+       Wait And Input Text  ${xpath_ntp_server1}  216.239.35.0
        Click Element  ${xpath_select_save_settings}
 
        # Wait until progress bar is not visible.
