@@ -52,6 +52,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "63c929b7_4fe4eded",
+        "filename": "oem/ast2600evb_rpi/gui/test_usb_ethernet_webui.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-09-23T08:47:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c28a4c2_e3a18dee",
+      "revId": "8203a875e0a4b569e2fab87e464882f39d096726",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "df251f10_f1c85ce7",
@@ -65,6 +83,24 @@
       "writtenOn": "2026-09-15T14:52:53Z",
       "side": 1,
       "message": "```\n    ${output}  ${rc}\u003d  Execute Command\n    ...  sudo ipmitool raw ${IPMI_RAW_CMD}[ssif_certificate_fingerprint][Get][0]\n    ...  return_stdout\u003dTrue  return_rc\u003dTrue\n    Should Be Equal As Integers  ${rc}  1\n    ...  msg\u003dExpected ipmitool to fail (rc\u003d1) when bootstrapping is disabled, got rc\u003d${rc}\n    Should Be Empty  ${output}  CredentialBootstrapping is not disabled\n```\n\nWithout the return-code check the test cannot distinguish \"IPMI returned nothing because bootstrapping is disabled\" from \"IPMI command failed for an unrelated reason (SSIF path down, command timeout, network error)\".",
+      "revId": "8203a875e0a4b569e2fab87e464882f39d096726",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20fc7718_a204783c",
+        "filename": "oem/ast2600evb_rpi/redfish/host_interface/test_host_interface.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-09-23T08:47:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df251f10_f1c85ce7",
       "revId": "8203a875e0a4b569e2fab87e464882f39d096726",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
