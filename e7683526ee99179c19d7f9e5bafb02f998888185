@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a1d9ba0_7a6ff732",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2026-09-24T07:41:44Z",
+      "side": 1,
+      "message": "I guess, DNS server configuration is a pre-req for this.\nIf yes, can you add it in setup.",
+      "revId": "e7683526ee99179c19d7f9e5bafb02f998888185",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
