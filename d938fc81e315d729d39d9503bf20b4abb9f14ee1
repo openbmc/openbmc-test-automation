@@ -53,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba1c6d93_cd82b935",
+        "filename": "gui/gui_test/resource_management_menu/test_resource_management_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-09-24T07:14:45Z",
+      "side": 1,
+      "message": "done.",
+      "parentUuid": "764e97ea_2a8213a4",
+      "revId": "d938fc81e315d729d39d9503bf20b4abb9f14ee1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "57d2265d_be7e1a30",
@@ -66,6 +84,24 @@
       "writtenOn": "2026-09-21T16:38:57Z",
       "side": 1,
       "message": "won\u0027t get any success message to verify ?",
+      "revId": "d938fc81e315d729d39d9503bf20b4abb9f14ee1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f89518b_63c4f633",
+        "filename": "gui/gui_test/resource_management_menu/test_resource_management_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-09-24T07:14:45Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "57d2265d_be7e1a30",
       "revId": "d938fc81e315d729d39d9503bf20b4abb9f14ee1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
