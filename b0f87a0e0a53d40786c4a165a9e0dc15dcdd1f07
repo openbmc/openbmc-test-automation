@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "99be2d04_b2b29771",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-09-25T05:37:20Z",
+      "side": 1,
+      "message": "I believe the name is already clear and understandable. Also there is no functional difference between the current name and the name you suggested.\n\nThe current name Configure Valid FQDN Settings Via GUI And Verify is fine — it follows the exact same convention as the existing test Configure Invalid FQDN Settings Via GUI And Verify directly above it (line 132), making it a natural pair.\n\nThis symmetry is intentional and is the stronger reason to keep the current name as-is.",
+      "parentUuid": "1918fae6_0d496d32",
+      "revId": "b0f87a0e0a53d40786c4a165a9e0dc15dcdd1f07",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e0b3e3b6_994a603d",
         "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
         "patchSetId": 7
