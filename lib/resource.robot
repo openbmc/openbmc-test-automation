@@ -171,6 +171,9 @@ ${LDAP_USER_PASSWORD}       ${EMPTY}
 ${GROUP_PRIVILEGE}          ${EMPTY}
 ${GROUP_NAME}               ${EMPTY}
 ${LDAP_SERVER_URI}          ldap://${LDAP_SERVER_HOST}
+# LDAP server URI specified as an FQDN (e.g. ldap://ldap.example.com or ldaps://ldap.example.com).
+# Used by FQDN-specific tests. Pass via -v LDAP_SERVER_FQDN_URI:ldap://ldap.example.com.
+${LDAP_SERVER_FQDN_URI}     ${EMPTY}
 
 # General tool variables
 # FFDC_DEFAULT == 1; use Default FFDC methods
