@@ -392,6 +392,20 @@ Configure LDAP Via IPv6 And Verify Login
     Static          ${2}
 
 
+Configure LDAP Server FQDN Via IPv6 And Verify Login
+    [Documentation]  Configure LDAP server using an FQDN-based URI (e.g. ldap://ldap.example.com)
+    ...  via IPv6 for SLAAC and static addresses on eth0, then verify LDAP user login.
+    ...  Prerequisite: The BMC must have a valid DNS server configured so the FQDN can be
+    ...  resolved. Pass LDAP_SERVER_FQDN_URI as a fully-qualified ldap:// or ldaps:// URI.
+    [Tags]  Configure_LDAP_Server_FQDN_Via_IPv6_And_Verify_Login
+    [Setup]  Valid Value  LDAP_SERVER_FQDN_URI
+    [Template]  Configure LDAP Using IPv6 Address And Verify Login
+
+    # address_type  channel_number  ldap_server_uri
+    SLAAC           ${1}            ${LDAP_SERVER_FQDN_URI}
+    Static          ${1}            ${LDAP_SERVER_FQDN_URI}
+
+
 Configure Valid Static IPv6 Address Via IPv6 Address And Verify
     [Documentation]  Configure Static IPv6 address via IPv6 session on both interfaces
     ...  and verify normalization.
@@ -990,10 +1004,13 @@ Configure And Verify NTP Over IPv6
 Configure LDAP Using IPv6 Address And Verify Login
     [Documentation]  Configure LDAP using IPv6 address and verify LDAP user login.
     [Arguments]  ${ipv6_address_type}  ${channel_number}
+    ...          ${ldap_server_uri}=${LDAP_SERVER_URI}
 
     # Description of argument(s):
     # ipv6_address_type  Type of IPv6 address (SLAAC/Static).
     # channel_number     Ethernet channel number, 1(eth0) or 2(eth1).
+    # ldap_server_uri    LDAP server URI (e.g. ldap://XX.XX.XX.XX or ldap://hostname.example.com).
+    #                    Defaults to ${LDAP_SERVER_URI} (IP-based). Pass an FQDN URI for FQDN tests.
 
     # Get the IPv6 address for the specified type and channel.
     @{ipv6_addressorigin_list}  ${ipv6_addr}=
@@ -1002,7 +1019,7 @@ Configure LDAP Using IPv6 Address And Verify Login
     RedfishIPv6.Login
 
     # Configure LDAP server using IPv6 connection.
-    Create LDAP Configuration  version=IPv6
+    Create LDAP Configuration  ldap_server_uri=${ldap_server_uri}  version=IPv6
 
     # Configure LDAP user role and group via IPv6.
     Update LDAP Configuration With LDAP User Role And Group  ${LDAP_TYPE}
