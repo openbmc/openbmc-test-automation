@@ -90,6 +90,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b15fe14f_571da216",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-09-25T06:05:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9fc93fda_f2a254f4",
+      "revId": "b0f87a0e0a53d40786c4a165a9e0dc15dcdd1f07",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e0b3e3b6_994a603d",
@@ -125,6 +143,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "75995697_0b187f91",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-09-25T06:05:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f971ffe5_e393cd46",
+      "revId": "b0f87a0e0a53d40786c4a165a9e0dc15dcdd1f07",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "420f47ba_a9abb2f0",
@@ -138,6 +174,24 @@
       "writtenOn": "2026-09-25T05:25:00Z",
       "side": 1,
       "message": "here you are not configuring SNMP via command line. so, make it as\n# Configure SNMP manager using the FQDN via GUI.",
+      "revId": "b0f87a0e0a53d40786c4a165a9e0dc15dcdd1f07",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83fee807_fdc3e94f",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-09-25T06:05:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "420f47ba_a9abb2f0",
       "revId": "b0f87a0e0a53d40786c4a165a9e0dc15dcdd1f07",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -173,6 +227,24 @@
       "side": 1,
       "message": "on line 160 verifying on GUI and line 164 verifying on redfish aswell",
       "parentUuid": "9c7e5f36_4c04131c",
+      "revId": "b0f87a0e0a53d40786c4a165a9e0dc15dcdd1f07",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b3aeae7_7c9a1cc5",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-09-25T06:05:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ebd8074f_8767ae26",
       "revId": "b0f87a0e0a53d40786c4a165a9e0dc15dcdd1f07",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
