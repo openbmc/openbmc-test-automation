@@ -4,7 +4,7 @@ Documentation  This testing requires special setup where SNMP trapd is
 ...            configuration refer http://www.net-snmp.org/.
 
 Resource  ../../lib/snmp/resource.robot
-Resource  ../../lib/snmp/snmp_utils.robot
+Resource  ../../lib/oem/ieisystem/snmp/snmp_utils.robot
 Resource  ../../lib/openbmc_ffdc.robot
 Resource  ../../lib/logging_utils.robot
 
