@@ -532,6 +532,21 @@ Verify Eth0 Static And Eth1 DHCPv4 Then Add IPv6 On Both Interfaces
     Verify DHCPv4 Functionality On Eth1
 
 
+Verify SSH Access For Service User Via Static IPv6 On Eth1
+    [Documentation]  SSH to static IPv6 address on eth1 (channel 2) via service user
+    ...  on port 22 and verify the connection is allowed.
+    [Tags]  Verify_SSH_Access_For_Service_User_Via_Static_IPv6_On_Eth1
+    [Setup]  Enable SSH Protocol  ${True}
+
+    @{_}  ${ipv6_addr}=
+    ...  Get Address Origin List And Address For Type  Static  ${2}
+
+    Wait For IPv6 Host To Ping  ${ipv6_addr}
+
+    # Verify service user (Root role) SSH login to the static IPv6 address on eth1 is allowed.
+    Check SSH Login Based On Role  ${OPENBMC_USERNAME}  Root  22  ${ipv6_addr}
+
+
 *** Keywords ***
 
 Suite Setup Execution
