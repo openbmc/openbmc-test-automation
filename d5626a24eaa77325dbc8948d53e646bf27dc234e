@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74d197cc_9ee9eb19",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1002670
+      },
+      "writtenOn": "2026-09-28T12:21:11Z",
+      "side": 0,
+      "message": "Wait And Input Text  ${xpath_manual_date}  2023-05-12\n    Wait And Input Text  ${xpath_manual_time}  15:30",
+      "range": {
+        "startLine": 176,
+        "startChar": 1,
+        "endLine": 177,
+        "endChar": 43
+      },
+      "revId": "d5626a24eaa77325dbc8948d53e646bf27dc234e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcf32ffb_0a40a05e",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1002670
+      },
+      "writtenOn": "2026-09-28T12:21:11Z",
+      "side": 0,
+      "message": "Verify Success Message On BMC GUI Page",
+      "range": {
+        "startLine": 180,
+        "startChar": 0,
+        "endLine": 181,
+        "endChar": 14
+      },
+      "revId": "d5626a24eaa77325dbc8948d53e646bf27dc234e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5479cb62_9c316cef",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1002670
+      },
+      "writtenOn": "2026-09-28T12:21:11Z",
+      "side": 0,
+      "message": "${cli_date}\u003d  Convert Date  ${cli_date_time}  result_format\u003d%Y-%m-%d\n    Should Contain  ${cli_date}  ${manual_date}\n\n    ${input_ts}\u003d  Convert Date  ${manual_date} ${manual_time}:00  result_format\u003depoch\n    ${cli_ts}\u003d  Convert Date  ${cli_date_time}  result_format\u003depoch\n    ${diff}\u003d  Evaluate  abs(${cli_ts} - ${input_ts})\n    ${in_range}\u003d  Evaluate  ${diff} \u003c ${date_time_change_wait_time}\n    Should Be True  ${in_range}  msg\u003dTime diff ${diff}s exceeds tolerance",
+      "range": {
+        "startLine": 186,
+        "startChar": 3,
+        "endLine": 186,
+        "endChar": 68
+      },
+      "revId": "d5626a24eaa77325dbc8948d53e646bf27dc234e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

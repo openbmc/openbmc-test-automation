@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fdc358ea_f3d78ca7",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1002670
+      },
+      "writtenOn": "2026-09-28T12:21:11Z",
+      "side": 1,
+      "message": "Why use the test machine\u0027s time (Get Current Date) as the input value?\nWe are not sure whether the input value taken from the test machine is\nclose to the BMC\u0027s current time. In particular, after waiting 2 minutes\nand reading CLI, we cannot prove the input value was successfully saved,\nregardless of whether the setting actually took effect.\n\nThe original fixed past time worked fine, and other test cases in the\nsame robot file also use a past time. If a fixed past time is not\ndesired, should it be handled like the existing Set Manual Date And Time\nVia GUI keyword, using CLI Get BMC DateTime plus an offset to generate\nthe input value? So I think this part does not need to change, because\nboth approaches I mentioned can ensure the input value is different from\nthe BMC time, with a clear gap.",
+      "range": {
+        "startLine": 172,
+        "startChar": 0,
+        "endLine": 173,
+        "endChar": 59
+      },
+      "revId": "86e8b40a843610955b9fd22449d2f1c70c1328a8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "55d073d4_29e04240",
         "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
         "patchSetId": 1
@@ -19,6 +42,52 @@
         "startChar": 54,
         "endLine": 185,
         "endChar": 68
+      },
+      "revId": "86e8b40a843610955b9fd22449d2f1c70c1328a8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec095ec5_658790be",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1002670
+      },
+      "writtenOn": "2026-09-28T12:21:11Z",
+      "side": 1,
+      "message": "Sleep ${date_time_change_wait_time} always waits the full 120s even if\nthe save completes in a few seconds. The original\nWait Until Page Contains Element ${xpath_select_ntp} was a condition\nwait that continues as soon as the element is back. Suggest keeping it.",
+      "range": {
+        "startLine": 213,
+        "startChar": 4,
+        "endLine": 213,
+        "endChar": 40
+      },
+      "revId": "86e8b40a843610955b9fd22449d2f1c70c1328a8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "390bea7f_738c5a83",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1002670
+      },
+      "writtenOn": "2026-09-28T12:21:11Z",
+      "side": 1,
+      "message": "The wait was moved out of Set Manual Date And Time Via GUI, so callers\nneed to add it. Suggest adding Wait Until Page Contains Element ${xpath_select_ntp} timeout\u003d30s here.",
+      "range": {
+        "startLine": 217,
+        "startChar": 4,
+        "endLine": 217,
+        "endChar": 36
       },
       "revId": "86e8b40a843610955b9fd22449d2f1c70c1328a8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
