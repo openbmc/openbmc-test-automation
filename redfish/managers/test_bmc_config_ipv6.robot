@@ -516,6 +516,33 @@ Verify Eth0 Static And Eth1 DHCPv4 Then Add IPv6 On Both Interfaces
     Verify DHCPv4 Functionality On Eth1
 
 
+Disable SSH Via Static IPv6 And Verify SSH Does Not Work Via IPv4 And IPv6
+    [Documentation]  Disable SSH via a Static IPv6 session and verify SSH does not work
+    ...    via both IPv4 and IPv6. Covers the Static IPv6 path on channel 1 (eth0).
+    [Tags]  Disable_SSH_Via_Static_IPv6_And_Verify_SSH_Does_Not_Work_Via_IPv4_And_IPv6
+    [Setup]  Check And Enable SSH Via Static IPv6
+    [Teardown]  Run Keywords
+    ...  Enable SSH Protocol  ${initial_ssh_state}
+    ...  AND  Test Teardown Execution
+
+    @{ipv6_addressorigin_list}  ${ipv6_static_addr}=
+    ...  Get Address Origin List And Address For Type  Static  ${1}
+    Connect BMC Using IPv6 Address  ${ipv6_static_addr}
+
+    # Disable SSH protocol via IPv6
+    Set SSH Protocol Using IPv6 Session And Verify  ${False}
+
+    ${status_v6}=  Run Keyword And Return Status
+    ...  Verify SSH Connection Via IPv6  ${ipv6_static_addr}
+    Should Be Equal As Strings  ${status_v6}  False
+    ...  msg=SSH is still reachable via Static IPv6 after disabling SSH.
+
+    ${status_v4}=  Run Keyword And Return Status
+    ...  Verify SSH Login And Commands Work
+    Should Be Equal As Strings  ${status_v4}  False
+    ...  msg=SSH is still reachable via IPv4 after disabling SSH.
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -1553,3 +1580,14 @@ Teardown Eth0 Static Eth1 DHCPv4
     END
 
     Test Teardown Execution
+
+
+Check And Enable SSH Via Static IPv6
+    [Documentation]  Read current SSH protocol state and store it as a test-scoped variable.
+    ...    If SSH is disabled, enable it via a Static IPv6 session before the test runs.
+
+    ${resp}=  Redfish.Get  ${REDFISH_NW_PROTOCOL_URI}
+    VAR  ${initial_ssh_state}  ${resp.dict['SSH']['ProtocolEnabled']}  scope=TEST
+    IF  not ${initial_ssh_state}
+        Enable SSH Protocol Via IPv6 Address And Verify  Static  ${1}
+    END
