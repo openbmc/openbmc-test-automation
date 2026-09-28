@@ -861,6 +861,20 @@ Verify Local User Created By LDAP Admin Disabled By Local Admin And Enabled By S
     # Verify re-enabled user can login successfully.
     Verify User Login And Logout  ${test_local_user}  ${test_user_password}
 
+Verify Privilege Change When LDAP Is Unreachable
+    [Documentation]  Verify that privilege change via LDAP user fails when LDAP is unreachable
+    ...  and that local admin can successfully change the privilege to ReadOnly.
+    [Tags]  Verify_Privilege_Change_When_LDAP_Is_Unreachable
+    [Setup]  Update LDAP Configuration With LDAP User Role And Group  ${LDAP_TYPE}
+    ...  Administrator  ${GROUP_NAME}
+    [Template]  Privilege Change When LDAP Unreachable
+    [Teardown]  Run Keywords  Create LDAP Configuration  AND  FFDC On Test Case Fail
+
+    # ldap_user_creator    login_attempt_role
+    Local_Admin            LDAP_User
+    LDAP_Admin             Local_Admin
+
+
 *** Keywords ***
 
 Redfish Verify LDAP Login
@@ -1521,4 +1535,72 @@ Creator User Creates Local User And LDAP User Changes Privilege
 
     # Verify user can login with new privilege.
     Verify User Login And Logout  ${test_local_user}  ${test_user_password}
+
+
+Privilege Change When LDAP Unreachable
+    [Documentation]  Create a test user with Administrator privilege, make LDAP unreachable,
+    ...  attempt privilege change via the given user and verify the final state.
+    [Arguments]  ${ldap_user_creator}  ${login_attempt_role}
+
+    # Description of argument(s):
+    # ldap_user_creator   Who creates the test user: Local_Admin or LDAP_Admin.
+    # login_attempt_role  Role that attempts login after LDAP becomes unreachable:
+    #                     LDAP_User (login expected to fail) or Local_Admin (login not attempted).
+
+    TRY
+        # Ensure clean state - restore LDAP config, delete test user if exists from a previous run.
+        Run Keyword And Ignore Error  Redfish.Logout
+        Redfish.Login
+        Create LDAP Configuration
+        Run Keyword And Ignore Error  Redfish.Delete  ${REDFISH_ACCOUNTS_URI}${test_local_user}
+        ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
+
+        # Create test user with Administrator privilege using the specified creator.
+        IF  '${ldap_user_creator}' == 'Local_Admin'
+            Redfish Create User  ${test_local_user}  ${test_user_password}
+            ...  ${privilege_admin}  ${True}  ${True}
+        ELSE IF  '${ldap_user_creator}' == 'LDAP_Admin'
+            # Logout local admin, login as LDAP user to create the test user.
+            Redfish.Logout
+            Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+            Redfish Create User  ${test_local_user}  ${test_user_password}
+            ...  ${privilege_admin}  ${True}  ${True}
+            # Switch back to local admin after LDAP user creates the test user.
+            Redfish.Logout
+            Redfish.Login  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+        ELSE
+            Fail  Unexpected ldap_user_creator value: ${ldap_user_creator}
+        END
+
+        # Verify user was created with Administrator privilege.
+        Verify User Role  ${test_local_user}  ${privilege_admin}
+        Verify User Login And Logout  ${test_local_user}  ${test_user_password}
+
+        # Establish local admin session after Verify User Login And Logout ends with no session.
+        Redfish.Login
+
+        # Reconfigure LDAP to an unreachable server.
+        Create LDAP Configuration  ${LDAP_TYPE}  ${ldap_unreachable_uri}
+        ...  ${LDAP_BIND_DN}  ${LDAP_BIND_DN_PASSWORD}  ${LDAP_BASE_DN}
+
+        # Confirm LDAP is unreachable (also verifies LDAP login is rejected).
+        Verify LDAP Is Unreachable
+
+        # Local admin changes privilege from Administrator to ReadOnly.
+        Redfish.Patch  ${REDFISH_ACCOUNTS_URI}${test_local_user}
+        ...  body={'RoleId': '${privilege_readonly}'}
+        ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+        # Verify privilege was successfully changed to ReadOnly.
+        Verify User Role  ${test_local_user}  ${privilege_readonly}
+
+        # Verify test user can login with ReadOnly privilege.
+        Verify User Login And Logout  ${test_local_user}  ${test_user_password}
+
+    FINALLY
+        Run Keyword And Ignore Error  Redfish.Logout
+        Redfish.Login
+        Run Keyword And Ignore Error  Redfish.Delete  ${REDFISH_ACCOUNTS_URI}${test_local_user}
+        ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
+    END
 
