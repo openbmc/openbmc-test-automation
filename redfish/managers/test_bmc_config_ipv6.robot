@@ -70,30 +70,6 @@ Enable SSH Protocol Via IPv6 And Verify
     Static               ${2}
 
 
-Disable SSH Protocol Via IPv6 And Verify
-    [Documentation]  Disable SSH protocol via IPv6 and verify.
-    [Tags]  Disable_SSH_Protocol_Via_IPv6_And_Verify
-    [Teardown]  Set SSH Protocol Using IPv6 Session And Verify  ${True}
-
-    @{ipv6_addressorigin_list}  ${ipv6_slaac_addr}=
-    ...  Get Address Origin List And Address For Type  SLAAC  ${2}
-    Connect BMC Using IPv6 Address  ${ipv6_slaac_addr}
-
-    Set SSH Protocol Using IPv6 Session And Verify  ${False}
-
-    # Verify SSH Login And Commands Work.
-    ${status}=  Run Keyword And Return Status
-    ...    Verify SSH Connection Via IPv6  ${ipv6_slaac_addr}
-    Should Be Equal As Strings  ${status}  False
-    ...  msg=SSH Login and commands are working after disabling SSH via IPv6.
-
-    # Verify SSH Connection Via IPv6.
-    ${status}=  Run Keyword And Return Status
-    ...  Verify SSH Login And Commands Work
-    Should Be Equal As Strings  ${status}  False
-    ...  msg=SSH Login and commands are working after disabling SSH.
-
-
 Verify BMC IPv4 And IPv6 Addresses Accessible Via SSH
     [Documentation]  Verify BMC IPv4 and IPv6 addresses accessible via SSH.
     [Tags]  Verify_BMC_IPv4_And_IPv6_Addresses_Accessible_Via_SSH
@@ -545,6 +521,23 @@ Verify SSH Access For Service User Via Static IPv6 On Eth1
 
     # Verify service user (Root role) SSH login to the static IPv6 address on eth1 is allowed.
     Check SSH Login Based On Role  ${OPENBMC_USERNAME}  Root  22  ${ipv6_addr}
+
+
+Disable SSH Protocol Via IPv6 And Verify
+    [Documentation]  Disable SSH via SLAAC and Static IPv6 sessions on both interfaces
+    ...    and verify SSH does not work via IPv4 or IPv6.
+    [Tags]  Disable_SSH_Protocol_Via_IPv6_And_Verify
+    [Setup]  Check And Enable SSH Via IPv6  SLAAC  ${1}
+    [Teardown]  Run Keywords
+    ...  Enable SSH Protocol  ${initial_ssh_state}
+    ...  AND  Test Teardown Execution
+    [Template]  Disable SSH Via IPv6 And Verify SSH Does Not Work Via IPv4 And IPv6
+
+    # ipv6_address_type  channel_number
+    SLAAC                ${1}
+    Static               ${1}
+    SLAAC                ${2}
+    Static               ${2}
 
 
 *** Keywords ***
@@ -1587,3 +1580,41 @@ Teardown Eth0 Static Eth1 DHCPv4
     END
 
     Test Teardown Execution
+
+
+Check And Enable SSH Via IPv6
+    [Documentation]  Read current SSH protocol state and store it as a test-scoped variable.
+    ...    If SSH is disabled, enable it via the given IPv6 address type and channel.
+    [Arguments]  ${ipv6_address_type}  ${channel_number}
+
+    ${resp}=  Redfish.Get  ${REDFISH_NW_PROTOCOL_URI}
+    VAR  ${initial_ssh_state}  ${resp.dict['SSH']['ProtocolEnabled']}  scope=TEST
+    IF  not ${initial_ssh_state}
+        Enable SSH Protocol Via IPv6 Address And Verify  ${ipv6_address_type}  ${channel_number}
+    END
+
+
+Disable SSH Via IPv6 And Verify SSH Does Not Work Via IPv4 And IPv6
+    [Documentation]  Disable SSH via the given IPv6 address type and channel, then verify
+    ...    SSH does not work via IPv6 or IPv4.
+    [Arguments]  ${ipv6_address_type}  ${channel_number}
+    [Teardown]  Run Keywords
+    ...  Enable SSH Protocol  ${True}
+    ...  AND  Wait Until Keyword Succeeds  60s  5s  Verify SSH Login And Commands Work
+
+    @{ipv6_addressorigin_list}  ${ipv6_addr}=
+    ...  Get Address Origin List And Address For Type  ${ipv6_address_type}  ${channel_number}
+    Connect BMC Using IPv6 Address  ${ipv6_addr}
+
+    Set SSH Protocol Using IPv6 Session And Verify  ${False}
+
+    ${status_v6}=  Run Keyword And Return Status
+    ...  Verify SSH Connection Via IPv6  ${ipv6_addr}
+    Should Be Equal As Strings  ${status_v6}  False
+    ...  msg=SSH is still reachable via ${ipv6_address_type} IPv6 after disabling SSH.
+
+    ${status_v4}=  Run Keyword And Return Status
+    ...  Verify SSH Login And Commands Work
+    Should Be Equal As Strings  ${status_v4}  False
+    ...  msg=SSH is still reachable via IPv4 after disabling SSH.
+
