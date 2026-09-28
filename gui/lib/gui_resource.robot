@@ -78,14 +78,24 @@ Launch Headless Browser
 Launch Browser And Login GUI
     [Documentation]  Launch browser and login to OpenBMC GUI, retry 2 attempts
     ...              in 1 minute time.
+    [Arguments]  ${URL}=${OPENBMC_GUI_URL}
 
-    Wait Until Keyword Succeeds  195 sec   65 sec  Retry Browser Login Attempts
+    # Description of argument(s):
+    # URL      Openbmc GUI URL to be open
+    #          (e.g. https://openbmc-test.mybluemix.net/#/login).
+
+    Wait Until Keyword Succeeds  195 sec   65 sec  Retry Browser Login Attempts  ${URL}
 
 
 Retry Browser Login Attempts
     [Documentation]  Launch browser and login to OpenBMC GUI.
+    [Arguments]  ${URL}=${OPENBMC_GUI_URL}
 
-    Open Browser With URL  ${OPENBMC_GUI_URL}
+    # Description of argument(s):
+    # URL      Openbmc GUI URL to be open
+    #          (e.g. https://openbmc-test.mybluemix.net/#/login).
+
+    Open Browser With URL  ${URL}
     Login GUI  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
 
 
