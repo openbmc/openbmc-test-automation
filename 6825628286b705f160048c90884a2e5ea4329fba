@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9194b25d_d8432f11",
+        "filename": "gui/gui_test/security_and_access_menu/test_multiple_interfaces.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-09-28T04:56:48Z",
+      "side": 1,
+      "message": "you can mention in this format for better readability\nhttps://${OPENBMC_HOST}:${HTTPS_PORT}",
+      "range": {
+        "startLine": 101,
+        "startChar": 4,
+        "endLine": 101,
+        "endChar": 42
+      },
+      "revId": "6825628286b705f160048c90884a2e5ea4329fba",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
