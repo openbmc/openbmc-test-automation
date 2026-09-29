@@ -3,9 +3,9 @@
 Documentation    Test OpenBMC GUI "Policies" sub-menu of "Security and Access" menu.
 
 Resource         ../../lib/gui_resource.robot
-Resource         ../../lib/ipmi_client.robot
-Resource         ../../lib/protocol_setting_utils.robot
-Resource         ../../lib/common_utils.robot
+Resource         ../../../lib/ipmi_client.robot
+Resource         ../../../lib/protocol_setting_utils.robot
+Resource         ../../../lib/common_utils.robot
 
 Suite Setup      Run Keywords  Launch Browser And Login GUI  AND  Redfish.Login
 Suite Teardown   Close Browser
