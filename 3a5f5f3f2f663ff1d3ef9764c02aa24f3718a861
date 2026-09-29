@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94f9b1aa_e623f155",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-09-29T06:19:49Z",
+      "side": 1,
+      "message": "Fix the white space",
+      "revId": "3a5f5f3f2f663ff1d3ef9764c02aa24f3718a861",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
