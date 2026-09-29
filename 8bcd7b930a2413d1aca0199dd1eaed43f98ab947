@@ -16,6 +16,24 @@
       "message": "nit: Can a add comment to mention\n\n```\n# Disable SSH protocol via IPv6.\n```",
       "revId": "8bcd7b930a2413d1aca0199dd1eaed43f98ab947",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24e12da3_92b73dfc",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1003095
+      },
+      "writtenOn": "2026-09-29T05:33:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aa9df27_3971e8c7",
+      "revId": "8bcd7b930a2413d1aca0199dd1eaed43f98ab947",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
