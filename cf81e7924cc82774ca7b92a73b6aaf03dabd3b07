@@ -20,6 +20,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7ee06987_c8edd872",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-09-29T17:07:16Z",
+      "side": 1,
+      "message": "Can this be replaced by\n\nDisable SSH Protocol Via IPv6 and Verify\n[Template]  Enable SSH Protocol Via IPv6 Address And Verify\nSLAAC ${1}\nStatic ${1}\nSLAAC ${2}\nStatic ${2}",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 40
+      },
+      "revId": "cf81e7924cc82774ca7b92a73b6aaf03dabd3b07",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f518887_b74d6911",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-09-29T17:07:16Z",
+      "side": 1,
+      "message": "Can Combining both SLAAC and static into a single keyword and call it as a template work?",
+      "range": {
+        "startLine": 519,
+        "startChar": 0,
+        "endLine": 519,
+        "endChar": 74
+      },
+      "revId": "cf81e7924cc82774ca7b92a73b6aaf03dabd3b07",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6384141c_6ca807bc",
         "filename": "redfish/managers/test_bmc_config_ipv6.robot",
         "patchSetId": 4
