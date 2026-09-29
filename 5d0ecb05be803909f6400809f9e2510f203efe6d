@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca427580_96ed80aa",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 870,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-09-29T05:02:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f1951cf1_e1f59b66",
+      "revId": "5d0ecb05be803909f6400809f9e2510f203efe6d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6d25da0_37809350",
@@ -31,6 +49,30 @@
       "writtenOn": "2026-09-28T16:44:04Z",
       "side": 1,
       "message": "for more clarity\n\nChange User Privilege When LDAP Unreachable",
+      "range": {
+        "startLine": 1539,
+        "startChar": 0,
+        "endLine": 1540,
+        "endChar": 38
+      },
+      "revId": "5d0ecb05be803909f6400809f9e2510f203efe6d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2600d49f_c892f6e5",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 1540,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-09-29T05:02:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6d25da0_37809350",
       "range": {
         "startLine": 1539,
         "startChar": 0,
