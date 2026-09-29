@@ -16,6 +16,24 @@
       "message": "Test Teardown   Test Teardown Execution \n\nis already covered in the suite level at the line 23.\n\nDo we additionally need this?",
       "revId": "e6761472134c1c59ad2c686af17dee5879ad6218",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da1e401c_e0985f0d",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 1003095
+      },
+      "writtenOn": "2026-09-29T05:20:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2dae43d5_37b34df4",
+      "revId": "e6761472134c1c59ad2c686af17dee5879ad6218",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
