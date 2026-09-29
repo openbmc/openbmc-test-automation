@@ -66,6 +66,57 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7437b5a1_b54efb5e",
+        "filename": "gui/gui_test/operations_menu/test_factory_reset_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-09-29T05:57:27Z",
+      "side": 1,
+      "message": "when test setup done still page with server power operation only so we need that Navigate To Required Sub Menu  ${xpath_settings_menu}  ${xpath_factory_reset_sub_menu}  factory-reset",
+      "revId": "1f113f425bdc938c71039e3c210362b42a21095d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd0be68d_81df9f0f",
+        "filename": "gui/gui_test/operations_menu/test_factory_reset_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-09-29T05:57:27Z",
+      "side": 1,
+      "message": "I see that u moved those lines into new keyword. I would suggest don\u0027t move to new keyword. that we can\u0027t re-use for other test. \n\nwe have 2 options in factory reset page we can both the scenarios.",
+      "revId": "1f113f425bdc938c71039e3c210362b42a21095d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8bdc96a_283f8812",
+        "filename": "gui/gui_test/operations_menu/test_factory_reset_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-09-29T05:57:27Z",
+      "side": 1,
+      "message": "what is the reason of removing below lines ?\nPerform reset server setting option with readonly user\n\nwith out above line how we will verify error and unautorized messages?",
+      "revId": "1f113f425bdc938c71039e3c210362b42a21095d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e194816f_b2fa8f68",
         "filename": "gui/gui_test/operations_menu/test_factory_reset_sub_menu.robot",
         "patchSetId": 7
