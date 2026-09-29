@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52ffd409_3a3e508c",
+        "filename": "oem/ast2600evb_rpi/redfish/bios_settings/test_bios_resource.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-09-29T03:19:32Z",
+      "side": 1,
+      "message": "Fix the whitespace at the end. and there are multiple such instances in this suite",
+      "revId": "a102888b61c8765e027e39bf843daa604ab1926b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
