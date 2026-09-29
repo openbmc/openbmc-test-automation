@@ -861,6 +861,24 @@ Verify Local User Created By LDAP Admin Disabled By Local Admin And Enabled By S
     # Verify re-enabled user can login successfully.
     Verify User Login And Logout  ${test_local_user}  ${test_user_password}
 
+
+Verify Password Change On Local User By Creator And Changer Roles
+    [Documentation]  Verify that a local user password can or cannot be changed
+    ...  depending on the creator of the user and the role of the user attempting
+    ...  the password change.
+    [Tags]  Verify_Password_Change_On_Local_User_By_Creator_And_Changer_Roles
+    [Template]  Verify Password Change On Local User By Creator And Changer Role
+    [Teardown]  FFDC On Test Case Fail
+
+    # creator_type    initial_privilege       changer_type      expected_result
+    Local_Admin       ${privilege_readonly}   LDAP_User         Success
+    Local_Admin       ${privilege_admin}      LDAP_User         Success
+    Service_User      ${privilege_admin}      LDAP_ReadOnly     Fail
+    Service_User      ${privilege_readonly}   LDAP_ReadOnly     Fail
+    LDAP_Admin        ${privilege_readonly}   Service_User      Success
+
+
+
 *** Keywords ***
 
 Redfish Verify LDAP Login
@@ -1522,3 +1540,83 @@ Creator User Creates Local User And LDAP User Changes Privilege
     # Verify user can login with new privilege.
     Verify User Login And Logout  ${test_local_user}  ${test_user_password}
 
+
+Verify Password Change On Local User By Creator And Changer Role
+    [Documentation]  Create a local test user via the specified creator, attempt a password
+    ...  change via the specified changer, and verify the outcome matches the expectation.
+    [Arguments]  ${creator_type}  ${initial_privilege}  ${changer_type}  ${expected_result}
+
+    # Description of argument(s):
+    # creator_type        The role used to create the local user (Local_Admin, Service_User, LDAP_Admin).
+    # initial_privilege   The privilege assigned to the local user at creation (e.g. Administrator, ReadOnly).
+    # changer_type        The role attempting the password change (LDAP_User, LDAP_ReadOnly, Service_User).
+    # expected_result     Expected outcome of the password change attempt (Success or Fail).
+
+    [Setup]  Run Keywords  Redfish.Login  AND
+    ...  Update LDAP Configuration With LDAP User Role And Group  ${LDAP_TYPE}
+    ...  Administrator  ${GROUP_NAME}
+    [Teardown]  Run Keywords  Run Keyword And Ignore Error  Redfish.Logout  AND
+    ...  Redfish.Login  AND
+    ...  Cleanup Local User And Restore Session  ${test_local_user}  AND
+    ...  Restore LDAP Privilege
+
+    Run Keyword And Ignore Error  Redfish.Delete  ${REDFISH_ACCOUNTS_URI}${test_local_user}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
+
+    IF  '${creator_type}' == 'Local_Admin'
+        Redfish Create User  ${test_local_user}  ${test_user_password}  ${initial_privilege}  ${True}
+
+    ELSE IF  '${creator_type}' == 'Service_User'
+        Redfish.Logout
+        Redfish.Login  ${service_user}  ${OPENBMC_PASSWORD}
+        Redfish Create User  ${test_local_user}  ${test_user_password}  ${initial_privilege}  ${True}
+        Redfish.Logout
+        Redfish.Login
+
+    ELSE IF  '${creator_type}' == 'LDAP_Admin'
+        Redfish.Logout
+        Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+        Redfish Create User  ${test_local_user}  ${test_user_password}  ${initial_privilege}  ${True}
+        Redfish.Logout
+        Redfish.Login
+    END
+
+    Verify User Login And Logout  ${test_local_user}  ${test_user_password}
+
+    # Verify User Login And Logout ends with Redfish.Logout — no explicit logout needed before changer login.
+    IF  '${changer_type}' == 'LDAP_User'
+        Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+
+    ELSE IF  '${changer_type}' == 'LDAP_ReadOnly'
+        Redfish.Login
+        Update LDAP Configuration With LDAP User Role And Group  ${LDAP_TYPE}
+        ...  ReadOnly  ${GROUP_NAME}
+        Redfish.Logout
+        Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+
+    ELSE IF  '${changer_type}' == 'Service_User'
+        Redfish.Login  ${service_user}  ${OPENBMC_PASSWORD}
+    END
+
+    ${valid_codes}=  Set Variable If
+    ...  '${expected_result}' == 'Success'  [${HTTP_OK}, ${HTTP_NO_CONTENT}]
+    ...  [${HTTP_FORBIDDEN}, ${HTTP_UNAUTHORIZED}]
+    Redfish.Patch  ${REDFISH_ACCOUNTS_URI}${test_local_user}
+    ...  body={'Password': '${new_password}'}
+    ...  valid_status_codes=${valid_codes}
+
+    Redfish.Logout
+
+    IF  '${expected_result}' == 'Success'
+        Verify User Login And Logout  ${test_local_user}  ${new_password}
+        ${orig_status}=  Run Keyword And Return Status
+        ...  Redfish.Login  ${test_local_user}  ${test_user_password}
+        Should Be Equal  ${orig_status}  ${False}
+        ...  msg=Original password still works after successful password change by ${changer_type}.
+    ELSE
+        ${new_status}=  Run Keyword And Return Status
+        ...  Redfish.Login  ${test_local_user}  ${new_password}
+        Should Be Equal  ${new_status}  ${False}
+        ...  msg=${changer_type} should not be able to change the local user password.
+        Verify User Login And Logout  ${test_local_user}  ${test_user_password}
+    END
