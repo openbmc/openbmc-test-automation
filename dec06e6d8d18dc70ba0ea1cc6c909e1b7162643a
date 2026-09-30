@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25411c8a_28de66e3",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1002670
+      },
+      "writtenOn": "2026-09-30T03:39:22Z",
+      "side": 1,
+      "message": "does not appear to be used by this change ?",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 58
+      },
+      "revId": "dec06e6d8d18dc70ba0ea1cc6c909e1b7162643a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64f2e36f_465ce662",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 703,
+      "author": {
+        "id": 1002670
+      },
+      "writtenOn": "2026-09-30T03:39:22Z",
+      "side": 1,
+      "message": "@lakshmi-kamath@ibm.com",
+      "range": {
+        "startLine": 703,
+        "startChar": 0,
+        "endLine": 703,
+        "endChar": 59
+      },
+      "revId": "dec06e6d8d18dc70ba0ea1cc6c909e1b7162643a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40c2306a_ff9e865f",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 874,
+      "author": {
+        "id": 1002670
+      },
+      "writtenOn": "2026-09-30T03:39:22Z",
+      "side": 1,
+      "message": "The creator account does not appear to be part of the authorization behavior being tested here. It is only used to create the local test user, so using different creator accounts such as LDAP_Admin or service does not provide additional coverage for the password-change authorization.\n\nUsing service also introduces an unnecessary dependency on a pre-configured, platform-specific account, which is not available on every OpenBMC platform. As discussed in issue #2280, the test may fail before the actual password-change authorization is exercised when such a creator account is not available.\n\nCould we remove creator_type from the test matrix and use the existing ${OPENBMC_USERNAME} / ${OPENBMC_PASSWORD} Administrator credentials to create the test user? This would keep the test focused on the role of the user performing the password change and avoid depending on platform-specific creator accounts.",
+      "range": {
+        "startLine": 874,
+        "startChar": 4,
+        "endLine": 874,
+        "endChar": 18
+      },
+      "revId": "dec06e6d8d18dc70ba0ea1cc6c909e1b7162643a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f04ebf3b_4649da8e",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 878,
+      "author": {
+        "id": 1002670
+      },
+      "writtenOn": "2026-09-30T03:39:22Z",
+      "side": 1,
+      "message": "Now that this commit adds the same two negative scenarios, could the existing test case `Verify LDAP ReadOnly User Cannot Change Local User Password` be removed? The two cases below already cover the scenarios currently verified by the existing test:\n\n```robot\n${privilege_admin}       LDAP_ReadOnly    Fail\n${privilege_readonly}    LDAP_ReadOnly    Fail\n```\n\nThis would avoid duplicate coverage and keep all local-user password change authorization scenarios in a single test.",
+      "range": {
+        "startLine": 877,
+        "startChar": 3,
+        "endLine": 878,
+        "endChar": 68
+      },
+      "revId": "dec06e6d8d18dc70ba0ea1cc6c909e1b7162643a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
