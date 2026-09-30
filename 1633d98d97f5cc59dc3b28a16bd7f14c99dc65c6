@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a49ce2b_485112a1",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-09-30T07:05:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14a0f082_26a8efbc",
+      "range": {
+        "startLine": 784,
+        "startChar": 0,
+        "endLine": 785,
+        "endChar": 63
+      },
+      "revId": "1633d98d97f5cc59dc3b28a16bd7f14c99dc65c6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4dc050a7_344a695c",
@@ -54,6 +78,30 @@
       "writtenOn": "2026-09-29T08:51:25Z",
       "side": 1,
       "message": "`Setup` sets the LDAP group privilege to `Administrator`, but `Create LDAP Configuration` then reconfigures it using the global `GROUP_PRIVILEGE` value.\n\nFor the `LDAP_Admin` case, this setup seems intended to make sure the LDAP user has Administrator privilege before creating the test user. However, that is currently handled by the global `GROUP_PRIVILEGE` setting instead.\n\nPlease remove this setup.",
+      "range": {
+        "startLine": 868,
+        "startChar": 13,
+        "endLine": 869,
+        "endChar": 37
+      },
+      "revId": "1633d98d97f5cc59dc3b28a16bd7f14c99dc65c6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "172292ea_61377a7f",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 869,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-09-30T07:05:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4dc050a7_344a695c",
       "range": {
         "startLine": 868,
         "startChar": 13,
@@ -87,6 +135,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed219b0f_bd4e720c",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 874,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-09-30T07:05:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02a29770_dbccadb8",
+      "range": {
+        "startLine": 874,
+        "startChar": 4,
+        "endLine": 874,
+        "endChar": 36
+      },
+      "revId": "1633d98d97f5cc59dc3b28a16bd7f14c99dc65c6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb3ec09e_4818c0f6",
@@ -100,6 +172,30 @@
       "writtenOn": "2026-09-29T08:51:25Z",
       "side": 1,
       "message": "This test case does not actually change the user\u0027s privilege using the LDAP user.\n\nThe `LDAP_Admin` is only used to create `test_local_user`. After LDAP becomes unreachable, the test logs in as the local admin and performs the `PATCH` to change the user\u0027s `RoleId`.\n\nSo this scenario only changes the user who creates the test account; it does not cover the privilege-change behavior described by the test name and documentation.\n\nDo you want to update the test flow to perform the privilege change with the intended LDAP session ?",
+      "range": {
+        "startLine": 875,
+        "startChar": 4,
+        "endLine": 875,
+        "endChar": 38
+      },
+      "revId": "1633d98d97f5cc59dc3b28a16bd7f14c99dc65c6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9098f2c_14aec8a2",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 875,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-09-30T07:05:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb3ec09e_4818c0f6",
       "range": {
         "startLine": 875,
         "startChar": 4,
@@ -133,6 +229,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "941b14b6_5cbd2368",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 1543,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-09-30T07:05:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc0e160f_35849ed8",
+      "range": {
+        "startLine": 1543,
+        "startChar": 39,
+        "endLine": 1543,
+        "endChar": 60
+      },
+      "revId": "1633d98d97f5cc59dc3b28a16bd7f14c99dc65c6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b7630174_d085e611",
@@ -146,6 +266,30 @@
       "writtenOn": "2026-09-29T08:51:25Z",
       "side": 1,
       "message": "The test documentation says that it verifies privilege change \"via LDAP user\" fails when LDAP is unreachable. However, this PATCH is always executed with the local admin session.\n\nVerify LDAP Is Unreachable itself restores the local admin session after the LDAP login attempt, so no LDAP user performs this privilege change.",
+      "range": {
+        "startLine": 1589,
+        "startChar": 7,
+        "endLine": 1592,
+        "endChar": 64
+      },
+      "revId": "1633d98d97f5cc59dc3b28a16bd7f14c99dc65c6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82993eac_95676053",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 1592,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-09-30T07:05:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7630174_d085e611",
       "range": {
         "startLine": 1589,
         "startChar": 7,
