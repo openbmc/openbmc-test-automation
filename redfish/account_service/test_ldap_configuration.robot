@@ -861,6 +861,36 @@ Verify Local User Created By LDAP Admin Disabled By Local Admin And Enabled By S
     # Verify re-enabled user can login successfully.
     Verify User Login And Logout  ${test_local_user}  ${test_user_password}
 
+Verify Local User Disable By LDAP User And Enable By LDAP Admin
+    [Documentation]  Create local user from local admin, disable the user using
+    ...  LDAP user and then enable via LDAP admin user and verify.
+    [Tags]  Verify_Local_User_Disable_By_LDAP_User_And_Enable_By_LDAP_Admin
+    [Setup]  Run Keywords  Redfish.Login  AND
+    ...  Update LDAP Configuration With LDAP User Role And Group  ${LDAP_TYPE}
+    ...  Administrator  ${GROUP_NAME}
+    [Teardown]  Run Keywords  Cleanup Local User And Restore Session  ${test_local_user}  AND
+    ...  FFDC On Test Case Fail
+
+    Redfish Create User  ${test_local_user}  ${test_user_password}  ReadOnly  ${True}
+
+    Verify User Login And Logout  ${test_local_user}  ${test_user_password}
+
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    Set User Account Enabled State  ${test_local_user}  ${False}
+    Verify User Account Enabled State  ${test_local_user}  ${False}
+    ...  msg=User account was not disabled by LDAP user.
+    Redfish.Logout
+
+    Verify User Cannot Login  ${test_local_user}  ${test_user_password}
+
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    Set User Account Enabled State  ${test_local_user}  ${True}
+    Verify User Account Enabled State  ${test_local_user}  ${True}
+    ...  msg=User account was not enabled by LDAP admin user.
+
+    Verify User Login And Logout  ${test_local_user}  ${test_user_password}
+
+
 *** Keywords ***
 
 Redfish Verify LDAP Login
