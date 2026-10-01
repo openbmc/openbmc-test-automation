@@ -230,7 +230,6 @@ Perform Server Operations With Readonly User
     # Description of argument(s):
     # orderly_immediate_operation    Eg: Perform shutdown_orderly and shutdown_immediate operations.
     # operations                     Eg: Perform reboot and shutdown operations.
-    #
 
     IF  $orderly_immediate_operation != ''
        Click Element At Coordinates  ${orderly_immediate_operation}  0  0
