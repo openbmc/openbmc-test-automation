@@ -16,6 +16,24 @@
       "message": "line #876 to #880 are same as #839 to #840. so can you call it as keyword.",
       "revId": "0dc2fc853daf011dfb6bfad9e3b1918215692532",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8816a53b_715434dc",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 887,
+      "author": {
+        "id": 1003095
+      },
+      "writtenOn": "2026-10-01T10:12:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4c42fe5_a7617b6f",
+      "revId": "0dc2fc853daf011dfb6bfad9e3b1918215692532",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
