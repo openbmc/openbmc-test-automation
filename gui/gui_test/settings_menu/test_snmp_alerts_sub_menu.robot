@@ -639,7 +639,7 @@ Delete Multiple SNMP Managers With Default Port Via GUI
     [Arguments]  ${ip_address_list}
 
     # Description of argument(s):
-    # ${ip_address_list}   List of IP address.
+    # ip_address_list     List of IP address.
 
     FOR  ${ip_address}  IN  @{ip_address_list}
       Wait Until Keyword Succeeds   30 sec  10 sec
