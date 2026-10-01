@@ -17,7 +17,6 @@ ${keybit_length}            2048
 Install Certificate File On BMC
     [Documentation]  Install certificate file in BMC using POST operation.
     [Arguments]  ${uri}  ${status}=ok  ${version}=IPv4  &{kwargs}
-    [Teardown]  Delete All Sessions
 
     # Description of argument(s):
     # uri         URI for installing certificate file via Redfish
