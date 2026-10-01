@@ -3,6 +3,7 @@ Documentation  Test OpenBMC GUI "Certificates" sub-menu of "Security and access"
 
 Resource        ../../lib/gui_resource.robot
 Resource        ../../../lib/certificate_utils.robot
+Resource        ../../../lib/bmc_redfish_ipv6_resource.robot
 
 Suite Setup     Suite Setup Execution
 Suite Teardown  Close All Browsers
