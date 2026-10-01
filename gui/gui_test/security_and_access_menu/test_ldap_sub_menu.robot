@@ -620,6 +620,7 @@ Configure LDAP Server Via IPv6 GUI And Verify
 
 Snapshot LDAP Configuration
     [Documentation]  Capture writable LDAP and ActiveDirectory fields before test, then disable both.
+
     # Bind DN password is write-only; restore PATCH omits it.
     Redfish.Login
     ${account_svc}=  Redfish.Get Properties  ${REDFISH_BASE_URI}AccountService
@@ -652,6 +653,7 @@ Snapshot LDAP Configuration
 
 Reset IPv6 Test State
     [Documentation]  Teardown: reset GUI URL, delete added role group, disable LDAP on BMC so next iteration starts clean.
+
     VAR  ${OPENBMC_GUI_URL}  https://${OPENBMC_HOST}:${HTTPS_PORT}  scope=TEST
     Redfish.Login  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
     Run Keyword And Ignore Error  Delete LDAP Role Group  ${GROUP_NAME}
@@ -662,6 +664,7 @@ Reset IPv6 Test State
 
 Restore Original LDAP Configuration
     [Documentation]  Restore LDAP and ActiveDirectory to pre-test state (disabled type first).
+
     ${ldap_orig_exists}=  Run Keyword And Return Status  Variable Should Exist  \${LDAP_orig}
     ${ad_orig_exists}=    Run Keyword And Return Status  Variable Should Exist  \${ActiveDirectory_orig}
     IF  not ${ldap_orig_exists} or not ${ad_orig_exists}

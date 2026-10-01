@@ -415,6 +415,7 @@ Create KVM Session
     # status    XPath of the expected KVM session status indicator. Valid values
     #           include ${xpath_kvm_status_connected} and
     #           ${xpath_kvm_status_disconnected}.
+
     # Open a browser instance and log in as the same admin user.
     Open Browser With URL  ${OPENBMC_GUI_URL}
     Login And Navigate To KVM
@@ -432,6 +433,7 @@ Login And Navigate To KVM
     # Description of argument(s):
     # username    username used to log in to the WebUI.
     # password    password associated with the specified user account.
+
     Login GUI  ${username}  ${password}
     Navigate To Required Sub Menu  ${xpath_operations_menu}  ${xpath_kvm_sub_menu}  kvm
 
