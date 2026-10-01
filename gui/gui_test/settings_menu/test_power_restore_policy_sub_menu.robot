@@ -137,6 +137,9 @@ Readonly User Test Setup
     [Documentation]  Do this test setup for Readonly user scenarios.
     [Arguments]  ${mode}
 
+    # Description of argument(s):
+    # mode                  Server operating mode ('Manual' or 'Normal'). Default: Normal.
+
     Set Server Operating Mode  ${mode}
     Logout GUI
     Create Readonly User And Login To GUI
