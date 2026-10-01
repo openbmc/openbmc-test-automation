@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4d9847a6_9dfd2a05",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1003095
+      },
+      "writtenOn": "2026-10-01T06:22:56Z",
+      "side": 1,
+      "message": "This import is required to pass dry-run validation. bmc_ldap_utils.robot transitively imports certificate_utils.robot, which references RedfishIPv6.Get Session Info and RedfishIPv6.Get Base Url. Without this import, the dry-run static resolver reports these as missing keywords. The import indeed carries no runtime impact on this suite as such.",
+      "parentUuid": "25411c8a_28de66e3",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 58
+      },
+      "revId": "dec06e6d8d18dc70ba0ea1cc6c909e1b7162643a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "64f2e36f_465ce662",
         "filename": "redfish/account_service/test_ldap_configuration.robot",
         "patchSetId": 3
@@ -37,6 +61,30 @@
       "writtenOn": "2026-09-30T03:39:22Z",
       "side": 1,
       "message": "@lakshmi-kamath@ibm.com",
+      "range": {
+        "startLine": 703,
+        "startChar": 0,
+        "endLine": 703,
+        "endChar": 59
+      },
+      "revId": "dec06e6d8d18dc70ba0ea1cc6c909e1b7162643a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2e7a8ed_e0bb05ff",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 703,
+      "author": {
+        "id": 1003095
+      },
+      "writtenOn": "2026-10-01T06:22:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64f2e36f_465ce662",
       "range": {
         "startLine": 703,
         "startChar": 0,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4c9614f8_afed4484",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 874,
+      "author": {
+        "id": 1003095
+      },
+      "writtenOn": "2026-10-01T06:22:56Z",
+      "side": 1,
+      "message": "The creator_type dimension is needed for the 5th test case covered in this template, which requires the test user to be created by an LDAP admin — this verifies that a service user can change the password of a user originally created via LDAP.\n\nSince Local_Admin and Service_User resolve to the same credentials (${OPENBMC_USERNAME} / ${OPENBMC_PASSWORD}),it has now been consolidated into a single IF branch with a comment clarifying this. The LDAP_Admin creator branch remains separate as it uses different credentials and tests a distinct scenario.",
+      "parentUuid": "40c2306a_ff9e865f",
+      "range": {
+        "startLine": 874,
+        "startChar": 4,
+        "endLine": 874,
+        "endChar": 18
+      },
+      "revId": "dec06e6d8d18dc70ba0ea1cc6c909e1b7162643a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f04ebf3b_4649da8e",
         "filename": "redfish/account_service/test_ldap_configuration.robot",
         "patchSetId": 3
@@ -83,6 +155,30 @@
       "writtenOn": "2026-09-30T03:39:22Z",
       "side": 1,
       "message": "Now that this commit adds the same two negative scenarios, could the existing test case `Verify LDAP ReadOnly User Cannot Change Local User Password` be removed? The two cases below already cover the scenarios currently verified by the existing test:\n\n```robot\n${privilege_admin}       LDAP_ReadOnly    Fail\n${privilege_readonly}    LDAP_ReadOnly    Fail\n```\n\nThis would avoid duplicate coverage and keep all local-user password change authorization scenarios in a single test.",
+      "range": {
+        "startLine": 877,
+        "startChar": 3,
+        "endLine": 878,
+        "endChar": 68
+      },
+      "revId": "dec06e6d8d18dc70ba0ea1cc6c909e1b7162643a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa418b2a_c027c07c",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 878,
+      "author": {
+        "id": 1003095
+      },
+      "writtenOn": "2026-10-01T06:22:56Z",
+      "side": 1,
+      "message": "Agreed. Rows 3 and 4 in the new template cover the same scenarios. The old test case and its keyword have been removed.",
+      "parentUuid": "f04ebf3b_4649da8e",
       "range": {
         "startLine": 877,
         "startChar": 3,
