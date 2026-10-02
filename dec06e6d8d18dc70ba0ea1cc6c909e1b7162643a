@@ -48,6 +48,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8167deb_2bf45cef",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1003095
+      },
+      "writtenOn": "2026-10-02T08:44:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d9847a6_9dfd2a05",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 58
+      },
+      "revId": "dec06e6d8d18dc70ba0ea1cc6c909e1b7162643a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "64f2e36f_465ce662",
@@ -142,6 +166,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "589663c6_1256a444",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 874,
+      "author": {
+        "id": 1003095
+      },
+      "writtenOn": "2026-10-02T08:44:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c9614f8_afed4484",
+      "range": {
+        "startLine": 874,
+        "startChar": 4,
+        "endLine": 874,
+        "endChar": 18
+      },
+      "revId": "dec06e6d8d18dc70ba0ea1cc6c909e1b7162643a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f04ebf3b_4649da8e",
@@ -179,6 +227,30 @@
       "side": 1,
       "message": "Agreed. Rows 3 and 4 in the new template cover the same scenarios. The old test case and its keyword have been removed.",
       "parentUuid": "f04ebf3b_4649da8e",
+      "range": {
+        "startLine": 877,
+        "startChar": 3,
+        "endLine": 878,
+        "endChar": 68
+      },
+      "revId": "dec06e6d8d18dc70ba0ea1cc6c909e1b7162643a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "669a4f39_e08bbd50",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 878,
+      "author": {
+        "id": 1003095
+      },
+      "writtenOn": "2026-10-02T08:44:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa418b2a_c027c07c",
       "range": {
         "startLine": 877,
         "startChar": 3,
