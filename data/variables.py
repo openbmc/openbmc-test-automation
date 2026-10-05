@@ -471,3 +471,11 @@ INVENTORY_ITEMS = {
         "version",
     ],
 }
+
+# CPER LogService URIs.
+CPER_ENTRIES_URI = SYSTEM_BASE_URI + "LogServices/CPER/Entries"
+
+# D-Bus service, object path, and interface for the CPER repository.
+CPER_DBUS_SERVICE = "xyz.openbmc_project.CPERRepository1"
+CPER_DBUS_OBJECT = "/xyz/openbmc_project/CPERRepository1"
+CPER_DBUS_IFACE = "xyz.openbmc_project.CPERRepository1"
