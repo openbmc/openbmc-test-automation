@@ -10,6 +10,7 @@ Resource         ../../lib/bmc_ldap_utils.robot
 
 Suite Setup      Suite Setup Execution
 Suite Teardown   LDAP Suite Teardown Execution
+Test Setup       Redfish.Login
 Test Teardown    Run Keywords  Redfish.Login  AND  FFDC On Test Case Fail
 
 Test Tags        Ldap_Configuration
@@ -46,7 +47,6 @@ Verify LDAP Configuration Created
     [Documentation]  Verify that LDAP configuration created.
     [Tags]  Verify_LDAP_Configuration_Created
 
-    Create LDAP Configuration
     # Call 'Get LDAP Configuration' to verify that LDAP configuration exists.
     Get LDAP Configuration  ${LDAP_TYPE}
     Sleep  ${ldap_timeout}
@@ -143,6 +143,27 @@ Verify LDAP Config Update With Invalid URL Scheme
     VAR  ${body}  {'${LDAP_TYPE}': {'ServiceAddresses': ['${invalid_uri}']}}
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
     ...  body=${body}  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
+
+Verify LDAP Login With Primary Server
+    [Documentation]  Verify that LDAP login works with the a backup server configured.
+    [Tags]  Verify_LDAP_Login_With_Primary_Server
+
+    ${bad_ldap_server_uri}=  Evaluate  $LDAP_SERVER_URI.split('://', 1)[0] + '://1.2.3.4'
+    VAR  @{ldap_server_uris}  ${LDAP_SERVER_URI}  ${bad_ldap_server_uri}
+    # Sleep for 10s to avoid quick restarts of LDAP service
+    Sleep  10s
+    Config LDAP URLs  ${ldap_server_uris}
+
+Verify LDAP Login With Backup Server
+    [Documentation]  Verify that LDAP login works with the backup server when the primary server fails.
+    [Tags]  Verify_LDAP_Login_With_Backup_Server
+
+    ${bad_ldap_server_uri}=  Evaluate  $LDAP_SERVER_URI.split('://', 1)[0] + '://1.2.3.4'
+    VAR  @{ldap_server_uris}  ${bad_ldap_server_uri}  ${LDAP_SERVER_URI}
+    # Sleep for 10s to avoid quick restarts of LDAP service
+    Sleep  10s
+    Config LDAP URLs  ${ldap_server_uris}
 
 
 Verify LDAP Configuration Exist
@@ -1093,8 +1114,22 @@ Config LDAP URL
     # ldap_server_uri    LDAP server uri (e.g. "ldap://XX.XX.XX.XX/").
     # expected_status    Expected state (True or False).
 
+    VAR  @{ldap_server_uris}  ${ldap_server_uri}
+    Config LDAP URLs  ${ldap_server_uris}  ${expected_status}
+
+
+Config LDAP URLs
+    [Documentation]  Configure LDAP URLs from a list of server URIs.
+    [Arguments]  ${ldap_server_uris}  ${expected_status}=${TRUE}
+
+    # Description of argument(s):
+    # ldap_server_uris   List of LDAP server URIs (e.g. ["ldap://192.0.2.1/", "ldap://192.0.2.2/"]).
+    # expected_status    Expected state (True or False).
+
+    VAR  &{ldap_config}  ServiceAddresses=${ldap_server_uris}
+    ${body}=  Create Dictionary  ${ldap_type}=${ldap_config}
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
-    ...  body={'${ldap_type}': {'ServiceAddresses': ['${ldap_server_uri}']}}
+    ...  body=${body}
     ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
     Sleep  ${ldap_timeout}
     # After update, LDAP login.
@@ -1152,6 +1187,8 @@ Suite Setup Execution
     Set Suite Variable  ${old_ldap_privilege}
     Disable Other LDAP
     Create LDAP Configuration
+    Update LDAP Configuration With LDAP User Role And Group
+    ...  ${LDAP_TYPE}  ${GROUP_PRIVILEGE}  ${GROUP_NAME}
     ${hostname}=  Redfish.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  HostName
     # Verify LDAP user can login after certificates and LDAP config are in place.
     ${login_status}=  Run Keyword And Return Status
