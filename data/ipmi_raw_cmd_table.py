@@ -810,4 +810,24 @@ IPMI_RAW_CMD = {
             ),
         ],
     },
+    # ------------------------------------------------------------------ #
+    # SSIF Send Platform Error Record                                     #
+    # NetFn: 0x2C (Group Extension)  Cmd: 0x01                           #
+    # Request:  [GroupExt=0xAE] [CPER Error record (Section Descriptor   #
+    #            and Section)]                                            #
+    # Response: [Completion Code] [GroupExt=0xAE]                        #
+    # ------------------------------------------------------------------ #
+    "ssif_send_platform_error_record": {
+        # Command action type
+        "Send": [
+            # raw command prefix; CPER payload bytes are appended at runtime
+            "0x2C 0x01 0xAE",
+            "ae",
+            (
+                "GroupExt 0xAE = Send Platform Error Record;"
+                " remaining bytes are the CPER Error record"
+                " (Section Descriptor and Section)."
+            ),
+        ],
+    },
 }
