@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac7d50e0_26dd1cff",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 1555,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-10-06T04:41:27Z",
+      "side": 1,
+      "message": "Suggestion: Since run keyword and return status returns a boolean, below would be more clearer.\n\nShould Be False  ${orig_status}",
+      "revId": "b72d56d85bd9fd26490ace3f37cf17ec50956509",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8118a9dd_67ebe6d1",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 1560,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-10-06T04:41:27Z",
+      "side": 1,
+      "message": "Should Be False  ${new_status}",
+      "revId": "b72d56d85bd9fd26490ace3f37cf17ec50956509",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
