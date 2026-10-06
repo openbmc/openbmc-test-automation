@@ -16,6 +16,52 @@
       "message": "Ready for review",
       "revId": "83941ac9c275a5628c65b97d01cf429b53d9930c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1541e14b_66fc3612",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-10-06T07:50:38Z",
+      "side": 1,
+      "message": "Kindly use VAR instead of Create List, like below. change in 152,159,1078\n\nVAR    @{ldap_server_uris}    ${LDAP_SERVER_URI}    ldap://1.2.3.4",
+      "range": {
+        "startLine": 152,
+        "startChar": 3,
+        "endLine": 152,
+        "endChar": 73
+      },
+      "revId": "83941ac9c275a5628c65b97d01cf429b53d9930c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19ffee2a_35731aac",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 1090,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-10-06T07:50:38Z",
+      "side": 1,
+      "message": "Kindly use VAR instead of Create Dictionary,\n\nVAR    \u0026{ldap_config}    ServiceAddresses\u003d${ldap_server_uris}",
+      "range": {
+        "startLine": 1090,
+        "startChar": 4,
+        "endLine": 1090,
+        "endChar": 5
+      },
+      "revId": "83941ac9c275a5628c65b97d01cf429b53d9930c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
