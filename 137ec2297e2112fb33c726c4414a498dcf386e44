@@ -22,6 +22,30 @@
       },
       "revId": "137ec2297e2112fb33c726c4414a498dcf386e44",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7859cfd_5bafff06",
+        "filename": "gui/gui_test/resource_management_menu/test_resource_management_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-10-07T10:39:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0114fa76_5b6f9d94",
+      "range": {
+        "startLine": 22,
+        "startChar": 47,
+        "endLine": 22,
+        "endChar": 81
+      },
+      "revId": "137ec2297e2112fb33c726c4414a498dcf386e44",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }

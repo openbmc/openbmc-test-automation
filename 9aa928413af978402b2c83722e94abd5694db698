@@ -71,6 +71,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b01db63c_c7b38969",
+        "filename": "gui/gui_test/resource_management_menu/test_resource_management_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-10-07T10:39:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c868aa14_d6f3d190",
+      "revId": "9aa928413af978402b2c83722e94abd5694db698",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac4aeceb_6e1deec4",
