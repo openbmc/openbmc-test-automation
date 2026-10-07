@@ -65,6 +65,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c21324a_840e089d",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1002248
+      },
+      "writtenOn": "2026-10-07T06:54:41Z",
+      "side": 1,
+      "message": "never mind. I was searching for VAR without double spaces. WIth double spaces there are plenty of examples. Is this a new effort? Because my second statment still stands, Create List is used widely.",
+      "parentUuid": "56a400ef_440e518b",
+      "range": {
+        "startLine": 152,
+        "startChar": 3,
+        "endLine": 152,
+        "endChar": 73
+      },
+      "revId": "83941ac9c275a5628c65b97d01cf429b53d9930c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "19ffee2a_35731aac",
