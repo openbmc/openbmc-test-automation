@@ -22,6 +22,29 @@
       },
       "revId": "6a4dfc02911416857e96512d324a6f87cc24f33c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a53f29d_94bb9fdf",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1002670
+      },
+      "writtenOn": "2026-10-08T09:54:04Z",
+      "side": 1,
+      "message": "Test cases modify the LDAP ServiceAddresses to two server URIs via Config LDAP URLs, but lack a [Teardown] to restore the original single-server configuration. After they run, the BMC\u0027s LDAP ServiceAddresses is left as a two-address list ([${LDAP_SERVER_URI}, \u003cbad\u003e] or [\u003cbad\u003e, ${LDAP_SERVER_URI}]). Since these cases could run before other cases that assume the single ${LDAP_SERVER_URI} (e.g. Verify LDAP Login With Correct LDAP URL) — especially with randomized execution order — this leftover state can cause inconsistent results and pollute the DUT. Please add a [Teardown] to restore the LDAP URL, following the existing pattern in this file, e.g.:\n\n[Teardown]  Run Keywords  Restore LDAP URL  AND\n...  FFDC On Test Case Fail",
+      "range": {
+        "startLine": 156,
+        "startChar": 22,
+        "endLine": 156,
+        "endChar": 41
+      },
+      "revId": "6a4dfc02911416857e96512d324a6f87cc24f33c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
