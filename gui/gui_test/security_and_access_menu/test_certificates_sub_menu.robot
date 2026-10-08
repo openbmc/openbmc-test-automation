@@ -14,6 +14,7 @@ Test Tags       Certificates_Sub_Menu
 *** Variables ***
 
 ${MUL_CA_CERTIFICATES}             3
+${LDAP_CERT_FILE_PATH}             ${EMPTY}
 ${xpath_certificate_heading}       //h1[text()="Certificates"]
 ${xpath_add_certificate_button}    //button[contains(normalize-space(.),"Add new certificate")]
 ${xpath_generate_csr_button}       //*[@data-test-id='certificates-button-generateCsr']
@@ -39,6 +40,9 @@ ${xpath_confirm_delete_button}     //button[text()='Delete']
 ${xpath_cancel_delete_button}      //button[normalize-space()='Delete']/preceding-sibling::button
 ${xpath_close_generate_csr}        (//button[contains(@class,'btn-close')])[3]
 ${xpath_ca_certificate_rows}       //tr[.//td[normalize-space()='CA Certificate']]
+${xpath_replace_ldap_button}       //tr[.//td[normalize-space()='LDAP Certificate']]//*[@title='Replace certificate']
+${xpath_cert_file_input}           //input[@type='file']
+${xpath_replace_submit_button}     //button[contains(@class,'btn-primary') and normalize-space()='Replace']
 
 
 *** Test Cases ***
@@ -186,6 +190,17 @@ Replace CA Certificate And Verify
     Redfish.Logout
 
     Verify CA Certificate Count In GUI  1
+
+
+Replace LDAP Certificate And Verify Via GUI
+    [Documentation]  Replace LDAP certificate via GUI Replace button and verify it.
+    ...  If no LDAP cert exists on BMC, one is installed via Redfish first.
+    ...  The GUI Replace button is then used to upload the cert given via -V.
+    ...  Requires LDAP_CERT_FILE_PATH to be passed via -V pointing to a valid PEM file.
+    [Tags]  Replace_LDAP_Certificate_And_Verify_Via_GUI
+
+    Ensure LDAP Certificate Is Present In GUI
+    Replace LDAP Certificate Via GUI  ${LDAP_CERT_FILE_PATH}
 
 
 Verify Success Message After Deleting CA Certificate
@@ -382,3 +397,48 @@ Verify Certificate Content Changed
 
     Should Not Be Equal  ${original_content}  ${new_content}
     ...  msg=Certificate content did not change after replacement
+
+
+Ensure LDAP Certificate Is Present In GUI
+    [Documentation]  Refresh the certificates page and verify an LDAP certificate is present.
+    ...  If not present, installs one via Redfish so the Replace button becomes available.
+
+    Refresh GUI
+    Wait Until Element Is Not Visible  ${xpath_page_loading_progress_bar}  timeout=30
+
+    ${ldap_present}=  Run Keyword And Return Status
+    ...  Page Should Contain Element  ${xpath_replace_ldap_button}
+
+    IF  not ${ldap_present}
+        Redfish.Login
+        Install And Verify Certificate Via Redfish  Client  Valid Certificate Valid Privatekey  ok
+        Redfish.Logout
+        Refresh GUI
+        Wait Until Element Is Not Visible  ${xpath_page_loading_progress_bar}  timeout=30
+    END
+
+
+Replace LDAP Certificate Via GUI
+    [Documentation]  Click the Replace button on the LDAP Certificate row, upload the
+    ...  given cert file and verify the success toast.
+    [Arguments]  ${cert_file_path}
+
+    # Description of argument(s):
+    # cert_file_path    Absolute path to the PEM certificate file to upload.
+
+    Should Not Be Empty  ${cert_file_path}
+    ...  msg=LDAP_CERT_FILE_PATH must be provided via -v, e.g. -v LDAP_CERT_FILE_PATH:/path/to/cert.pem
+
+    Wait Until Page Contains Element  ${xpath_replace_ldap_button}  timeout=15
+    Click Element  ${xpath_replace_ldap_button}
+    Wait Until Page Contains Element  ${xpath_cert_file_input}  timeout=10
+
+    # Expose the hidden file input and upload the certificate.
+    Execute Javascript
+    ...  document.querySelector('input[type="file"]').style.display = 'block';
+    Choose File  ${xpath_cert_file_input}  ${cert_file_path}
+
+    Click Element  ${xpath_replace_submit_button}
+
+    Verify Success Message On BMC GUI Page
+    Wait Until Page Contains  LDAP Certificate  timeout=30
