@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "18384d59_77e9da64",
+        "filename": "requirements.txt",
+        "patchSetId": 14
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1003140
+      },
+      "writtenOn": "2026-10-08T21:39:17Z",
+      "side": 1,
+      "message": "Removed!",
+      "parentUuid": "826a4704_d90e1774",
+      "revId": "0f29157072a882db89d1aa13ebd8cab21a2cb79c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bbbba22b_a6c38a49",
         "filename": "requirements.txt",
         "patchSetId": 14
@@ -48,6 +66,24 @@
       "writtenOn": "2026-10-01T10:09:12Z",
       "side": 1,
       "message": "jsonschema\u003d\u003d3.2.0 is a 2019 release pinned to an exact version rather than a minimum. The current jsonschema stable release is 4.x, in which RefResolver and Draft4Validator are deprecated in favour of jsonschema.validate() with referencing library. The exact pin (\u003d\u003d) prevents automatic security or compatibility updates.\n\nConsider using jsonschema\u003e\u003d4.0 and updating the code to use the modern validation API:\n```\n  jsonschema.validate(var_value, schema_def)\n```\n\nIf staying on 3.x is intentional (e.g. for compatibility), document the reason and consider using \u003e\u003d3.2.0,\u003c4.0 to allow patch updates.\n\nExact version pins accumulate technical debt and may conflict with transitive dependencies that already require jsonschema\u003e\u003d4.0. Using deprecated APIs now means a larger refactor later.",
+      "revId": "0f29157072a882db89d1aa13ebd8cab21a2cb79c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec04881d_95b41a83",
+        "filename": "requirements.txt",
+        "patchSetId": 14
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1003140
+      },
+      "writtenOn": "2026-10-08T21:39:17Z",
+      "side": 1,
+      "message": "Modified to jsonschema\u003e\u003d4.18 and updated the code.",
+      "parentUuid": "bbbba22b_a6c38a49",
       "revId": "0f29157072a882db89d1aa13ebd8cab21a2cb79c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
