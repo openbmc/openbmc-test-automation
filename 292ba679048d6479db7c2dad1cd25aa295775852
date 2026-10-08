@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9e3ccfd_05503682",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 901,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2026-10-08T06:12:33Z",
+      "side": 1,
+      "message": "Review Summary — Change 94950\nVerdict: :large_yellow_circle: Comment — nearly ready, one medium-severity fix recommended.\nWhat the change does: Adds one new test case Verify Privilege Change When LDAP Is Unreachable and its orchestrator keyword Change User Privilege When LDAP Unreachable to redfish/account_service/test_ldap_configuration.robot. The test validates that a local admin can change the privilege of a user originally created by an LDAP admin when LDAP is unreachable — a meaningfully distinct scenario from the existing Verify Privilege Change By Local Admin When LDAP Is Unreachable test.\nQuick Stats: 0 High | 1 Medium | 1 Low | 0 Unresolved threads\nIssues Found\n#SeverityIssue1:large_yellow_circle: MediumTest [Teardown] lacks session guard — the teardown at line 901 calls Create LDAP Configuration without first ensuring a valid Redfish session. If the FINALLY block\u0027s Redfish.Login fails, the teardown will run unauthenticated. Fix: prepend Run Keyword And Ignore Error Redfish.Login AND to the teardown chain (matches the suite-wide pattern on line 13).2:large_green_circle: LowCommit message keyword name mismatch — the commit body says \u0027Privilege Change When LDAP Unreachable\u0027; the actual keyword is Change User Privilege When LDAP Unreachable.",
+      "revId": "292ba679048d6479db7c2dad1cd25aa295775852",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
