@@ -894,6 +894,39 @@ Verify Local User Disable And Enable By LDAP Admin
     Verify User Login And Logout  ${test_local_user}  ${test_user_password}
 
 
+Verify LDAP User Cannot Change Privilege When LDAP Is Unreachable
+    [Documentation]  Create a test user with admin privilege via local admin, make LDAP
+    ...  unreachable and confirm the privilege remains Administrator.
+    [Tags]  Verify_LDAP_User_Cannot_Change_Privilege_When_LDAP_Is_Unreachable
+    [Teardown]  Run Keywords  Redfish.Login  AND  Create LDAP Configuration  AND
+    ...  Run Keyword And Ignore Error  Delete Local User If Exists  ${test_local_user}  AND
+    ...  FFDC On Test Case Fail
+
+    # Create test user with admin privilege and verify login.
+    Create Local User And Verify Login  ${test_local_user}  ${test_user_password}  ${privilege_admin}  force=${True}
+
+    # Restore admin session and confirm user role before making LDAP unreachable.
+    Redfish.Login
+    Verify User Role  ${test_local_user}  ${privilege_admin}
+
+    # Reconfigure LDAP to use an unreachable server.
+    Create LDAP Configuration  ${LDAP_TYPE}  ${ldap_unreachable_uri}
+    ...  ${LDAP_BIND_DN}  ${LDAP_BIND_DN_PASSWORD}  ${LDAP_BASE_DN}
+
+    # Confirm LDAP is unreachable — LDAP user login must fail.
+    Verify LDAP Is Unreachable
+
+    # Verify LDAP user cannot login when LDAP server is unreachable.
+    Verify User Cannot Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    Redfish.Login
+    
+    # Verify privilege is unchanged — still Administrator.
+    Verify User Role  ${test_local_user}  ${privilege_admin}
+
+    # Verify local test user can still login with unchanged privilege.
+    Verify User Login And Logout  ${test_local_user}  ${test_user_password}
+
+
 *** Keywords ***
 
 Redfish Verify LDAP Login
