@@ -64,6 +64,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "62a29486_b92d3ae1",
+        "filename": "gui/gui_test/operations_menu/test_factory_reset_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-10-08T06:01:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d156047b_aec29ca4",
+      "range": {
+        "startLine": 20,
+        "startChar": 41,
+        "endLine": 20,
+        "endChar": 79
+      },
+      "revId": "1f113f425bdc938c71039e3c210362b42a21095d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7437b5a1_b54efb5e",
@@ -77,6 +101,24 @@
       "writtenOn": "2026-09-29T05:57:27Z",
       "side": 1,
       "message": "when test setup done still page with server power operation only so we need that Navigate To Required Sub Menu  ${xpath_settings_menu}  ${xpath_factory_reset_sub_menu}  factory-reset",
+      "revId": "1f113f425bdc938c71039e3c210362b42a21095d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3f566ca_11285fae",
+        "filename": "gui/gui_test/operations_menu/test_factory_reset_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-10-08T06:01:33Z",
+      "side": 1,
+      "message": "Thanks for pointing out. updated",
+      "parentUuid": "7437b5a1_b54efb5e",
       "revId": "1f113f425bdc938c71039e3c210362b42a21095d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -115,6 +157,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2702c923_66dbcb20",
+        "filename": "gui/gui_test/operations_menu/test_factory_reset_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-10-08T06:01:33Z",
+      "side": 1,
+      "message": "Currently, this keyword is used in two test cases, and there are no issues with the execution flow. Therefore, I think it\u0027s fine to keep it as a reusable keyword.",
+      "parentUuid": "dd0be68d_81df9f0f",
+      "revId": "1f113f425bdc938c71039e3c210362b42a21095d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e194816f_b2fa8f68",
@@ -128,6 +188,30 @@
       "writtenOn": "2026-09-23T09:47:19Z",
       "side": 1,
       "message": "Page Should Not Contain Element?",
+      "range": {
+        "startLine": 127,
+        "startChar": 5,
+        "endLine": 127,
+        "endChar": 28
+      },
+      "revId": "1f113f425bdc938c71039e3c210362b42a21095d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3447ddef_d0b3cf89",
+        "filename": "gui/gui_test/operations_menu/test_factory_reset_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-10-08T06:01:33Z",
+      "side": 1,
+      "message": "Updated",
+      "parentUuid": "e194816f_b2fa8f68",
       "range": {
         "startLine": 127,
         "startChar": 5,
@@ -161,6 +245,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "75e5471b_f945d962",
+        "filename": "gui/gui_test/operations_menu/test_factory_reset_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-10-08T06:01:33Z",
+      "side": 1,
+      "message": "This MR is currently scoped to issue 2286. A separate PR will be raised for issue 2287.",
+      "parentUuid": "5b86119f_07228b60",
+      "range": {
+        "startLine": 135,
+        "startChar": 14,
+        "endLine": 135,
+        "endChar": 30
+      },
+      "revId": "1f113f425bdc938c71039e3c210362b42a21095d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bd28e077_a7c2b072",
@@ -184,6 +292,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3775a5eb_823e1c5e",
+        "filename": "gui/gui_test/operations_menu/test_factory_reset_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-10-08T06:01:33Z",
+      "side": 1,
+      "message": "This MR is currently scoped to issue 2286. A separate PR will be raised for issue 2287.",
+      "parentUuid": "bd28e077_a7c2b072",
+      "range": {
+        "startLine": 147,
+        "startChar": 14,
+        "endLine": 147,
+        "endChar": 29
+      },
+      "revId": "1f113f425bdc938c71039e3c210362b42a21095d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d7a2d898_53598bfd",
@@ -197,6 +329,30 @@
       "writtenOn": "2026-09-22T12:41:50Z",
       "side": 1,
       "message": "Wait Until Element Is Visible  ${reset_option}  timeout\u003d5s",
+      "range": {
+        "startLine": 171,
+        "startChar": 4,
+        "endLine": 171,
+        "endChar": 48
+      },
+      "revId": "1f113f425bdc938c71039e3c210362b42a21095d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83097950_a41c1dc2",
+        "filename": "gui/gui_test/operations_menu/test_factory_reset_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-10-08T06:01:33Z",
+      "side": 1,
+      "message": "Have used different approx for the timing issue.",
+      "parentUuid": "d7a2d898_53598bfd",
       "range": {
         "startLine": 171,
         "startChar": 4,
