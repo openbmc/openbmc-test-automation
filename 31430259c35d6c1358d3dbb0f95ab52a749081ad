@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcbf0f57_6870b9c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002248
+      },
+      "writtenOn": "2026-10-08T14:51:24Z",
+      "side": 1,
+      "message": "Thank you for the review @fangkaiyu1783@phytium.com.cn!\nI made the changes to fix the issues you brought up.",
+      "revId": "31430259c35d6c1358d3dbb0f95ab52a749081ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
