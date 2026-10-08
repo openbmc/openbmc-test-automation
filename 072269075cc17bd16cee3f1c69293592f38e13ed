@@ -39,6 +39,30 @@
       },
       "revId": "072269075cc17bd16cee3f1c69293592f38e13ed",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0dfa2be6_3023973b",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 1539,
+      "author": {
+        "id": 1003095
+      },
+      "writtenOn": "2026-10-08T10:49:15Z",
+      "side": 1,
+      "message": "Done. Replaced Service_User with Local_Admin in all template rows. Row 5 now reads LDAP_Admin / Local_Admin and will run cleanly on all platforms.",
+      "parentUuid": "a497b3a9_330ffc24",
+      "range": {
+        "startLine": 1539,
+        "startChar": 8,
+        "endLine": 1539,
+        "endChar": 59
+      },
+      "revId": "072269075cc17bd16cee3f1c69293592f38e13ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
