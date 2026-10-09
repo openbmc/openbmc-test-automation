@@ -33,6 +33,24 @@
       "message": "FYI, this gerrit can\u0027t be merged until the following gerrit merges: \nhttps://gerrit.openbmc.org/c/openbmc/bmcweb/+/91118/12",
       "revId": "cc1ce524dc0ed1d1edf517e7e889289849a53185",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a72f6de4_36001140",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-10-09T11:33:21Z",
+      "side": 1,
+      "message": "ON noted.. Thanks for heads up..",
+      "parentUuid": "d439c55f_716bb978",
+      "revId": "cc1ce524dc0ed1d1edf517e7e889289849a53185",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
