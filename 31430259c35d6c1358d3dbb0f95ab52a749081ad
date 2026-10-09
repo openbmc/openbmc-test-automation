@@ -16,6 +16,23 @@
       "message": "Thank you for the review @fangkaiyu1783@phytium.com.cn!\nI made the changes to fix the issues you brought up.",
       "revId": "31430259c35d6c1358d3dbb0f95ab52a749081ad",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44862fe9_70b1932c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002670
+      },
+      "writtenOn": "2026-10-09T14:16:19Z",
+      "side": 1,
+      "message": "Current test cases look fine. I ran them on real hardware (not QEMU):\nVerify LDAP Login With Primary Server (valid primary URI + bad backup URI): PASS \nVerify LDAP Login With Backup Server (bad primary URI + valid backup URI): FAIL \n\nThe second test fails because the current firmware does not yet support LDAP primary/backup failover. The firmware-side changes are still under review:\n\nphosphor-user-manager change 95036 \"LDAPServerURIs with backup URIs for LDAP\" \nbmcweb change 95039 \"Support Redfish ServiceAddresses as array for LDAP\"\nphosphor-dbus-interfaces change 94933 (same topic, needed for the D-Bus interface)\n\nWill re-test once these changes are merged.",
+      "revId": "31430259c35d6c1358d3dbb0f95ab52a749081ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
