@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "69e1dd60_42715c59",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003095
+      },
+      "writtenOn": "2026-10-09T18:54:25Z",
+      "side": 1,
+      "message": "Yes, realised the error and hence abandoned the commit, Thank You for pointing out again tho!",
+      "revId": "1654df852189459e0ecd252160492fae3274ddc7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "063eff88_a7fb99fb",
@@ -14,6 +31,30 @@
       "writtenOn": "2026-10-09T12:52:36Z",
       "side": 1,
       "message": "Reading the name, the intended scenario is: an LDAP user issues a Redfish PATCH to change a privilege and is rejected (403). The test body and [Documentation] contain no such action. What is actually asserted is that the local user\u0027s RoleId is unchanged and that the local user can still log in. The name describes \"LDAP user is denied a privilege change\"; the test verifies \"local user privilege is retained\". These are different scenarios.",
+      "range": {
+        "startLine": 897,
+        "startChar": 7,
+        "endLine": 897,
+        "endChar": 40
+      },
+      "revId": "1654df852189459e0ecd252160492fae3274ddc7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b52fa996_48342100",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 897,
+      "author": {
+        "id": 1003095
+      },
+      "writtenOn": "2026-10-09T18:54:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "063eff88_a7fb99fb",
       "range": {
         "startLine": 897,
         "startChar": 7,
@@ -47,6 +88,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d11dd80c_4a770f10",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 908,
+      "author": {
+        "id": 1003095
+      },
+      "writtenOn": "2026-10-09T18:54:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e54c881_72fe501a",
+      "range": {
+        "startLine": 908,
+        "startChar": 6,
+        "endLine": 908,
+        "endChar": 14
+      },
+      "revId": "1654df852189459e0ecd252160492fae3274ddc7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b3b500c_8101c487",
@@ -60,6 +125,30 @@
       "writtenOn": "2026-10-09T12:52:36Z",
       "side": 1,
       "message": "Redundant with L917. Verify LDAP Is Unreachable (defined at L950–959) already runs Run Keyword And Return Status Redfish.Login ${LDAP_USER} ${LDAP_USER_PASSWORD}, asserts the status is ${False}, and restores the admin session at the end. This line is the same assertion wrapped one level deeper",
+      "range": {
+        "startLine": 920,
+        "startChar": 4,
+        "endLine": 921,
+        "endChar": 17
+      },
+      "revId": "1654df852189459e0ecd252160492fae3274ddc7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4cae27c7_41a4481b",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 921,
+      "author": {
+        "id": 1003095
+      },
+      "writtenOn": "2026-10-09T18:54:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b3b500c_8101c487",
       "range": {
         "startLine": 920,
         "startChar": 4,
