@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "11254765_5ad97f17",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1002670
+      },
+      "writtenOn": "2026-10-09T09:33:42Z",
+      "side": 0,
+      "message": "The third argument is a failure message rather than a substring to match, so this test case only verifies the date, not the time.",
+      "range": {
+        "startLine": 86,
+        "startChar": 54,
+        "endLine": 86,
+        "endChar": 68
+      },
+      "revId": "d5626a24eaa77325dbc8948d53e646bf27dc234e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "74d197cc_9ee9eb19",
         "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
         "patchSetId": 1
