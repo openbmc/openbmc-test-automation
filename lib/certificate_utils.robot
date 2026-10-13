@@ -108,20 +108,23 @@ Generate Certificate File Via Openssl
     [Documentation]  Create certificate file via openssl with required content
     ...              and returns its path.
     [Arguments]  ${cert_format}  ${time}=365  ${cert_dir_name}=certificate_dir
+    ...  ${cert_sub_name}=${cert_subject}
 
     # Description of argument(s):
     # cert_format          Certificate file format
-    #                      e.g. Valid_Certificate_Empty_Privatekey.
+    #                      (e.g. Valid_Certificate_Empty_Privatekey).
     # time                 Number of days to certify the certificate for.
     # cert_dir_name        The name of the sub-directory where the certificate
     #                      is stored.
+    # cert_sub_name        Cerificate subject name.
+    #                      (e.g. "/O=XYZ Corporation /CN=www.xyz.com").
 
     Check If Openssl Tool Exist
 
     ${openssl_cmd}=  Catenate  openssl req -x509 -sha256 -newkey rsa:${keybit_length}
     ...  ${SPACE}-nodes -days ${time}
     ...  ${SPACE}-keyout ${cert_dir_name}/cert.pem -out ${cert_dir_name}/cert.pem
-    ...  ${SPACE}-subj "${cert_subject}"
+    ...  ${SPACE}-subj "${cert_sub_name}"
 
     ${rc}  ${output}=  Run And Return RC And Output  ${openssl_cmd}
     Should Be Equal  ${rc}  ${0}  msg=${output}
@@ -303,6 +306,7 @@ Replace Certificate Via Redfish
 Install And Verify Certificate Via Redfish
     [Documentation]  Install and verify certificate using Redfish.
     [Arguments]  ${cert_type}  ${cert_format}  ${expected_status}  ${delete_cert}=${True}
+    ...  ${cert_sub_name}=${cert_subject}
 
     # Description of argument(s):
     # cert_type           Certificate type (e.g. "Client" or "CA").
@@ -311,6 +315,8 @@ Install And Verify Certificate Via Redfish
     # expected_status     Expected status of certificate replace Redfish
     #                     request (i.e. "ok" or "error").
     # delete_cert         Certificate will be deleted before installing if this True.
+    # cert_sub_name       Cerificate subject name.
+    #                     (e.g. "/O=XYZ Corporation /CN=www.xyz.com").
 
     IF  '${cert_type}' == 'CA' and '${delete_cert}' == '${True}'
         Delete All CA Certificate Via Redfish
@@ -319,6 +325,8 @@ Install And Verify Certificate Via Redfish
     END
 
     ${cert_file_path}=  Generate Certificate File Via Openssl  ${cert_format}
+    ...  cert_sub_name=${cert_sub_name}
+
     ${bytes}=  OperatingSystem.Get Binary File  ${cert_file_path}
     ${file_data}=  Decode Bytes To String  ${bytes}  UTF-8
 
