@@ -22,6 +22,30 @@
       },
       "revId": "146acd6739fe8d61ffc4ad4e33c66aa9ab99f152",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fc246d8_c4cc1832",
+        "filename": "gui/gui_test/resource_management_menu/test_resource_management_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-10-14T05:47:42Z",
+      "side": 1,
+      "message": "updated the issue link.",
+      "parentUuid": "bbb3a24d_c0146ff4",
+      "range": {
+        "startLine": 50,
+        "startChar": 4,
+        "endLine": 52,
+        "endChar": 0
+      },
+      "revId": "146acd6739fe8d61ffc4ad4e33c66aa9ab99f152",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
