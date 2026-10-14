@@ -39,6 +39,7 @@ ${xpath_input_prefix_length}             //*[@id="prefixLength"]
 ${xpath_input_addressorigin}             //*[@id="Address Origin"]
 ${xpath_cancel_button}                   //div[@class='modal fade show']//button[@type='button'][normalize-space()='Cancel']
 ${xpath_delete_dns_server}               //*[@title="Delete DNS address"]
+${xpath_edit_dns_server}                 //*[@title="Edit DNS address"]
 ${xpath_save_button}                     //button[@type='button'][normalize-space()='Save']
 ${xpath_dhcp_toggle_switch}              //*[@data-test-id='networkSettings-switch-dhcpEnabled']
 ${xpath_dhcpv6_toggle_switch}            (//dt[normalize-space()='DHCP']/following-sibling::dd[1]//input[@class='form-check-input'])[2]
@@ -285,6 +286,19 @@ Verify Error While Adding Empty DNS Server IP Address
     ...  Configure Static Name Servers
 
     Add DNS Servers And Verify  ${EMPTY}  Field required
+
+
+Verify No Option To Modify DNS Server Via GUI
+    [Documentation]  Add a DNS server via GUI and verify there is no edit button
+    ...  on the DNS server row, confirming DNS servers cannot be modified via GUI.
+    [Tags]  Verify_No_Option_To_Modify_DNS_Server_Via_GUI
+    [Setup]  Run Keywords  DNS Test Setup Execution  AND
+    ...  Add DNS Servers And Verify  ${dns_server}
+    [Teardown]  Run Keywords  Delete Static Name Servers  AND
+    ...  Configure Static Name Servers
+
+    Element Should Be Visible  ${xpath_delete_dns_server}
+    Page Should Not Contain Element  ${xpath_edit_dns_server}
 
 
 Configure Static IPv4 Netmask Via GUI And Verify
