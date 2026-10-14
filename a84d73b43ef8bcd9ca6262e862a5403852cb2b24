@@ -22,6 +22,30 @@
       },
       "revId": "a84d73b43ef8bcd9ca6262e862a5403852cb2b24",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e09c9230_6a19b073",
+        "filename": "gui/gui_test/operations_menu/test_factory_reset_sub_menu.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-10-14T09:03:30Z",
+      "side": 1,
+      "message": "xpath_unauthorized_popup \u003d \"//*[contains(normalize-space(.),\u0027Unauthorized\u0027)]/following-sibling::button\"\n    xpath_information_message \u003d \"//*[contains(text(),\u0027Reload the browser page to get the updated content.\u0027)]\"\n\n\nthis will close the both pop up messages. so please user this",
+      "parentUuid": "a324c8bd_a44f142f",
+      "range": {
+        "startLine": 183,
+        "startChar": 0,
+        "endLine": 184,
+        "endChar": 40
+      },
+      "revId": "a84d73b43ef8bcd9ca6262e862a5403852cb2b24",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
