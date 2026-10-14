@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "42928617_f12650c4",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-10-14T18:30:26Z",
+      "side": 1,
+      "message": "updated as per the comment.",
+      "parentUuid": "fdc358ea_f3d78ca7",
+      "range": {
+        "startLine": 172,
+        "startChar": 0,
+        "endLine": 173,
+        "endChar": 59
+      },
+      "revId": "86e8b40a843610955b9fd22449d2f1c70c1328a8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55d073d4_29e04240",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-09-28T10:34:51Z",
       "side": 1,
       "message": "The third argument of Should Contain is msg (failure message), not a second item to verify.\nSo this only checks date; time is never verified.\n\nSplit into two separate assertions:\n  Should Contain  ${cli_date_time}  ${manual_date}\n  Should Contain  ${cli_date_time}  ${manual_time}",
+      "range": {
+        "startLine": 185,
+        "startChar": 54,
+        "endLine": 185,
+        "endChar": 68
+      },
+      "revId": "86e8b40a843610955b9fd22449d2f1c70c1328a8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99e39769_979546ca",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-10-14T18:30:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55d073d4_29e04240",
       "range": {
         "startLine": 185,
         "startChar": 54,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4ff1ee6_76ebb456",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-10-14T18:30:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec095ec5_658790be",
+      "range": {
+        "startLine": 213,
+        "startChar": 4,
+        "endLine": 213,
+        "endChar": 40
+      },
+      "revId": "86e8b40a843610955b9fd22449d2f1c70c1328a8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "390bea7f_738c5a83",
@@ -83,6 +155,30 @@
       "writtenOn": "2026-09-28T12:21:11Z",
       "side": 1,
       "message": "The wait was moved out of Set Manual Date And Time Via GUI, so callers\nneed to add it. Suggest adding Wait Until Page Contains Element ${xpath_select_ntp} timeout\u003d30s here.",
+      "range": {
+        "startLine": 217,
+        "startChar": 4,
+        "endLine": 217,
+        "endChar": 36
+      },
+      "revId": "86e8b40a843610955b9fd22449d2f1c70c1328a8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80928386_c1120dea",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-10-14T18:30:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "390bea7f_738c5a83",
       "range": {
         "startLine": 217,
         "startChar": 4,
