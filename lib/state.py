@@ -529,12 +529,16 @@ def get_os_state(
 
     if os_up:
         if "os_ping" in req_states:
-            # See if the OS pings.
+            # See if the OS pings.  Use a longer per-attempt deadline and retry
+            # a few times so that transient network delays do not produce a
+            # false "not ping-able" result.
             rc, out_buf = gc.shell_cmd(
-                "ping -c 1 -w 2 " + os_host,
+                "ping -c 1 -w 4 " + os_host,
                 print_output=0,
                 show_err=0,
                 ignore_err=1,
+                max_attempts=3,
+                retry_sleep_time=2,
             )
             if rc == 0:
                 os_ping = 1
@@ -687,12 +691,16 @@ def get_state(
 
     # Get the component states.
     if "ping" in req_states:
-        # See if the OS pings.
+        # See if the OS pings.  Use a longer per-attempt deadline and retry a
+        # few times so that transient network delays (e.g. BMC mid-transition)
+        # do not produce a false "not ping-able" result.
         rc, out_buf = gc.shell_cmd(
-            "ping -c 1 -w 2 " + openbmc_host,
+            "ping -c 1 -w 4 " + openbmc_host,
             print_output=0,
             show_err=0,
             ignore_err=1,
+            max_attempts=3,
+            retry_sleep_time=2,
         )
         if rc == 0:
             ping = 1
