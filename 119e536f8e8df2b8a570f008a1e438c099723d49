@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa00aac9_5278c9a0",
+        "filename": "gui/gui_test/operations_menu/test_factory_reset_sub_menu.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2026-10-15T11:26:24Z",
+      "side": 1,
+      "message": "Please remove the whitespace.",
+      "revId": "119e536f8e8df2b8a570f008a1e438c099723d49",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
