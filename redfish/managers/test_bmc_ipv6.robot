@@ -12,6 +12,9 @@ Resource       ../../lib/external_intf/vmi_utils.robot
 Resource       ../../lib/bmc_network_utils.robot
 Library        ../../lib/bmc_network_utils.py
 
+Library        ../../lib/bmc_redfish.py  https://${OPENBMC_HOST_ETH1}:${HTTPS_PORT}
+...            ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}  AS  Redfish1
+
 Test Setup      Test Setup Execution
 Test Teardown   Test Teardown Execution
 Suite Setup     Suite Setup Execution
@@ -542,6 +545,32 @@ Verify Eth1 DHCPv4 Functionality In The Presence Of DHCPv6
     Should Not Be Empty  ${dhcpv6_addr}  msg=dhcpv6 address is not present
 
     Verify DHCPv4 Functionality On Eth1
+
+
+Verify Eth0 DHCPv4 Functionality In The Presence Of Static IPv6
+    [Documentation]  Verify eth0 DHCPv4 functions properly in the presence of static IPv6.
+    ...  All Redfish calls after enabling DHCP go through Redfish1 (eth1) to avoid losing
+    ...  connectivity when eth0's static IP is released.
+    [Tags]  Verify_Eth0_DHCPv4_Functionality_In_The_Presence_Of_Static_IPv6
+    [Setup]  Run Keywords
+    ...  Configure IPv6 Address On BMC  ${test_ipv6_addr}  ${test_prefix_length}  ${None}  ${1}
+    ...  AND  Enable Eth0 DHCPv4 And Login Redfish Via Eth1
+    [Teardown]  Restore Eth0 Static IPv4 And Delete Static IPv6
+
+    ${eth0_network_properties}=  Redfish1.Get  ${REDFISH_NW_ETH_IFACE}eth0
+
+    # DHCPv4 mode must be active.
+    Should Be Equal  ${eth0_network_properties.dict['DHCPv4']['DHCPEnabled']}  ${True}
+    ...  msg=DHCPv4 is not enabled on eth0.
+
+    # Static IPv4 must be gone; link-local or DHCP origin both acceptable when no lease is issued.
+    VAR  ${v4_origins}  ${{[a['AddressOrigin'] for a in $eth0_network_properties.dict['IPv4Addresses']]}}
+    Should Not Contain  ${v4_origins}  Static  msg=Static IPv4 still present on eth0 after enabling DHCP.
+
+    # Static IPv6 and LinkLocal must coexist on eth0.
+    VAR  ${v6_origins}  ${{[a['AddressOrigin'] for a in $eth0_network_properties.dict['IPv6Addresses']]}}
+    Should Contain  ${v6_origins}  Static    msg=Static IPv6 not present on eth0.
+    Should Contain  ${v6_origins}  LinkLocal  msg=LinkLocal IPv6 not present on eth0.
 
 
 Verify Static IPv4 Functionality In Presence Of Static IPv6
@@ -1273,3 +1302,73 @@ Delete Multiple Static IPv6 Address On BMC
     END
 
     Validate IPv6 Network Config On BMC
+
+
+Enable Eth0 DHCPv4 And Login Redfish Via Eth1
+    [Documentation]  Verify eth1 is reachable, snapshot eth0 static IPv4 for teardown,
+    ...    enable DHCPv4 on eth0, and open a Redfish1 session over eth1.
+    ...    Requires: OPENBMC_HOST_ETH1 (CLI).
+
+    # Redfish1 is instantiated at suite load time with OPENBMC_HOST_ETH1 baked in;
+    # it cannot be re-pointed at runtime, so skip if the variable was not supplied.
+    Skip If  '${OPENBMC_HOST_ETH1}' == '${EMPTY}'
+    ...  OPENBMC_HOST_ETH1 not provided via CLI - skipping test.
+
+    # Skip if eth1 does not have a static IPv4 — required as management fallback
+    # once eth0's static IP is released by DHCP.
+    @{ipv4_addressorigin_list}  ${ipv4_addr_list}=
+    ...  Get Address Origin List And IPv4 or IPv6 Address  IPv4Addresses  ${2}
+    ${ipv4_addressorigin_list}=  Combine Lists  @{ipv4_addressorigin_list}
+    Skip If  'Static' not in $ipv4_addressorigin_list
+    ...  eth1 has no static IPv4 (origins: ${ipv4_addressorigin_list}) - skipping test.
+    Skip If  'DHCP' in $ipv4_addressorigin_list
+    ...  eth1 is in DHCP mode, not static (origins: ${ipv4_addressorigin_list}) - skipping test.
+
+    FOR  ${ip}  IN  @{ipv4_addr_list}
+        Wait For Host To Ping  ${ip}  ${NETWORK_TIMEOUT}
+    END
+
+    @{eth0_static_ipv4_original}=  Get Network Configuration  ${1}
+    VAR  @{eth0_static_ipv4_original}  @{eth0_static_ipv4_original}  scope=TEST
+
+    # Enable DHCPv4 on eth0, then wait and open a Redfish1 session via eth1.
+    Set DHCPEnabled To Enable Or Disable  True  eth0
+    # Allow eth0 network stack to reconfigure after DHCP is enabled.
+    # Polling via Redfish1.Get is not used because eth0 has no stable address
+    # to query until DHCP completes; eth1 cannot observe eth0's DHCP state.
+    Sleep  ${NETWORK_TIMEOUT}s
+    Redfish1.Login
+
+
+Restore Eth0 Static IPv4 And Delete Static IPv6
+    [Documentation]  Restore eth0 DHCPv4 and static IPv4; clean up IPv6;
+    ...    log out Redfish1 and run standard teardown.
+
+    # Guard the full restore block — if setup failed early, snapshot variables may be
+    # undefined; wrapping ensures Test Teardown Execution (FFDC) always runs.
+    TRY
+        # Disable DHCPv4 and restore eth0 static IPv4.
+        Redfish1.Patch  ${REDFISH_NW_ETH_IFACE}eth0  body=&{DISABLE_DHCP}
+        ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+        # AddressOrigin is read-only; strip it so Redfish does not reject with HTTP 400.
+        VAR  ${restore}
+        ...  ${{[{'Address': e['Address'], 'SubnetMask': e['SubnetMask'], 'Gateway': e['Gateway']} for e in $eth0_static_ipv4_original]}}
+        Redfish1.Patch  ${REDFISH_NW_ETH_IFACE}eth0
+        ...  body={'IPv4StaticAddresses': ${restore}}
+        ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+        # Wait for eth0 to come back.
+        Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
+    EXCEPT
+        Log  Partial teardown - setup may have failed before snapshots were taken.  level=WARN
+    END
+
+    # Best-effort cleanup; ignore errors if address is absent or session already closed.
+    TRY
+        Delete IPv6 Address  ${test_ipv6_addr}  ${1}
+        Redfish1.Logout
+    EXCEPT
+        Log  Cleanup skipped - IPv6 address may be absent or Redfish1 session already closed.
+    END
+    Test Teardown Execution
