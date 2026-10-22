@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "996cee5f_0f83a271",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-10-22T09:05:40Z",
+      "side": 1,
+      "message": "Currently, when the required setup is not available, the test case is marked as FAIL. Please change this behaviour to SKIP the test case instead. A failure implies something went wrong during execution and needs debugging — a skip clearly communicates that the prerequisite conditions were not met, so the test was intentionally not run.",
+      "revId": "842812b34258ada1b2c80a936e5d3a554194a7a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb23f67b_1958bdc3",
