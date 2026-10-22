@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb23f67b_1958bdc3",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-10-22T05:19:18Z",
+      "side": 1,
+      "message": "Suggest to add these DHCPv4 eth0 test cases in another bucket as we might loose connection to the system",
+      "range": {
+        "startLine": 549,
+        "startChar": 0,
+        "endLine": 549,
+        "endChar": 0
+      },
+      "revId": "842812b34258ada1b2c80a936e5d3a554194a7a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63e49fac_30b3ee48",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 1354,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-10-22T05:19:18Z",
+      "side": 1,
+      "message": "Remove this",
+      "range": {
+        "startLine": 1354,
+        "startChar": 0,
+        "endLine": 1354,
+        "endChar": 3
+      },
+      "revId": "842812b34258ada1b2c80a936e5d3a554194a7a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
