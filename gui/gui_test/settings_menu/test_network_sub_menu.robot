@@ -135,7 +135,7 @@ ${more_byte_netmask}                     255.255.255.0.0
 ${lowest_netmask}                        128.0.0.0
 ${incomplete_df_gw}                      10.3.3
 ${test_hostname}                         openbmc
-
+${xpath_edit_dns_server}                 //h2[text()='Static DNS']/following::table[1]//*[contains(@title,'Edit')]
 *** Test Cases ***
 
 Verify Navigation To Network Page
@@ -1192,6 +1192,21 @@ Verify Error While Adding Empty Host Name On BMC Page
     Clear Element Text  ${xpath_hostname_input}
     Click Button  ${xpath_save_button}
     Element Should Contain  ${xpath_hostname_error}  Field required
+
+
+Verify No Option To Modify DNS Servers Via GUI
+    [Documentation]  Add a static DNS server via GUI and verify that only the delete
+    ...  option is available and there is no option to modify (edit) the DNS server.
+    [Tags]  Verify_No_Option_To_Modify_DNS_Servers_Via_GUI
+    [Setup]  DNS Test Setup Execution
+    [Teardown]  Run Keywords  Delete Static Name Servers  AND
+    ...  Configure Static Name Servers
+
+    Add DNS Servers And Verify  ${dns_server}
+
+    # Verify the DNS server entry can only be deleted, not edited.
+    Page Should Contain Element  ${xpath_delete_dns_server}
+    Page Should Not Contain Element  ${xpath_edit_dns_server}
 
 
 *** Keywords ***
