@@ -16,6 +16,24 @@
       "message": "The Combine Lists line breaks the Skip logic — test will always be skipped.\n\n@{ipv4_addressorigin_list} is already a flat list like [\u0027Static\u0027, \u0027IPv4LinkLocal\u0027]. Using @{...} here unpacks each string as a separate argument to Combine Lists, which then iterates over each string\u0027s characters instead of treating them as whole values — turning the list into individual letters ([\u0027S\u0027, \u0027t\u0027, \u0027a\u0027, \u0027t\u0027, \u0027i\u0027, \u0027c\u0027, \u0027I\u0027, \u0027P\u0027, \u0027v\u0027, \u00274\u0027, ...]).\n\nAs a result, \u0027Static\u0027 not in $ipv4_addressorigin_list is always True (no single letter equals \u0027Static\u0027), so the test always gets skipped. Same problem affects the \u0027DHCP\u0027.\n\nso remove the line ${ipv4_addressorigin_list}\u003d  Combine Lists  @{ipv4_addressorigin_list}",
       "revId": "f8a8126437419560235cb2b0485437b8090b2279",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46a490d0_6102f5c5",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 1317,
+      "author": {
+        "id": 1003095
+      },
+      "writtenOn": "2026-10-23T06:18:24Z",
+      "side": 1,
+      "message": "Thank you for your review. I had run the test for both with eth1 having static ip and not having a static IP and the results were as intended. The Combine Lists line is actually needed here and mirrors the same pattern used in \u0027Verify Static IPv4 Functionality\u0027 in lib/bmc_ipv6_utils.robot.\n\nWhen Get Address Origin List And IPv4 or IPv6 Address returns two scalars and they are assigned to @{ipv4_addressorigin_list} ${ipv4_addr_list}, Robot wraps the first return value into a list-of-list  [[\u0027Static\u0027]]. Combine Lists then flattens it back to [\u0027Static\u0027], which is what we need for the Skip If check.\n\nRemoving it would actually cause the opposite problem \u0027Static\u0027 not in [[\u0027Static\u0027]] is always True, so the test would always skip.\n\nThis is also confirmed by the output.xml log which shows @{ipv4_addressorigin_list} \u003d [ [] ] before Combine Lists and [\u0027Static\u0027] after.",
+      "parentUuid": "49b67ccd_c2af301a",
+      "revId": "f8a8126437419560235cb2b0485437b8090b2279",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
