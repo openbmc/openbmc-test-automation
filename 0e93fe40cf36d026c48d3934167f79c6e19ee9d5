@@ -16,6 +16,24 @@
       "message": "Removed the [Setup]/[Teardown] overrides on \"Verify IPv4 Link Local Absent When Static Or DHCP Configured\" Test case.\nsince they duplicated what the suite\u0027s default Test Setup/Test Teardown already covered:\n\nThe [Setup] called Redfish.Login again — but Test Setup Execution (which runs automatically before every test) already logs in. \n\nwe can Moved \"Add IP Address\" keyword into the test body instead, matching the pattern used by other tests in this file (e.g. Add Valid IPv4 Address And Verify).\n\nThe [Teardown] called Redfish.Logout again after Test Teardown Execution, which already does Run Keyword And Ignore Error  Redfish.Logout. \n\nso, the extra unwrapped Redfish.Logout call could fail against an already-closed session and mark the teardown as failed.\n\nExample, we can directly define this test case as below:\n\nVerify IPv4 Link Local Absent When Static Or DHCP Configured\n    [Documentation]  Verify IPv4 link-local is not present when Static or DHCP IPv4 is configured.\n    [Tags]  Verify_IPv4_Link_Local_Absent_When_Static_Or_DHCP_Configured\n    [Teardown]  Run Keywords\n    ...  Delete IP Address  ${test_ipv4_addr}  AND  Test Teardown Execution\n\n    Add IP Address  ${test_ipv4_addr}  ${test_subnet_mask}  ${test_gateway}\n\n    ${ipv4_origin_list}  ${ignored}\u003d\n    ...  Get Address Origin List And IPv4 or IPv6 Address  IPv4Addresses\n\n    Should Not Contain  ${ipv4_origin_list}  IPv4LinkLocal\n    ...  msg\u003dIPv4 link-local must not be present when Static or DHCP is configured.",
       "revId": "0e93fe40cf36d026c48d3934167f79c6e19ee9d5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b17347c5_c6bf43a6",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 778,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2026-10-26T06:50:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af269850_b90806ed",
+      "revId": "0e93fe40cf36d026c48d3934167f79c6e19ee9d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
