@@ -775,7 +775,9 @@ Verify Static DNS Rejects Out Of Range IP Address
 Verify IPv4 Link Local Absent When Static Or DHCP Configured
     [Documentation]  Verify IPv4 link-local is not present when Static or DHCP IPv4 is configured.
     [Tags]  Verify_IPv4_Link_Local_Absent_When_Static_Or_DHCP_Configured
-    [Setup]  Add IP Address  ${test_ipv4_addr}  ${test_subnet_mask}  ${test_gateway}
+    [Setup]  Run Keywords
+    ...  Test Setup Execution  AND
+    ...  Add IP Address  ${test_ipv4_addr}  ${test_subnet_mask}  ${test_gateway}
     [Teardown]  Run Keywords
     ...  Delete IP Address  ${test_ipv4_addr}  AND  Test Teardown Execution
 
