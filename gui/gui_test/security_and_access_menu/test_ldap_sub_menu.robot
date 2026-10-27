@@ -34,8 +34,8 @@ ${xpath_role_group_checkbox}            //tbody/tr[1]//input[@type='checkbox']
 ${xpath_select_all_checkbox}            //thead//input[@type='checkbox']
 ${xpath_delete_selected_button}         //*[@data-test-id='table-button-deleteSelected']
 
-${incorrect_ip}     1.2.3.4
-${wrong_ldap_port}  135
+${incorrect_ip}           1.2.3.4
+${wrong_ldap_port}        135
 
 *** Test Cases ***
 
@@ -286,6 +286,21 @@ Configure LDAP Server Via IPv6 And Verify It Works
     Static                 secure
     SLAAC                  nonsecure
     SLAAC                  secure
+
+
+Configure LDAP Server FQDN Via IPv6 And Verify It Works
+    [Documentation]  Configure LDAP server via FQDN URI over Static and SLAAC IPv6 on eth0/eth1
+    ...  and verify it works. Pass the FQDN URI in LDAP_SERVER_URI (e.g. ldap://ldap.example.com).
+    [Tags]  Configure_LDAP_Server_FQDN_Via_IPv6_And_Verify_It_Works
+    [Setup]  Snapshot LDAP Configuration
+    [Template]  Configure LDAP Server Via IPv6 GUI And Verify
+    [Teardown]  Restore Original LDAP Configuration
+
+    # ipv6_address_type    channel_number
+    Static                 channel_number=${1}
+    SLAAC                  channel_number=${1}
+    Static                 channel_number=${2}
+    SLAAC                  channel_number=${2}
 
 
 *** Keywords ***
@@ -588,18 +603,23 @@ Validate Group Privilege Options
 
 
 Configure LDAP Server Via IPv6 GUI And Verify
-    [Documentation]  Configure LDAP server via Static or SLAAC IPv6 and verify it works.
-    [Arguments]  ${ipv6_address_type}  ${ldap_mode}
+    [Documentation]  Configure LDAP server (${LDAP_SERVER_URI}) via Static or SLAAC IPv6
+    ...  and verify it works.  Optional channel_number (defaults to ${CHANNEL_NUMBER})
+    ...  selects eth0 or eth1.
+    [Arguments]  ${ipv6_address_type}  ${ldap_mode}=${LDAP_MODE}  ${channel_number}=${CHANNEL_NUMBER}
     [Teardown]  Reset IPv6 Test State
 
     # Description of argument(s):
-    # ipv6_address_type  Type of IPv6 address to configure (Static or SLAAC).
-    # ldap_mode          LDAP connection mode (nonsecure or secure/TLS).
+    # ipv6_address_type  Type of IPv6 address to use for BMC GUI access (Static or SLAAC).
+    # ldap_mode          LDAP connection mode (nonsecure or secure/TLS).  Defaults to ${LDAP_MODE}.
+    # channel_number     Ethernet channel to read the IPv6 address from: 1=eth0, 2=eth1.
 
     Redfish.Login
-    @{_}  ${ipv6_addr}=  Get Address Origin List And Address For Type  ${ipv6_address_type}
+    @{_}  ${ipv6_addr}=  Get Address Origin List And Address For Type
+    ...  ${ipv6_address_type}  ${channel_number}
     ${result}=  Run Process  ping6  -c  4  -W  2  ${ipv6_addr}  timeout=15s  on_timeout=kill
-    Should Be Equal As Integers  ${result.rc}  0  msg=${ipv6_address_type} IPv6 ${ipv6_addr} is unreachable.
+    Should Be Equal As Integers  ${result.rc}  0
+    ...  msg=${ipv6_address_type} IPv6 ${ipv6_addr} is unreachable.
 
     VAR  ${OPENBMC_GUI_URL}  https://[${ipv6_addr}]:${HTTPS_PORT}  scope=TEST
     Login BMC And Navigate To LDAP Page
@@ -612,6 +632,8 @@ Configure LDAP Server Via IPv6 GUI And Verify
 
     ${ldap_cfg}=  Redfish.Get Attribute  ${REDFISH_BASE_URI}AccountService  ${LDAP_TYPE}
     Should Be True  ${ldap_cfg['ServiceEnabled']}  msg=LDAP ServiceEnabled is False after saving config.
+    Should Contain  ${ldap_cfg['ServiceAddresses']}[0]  ${LDAP_SERVER_URI}
+    ...  msg=Configured ServiceAddresses[0] does not contain expected URI: ${LDAP_SERVER_URI}
     Redfish.Logout
 
     Wait Until Keyword Succeeds  30s  5s  Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
