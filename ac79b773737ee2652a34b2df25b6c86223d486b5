@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2e9987e3_d868dde0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1003195
+      },
+      "writtenOn": "2026-10-27T08:39:44Z",
+      "side": 1,
+      "message": "Tested only says ‘Ran and Tested on BMC Environment’. Please attach the Robot summary for the 8 iterations, and show that an existing caller of the shared keyword still passes.",
+      "revId": "ac79b773737ee2652a34b2df25b6c86223d486b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "00cd233f_2a1803ff",
         "filename": "gui/gui_test/security_and_access_menu/test_ldap_sub_menu.robot",
         "patchSetId": 2
@@ -112,6 +129,23 @@
         "endLine": 338,
         "endChar": 37
       },
+      "revId": "ac79b773737ee2652a34b2df25b6c86223d486b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ea3194b_bc5c7c70",
+        "filename": "gui/gui_test/security_and_access_menu/test_ldap_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 1003195
+      },
+      "writtenOn": "2026-10-27T08:39:44Z",
+      "side": 1,
+      "message": "This new assertion runs for all existing callers of the shared keyword. Can you confirm that the stored ServiceAddresses[0] matches the configured URI on the existing tests, or limit it to the new test",
       "revId": "ac79b773737ee2652a34b2df25b6c86223d486b5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
