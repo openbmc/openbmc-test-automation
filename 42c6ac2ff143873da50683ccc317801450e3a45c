@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7927578_1d22925b",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-10-27T07:27:55Z",
+      "side": 1,
+      "message": "Add a static IPv6 address in the setup\nPrefer to make it into 2 keywords\nRun Keywords  Setup for Eth0 DHCPv4  AND  Configure Static IPv6......",
+      "range": {
+        "startLine": 555,
+        "startChar": 4,
+        "endLine": 555,
+        "endChar": 54
+      },
+      "revId": "42c6ac2ff143873da50683ccc317801450e3a45c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "294409ab_e86ff3a6",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-10-27T07:27:55Z",
+      "side": 1,
+      "message": "rename with more meaningful name",
+      "range": {
+        "startLine": 558,
+        "startChar": 6,
+        "endLine": 558,
+        "endChar": 10
+      },
+      "revId": "42c6ac2ff143873da50683ccc317801450e3a45c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39621d02_6c9a591d",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 572,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-10-27T07:27:55Z",
+      "side": 1,
+      "message": "remove this - this will come up only if SLAAC is enabled\nNeed not be checked as a part of this test",
+      "range": {
+        "startLine": 572,
+        "startChar": 4,
+        "endLine": 572,
+        "endChar": 80
+      },
+      "revId": "42c6ac2ff143873da50683ccc317801450e3a45c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a952905c_60813898",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 1334,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-10-27T07:27:55Z",
+      "side": 1,
+      "message": "not needed a part of this test",
+      "range": {
+        "startLine": 1333,
+        "startChar": 4,
+        "endLine": 1334,
+        "endChar": 69
+      },
+      "revId": "42c6ac2ff143873da50683ccc317801450e3a45c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac29007e_c963427c",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 1337,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-10-27T07:27:55Z",
+      "side": 1,
+      "message": "include it in the setup preferably",
+      "range": {
+        "startLine": 1337,
+        "startChar": 3,
+        "endLine": 1337,
+        "endChar": 90
+      },
+      "revId": "42c6ac2ff143873da50683ccc317801450e3a45c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4af081b_aa122ce5",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 1338,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-10-27T07:27:55Z",
+      "side": 1,
+      "message": "Remove not required in this test case",
+      "range": {
+        "startLine": 1338,
+        "startChar": 4,
+        "endLine": 1338,
+        "endChar": 92
+      },
+      "revId": "42c6ac2ff143873da50683ccc317801450e3a45c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e21f4462_e1c66f4c",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 1369,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-10-27T07:27:55Z",
+      "side": 1,
+      "message": "Remove",
+      "range": {
+        "startLine": 1367,
+        "startChar": 8,
+        "endLine": 1369,
+        "endChar": 0
+      },
+      "revId": "42c6ac2ff143873da50683ccc317801450e3a45c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
