@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00cd233f_2a1803ff",
+        "filename": "gui/gui_test/security_and_access_menu/test_ldap_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-10-27T06:49:59Z",
+      "side": 1,
+      "message": "make it concise.",
+      "range": {
+        "startLine": 292,
+        "startChar": 4,
+        "endLine": 297,
+        "endChar": 34
+      },
+      "revId": "ac79b773737ee2652a34b2df25b6c86223d486b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe6c32e1_4f1da9a4",
+        "filename": "gui/gui_test/security_and_access_menu/test_ldap_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-10-27T06:49:59Z",
+      "side": 1,
+      "message": "not required",
+      "range": {
+        "startLine": 299,
+        "startChar": 13,
+        "endLine": 299,
+        "endChar": 40
+      },
+      "revId": "ac79b773737ee2652a34b2df25b6c86223d486b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b556e1e_04fc4870",
+        "filename": "gui/gui_test/security_and_access_menu/test_ldap_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-10-27T06:49:59Z",
+      "side": 1,
+      "message": "LDAP_SERVER_FQDN_URI this is not needed\nplease pass it in LDAP_SERVER_URI only",
+      "range": {
+        "startLine": 304,
+        "startChar": 43,
+        "endLine": 304,
+        "endChar": 63
+      },
+      "revId": "ac79b773737ee2652a34b2df25b6c86223d486b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2815f6ba_cb66120b",
+        "filename": "gui/gui_test/security_and_access_menu/test_ldap_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-10-27T06:49:59Z",
+      "side": 1,
+      "message": "non-secure and secure can be combined\nldap_mode can be removed",
+      "range": {
+        "startLine": 303,
+        "startChar": 4,
+        "endLine": 312,
+        "endChar": 0
+      },
+      "revId": "ac79b773737ee2652a34b2df25b6c86223d486b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "124349ce_be94e92d",
+        "filename": "gui/gui_test/security_and_access_menu/test_ldap_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-10-27T06:49:59Z",
+      "side": 1,
+      "message": "Please remove \nplease make use of LDAP_SERVER_URI",
+      "range": {
+        "startLine": 338,
+        "startChar": 4,
+        "endLine": 338,
+        "endChar": 37
+      },
+      "revId": "ac79b773737ee2652a34b2df25b6c86223d486b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
