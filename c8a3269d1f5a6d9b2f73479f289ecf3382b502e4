@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd3d3d3e_8c037eb8",
+        "filename": "oem/ast2600evb_rpi/ipmi/ssif/test_cper.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-10-27T05:29:31Z",
+      "side": 1,
+      "message": "Fix: Use direct Python variable syntax ($local_hex_file) to pass strings directly into the evaluation namespace, and modern pathlib methods which handle file closures safely:\n```\n  ${match}\u003d  Evaluate\n  ...  bytes.fromhex(\"\".join(__import__(\u0027pathlib\u0027).Path($local_hex_file).read_text().split())) \u003d\u003d __import__(\u0027base64\u0027).b64decode(__import__(\u0027pathlib\u0027).Path($b64_local_file).read_bytes())\n\n```\nWhy: Ensures robust path evaluation, prevents file leaks, and improves code hygiene.",
+      "revId": "c8a3269d1f5a6d9b2f73479f289ecf3382b502e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1aeccf3f_f15cdb19",
+        "filename": "oem/ast2600evb_rpi/ipmi/ssif/test_cper.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-10-27T05:29:31Z",
+      "side": 1,
+      "message": "Deprecated Create List Keyword usage\n\n\n\nFix: Use the modern VAR syntax instead:\n```\n  VAR  @{bytes}\n```",
+      "revId": "c8a3269d1f5a6d9b2f73479f289ecf3382b502e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
