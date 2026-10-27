@@ -34,8 +34,8 @@ ${xpath_role_group_checkbox}            //tbody/tr[1]//input[@type='checkbox']
 ${xpath_select_all_checkbox}            //thead//input[@type='checkbox']
 ${xpath_delete_selected_button}         //*[@data-test-id='table-button-deleteSelected']
 
-${incorrect_ip}     1.2.3.4
-${wrong_ldap_port}  135
+${incorrect_ip}           1.2.3.4
+${wrong_ldap_port}        135
 
 *** Test Cases ***
 
@@ -288,6 +288,29 @@ Configure LDAP Server Via IPv6 And Verify It Works
     SLAAC                  secure
 
 
+Configure LDAP Server FQDN Via IPv6 And Verify It Works
+    [Documentation]  Configure LDAP server using a fully-qualified domain name (FQDN) URI
+    ...  accessed over Static and SLAAC IPv6 BMC addresses and verify it works.
+    ...  Covers both eth0 (channel 1) and eth1 (channel 2) in nonsecure and secure modes.
+    ...  BMC must have Static and SLAAC IPv6 addresses on each tested channel.
+    ...  Requires LDAP_SERVER_FQDN_URI set to e.g. ldap://ldap.example.com or
+    ...  ldaps://ldap.example.com.
+    [Tags]  Configure_LDAP_Server_FQDN_Via_IPv6_And_Verify_It_Works
+    [Setup]  Snapshot LDAP Configuration
+    [Template]  Configure LDAP Server Via IPv6 GUI And Verify
+    [Teardown]  Restore Original LDAP Configuration
+
+    # ipv6_address_type    ldap_mode     ldap_server_uri           channel_number
+    Static                 nonsecure     ${LDAP_SERVER_FQDN_URI}   ${1}
+    Static                 secure        ${LDAP_SERVER_FQDN_URI}   ${1}
+    SLAAC                  nonsecure     ${LDAP_SERVER_FQDN_URI}   ${1}
+    SLAAC                  secure        ${LDAP_SERVER_FQDN_URI}   ${1}
+    Static                 nonsecure     ${LDAP_SERVER_FQDN_URI}   ${2}
+    Static                 secure        ${LDAP_SERVER_FQDN_URI}   ${2}
+    SLAAC                  nonsecure     ${LDAP_SERVER_FQDN_URI}   ${2}
+    SLAAC                  secure        ${LDAP_SERVER_FQDN_URI}   ${2}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -312,6 +335,7 @@ Suite Setup Execution
     Valid Value  LDAP_BIND_DN
     Valid Value  LDAP_BASE_DN
     Valid Value  LDAP_MODE  valid_values=["secure", "nonsecure"]
+    Valid Value  LDAP_SERVER_FQDN_URI
 
 
 Create LDAP Configuration
@@ -589,22 +613,31 @@ Validate Group Privilege Options
 
 Configure LDAP Server Via IPv6 GUI And Verify
     [Documentation]  Configure LDAP server via Static or SLAAC IPv6 and verify it works.
+    ...  Accepts optional ldap_server_uri (defaults to ${LDAP_SERVER_URI}) and
+    ...  channel_number (defaults to ${CHANNEL_NUMBER}=1=eth0) so FQDN, hostname,
+    ...  eth0 and eth1 variations all reuse this single keyword.
     [Arguments]  ${ipv6_address_type}  ${ldap_mode}
+    ...  ${ldap_server_uri}=${LDAP_SERVER_URI}  ${channel_number}=${CHANNEL_NUMBER}
     [Teardown]  Reset IPv6 Test State
 
     # Description of argument(s):
-    # ipv6_address_type  Type of IPv6 address to configure (Static or SLAAC).
+    # ipv6_address_type  Type of IPv6 address to use for BMC GUI access (Static or SLAAC).
     # ldap_mode          LDAP connection mode (nonsecure or secure/TLS).
+    # ldap_server_uri    LDAP server URI to configure on the BMC.  Defaults to
+    #                    ${LDAP_SERVER_URI} so existing test rows need no change.
+    # channel_number     Ethernet channel to read the IPv6 address from: 1=eth0, 2=eth1.
 
     Redfish.Login
-    @{_}  ${ipv6_addr}=  Get Address Origin List And Address For Type  ${ipv6_address_type}
+    @{_}  ${ipv6_addr}=  Get Address Origin List And Address For Type
+    ...  ${ipv6_address_type}  ${channel_number}
     ${result}=  Run Process  ping6  -c  4  -W  2  ${ipv6_addr}  timeout=15s  on_timeout=kill
-    Should Be Equal As Integers  ${result.rc}  0  msg=${ipv6_address_type} IPv6 ${ipv6_addr} is unreachable.
+    Should Be Equal As Integers  ${result.rc}  0
+    ...  msg=${ipv6_address_type} IPv6 ${ipv6_addr} is unreachable.
 
     VAR  ${OPENBMC_GUI_URL}  https://[${ipv6_addr}]:${HTTPS_PORT}  scope=TEST
     Login BMC And Navigate To LDAP Page
     ${original_timeout}=  Set Selenium Timeout  30s
-    Create LDAP Configuration  ${LDAP_SERVER_URI}  ${LDAP_TYPE}
+    Create LDAP Configuration  ${ldap_server_uri}  ${LDAP_TYPE}
     ...  ${LDAP_BIND_DN}  ${LDAP_BIND_DN_PASSWORD}  ${LDAP_BASE_DN}
     ...  ${ldap_mode}
     Set Selenium Timeout  ${original_timeout}
@@ -612,6 +645,8 @@ Configure LDAP Server Via IPv6 GUI And Verify
 
     ${ldap_cfg}=  Redfish.Get Attribute  ${REDFISH_BASE_URI}AccountService  ${LDAP_TYPE}
     Should Be True  ${ldap_cfg['ServiceEnabled']}  msg=LDAP ServiceEnabled is False after saving config.
+    Should Contain  ${ldap_cfg['ServiceAddresses']}[0]  ${ldap_server_uri}
+    ...  msg=Configured ServiceAddresses[0] does not contain expected URI: ${ldap_server_uri}
     Redfish.Logout
 
     Wait Until Keyword Succeeds  30s  5s  Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
