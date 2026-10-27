@@ -616,6 +616,16 @@ Delete Multiple Static IPv6 Address And Verify
     Delete Multiple Static IPv6 Address On BMC  ${test_ipv6_addr}  ${test_ipv6_addr1}
 
 
+Eth1 Static IPv6 Run Redfish Put And Verify
+    [Documentation]  Run Redfish PUT command to static IPv6 on eth1 and verify
+    ...    that PUT is rejected with 405 Method Not Allowed and the existing
+    ...    IPv6 configuration on eth1 remains unchanged.
+    [Tags]  Eth1_Static_IPv6_Run_Redfish_Put_And_Verify
+    [Teardown]  Test Teardown Execution
+
+    Run Redfish Put Static IPv6 On Eth1 And Verify  ${test_ipv6_addr}  ${test_prefix_length}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -1273,3 +1283,37 @@ Delete Multiple Static IPv6 Address On BMC
     END
 
     Validate IPv6 Network Config On BMC
+
+
+Run Redfish Put Static IPv6 On Eth1 And Verify
+    [Documentation]  Issue Redfish PUT on the eth1 EthernetInterface with a static IPv6
+    ...    address payload and verify the server rejects it with 405 Method Not Allowed.
+    ...    Also verify the existing eth1 IPv6 configuration is unchanged after the rejected PUT.
+    [Arguments]  ${ipv6_addr}  ${prefix_len}
+
+    # Description of argument(s):
+    # ipv6_addr    Static IPv6 address used in PUT body (e.g. "2001:db8:3333:4444:5555:6666:7777:8888").
+    # prefix_len   Prefix length for the IPv6 address (e.g. "64").
+
+    ${prefix_length}=  Convert To Integer  ${prefix_len}
+    VAR  &{ipv6_data}  Address=${ipv6_addr}  PrefixLength=${prefix_length}
+    VAR  @{ipv6_static_list}  ${ipv6_data}
+    VAR  &{put_body}  IPv6StaticAddresses=${ipv6_static_list}
+
+    # Capture eth1 IPv6 configuration before the PUT attempt.
+    @{ipv6_configs_before}=  Get IPv6 Network Configuration  ${2}
+
+    # Resolve eth1 interface name from channel 2.
+    ${active_channel_config}=  Get Active Channel Config
+    VAR  ${eth1_interface}  ${active_channel_config['${channel_number}']['name']}
+
+    # Issue Redfish PUT — expected to be rejected with 405 Method Not Allowed.
+    Redfish.Put  ${REDFISH_NW_ETH_IFACE}${eth1_interface}  body=&{put_body}
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Verify eth1 IPv6 static configuration is unchanged after the rejected PUT.
+    @{ipv6_configs_after}=  Get IPv6 Network Configuration  ${2}
+    Should Be Equal  ${ipv6_configs_before}  ${ipv6_configs_after}
+    ...  msg=eth1 IPv6 configuration was modified despite PUT being rejected with 405.
+
+
