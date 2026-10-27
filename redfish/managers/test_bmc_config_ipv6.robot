@@ -843,6 +843,11 @@ Verify Redfish Operations For IPV6 Address
     RedfishIPv6.Post  /redfish/v1/EventService/Subscriptions  body=&{snmp_mgr_data}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT},${HTTP_CREATED}]
 
+    # Verify Redfish Put operation is rejected.
+    VAR  &{put_body}  IPv6StaticAddresses=@{EMPTY}
+    RedfishIPv6.Put  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{put_body}
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
     Delete SNMP Manager Via Redfish  ${SNMP_MGR_IP}  ${SNMP_DEFAULT_PORT}  version=IPv6
 
 
