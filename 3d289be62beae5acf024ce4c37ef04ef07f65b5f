@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b74e80a1_3243fd7b",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-10-28T07:45:55Z",
+      "side": 1,
+      "message": "Please add this as a part of the Test case which takes care of the Redfish Operations",
+      "range": {
+        "startLine": 619,
+        "startChar": 0,
+        "endLine": 619,
+        "endChar": 43
+      },
+      "revId": "3d289be62beae5acf024ce4c37ef04ef07f65b5f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
