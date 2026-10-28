@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3dd5d5f_39c23723",
+        "filename": "oem/ast2600evb_rpi/ipmi/ssif/test_cper.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-10-28T10:27:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd3d3d3e_8c037eb8",
+      "revId": "c8a3269d1f5a6d9b2f73479f289ecf3382b502e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1aeccf3f_f15cdb19",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-10-27T05:29:31Z",
       "side": 1,
       "message": "Deprecated Create List Keyword usage\n\n\n\nFix: Use the modern VAR syntax instead:\n```\n  VAR  @{bytes}\n```",
+      "revId": "c8a3269d1f5a6d9b2f73479f289ecf3382b502e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b69fbc0c_ad4df50d",
+        "filename": "oem/ast2600evb_rpi/ipmi/ssif/test_cper.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1003021
+      },
+      "writtenOn": "2026-10-28T10:27:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1aeccf3f_f15cdb19",
       "revId": "c8a3269d1f5a6d9b2f73479f289ecf3382b502e4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
