@@ -909,6 +909,47 @@ Verify Password Change On Local User By Creator And Changer Roles
     LDAP_Admin        ${privilege_readonly}   Local_Admin       Success
 
 
+Verify Delete Admin User Via Local Admin When LDAP Is Unreachable
+    [Documentation]  Verify that a local admin can delete an admin user account
+    ...  when the LDAP server is unreachable.
+    [Tags]  Verify_Delete_Admin_User_Via_Local_Admin_When_LDAP_Is_Unreachable
+    [Setup]  Run Keywords  Redfish.Login  AND
+    ...  Delete Local User If Exists  ${test_local_user}
+    [Teardown]  Run Keywords  Redfish.Login  AND
+    ...  Restore LDAP URL  AND
+    ...  Delete Local User If Exists  ${test_local_user}  AND
+    ...  FFDC On Test Case Fail
+
+    # Create new local admin user and verify login works.
+    Redfish Create User  ${test_local_user}  ${test_user_password}  ${privilege_admin}  ${True}  ${True}
+    Verify User Login And Logout  ${test_local_user}  ${test_user_password}
+
+    # Ensure local admin session is active and user is present in account list.
+    Redfish.Login
+    ${accounts_list}=  Redfish_Utils.Get Member List  ${REDFISH_ACCOUNTS_URI}
+    List Should Contain Value  ${accounts_list}  ${REDFISH_ACCOUNTS_URI}${test_local_user}
+
+    # Reconfigure LDAP to an unreachable server.
+    Create LDAP Configuration  ${LDAP_TYPE}  ${ldap_unreachable_uri}
+    ...  ${LDAP_BIND_DN}  ${LDAP_BIND_DN_PASSWORD}  ${LDAP_BASE_DN}
+
+    # Confirm LDAP is unreachable (verifies LDAP login fails and restores local admin session).
+    Verify LDAP Is Unreachable
+
+    # Delete the admin user via local admin.
+    Redfish.Delete  ${REDFISH_ACCOUNTS_URI}${test_local_user}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+    # Verify user account no longer exists in account list and GET returns 404.
+    ${final_accounts_list}=  Redfish_Utils.Get Member List  ${REDFISH_ACCOUNTS_URI}
+    List Should Not Contain Value  ${final_accounts_list}  ${REDFISH_ACCOUNTS_URI}${test_local_user}
+
+    Redfish.Get  ${REDFISH_ACCOUNTS_URI}${test_local_user}
+    ...  valid_status_codes=[${HTTP_NOT_FOUND}]
+
+    Verify User Cannot Login  ${test_local_user}  ${test_user_password}
+
+
 *** Keywords ***
 
 Redfish Verify LDAP Login
