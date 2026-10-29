@@ -909,6 +909,65 @@ Verify Password Change On Local User By Creator And Changer Roles
     LDAP_Admin        ${privilege_readonly}   Local_Admin       Success
 
 
+Verify Privilege Change Fails For LDAP User When LDAP Unreachable And Succeeds Via Local Admin
+    [Documentation]  Verify that when LDAP server is unreachable, attempting to change
+    ...  a test user's privilege from Administrator to ReadOnly using an LDAP user
+    ...  fails with an error, and the privilege change succeeds when performed by
+    ...  a local admin user.
+    [Tags]  Verify_Privilege_Change_Fails_For_LDAP_User_When_LDAP_Unreachable_And_Succeeds_Via_Local_Admin
+    [Teardown]  Run Keywords
+    ...  Redfish.Login  AND
+    ...  Create LDAP Configuration  AND
+    ...  Run Keyword And Ignore Error  Delete Local User If Exists  ${test_local_user}  AND
+    ...  FFDC On Test Case Fail
+
+    # Delete test user if exists from previous run to ensure clean state.
+    Run Keyword And Ignore Error  Delete Local User If Exists  ${test_local_user}
+
+    # Create test user with Administrator privilege using local admin.
+    Redfish Create User  ${test_local_user}  ${test_user_password}  ${privilege_admin}  ${True}  ${True}
+
+    # Verify the test user was created with Administrator privilege.
+    Verify User Role  ${test_local_user}  ${privilege_admin}
+
+    # Verify newly created test user can login and logout.
+    Verify User Login And Logout  ${test_local_user}  ${test_user_password}
+
+    # Re-establish local admin session.
+    Redfish.Login
+
+    # Reconfigure LDAP to use an unreachable server.
+    Create LDAP Configuration  ${LDAP_TYPE}  ${ldap_unreachable_uri}
+    ...  ${LDAP_BIND_DN}  ${LDAP_BIND_DN_PASSWORD}  ${LDAP_BASE_DN}
+
+    # Confirm LDAP server is unreachable.
+    Verify LDAP Is Unreachable
+
+    # Attempt to change privilege from Administrator to ReadOnly using LDAP user.
+    # Expect failure since LDAP server is unreachable.
+    TRY
+        Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+        Redfish.Patch  ${REDFISH_ACCOUNTS_URI}${test_local_user}
+        ...  body={'RoleId': '${privilege_readonly}'}
+    EXCEPT
+        Log  Privilege change using LDAP user failed as expected due to unreachable LDAP server.
+    ELSE
+        Fail  msg=Privilege change using LDAP user should fail when LDAP server is unreachable.
+    END
+
+    # Login as local admin and change privilege from Administrator to ReadOnly.
+    Redfish.Login  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+    Redfish.Patch  ${REDFISH_ACCOUNTS_URI}${test_local_user}
+    ...  body={'RoleId': '${privilege_readonly}'}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+    # Verify the privilege was successfully changed to ReadOnly.
+    Verify User Role  ${test_local_user}  ${privilege_readonly}
+
+    # Verify test user can login with ReadOnly privilege.
+    Verify User Login And Logout  ${test_local_user}  ${test_user_password}
+
+
 *** Keywords ***
 
 Redfish Verify LDAP Login
