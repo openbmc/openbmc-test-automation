@@ -112,6 +112,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a485269b_c3380df0",
+        "filename": "gui/gui_test/security_and_access_menu/test_ldap_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-10-29T08:39:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68467b58_6a66eaef",
+      "range": {
+        "startLine": 299,
+        "startChar": 13,
+        "endLine": 299,
+        "endChar": 40
+      },
+      "revId": "ac79b773737ee2652a34b2df25b6c86223d486b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4b556e1e_04fc4870",
