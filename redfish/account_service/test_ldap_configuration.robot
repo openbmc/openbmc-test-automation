@@ -952,6 +952,66 @@ Verify Delete Admin User Via Local Admin When LDAP Is Unreachable
     Verify User Cannot Login  ${test_local_user}  ${test_user_password}
 
 
+Verify Privilege Change Fails For LDAP User When LDAP Unreachable And Succeeds Via Local Admin
+    [Documentation]  Verify that when the LDAP server is unreachable, LDAP users cannot
+    ...  authenticate to change a user's privilege, ensuring the user's role remains
+    ...  unchanged, while a local admin user can still successfully change the privilege
+    ...  from Administrator to ReadOnly.
+    [Tags]  Verify_Privilege_Change_Fails_For_LDAP_User_When_LDAP_Unreachable_And_Succeeds_Via_Local_Admin
+    [Setup]  Run Keywords
+    ...  Redfish.Login  AND
+    ...  Delete Local User If Exists  ${test_local_user}
+    [Teardown]  Run Keywords
+    ...  Redfish.Login  AND
+    ...  Run Keyword And Ignore Error  Create LDAP Configuration  AND
+    ...  Run Keyword And Ignore Error  Delete Local User If Exists  ${test_local_user}  AND
+    ...  FFDC On Test Case Fail
+
+    # Create test user with Administrator privilege using local admin.
+    Redfish Create User  ${test_local_user}  ${test_user_password}  ${privilege_admin}  ${True}  ${True}
+
+    # Verify the test user was created with Administrator privilege.
+    Verify User Role  ${test_local_user}  ${privilege_admin}
+
+    # Verify newly created test user can login and logout.
+    Verify User Login And Logout  ${test_local_user}  ${test_user_password}
+
+    # Re-establish local admin session.
+    Redfish.Login
+
+    # Reconfigure LDAP to use an unreachable server.
+    Create LDAP Configuration  ${LDAP_TYPE}  ${ldap_unreachable_uri}
+    ...  ${LDAP_BIND_DN}  ${LDAP_BIND_DN_PASSWORD}  ${LDAP_BASE_DN}
+
+    # Confirm LDAP is unreachable (LDAP login must fail; local admin session is restored).
+    Verify LDAP Is Unreachable
+
+    # Attempt to change test user privilege from Administrator to ReadOnly using LDAP user credentials.
+    # Expect 401 Unauthorized or 403 Forbidden since LDAP server is unreachable.
+    ${result}=  Run Process  curl  -k  -s  -o  /dev/null  -w  \%{http_code}
+    ...  -u  ${LDAP_USER}:${LDAP_USER_PASSWORD}  -X  PATCH
+    ...  -H  Content-Type: application/json
+    ...  -d  {"RoleId": "${privilege_readonly}"}
+    ...  ${AUTH_URI}${REDFISH_ACCOUNTS_URI}${test_local_user}
+    Should Be Equal As Integers  ${result.rc}  0
+    Should Contain Any  ${result.stdout}  401  403
+    ...  msg=LDAP user was not rejected while LDAP is unreachable. HTTP status: ${result.stdout}
+
+    # Confirm the target user's role was not altered and remains Administrator.
+    Verify User Role  ${test_local_user}  ${privilege_admin}
+
+    # Change privilege from Administrator to ReadOnly using local admin.
+    Redfish.Patch  ${REDFISH_ACCOUNTS_URI}${test_local_user}
+    ...  body={'RoleId': '${privilege_readonly}'}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+    # Verify the privilege was successfully changed to ReadOnly.
+    Verify User Role  ${test_local_user}  ${privilege_readonly}
+
+    # Verify test user can login with ReadOnly privilege.
+    Verify User Login And Logout  ${test_local_user}  ${test_user_password}
+
+
 *** Keywords ***
 
 Redfish Verify LDAP Login
