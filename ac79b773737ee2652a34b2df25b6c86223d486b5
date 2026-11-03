@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "63312c7a_26dba326",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-11-03T09:44:08Z",
+      "side": 1,
+      "message": "Here the PASS for all 4 iterations - Screenshot paste is not available here.\nExecution Log\nSUITE\nTest Ldap Sub Menu\n00:07:29.097\nFull Name:\tTest Ldap Sub Menu\nDocumentation:\t\nTest OpenBMC GUI \"LDAP\" sub-menu of \"Security and access\".\n\n\nStart / End / Elapsed:\t20261103 14:36:58.325 / 20261103 14:44:27.422 / 00:07:29.097\nStatus:\t1 test total, 1 passed, 0 failed, 0 skipped\nSETUP\nSuite Setup Execution\n00:00:23.126\nTEARDOWN\nSeleniumLibrary . Close Browser\n00:00:00.465\nTEST\nConfigure LDAP Server FQDN Via IPv6 And Verify It Works\n00:03:37.696\nFull Name:\tTest Ldap Sub Menu.Configure LDAP Server FQDN Via IPv6 And Verify It Works\nDocumentation:\t\nConfigure LDAP server via FQDN URI over Static and SLAAC IPv6 on eth0/eth1 and verify it works. Pass the FQDN URI in LDAP_SERVER_URI (e.g. ldap://ldap.example.com).\n\nTags:\tConfigure_LDAP_Server_FQDN_Via_IPv6_And_Verify_It_Works, LDAP_Sub_Menu\nStart / End / Elapsed:\t20261103 14:40:49.260 / 20261103 14:44:26.956 / 00:03:37.696\nStatus:\tPASS\nSETUP\nSnapshot LDAP Configuration\n00:00:02.397\nKEYWORD\nConfigure LDAP Server Via IPv6 GUI And Verify\nStatic    channel_number\u003d${1}\n00:00:47.284\nKEYWORD\nConfigure LDAP Server Via IPv6 GUI And Verify\nSLAAC    channel_number\u003d${1}\n00:01:06.945\nKEYWORD\nConfigure LDAP Server Via IPv6 GUI And Verify\nStatic    channel_number\u003d${2}\n00:00:53.811\nKEYWORD\nConfigure LDAP Server Via IPv6 GUI And Verify\nSLAAC    channel_number\u003d${2}\n00:00:45.359\nTEARDOWN\nRestore Original LDAP Configuration",
+      "parentUuid": "2e9987e3_d868dde0",
+      "revId": "ac79b773737ee2652a34b2df25b6c86223d486b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "00cd233f_2a1803ff",
         "filename": "gui/gui_test/security_and_access_menu/test_ldap_sub_menu.robot",
         "patchSetId": 2
@@ -290,6 +308,24 @@
       "writtenOn": "2026-10-27T08:39:44Z",
       "side": 1,
       "message": "This new assertion runs for all existing callers of the shared keyword. Can you confirm that the stored ServiceAddresses[0] matches the configured URI on the existing tests, or limit it to the new test",
+      "revId": "ac79b773737ee2652a34b2df25b6c86223d486b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c93d7028_326dfc09",
+        "filename": "gui/gui_test/security_and_access_menu/test_ldap_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-11-03T09:44:08Z",
+      "side": 1,
+      "message": "Yes, the stored ServiceAddresses[0] matches the configured URI on the existing tests.\nRan the existing test aswell it worked as expected.",
+      "parentUuid": "5ea3194b_bc5c7c70",
       "revId": "ac79b773737ee2652a34b2df25b6c86223d486b5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
