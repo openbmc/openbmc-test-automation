@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8a83681_6e963df8",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 960,
+      "author": {
+        "id": 1003095
+      },
+      "writtenOn": "2026-11-05T11:54:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f08fc63_030c9e77",
+      "range": {
+        "startLine": 960,
+        "startChar": 12,
+        "endLine": 960,
+        "endChar": 106
+      },
+      "revId": "74635fda3376f40d0697c1bdff98d9e992029204",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d77a6b53_5794ea35",
@@ -37,6 +61,24 @@
       "writtenOn": "2026-11-05T06:57:25Z",
       "side": 1,
       "message": "Only result.rc \u003d\u003d 0 is checked here, which confirms curl executed without crashing, but not that it actually returned a valid HTTP status code in stdout. If curl\u0027s -w \u0027%{http_code}\u0027 output is empty, truncated, or malformed for any reason, this will silently return bad data to the caller, which will then fail later with a confusing/misleading error.\n\nSuggest adding a format check before returning:\n\nShould Be Equal As Integers  ${result.rc}  0\n    ...  msg\u003dcurl failed (rc\u003d${result.rc}); unable to evaluate the LDAP user request.\n\nShould Match Regexp  ${result.stdout}  ^\\d{3}$\n...  msg\u003dcurl did not return a valid 3-digit HTTP status code. Got: \u0027${result.stdout}\u0027",
+      "revId": "74635fda3376f40d0697c1bdff98d9e992029204",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7907573_212fae3b",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 1794,
+      "author": {
+        "id": 1003095
+      },
+      "writtenOn": "2026-11-05T11:54:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d77a6b53_5794ea35",
       "revId": "74635fda3376f40d0697c1bdff98d9e992029204",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
