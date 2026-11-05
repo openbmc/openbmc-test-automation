@@ -208,6 +208,32 @@ Disable SSH Protocol Via Eth1 And Verify On Both Interfaces
     Should Be Equal As Strings  ${status}  False
     ...  msg=SSH Login and commands are working after disabling SSH.
 
+Verify Eth0 Static To DHCP Switch Assigns Link Local When DHCP Server Is Down
+    [Documentation]  Switch eth0 from static to DHCP mode while no DHCP server is reachable on
+    ...              the eth0 network and verify that eth0 gets an IPv4 link-local address.
+    ...              Precondition: DHCP server must not be reachable from eth0.
+    [Tags]  Verify_Eth0_Static_To_DHCP_Switch_Assigns_Link_Local_When_DHCP_Server_Is_Down
+    [Setup]  Setup Eth0 And Eth1 Static And Reachable
+    [Teardown]  Restore Eth0 Static Via Eth1
+
+    # Switch eth0 to DHCP via eth1 since eth0 static IP is going to be removed.
+    Redfish1.Patch  ${REDFISH_NW_ETH_IFACE}eth0  body=${ENABLE_DHCP}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_ACCEPTED}, ${HTTP_NO_CONTENT}]
+    Sleep  ${NETWORK_TIMEOUT}s
+
+    # Verify eth0 is in DHCP mode and has link-local address (no DHCP lease as server is down).
+    ${dhcp_enabled}=  Redfish1.Get Attribute  ${REDFISH_NW_ETH_IFACE}eth0  DHCPv4
+    Should Be Equal  ${dhcp_enabled['DHCPEnabled']}  ${True}
+    ...  msg=DHCP is not enabled on eth0.
+    Wait Until Keyword Succeeds  3 min  10 sec  Verify Eth0 Link Local And No DHCP Lease Via Eth1
+
+    # Verify BMC is still reachable and working through eth1.
+    Wait For Host To Ping  ${OPENBMC_HOST_ETH1}  ${NETWORK_TIMEOUT}
+    ${resp}=  Redfish1.Get  ${REDFISH_NW_ETH_IFACE}eth1
+    Should Be Equal  ${resp.dict['DHCPv4']['DHCPEnabled']}  ${False}
+    ...  msg=eth1 DHCP state changed after switching eth0 to DHCP.
+
+
 *** Keywords ***
 
 Get Network Configuration Using Channel Number
@@ -364,3 +390,97 @@ Verify SSH Protocol State Via Eth1
     ${resp}=  Redfish1.Get  ${REDFISH_NW_PROTOCOL_URI}
     Should Be Equal As Strings  ${resp.dict['SSH']['ProtocolEnabled']}  ${state}
     ...  msg=Protocol states are not matching.
+
+
+Setup Eth0 And Eth1 Static And Reachable
+    [Documentation]  Skip the test unless eth0 and eth1 are static and pingable.
+
+    # Ping both interfaces before any login so an unreachable one skips the test.
+    FOR  ${name}  ${host}  IN  eth0  ${OPENBMC_HOST}  eth1  ${OPENBMC_HOST_ETH1}
+        TRY
+            Ping Host  ${host}
+        EXCEPT  AS  ${error}
+            Skip  ${name} (${host}) is not pingable, skipping test. ${error}
+        END
+    END
+
+    Redfish1.Login
+
+    FOR  ${interface}  IN  eth0  eth1
+        ${dhcp}=  Redfish1.Get Attribute  ${REDFISH_NW_ETH_IFACE}${interface}  DHCPv4
+        IF  ${dhcp['DHCPEnabled']}
+            Skip  ${interface} is in DHCP mode instead of static, skipping test.
+        END
+    END
+
+    # Save the eth0 static IPv4 entries so teardown can restore them.
+    ${eth0_static}=  Redfish1.Get Attribute  ${REDFISH_NW_ETH_IFACE}eth0  IPv4StaticAddresses
+    VAR  @{static_addresses}
+    FOR  ${entry}  IN  @{eth0_static}
+        VAR  &{ip_data}
+        ...  Address=${entry['Address']}
+        ...  SubnetMask=${entry['SubnetMask']}
+        ...  Gateway=${entry['Gateway']}
+        Append To List  ${static_addresses}  ${ip_data}
+    END
+    IF  not ${static_addresses}
+        Skip  No static IPv4 address found on eth0, skipping test.
+    END
+
+    # Set only after all checks pass so teardown restores nothing for a skipped test.
+    VAR  @{eth0_static_original}  @{static_addresses}  scope=TEST
+
+
+Verify Eth0 Link Local And No DHCP Lease Via Eth1
+    [Documentation]  Verify eth0 has IPv4 link-local and no DHCP address via eth1.
+
+    ${resp}=  Redfish1.Get  ${REDFISH_NW_ETH_IFACE}eth0
+    VAR  @{origins}
+    FOR  ${ip_entry}  IN  @{resp.dict['IPv4Addresses']}
+        Append To List  ${origins}  ${ip_entry['AddressOrigin']}
+    END
+
+    Should Contain  ${origins}  IPv4LinkLocal
+    ...  msg=No IPv4LinkLocal address found on eth0 after enabling DHCP with DHCP server down.
+    List Should Not Contain Value  ${origins}  DHCP
+    ...  msg=eth0 got a DHCP address, DHCP server is expected to be down.
+
+
+Restore Eth0 Static Via Eth1
+    [Documentation]  Restore eth0 static IPv4 addresses via eth1 and log out.
+
+    FFDC On Test Case Fail
+
+    # Setup skipped or failed before saving the eth0 state, so there is nothing to restore.
+    TRY
+        Variable Should Exist  ${eth0_static_original}
+    EXCEPT
+        Run Keyword And Ignore Error  Redfish1.Logout
+        RETURN
+    END
+
+    TRY
+        # Turn DHCP off through eth1 since eth0 may be unreachable.
+        Redfish1.Patch  ${REDFISH_NW_ETH_IFACE}eth0  body=${DISABLE_DHCP}
+        ...  valid_status_codes=[${HTTP_OK}, ${HTTP_ACCEPTED}, ${HTTP_NO_CONTENT}]
+        Sleep  ${NETWORK_TIMEOUT}s
+
+        # Clear current static entries and add the saved ones in a single patch.
+        ${current}=  Redfish1.Get Attribute  ${REDFISH_NW_ETH_IFACE}eth0  IPv4StaticAddresses
+        VAR  &{empty_entry}
+        VAR  @{entries}
+        FOR  ${entry}  IN  @{current}
+            Append To List  ${entries}  ${empty_entry}
+        END
+        Append To List  ${entries}  @{eth0_static_original}
+        VAR  &{data}  IPv4StaticAddresses=${entries}
+        Redfish1.Patch  ${REDFISH_NW_ETH_IFACE}eth0  body=&{data}
+        ...  valid_status_codes=[${HTTP_OK}, ${HTTP_ACCEPTED}, ${HTTP_NO_CONTENT}]
+        Sleep  ${NETWORK_TIMEOUT}s
+
+        # Verify both interfaces answer again.
+        Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
+        Wait For Host To Ping  ${OPENBMC_HOST_ETH1}  ${NETWORK_TIMEOUT}
+    FINALLY
+        Run Keyword And Ignore Error  Redfish1.Logout
+    END
