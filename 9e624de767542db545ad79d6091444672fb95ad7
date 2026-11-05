@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e63db621_f4fa107e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-11-05T05:33:28Z",
+      "side": 1,
+      "message": "@suvedhab@ami.com @nandakumarb@ami.com please check and approve if all good. Thanks",
+      "revId": "9e624de767542db545ad79d6091444672fb95ad7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
