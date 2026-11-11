@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0ceda25_77b4f2af",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 1356,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-11-11T04:57:39Z",
+      "side": 1,
+      "message": "Line 1356 is 137 characters long, exceeding the limit.\n\nKindly update as below and check,\n\nVAR  ${restore}\n...  ${{[{\u0027Address\u0027: e[\u0027Address\u0027], \u0027SubnetMask\u0027: e[\u0027SubnetMask\u0027],\n...  \u0027Gateway\u0027: e[\u0027Gateway\u0027]} for e in $eth0_static_ipv4_original]}}",
+      "range": {
+        "startLine": 1356,
+        "startChar": 0,
+        "endLine": 1356,
+        "endChar": 8
+      },
+      "revId": "5f2c066a74e1fdc539fe3844a68b5ea1b1fcf15c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
