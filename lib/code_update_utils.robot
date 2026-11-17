@@ -841,7 +841,7 @@ Update Multipart Image To BMC
 
     # Description of argument(s):
     # image_file_path   The path to the firmware image tarball.
-    # image_type        The type of firmware image being uploade
+    # image_type        The type of firmware image being uploaded
     #                   (e.g. bmc,host)
 
     # Set target firmware inventory URI

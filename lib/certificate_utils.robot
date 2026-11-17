@@ -116,7 +116,7 @@ Generate Certificate File Via Openssl
     # time                 Number of days to certify the certificate for.
     # cert_dir_name        The name of the sub-directory where the certificate
     #                      is stored.
-    # cert_sub_name        Cerificate subject name.
+    # cert_sub_name        Certificate subject name.
     #                      (e.g. "/O=XYZ Corporation /CN=www.xyz.com").
 
     Check If Openssl Tool Exist
@@ -315,7 +315,7 @@ Install And Verify Certificate Via Redfish
     # expected_status     Expected status of certificate replace Redfish
     #                     request (i.e. "ok" or "error").
     # delete_cert         Certificate will be deleted before installing if this True.
-    # cert_sub_name       Cerificate subject name.
+    # cert_sub_name       Certificate subject name.
     #                     (e.g. "/O=XYZ Corporation /CN=www.xyz.com").
 
     IF  '${cert_type}' == 'CA' and '${delete_cert}' == '${True}'
