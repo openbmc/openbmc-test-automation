@@ -18,6 +18,7 @@ Test Tags           LLDP_config
 ${LLDP_SHOW_INTERFACES}        sudo lldpcli show interfaces
 ${LLDP_TLV_CHASSIS_ID}         ChassisID
 ${LLDP_TLV_PORT_ID}            PortID
+${LLDP_TLV_SYS_NAME}           SysName
 
 *** Test Cases ***
 
@@ -132,6 +133,43 @@ Verify LLDP PortID Matches MAC Address For Eth0 And Eth1
     Should Be Equal
     ...  ${eth1_port_id.lower()}  ${redfish_eth1_mac.lower()}
     ...  msg=${msg_eth1}
+
+Verify LLDP SysName Matches Redfish HostName For Eth0 And Eth1
+    [Documentation]  Verify lldpcli SysName for eth0 and eth1 matches
+    ...  the Redfish HostName of the respective interface.
+    [Tags]  Verify_LLDP_SysName_Matches_Redfish_HostName_For_Eth0_And_Eth1
+    [Teardown]  Restore LLDP State And Collect FFDC
+
+    # Enable LLDP explicitly so this test is independent of execution order.
+    Set LLDP Configuration State  ${True}
+    Verify LLDP Configuration State  ${True}
+
+    # Open SSH connection to the BMC using OPENBMC_HOST.
+    Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+
+    # Run lldpcli and capture the full interfaces output; retry until non-empty.
+    ${lldpcli_output}=  Wait Until Keyword Succeeds  30s  5s
+    ...  Get Non Empty LLDP Interfaces Output
+
+    # Parse the SysName TLV value for eth0 and eth1 from lldpcli output.
+    ${eth0_sys_name}=  Get Interface TLV Value From LLDP Output
+    ...  ${lldpcli_output}  eth0  ${LLDP_TLV_SYS_NAME}
+    ${eth1_sys_name}=  Get Interface TLV Value From LLDP Output
+    ...  ${lldpcli_output}  eth1  ${LLDP_TLV_SYS_NAME}
+
+    # Fetch the HostName for eth0 and eth1 via Redfish.
+    ${resp_eth0}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}eth0
+    ${redfish_eth0_hostname}=  Get From Dictionary  ${resp_eth0.dict}  HostName
+    ${resp_eth1}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}eth1
+    ${redfish_eth1_hostname}=  Get From Dictionary  ${resp_eth1.dict}  HostName
+
+    # Verify eth0 SysName from lldpcli matches eth0 HostName from Redfish.
+    Should Be Equal  ${eth0_sys_name}  ${redfish_eth0_hostname}
+    ...  msg=eth0 SysName does not match Redfish HostName.
+
+    # Verify eth1 SysName from lldpcli matches eth1 HostName from Redfish.
+    Should Be Equal  ${eth1_sys_name}  ${redfish_eth1_hostname}
+    ...  msg=eth1 SysName does not match Redfish HostName.
 
 *** Keywords ***
 
