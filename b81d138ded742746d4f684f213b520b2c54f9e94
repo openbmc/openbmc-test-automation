@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d48dcf59_62fd3012",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1003095
+      },
+      "writtenOn": "2026-11-19T07:22:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e59f795_3e3c70b7",
+      "revId": "b81d138ded742746d4f684f213b520b2c54f9e94",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6c4d9514_43d53f22",
@@ -48,6 +66,24 @@
       "writtenOn": "2026-11-12T09:23:11Z",
       "side": 1,
       "message": "Could we replace the fixed Sleep ${NETWORK_TIMEOUT}s with bounded retries through Redfish1 over eth1? That connection can query ${REDFISH_NW_ETH_IFACE}eth0 and wait for DHCPEnabled to become true and the static IPv4 address to disappear. This would avoid always waiting the full timeout and explicitly verify that reconfiguration completed. The comment that eth1 cannot observe eth0\u0027s DHCP state seems incorrect",
+      "revId": "b81d138ded742746d4f684f213b520b2c54f9e94",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4a58bae_94841bbe",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 1353,
+      "author": {
+        "id": 1003095
+      },
+      "writtenOn": "2026-11-19T07:22:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c4d9514_43d53f22",
       "revId": "b81d138ded742746d4f684f213b520b2c54f9e94",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
